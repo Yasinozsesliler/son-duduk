@@ -413,7 +413,7 @@ nav.side button.on .ic{color:var(--yellow);opacity:1}
 .banner.whistle b,.banner.board b{font-size:clamp(22px,4vw,36px)}
 .banner.board b{color:var(--yellow);font-family:var(--f-mono)}
 @keyframes bnr{from{transform:translate(-50%,-50%) scale(.7);opacity:0}to{transform:translate(-50%,-50%) scale(1);opacity:1}}
-.prompt{position:absolute;left:10px;right:10px;bottom:10px;padding:12px 14px;border-radius:14px;background:rgba(10,15,23,.92);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid var(--line2);display:flex;flex-direction:column;gap:8px;animation:rise .25s ease;max-height:calc(100% - 20px);overflow:auto;z-index:3}
+.prompt{position:relative;padding:12px 14px;border-radius:14px;background:rgba(10,15,23,.92);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid var(--line2);display:flex;flex-direction:column;gap:8px;animation:rise .25s ease;z-index:3;border-color:color-mix(in srgb,var(--yellow) 45%,var(--line2))}
 .pr-head{display:flex;justify-content:space-between;align-items:center}
 .pr-tag{font-family:var(--f-display);font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--yellow)}
 .pr-tag.ok{color:var(--green)}.pr-tag.bad{color:#ff8a8f}
@@ -422,7 +422,8 @@ nav.side button.on .ic{color:var(--yellow);opacity:1}
 .pr-opts.row{display:flex;flex-wrap:wrap}
 .prompt .posopt{font-size:13px;padding:8px 10px}
 .prompt .timer{border-radius:99px;overflow:hidden}
-@media (max-width:700px){.pr-opts{grid-template-columns:minmax(0,1fr)}.prompt{position:fixed;left:8px;right:8px;bottom:calc(8px + env(safe-area-inset-bottom,0px));z-index:75;max-height:58vh;box-shadow:0 -10px 40px rgba(0,0,0,.6)}}
+@media (max-width:700px){.pr-opts{grid-template-columns:minmax(0,1fr)}.prompt{position:fixed;left:8px;right:8px;bottom:calc(8px + env(safe-area-inset-bottom,0px));z-index:75;max-height:46vh;overflow:auto;box-shadow:0 -10px 40px rgba(0,0,0,.6)}}
+@media (max-width:560px){.mbar{gap:8px}.mbar .meter{min-width:calc(50% - 8px)}.mbar .seg button{padding:7px 9px}.mbar .btn.sm{padding:6px 10px;min-height:36px}}
 .mbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 12px;border-radius:14px;background:var(--panel);border:1px solid var(--line)}
 .meter{display:flex;flex-direction:column;gap:5px;min-width:110px;flex:1}
 .meter .bar{height:8px}
@@ -2102,7 +2103,7 @@ function startRender(){
 function liveCam(W,H,dpr){ const x=SC.camX;
   if(SC.mode==='buildup' && SC.cam!=='ust'){ const pts=[SC.mark,...(SC.spots||[]).map(s=>[s.x,s.y])]; const cx=avg(pts.map(p=>p[0])), cy=avg(pts.map(p=>p[1])); const span=Math.max(18,...pts.map(p=>Math.hypot(p[0]-cx,p[1]-cy))); const tall=H/W>.68; const z=SC.spots?(tall?1.15:1.35):1;
     SC.bx=(SC.bx==null?x:SC.bx)+(cx-(SC.bx==null?x:SC.bx))*.06; SC.by=(SC.by==null?34:SC.by)+(cy-(SC.by==null?34:SC.by))*.06;
-    return camera([SC.bx,SC.by-span*1.05*z-4,span*1.55*z+14],[SC.bx,SC.by-(SC.spots&&!tall?span*.85:span*.15),0],.7,W,H,dpr); }
+    return camera([SC.bx,SC.by-span*1.05*z-4,span*1.55*z+14],[SC.bx,SC.by-span*.12,0],.7,W,H,dpr); }
   SC.bx=null; SC.by=null; if(SC.cam==='ust') return camera([52.5,-40,66],[52.5,31,0],.63,W,H,dpr); if(SC.cam==='yakin') return camera([x,-15,10.5],[x,30,0],1.15,W,H,dpr); return camera([x,-27,17],[x,31,0],1.02,W,H,dpr); }
 function drawLive(cv){ const [W,H,dpr]=fitCanvas(cv); const ctx=cv.getContext('2d'); drawWorld(ctx,liveCam(W,H,dpr),{actors:[...SC.pl,...SC.refs],ball:SC.ball,spots:SC.spots,t:SC.t}); }
 function matchBanner(kind,title,sub){
@@ -2189,7 +2190,7 @@ function liveIncident(inc){
     startTimer(Math.max(6,Math.round(decisionTime()*.5)),()=>choose('bad'),'ptmr','ptLab');
   } else { inc.posQ=null; inc.refPos=sp?sp.ok:[28,15]; SC.refTarget=SC.map(inc.refPos[0],inc.refPos[1]); setTimeout(go,500); }
 }
-function showPrompt(html){ const p=$('#prompt'); if(!p) return; p.innerHTML=html; p.hidden=false; }
+function showPrompt(html){ const p=$('#prompt'); if(!p) return; p.innerHTML=html; p.hidden=false; const ov=$('#overlay'); if(ov && window.innerWidth<=700 && ov.scrollTop>40) ov.scrollTo({top:0,behavior:'smooth'}); }
 function hidePrompt(){ const p=$('#prompt'); if(p){ p.hidden=true; p.innerHTML=''; } }
 
 function incidentMain(inc){
@@ -2344,7 +2345,7 @@ function prematchUI(){
 function matchUI(){
   const ov=$('#overlay'); const fx=M.fx; kickoffPositions(SC,0);
   ov.innerHTML=`<div class="ov-in match">
-    <div class="stage"><canvas id="cv"></canvas>${bugHTML(fx)}<div class="banner" id="banner" hidden></div><div class="prompt" id="prompt" hidden></div></div>
+    <div class="stage"><canvas id="cv"></canvas>${bugHTML(fx)}<div class="banner" id="banner" hidden></div></div><div class="prompt" id="prompt" hidden></div>
     <div class="mbar">
       <div class="meter"><span class="eyebrow">Maç ısısı</span><div class="bar temp"><i id="mTemp"></i></div></div>
       <div class="meter"><span class="eyebrow">Enerjin</span><div class="bar"><i id="mSta" style="background:var(--green)"></i></div></div>
