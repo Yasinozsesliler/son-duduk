@@ -12,3 +12,4 @@ ios/DerivedData/
 *.jks
 *.keystore
 .DS_Store
+dist/
