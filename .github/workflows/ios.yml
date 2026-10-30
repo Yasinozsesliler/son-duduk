@@ -1,0 +1,26 @@
+name: iOS build check
+
+# Compiles the iOS app on a macOS runner without signing, to catch build errors.
+# Publishing to the App Store needs Xcode signing with your Apple Developer account (see KURULUM.md).
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install and sync
+        run: |
+          npm ci
+          npm run build
+          npx cap sync ios
+      - name: Build for iOS Simulator (unsigned)
+        run: |
+          xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Debug \
+            -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO build

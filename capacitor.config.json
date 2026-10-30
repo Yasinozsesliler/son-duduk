@@ -1,0 +1,12 @@
+{
+  "appId": "com.sonduduk.hakem",
+  "appName": "Son Düdük",
+  "webDir": "www",
+  "backgroundColor": "#0c121b",
+  "android": { "backgroundColor": "#0c121b" },
+  "ios": { "backgroundColor": "#0c121b", "contentInset": "never" },
+  "plugins": {
+    "SplashScreen": { "launchAutoHide": false, "backgroundColor": "#0c121b", "showSpinner": false },
+    "StatusBar": { "overlaysWebView": true, "style": "DARK" }
+  }
+}

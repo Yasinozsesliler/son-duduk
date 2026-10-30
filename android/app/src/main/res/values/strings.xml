@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Son Düdük</string>
+    <string name="title_activity_main">Son Düdük</string>
+    <string name="package_name">com.sonduduk.hakem</string>
+    <string name="custom_url_scheme">com.sonduduk.hakem</string>
+</resources>
