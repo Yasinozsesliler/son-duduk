@@ -621,6 +621,74 @@ input[type=range]{padding:0;accent-color:var(--gold2);background:none;border:0;h
 @media (max-width:860px){.wiz-body{grid-template-columns:minmax(0,1fr)}.wiz-prev{position:static;flex-direction:row;text-align:left;padding:14px;gap:14px}.wiz-prev .avsvg{width:76px;height:76px}.wiz-prev .pv-attrs{display:none}.pv-txt{align-items:flex-start;gap:5px}.pv-name{font-size:21px}.pv-meta{justify-content:flex-start}.idgrid{grid-template-columns:minmax(0,1fr)}.wiz-main{padding:16px}}
 @media (max-width:560px){.wiz-foot>.muted{display:none}.wiz-foot .btn{flex:1}.cgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.ccard{padding:12px}.ccard small{font-size:11.5px}.ccard b{font-size:17px}.stepper li{font-size:12px;padding-right:10px}}
 
+/* ===== v6: post-match report ===== */
+.ov-in.rep{gap:16px;max-width:1240px;padding-bottom:120px}
+.rhero{position:relative;isolation:isolate;border-radius:28px;overflow:hidden;border:1px solid var(--line2);box-shadow:0 40px 90px -40px rgba(0,0,0,.95);background:#05080d;padding:20px 22px 18px;display:flex;flex-direction:column;gap:18px;min-height:340px;justify-content:space-between}
+.rhero canvas{position:absolute;inset:0;width:100%;height:100%;z-index:-2;display:block}
+.rhero-shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(7,11,18,.7) 0%,rgba(7,11,18,.35) 35%,rgba(7,11,18,.55) 60%,rgba(7,11,18,.96) 100%)}
+.rh-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.rh-comp{font-family:var(--f-display);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:13px;color:#d5dde8;flex:1}
+.rh-score{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:start;gap:16px}
+.rh-t{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;min-width:0}
+.rh-t .crest{width:clamp(56px,8vw,84px);height:auto;filter:drop-shadow(0 10px 22px rgba(0,0,0,.7))}
+.rh-t b{font-family:var(--f-display);font-weight:800;font-size:clamp(18px,2.6vw,28px);text-transform:uppercase;line-height:1;text-shadow:0 3px 16px rgba(0,0,0,.9);overflow-wrap:anywhere}
+.scorers{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:3px;font-size:13px;color:#cfd7e2}
+.scorers li{display:flex;align-items:center;gap:6px;justify-content:center}
+.ball-i{width:8px;height:8px;border-radius:50%;background:#fff;box-shadow:0 0 0 1.5px rgba(0,0,0,.4)}
+.rh-mid{display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:6px}
+.rh-sc{display:flex;align-items:center;gap:14px;font-size:clamp(46px,7vw,82px);font-weight:600;line-height:1;text-shadow:0 6px 30px rgba(0,0,0,.8)}
+.rh-sc i{font-style:normal;color:var(--gold1);font-size:.6em}
+.rh-mid small{font-family:var(--f-display);font-weight:700;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.tl{position:relative;padding:14px 0 18px}
+.tl-bar{height:4px;border-radius:4px;background:linear-gradient(90deg,rgba(255,255,255,.18),rgba(255,255,255,.3));position:relative}
+.tl-ht{position:absolute;left:46.9%;top:-5px;width:2px;height:14px;background:rgba(255,255,255,.35)}
+.tl-m{position:absolute;top:14px;transform:translate(-50%,-50%);transition:transform .15s}
+.tl-m:hover{transform:translate(-50%,-50%) scale(1.4)}
+.tl-m.goal{width:12px;height:12px;border-radius:50%;background:#fff;box-shadow:0 0 0 2px rgba(7,11,18,.9),0 0 10px rgba(255,255,255,.6);top:2px}
+.tl-m.yellow,.tl-m.red{width:8px;height:11px;border-radius:2px;background:var(--yellow);top:26px;box-shadow:0 0 0 2px rgba(7,11,18,.9)}
+.tl-m.red{background:var(--red)}
+.tl-m.dc{width:10px;height:10px;background:var(--vc);transform:translate(-50%,-50%) rotate(45deg);top:-8px;box-shadow:0 0 0 2px rgba(7,11,18,.9)}
+.tl-m.dc:hover{transform:translate(-50%,-50%) rotate(45deg) scale(1.4)}
+.tl-lab{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:11px;color:var(--muted);margin-top:22px}
+.rgrid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1.1fr) minmax(0,.95fr);gap:16px;align-items:start}
+@media (max-width:1100px){.rgrid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.rgrid>.rscore{grid-column:1/-1}}
+@media (max-width:760px){.rgrid{grid-template-columns:minmax(0,1fr)}}
+.rscore{display:flex;flex-direction:column;gap:16px;position:relative;overflow:hidden}
+.rscore::before{content:"";position:absolute;inset:0 0 auto 0;height:160px;background:radial-gradient(360px 140px at 18% 0%,rgba(255,219,92,.13),transparent);pointer-events:none}
+.rs-top{display:grid;grid-template-columns:auto minmax(0,1fr);gap:18px;align-items:center}
+.rring.big{width:160px;height:160px}
+.rring.big .rring-in b{font-size:50px}
+.rgrade{font-size:32px}
+.rkpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.rkpis>div{display:flex;flex-direction:column;gap:3px;padding:12px;border-radius:14px;background:var(--glass),rgba(7,11,18,.5);border:1px solid var(--line);min-width:0}
+.rkpis b{font-size:24px;font-weight:600}.rkpis small{font-size:11.5px;color:var(--muted)}
+.mbar2{display:block;height:5px;border-radius:5px;background:rgba(255,255,255,.08);overflow:hidden;margin-top:4px}.mbar2 i{display:block;height:100%;background:linear-gradient(90deg,var(--green),#7fe0b2);border-radius:5px}
+.rewards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.rw{display:flex;align-items:center;gap:8px;padding:10px;border-radius:14px;background:linear-gradient(180deg,rgba(255,219,92,.08),rgba(255,219,92,.01));border:1px solid rgba(255,219,92,.18);min-width:0}
+.rw span:last-child{display:flex;flex-direction:column;min-width:0}.rw small{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;font-weight:600}.rw b{font-size:15px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rw-ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:rgba(91,155,255,.14);color:#9cc2ff;flex:none}.rw-ic.gold{background:rgba(255,219,92,.16);color:var(--gold1)}
+@media (max-width:480px){.rewards{grid-template-columns:minmax(0,1fr)}.rs-top{grid-template-columns:minmax(0,1fr);justify-items:center;text-align:center}.rring.big{width:140px;height:140px}}
+.gains2{display:flex;flex-wrap:wrap;gap:6px}
+.gains2 span{font-size:12.5px;padding:4px 10px;border-radius:999px;background:rgba(56,178,122,.1);color:#bfeedd}.gains2 b{color:#7fe0b2;font-weight:600}
+.dec2{display:grid;grid-template-columns:44px minmax(0,1fr);gap:10px;padding:12px 12px 12px 14px;border-radius:14px;background:var(--glass),rgba(7,11,18,.45);border:1px solid var(--line);box-shadow:inset 3px 0 0 var(--vc)}
+.dec2 .m{color:var(--muted);font-size:13px;padding-top:1px}
+.dec2 b{font-size:14.5px}
+.vtag{font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:999px;color:var(--vc);background:color-mix(in srgb,var(--vc) 14%,transparent);white-space:nowrap}
+.dec2 details summary{cursor:pointer;color:var(--muted);font-size:13px}
+.dec2 details p{font-size:13px;margin-top:6px;line-height:1.5}
+.rp-btn{color:var(--gold1);border-color:rgba(255,219,92,.35)}
+.press{background:linear-gradient(180deg,#f3efe4,#e7e1d1);color:#16130d;border:0;padding:16px 18px}
+.press-mast{display:flex;justify-content:space-between;align-items:baseline;border-bottom:3px double #16130d;padding-bottom:6px;margin-bottom:10px;font-family:var(--f-display);font-weight:800;font-size:22px;text-transform:uppercase;letter-spacing:.04em}
+.press-mast .muted{font-family:var(--f-body);font-size:12px;color:#5d564a;text-transform:none;letter-spacing:0;font-weight:500}
+.press article{padding:8px 0;border-bottom:1px solid rgba(22,19,13,.18)}.press article:last-child{border-bottom:0}
+.press small{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#7a2f1f;font-weight:700}
+.press h4{margin:2px 0 0;font-family:var(--f-display);font-weight:800;text-transform:uppercase;line-height:1.05}
+.np-l h4{font-size:26px}.np-s h4{font-size:17px}
+.alert-p{border-color:rgba(227,67,75,.4);background:linear-gradient(180deg,rgba(227,67,75,.1),rgba(227,67,75,.02)),var(--panel)}
+.rfoot{position:sticky;bottom:calc(10px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:12px 14px 12px 18px;border-radius:20px;background:rgba(11,17,27,.9);border:1px solid var(--line2);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 20px 50px -20px rgba(0,0,0,.9);z-index:5}
+.rf-q{display:flex;flex-direction:column;gap:8px;min-width:0;flex:1}
+@media (max-width:560px){.rfoot .btn.lg{flex:1}.rh-score{gap:8px}.rhero{padding:16px 14px 14px}}
+
 /* touch / mobile app ergonomics */
 html{-webkit-text-size-adjust:100%}
 body{overscroll-behavior-y:none;-webkit-tap-highlight-color:transparent}
@@ -1518,6 +1586,7 @@ const GEN = {
   const ax=ri(23,45), ay=outside?17.6:ri(8,14);
   inc.dia={mode:'box',pl:[{x:ax,y:ay,s:'A',n:ap.no,hl:1},{x:ax+1.9,y:ay+1.3,s:'D',n:dp.no,hl:1},{x:34,y:1.5,s:'G',n:1},{x:ax-9,y:ay+2,s:'D',n:ri(2,6)},{x:ax+10,y:ay-2,s:'D',n:ri(13,18)},{x:ax+12,y:ay+7,s:'A',n:ri(7,11)},{x:20,y:ay+12,s:'A',n:ri(14,20)}],
     arrows:[{f:[ax-4,ay+12],t:[ax-.3,ay+1],k:'run'}],ball:[ax+.6,ay-1],mark:[ax+1,ay+.6]};
+  inc.sx={kind,tackle,sev};
   return inc;
  },
  elle_oynama(c){
@@ -1547,6 +1616,7 @@ const GEN = {
   inc.pos='kanat_atak';
   const dx=ri(24,44);
   inc.dia={mode:'box',pl:[{x:dx,y:13,s:'D',n:dp.no,hl:1},{x:dx+3,y:23,s:'A',n:ap.no,hl:1},{x:34,y:1.5,s:'G',n:1},{x:dx-6,y:9,s:'D',n:ri(2,5)},{x:dx+8,y:10,s:'A',n:9},{x:dx-12,y:14,s:'D',n:ri(13,18)}],arrows:[{f:[dx+3,22.5],t:[dx+.4,13.6],k:'shot'}],ball:[dx+.3,13.8],mark:[dx,13]};
+  inc.sx={arm,deliberate,deflect};
   return inc;
  },
  hucum_elle_gol(c){
@@ -1563,6 +1633,7 @@ const GEN = {
   if(v==='omuz'){ inc.correct={d:'gol_gecerli',c:'yok'}; inc.explain='Top omza çarptı; kolun üst sınırı koltuk altının alt hizasıdır. Elle oynama yok, gol geçerli.'; }
   inc.pos='korner';
   inc.dia={mode:'box',pl:[{x:31,y:8,s:'A',n:ap.no,hl:1},{x:33,y:7,s:'D',n:ri(2,5)},{x:34,y:1.5,s:'G',n:1},{x:28,y:10,s:'D',n:ri(13,18)},{x:38,y:11,s:'A',n:mate.no,hl:v==='mate'?1:0},{x:40,y:7,s:'D',n:ri(13,18)}],arrows:[{f:[31,8],t:[33,.5],k:'shot'}],ball:[31.6,7.2],mark:[31,8]};
+  inc.sx={v};
   return inc;
  },
  ofsayt_gol(c){
@@ -1650,6 +1721,7 @@ const GEN = {
   const by={önden:[34,18.4],yandan:[36.6,21],arkadan:[34,23.8]}[dir];
   inc.dia={mode:'mid',pl:[{x:34,y:21,s:'A',n:vic.no,hl:1},{x:by[0],y:by[1],s:'D',n:off.no,hl:1},{x:42,y:13,s:'A',n:ri(7,11)},{x:24,y:16,s:'D',n:ri(2,6)},{x:28,y:27,s:'A',n:ri(14,20)},{x:46,y:26,s:'D',n:ri(13,18)}],
     arrows:[{f:[34,28],t:[34,21.8],k:'run'}].concat(adv?[{f:[34.5,20.5],t:[41.5,13.8],k:'pass'}]:[]),ball:[34.6,20.2],mark:[34.3,21.6]};
+  inc.sx={dir,studs,h,force,ballPlayed,clean:ballPlayed&&score<=1};
   return inc;
  },
  dogso(c){
@@ -1678,6 +1750,7 @@ const GEN = {
   const pls=[{x:x0,y:y0,s:'A',n:ap.no,hl:1},{x:x0+1.4,y:y0+1.6,s:'D',n:dp.no,hl:1},{x:34,y:ctrl?3:7,s:'G',n:1}];
   if(defs==='far') pls.push({x:18,y:y0+14,s:'D',n:ri(2,6)}); if(defs==='close') pls.push({x:x0-4,y:y0-2,s:'D',n:ri(2,6)}); if(defs==='2') pls.push({x:x0-5,y:y0-1,s:'D',n:ri(2,6)},{x:x0+6,y:y0+1,s:'D',n:ri(13,18)});
   inc.dia={mode:'box',pl:pls,arrows:[{f:[x0,y0+10],t:[x0,y0+.8],k:'run'}],ball:ctrl?[x0,y0-1.4]:[x0+(dirK?2:5),y0-5],mark:[x0+.6,y0+.8]};
+  inc.sx={ftype};
   return inc;
  },
  dirsek(c){
@@ -1693,6 +1766,7 @@ const GEN = {
   else { inc.correct={d:'faul',c:area==='göğüs'&&!hard?'sari':'kirmizi'}; inc.explain = area==='göğüs'&&!hard ? 'Dirsek savruldu ama göğse hafif geldi: pervasız, sarı kart.' : 'Dirsek bilerek rakibin '+area+'ına savruldu: şiddetli hareket, kırmızı kart.'; if(area==='göğüs'&&!hard) inc.accept=[{d:'faul',c:'kirmizi'}]; }
   inc.pos='orta_saha';
   inc.dia={mode:'mid',pl:[{x:33.4,y:20.6,s:'A',n:vic.no,hl:1},{x:34.8,y:21.4,s:'D',n:off.no,hl:1},{x:26,y:14,s:'D',n:ri(2,6)},{x:42,y:16,s:'A',n:ri(7,11)},{x:30,y:30,s:'A',n:ri(14,20)}],arrows:[{f:[20,36],t:[33.6,20.2],k:'pass'}],ball:[34,19.8],mark:[34.1,21]};
+  inc.sx={use,area};
   return inc;
  },
  top_disinda(c){
@@ -1711,6 +1785,7 @@ const GEN = {
   inc.pos='korner';
   const yx=inBox?[30,10]:[34,30];
   inc.dia={mode:'box',pl:[{x:yx[0],y:yx[1],s:'A',n:vic.no,hl:1},{x:yx[0]+1.6,y:yx[1]+.9,s:'D',n:off.no,hl:1},{x:62,y:28,s:'A',n:ri(7,11)},{x:60,y:30,s:'D',n:ri(2,6)},{x:34,y:2,s:'G',n:1}],arrows:[],ball:inPlay?[61.5,27]:[69,27],mark:[yx[0]+.8,yx[1]+.4]};
+  inc.sx={act};
   return inc;
  },
  kaleci_engelleme(c){
@@ -1726,6 +1801,7 @@ const GEN = {
   inc.explain = bad? 'Kalecinin topu oynaması temasla engellendi: faul, gol iptal.' : v==='omuz'?'Topa giden iki oyuncu arasında normal omuz teması: faul yok, gol geçerli.':'Kaleci kendi arkadaşıyla çarpıştı; hücumcunun ihlali yok. Gol geçerli.';
   inc.pos='korner';
   inc.dia={mode:'box',pl:[{x:34,y:2.6,s:'G',n:gk.no,hl:1},{x:35.4,y:3.6,s:'A',n:ap.no,hl:1},{x:31,y:6,s:'D',n:ri(2,6)},{x:38,y:7,s:'D',n:ri(13,18)},{x:30,y:9,s:'A',n:ri(7,11)},{x:41,y:10,s:'A',n:ri(14,20)}].concat(v==='arkadas'?[{x:33,y:3.4,s:'D',n:ri(2,6),hl:1}]:[]),arrows:[{f:[67.5,.6],t:[34.8,3],k:'pass'}],ball:[35,2.2],mark:[34.6,3]};
+  inc.sx={v};
   return inc;
  },
  gol_cizgisi(c){
@@ -1741,6 +1817,7 @@ const GEN = {
   inc.explain=(v==='tam'?'Topun tamamı çizgiyi geçti: gol.':'Topun tamamı çizgiyi geçmedi: gol değil.')+(ar!==(v==='tam')?' Yardımcı hakemin işareti hatalıydı'+(arNear?'.':'; o açıdan görmesi zordu.'):'');
   inc.pos='kanat_atak';
   inc.dia={mode:'box',pl:[{x:32,y:.9,s:'G',n:gk.no,hl:1},{x:34,y:6,s:'A',n:ap.no,hl:1},{x:37,y:4,s:'D',n:ri(2,6)},{x:29,y:7,s:'D',n:ri(13,18)},{x:arNear?68.6:68.6,y:arNear?0:12,s:'AR',n:0}],arrows:[{f:[34,6],t:[33.2,.3],k:'shot'}],ball:[33.3,v==='tam'?-.5:v==='buyuk'?-.2:0],mark:[33.3,0]};
+  inc.sx={v};
   return inc;
  },
  geri_pas(c){
@@ -1756,6 +1833,7 @@ const GEN = {
   inc.pos='kanat_atak';
   const gy=inGA?3.5:10;
   inc.dia={mode:'box',pl:[{x:30,y:24,s:'D',n:passer.no,hl:1},{x:34,y:gy,s:'G',n:gk.no,hl:1},{x:32,y:21,s:'A',n:ri(7,11)},{x:40,y:14,s:'A',n:ri(14,20)}],arrows:[{f:[30,23.5],t:[33.6,gy+.8],k:'pass'}],ball:[34,gy-.6],mark:[34,gy]};
+  inc.sx={v};
   return inc;
  },
  gol_oncesi_faul(c){
@@ -1771,6 +1849,7 @@ const GEN = {
   inc.explain=bad?'Hücumcu, savunmacıya faul yaparak avantaj sağladı ve aynı fazda gol geldi: gol iptal, savunmaya direkt serbest vuruş.':'Normal mücadele; faul yok, gol geçerli.';
   inc.pos=pick(['korner','kanat_atak']);
   inc.dia={mode:'box',pl:[{x:30,y:8,s:'A',n:ap.no,hl:1},{x:31.4,y:9.2,s:'D',n:dp.no,hl:1},{x:34,y:1.5,s:'G',n:1},{x:38,y:9,s:'D',n:ri(2,6)},{x:25,y:12,s:'A',n:ri(7,11)}],arrows:[{f:[30,8],t:[32.4,.4],k:'shot'}],ball:[30.5,7.4],mark:[30.7,8.6]};
+  inc.sx={v};
   return inc;
  },
  penalti_atisi(c){
@@ -1785,6 +1864,7 @@ const GEN = {
   inc.correct={d:map[v][0],c:map[v][1]}; if(v==='gk_save') inc.accept=[{d:'tekrar',c:'sari_kaleci'}];
   inc.explain={gk_save:'Kaleci ihlal etti ve top kaleye girmedi: penaltı tekrar. İlk ihlalde kaleci uyarılır (tekrarında sarı).',gk_wide:'Kaleci erken çıktı ama vurucuyu etkilemedi, top dışarı gitti: tekrar yok, kale vuruşu.',feint:'Koşu tamamlandıktan sonra aldatma: gol geçersiz, vurucuya sarı kart, savunmaya endirekt serbest vuruş.',att_goal:'Hücumcu erken girdi ve gol oldu: penaltı tekrar.',def_goal:'Savunmacı erken girdi ama gol oldu: gol geçerli.',def_save:'Savunmacı erken girip etkili oldu, gol olmadı: penaltı tekrar.',clean:'İhlal yok: gol.'}[v];
   inc.dia={mode:'box',pl:[{x:34,y:12.4,s:'A',n:kicker.no,hl:1},{x:34,y:v.startsWith('gk')?1.3:.3,s:'G',n:gk.no,hl:1},{x:27,y:v==='att_goal'?15.8:17.8,s:'A',n:ri(7,11),hl:v==='att_goal'?1:0},{x:40,y:v.startsWith('def')?15.9:17.6,s:'D',n:ri(2,6),hl:v.startsWith('def')?1:0},{x:22,y:18,s:'D',n:ri(13,18)},{x:46,y:18,s:'A',n:ri(14,20)}],arrows:[],ball:[34,11],mark:[34,6]};
+  inc.sx={v};
   return inc;
  }
 };
@@ -1898,6 +1978,7 @@ function openEvent(ev){
 }
 
 // ---------- incident evaluation ----------
+function pushLog(inc,e){ Object.defineProperty(e,'inc',{value:inc,enumerable:false}); M.log.push(e); }
 function sameAns(a,b){ return a.d===b.d && (b.c===undefined || a.c===b.c); }
 function evaluate(inc,ans){
   const C=inc.correct;
@@ -1983,7 +2064,7 @@ function finalizeIncident(inc,ans,opt){
     const tempD = vv==='hata'||vv==='israr' ? 13*(M.fx.derby?1.4:1) : vv==='kismen'?5 : vv==='var'?4 : -3*(S.attrs.iletisim/60);
     M.temp=clamp(M.temp+tempD,0,100);
     const harmed = (vv==='hata'||vv==='israr') ? (favorScore(inc,inc.correct)>favorScore(inc,fin)?inc.ai:inc.di) : null;
-    M.log.push({cat:'major',type:inc.type,title:inc.title,min:inc.minute,your:ansText(inc,inc.ans),final:ansText(inc,fin),correct:ansText(inc,inc.correct),v:vv,explain:inc.explain,law:inc.law,note,harmed,reviewable:inc.reviewable||inc.redReview,late:inc.late,posQ:inc.posQ});
+    pushLog(inc,{cat:'major',type:inc.type,title:inc.title,min:inc.minute,your:ansText(inc,inc.ans),final:ansText(inc,fin),correct:ansText(inc,inc.correct),v:vv,explain:inc.explain,law:inc.law,note,harmed,reviewable:inc.reviewable||inc.redReview,late:inc.late,posQ:inc.posQ});
     S.totals.decisions++; if(vv==='dogru'||vv==='kabul'||vv==='durdu') S.totals.correct++;
     if(!M.auto) { if(S.settings.feedback) feedbackUI(inc,fin,vv,note); else closeModal(); }
   };
@@ -2199,31 +2280,6 @@ function drawGoal(ctx,c,end){
   const m=P(c,[gx,34,1.2]); const w=m?Math.max(1.5,c.F/m[2]*.12):2;
   ctx.strokeStyle='#f4f6f8'; ctx.lineWidth=w; ctx.lineCap='round'; ctx.beginPath(); segPath(ctx,c,[gx,y0,0],[gx,y0,h]); segPath(ctx,c,[gx,y0,h],[gx,y1,h]); segPath(ctx,c,[gx,y1,h],[gx,y1,0]); ctx.stroke();
 }
-function drawFig(ctx,c,a){
-  const fall=a.fall||0, fd=a.fallDir||a.face||[1,0];
-  const up=fall>0?V3.norm([fd[0]*fall*1.6,fd[1]*fall*1.6,Math.max(.06,1-fall)]):[0,0,1];
-  const fx=a.face?a.face[0]:1, fy=a.face?a.face[1]:0, px=-fy, py=fx;
-  const at=(h,s,f)=>[a.x+up[0]*h+px*s+fx*f, a.y+up[1]*h+py*s+fy*f, Math.max(.02,up[2]*h)];
-  const hip=P(c,at(.92,0,0)); if(!hip) return;
-  const sc=c.F/hip[2]; if(sc<1) return;
-  const g=P(c,[a.x,a.y,0]); if(!g) return;
-  const st=Math.min(1,(a.speed||0)/6)*.42*Math.sin(a.phase||0)*(1-fall);
-  ctx.fillStyle='rgba(0,0,0,.34)'; ctx.beginPath(); ctx.ellipse(g[0],g[1],.5*sc,.17*sc,0,0,Math.PI*2); ctx.fill();
-  if(a.hl){ ctx.strokeStyle='rgba(246,198,43,.95)'; ctx.lineWidth=Math.max(1.5*c.dpr,.08*sc); ctx.beginPath(); ctx.ellipse(g[0],g[1],.9*sc,.32*sc,0,0,Math.PI*2); ctx.stroke(); }
-  const pts=[at(.05,.14,st),at(.05,-.14,-st),at(.6,0,0),at(1.0,0,0),at(1.44,0,0),at(1.71,0,0),at(1.4,.24,0),at(1.4,-.24,0),at(.98,.33,-st*.9),at(.98,-.33,st*.9),at(1.2,0,0)].map(p=>P(c,p));
-  if(pts.some(p=>!p)) return;
-  const [fl,fr,sh,wa,nk,hd,sl,sr,hl,hr,ch]=pts;
-  const L=(p,q,w,col)=>{ ctx.strokeStyle=col; ctx.lineWidth=Math.max(c.dpr,w*sc); ctx.beginPath(); ctx.moveTo(p[0],p[1]); ctx.lineTo(q[0],q[1]); ctx.stroke(); };
-  ctx.lineCap='round';
-  L(hip,fl,.15,a.kit.socks); L(hip,fr,.15,a.kit.socks);
-  L(hip,sh,.33,a.kit.shorts);
-  L(sl,hl,.12,a.kit.shirt); L(sr,hr,.12,a.kit.shirt);
-  L(wa,nk,.44,a.kit.shirt);
-  ctx.fillStyle=a.skin||'#e0b08a'; ctx.beginPath(); ctx.arc(hd[0],hd[1],Math.max(1.2*c.dpr,.135*sc),0,Math.PI*2); ctx.fill();
-  if(a.flag){ const f0=P(c,at(1.95,.34,0)); if(f0){ ctx.fillStyle=a.flagUp?'#ffd84a':'#f2b81f'; ctx.fillRect(f0[0],f0[1]-(a.flagUp?.25*sc:0),.32*sc,.24*sc); } }
-  if(a.num!=null && sc>15){ ctx.fillStyle=a.kit.numCol; ctx.font=`700 ${Math.round(.2*sc)}px "IBM Plex Mono",monospace`; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(a.num,ch[0],ch[1]); }
-  if(a.label && sc>3){ const fs=11*c.dpr; ctx.font=`600 ${fs}px Barlow,sans-serif`; const w=ctx.measureText(a.label).width+fs*.9; const x=hd[0]-w/2, y=hd[1]-.25*sc-fs*1.9; ctx.fillStyle='rgba(8,13,20,.86)'; rrect(ctx,x,y,w,fs*1.55,fs*.4); ctx.fill(); ctx.fillStyle='#fff'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(a.label,hd[0],y+fs*.8); }
-}
 function rrect(ctx,x,y,w,h,r){ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); }
 function drawBall(ctx,c,b){ const g=P(c,[b.x,b.y,0]); const s=P(c,[b.x,b.y,(b.z||0)+.11]); if(!g||!s) return; const sc=c.F/s[2]; ctx.fillStyle='rgba(0,0,0,.38)'; ctx.beginPath(); ctx.ellipse(g[0],g[1],.17*sc,.06*sc,0,0,Math.PI*2); ctx.fill(); ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(s[0],s[1],Math.max(1.7*c.dpr,.12*sc),0,Math.PI*2); ctx.fill(); ctx.strokeStyle='rgba(0,0,0,.45)'; ctx.lineWidth=c.dpr; ctx.stroke(); }
 function groundRing(ctx,c,x,y,r,stroke,fill,dash){ ctx.beginPath(); for(let i=0;i<=28;i++){ const a=i/28*Math.PI*2; const s=P(c,[x+Math.cos(a)*r,y+Math.sin(a)*r,0]); if(!s) return; i?ctx.lineTo(s[0],s[1]):ctx.moveTo(s[0],s[1]); } if(fill){ ctx.fillStyle=fill; ctx.fill(); } if(stroke){ ctx.setLineDash(dash?[6*c.dpr,5*c.dpr]:[]); ctx.strokeStyle=stroke; ctx.lineWidth=2*c.dpr; ctx.stroke(); ctx.setLineDash([]); } }
@@ -2249,6 +2305,7 @@ function drawWorld(ctx,c,o){
   (o.actors||[]).forEach(a=>items.push({d:dep([a.x,a.y,1]),f:()=>drawFig(ctx,c,a)}));
   if(o.ball) items.push({d:dep([o.ball.x,o.ball.y,(o.ball.z||0)])-.3,f:()=>drawBall(ctx,c,o.ball)});
   items.sort((a,b)=>b.d-a.d).forEach(i=>i.f());
+  if(o.flash) drawFlash(ctx,c,o.flash);
   const v=ctx.createRadialGradient(W/2,H*.45,H*.25,W/2,H*.5,W*.75); v.addColorStop(0,'rgba(0,0,0,0)'); v.addColorStop(1,'rgba(0,0,0,.45)'); ctx.fillStyle=v; ctx.fillRect(0,0,W,H);
 }
 function fitCanvas(cv){ const r=cv.getBoundingClientRect(); const dpr=Math.min(2,window.devicePixelRatio||1); const w=Math.max(10,Math.round(r.width*dpr)), h=Math.max(10,Math.round(r.height*dpr)); if(cv.width!==w||cv.height!==h){cv.width=w;cv.height=h;} return [w,h,dpr]; }
@@ -2360,57 +2417,14 @@ function sceneGoal(sc,side,p){
   sc.pl.forEach(q=>{ q.keepDown=false; q.fall=0; });
   matchBanner('goal','GOL!',esc(sideTeam(side).name)+(p?' · '+esc(p.name):''));
 }
-function sceneResume(sc){ if(!sc||sc.mode==='goal'||sc.mode==='kickoff') return; sc.mode='play'; sc.forced=null; sc.spots=null; sc.mark=null; sc.refTarget=null; sc.gather=null; sc.pl.forEach(p=>{ p.keepDown=false; p.label=null; p.hl=false; }); const b=sc.ball; b.fl=null; b.owner=nearestTo(sc.pl,b.x,b.y); sc.poss=b.owner.side; b.owner.hold=0; b.owner.next=1; }
 function sceneStop(sc,gather){ if(!sc||sc.mode==='goal') return; sc.mode='stopped'; sc.gather=gather||null; if(sc.ball.owner){ sc.ball.owner=null; } sc.ball.fl=null; }
 function sceneHalf(sc){ if(!sc) return; sc.dirHome=-1; kickoffPositions(sc,1); }
 
 // incident build-up on the live pitch -----------------------
 const VICTIM={penalti_temas:'A',dogso:'A',orta_saha_faul:'A',dirsek:'A',top_disinda:'A',gol_oncesi_faul:'D',kaleci_engelleme:'G'};
 function diaMap(mode,d){ return mode==='mid' ? (x,y)=>[52.5+d*(21-y), d>0?x:68-x] : (x,y)=> d>0?[105-y,x]:[y,68-x]; }
-function replayTracks(inc){
-  const d=inc.dia, runs=(d.arrows||[]).filter(a=>a.k==='run'), vs=VICTIM[inc.type]; let vSet=false, oSet=false; const r=seeded(hash(inc.title+inc.minute));
-  return d.pl.map(p=>{ const run=runs.find(a=>Math.hypot(a.t[0]-p.x,a.t[1]-p.y)<3.4);
-    const from = run? run.f.slice() : (p.s==='G'||p.s==='AR') ? [p.x,p.y] : [p.x+(r()*2.4-1.2), p.y+(p.s==='A'?4+r()*3:2.5+r()*2)];
-    let role=null; if(vs && p.hl && p.s===vs && !vSet){ role='victim'; vSet=true; } else if(vs && p.hl && p.s!==vs && p.s!=='AR' && !oSet){ role='offender'; oSet=true; }
-    return {s:p.s,n:p.n,hl:p.hl,from,to:[p.x,p.y],role}; });
-}
-function ballKeys(inc){ const d=inc.dia; const pass=(d.arrows||[]).find(a=>a.k==='pass'), shot=(d.arrows||[]).find(a=>a.k==='shot'), run=(d.arrows||[]).find(a=>a.k==='run');
-  const end=d.ball||d.mark; const kf=[];
-  if(pass) kf.push([0,pass.f,0],[.55,pass.t,Math.hypot(pass.t[0]-pass.f[0],pass.t[1]-pass.f[1])>18?2.6:.3]); else kf.push([0,run?[run.f[0]+.4,run.f[1]-1]:end,0]);
-  kf.push([.72,end,.2]); if(shot) kf.push([.8,shot.f,0],[.95,shot.t,.6]); return kf; }
-function ballAt(kf,t){ if(t<=kf[0][0]) return [kf[0][1][0],kf[0][1][1],0]; for(let i=1;i<kf.length;i++){ if(t<=kf[i][0]){ const a=kf[i-1], b=kf[i]; const u=(t-a[0])/(b[0]-a[0]); return [a[1][0]+(b[1][0]-a[1][0])*u, a[1][1]+(b[1][1]-a[1][1])*u, b[2]*4*u*(1-u)]; } } const l=kf[kf.length-1]; return [l[1][0],l[1][1],0]; }
 const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
-function sceneBuildup(sc,inc){
-  const d=sdir(sc,inc.ai); const map=diaMap(inc.dia.mode,d); sc.map=map; inc.tracks=inc.tracks||replayTracks(inc);
-  const used=new Set(); sc.forced=[]; sc.pl.forEach(p=>{p.hl=false;p.label=null;p.keepDown=false;});
-  inc.tracks.forEach(t=>{ if(t.s==='AR') return; const side=t.s==='A'?inc.ai:inc.di; const gk=t.s==='G'; const to=map(t.to[0],t.to[1]);
-    const best=nearestTo(sc.pl.filter(p=>p.side===side&&!used.has(p)&&(gk?p.role==='GK':p.role!=='GK')),to[0],to[1]); if(!best) return; used.add(best);
-    if(t.n) best.num=t.n; best.hl=!!t.hl; sc.forced.push({p:best,pre:map(t.from[0],t.from[1]),to,role:t.role}); });
-  sc.mode='buildup'; sc.stage=1; sc.bt=0; sc.mark=map(inc.dia.mark[0],inc.dia.mark[1]);
-  sc.bkf=ballKeys(inc).map(k=>[k[0],map(k[1][0],k[1][1]),k[2]]);
-  const carrier=sc.forced.find(f=>f.role==='victim')||sc.forced.find(f=>f.p.side===inc.ai);
-  sc.ball.fl=null; sc.ball.owner=null; const b0=sc.bkf[0][1]; sc.ballFrom=[sc.ball.x,sc.ball.y]; sc.ballPre=b0; sc.carrier=carrier?carrier.p:null;
-  sc.gather=null; sc.refTarget=null;
-}
 function sceneBuildGo(sc,onContact){ sc.stage=2; sc.bt=0; sc.forced.forEach(f=>f.start=[f.p.x,f.p.y]); sc.onContact=onContact; sc.contactDone=false; sc.spots=null; }
-function buildAI(sc,dt){
-  sc.bt+=dt; const b=sc.ball;
-  const forcedSet=new Set(sc.forced.map(f=>f.p));
-  sc.pl.forEach(p=>{ if(forcedSet.has(p)) return; const t=formTarget(sc,p); steer(p,t[0]*.5+sc.mark[0]*.5,t[1]*.6+sc.mark[1]*.4,dt,3.2); });
-  if(sc.stage===1){
-    sc.forced.forEach(f=>steer(f.p,f.pre[0],f.pre[1],dt,4.2));
-    const k=Math.min(1,sc.bt/1.2); b.x=sc.ballFrom[0]+(sc.ballPre[0]-sc.ballFrom[0])*k; b.y=sc.ballFrom[1]+(sc.ballPre[1]-sc.ballFrom[1])*k; b.z=0;
-    if(sc.carrier && k>=1){ b.x=sc.carrier.x+sc.carrier.face[0]*.5; b.y=sc.carrier.y+sc.carrier.face[1]*.5; }
-    return;
-  }
-  const DUR=1.7, t=Math.min(1,sc.bt/DUR), e=ease(Math.min(1,t/.72*1));
-  sc.forced.forEach(f=>{ const p=f.p; const tt=Math.min(1,t/.72); const k=ease(tt); const nx=f.start[0]+(f.to[0]-f.start[0])*k, ny=f.start[1]+(f.to[1]-f.start[1])*k; const vx=(nx-p.x)/Math.max(dt,1e-3), vy=(ny-p.y)/Math.max(dt,1e-3); p.x=nx; p.y=ny; p.speed=Math.min(8,Math.hypot(vx,vy)); if(p.speed>.4) p.face=[vx/Math.hypot(vx,vy),vy/Math.hypot(vx,vy)]; p.phase+=p.speed*dt*2.7;
-    if(f.role==='victim' && t>.72){ p.fall=Math.min(1,(t-.72)/.14); p.fallDir=p.face.slice(); p.keepDown=true; } });
-  const bp=ballAt(sc.bkf.map(k=>[k[0]*1,k[1],k[2]]),t); b.x=bp[0]; b.y=bp[1]; b.z=bp[2];
-  if(t>=1 && !sc.contactDone && sc.bt>DUR+.35){ sc.contactDone=true; sc.mode='stopped'; sc.gather=sc.mark; const cb=sc.onContact; sc.onContact=null; if(cb) cb(); }
-}
-
-// ---------- live render loop ----------
 function startRender(){
   cancelAnimationFrame(RAF); LASTF=performance.now();
   const loop=now=>{ const cv=$('#cv'); if(!SC||!cv){ RAF=null; return; } const dt=Math.min(.05,(now-LASTF)/1000); LASTF=now;
@@ -2418,12 +2432,6 @@ function startRender(){
     RAF=requestAnimationFrame(loop); };
   RAF=requestAnimationFrame(loop);
 }
-function liveCam(W,H,dpr){ const x=SC.camX;
-  if(SC.mode==='buildup' && SC.cam!=='ust'){ const pts=[SC.mark,...(SC.spots||[]).map(s=>[s.x,s.y])]; const cx=avg(pts.map(p=>p[0])), cy=avg(pts.map(p=>p[1])); const span=Math.max(18,...pts.map(p=>Math.hypot(p[0]-cx,p[1]-cy))); const tall=H/W>.68; const z=SC.spots?(tall?1.15:1.35):1;
-    SC.bx=(SC.bx==null?x:SC.bx)+(cx-(SC.bx==null?x:SC.bx))*.06; SC.by=(SC.by==null?34:SC.by)+(cy-(SC.by==null?34:SC.by))*.06;
-    return camera([SC.bx,SC.by-span*1.05*z-4,span*1.55*z+14],[SC.bx,SC.by-span*.12,0],.7,W,H,dpr); }
-  SC.bx=null; SC.by=null; if(SC.cam==='ust') return camera([52.5,-40,66],[52.5,31,0],.63,W,H,dpr); if(SC.cam==='yakin') return camera([x,-15,10.5],[x,30,0],1.15,W,H,dpr); return camera([x,-27,17],[x,31,0],1.02,W,H,dpr); }
-function drawLive(cv){ const [W,H,dpr]=fitCanvas(cv); const ctx=cv.getContext('2d'); drawWorld(ctx,liveCam(W,H,dpr),{actors:[...SC.pl,...SC.refs],ball:SC.ball,spots:SC.spots,t:SC.t}); }
 function matchBanner(kind,title,sub){
   if(!M||M.auto) return; const el=$('#banner'); if(!el) return;
   el.className='banner '+kind; el.innerHTML=`<b>${title}</b>${sub?`<span>${sub}</span>`:''}`; el.hidden=false; el.style.animation='none'; void el.offsetWidth; el.style.animation='';
@@ -2431,49 +2439,258 @@ function matchBanner(kind,title,sub){
 }
 
 // ---------- incident replay (in the decision sheet) ----------
+// ---------- body poses & contact animation ----------
+// limb targets: {s: side (+left), f: forward, h: height} in metres, relative to the player's feet and facing
+const POSES={
+ slide:{hipH:.3,lean:-.45,legR:{s:-.08,f:1.05,h:.12},legL:{s:.22,f:.05,h:.05},armL:{s:.45,f:-.35,h:.22},armR:{s:-.45,f:-.1,h:.45}},
+ slideHigh:{hipH:.36,lean:-.5,legR:{s:-.08,f:1.05,h:.55},legL:{s:.12,f:.95,h:.45},armL:{s:.45,f:-.35,h:.3},armR:{s:-.45,f:-.3,h:.3}},
+ slideArm:{hipH:.3,lean:-.45,legR:{s:-.08,f:1.0,h:.12},legL:{s:.22,f:.05,h:.05},armL:{s:.6,f:.05,h:.05},armR:{s:-.45,f:-.1,h:.45}},
+ tackle:{hipH:.8,lean:-.12,legR:{s:-.05,f:.85,h:.22},armL:{s:.48,f:-.2,h:1.05},armR:{s:-.45,f:.1,h:1.1}},
+ tackleHigh:{hipH:.82,lean:-.2,legR:{s:-.05,f:.9,h:.58},armL:{s:.5,f:-.25,h:1.15},armR:{s:-.48,f:0,h:1.2}},
+ trip:{hipH:.74,lean:.12,legR:{s:.18,f:.8,h:.12},armL:{s:.4,f:.2,h:.9},armR:{s:-.4,f:.1,h:.95}},
+ push:{hipH:.9,lean:.28,armL:{s:.18,f:.65,h:1.32},armR:{s:-.18,f:.65,h:1.32}},
+ hold:{hipH:.88,lean:-.18,armR:{s:-.05,f:.72,h:1.2},armL:{s:.4,f:-.1,h:1.0}},
+ shoulder:{hipH:.9,lean:.12,armL:{s:.36,f:.1,h:1.05},armR:{s:-.4,f:-.1,h:1.0}},
+ elbow:{jump:.35,armR:{s:-.2,f:.35,h:1.78},armL:{s:.35,f:.1,h:1.45}},
+ lever:{jump:.32,armR:{s:-.08,f:.5,h:1.45},armL:{s:.35,f:.1,h:1.4}},
+ header:{jump:.4,armL:{s:.35,f:.15,h:1.35},armR:{s:-.35,f:.15,h:1.35}},
+ punch:{lean:.2,armR:{s:-.05,f:.78,h:1.62}},
+ headbutt:{lean:.42,headF:.28,armL:{s:.35,f:-.2,h:.95},armR:{s:-.35,f:-.2,h:.95}},
+ stamp:{hipH:.95,legR:{s:-.05,f:.48,h:.02}},
+ gesture:{armR:{s:-.25,f:.35,h:1.95}},
+ block:{hipH:.82,lean:.06},
+ armTight:{hipH:.84,armL:{s:.2,f:.05,h:1.08},armR:{s:-.2,f:.05,h:1.08}},
+ armNat:{hipH:.86,armL:{s:.32,f:-.12,h:.98},armR:{s:-.32,f:-.05,h:.98}},
+ armSide:{hipH:.84,armL:{s:.78,f:.08,h:1.32},armR:{s:-.3,f:0,h:1.0}},
+ armUp:{hipH:.86,jump:.12,armL:{s:.25,f:.18,h:2.08},armR:{s:-.3,f:0,h:1.0}},
+ armReach:{hipH:.84,lean:.1,armL:{s:.5,f:.5,h:1.4},armR:{s:-.3,f:0,h:1.0}},
+ shot:{lean:-.12,legR:{s:-.1,f:.82,h:.45},armL:{s:.5,f:.2,h:1.2},armR:{s:-.45,f:-.1,h:1.05}},
+ pass:{legR:{s:-.1,f:.62,h:.25},armL:{s:.45,f:.1,h:1.1}},
+ gkJump:{jump:.55,armL:{s:.22,f:.25,h:2.25},armR:{s:-.22,f:.25,h:2.25}},
+ gkCatch:{hipH:.78,armL:{s:.16,f:.42,h:1.1},armR:{s:-.16,f:.42,h:1.1}},
+ gkDive:{hipH:.8,armL:{s:.2,f:.3,h:2.1},armR:{s:-.2,f:.3,h:2.1}},
+ dive:{jump:.15,armL:{s:.35,f:.2,h:1.95},armR:{s:-.35,f:.2,h:1.95}},
+ faceHold:{armL:{s:.12,f:.22,h:1.62},armR:{s:-.12,f:.22,h:1.62}}
+};
+const ARM_POSE={bitisik:'armTight',dogal:'armNat',siluet:'armSide',omuz:'armUp',destek:'slideArm'};
+const ARM_HIT={bitisik:[.22,1.08],dogal:[.32,.98],siluet:[.74,1.32],omuz:[.26,2.02],destek:[.58,.08]};
+const CT=.72;
+const REACH={slide:1.0,slideHigh:1.0,tackle:.85,tackleHigh:.9,trip:.78,push:.62,hold:.68,shoulder:.5,elbow:.55,lever:.55,header:.6,punch:.72,headbutt:.45,stamp:.5,block:.45};
+function setPose(a,name,k){ if(!name||k<=0) return; const P=POSES[name]; if(!P) return; if(!a.pose||k>=a.pose.k) a.pose={P,k:Math.min(1,k)}; }
+// what happens in each incident, derived from the generated scenario
+function animSpec(inc){
+  const x=inc.sx||{}, T=inc.type;
+  switch(T){
+    case 'penalti_temas': { const k=x.kind, tk=x.tackle||''; const off = k==='dalis'?'tackle':k==='temiz'?'slide':k==='hafif'?'shoulder':/kayarak/.test(tk)?(x.sev!=='normal'?'slideHigh':'slide'):/çelme/.test(tk)?'trip':/tutma/.test(tk)?'hold':/itme/.test(tk)?'push':'slide';
+      return {off,vic:k==='dalis'?'dive':k==='hafif'?'stumble':'fall',gap:k==='dalis'?1.5:0,ballAway:k==='temiz',contact:k!=='dalis',hitZ:/hold|push|shoulder/.test(off)?1.2:.3}; }
+    case 'elle_oynama': return {off:ARM_POSE[x.arm]||'armNat',offS:'D',vicS:null,handball:x.arm,deflect:x.deflect,delib:x.deliberate,faceTo:'shooter',contact:true};
+    case 'hucum_elle_gol': return {off:x.v==='omuz'?'shoulder':x.v==='mate'?null:'armReach',offS:'A',vicS:null,attHit:x.v,contact:x.v!=='mate'};
+    case 'orta_saha_faul': { const off = x.force==='asiri'?'slideHigh':x.studs?(x.h==='top'?'tackle':'tackleHigh'):(x.dir==='yandan'?'slide':x.dir==='arkadan'?'trip':'tackle');
+      return {off,vic:x.clean?'stumble':'fall',ballAway:x.ballPlayed,contact:true,hitZ:/High/.test(off)?.55:.25}; }
+    case 'dogso': return {off:/arkadan/.test(x.ftype||'')?'trip':/çekme/.test(x.ftype||'')?'hold':'push',vic:'fall',contact:true,hitZ:/çekme|itme/.test(x.ftype||'')?1.2:.25};
+    case 'dirsek': return {off:x.use==='dogal'?'header':x.use==='kaldirac'?'lever':'elbow',vicPose:'header',vic:(x.area==='yüz'||x.area==='kafa')?'fall':'stumble',vicAfter:'faceHold',contact:true,hitZ:x.area==='göğüs'?1.7:2.05};
+    case 'top_disinda': return {off:{itme:'push',yumruk:'punch',kafa:'headbutt',basma:'stamp',kufur:'gesture'}[x.act],vic:x.act==='basma'?'down':x.act==='kufur'?'none':x.act==='itme'?'stumble':'fall',contact:x.act!=='kufur',hitZ:x.act==='basma'?.1:1.55};
+    case 'kaleci_engelleme': return {off:{tuttu:'hold',itti:'push',omuz:'shoulder',engel:'block',arkadas:'header'}[x.v],offS:x.v==='arkadas'?'D':'A',vicS:'G',vicPose:'gkJump',vic:['tuttu','itti','engel'].includes(x.v)?'fall':x.v==='arkadas'?'fall':'stumble',contact:true,hitZ:1.4};
+    case 'gol_oncesi_faul': return {off:{itme:'push',omuz:'shoulder',basma:'stamp',hafif:'shoulder',cekme:'hold'}[x.v],offS:'A',vicS:'D',vic:['itme','basma','cekme'].includes(x.v)?'fall':'stumble',contact:true,hitZ:x.v==='basma'?.1:1.2};
+    case 'gol_cizgisi': return {gk:'dive',contact:false,headerA:true};
+    case 'geri_pas': return {gk:'catch',contact:false,flick:x.v==='hile'};
+    case 'penalti_atisi': return {gk:'dive',gkEarly:/^gk/.test(x.v||''),feint:x.v==='feint',contact:false,pen:true};
+    default: return {contact:false};
+  }
+}
+function v2n(x,y){ const l=Math.hypot(x,y)||1; return [x/l,y/l]; }
+function replayTracks(inc){
+  const d=inc.dia, runs=(d.arrows||[]).filter(a=>a.k==='run'), shot=(d.arrows||[]).find(a=>a.k==='shot'), pass=(d.arrows||[]).find(a=>a.k==='pass');
+  const an=inc.anim||(inc.anim=animSpec(inc)); const vs=an.vicS!==undefined?an.vicS:VICTIM[inc.type]; const os=an.offS;
+  let vSet=false, oSet=false; const r=seeded(hash(inc.title+inc.minute));
+  const tr=d.pl.map(p=>{ const run=runs.find(a=>Math.hypot(a.t[0]-p.x,a.t[1]-p.y)<3.4);
+    let from = run? run.f.slice() : (p.s==='G'||p.s==='AR') ? [p.x,p.y] : [p.x+(r()*2.4-1.2), p.y+(p.s==='A'?4+r()*3:2.5+r()*2)];
+    if(an.pen && p.s==='G') from=[p.x,.3];
+    if(an.pen && p.hl && p.s==='A' && Math.hypot(p.x-34,p.y-12.4)<1) from=[34,15.5];
+    let role=null; if(vs && p.hl && p.s===vs && !vSet){ role='victim'; vSet=true; } else if(p.hl && p.s!=='AR' && !oSet && (os? p.s===os && p.s!==vs : (vs? p.s!==vs : false))){ role='offender'; oSet=true; }
+    const t={s:p.s,n:p.n,hl:p.hl,from,to:[p.x,p.y],role};
+    if(shot && Math.hypot(shot.f[0]-p.x,shot.f[1]-p.y)<2.2 && p.s==='A') t.shooter=true;
+    if(pass && Math.hypot(pass.f[0]-p.x,pass.f[1]-p.y)<2.2) t.passer=true;
+    return t; });
+  if(an.handball) tr.forEach(t=>{ if(t.shooter) t.from=t.to.slice(); });
+  if(!oSet && os){ const o=tr.find(t=>t.hl&&t.s===os&&t.role!=='victim'); if(o) o.role='offender'; }
+  const off=tr.find(t=>t.role==='offender'), vic=tr.find(t=>t.role==='victim');
+  if(!an.gap && off && vic && REACH[an.off]){ const u=v2n(off.to[0]-vic.to[0],off.to[1]-vic.to[1]); off.to=[vic.to[0]+u[0]*REACH[an.off],vic.to[1]+u[1]*REACH[an.off]]; }
+  if(an.gap && off && vic){ const u=v2n(off.to[0]-vic.to[0],off.to[1]-vic.to[1]); off.to=[off.to[0]+u[0]*an.gap,off.to[1]+u[1]*an.gap]; }
+  return tr;
+}
+// hit point (dia coords + height) for hand/arm incidents
+function hitPoint(inc){ const an=inc.anim, tr=inc.tracks; const off=tr.find(t=>t.role==='offender'); if(!off) return null;
+  if(an.handball){ const sh=tr.find(t=>t.shooter)||tr.find(t=>t.s==='A'); const f=v2n(sh.to[0]-off.to[0],sh.to[1]-off.to[1]); const pp=[-f[1],f[0]]; const [s,h]=ARM_HIT[an.handball]||[.3,1];
+    return {p:[off.to[0]+pp[0]*s+f[0]*.15,off.to[1]+pp[1]*s+f[1]*.15],z:h,face:f}; }
+  if(an.attHit){ const [s,h]=an.attHit==='omuz'?[.2,1.45]:[.45,1.25]; return {p:[off.to[0]-.3,off.to[1]-.4+s*0],z:h,face:[0,-1]}; }
+  return null; }
+function ballKeys(inc){ const d=inc.dia, A=(d.arrows||[]); const pass=A.find(a=>a.k==='pass'), shot=A.find(a=>a.k==='shot'), run=A.find(a=>a.k==='run');
+  const an=inc.anim||(inc.anim=animSpec(inc)); inc.tracks=inc.tracks||replayTracks(inc);
+  const end=d.ball||d.mark; const K=(t,p,z,arc)=>({t,p:p.slice(),z:z||0,arc:arc||0});
+  if(an.handball){ const hp=hitPoint(inc); const sh=inc.tracks.find(t=>t.shooter)||inc.tracks.find(t=>t.s==='A'); const kf=[K(0,[sh.to[0],sh.to[1]-.6],.15)];
+    if(an.deflect) kf.push(K(.64,[hp.p[0]-hp.face[0]*.1,hp.p[1]-hp.face[1]*.1],.5)); kf.push(K(CT,hp.p,hp.z,.3)); kf.push(K(.95,[hp.p[0]+hp.face[0]*3+hp.face[1]*2,hp.p[1]+hp.face[1]*3-hp.face[0]*2],.2,.8)); return kf; }
+  if(an.attHit && an.attHit!=='mate'){ const hp=hitPoint(inc); const kf=[K(0,[hp.p[0]+3,hp.p[1]+5],1.6),K(.6,hp.p,hp.z,.6),K(.7,end,.1)]; if(shot) kf.push(K(.78,shot.f,.1),K(.95,shot.t,.6,.4)); return kf; }
+  if(an.pen){ return [K(0,[34,11],0),K(an.feint?.78:.72,[34,11],0),K(.9,[an.gkEarly&&/wide/.test(inc.sx.v)?40.5:32.5,-.4],.9,.3)]; }
+  const kf=[]; if(pass) kf.push(K(0,pass.f,0),K(.55,pass.t,.2,Math.hypot(pass.t[0]-pass.f[0],pass.t[1]-pass.f[1])>18?2.6:.3)); else kf.push(K(0,run?[run.f[0]+.4,run.f[1]-1]:end,0));
+  kf.push(K(.7,end,0,.2));
+  if(an.ballAway) kf.push(K(.9,[end[0]+4,end[1]-2.5],.2,.6));
+  else if(shot) kf.push(K(.8,shot.f,0),K(.95,shot.t,.5,.6));
+  return kf; }
+function ballAt(kf,t){ if(t<=kf[0].t) return [kf[0].p[0],kf[0].p[1],kf[0].z]; for(let i=1;i<kf.length;i++){ if(t<=kf[i].t){ const a=kf[i-1], b=kf[i]; const u=(t-a.t)/(b.t-a.t); return [a.p[0]+(b.p[0]-a.p[0])*u, a.p[1]+(b.p[1]-a.p[1])*u, a.z+(b.z-a.z)*u+b.arc*4*u*(1-u)]; } } const l=kf[kf.length-1]; return [l.p[0],l.p[1],l.z>.3?Math.max(0,l.z-(t-l.t)*6):l.z]; }
+const mapKeys=(kf,map)=>kf.map(k=>({...k,p:map(k.p[0],k.p[1])}));
+// apply poses/falls for time t to actors that carry a track in a.t; returns contact flash info
+function applyAnim(actors,inc,t,map){
+  const an=inc.anim||{}; let off=null, vic=null, shooterA=null;
+  actors.forEach(a=>{ a.pose=null; if(!a.t) return; if(a.t.role==='offender') off=a; if(a.t.role==='victim') vic=a; if(a.t.shooter) shooterA=a; });
+  actors.forEach(a=>{ const tr=a.t; if(!tr) return; a.fall=0;
+    if(tr.passer){ setPose(a,an.flick?'header':'pass',t<.08?t/.08:1-(t-.08)/.12); }
+    if(tr.shooter && tr.role!=='victim'){ const k=an.handball?(t<.06?t/.06:1-(t-.06)/.12):(t<.75?0:t<.8?(t-.75)/.05:1-(t-.8)/.12); setPose(a,'shot',k); }
+    if(tr.s==='A' && an.headerA && tr.hl){ setPose(a,'header',clamp((t-.55)/.12,0,1)*(1-clamp((t-.82)/.1,0,1))); }
+    if(tr.s==='A' && an.pen && tr.hl && Math.hypot(tr.to[0]-34,tr.to[1]-12.4)<1.2){ const kt=an.feint?.78:CT; const k=t<kt-.05?0:t<kt?(t-(kt-.05))/.05:1-(t-kt)/.12; setPose(a,'shot',k); }
+    if(tr.s==='G' && an.gk && tr.role!=='victim'){ const st=an.pen?(an.gkEarly?.62:CT):.66; const k=clamp((t-st)/.12,0,1);
+      if(an.gk==='dive'){ setPose(a,'gkDive',k); a.fall=k*.92; a.fallDir=[-(a.face[1]||0)||1,a.face[0]||0]; } else setPose(a,an.gk==='catch'?'gkCatch':'gkJump',k); }
+    if(tr.role==='offender' && an.off){ const pre=an.handball?.42:CT-.17; const k=ease(clamp((t-pre)/(an.handball?.2:.17),0,1)); setPose(a,an.off,k);
+      if(an.delib && t>.6) setPose(a,'armReach',clamp((t-.6)/.1,0,1)); }
+    if(tr.role==='victim'){ if(an.vicPose){ const k=clamp((t-.5)/.18,0,1); setPose(a,an.vicPose,k*(an.vic==='fall'?1-clamp((t-CT)/.1,0,1):1)); }
+      const v=an.vic||'fall'; const kf=clamp((t-CT)/.15,0,1);
+      if(v==='fall') a.fall=kf; else if(v==='stumble') a.fall=kf*.42*(1-clamp((t-1)/.2,0,1)); else if(v==='dive'){ const kd=clamp((t-(CT-.05))/.13,0,1); a.fall=kd; setPose(a,'dive',clamp((t-.6)/.1,0,1)); } else if(v==='down') a.fall=1;
+      if(an.vicAfter && a.fall>.5) setPose(a,an.vicAfter,1); if(a.fall>0 && !a.fallDir) a.fallDir=(a.face||[1,0]).slice(); if(a.fall===0) a.fallDir=null; }
+  });
+  // face the target around contact
+  if(off && t>.45){ let tgt=null; if(an.faceTo==='shooter'&&shooterA) tgt=shooterA; else if(vic) tgt=vic; if(tgt){ const f=v2n(tgt.x-off.x,tgt.y-off.y); const k=clamp((t-.45)/.15,0,1); off.face=v2n(off.face[0]*(1-k)+f[0]*k,off.face[1]*(1-k)+f[1]*k); } }
+  if(an.contact===false) return null;
+  const ft=an.attHit?.6:CT; if(t<ft||t>ft+.14) return null;
+  let p,z=an.hitZ||.6; const hp=(an.handball||an.attHit)&&inc.tracks?hitPoint(inc):null;
+  if(hp){ const w=map(hp.p[0],hp.p[1]); p=w; z=hp.z; } else if(off&&vic){ const r=(REACH[an.off]||.6)*.92; p=[off.x+off.face[0]*r,off.y+off.face[1]*r]; } else return null;
+  return {x:p[0],y:p[1],z,k:(t-ft)/.14};
+}
+function drawFlash(ctx,c,fl){ if(!fl) return; const s=P(c,[fl.x,fl.y,fl.z]); if(!s) return; const sc=c.F/s[2]; const k=fl.k, r=(.18+k*.7)*sc;
+  ctx.save(); ctx.globalAlpha=Math.max(0,.95-k); ctx.strokeStyle='#fff'; ctx.lineWidth=Math.max(1.5*c.dpr,.045*sc); ctx.beginPath(); ctx.arc(s[0],s[1],r,0,Math.PI*2); ctx.stroke();
+  ctx.strokeStyle='#ffdb5c'; ctx.lineWidth=Math.max(1.2*c.dpr,.03*sc); ctx.beginPath(); for(let i=0;i<8;i++){ const a=i/8*Math.PI*2+.3; ctx.moveTo(s[0]+Math.cos(a)*r*.45,s[1]+Math.sin(a)*r*.45); ctx.lineTo(s[0]+Math.cos(a)*r*.95,s[1]+Math.sin(a)*r*.95); } ctx.stroke();
+  ctx.globalAlpha=Math.max(0,.85-k*1.6); ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(s[0],s[1],Math.max(2*c.dpr,.07*sc),0,Math.PI*2); ctx.fill(); ctx.restore(); }
+
+function drawFig(ctx,c,a){
+  const fall=a.fall||0, fd=a.fallDir||a.face||[1,0];
+  const up=fall>0?V3.norm([fd[0]*fall*1.6,fd[1]*fall*1.6,Math.max(.06,1-fall)]):[0,0,1];
+  const fx=a.face?a.face[0]:1, fy=a.face?a.face[1]:0, px=-fy, py=fx;
+  const ps=a.pose&&a.pose.k>0?a.pose:null, PZ=ps?ps.P:{}, K=ps?ps.k:0;
+  const hipH=.92+((PZ.hipH!=null?PZ.hipH:.92)-.92)*K, lean=(PZ.lean||0)*K, jump=(PZ.jump||0)*K, headF=(PZ.headF||0)*K;
+  const at=(h,s,f)=>[a.x+up[0]*h+px*s+fx*f, a.y+up[1]*h+py*s+fy*f, Math.max(.02,up[2]*h)+jump];
+  const st=Math.min(1,(a.speed||0)/6)*.42*Math.sin(a.phase||0)*(1-fall)*(1-K);
+  const limb=(def,key)=>{ const T=PZ[key]; return T?[def[0]+(T.s-def[0])*K, def[1]+(T.f-def[1])*K, def[2]+(T.h-def[2])*K]:def; };
+  const LL=limb([.14,st,.05],'legL'), LR=limb([-.14,-st,.05],'legR'), AL=limb([.33,-st*.9,.98],'armL'), AR=limb([-.33,st*.9,.98],'armR');
+  const hip=P(c,at(hipH,0,lean*.15)); if(!hip) return;
+  const sc=c.F/hip[2]; if(sc<1) return;
+  const g=P(c,[a.x,a.y,0]); if(!g) return;
+  const shR=Math.max(.3,.5-jump*.3);
+  ctx.fillStyle='rgba(0,0,0,.34)'; ctx.beginPath(); ctx.ellipse(g[0],g[1],shR*sc,.17*sc,0,0,Math.PI*2); ctx.fill();
+  if(a.hl){ ctx.strokeStyle='rgba(246,198,43,.95)'; ctx.lineWidth=Math.max(1.5*c.dpr,.08*sc); ctx.beginPath(); ctx.ellipse(g[0],g[1],.9*sc,.32*sc,0,0,Math.PI*2); ctx.stroke(); }
+  const pts=[at(LL[2],LL[0],LL[1]),at(LR[2],LR[0],LR[1]),at(hipH-.3,0,lean*.1),at(hipH+.08,0,lean*.25),at(hipH+.52,0,lean),at(hipH+.79,0,lean*1.15+headF),at(hipH+.48,.24,lean*.9),at(hipH+.48,-.24,lean*.9),at(AL[2],AL[0],AL[1]),at(AR[2],AR[0],AR[1]),at(hipH+.28,0,lean*.55)].map(p=>P(c,p));
+  if(pts.some(p=>!p)) return;
+  const [fl,fr,sh,wa,nk,hd,sl,sr,hl,hr,ch]=pts;
+  const L=(p,q,w,col)=>{ ctx.strokeStyle=col; ctx.lineWidth=Math.max(c.dpr,w*sc); ctx.beginPath(); ctx.moveTo(p[0],p[1]); ctx.lineTo(q[0],q[1]); ctx.stroke(); };
+  ctx.lineCap='round';
+  const legs=()=>{ L(hip,fl,.15,a.kit.socks); L(hip,fr,.15,a.kit.socks); ctx.fillStyle='#0d0f12'; [fl,fr].forEach(f=>{ ctx.beginPath(); ctx.arc(f[0],f[1],Math.max(c.dpr,.07*sc),0,Math.PI*2); ctx.fill(); }); L(hip,sh,.33,a.kit.shorts); };
+  const back=(hl[1]<sl[1]-.4*sc);
+  if(fr[2]>hip[2]) { legs(); }
+  L(sl,hl,.12,a.kit.shirt); L(sr,hr,.12,a.kit.shirt);
+  if(fr[2]<=hip[2]) legs();
+  L(wa,nk,.44,a.kit.shirt);
+  ctx.fillStyle=a.skin||'#e0b08a'; [hl,hr].forEach(h=>{ ctx.beginPath(); ctx.arc(h[0],h[1],Math.max(c.dpr*.8,.05*sc),0,Math.PI*2); ctx.fill(); });
+  ctx.beginPath(); ctx.arc(hd[0],hd[1],Math.max(1.2*c.dpr,.135*sc),0,Math.PI*2); ctx.fill();
+  if(a.flag){ const f0=P(c,at(1.95,.34,0)); if(f0){ ctx.fillStyle=a.flagUp?'#ffd84a':'#f2b81f'; ctx.fillRect(f0[0],f0[1]-(a.flagUp?.25*sc:0),.32*sc,.24*sc); } }
+  if(a.num!=null && sc>15 && fall<.5){ ctx.fillStyle=a.kit.numCol; ctx.font=`700 ${Math.round(.2*sc)}px "IBM Plex Mono",monospace`; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(a.num,ch[0],ch[1]); }
+  if(a.label && sc>3){ const fs=11*c.dpr; ctx.font=`600 ${fs}px Barlow,sans-serif`; const w=ctx.measureText(a.label).width+fs*.9; const x=hd[0]-w/2, y=hd[1]-.25*sc-fs*1.9; ctx.fillStyle='rgba(8,13,20,.86)'; rrect(ctx,x,y,w,fs*1.55,fs*.4); ctx.fill(); ctx.fillStyle='#fff'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(a.label,hd[0],y+fs*.8); }
+}
+function sceneBuildup(sc,inc){
+  const d=sdir(sc,inc.ai); const map=diaMap(inc.dia.mode,d); sc.map=map; sc.inc=inc; inc.anim=inc.anim||animSpec(inc); inc.tracks=inc.tracks||replayTracks(inc);
+  const used=new Set(); sc.forced=[]; sc.pl.forEach(p=>{p.hl=false;p.label=null;p.keepDown=false;p.t=null;p.pose=null;p.fall=0;});
+  inc.tracks.forEach(t=>{ if(t.s==='AR') return; const side=t.s==='A'?inc.ai:inc.di; const gk=t.s==='G'; const to=map(t.to[0],t.to[1]);
+    const best=nearestTo(sc.pl.filter(p=>p.side===side&&!used.has(p)&&(gk?p.role==='GK':p.role!=='GK')),to[0],to[1]); if(!best) return; used.add(best);
+    if(t.n) best.num=t.n; best.hl=!!t.hl; best.t=t; sc.forced.push({p:best,pre:map(t.from[0],t.from[1]),to,role:t.role}); });
+  sc.mode='buildup'; sc.stage=1; sc.bt=0; sc.mark=map(inc.dia.mark[0],inc.dia.mark[1]); sc.flash=null;
+  sc.bkf=mapKeys(ballKeys(inc),map);
+  const carrier=sc.forced.find(f=>f.role==='victim')||sc.forced.find(f=>f.p.side===inc.ai);
+  sc.ball.fl=null; sc.ball.owner=null; sc.ballFrom=[sc.ball.x,sc.ball.y]; sc.ballPre=sc.bkf[0].p; sc.carrier=carrier?carrier.p:null;
+  sc.gather=null; sc.refTarget=null;
+}
+function buildAI(sc,dt){
+  sc.bt+=dt; const b=sc.ball;
+  const forcedSet=new Set(sc.forced.map(f=>f.p));
+  sc.pl.forEach(p=>{ if(forcedSet.has(p)) return; const t=formTarget(sc,p); steer(p,t[0]*.5+sc.mark[0]*.5,t[1]*.6+sc.mark[1]*.4,dt,3.2); });
+  if(sc.stage===1){
+    sc.forced.forEach(f=>steer(f.p,f.pre[0],f.pre[1],dt,4.2));
+    const k=Math.min(1,sc.bt/1.2); b.x=sc.ballFrom[0]+(sc.ballPre[0]-sc.ballFrom[0])*k; b.y=sc.ballFrom[1]+(sc.ballPre[1]-sc.ballFrom[1])*k; b.z=0;
+    if(sc.carrier && k>=1 && !sc.inc.anim.handball){ b.x=sc.carrier.x+sc.carrier.face[0]*.5; b.y=sc.carrier.y+sc.carrier.face[1]*.5; }
+    return;
+  }
+  const DUR=2.3, t=Math.min(1,sc.bt/DUR);
+  sc.forced.forEach(f=>{ const p=f.p; const k=ease(Math.min(1,t/CT)); const nx=f.start[0]+(f.to[0]-f.start[0])*k, ny=f.start[1]+(f.to[1]-f.start[1])*k; const vx=(nx-p.x)/Math.max(dt,1e-3), vy=(ny-p.y)/Math.max(dt,1e-3); const sp=Math.hypot(vx,vy); p.x=nx; p.y=ny; p.speed=t<CT?Math.min(8,sp):.2; if(sp>.4) p.face=[vx/sp,vy/sp]; p.phase+=p.speed*dt*2.7; });
+  sc.flash=applyAnim(sc.forced.map(f=>f.p),sc.inc,t,sc.map);
+  sc.forced.forEach(f=>{ if(f.p.fall>.5) f.p.keepDown=true; });
+  const bp=ballAt(sc.bkf,t); b.x=bp[0]; b.y=bp[1]; b.z=bp[2];
+  if(t>=1 && !sc.contactDone && sc.bt>DUR+.45){ sc.contactDone=true; sc.flash=null; sc.mode='stopped'; sc.gather=sc.mark; const cb=sc.onContact; sc.onContact=null; if(cb) cb(); }
+}
+function sceneResume(sc){ if(!sc||sc.mode==='goal'||sc.mode==='kickoff') return; sc.mode='play'; sc.forced=null; sc.spots=null; sc.mark=null; sc.refTarget=null; sc.gather=null; sc.flash=null; sc.pl.forEach(p=>{ p.keepDown=false; p.label=null; p.hl=false; p.t=null; p.pose=null; }); const b=sc.ball; b.fl=null; b.owner=nearestTo(sc.pl,b.x,b.y); sc.poss=b.owner.side; b.owner.hold=0; b.owner.next=1; }
+function liveCamDesired(W,H){ const x=SC.camX;
+  if(SC.cam==='ust') return {p:[52.5,-40,66],t:[52.5,31,0],f:.63};
+  if((SC.mode==='buildup'&&SC.stage===2)||(SC.mode==='stopped'&&SC.mark)){ const m=SC.mark; return {p:[m[0]-3.5,m[1]-12.5,5.6],t:[m[0],m[1]+.5,.7],f:1.0}; }
+  if(SC.mode==='buildup'){ const pts=[SC.mark,...(SC.spots||[]).map(s=>[s.x,s.y])]; const cx=avg(pts.map(p=>p[0])), cy=avg(pts.map(p=>p[1])); const span=Math.max(18,...pts.map(p=>Math.hypot(p[0]-cx,p[1]-cy))); const tall=H/W>.68; const z=SC.spots?(tall?1.15:1.35):1;
+    return {p:[cx,cy-span*1.05*z-4,span*1.55*z+14],t:[cx,cy-span*.12,0],f:.7}; }
+  if(SC.cam==='yakin') return {p:[x,-15,10.5],t:[x,30,0],f:1.15};
+  return {p:[x,-27,17],t:[x,31,0],f:1.02}; }
+function liveCam(W,H,dpr){ const d=liveCamDesired(W,H); const s=SC.cs||(SC.cs={p:d.p.slice(),t:d.t.slice(),f:d.f}); const k=.075; for(let i=0;i<3;i++){ s.p[i]+=(d.p[i]-s.p[i])*k; s.t[i]+=(d.t[i]-s.t[i])*k; } s.f+=(d.f-s.f)*k; return camera(s.p,s.t,s.f,W,H,dpr); }
+function drawLive(cv){ const [W,H,dpr]=fitCanvas(cv); const ctx=cv.getContext('2d'); drawWorld(ctx,liveCam(W,H,dpr),{actors:[...SC.pl,...SC.refs],ball:SC.ball,spots:SC.spots,t:SC.t,flash:SC.mode==='buildup'?SC.flash:null}); }
 let RP=null;
-function replayStart(cv,inc,mode){
-  replayStop();
-  const d=1, map=diaMap(inc.dia.mode,d); const tracks=inc.tracks||(inc.tracks=replayTracks(inc));
-  const A=sideTeam(inc.ai), D=sideTeam(inc.di); const kits=SC?SC.kits:kitsFor(M.H,M.A); const rk=SC?SC.rk:kitsFor(M.H,M.A)[2];
+function replayStart(cv,inc,mode,opt){
+  replayStop(); opt=opt||{};
+  const map=diaMap(inc.dia.mode,1); inc.anim=inc.anim||animSpec(inc); const tracks=inc.tracks||(inc.tracks=replayTracks(inc));
+  let kits,rk; if(SC){ kits=SC.kits; rk=SC.rk; } else { const k=kitsFor(team(M.fx.home),team(M.fx.away)); kits=[k[0],k[1]]; rk=k[2]; }
   const kA=kits[inc.ai], kD=kits[inc.di], kG=GK_KITS[inc.di];
-  const actors=tracks.map((t,i)=>({t,x:0,y:0,face:[1,0],phase:i,speed:0,fall:0,num:t.n||null,hl:!!t.hl&&mode!=='hakem',skin:SKINS[(i*3+inc.ai)%5],kit:t.s==='A'?kA:t.s==='D'?kD:t.s==='G'?kG:rk,flag:t.s==='AR',flagUp:t.s==='AR'}));
+  const actors=tracks.map((t,i)=>({t,x:t.from?map(t.from[0],t.from[1])[0]:0,y:0,face:[1,0],phase:i,speed:0,fall:0,num:t.n||null,hl:!!t.hl&&mode!=='hakem',skin:SKINS[(i*3+inc.ai)%5],kit:t.s==='A'?kA:t.s==='D'?kD:t.s==='G'?kG:rk,flag:t.s==='AR',flagUp:t.s==='AR'}));
   const ref=inc.refPos?map(inc.refPos[0],inc.refPos[1]):map(28,15);
   const refA={x:ref[0],y:ref[1],face:[1,0],phase:0,speed:0,fall:0,kit:rk,skin:SKINS[1],num:null};
-  const mk=map(inc.dia.mark[0],inc.dia.mark[1]); const bkf=ballKeys(inc).map(k=>[k[0],map(k[1][0],k[1][1]),k[2]]);
+  const mk=map(inc.dia.mark[0],inc.dia.mark[1]); const bkf=mapKeys(ballKeys(inc),map);
   const offX = inc.showOff && inc.dia.off!=null ? map(34,inc.dia.off)[0] : null;
-  RP={cv,inc,cam:mode,slow:false,playing:true,t:0,actors,refA,mk,bkf,offX,last:performance.now(),map};
-  const loop=now=>{ if(!RP||RP.cv!==cv||!document.body.contains(cv)){ return; } const dt=Math.min(.05,(now-RP.last)/1000); RP.last=now; if(RP.playing) RP.t+=dt/(RP.slow?7.5:3.4); if(RP.t>1.28) RP.t=0; replayDraw(); RP.raf=requestAnimationFrame(loop); };
+  RP={cv,inc,cam:mode,slow:false,playing:true,t:0,actors,refA,mk,bkf,offX,last:performance.now(),map,obscure:!!opt.obscure};
+  const loop=now=>{ if(!RP||RP.cv!==cv||!document.body.contains(cv)) return; const dt=Math.min(.05,(now-RP.last)/1000); RP.last=now;
+    if(RP.playing){ const z=(RP.t>.58&&RP.t<.9)?.36:1; RP.t+=dt/(RP.slow?7.5:3.2)*z; } if(RP.t>1.3) RP.t=0; replayDraw(); RP.raf=requestAnimationFrame(loop); };
   RP.raf=requestAnimationFrame(loop);
 }
 function replayStop(){ if(RP){ cancelAnimationFrame(RP.raf); RP=null; } }
 function replayDraw(){
   const R=RP, cv=R.cv; const [W,H,dpr]=fitCanvas(cv); const ctx=cv.getContext('2d'); const t=Math.min(1,R.t);
-  R.actors.forEach(a=>{ const tr=a.t; const k=ease(Math.min(1,t/.72)); const f=R.map(tr.from[0],tr.from[1]), to=R.map(tr.to[0],tr.to[1]);
+  R.actors.forEach(a=>{ const tr=a.t; const k=ease(Math.min(1,t/CT)); const f=R.map(tr.from[0],tr.from[1]), to=R.map(tr.to[0],tr.to[1]);
     const nx=f[0]+(to[0]-f[0])*k, ny=f[1]+(to[1]-f[1])*k; const vx=nx-a.x, vy=ny-a.y; const sp=Math.hypot(vx,vy);
-    a.speed = t<.72 ? Math.min(7,Math.hypot(to[0]-f[0],to[1]-f[1])/2.4*2) : .2; if(sp>.001) a.face=[vx/sp,vy/sp]; if(tr.s==='G'||tr.s==='AR'){ const dx=R.mk[0]-nx, dy=R.mk[1]-ny, l=Math.hypot(dx,dy)||1; a.face=[dx/l,dy/l]; }
-    a.phase=t*3.4*a.speed*2.7+(a.num||0); a.x=nx; a.y=ny;
-    a.fall = tr.role==='victim' ? clamp((t-.72)/.14,0,1) : 0; if(a.fall>0 && !a.fallDir) a.fallDir=a.face.slice(); if(a.fall===0) a.fallDir=null; });
+    a.speed = t<CT ? Math.min(7,Math.hypot(to[0]-f[0],to[1]-f[1])/2.4*2) : .2; if(sp>.001&&t<CT) a.face=[vx/sp,vy/sp];
+    if(tr.s==='G'||tr.s==='AR'||(R.inc.anim.handball&&tr.shooter)){ const dx=R.mk[0]-nx, dy=R.mk[1]-ny, l=Math.hypot(dx,dy)||1; a.face=[dx/l,dy/l]; }
+    a.phase=t*3.4*a.speed*2.7+(a.num||0); a.x=nx; a.y=ny; });
+  const fl=applyAnim(R.actors,R.inc,t,R.map);
   const b=ballAt(R.bkf,t);
-  const mx=R.mk[0], my=R.mk[1]; const rf_=R.refA; { const dx=mx-rf_.x, dy=my-rf_.y, l=Math.hypot(dx,dy)||1; rf_.face=[dx/l,dy/l]; rf_.speed=t<.72?2.5:0; rf_.phase=t*20; }
+  const mx=R.mk[0], my=R.mk[1]; const rf_=R.refA; { const dx=mx-rf_.x, dy=my-rf_.y, l=Math.hypot(dx,dy)||1; rf_.face=[dx/l,dy/l]; rf_.speed=t<CT?2.5:0; rf_.phase=t*20; }
   let cam;
-  if(R.cam==='hakem'){ const dx=mx-rf_.x, dy=my-rf_.y, l=Math.hypot(dx,dy)||1; cam=camera([rf_.x-dx/l*.6,rf_.y-dy/l*.6,1.75],[mx,my,.7],Math.min(1.5,.55+l/28),W,H,dpr); }
+  if(R.cam==='yakin'){ const off=R.actors.find(a=>a.t.role==='offender'), vic=R.actors.find(a=>a.t.role==='victim'); let px=0,py=-1; if(off&&vic&&Math.hypot(vic.x-off.x,vic.y-off.y)>.2){ const v=v2n(vic.x-off.x,vic.y-off.y); px=-v[1]; py=v[0]; if(py>0){px=-px;py=-py;} }
+    const cx=off&&vic?(off.x+vic.x)/2:mx, cy=off&&vic?(off.y+vic.y)/2:my; cam=camera([cx+px*7.5,cy+py*7.5,2.2],[cx,cy,.85],1.2,W,H,dpr); }
+  else if(R.cam==='hakem'){ const dx=mx-rf_.x, dy=my-rf_.y, l=Math.hypot(dx,dy)||1; cam=camera([rf_.x-dx/l*.6,rf_.y-dy/l*.6,1.75],[mx,my,.7],Math.min(1.5,.55+l/28),W,H,dpr); }
   else if(R.cam==='tv') cam=camera([mx-4,my-26,13],[mx,my,0],1.35,W,H,dpr);
   else if(R.cam==='ters') cam=camera([mx+4,my+26,12],[mx,my,0],1.35,W,H,dpr);
   else if(R.cam==='arka') cam=camera([116,my*.4+20,6],[mx,my,.8],1.25,W,H,dpr);
   else cam=camera([mx-6,my-14,34],[mx,my,0],.95,W,H,dpr);
   const actors=R.actors.slice(); if(R.cam!=='hakem') actors.push(rf_);
-  drawWorld(ctx,cam,{actors,ball:{x:b[0],y:b[1],z:b[2]},offX:R.offX,mark:R.cam==='ust'?R.mk:null,t:R.t*3});
+  drawWorld(ctx,cam,{actors,ball:{x:b[0],y:b[1],z:b[2]},offX:R.offX,mark:R.cam==='ust'?R.mk:null,t:R.t*3,flash:(R.obscure&&R.inc.vis<.45)?null:fl});
+  if(R.obscure && R.inc.vis<.6 && R.cam!=='ust'){ const s=P(cam,[mx,my,.9]); const a=clamp((.62-R.inc.vis)*1.9,.15,.82);
+    if(s){ const g=ctx.createRadialGradient(s[0],s[1],0,s[0],s[1],W*.2); g.addColorStop(0,`rgba(6,10,16,${a})`); g.addColorStop(1,'rgba(6,10,16,0)'); ctx.fillStyle=g; ctx.fillRect(0,0,W,H); } }
   if(R.cam==='hakem' && R.inc.vis<.55){ ctx.fillStyle=`rgba(5,9,14,${(.55-R.inc.vis)*.9})`; ctx.fillRect(0,0,W,H); }
-  const lab=$('#rpT'); if(lab) lab.textContent= t<.72?'Atak':t<.86?'Temas':'Sonrası';
+  const lab=$('#rpT'); if(lab) lab.textContent= t<.58?'Atak':t<.9?'Temas · ağır çekim':'Sonrası';
 }
 function replayHTML(inc,cams){
-  const names={hakem:'Hakem gözü',ust:'Taktik',tv:'Yayın',ters:'Ters açı',arka:'Kale arkası'};
-  return `<div class="replay"><canvas id="rcv" aria-label="Pozisyonun tekrar görüntüsü"></canvas><div class="rp-top"><span class="rp-live">TEKRAR</span><span id="rpT" class="rp-ph">Atak</span>${cams[0]==='hakem'&&inc.vis<.55?'<span class="rp-warn">Görüş kısıtlı</span>':''}</div>
+  const names={yakin:'Yakın plan',hakem:'Hakem gözü',ust:'Taktik',tv:'Yayın',ters:'Ters açı',arka:'Kale arkası'};
+  return `<div class="replay"><canvas id="rcv" aria-label="Pozisyonun tekrar görüntüsü"></canvas><div class="rp-top"><span class="rp-live">TEKRAR</span><span id="rpT" class="rp-ph">Atak</span>${inc.vis!=null&&inc.vis<.55&&!inc.showOff?'<span class="rp-warn">Görüş kısıtlı</span>':''}</div>
     <div class="rp-ctl"><div class="seg">${cams.map((c,i)=>`<button data-cam="${c}" class="${i===0?'on':''}">${names[c]}</button>`).join('')}</div><div class="seg"><button id="rpSlow">Yavaş</button><button id="rpPlay">Durdur</button></div></div></div>`;
 }
-function bindReplay(inc,cams){
-  const cv=$('#rcv'); if(!cv) return; replayStart(cv,inc,cams[0]);
+function bindReplay(inc,cams,opt){
+  const cv=$('#rcv'); if(!cv) return; replayStart(cv,inc,cams[0],opt);
   document.querySelectorAll('[data-cam]').forEach(b=>b.onclick=()=>{ RP.cam=b.dataset.cam; document.querySelectorAll('[data-cam]').forEach(x=>x.classList.toggle('on',x===b)); RP.actors.forEach(a=>a.hl=!!a.t.hl&&RP.cam!=='hakem'); });
   $('#rpSlow').onclick=()=>{ RP.slow=!RP.slow; $('#rpSlow').classList.toggle('on',RP.slow); };
   $('#rpPlay').onclick=()=>{ RP.playing=!RP.playing; $('#rpPlay').textContent=RP.playing?'Durdur':'Oynat'; };
@@ -2516,12 +2733,12 @@ function incidentMain(inc){
   inc.sel={d:null,c:inc.steps[1]?null:undefined}; inc.arAsked=false;
   const posNote = inc.posQ ? `<span class="chip ${inc.posQ==='best'?'g':inc.posQ==='ok'?'b':'a'}">${inc.posQ==='best'?'İdeal açı':inc.posQ==='ok'?'Uzak açı':'Kapalı açı'}</span>`:'';
   openModal(head(inc.minute+' · '+esc(sideTeam(inc.ai).name)+' atakta',esc(inc.title),posNote+`<span class="chip">Görüş %${Math.round(vis*100)}</span><span class="num tm-l" id="tmrLab"></span>`)+`<div class="timer" id="tmr"><i></i></div>
-    <div class="sh-body"><div class="inc"><div class="stack">${replayHTML(inc,['hakem','ust'])}<p class="story">${inc.story}</p>
+    <div class="sh-body"><div class="inc"><div class="stack">${replayHTML(inc,['yakin','hakem','ust'])}<p class="story">${inc.story}</p>
       <div class="tools"><button class="btn sm" id="bLaw" ${M.lawUses<=0?'disabled':''}>Kural kitabı (${M.lawUses})</button><button class="btn sm" id="bAR">${inc.type==='ofsayt_gol'?'Yardımcıya sor':'Ekibine sor'}</button></div><div id="lawSlot"></div></div>
     <div class="stack"><div class="eyebrow">Gördüklerin</div><div class="facts" id="facts">${factsHTML(inc)}</div>
       <div class="decide" id="decide">${stepsHTML(inc)}</div>
       <button class="btn primary" id="bConfirm" disabled>Düdüğü çal</button></div></div></div>`);
-  bindReplay(inc,['hakem','ust']); bindSteps(inc);
+  bindReplay(inc,['yakin','hakem','ust'],{obscure:true}); bindSteps(inc);
   $('#bLaw').onclick=()=>{ if(M.lawUses<=0) return; M.lawUses--; $('#lawSlot').innerHTML=`<div class="lawbox">${esc(inc.law)}</div>`; $('#bLaw').disabled=true; $('#bLaw').textContent='Kural kitabı açık'; };
   $('#bAR').onclick=()=>{ if(inc.arAsked) return; inc.arAsked=true; $('#bAR').disabled=true;
     const ob=inc.facts.filter(f=>f.obs); let msg;
@@ -2562,7 +2779,7 @@ function varAnim(cb,kind){
   setTimeout(cb,1300);
 }
 function ofrUI(inc,ans,kind,done){
-  inc.sel={...ans}; inc.showOff=true; const cams=['tv','ters','arka','ust','hakem'];
+  inc.sel={...ans}; inc.showOff=true; const cams=['yakin','tv','ters','arka','ust','hakem'];
   openModal(head('Saha kenarı inceleme (OFR)',kind==='yanlis'?'VAR: "Bir bakmanı öneriyorum"':'VAR: "Olası açık ve net hata"',`<span class="chip b">5 kamera</span>`)+
     `<div class="sh-body"><p class="muted">İlk kararın: <b>${esc(ansText(inc,ans))}</b>. VAR yalnızca öneride bulunur; son karar senin.</p>
     <div class="inc"><div class="monitor">${replayHTML(inc,cams)}</div>
@@ -2573,7 +2790,7 @@ function ofrUI(inc,ans,kind,done){
 }
 const VLAB={dogru:'Doğru karar',kabul:'Kabul edilebilir',kismen:'Kısmen doğru',hata:'Hatalı karar',var:'VAR ile düzeltildi',israr:'Hatada ısrar',durdu:'Kararının arkasında durdun'};
 function feedbackUI(inc,fin,v,note){
-  inc.showOff=true; const cams=['tv','hakem','ters','ust'];
+  inc.showOff=true; const cams=['yakin','tv','hakem','ters','ust'];
   openModal(head(inc.minute+' · '+esc(inc.title),'Karar değerlendirmesi','')+`<div class="sh-body">
     <div class="verdict v-${v}"><span class="vi">${VLAB[v]}</span><span class="muted">Senin kararın: ${esc(ansText(inc,fin))}</span></div>
     <div class="inc"><div class="stack">${replayHTML(inc,cams)}</div><div class="stack">
@@ -2696,34 +2913,67 @@ function renderSide(){
 // =========================================================
 //   UI — REPORT
 // =========================================================
+function minNum(s){ const m=String(s).match(/(\d+)(?:\+(\d+))?/); return m? +m[1]+(m[2]?Math.min(5,+m[2])*.4:0) : 0; }
+const VCOL={dogru:'var(--green)',durdu:'var(--green)',kabul:'var(--blue)',kismen:'var(--amber)',var:'var(--amber)',hata:'var(--red)',israr:'var(--red)'};
 function reportUI(r){
   const ov=$('#overlay'); ov.hidden=false; document.body.style.overflow='hidden'; $('#modal').hidden=true;
   const H=team(r.H), A=team(r.A); const fx=r.fx;
   const maj=r.log.filter(d=>d.cat==='major'); const errs=maj.filter(d=>d.v==='hata'||d.v==='israr');
-  const col = r.rating>=8.6?'var(--green)':r.rating>=8.0?'var(--fg)':r.rating>=7.5?'var(--amber)':'var(--red)';
+  const good=r.log.filter(d=>['dogru','kabul','durdu','var'].includes(d.v)).length;
+  const col = r.rating>=8.6?'var(--green)':r.rating>=8.0?'var(--gold1)':r.rating>=7.5?'var(--amber)':'var(--red)';
   const needStatement = !r.auto && (errs.length || r.clubComplaint);
-  ov.innerHTML=`<div class="ov-in">
-    <div class="eyebrow">${esc(fx.compName)} · ${esc(fx.stage||'')} · Maç raporu</div>
-    <div class="board"><div class="tm">${crest(H,40)}<span>${esc(teamLabel(fx,'h'))}</span></div><div class="score"><span class="sc num">${r.score[0]} – ${r.score[1]}</span><span class="clk">MS</span></div><div class="tm r"><span>${esc(teamLabel(fx,'a'))}</span>${crest(A,40)}</div></div>
-    <div class="panel"><div class="rep-top"><div class="row" style="gap:18px;flex-wrap:nowrap"><div class="rring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle class="bg" cx="60" cy="60" r="52"/><circle class="fg" id="rRing" cx="60" cy="60" r="52" stroke="${col}" stroke-dasharray="326.7" stroke-dashoffset="326.7"/></svg><div class="rring-in"><b class="num" id="rNum" style="color:${col}">6.0</b><small>Gözlemci</small></div></div><div class="stack" style="gap:2px"><span class="eyebrow">Performans</span><span class="rgrade" style="color:${col}">${gradeOf(r.rating)}</span></div></div>
-      <div class="stack"><div class="row"><span class="chip ${r.repD>=0?'g':'r'}">İtibar ${r.repD>=0?'+':''}${f1(r.repD)}</span><span class="chip g">Ücret ${moneyShort(r.fee)}</span>${r.followersD?`<span class="chip b">Takipçi ${r.followersD>0?'+':''}${compactNum(r.followersD)}</span>`:''}<span class="chip">Maks. ısı %${r.tempMax}</span>${r.posTotal?`<span class="chip b">İdeal konum ${r.posGood}/${r.posTotal}</span>`:''}<span class="chip">VAR ${r.varCount}</span>${r.auto?'<span class="chip a">Otomatik yönetildi</span>':''}</div>
-      <p class="muted">${esc(observerText(r.rating,errs.length,maj.length))}</p>
-      <div class="row" style="font-size:13px">${Object.entries(r.gains).map(([k,v])=>`<span class="muted">${ATTR_NAMES[k]} <span class="num" style="color:var(--green)">+${v.toFixed(2)}</span></span>`).join('')}</div></div></div></div>
-    <div class="grid2">
-      <div class="panel stack"><h3>Kararların</h3><div class="declist">${r.log.map(d=>decRow(d)).join('')}</div></div>
-      <div class="stack"><div class="panel"><h3>Manşetler</h3>${r.headlines.map(h=>`<div class="headline"><small>${esc(h.s)}</small>${esc(h.t)}</div>`).join('')}</div>
-        <div class="panel stack"><h3>Sosyal medya</h3><div class="social">${r.social.map(p=>`<div class="rpost"><b>${esc(p.u)}</b><div>${esc(p.t)}</div></div>`).join('')}</div></div>
-        ${r.clubComplaint?`<div class="panel"><h3>Kulüp tepkisi</h3><p>${esc(r.clubComplaint)} resmi açıklama yaptı ve kararlarını Hakem Kurulu'na taşıdı.</p></div>`:''}
-        ${needStatement?`<div class="panel stack"><h3>Basına ne diyeceksin?</h3><div class="dopts"><button class="dopt" data-st="sessiz">Sessiz kal (kurum kuralı)</button><button class="dopt" data-st="acikla">Hakem açıklama programında kararını anlat</button><button class="dopt" data-st="yanit">Kulübe sert yanıt ver</button></div></div>`:''}
-        <button class="btn primary" id="bDone">${needStatement?'Sessiz kal ve devam et':'Devam'}</button></div>
-    </div></div>`;
+  const obs = (NAMES[(S&&S.nationality)||'TR']||NAMES.TR); const obsName=obs.f[hash(fx.id)%obs.f.length]+' '+obs.l[hash(fx.id+'o')%obs.l.length];
+  const scorers=side=>r.goals.filter(g=>g.side===side).map(g=>`<li><span class="ball-i"></span>${esc(g.p.replace(/^\d+ /,''))} <span class="num">${esc(g.min)}</span></li>`).join('');
+  const marks=[...r.goals.map(g=>({m:g.min,k:'goal',side:g.side,tip:'Gol · '+g.p})),...r.cards.map(c=>({m:c.min,k:c.red?'red':'yellow',side:c.side,tip:(c.red?'Kırmızı':'Sarı')+' · '+c.label})),...maj.map(d=>({m:d.min,k:'dc',v:d.v,tip:d.title+' · '+(VLAB[d.v]||'')}))];
+  ov.innerHTML=`<div class="ov-in rep">
+    <section class="rhero"><canvas id="repCv" aria-hidden="true"></canvas><div class="rhero-shade"></div>
+      <div class="rh-top"><span class="eyebrow gold">Maç sonu</span><span class="rh-comp">${esc(fx.compName)} · ${esc(fx.stage||'')}</span><span class="chip">${r.auto?'Otomatik yönetildi':'Hakem: '+esc(S.name)}</span></div>
+      <div class="rh-score"><div class="rh-t">${crest(H,84)}<b>${esc(teamLabel(fx,'h'))}</b><ul class="scorers">${scorers(0)}</ul></div>
+        <div class="rh-mid"><div class="rh-sc num"><span>${r.score[0]}</span><i>–</i><span>${r.score[1]}</span></div><small>Maç sonucu</small></div>
+        <div class="rh-t">${crest(A,84)}<b>${esc(teamLabel(fx,'a'))}</b><ul class="scorers">${scorers(1)}</ul></div></div>
+      <div class="tl"><div class="tl-bar"><span class="tl-ht"></span></div>${marks.map(x=>`<span class="tl-m ${x.k} ${x.side===1?'aw':''}" style="left:${clamp(minNum(x.m)/96*100,1,99).toFixed(1)}%;${x.k==='dc'?`--vc:${VCOL[x.v]}`:''}" title="${esc(x.m+' '+x.tip)}"></span>`).join('')}<div class="tl-lab"><span>0'</span><span>45'</span><span>90'</span></div></div>
+    </section>
+    <div class="rgrid">
+      <section class="panel rscore">
+        <div class="rs-top"><div class="rring big"><svg viewBox="0 0 120 120" aria-hidden="true"><defs><linearGradient id="rgG" x1="0" x2="1"><stop offset="0" stop-color="${col}"/><stop offset="1" stop-color="${col}" stop-opacity=".55"/></linearGradient></defs><circle class="bg" cx="60" cy="60" r="52"/><circle class="fg" id="rRing" cx="60" cy="60" r="52" stroke="url(#rgG)" stroke-dasharray="326.7" stroke-dashoffset="326.7"/></svg><div class="rring-in"><b class="num" id="rNum" style="color:${col}">6.0</b><small>Gözlemci notu</small></div></div>
+          <div class="stack" style="gap:6px;min-width:0"><span class="eyebrow">Performans</span><span class="rgrade" style="color:${col}">${gradeOf(r.rating)}</span><p class="muted" style="font-size:14px">${esc(observerText(r.rating,errs.length,maj.length))}</p><span class="muted" style="font-size:12px">Gözlemci: ${esc(obsName)}</span></div></div>
+        <div class="rkpis"><div><span class="eyebrow">Kararlar</span><b class="num">${good}/${r.log.length}</b><i class="mbar2"><i style="width:${r.log.length?good/r.log.length*100:0}%"></i></i></div><div><span class="eyebrow">Kritik hata</span><b class="num" style="color:${errs.length?'var(--red)':'var(--green)'}">${errs.length}</b><small>${maj.length} kritik pozisyon</small></div><div><span class="eyebrow">İdeal konum</span><b class="num">${r.posTotal?r.posGood+'/'+r.posTotal:'—'}</b><small>pozisyon alma</small></div><div><span class="eyebrow">Maç ısısı</span><b class="num" style="color:${r.tempMax>80?'var(--red)':r.tempMax>60?'var(--amber)':'var(--green)'}">%${r.tempMax}</b><small>en yüksek · VAR ${r.varCount}</small></div></div>
+        <div class="rewards"><div class="rw"><span class="rw-ic">${ic('star')}</span><span><small>İtibar</small><b class="num" data-cnt="${r.repD}" data-dec="1" style="color:${r.repD>=0?'var(--green)':'var(--red)'}">0</b></span></div><div class="rw"><span class="rw-ic gold">${ic('coin')}</span><span><small>Ücret</small><b class="num">+${moneyShort(r.fee)}</b></span></div><div class="rw"><span class="rw-ic">${ic('sosyal')}</span><span><small>Takipçi</small><b class="num" data-cnt="${r.followersD||0}">0</b></span></div></div>
+        <div class="gains2">${Object.entries(r.gains).map(([k,v])=>`<span>${ATTR_NAMES[k]} <b class="num">+${v.toFixed(2)}</b></span>`).join('')}</div>
+      </section>
+      <section class="panel stack"><div class="row" style="justify-content:space-between"><h3>Kararların</h3><span class="muted" style="font-size:12px">Kritik pozisyonların tekrarını izleyebilirsin</span></div><div class="declist">${r.log.map((d,i)=>decRow(d,i)).join('')}</div></section>
+      <section class="stack" style="gap:14px;min-width:0">
+        <div class="panel press"><div class="press-mast"><span>Spor Gazetesi</span><span class="muted">${esc(weekDate(Math.min(34,S.week)))}</span></div>${r.headlines.map((h,i)=>`<article class="${i?'np-s':'np-l'}"><small>${esc(h.s)}</small><h4>${esc(h.t)}</h4></article>`).join('')}</div>
+        <div class="panel stack"><h3>Sosyal medya</h3><div class="feedlist">${r.social.map(p=>postHTML({a:{n:p.u.replace('@','').replace(/_/g,' '),h:p.u},text:p.t,likes:Math.round((fx.imp*40+60)*rf(.6,1.6)),rts:ri(5,60),week:S.week})).join('')}</div></div>
+        ${r.clubComplaint?`<div class="panel alert-p"><h3>Kulüp tepkisi</h3><p>${esc(r.clubComplaint)} resmi açıklama yaptı ve kararlarını ${esc(kurulName())}'na taşıdı.</p></div>`:''}
+      </section>
+    </div>
+    <div class="rfoot">${needStatement?`<div class="rf-q"><span class="eyebrow gold">Basın seni bekliyor</span><div class="dopts"><button class="dopt" data-st="acikla">Hakem açıklama programında kararını anlat</button><button class="dopt" data-st="yanit">Kulübe sert yanıt ver</button></div></div>`:'<span class="muted">Rapor kurula iletildi.</span>'}<button class="btn primary lg" id="bDone">${needStatement?'Sessiz kal ve devam et':'Devam'}</button></div>
+  </div>`;
   ov.scrollTop=0;
-  { const el=$('#rNum'), ring=$('#rRing'), t0=performance.now(), to=r.rating, C=326.7; const reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  { const el=$('#rNum'), ring=$('#rRing'), t0=performance.now(), to=r.rating, C=326.7;
     const set=v=>{ el.textContent=f1(v); ring.style.strokeDashoffset=(C*(1-clamp((v-5.5)/4,0,1))).toFixed(1); };
-    if(reduce) set(to); else { const step=now=>{ const k=Math.min(1,(now-t0)/1400), e=1-Math.pow(1-k,3); set(6+(to-6)*e); if(k<1) requestAnimationFrame(step); }; requestAnimationFrame(step); } }
+    const cnt=[...ov.querySelectorAll('[data-cnt]')];
+    const setC=k=>cnt.forEach(e=>{ const v=+e.dataset.cnt*k; e.textContent=(v>=0?'+':'')+(e.dataset.dec?f1(v):compactNum(Math.round(v))); });
+    if(reduce){ set(to); setC(1); } else { const step=now=>{ const k=Math.min(1,(now-t0)/1500), e=1-Math.pow(1-k,3); set(6+(to-6)*e); setC(e); if(k<1) requestAnimationFrame(step); }; requestAnimationFrame(step); } }
+  heroStart('repCv',H.id,A.id,'rep'+fx.id);
   ov.querySelectorAll('[data-st]').forEach(b=>b.onclick=()=>afterReport(b.dataset.st));
+  ov.querySelectorAll('[data-rp]').forEach(b=>b.onclick=()=>{ const d=r.log[+b.dataset.rp]; if(d&&d.inc) replayModal(d); });
   $('#bDone').onclick=()=>afterReport(null);
 }
+function replayModal(d){
+  const inc=d.inc; inc.showOff=true; const cams=['yakin','tv','ters','arka','hakem','ust'];
+  openModal(head(esc(d.min)+' · Tekrar',esc(d.title),`<button class="btn sm" id="bRpClose">Kapat</button>`)+`<div class="sh-body"><div class="inc"><div class="stack">${replayHTML(inc,cams)}</div><div class="stack">
+    <div class="verdict v-${d.v}"><span class="vi">${VLAB[d.v]}</span></div><p><b>Senin kararın:</b> ${esc(d.final||d.your)}</p>${d.v!=='dogru'&&d.v!=='durdu'?`<p><b>Doğrusu:</b> ${esc(d.correct)}</p>`:''}<p>${esc(d.explain)}</p><p class="muted" style="font-size:13px">${esc(d.law||'')}</p></div></div></div>`);
+  bindReplay(inc,cams); $('#bRpClose').onclick=()=>{ replayStop(); const m=$('#modal'); m.hidden=true; m.innerHTML=''; };
+}
+function decRow(d,i){
+  const ttl = d.cat==='major'?d.title:d.cat==='quick'?'Hızlı karar':d.cat==='mgmt'?'Maç yönetimi':d.title;
+  return `<div class="dec2" style="--vc:${VCOL[d.v]||'var(--line2)'}"><span class="m num">${esc(d.min)}</span><div style="min-width:0"><div class="row" style="justify-content:space-between;gap:8px"><b>${esc(ttl)}</b><span class="vtag">${VLAB[d.v]||d.v}</span></div>${d.text?`<div class="muted" style="font-size:13px">${esc(d.text)}</div>`:''}<div style="font-size:13px;margin-top:2px">Senin: ${esc(d.your)}${d.final&&d.final!==d.your?' → '+esc(d.final):''}</div>${d.v!=='dogru'&&d.v!=='durdu'?`<div style="font-size:13px" class="muted">Doğrusu: ${esc(d.correct)}</div>`:''}
+    <div class="row" style="gap:10px;margin-top:6px">${d.inc?`<button class="btn sm rp-btn" data-rp="${i}">▶ Tekrarı izle</button>`:''}<details><summary>Neden?</summary><p>${esc(d.explain)}${d.note?' '+esc(d.note):''}</p></details></div></div></div>`;
+}
+
 function gradeOf(r){ return r>=9?'Olağanüstü':r>=8.6?'Çok iyi':r>=8.3?'İyi':r>=8.0?'Yeterli':r>=7.5?'Zayıf':'Kötü'; }
 function observerText(r,e,n){
   if(r>=9) return 'Olağanüstü. Kritik pozisyonlarda doğru yerdeydin, kararların tutarlı ve net. Bu maç eğitim videolarında kullanılabilir.';
@@ -2733,13 +2983,6 @@ function observerText(r,e,n){
   if(r>=7.5) return 'Beklentinin altında. '+e+' kritik hata maçın sonucunu etkileyebilecek nitelikteydi.';
   return 'Zayıf. Hatalar ve maç kontrolü kurulun gündeminde; ciddi bir video analiz süreci gerekiyor.';
 }
-function decRow(d){
-  const vcls={dogru:'g',kabul:'b',durdu:'g',kismen:'a',var:'a',hata:'r',israr:'r'}[d.v]||'';
-  const ttl = d.cat==='major'?d.title:d.cat==='quick'?'Hızlı karar':d.cat==='mgmt'?'Maç yönetimi':d.title;
-  return `<div class="dec"><span class="m">${esc(d.min)}</span><div style="min-width:0"><b>${esc(ttl)}</b>${d.text?`<div class="muted" style="font-size:13px">${esc(d.text)}</div>`:''}<div style="font-size:13px">Senin: ${esc(d.your)}${d.final&&d.final!==d.your?' → '+esc(d.final):''}</div>${d.v!=='dogru'&&d.v!=='durdu'?`<div style="font-size:13px" class="muted">Doğrusu: ${esc(d.correct)}</div>`:''}
-    <details><summary>Neden?</summary><p>${esc(d.explain)}${d.note?' '+esc(d.note):''}</p>${d.law?`<p class="muted">${esc(d.law)}</p>`:''}</details></div><span class="chip ${vcls}">${VLAB[d.v]||d.v}</span></div>`;
-}
-
 // =========================================================
 //   UI — APP SHELL
 // =========================================================
@@ -2858,7 +3101,7 @@ function heroStart(cvId,hId,aId,key){
   const reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(reduce){ for(let i=0;i<60;i++) sceneUpdate(MS.sc,.05); heroDraw(cv); return; }
   const loop=now=>{ if($('#'+cvId)!==cv){ MS.raf=null; return; } const dt=Math.min(.1,(now-last)/1000); last=now; acc+=dt;
-    if(!document.hidden && $('#overlay').hidden && acc>=1/30){ sceneUpdate(MS.sc,Math.min(acc,.06)); heroDraw(cv); acc=0; }
+    if(!document.hidden && ($('#overlay').hidden || cv.closest('#overlay')) && $('#modal').hidden && acc>=1/30){ sceneUpdate(MS.sc,Math.min(acc,.06)); heroDraw(cv); acc=0; }
     MS.raf=requestAnimationFrame(loop); };
   heroDraw(cv); MS.raf=requestAnimationFrame(loop);
 }
