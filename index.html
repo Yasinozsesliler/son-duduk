@@ -3604,7 +3604,7 @@ function careerHTML(){
 function leagueHTML(){
   const t=sortedTable(); const reffed=new Set(); S.history.filter(h=>h.season===S.season).forEach(h=>{reffed.add(h.home);reffed.add(h.away);});
   return `<div class="panel stack"><div><div class="eyebrow">${seasonLabel(S.season)}</div><h2>${esc(leagueName())}</h2></div><div class="tbl-wrap"><table><thead><tr><th class="n">#</th><th>Takım</th><th class="n">O</th><th class="n">G</th><th class="n">B</th><th class="n">M</th><th class="n">A</th><th class="n">Y</th><th class="n">AV</th><th class="n">P</th></tr></thead><tbody>
-    ${t.map(r=>{ const tm=team(r.id); return `<tr class="${reffed.has(r.id)?'me':''}"><td class="n">${r.pos}</td><td><span class="row" style="gap:8px;flex-wrap:nowrap"><span class="kit" style="background:${tm.c1}"></span>${esc(tm.name)}</span></td><td class="n">${r.p}</td><td class="n">${r.w}</td><td class="n">${r.d}</td><td class="n">${r.l}</td><td class="n">${r.gf}</td><td class="n">${r.ga}</td><td class="n">${r.gf-r.ga}</td><td class="n"><b>${r.pts}</b></td></tr>`; }).join('')}
+    ${t.map(r=>{ const tm=team(r.id); return `<tr class="${reffed.has(r.id)?'me':''}"><td class="n">${r.pos}</td><td><span class="row" style="gap:8px;flex-wrap:nowrap">${crest(tm,24)}${esc(tm.name)}</span></td><td class="n">${r.p}</td><td class="n">${r.w}</td><td class="n">${r.d}</td><td class="n">${r.l}</td><td class="n">${r.gf}</td><td class="n">${r.ga}</td><td class="n">${r.gf-r.ga}</td><td class="n"><b>${r.pts}</b></td></tr>`; }).join('')}
     </tbody></table></div><p class="muted" style="font-size:13px">Vurgulu satırlar: bu sezon maçını yönettiğin takımlar.</p></div>`;
 }
 function devHTML(){
