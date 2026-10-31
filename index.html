@@ -689,6 +689,36 @@ input[type=range]{padding:0;accent-color:var(--gold2);background:none;border:0;h
 .rf-q{display:flex;flex-direction:column;gap:8px;min-width:0;flex:1}
 @media (max-width:560px){.rfoot .btn.lg{flex:1}.rh-score{gap:8px}.rhero{padding:16px 14px 14px}}
 
+
+/* ===== v7: mobile fixes ===== */
+.ktable{table-layout:fixed}
+.ktable td{overflow:hidden}
+.kname{display:flex;align-items:center;gap:6px;min-width:0}
+.kname .ell{flex:0 1 auto}
+.kname .chip{flex:none;padding:0 6px;font-size:11px}
+.agerow{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.tl-m.goal{top:calc(31px - var(--lv,0)*12px)}
+.tl-m.dc{top:calc(13px - var(--lv,0)*11px)}
+.tl-m.yellow,.tl-m.red{top:calc(56px + var(--lv,0)*12px)}
+.tl{padding-top:44px}
+.tl-lab{margin-top:30px}
+.scorers li{white-space:nowrap;max-width:100%;min-width:0}
+.scorers .nm{overflow:hidden;text-overflow:ellipsis;min-width:0}
+.rpress{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:center;border-color:rgba(255,219,92,.35);background:linear-gradient(90deg,rgba(255,219,92,.1),rgba(255,219,92,.02)),var(--panel)}
+.rpress .dopts{flex-wrap:nowrap}
+@media (max-width:760px){.rpress{grid-template-columns:minmax(0,1fr)}.rpress .dopts{flex-wrap:wrap}.rpress .dopt{flex:1 1 180px}}
+@media (max-width:560px){
+  .rh-top{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px}
+  .rh-top .chip{justify-self:end;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+  .rh-comp{grid-column:1/-1;order:3;font-size:11px;letter-spacing:.1em}
+  .scorers{font-size:11.5px}.rh-t b{font-size:17px}
+  .rh-sc{gap:10px}
+  .rfoot{padding:10px}.rfoot .rf-t{display:none}.rfoot .btn.lg{flex:1}
+  .cards{gap:8px}.cbtn{width:calc(33.33% - 6px);min-width:0;min-height:74px;font-size:11.5px;padding:7px}
+  #bConfirm,#bOfr{box-shadow:0 -18px 22px 4px var(--panel),0 8px 24px rgba(0,0,0,.55)}
+  .decide{padding-bottom:6px}
+}
+
 /* touch / mobile app ergonomics */
 html{-webkit-text-size-adjust:100%}
 body{overscroll-behavior-y:none;-webkit-tap-highlight-color:transparent}
@@ -910,7 +940,7 @@ function stepType(){ return `<h2 class="wiz-h">Nasıl bir hakemsin?</h2><p class
 function stepId(){ const L=CR.look; const sp=SPECS[CR.spec]; const amin=sp.ageMin||21, amax=sp.ageMax||32;
   return `<h2 class="wiz-h">Kimliğin</h2>
   <div class="idgrid"><div class="stack"><div><label class="lbl" for="nName">Ad soyad</label><div class="row" style="flex-wrap:nowrap"><input id="nName" value="${esc(CR.name)}" maxlength="28"><button class="btn sm" id="bRnd" title="Rastgele isim">Rastgele</button></div></div>
-    <div><label class="lbl" for="nAge">Başlangıç yaşı · <span class="num" id="ageLab">${CR.age}</span></label><input type="range" id="nAge" min="${amin}" max="${amax}" value="${CR.age}"><div class="row muted" style="justify-content:space-between;font-size:12px"><span>${amin}</span><span>Genç başlarsan zirveye çıkmak için daha çok zamanın olur</span><span>${amax}</span></div></div>
+    <div><label class="lbl" for="nAge">Başlangıç yaşı · <span class="num" id="ageLab">${CR.age}</span></label><input type="range" id="nAge" min="${amin}" max="${amax}" value="${CR.age}"><div class="agerow"><span>${amin}</span><span>${amax}</span></div><p class="muted" style="font-size:12.5px;margin-top:4px">Genç başlarsan zirveye çıkmak için daha çok zamanın olur.</p></div>
     <div><span class="lbl">Zorluk</span><div class="opt-grid">${Object.entries(DIFFS).map(([k,d])=>`<button class="opt ${CR.diff===k?'on':''}" data-diff="${k}"><b>${d.name}</b><span>${d.desc}</span></button>`).join('')}</div></div></div>
   <div class="stack"><div><span class="lbl">Ten rengi</span><div class="swatches">${LOOK_SKINS.map((c,i)=>`<button class="sw ${L.skin===i?'on':''}" data-skin="${i}" style="background:${c}" aria-label="Ten ${i+1}"></button>`).join('')}</div></div>
     <div><span class="lbl">Saç</span><div class="row" style="gap:6px">${HAIR_STYLES.map((h,i)=>`<button class="fchip ${L.hair===i?'on':''}" data-hair="${i}">${h}</button>`).join('')}</div></div>
@@ -1680,6 +1710,7 @@ const GEN = {
   if(who==='scorer'){ plist.push({x:sx,y:L+off,s:'A',n:ap.no,hl:1}); arrows.push({f:[18,32.5],t:[sx+1,L-7],k:'pass'},{f:[sx,L+off-.4],t:[sx+.6,L-6.5],k:'run'}); }
   else { const ox=involve==='uzak'?56:involve==='hareket'?37:34.5, oy=involve==='uzak'?9:involve==='hareket'?7:4.8; plist.push({x:ox,y:oy,s:'A',n:other.no,hl:1},{x:40,y:19,s:'A',n:ap.no,hl:1}); arrows.push({f:[40,19],t:[33.5,.4],k:'shot'}); }
   inc.dia={mode:'box',pl:plist,arrows,off:L,mark:who==='scorer'?[sx,L+off]:[involve==='uzak'?56:34.5,involve==='uzak'?9:4.8]};
+  inc.sx={who,restart};
   return inc;
  },
  orta_saha_faul(c){
@@ -1955,7 +1986,7 @@ function simulateMinute(){
   if(M.temp>78 && M.min-M.mgmtAt>15 && chance(.12)){ M.mgmtAt=M.min; M.queue.push({kind:'mgmt',side:ri(0,1)}); }
 }
 function tick(){
-  if(!M||M.modal||M.paused||M.done) return;
+  if(!M||M.modal||M.paused||M.done||(M.goalHold&&!M.auto)) return;
   if(M.queue.length && !M.inline){ openEvent(M.queue.shift()); return; }
   switch(M.phase){
     case 'h1': M.min++; simulateMinute(); M.schedule.filter(e=>e.min===M.min).forEach(e=>M.queue.push(e)); if(M.min>=45){ M.phase='uz1'; M.queue.push({kind:'uz',half:1}); } break;
@@ -2270,16 +2301,6 @@ const CROWD=(()=>{ const r=seeded(77); const pts=[]; const cols=['#cfd5dd','#8e9
   for(let i=0;i<900;i++){ const d=r(); pts.push([-14+r()*133,-7-d*22,1.2+d*15,cols[Math.floor(r()*cols.length)]]); }
   return pts; })();
 
-function drawGoal(ctx,c,end){
-  const gx=end?105:0, bx=end?107.2:-2.2, y0=30.34, y1=37.66, h=2.44, net='rgba(235,240,245,.14)';
-  fillPoly(ctx,c,[[bx,y0,0],[bx,y1,0],[bx,y1,2.1],[bx,y0,2.1]],net);
-  fillPoly(ctx,c,[[gx,y0,h],[gx,y1,h],[bx,y1,2.1],[bx,y0,2.1]],net);
-  fillPoly(ctx,c,[[gx,y0,0],[bx,y0,0],[bx,y0,2.1],[gx,y0,h]],net);
-  fillPoly(ctx,c,[[gx,y1,0],[bx,y1,0],[bx,y1,2.1],[gx,y1,h]],net);
-  ctx.strokeStyle='rgba(235,240,245,.22)'; ctx.lineWidth=1; ctx.beginPath(); for(let i=1;i<6;i++){ const y=y0+(y1-y0)*i/6; segPath(ctx,c,[bx,y,0],[bx,y,2.1]); segPath(ctx,c,[gx,y,h],[bx,y,2.1]); } ctx.stroke();
-  const m=P(c,[gx,34,1.2]); const w=m?Math.max(1.5,c.F/m[2]*.12):2;
-  ctx.strokeStyle='#f4f6f8'; ctx.lineWidth=w; ctx.lineCap='round'; ctx.beginPath(); segPath(ctx,c,[gx,y0,0],[gx,y0,h]); segPath(ctx,c,[gx,y0,h],[gx,y1,h]); segPath(ctx,c,[gx,y1,h],[gx,y1,0]); ctx.stroke();
-}
 function rrect(ctx,x,y,w,h,r){ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); }
 function drawBall(ctx,c,b){ const g=P(c,[b.x,b.y,0]); const s=P(c,[b.x,b.y,(b.z||0)+.11]); if(!g||!s) return; const sc=c.F/s[2]; ctx.fillStyle='rgba(0,0,0,.38)'; ctx.beginPath(); ctx.ellipse(g[0],g[1],.17*sc,.06*sc,0,0,Math.PI*2); ctx.fill(); ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(s[0],s[1],Math.max(1.7*c.dpr,.12*sc),0,Math.PI*2); ctx.fill(); ctx.strokeStyle='rgba(0,0,0,.45)'; ctx.lineWidth=c.dpr; ctx.stroke(); }
 function groundRing(ctx,c,x,y,r,stroke,fill,dash){ ctx.beginPath(); for(let i=0;i<=28;i++){ const a=i/28*Math.PI*2; const s=P(c,[x+Math.cos(a)*r,y+Math.sin(a)*r,0]); if(!s) return; i?ctx.lineTo(s[0],s[1]):ctx.moveTo(s[0],s[1]); } if(fill){ ctx.fillStyle=fill; ctx.fill(); } if(stroke){ ctx.setLineDash(dash?[6*c.dpr,5*c.dpr]:[]); ctx.strokeStyle=stroke; ctx.lineWidth=2*c.dpr; ctx.stroke(); ctx.setLineDash([]); } }
@@ -2301,7 +2322,7 @@ function drawWorld(ctx,c,o){
   if(o.spots) o.spots.forEach(sp=>{ groundRing(ctx,c,sp.x,sp.y,1.9,'#f6c62b','rgba(246,198,43,.28)'); const s=P(c,[sp.x,sp.y,2.6]); if(s){ const fs=Math.max(14*c.dpr,c.F/s[2]*1.3); ctx.font=`800 ${fs}px "Saira Condensed",sans-serif`; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillStyle='rgba(8,13,20,.85)'; ctx.beginPath(); ctx.arc(s[0],s[1],fs*.72,0,Math.PI*2); ctx.fill(); ctx.fillStyle='#f6c62b'; ctx.fillText(sp.l,s[0],s[1]+fs*.04); } });
   const items=[];
   const dep=p=>tc(c,p)[2];
-  items.push({d:dep([0,34,1]),f:()=>drawGoal(ctx,c,0)},{d:dep([105,34,1]),f:()=>drawGoal(ctx,c,1)});
+  items.push({d:dep([0,34,1]),f:()=>drawGoal(ctx,c,0,o.net&&o.net.end===0?netBulge(o.net):0)},{d:dep([105,34,1]),f:()=>drawGoal(ctx,c,1,o.net&&o.net.end===1?netBulge(o.net):0)});
   (o.actors||[]).forEach(a=>items.push({d:dep([a.x,a.y,1]),f:()=>drawFig(ctx,c,a)}));
   if(o.ball) items.push({d:dep([o.ball.x,o.ball.y,(o.ball.z||0)])-.3,f:()=>drawBall(ctx,c,o.ball)});
   items.sort((a,b)=>b.d-a.d).forEach(i=>i.f());
@@ -2330,7 +2351,7 @@ let SC=null, RAF=null, LASTF=0;
 function newScene(H,A){
   const [hk,ak,rk]=kitsFor(H,A);
   const sc={pl:[],refs:[],ball:{x:52.5,y:34,z:0,owner:null,fl:null},poss:0,dirHome:1,mode:'kickoff',mt:0,t:0,camX:52.5,cam:'tv',spots:null,mark:null,forced:null,shots:[0,0],possT:[1,1],kits:[hk,ak],rk,refTarget:null,gather:null};
-  [H,A].forEach((t,side)=>{ const sq=squad(t).pl; F433.forEach((f,i)=>{ sc.pl.push({side,i,role:f[2],bx:f[0],by:side?68-f[1]:f[1],x:0,y:0,vx:0,vy:0,face:[side?-1:1,0],phase:rand()*6,speed:0,fall:0,fallDir:[1,0],num:sq[i].no,skin:SKINS[(hash(t.id)+i*7)%5],hold:0,next:1,kit:i===0?GK_KITS[side]:(side?ak:hk)}); }); });
+  [H,A].forEach((t,side)=>{ const sq=squad(t).pl; F433.forEach((f,i)=>{ sc.pl.push({side,i,role:f[2],bx:f[0],by:side?68-f[1]:f[1],x:0,y:0,vx:0,vy:0,face:[side?-1:1,0],phase:rand()*6,speed:0,fall:0,fallDir:[1,0],num:sq[i].no,skin:SKINS[(hash(t.id)+i*7)%5],sz:.95+((hash(t.id)+i*13)%11)/100,hair:LOOK_HAIRC[(hash(t.id)+i*3)%4],hold:0,next:1,kit:i===0?GK_KITS[side]:(side?ak:hk)}); }); });
   const R=(x,y,flag)=>({x,y,vx:0,vy:0,face:[0,1],phase:0,speed:0,fall:0,kit:rk,skin:SKINS[1],flag});
   sc.refs=[R(46,26),R(70,-1.4,true),R(35,69.4,true)];
   kickoffPositions(sc,0); return sc;
@@ -2394,11 +2415,6 @@ function idleAI(sc,dt){
     steer(p,p.wt[0],p.wt[1],dt,1.3);
   });
 }
-function goalAI(sc,dt){
-  const side=sc.goalSide, d=sdir(sc,side);
-  sc.pl.forEach(p=>{ if(p.side===side&&p.role!=='GK'){ steer(p,d>0?100:5,sc.goalCornerY,dt,p.i===sc.scorerIdx?7:5); } else steer(p,p.x-d*.5,p.y,dt,1.2); });
-  if(sc.mt>3.4) kickoffPositions(sc,1-side);
-}
 function refAI(sc,dt){
   const b=sc.ball, r=sc.refs[0];
   if(sc.refTarget) steer(r,sc.refTarget[0],sc.refTarget[1],dt,7.2);
@@ -2408,14 +2424,6 @@ function refAI(sc,dt){
   const right=sc.pl.filter(p=>sdir(sc,p.side)<0).map(p=>p.x).sort((a,c)=>c-a), left=sc.pl.filter(p=>sdir(sc,p.side)>0).map(p=>p.x).sort((a,c)=>a-c);
   steer(sc.refs[1],clamp(Math.max(right[1]||70,b.x),52.5,104),-1.4,dt,6.5);
   steer(sc.refs[2],clamp(Math.min(left[1]||35,b.x),1,52.5),69.4,dt,6.5);
-}
-function sceneGoal(sc,side,p){
-  if(!sc) return; const d=sdir(sc,side); const b=sc.ball; b.owner=null;
-  b.fl={from:[b.x,b.y],to:[d>0?106.2:-1.2,34+rf(-2.5,2.5)],t:0,dur:.55,h:1.3,done:()=>{}};
-  sc.mode='goal'; sc.mt=0; sc.goalSide=side; sc.goalCornerY=chance(.5)?2:66; sc.forced=null; sc.spots=null; sc.mark=null; sc.refTarget=null; sc.gather=null;
-  const sp=p?sc.pl.find(q=>q.side===side&&q.num===p.no):null; sc.scorerIdx=sp?sp.i:9;
-  sc.pl.forEach(q=>{ q.keepDown=false; q.fall=0; });
-  matchBanner('goal','GOL!',esc(sideTeam(side).name)+(p?' · '+esc(p.name):''));
 }
 function sceneStop(sc,gather){ if(!sc||sc.mode==='goal') return; sc.mode='stopped'; sc.gather=gather||null; if(sc.ball.owner){ sc.ball.owner=null; } sc.ball.fl=null; }
 function sceneHalf(sc){ if(!sc) return; sc.dirHome=-1; kickoffPositions(sc,1); }
@@ -2470,7 +2478,9 @@ const POSES={
  gkCatch:{hipH:.78,armL:{s:.16,f:.42,h:1.1},armR:{s:-.16,f:.42,h:1.1}},
  gkDive:{hipH:.8,armL:{s:.2,f:.3,h:2.1},armR:{s:-.2,f:.3,h:2.1}},
  dive:{jump:.15,armL:{s:.35,f:.2,h:1.95},armR:{s:-.35,f:.2,h:1.95}},
- faceHold:{armL:{s:.12,f:.22,h:1.62},armR:{s:-.12,f:.22,h:1.62}}
+ faceHold:{armL:{s:.12,f:.22,h:1.62},armR:{s:-.12,f:.22,h:1.62}},
+ celebrate:{jump:.1,armL:{s:.4,f:.15,h:2.05},armR:{s:-.4,f:.15,h:2.05}},
+ slump:{hipH:.88,lean:.22,headF:.08,armL:{s:.22,f:.05,h:.85},armR:{s:-.22,f:.05,h:.85}}
 };
 const ARM_POSE={bitisik:'armTight',dogal:'armNat',siluet:'armSide',omuz:'armUp',destek:'slideArm'};
 const ARM_HIT={bitisik:[.22,1.08],dogal:[.32,.98],siluet:[.74,1.32],omuz:[.26,2.02],destek:[.58,.08]};
@@ -2484,15 +2494,16 @@ function animSpec(inc){
     case 'penalti_temas': { const k=x.kind, tk=x.tackle||''; const off = k==='dalis'?'tackle':k==='temiz'?'slide':k==='hafif'?'shoulder':/kayarak/.test(tk)?(x.sev!=='normal'?'slideHigh':'slide'):/çelme/.test(tk)?'trip':/tutma/.test(tk)?'hold':/itme/.test(tk)?'push':'slide';
       return {off,vic:k==='dalis'?'dive':k==='hafif'?'stumble':'fall',gap:k==='dalis'?1.5:0,ballAway:k==='temiz',contact:k!=='dalis',hitZ:/hold|push|shoulder/.test(off)?1.2:.3}; }
     case 'elle_oynama': return {off:ARM_POSE[x.arm]||'armNat',offS:'D',vicS:null,handball:x.arm,deflect:x.deflect,delib:x.deliberate,faceTo:'shooter',contact:true};
-    case 'hucum_elle_gol': return {off:x.v==='omuz'?'shoulder':x.v==='mate'?null:'armReach',offS:'A',vicS:null,attHit:x.v,contact:x.v!=='mate'};
+    case 'hucum_elle_gol': return {off:x.v==='omuz'?'shoulder':x.v==='mate'?null:'armReach',offS:'A',vicS:null,attHit:x.v,contact:x.v!=='mate',gk:'dive',gkT:.82};
     case 'orta_saha_faul': { const off = x.force==='asiri'?'slideHigh':x.studs?(x.h==='top'?'tackle':'tackleHigh'):(x.dir==='yandan'?'slide':x.dir==='arkadan'?'trip':'tackle');
       return {off,vic:x.clean?'stumble':'fall',ballAway:x.ballPlayed,contact:true,hitZ:/High/.test(off)?.55:.25}; }
     case 'dogso': return {off:/arkadan/.test(x.ftype||'')?'trip':/çekme/.test(x.ftype||'')?'hold':'push',vic:'fall',contact:true,hitZ:/çekme|itme/.test(x.ftype||'')?1.2:.25};
     case 'dirsek': return {off:x.use==='dogal'?'header':x.use==='kaldirac'?'lever':'elbow',vicPose:'header',vic:(x.area==='yüz'||x.area==='kafa')?'fall':'stumble',vicAfter:'faceHold',contact:true,hitZ:x.area==='göğüs'?1.7:2.05};
     case 'top_disinda': return {off:{itme:'push',yumruk:'punch',kafa:'headbutt',basma:'stamp',kufur:'gesture'}[x.act],vic:x.act==='basma'?'down':x.act==='kufur'?'none':x.act==='itme'?'stumble':'fall',contact:x.act!=='kufur',hitZ:x.act==='basma'?.1:1.55};
     case 'kaleci_engelleme': return {off:{tuttu:'hold',itti:'push',omuz:'shoulder',engel:'block',arkadas:'header'}[x.v],offS:x.v==='arkadas'?'D':'A',vicS:'G',vicPose:'gkJump',vic:['tuttu','itti','engel'].includes(x.v)?'fall':x.v==='arkadas'?'fall':'stumble',contact:true,hitZ:1.4};
-    case 'gol_oncesi_faul': return {off:{itme:'push',omuz:'shoulder',basma:'stamp',hafif:'shoulder',cekme:'hold'}[x.v],offS:'A',vicS:'D',vic:['itme','basma','cekme'].includes(x.v)?'fall':'stumble',contact:true,hitZ:x.v==='basma'?.1:1.2};
+    case 'gol_oncesi_faul': return {gk:'dive',gkT:.82,off:{itme:'push',omuz:'shoulder',basma:'stamp',hafif:'shoulder',cekme:'hold'}[x.v],offS:'A',vicS:'D',vic:['itme','basma','cekme'].includes(x.v)?'fall':'stumble',contact:true,hitZ:x.v==='basma'?.1:1.2};
     case 'gol_cizgisi': return {gk:'dive',contact:false,headerA:true};
+    case 'ofsayt_gol': return {ofs:true,scorer:x.who==='scorer',gk:'dive',gkT:.86,contact:false};
     case 'geri_pas': return {gk:'catch',contact:false,flick:x.v==='hile'};
     case 'penalti_atisi': return {gk:'dive',gkEarly:/^gk/.test(x.v||''),feint:x.v==='feint',contact:false,pen:true};
     default: return {contact:false};
@@ -2509,7 +2520,8 @@ function replayTracks(inc){
     if(an.pen && p.hl && p.s==='A' && Math.hypot(p.x-34,p.y-12.4)<1) from=[34,15.5];
     let role=null; if(vs && p.hl && p.s===vs && !vSet){ role='victim'; vSet=true; } else if(p.hl && p.s!=='AR' && !oSet && (os? p.s===os && p.s!==vs : (vs? p.s!==vs : false))){ role='offender'; oSet=true; }
     const t={s:p.s,n:p.n,hl:p.hl,from,to:[p.x,p.y],role};
-    if(shot && Math.hypot(shot.f[0]-p.x,shot.f[1]-p.y)<2.2 && p.s==='A') t.shooter=true;
+    if(shot && Math.hypot(shot.f[0]-p.x,shot.f[1]-p.y)<2.2 && p.s==='A'){ t.shooter=true; t.shootAt=an.handball?.03:(an.ofs?CT:.78); }
+    if(an.ofs && an.scorer && pass && p.s==='A' && p.hl && !(Math.hypot(pass.f[0]-p.x,pass.f[1]-p.y)<2.2)){ t.after=pass.t.slice(); t.shootAt=.87; t.from=[p.x+.3,p.y+1.5]; }
     if(pass && Math.hypot(pass.f[0]-p.x,pass.f[1]-p.y)<2.2) t.passer=true;
     return t; });
   if(an.handball) tr.forEach(t=>{ if(t.shooter) t.from=t.to.slice(); });
@@ -2530,12 +2542,16 @@ function ballKeys(inc){ const d=inc.dia, A=(d.arrows||[]); const pass=A.find(a=>
   const end=d.ball||d.mark; const K=(t,p,z,arc)=>({t,p:p.slice(),z:z||0,arc:arc||0});
   if(an.handball){ const hp=hitPoint(inc); const sh=inc.tracks.find(t=>t.shooter)||inc.tracks.find(t=>t.s==='A'); const kf=[K(0,[sh.to[0],sh.to[1]-.6],.15)];
     if(an.deflect) kf.push(K(.64,[hp.p[0]-hp.face[0]*.1,hp.p[1]-hp.face[1]*.1],.5)); kf.push(K(CT,hp.p,hp.z,.3)); kf.push(K(.95,[hp.p[0]+hp.face[0]*3+hp.face[1]*2,hp.p[1]+hp.face[1]*3-hp.face[0]*2],.2,.8)); return kf; }
-  if(an.attHit && an.attHit!=='mate'){ const hp=hitPoint(inc); const kf=[K(0,[hp.p[0]+3,hp.p[1]+5],1.6),K(.6,hp.p,hp.z,.6),K(.7,end,.1)]; if(shot) kf.push(K(.78,shot.f,.1),K(.95,shot.t,.6,.4)); return kf; }
+  if(an.attHit && an.attHit!=='mate'){ const hp=hitPoint(inc); const kf=[K(0,[hp.p[0]+3,hp.p[1]+5],1.6),K(.6,hp.p,hp.z,.6),K(.7,end,.1)]; if(shot) kf.push(K(.78,shot.f,.1),K(.95,[clamp(shot.t[0],31.2,36.8),-1.25],.6,.4)); return kf; }
+  const NET=['ofsayt_gol','hucum_elle_gol','gol_oncesi_faul','kaleci_engelleme'].includes(inc.type); const inNet=q=>NET?[clamp(q[0],31.2,36.8),-1.25]:q;
+  if(an.ofs){ const pa=pass||{f:[18,32],t:end}; if(an.scorer) return [K(0,pa.f,0),K(CT,pa.f,0),K(.86,pa.t,0,Math.hypot(pa.t[0]-pa.f[0],pa.t[1]-pa.f[1])>18?2.4:.3),K(.97,inNet([33+((hash(inc.title+inc.minute)%5)-2)*.9,0]),.9,.3)];
+    if(shot) return [K(0,shot.f,0),K(CT,shot.f,0),K(.9,inNet(shot.t),1.1,.3)]; }
   if(an.pen){ return [K(0,[34,11],0),K(an.feint?.78:.72,[34,11],0),K(.9,[an.gkEarly&&/wide/.test(inc.sx.v)?40.5:32.5,-.4],.9,.3)]; }
   const kf=[]; if(pass) kf.push(K(0,pass.f,0),K(.55,pass.t,.2,Math.hypot(pass.t[0]-pass.f[0],pass.t[1]-pass.f[1])>18?2.6:.3)); else kf.push(K(0,run?[run.f[0]+.4,run.f[1]-1]:end,0));
   kf.push(K(.7,end,0,.2));
   if(an.ballAway) kf.push(K(.9,[end[0]+4,end[1]-2.5],.2,.6));
-  else if(shot) kf.push(K(.8,shot.f,0),K(.95,shot.t,.5,.6));
+  else if(shot) kf.push(K(.8,shot.f,0),K(.95,inNet(shot.t),.6,.6));
+  else if(NET) kf.push(K(.8,end,0),K(.93,inNet([34,0]),.4,.3));
   return kf; }
 function ballAt(kf,t){ if(t<=kf[0].t) return [kf[0].p[0],kf[0].p[1],kf[0].z]; for(let i=1;i<kf.length;i++){ if(t<=kf[i].t){ const a=kf[i-1], b=kf[i]; const u=(t-a.t)/(b.t-a.t); return [a.p[0]+(b.p[0]-a.p[0])*u, a.p[1]+(b.p[1]-a.p[1])*u, a.z+(b.z-a.z)*u+b.arc*4*u*(1-u)]; } } const l=kf[kf.length-1]; return [l.p[0],l.p[1],l.z>.3?Math.max(0,l.z-(t-l.t)*6):l.z]; }
 const mapKeys=(kf,map)=>kf.map(k=>({...k,p:map(k.p[0],k.p[1])}));
@@ -2544,11 +2560,11 @@ function applyAnim(actors,inc,t,map){
   const an=inc.anim||{}; let off=null, vic=null, shooterA=null;
   actors.forEach(a=>{ a.pose=null; if(!a.t) return; if(a.t.role==='offender') off=a; if(a.t.role==='victim') vic=a; if(a.t.shooter) shooterA=a; });
   actors.forEach(a=>{ const tr=a.t; if(!tr) return; a.fall=0;
-    if(tr.passer){ setPose(a,an.flick?'header':'pass',t<.08?t/.08:1-(t-.08)/.12); }
-    if(tr.shooter && tr.role!=='victim'){ const k=an.handball?(t<.06?t/.06:1-(t-.06)/.12):(t<.75?0:t<.8?(t-.75)/.05:1-(t-.8)/.12); setPose(a,'shot',k); }
+    if(tr.passer){ if(an.ofs) setPose(a,'pass',t<CT-.05?0:t<CT?(t-(CT-.05))/.05:1-(t-CT)/.1); else setPose(a,an.flick?'header':'pass',t<.08?t/.08:1-(t-.08)/.12); }
+    if(tr.shootAt!=null && tr.role!=='victim'){ const s0=tr.shootAt; const k=t<s0-.04?0:t<s0?(t-(s0-.04))/.04:1-(t-s0)/.1; setPose(a,'shot',k); }
     if(tr.s==='A' && an.headerA && tr.hl){ setPose(a,'header',clamp((t-.55)/.12,0,1)*(1-clamp((t-.82)/.1,0,1))); }
     if(tr.s==='A' && an.pen && tr.hl && Math.hypot(tr.to[0]-34,tr.to[1]-12.4)<1.2){ const kt=an.feint?.78:CT; const k=t<kt-.05?0:t<kt?(t-(kt-.05))/.05:1-(t-kt)/.12; setPose(a,'shot',k); }
-    if(tr.s==='G' && an.gk && tr.role!=='victim'){ const st=an.pen?(an.gkEarly?.62:CT):.66; const k=clamp((t-st)/.12,0,1);
+    if(tr.s==='G' && an.gk && tr.role!=='victim'){ const st=an.gkT!=null?an.gkT:an.pen?(an.gkEarly?.62:CT):.66; const k=clamp((t-st)/.12,0,1);
       if(an.gk==='dive'){ setPose(a,'gkDive',k); a.fall=k*.92; a.fallDir=[-(a.face[1]||0)||1,a.face[0]||0]; } else setPose(a,an.gk==='catch'?'gkCatch':'gkJump',k); }
     if(tr.role==='offender' && an.off){ const pre=an.handball?.42:CT-.17; const k=ease(clamp((t-pre)/(an.handball?.2:.17),0,1)); setPose(a,an.off,k);
       if(an.delib && t>.6) setPose(a,'armReach',clamp((t-.6)/.1,0,1)); }
@@ -2565,44 +2581,12 @@ function applyAnim(actors,inc,t,map){
   if(hp){ const w=map(hp.p[0],hp.p[1]); p=w; z=hp.z; } else if(off&&vic){ const r=(REACH[an.off]||.6)*.92; p=[off.x+off.face[0]*r,off.y+off.face[1]*r]; } else return null;
   return {x:p[0],y:p[1],z,k:(t-ft)/.14};
 }
+const NETTYPES=['ofsayt_gol','hucum_elle_gol','gol_oncesi_faul','kaleci_engelleme','gol_cizgisi'];
 function drawFlash(ctx,c,fl){ if(!fl) return; const s=P(c,[fl.x,fl.y,fl.z]); if(!s) return; const sc=c.F/s[2]; const k=fl.k, r=(.18+k*.7)*sc;
   ctx.save(); ctx.globalAlpha=Math.max(0,.95-k); ctx.strokeStyle='#fff'; ctx.lineWidth=Math.max(1.5*c.dpr,.045*sc); ctx.beginPath(); ctx.arc(s[0],s[1],r,0,Math.PI*2); ctx.stroke();
   ctx.strokeStyle='#ffdb5c'; ctx.lineWidth=Math.max(1.2*c.dpr,.03*sc); ctx.beginPath(); for(let i=0;i<8;i++){ const a=i/8*Math.PI*2+.3; ctx.moveTo(s[0]+Math.cos(a)*r*.45,s[1]+Math.sin(a)*r*.45); ctx.lineTo(s[0]+Math.cos(a)*r*.95,s[1]+Math.sin(a)*r*.95); } ctx.stroke();
   ctx.globalAlpha=Math.max(0,.85-k*1.6); ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(s[0],s[1],Math.max(2*c.dpr,.07*sc),0,Math.PI*2); ctx.fill(); ctx.restore(); }
 
-function drawFig(ctx,c,a){
-  const fall=a.fall||0, fd=a.fallDir||a.face||[1,0];
-  const up=fall>0?V3.norm([fd[0]*fall*1.6,fd[1]*fall*1.6,Math.max(.06,1-fall)]):[0,0,1];
-  const fx=a.face?a.face[0]:1, fy=a.face?a.face[1]:0, px=-fy, py=fx;
-  const ps=a.pose&&a.pose.k>0?a.pose:null, PZ=ps?ps.P:{}, K=ps?ps.k:0;
-  const hipH=.92+((PZ.hipH!=null?PZ.hipH:.92)-.92)*K, lean=(PZ.lean||0)*K, jump=(PZ.jump||0)*K, headF=(PZ.headF||0)*K;
-  const at=(h,s,f)=>[a.x+up[0]*h+px*s+fx*f, a.y+up[1]*h+py*s+fy*f, Math.max(.02,up[2]*h)+jump];
-  const st=Math.min(1,(a.speed||0)/6)*.42*Math.sin(a.phase||0)*(1-fall)*(1-K);
-  const limb=(def,key)=>{ const T=PZ[key]; return T?[def[0]+(T.s-def[0])*K, def[1]+(T.f-def[1])*K, def[2]+(T.h-def[2])*K]:def; };
-  const LL=limb([.14,st,.05],'legL'), LR=limb([-.14,-st,.05],'legR'), AL=limb([.33,-st*.9,.98],'armL'), AR=limb([-.33,st*.9,.98],'armR');
-  const hip=P(c,at(hipH,0,lean*.15)); if(!hip) return;
-  const sc=c.F/hip[2]; if(sc<1) return;
-  const g=P(c,[a.x,a.y,0]); if(!g) return;
-  const shR=Math.max(.3,.5-jump*.3);
-  ctx.fillStyle='rgba(0,0,0,.34)'; ctx.beginPath(); ctx.ellipse(g[0],g[1],shR*sc,.17*sc,0,0,Math.PI*2); ctx.fill();
-  if(a.hl){ ctx.strokeStyle='rgba(246,198,43,.95)'; ctx.lineWidth=Math.max(1.5*c.dpr,.08*sc); ctx.beginPath(); ctx.ellipse(g[0],g[1],.9*sc,.32*sc,0,0,Math.PI*2); ctx.stroke(); }
-  const pts=[at(LL[2],LL[0],LL[1]),at(LR[2],LR[0],LR[1]),at(hipH-.3,0,lean*.1),at(hipH+.08,0,lean*.25),at(hipH+.52,0,lean),at(hipH+.79,0,lean*1.15+headF),at(hipH+.48,.24,lean*.9),at(hipH+.48,-.24,lean*.9),at(AL[2],AL[0],AL[1]),at(AR[2],AR[0],AR[1]),at(hipH+.28,0,lean*.55)].map(p=>P(c,p));
-  if(pts.some(p=>!p)) return;
-  const [fl,fr,sh,wa,nk,hd,sl,sr,hl,hr,ch]=pts;
-  const L=(p,q,w,col)=>{ ctx.strokeStyle=col; ctx.lineWidth=Math.max(c.dpr,w*sc); ctx.beginPath(); ctx.moveTo(p[0],p[1]); ctx.lineTo(q[0],q[1]); ctx.stroke(); };
-  ctx.lineCap='round';
-  const legs=()=>{ L(hip,fl,.15,a.kit.socks); L(hip,fr,.15,a.kit.socks); ctx.fillStyle='#0d0f12'; [fl,fr].forEach(f=>{ ctx.beginPath(); ctx.arc(f[0],f[1],Math.max(c.dpr,.07*sc),0,Math.PI*2); ctx.fill(); }); L(hip,sh,.33,a.kit.shorts); };
-  const back=(hl[1]<sl[1]-.4*sc);
-  if(fr[2]>hip[2]) { legs(); }
-  L(sl,hl,.12,a.kit.shirt); L(sr,hr,.12,a.kit.shirt);
-  if(fr[2]<=hip[2]) legs();
-  L(wa,nk,.44,a.kit.shirt);
-  ctx.fillStyle=a.skin||'#e0b08a'; [hl,hr].forEach(h=>{ ctx.beginPath(); ctx.arc(h[0],h[1],Math.max(c.dpr*.8,.05*sc),0,Math.PI*2); ctx.fill(); });
-  ctx.beginPath(); ctx.arc(hd[0],hd[1],Math.max(1.2*c.dpr,.135*sc),0,Math.PI*2); ctx.fill();
-  if(a.flag){ const f0=P(c,at(1.95,.34,0)); if(f0){ ctx.fillStyle=a.flagUp?'#ffd84a':'#f2b81f'; ctx.fillRect(f0[0],f0[1]-(a.flagUp?.25*sc:0),.32*sc,.24*sc); } }
-  if(a.num!=null && sc>15 && fall<.5){ ctx.fillStyle=a.kit.numCol; ctx.font=`700 ${Math.round(.2*sc)}px "IBM Plex Mono",monospace`; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(a.num,ch[0],ch[1]); }
-  if(a.label && sc>3){ const fs=11*c.dpr; ctx.font=`600 ${fs}px Barlow,sans-serif`; const w=ctx.measureText(a.label).width+fs*.9; const x=hd[0]-w/2, y=hd[1]-.25*sc-fs*1.9; ctx.fillStyle='rgba(8,13,20,.86)'; rrect(ctx,x,y,w,fs*1.55,fs*.4); ctx.fill(); ctx.fillStyle='#fff'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(a.label,hd[0],y+fs*.8); }
-}
 function sceneBuildup(sc,inc){
   const d=sdir(sc,inc.ai); const map=diaMap(inc.dia.mode,d); sc.map=map; sc.inc=inc; inc.anim=inc.anim||animSpec(inc); inc.tracks=inc.tracks||replayTracks(inc);
   const used=new Set(); sc.forced=[]; sc.pl.forEach(p=>{p.hl=false;p.label=null;p.keepDown=false;p.t=null;p.pose=null;p.fall=0;});
@@ -2626,7 +2610,7 @@ function buildAI(sc,dt){
     return;
   }
   const DUR=2.3, t=Math.min(1,sc.bt/DUR);
-  sc.forced.forEach(f=>{ const p=f.p; const k=ease(Math.min(1,t/CT)); const nx=f.start[0]+(f.to[0]-f.start[0])*k, ny=f.start[1]+(f.to[1]-f.start[1])*k; const vx=(nx-p.x)/Math.max(dt,1e-3), vy=(ny-p.y)/Math.max(dt,1e-3); const sp=Math.hypot(vx,vy); p.x=nx; p.y=ny; p.speed=t<CT?Math.min(8,sp):.2; if(sp>.4) p.face=[vx/sp,vy/sp]; p.phase+=p.speed*dt*2.7; });
+  sc.forced.forEach(f=>{ const p=f.p; const k=ease(Math.min(1,t/CT)); let nx=f.start[0]+(f.to[0]-f.start[0])*k, ny=f.start[1]+(f.to[1]-f.start[1])*k; if(p.t&&p.t.after&&t>CT){ const af=sc.map(p.t.after[0],p.t.after[1]); const ka=ease(clamp((t-CT)/(.86-CT),0,1)); nx=f.to[0]+(af[0]-f.to[0])*ka; ny=f.to[1]+(af[1]-f.to[1])*ka; } const vx=(nx-p.x)/Math.max(dt,1e-3), vy=(ny-p.y)/Math.max(dt,1e-3); const sp=Math.hypot(vx,vy); p.x=nx; p.y=ny; p.speed=(t<CT||(p.t&&p.t.after&&t<.86))?Math.min(8,sp):.2; if(sp>.4) p.face=[vx/sp,vy/sp]; p.phase+=p.speed*dt*2.7; });
   sc.flash=applyAnim(sc.forced.map(f=>f.p),sc.inc,t,sc.map);
   sc.forced.forEach(f=>{ if(f.p.fall>.5) f.p.keepDown=true; });
   const bp=ballAt(sc.bkf,t); b.x=bp[0]; b.y=bp[1]; b.z=bp[2];
@@ -2635,20 +2619,21 @@ function buildAI(sc,dt){
 function sceneResume(sc){ if(!sc||sc.mode==='goal'||sc.mode==='kickoff') return; sc.mode='play'; sc.forced=null; sc.spots=null; sc.mark=null; sc.refTarget=null; sc.gather=null; sc.flash=null; sc.pl.forEach(p=>{ p.keepDown=false; p.label=null; p.hl=false; p.t=null; p.pose=null; }); const b=sc.ball; b.fl=null; b.owner=nearestTo(sc.pl,b.x,b.y); sc.poss=b.owner.side; b.owner.hold=0; b.owner.next=1; }
 function liveCamDesired(W,H){ const x=SC.camX;
   if(SC.cam==='ust') return {p:[52.5,-40,66],t:[52.5,31,0],f:.63};
+  if(SC.mode==='goal'&&SC.goal){ const G=SC.goal; const fp=G.t<2.35?[SC.ball.x,SC.ball.y]:[G.sp.x,G.sp.y]; return {p:[fp[0]-G.d*8,fp[1]-15,7],t:[fp[0]+G.d*3,fp[1]+1,.6],f:1.0}; }
   if((SC.mode==='buildup'&&SC.stage===2)||(SC.mode==='stopped'&&SC.mark)){ const m=SC.mark; return {p:[m[0]-3.5,m[1]-12.5,5.6],t:[m[0],m[1]+.5,.7],f:1.0}; }
   if(SC.mode==='buildup'){ const pts=[SC.mark,...(SC.spots||[]).map(s=>[s.x,s.y])]; const cx=avg(pts.map(p=>p[0])), cy=avg(pts.map(p=>p[1])); const span=Math.max(18,...pts.map(p=>Math.hypot(p[0]-cx,p[1]-cy))); const tall=H/W>.68; const z=SC.spots?(tall?1.15:1.35):1;
     return {p:[cx,cy-span*1.05*z-4,span*1.55*z+14],t:[cx,cy-span*.12,0],f:.7}; }
   if(SC.cam==='yakin') return {p:[x,-15,10.5],t:[x,30,0],f:1.15};
   return {p:[x,-27,17],t:[x,31,0],f:1.02}; }
 function liveCam(W,H,dpr){ const d=liveCamDesired(W,H); const s=SC.cs||(SC.cs={p:d.p.slice(),t:d.t.slice(),f:d.f}); const k=.075; for(let i=0;i<3;i++){ s.p[i]+=(d.p[i]-s.p[i])*k; s.t[i]+=(d.t[i]-s.t[i])*k; } s.f+=(d.f-s.f)*k; return camera(s.p,s.t,s.f,W,H,dpr); }
-function drawLive(cv){ const [W,H,dpr]=fitCanvas(cv); const ctx=cv.getContext('2d'); drawWorld(ctx,liveCam(W,H,dpr),{actors:[...SC.pl,...SC.refs],ball:SC.ball,spots:SC.spots,t:SC.t,flash:SC.mode==='buildup'?SC.flash:null}); }
+function drawLive(cv){ const [W,H,dpr]=fitCanvas(cv); const ctx=cv.getContext('2d'); drawWorld(ctx,liveCam(W,H,dpr),{actors:[...SC.pl,...SC.refs],ball:SC.ball,spots:SC.spots,t:SC.t,flash:SC.mode==='buildup'?SC.flash:null,net:SC.net}); }
 let RP=null;
 function replayStart(cv,inc,mode,opt){
   replayStop(); opt=opt||{};
   const map=diaMap(inc.dia.mode,1); inc.anim=inc.anim||animSpec(inc); const tracks=inc.tracks||(inc.tracks=replayTracks(inc));
   let kits,rk; if(SC){ kits=SC.kits; rk=SC.rk; } else { const k=kitsFor(team(M.fx.home),team(M.fx.away)); kits=[k[0],k[1]]; rk=k[2]; }
   const kA=kits[inc.ai], kD=kits[inc.di], kG=GK_KITS[inc.di];
-  const actors=tracks.map((t,i)=>({t,x:t.from?map(t.from[0],t.from[1])[0]:0,y:0,face:[1,0],phase:i,speed:0,fall:0,num:t.n||null,hl:!!t.hl&&mode!=='hakem',skin:SKINS[(i*3+inc.ai)%5],kit:t.s==='A'?kA:t.s==='D'?kD:t.s==='G'?kG:rk,flag:t.s==='AR',flagUp:t.s==='AR'}));
+  const actors=tracks.map((t,i)=>({t,x:t.from?map(t.from[0],t.from[1])[0]:0,y:0,face:[1,0],phase:i,speed:0,fall:0,num:t.n||null,hl:!!t.hl&&mode!=='hakem',skin:SKINS[(i*3+inc.ai)%5],sz:.95+(i%5)*.025,hair:LOOK_HAIRC[(i*2+inc.di)%4],kit:t.s==='A'?kA:t.s==='D'?kD:t.s==='G'?kG:rk,flag:t.s==='AR',flagUp:t.s==='AR'}));
   const ref=inc.refPos?map(inc.refPos[0],inc.refPos[1]):map(28,15);
   const refA={x:ref[0],y:ref[1],face:[1,0],phase:0,speed:0,fall:0,kit:rk,skin:SKINS[1],num:null};
   const mk=map(inc.dia.mark[0],inc.dia.mark[1]); const bkf=mapKeys(ballKeys(inc),map);
@@ -2662,23 +2647,25 @@ function replayStop(){ if(RP){ cancelAnimationFrame(RP.raf); RP=null; } }
 function replayDraw(){
   const R=RP, cv=R.cv; const [W,H,dpr]=fitCanvas(cv); const ctx=cv.getContext('2d'); const t=Math.min(1,R.t);
   R.actors.forEach(a=>{ const tr=a.t; const k=ease(Math.min(1,t/CT)); const f=R.map(tr.from[0],tr.from[1]), to=R.map(tr.to[0],tr.to[1]);
-    const nx=f[0]+(to[0]-f[0])*k, ny=f[1]+(to[1]-f[1])*k; const vx=nx-a.x, vy=ny-a.y; const sp=Math.hypot(vx,vy);
-    a.speed = t<CT ? Math.min(7,Math.hypot(to[0]-f[0],to[1]-f[1])/2.4*2) : .2; if(sp>.001&&t<CT) a.face=[vx/sp,vy/sp];
+    let nx=f[0]+(to[0]-f[0])*k, ny=f[1]+(to[1]-f[1])*k; if(tr.after&&t>CT){ const af=R.map(tr.after[0],tr.after[1]); const ka=ease(clamp((t-CT)/(.86-CT),0,1)); nx=to[0]+(af[0]-to[0])*ka; ny=to[1]+(af[1]-to[1])*ka; } const vx=nx-a.x, vy=ny-a.y; const sp=Math.hypot(vx,vy);
+    if(tr.after&&t>CT&&t<.86){ a.speed=6.5; if(sp>.001) a.face=[vx/sp,vy/sp]; }
+    else a.speed = t<CT ? Math.min(7,Math.hypot(to[0]-f[0],to[1]-f[1])/2.4*2) : .2; if(sp>.001&&t<CT) a.face=[vx/sp,vy/sp];
     if(tr.s==='G'||tr.s==='AR'||(R.inc.anim.handball&&tr.shooter)){ const dx=R.mk[0]-nx, dy=R.mk[1]-ny, l=Math.hypot(dx,dy)||1; a.face=[dx/l,dy/l]; }
     a.phase=t*3.4*a.speed*2.7+(a.num||0); a.x=nx; a.y=ny; });
   const fl=applyAnim(R.actors,R.inc,t,R.map);
   const b=ballAt(R.bkf,t);
-  const mx=R.mk[0], my=R.mk[1]; const rf_=R.refA; { const dx=mx-rf_.x, dy=my-rf_.y, l=Math.hypot(dx,dy)||1; rf_.face=[dx/l,dy/l]; rf_.speed=t<CT?2.5:0; rf_.phase=t*20; }
+  const kf_=ease(clamp((t-CT)/.2,0,1))*(NETTYPES.includes(R.inc.type)||R.inc.anim.pen?1:.35); const mx=R.mk[0]+(b[0]-R.mk[0])*kf_, my=R.mk[1]+(b[1]-R.mk[1])*kf_; const rf_=R.refA; { const dx=mx-rf_.x, dy=my-rf_.y, l=Math.hypot(dx,dy)||1; rf_.face=[dx/l,dy/l]; rf_.speed=t<CT?2.5:0; rf_.phase=t*20; }
   let cam;
   if(R.cam==='yakin'){ const off=R.actors.find(a=>a.t.role==='offender'), vic=R.actors.find(a=>a.t.role==='victim'); let px=0,py=-1; if(off&&vic&&Math.hypot(vic.x-off.x,vic.y-off.y)>.2){ const v=v2n(vic.x-off.x,vic.y-off.y); px=-v[1]; py=v[0]; if(py>0){px=-px;py=-py;} }
-    const cx=off&&vic?(off.x+vic.x)/2:mx, cy=off&&vic?(off.y+vic.y)/2:my; cam=camera([cx+px*7.5,cy+py*7.5,2.2],[cx,cy,.85],1.2,W,H,dpr); }
+    const cx=off&&vic&&kf_<.5?(off.x+vic.x)/2:mx, cy=off&&vic&&kf_<.5?(off.y+vic.y)/2:my; cam=camera([cx+px*7.5,cy+py*7.5,2.2],[cx,cy,.85],1.2,W,H,dpr); }
   else if(R.cam==='hakem'){ const dx=mx-rf_.x, dy=my-rf_.y, l=Math.hypot(dx,dy)||1; cam=camera([rf_.x-dx/l*.6,rf_.y-dy/l*.6,1.75],[mx,my,.7],Math.min(1.5,.55+l/28),W,H,dpr); }
-  else if(R.cam==='tv') cam=camera([mx-4,my-26,13],[mx,my,0],1.35,W,H,dpr);
-  else if(R.cam==='ters') cam=camera([mx+4,my+26,12],[mx,my,0],1.35,W,H,dpr);
+  else if(R.cam==='tv') cam=camera([mx-3,my-16,7.5],[mx,my,.4],1.3,W,H,dpr);
+  else if(R.cam==='ters') cam=camera([mx+3,my+16,7],[mx,my,.4],1.3,W,H,dpr);
   else if(R.cam==='arka') cam=camera([116,my*.4+20,6],[mx,my,.8],1.25,W,H,dpr);
   else cam=camera([mx-6,my-14,34],[mx,my,0],.95,W,H,dpr);
   const actors=R.actors.slice(); if(R.cam!=='hakem') actors.push(rf_);
-  drawWorld(ctx,cam,{actors,ball:{x:b[0],y:b[1],z:b[2]},offX:R.offX,mark:R.cam==='ust'?R.mk:null,t:R.t*3,flash:(R.obscure&&R.inc.vis<.45)?null:fl});
+  let net=null; if(b[0]>105.25){ if(R.netAt==null) R.netAt=R.t; net={end:1,t:(R.t-R.netAt)*3.4}; } else R.netAt=null;
+  drawWorld(ctx,cam,{net,actors,ball:{x:b[0],y:b[1],z:b[2]},offX:R.offX,mark:R.cam==='ust'?R.mk:null,t:R.t*3,flash:(R.obscure&&R.inc.vis<.45)?null:fl});
   if(R.obscure && R.inc.vis<.6 && R.cam!=='ust'){ const s=P(cam,[mx,my,.9]); const a=clamp((.62-R.inc.vis)*1.9,.15,.82);
     if(s){ const g=ctx.createRadialGradient(s[0],s[1],0,s[0],s[1],W*.2); g.addColorStop(0,`rgba(6,10,16,${a})`); g.addColorStop(1,'rgba(6,10,16,0)'); ctx.fillStyle=g; ctx.fillRect(0,0,W,H); } }
   if(R.cam==='hakem' && R.inc.vis<.55){ ctx.fillStyle=`rgba(5,9,14,${(.55-R.inc.vis)*.9})`; ctx.fillRect(0,0,W,H); }
@@ -2696,12 +2683,106 @@ function bindReplay(inc,cams,opt){
   $('#rpPlay').onclick=()=>{ RP.playing=!RP.playing; $('#rpPlay').textContent=RP.playing?'Durdur':'Oynat'; };
 }
 
+function ik(A,B,l1,l2,bend){ const d=V3.sub(B,A); const L=Math.hypot(d[0],d[1],d[2]); if(L<1e-5) return A.slice(); const dir=[d[0]/L,d[1]/L,d[2]/L];
+  if(L>=l1+l2-1e-4) return V3.lerp(A,B,l1/(l1+l2));
+  const a=(l1*l1-l2*l2+L*L)/(2*L), h=Math.sqrt(Math.max(0,l1*l1-a*a)); const bd=V3.dot(bend,dir); let p=[bend[0]-dir[0]*bd,bend[1]-dir[1]*bd,bend[2]-dir[2]*bd]; const pl=Math.hypot(p[0],p[1],p[2])||1;
+  return [A[0]+dir[0]*a+p[0]/pl*h, A[1]+dir[1]*a+p[1]/pl*h, A[2]+dir[2]*a+p[2]/pl*h]; }
+function drawFig(ctx,c,a){
+  const fall=a.fall||0, fd=a.fallDir||a.face||[1,0];
+  const up=fall>0?V3.norm([fd[0]*fall*1.6,fd[1]*fall*1.6,Math.max(.06,1-fall)]):[0,0,1];
+  const fx=a.face?a.face[0]:1, fy=a.face?a.face[1]:0, px=-fy, py=fx;
+  const ps=a.pose&&a.pose.k>0?a.pose:null, PZ=ps?ps.P:{}, K=ps?ps.k:0;
+  const hipH=.92+((PZ.hipH!=null?PZ.hipH:.92)-.92)*K, lean=(PZ.lean||0)*K, jump=(PZ.jump||0)*K, headF=(PZ.headF||0)*K, sz=a.sz||1;
+  const at=(h,s,f)=>{ h*=sz; return [a.x+up[0]*h+px*s+fx*f, a.y+up[1]*h+py*s+fy*f, Math.max(.02,up[2]*h)+jump]; };
+  const run=Math.min(1,(a.speed||0)/6.5)*(1-fall)*(1-K), sn=Math.sin(a.phase||0);
+  const st=.45*sn*run, liftL=.05+Math.max(0,-sn)*.3*run, liftR=.05+Math.max(0,sn)*.3*run;
+  const limb=(def,key)=>{ const T=PZ[key]; return T?[def[0]+(T.s-def[0])*K, def[1]+(T.f-def[1])*K, def[2]+(T.h-def[2])*K]:def; };
+  const LL=limb([.12,st,liftL],'legL'), LR=limb([-.12,-st,liftR],'legR'), AL=limb([.28,-st*.75,.97+Math.max(0,-sn)*.12*run],'armL'), AR=limb([-.28,st*.75,.97+Math.max(0,sn)*.12*run],'armR');
+  const J={hip:at(hipH,0,lean*.12),hL:at(hipH,.12,lean*.12),hR:at(hipH,-.12,lean*.12),sL:at(hipH+.5,.22,lean*.92),sR:at(hipH+.5,-.22,lean*.92),nk:at(hipH+.57,0,lean*.98),hd:at(hipH+.75,0,lean*1.12+headF),
+    fL:at(LL[2],LL[0],LL[1]),fR:at(LR[2],LR[0],LR[1]),wL:at(AL[2],AL[0],AL[1]),wR:at(AR[2],AR[0],AR[1]),oL:at(hipH-.24,.15,lean*.05),oR:at(hipH-.24,-.15,lean*.05),ch:at(hipH+.3,0,lean*.55)};
+  const kb=[fx,fy,.15], eb=[-fx*.7,-fy*.7,-.5];
+  J.kL=ik(J.hL,J.fL,.45*sz,.45*sz,kb); J.kR=ik(J.hR,J.fR,.45*sz,.45*sz,kb); J.eL=ik(J.sL,J.wL,.29*sz,.29*sz,eb); J.eR=ik(J.sR,J.wR,.29*sz,.29*sz,eb);
+  const S2={}; for(const k in J){ const p=P(c,J[k]); if(!p) return; S2[k]=p; }
+  const sc=c.F/S2.hip[2]; if(sc<1) return;
+  const g=P(c,[a.x+up[0]*.5,a.y+up[1]*.5,0]); if(!g) return;
+  ctx.fillStyle='rgba(0,0,0,.34)'; ctx.beginPath(); ctx.ellipse(g[0],g[1],(.42+fall*.5)*sc,.16*sc,0,0,Math.PI*2); ctx.fill();
+  if(a.hl){ const g0=P(c,[a.x,a.y,0]); if(g0){ ctx.strokeStyle='rgba(246,198,43,.95)'; ctx.lineWidth=Math.max(1.5*c.dpr,.07*sc); ctx.beginPath(); ctx.ellipse(g0[0],g0[1],.9*sc,.32*sc,0,0,Math.PI*2); ctx.stroke(); } }
+  const L=(p,q,w,col)=>{ ctx.strokeStyle=col; ctx.lineWidth=Math.max(c.dpr,w*sc); ctx.beginPath(); ctx.moveTo(p[0],p[1]); ctx.lineTo(q[0],q[1]); ctx.stroke(); };
+  const dot=(p,r,col)=>{ ctx.fillStyle=col; ctx.beginPath(); ctx.arc(p[0],p[1],Math.max(c.dpr*.8,r*sc),0,Math.PI*2); ctx.fill(); };
+  const poly=(pts,fill)=>{ ctx.fillStyle=fill; ctx.strokeStyle=fill; ctx.lineWidth=Math.max(c.dpr,.05*sc); ctx.beginPath(); pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1])); ctx.closePath(); ctx.fill(); ctx.stroke(); };
+  const skin=a.skin||'#e0b08a';
+  ctx.lineCap='round'; ctx.lineJoin='round';
+  const leg=s=>{ L(S2['h'+s],S2['k'+s],.16,skin); L(S2['k'+s],S2['f'+s],.13,a.kit.socks); const f=S2['f'+s], k=S2['k'+s]; dot(f,.075,'#121417'); ctx.strokeStyle='#121417'; ctx.lineWidth=Math.max(c.dpr,.07*sc); ctx.beginPath(); ctx.moveTo(f[0],f[1]); ctx.lineTo(f[0]+(f[0]-k[0])*.12,f[1]+(f[1]-k[1])*.12); ctx.stroke(); };
+  const arm=s=>{ L(S2['s'+s],S2['e'+s],.13,a.kit.shirt); L(S2['e'+s],S2['w'+s],.085,skin); dot(S2['w'+s],.05,skin); };
+  const farL=S2.sL[2]>S2.sR[2], F=farL?'L':'R', N=farL?'R':'L';
+  leg(F); leg(N); arm(F);
+  poly([S2.hL,S2.hR,S2.oR,S2.oL],a.kit.shorts);
+  poly([S2.sL,S2.sR,S2.hR,S2.hL],a.kit.shirt);
+  arm(N);
+  L(S2.nk,S2.hd,.11,skin);
+  const hr=Math.max(1.2*c.dpr,.125*sc); dot(S2.hd,.125,skin);
+  ctx.fillStyle=a.hair||'#1d1611'; ctx.beginPath(); ctx.arc(S2.hd[0],S2.hd[1]-hr*.08,hr*1.02,Math.PI*1.05,Math.PI*1.95); ctx.closePath(); ctx.fill();
+  if(a.flag){ const f0=P(c,at(1.95,.34,0)); if(f0){ ctx.fillStyle=a.flagUp?'#ffd84a':'#f2b81f'; ctx.fillRect(f0[0],f0[1]-(a.flagUp?.25*sc:0),.32*sc,.24*sc); } }
+  if(a.num!=null && sc>15 && fall<.5){ ctx.fillStyle=a.kit.numCol; ctx.font=`700 ${Math.round(.19*sc)}px "IBM Plex Mono",monospace`; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(a.num,S2.ch[0],S2.ch[1]); }
+  if(a.label && sc>3){ const fs=11*c.dpr; ctx.font=`600 ${fs}px Barlow,sans-serif`; const w=ctx.measureText(a.label).width+fs*.9; const x=S2.hd[0]-w/2, y=S2.hd[1]-.25*sc-fs*1.9; ctx.fillStyle='rgba(8,13,20,.86)'; rrect(ctx,x,y,w,fs*1.55,fs*.4); ctx.fill(); ctx.fillStyle='#fff'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(a.label,S2.hd[0],y+fs*.8); }
+}
+function drawGoal(ctx,c,end,bulge){
+  const b=bulge||0, gx=end?105:0, bx=end?107.2+b:-2.2-b, y0=30.34, y1=37.66, h=2.44, net='rgba(235,240,245,.14)';
+  const by0=y0+b*.5, by1=y1-b*.5, bh=2.1-b*.2;
+  fillPoly(ctx,c,[[bx,by0,0],[bx,by1,0],[bx,by1,bh],[bx,by0,bh]],net);
+  fillPoly(ctx,c,[[gx,y0,h],[gx,y1,h],[bx,by1,bh],[bx,by0,bh]],net);
+  fillPoly(ctx,c,[[gx,y0,0],[bx,by0,0],[bx,by0,bh],[gx,y0,h]],net);
+  fillPoly(ctx,c,[[gx,y1,0],[bx,by1,0],[bx,by1,bh],[gx,y1,h]],net);
+  ctx.strokeStyle=`rgba(235,240,245,${.22+b*.25})`; ctx.lineWidth=1; ctx.beginPath(); for(let i=1;i<6;i++){ const y=by0+(by1-by0)*i/6, yt=y0+(y1-y0)*i/6; segPath(ctx,c,[bx,y,0],[bx,y,bh]); segPath(ctx,c,[gx,yt,h],[bx,y,bh]); } ctx.stroke();
+  const m=P(c,[gx,34,1.2]); const w=m?Math.max(1.5,c.F/m[2]*.12):2;
+  ctx.strokeStyle='#f4f6f8'; ctx.lineWidth=w; ctx.lineCap='round'; ctx.beginPath(); segPath(ctx,c,[gx,y0,0],[gx,y0,h]); segPath(ctx,c,[gx,y0,h],[gx,y1,h]); segPath(ctx,c,[gx,y1,h],[gx,y1,0]); ctx.stroke();
+}
+const netBulge = n => !n?0: n.t<.25? Math.sin(n.t/.25*Math.PI/2)*.9 : Math.max(0,.9*(1-(n.t-.25)/1.2));
+function crowdRoar(){
+  if(!S||!S.settings.sound) return;
+  try{ AC=AC||new (window.AudioContext||window.webkitAudioContext)(); const len=AC.sampleRate*3, buf=AC.createBuffer(1,len,AC.sampleRate), d=buf.getChannelData(0); for(let i=0;i<len;i++) d[i]=Math.random()*2-1;
+    const src=AC.createBufferSource(); src.buffer=buf; const bp=AC.createBiquadFilter(); bp.type='bandpass'; bp.frequency.value=700; bp.Q.value=.6; const g=AC.createGain(); const t0=AC.currentTime;
+    g.gain.setValueAtTime(0,t0); g.gain.linearRampToValueAtTime(.16,t0+.25); g.gain.linearRampToValueAtTime(.11,t0+1.4); g.gain.linearRampToValueAtTime(0,t0+2.9);
+    src.connect(bp); bp.connect(g); g.connect(AC.destination); src.start(t0); src.stop(t0+3); }catch(e){} }
+// live goal sequence: carry, shot, keeper beaten, net bulge, celebration
+function sceneGoal(sc,side,p){
+  if(!sc) return;
+  if(M && M.modal){ sc.pendingGoal=[side,p]; if(M) M.goalHold=true; return; }
+  const d=sdir(sc,side), gx=d>0?105:0;
+  sc.forced=null; sc.spots=null; sc.mark=null; sc.refTarget=null; sc.gather=null; sc.flash=null;
+  sc.pl.forEach(q=>{ q.keepDown=false; q.fall=0; q.pose=null; q.t=null; q.hl=false; });
+  const mates=sc.pl.filter(q=>q.side===side&&q.role!=='GK');
+  let sp=p?mates.find(q=>q.num===p.no):null; if(!sp) sp=nearestTo(mates.filter(q=>q.role==='F'),gx,34)||mates[0]; if(p) sp.num=p.no;
+  const shotPos=[gx-d*rf(11,16),34+rf(-8,8)], target=[gx+d*1.15,34+(chance(.5)?1:-1)*rf(1.8,3.1)];
+  sc.goal={side,sp,shotPos,target,d,gx,t:0,gk:sc.pl.find(q=>q.side!==side&&q.role==='GK'),label:esc(sideTeam(side).name)+(p?' · '+esc(p.name):'')};
+  sc.mode='goal'; sc.mt=0; sc.ball.fl=null; sc.ball.owner=null; sc.net=null;
+  if(M) M.goalHold=true;
+}
+function goalAI(sc,dt){
+  const G=sc.goal; if(!G){ kickoffPositions(sc,0); return; } G.t+=dt; const b=sc.ball, sp=G.sp, d=G.d;
+  const T1=1.7,T2=1.95,T3=2.35,END=5.6;
+  sc.pl.forEach(q=>{ if(q===sp||q===G.gk) return;
+    if(G.t<T3){ if(q.side===G.side) steer(q,G.gx-d*(13+(q.i%4)*5),34+((q.i%5)-2)*8,dt,5.6); else steer(q,G.gx-d*(5+(q.i%4)*2.5),34+((q.i%5)-2)*6,dt,6); }
+    else if(q.side===G.side){ steer(q,sp.x-d*(1+(q.i%3)*.8),sp.y+((q.i%4)-1.5)*1.3,dt,6.8); if(G.t>T3+1.2) setPose(q,'celebrate',.6); }
+    else { steer(q,q.x,q.y,dt,.6); q.pose={P:POSES.slump,k:Math.min(1,(G.t-T3)*2)}; } });
+  const gk=G.gk;
+  if(G.t<T1){ steer(sp,G.shotPos[0],G.shotPos[1],dt,7.2); b.x=sp.x+sp.face[0]*.55; b.y=sp.y+sp.face[1]*.55; b.z=0; steer(gk,G.gx-d*2.5,34+(b.y-34)*.3,dt,3); }
+  else if(G.t<T2){ const k=(G.t-T1)/(T2-T1); sp.speed=.5; sp.face=v2n(G.target[0]-sp.x,G.target[1]-sp.y); sp.pose={P:POSES.shot,k:Math.sin(k*Math.PI)}; b.x=sp.x+sp.face[0]*.55; b.y=sp.y+sp.face[1]*.55; }
+  else if(G.t<T3){ if(!G.from) G.from=[b.x,b.y]; sp.pose=null; const k=(G.t-T2)/(T3-T2); b.x=G.from[0]+(G.target[0]-G.from[0])*k; b.y=G.from[1]+(G.target[1]-G.from[1])*k; b.z=1.1*k+.9*4*k*(1-k)*.5;
+    const dv=G.target[1]>34?-1:1; gk.face=[-d,0]; gk.pose={P:POSES.gkDive,k:Math.min(1,k*1.6)}; gk.fall=Math.min(.95,k*1.4); gk.fallDir=[0,dv]; steer(gk,gk.x,34+dv*1.8,dt,4); }
+  else { if(!G.scored){ G.scored=true; sc.net={end:d>0?1:0,t:0}; matchBanner('goal','GOL!',G.label); crowdRoar(); haptic('success'); }
+    b.x=G.target[0]+d*.4; b.z=Math.max(.11,(b.z||0)-dt*2.5);
+    const corner=[G.gx-d*1.5,G.target[1]>34?66:2]; steer(sp,corner[0],corner[1],dt,7.5); if(G.t>T3+.5) sp.pose={P:POSES.celebrate,k:Math.min(1,(G.t-T3-.5)*3)}; }
+  if(sc.net) sc.net.t+=dt;
+  if(G.t>END){ sc.goal=null; sc.net=null; gk.fall=0; gk.pose=null; sc.pl.forEach(q=>q.pose=null); kickoffPositions(sc,1-G.side); if(M) M.goalHold=false; }
+}
+
 // =========================================================
 //   UI — MODALS IN MATCH
 // =========================================================
 let curInc=null, PTIMER=null;
 function openModal(html,narrow){ const m=$('#modal'); m.innerHTML=`<div class="sheet ${narrow?'narrow':''}" role="dialog" aria-modal="true">${html}</div>`; m.hidden=false; m.scrollTop=0; }
-function closeModal(){ stopTimer(); replayStop(); clearInterval(FBT); const m=$('#modal'); m.hidden=true; m.innerHTML=''; if(M){ M.modal=false; if(SC&&SC.mode==='stopped') sceneResume(SC); updateBoard(); } }
+function closeModal(){ stopTimer(); replayStop(); clearInterval(FBT); const m=$('#modal'); m.hidden=true; m.innerHTML=''; if(M){ M.modal=false; if(SC&&SC.pendingGoal){ const g=SC.pendingGoal; SC.pendingGoal=null; sceneGoal(SC,g[0],g[1]); } else if(SC&&SC.mode==='stopped') sceneResume(SC); updateBoard(); } }
 let TIMER_T0=0, HIDDEN_AT=0, FBT=null;
 function stopTimer(){ clearInterval(TIMER); TIMER=null; }
 function startTimer(sec,onEnd,elId,labId){
@@ -2923,16 +3004,18 @@ function reportUI(r){
   const col = r.rating>=8.6?'var(--green)':r.rating>=8.0?'var(--gold1)':r.rating>=7.5?'var(--amber)':'var(--red)';
   const needStatement = !r.auto && (errs.length || r.clubComplaint);
   const obs = (NAMES[(S&&S.nationality)||'TR']||NAMES.TR); const obsName=obs.f[hash(fx.id)%obs.f.length]+' '+obs.l[hash(fx.id+'o')%obs.l.length];
-  const scorers=side=>r.goals.filter(g=>g.side===side).map(g=>`<li><span class="ball-i"></span>${esc(g.p.replace(/^\d+ /,''))} <span class="num">${esc(g.min)}</span></li>`).join('');
+  const scorers=side=>r.goals.filter(g=>g.side===side).map(g=>`<li><span class="ball-i"></span><span class="nm">${esc(g.p.replace(/^\d+ /,''))}</span><span class="num">${esc(g.min)}</span></li>`).join('');
   const marks=[...r.goals.map(g=>({m:g.min,k:'goal',side:g.side,tip:'Gol · '+g.p})),...r.cards.map(c=>({m:c.min,k:c.red?'red':'yellow',side:c.side,tip:(c.red?'Kırmızı':'Sarı')+' · '+c.label})),...maj.map(d=>({m:d.min,k:'dc',v:d.v,tip:d.title+' · '+(VLAB[d.v]||'')}))];
+  const lanes={}; marks.map(x=>({x,pos:clamp(minNum(x.m)/96*100,1,99)})).sort((a,b)=>a.pos-b.pos).forEach(o=>{ const ln=o.x.k==='goal'?'g':o.x.k==='dc'?'d':'c'; const L=lanes[ln]||(lanes[ln]={last:-99,lvl:0}); L.lvl = o.pos-L.last<2.6 ? L.lvl+1 : 0; L.last=o.pos; o.x.pos=o.pos; o.x.lvl=L.lvl; });
   ov.innerHTML=`<div class="ov-in rep">
     <section class="rhero"><canvas id="repCv" aria-hidden="true"></canvas><div class="rhero-shade"></div>
       <div class="rh-top"><span class="eyebrow gold">Maç sonu</span><span class="rh-comp">${esc(fx.compName)} · ${esc(fx.stage||'')}</span><span class="chip">${r.auto?'Otomatik yönetildi':'Hakem: '+esc(S.name)}</span></div>
       <div class="rh-score"><div class="rh-t">${crest(H,84)}<b>${esc(teamLabel(fx,'h'))}</b><ul class="scorers">${scorers(0)}</ul></div>
         <div class="rh-mid"><div class="rh-sc num"><span>${r.score[0]}</span><i>–</i><span>${r.score[1]}</span></div><small>Maç sonucu</small></div>
         <div class="rh-t">${crest(A,84)}<b>${esc(teamLabel(fx,'a'))}</b><ul class="scorers">${scorers(1)}</ul></div></div>
-      <div class="tl"><div class="tl-bar"><span class="tl-ht"></span></div>${marks.map(x=>`<span class="tl-m ${x.k} ${x.side===1?'aw':''}" style="left:${clamp(minNum(x.m)/96*100,1,99).toFixed(1)}%;${x.k==='dc'?`--vc:${VCOL[x.v]}`:''}" title="${esc(x.m+' '+x.tip)}"></span>`).join('')}<div class="tl-lab"><span>0'</span><span>45'</span><span>90'</span></div></div>
+      <div class="tl"><div class="tl-bar"><span class="tl-ht"></span></div>${marks.map(x=>`<span class="tl-m ${x.k} ${x.side===1?'aw':''}" style="left:${x.pos.toFixed(1)}%;--lv:${x.lvl};${x.k==='dc'?`--vc:${VCOL[x.v]}`:''}" title="${esc(x.m+' '+x.tip)}"></span>`).join('')}<div class="tl-lab"><span>0'</span><span>45'</span><span>90'</span></div></div>
     </section>
+    ${needStatement?`<section class="panel rpress"><div class="stack" style="gap:4px;min-width:0"><span class="eyebrow gold">Basın seni bekliyor</span><p class="muted" style="font-size:14px">Maçtaki kararların konuşuluyor. Bir açıklama yapabilir ya da sessiz kalabilirsin.</p></div><div class="dopts"><button class="dopt" data-st="acikla">Hakem açıklama programında kararını anlat</button><button class="dopt" data-st="yanit">Kulübe sert yanıt ver</button></div></section>`:''}
     <div class="rgrid">
       <section class="panel rscore">
         <div class="rs-top"><div class="rring big"><svg viewBox="0 0 120 120" aria-hidden="true"><defs><linearGradient id="rgG" x1="0" x2="1"><stop offset="0" stop-color="${col}"/><stop offset="1" stop-color="${col}" stop-opacity=".55"/></linearGradient></defs><circle class="bg" cx="60" cy="60" r="52"/><circle class="fg" id="rRing" cx="60" cy="60" r="52" stroke="url(#rgG)" stroke-dasharray="326.7" stroke-dashoffset="326.7"/></svg><div class="rring-in"><b class="num" id="rNum" style="color:${col}">6.0</b><small>Gözlemci notu</small></div></div>
@@ -2948,7 +3031,7 @@ function reportUI(r){
         ${r.clubComplaint?`<div class="panel alert-p"><h3>Kulüp tepkisi</h3><p>${esc(r.clubComplaint)} resmi açıklama yaptı ve kararlarını ${esc(kurulName())}'na taşıdı.</p></div>`:''}
       </section>
     </div>
-    <div class="rfoot">${needStatement?`<div class="rf-q"><span class="eyebrow gold">Basın seni bekliyor</span><div class="dopts"><button class="dopt" data-st="acikla">Hakem açıklama programında kararını anlat</button><button class="dopt" data-st="yanit">Kulübe sert yanıt ver</button></div></div>`:'<span class="muted">Rapor kurula iletildi.</span>'}<button class="btn primary lg" id="bDone">${needStatement?'Sessiz kal ve devam et':'Devam'}</button></div>
+    <div class="rfoot"><span class="muted rf-t">${needStatement?'Açıklama yapmazsan sessiz kalmış sayılırsın.':'Rapor kurula iletildi.'}</span><button class="btn primary lg" id="bDone">${needStatement?'Sessiz kal ve devam et':'Devam'}</button></div>
   </div>`;
   ov.scrollTop=0;
   const reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -3176,7 +3259,7 @@ function kurulHTML(){
       <p>Senin kararın: <b>${esc(h.your)}</b>. ${h.wrong?'Video incelemesinde kurul üyeleri kararın hatalı olabileceğini düşünüyor.':'Kulüp kararın hatalı olduğunu iddia ederek başvurdu.'} Ne diyeceksin?</p>
       <div class="dopts"><button class="dopt" data-hear="kabul">Hatamı kabul ediyorum</button><button class="dopt" data-hear="savun">Kararımın arkasındayım, görüntülerle savunurum</button></div></section>`:''}
     <section class="panel stack"><div class="row" style="justify-content:space-between"><h3>Klasman sıralaması</h3><span class="muted" style="font-size:13px">Sezon ortalamasına göre</span></div>
-      <div class="tbl-wrap"><table><thead><tr><th class="n">#</th><th>Hakem</th><th class="n">Maç</th><th class="n">Ort.</th><th class="n">Son</th></tr></thead><tbody>${rank.map((r,i)=>`<tr class="${r.me?'me':''}"><td class="n">${i+1}</td><td>${esc(r.name)}${r.fifa?' <span class="chip b">FIFA</span>':''}${r.me?' <span class="chip y">Sen</span>':''}</td><td class="n">${r.n}</td><td class="n" style="color:${r.avg==null?'':r.avg>=8.35?'var(--green)':r.avg<7.7?'var(--red)':''}">${r.avg==null?'—':r.avg.toFixed(2)}</td><td class="n">${r.last!=null?f1(r.last):'—'}</td></tr>`).join('')}</tbody></table></div>
+      <div class="tbl-wrap"><table class="ktable"><colgroup><col style="width:34px"><col><col style="width:46px"><col style="width:56px"><col style="width:46px"></colgroup><thead><tr><th class="n">#</th><th>Hakem</th><th class="n">Maç</th><th class="n">Ort.</th><th class="n">Son</th></tr></thead><tbody>${rank.map((r,i)=>`<tr class="${r.me?'me':''}"><td class="n">${i+1}</td><td><div class="kname"><span class="ell">${esc(r.name)}</span>${r.fifa?'<span class="chip b">FIFA</span>':''}${r.me?'<span class="chip y">Sen</span>':''}</div></td><td class="n">${r.n}</td><td class="n" style="color:${r.avg==null?'':r.avg>=8.35?'var(--green)':r.avg<7.7?'var(--red)':''}">${r.avg==null?'—':r.avg.toFixed(2)}</td><td class="n">${r.last!=null?f1(r.last):'—'}</td></tr>`).join('')}</tbody></table></div>
       <p class="muted" style="font-size:12px">Yeşil: yükselme sınırının (8.35) üstü · Kırmızı: düşme sınırının (7.70) altı.</p></section>
     <section class="panel stack"><h3>Bu haftanın atamaları</h3>${ap.length?`<div class="appts">${ap.map(a=>{ const H=team(a.h),A=team(a.a); return `<div class="appt ${a.mine?'me':''}"><span class="row" style="gap:6px;flex-wrap:nowrap;min-width:0">${crest(H,20)}<span class="ell">${esc(H.short)}</span><span class="muted">–</span><span class="ell">${esc(A.short)}</span>${crest(A,20)}</span><span class="ell ${a.mine?'':'muted'}">${esc(a.ref)}</span></div>`; }).join('')}</div>`:'<p class="muted">Bu hafta lig maçı ataması yok.</p>'}</section></div>
   <div class="stack" style="gap:16px;min-width:0">
