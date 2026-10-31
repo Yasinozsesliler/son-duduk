@@ -285,7 +285,7 @@ svg.pitch{display:block;width:100%;height:auto}
 .ring-bg{stroke:var(--line2)} .ring-fg{stroke:var(--yellow);stroke-linecap:round}
 .ic{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
 .hs-ic{width:22px;height:22px;color:var(--blue)} .hs-ic.gold{color:var(--yellow)}
-.me{display:flex;align-items:center;gap:10px;height:46px;padding:0 14px 0 5px;border-radius:999px;background:var(--panel2);border:1px solid var(--line2);text-align:left;margin-left:4px;min-width:0}
+.hdr-right>.me{display:flex;align-items:center;gap:10px;height:46px;padding:0 14px 0 5px;border-radius:999px;background:var(--panel2);border:1px solid var(--line2);text-align:left;margin-left:4px;min-width:0}
 .av{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--yellow),#e3a019);color:var(--yellow-ink);font-family:var(--f-display);font-weight:800;font-size:15px;flex:none;letter-spacing:.02em}
 .av.lg{width:54px;height:54px;font-size:21px} .av.xl{width:80px;height:80px;font-size:30px;border:4px solid var(--panel)}
 .me-t{display:flex;flex-direction:column;line-height:1.15;max-width:190px;min-width:0}
@@ -293,7 +293,7 @@ svg.pitch{display:block;width:100%;height:auto}
 .me-t small{font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .badge{background:var(--yellow);color:var(--yellow-ink);border-radius:999px;font-size:11px;padding:0 7px;font-weight:700;line-height:18px}
 @media (max-width:1100px){.hdr-season{display:none}}
-@media (max-width:860px){.me-t{display:none}.me{padding:0 4px;height:44px}.top-in{min-height:60px;gap:8px}.brand span{display:none}.hstat{padding:0 10px;height:42px;gap:7px}.hdr-right{gap:6px}}
+@media (max-width:860px){.me-t{display:none}.hdr-right>.me{padding:0 4px;height:44px}.top-in{min-height:60px;gap:8px}.brand span{display:none}.hstat{padding:0 10px;height:42px;gap:7px}.hdr-right{gap:6px}}
 @media (max-width:440px){.hide-xs{display:none}.hstat small{display:none}.hstat{height:40px;padding:0 9px}.ring{width:24px;height:24px}.hstat b{font-size:14px}}
 
 /* ===== v2: navigation ===== */
@@ -479,7 +479,7 @@ h3{font-size:17px;letter-spacing:.08em}
 .top{background:rgba(7,11,18,.7);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid var(--line)}
 body::before{background:rgba(7,11,18,.92)}
 .hstat{background:var(--glass),rgba(14,22,35,.7);border-color:var(--line);border-radius:14px}
-.me{background:var(--glass),rgba(21,32,51,.8);border-color:var(--line2)}
+.hdr-right>.me{background:var(--glass),rgba(21,32,51,.8);border-color:var(--line2)}
 .av{background:linear-gradient(135deg,var(--gold1),var(--gold2));box-shadow:0 0 0 2px rgba(7,11,18,.9),0 0 0 3px rgba(255,219,92,.45)}
 nav.side button{border-radius:12px;transition:background .15s,color .15s}
 nav.side button:hover{background:rgba(255,255,255,.04)}
@@ -718,6 +718,160 @@ input[type=range]{padding:0;accent-color:var(--gold2);background:none;border:0;h
   #bConfirm,#bOfr{box-shadow:0 -18px 22px 4px var(--panel),0 8px 24px rgba(0,0,0,.55)}
   .decide{padding-bottom:6px}
 }
+
+/* ===== v8: calendar ===== */
+.cal-top{display:flex;flex-direction:column;gap:16px}
+.cal-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.cal-kpis>div{display:flex;flex-direction:column;gap:2px;padding:12px;border-radius:14px;background:var(--glass),rgba(7,11,18,.5);border:1px solid var(--line);min-width:0}
+.cal-kpis b{font-size:26px;font-weight:600}.cal-kpis small{font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media (max-width:600px){.cal-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.cal-bar{height:8px;border-radius:8px;background:rgba(255,255,255,.07);overflow:hidden}.cal-bar i{display:block;height:100%;border-radius:8px;background:linear-gradient(90deg,var(--green),var(--gold1))}
+.cal-mon{display:flex;margin-top:6px;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:600}.cal-mon span{min-width:0;overflow:hidden}
+.cal-month{display:flex;flex-direction:column;gap:10px}
+.cal-mh{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:0 2px}
+.cal-mh h3{font-size:22px;letter-spacing:.04em}
+.wk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+.wk{position:relative;display:flex;flex-direction:column;gap:8px;padding:12px;border-radius:16px;background:var(--glass),var(--panel);border:1px solid var(--line);min-height:118px;overflow:hidden}
+.wk.past{background:var(--glass),rgba(14,22,35,.9)}
+.wk.future{background:rgba(14,22,35,.45);border-style:dashed}
+.wk.now{border-color:var(--gold1);background:linear-gradient(180deg,rgba(255,219,92,.13),rgba(255,219,92,.02)),var(--panel);box-shadow:0 14px 34px -18px rgba(240,165,25,.6);cursor:pointer}
+.wk-h{display:flex;justify-content:space-between;align-items:baseline}
+.wk-n{font-family:var(--f-display);font-weight:800;font-size:15px;text-transform:uppercase;letter-spacing:.04em}
+.wk-d{font-size:12px;color:var(--muted)}
+.wk-ph{align-self:flex-start;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;background:rgba(91,155,255,.14);color:#9cc2ff}
+.wk-m{display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;align-items:center;gap:8px}
+.wk-sc{display:flex;flex-direction:column;align-items:center;line-height:1.1;min-width:0}
+.wk-sc b{font-size:18px}.wk-sc b i{font-style:normal;color:var(--gold1);margin:0 4px}.wk-sc small{font-size:11px;color:var(--muted);white-space:nowrap}
+.wk-r{font-size:13px;font-weight:600;padding:3px 7px;border-radius:8px;color:var(--rc);background:color-mix(in srgb,var(--rc) 14%,transparent);border:1px solid color-mix(in srgb,var(--rc) 40%,transparent)}
+.wk-go{font-size:11px;font-weight:700;color:#211600;background:linear-gradient(180deg,var(--gold1),var(--gold2));padding:3px 8px;border-radius:999px}
+.wk-c{font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wk-pre small{display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--dim);margin-bottom:4px;font-weight:700}
+.wk-pre .ell{font-family:var(--f-display);font-weight:700;font-size:15px;color:#c7d0dc}
+.wk-empty{color:var(--dim);font-size:13px;margin-top:auto}
+.wk-now{position:absolute;top:0;right:0;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-bottom-left-radius:10px;background:var(--gold1);color:#211600}
+.wk.now .wk-d{margin-right:64px}
+.cal-break{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.cal-break::before,.cal-break::after{content:"";flex:1;height:1px;background:repeating-linear-gradient(90deg,var(--line2) 0 6px,transparent 6px 12px)}
+.cal-summer{border-color:rgba(91,155,255,.35);background:linear-gradient(135deg,rgba(91,155,255,.12),rgba(91,155,255,.02)),var(--panel)}
+@media (max-width:480px){.wk-grid{grid-template-columns:minmax(0,1fr)}.wk{min-height:0}}
+/* ===== v8: Kadraj (social) ===== */
+.ig-wrap{display:grid;grid-template-columns:minmax(0,560px) minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:1020px){.ig-wrap{grid-template-columns:minmax(0,1fr)}.ig-side{display:none}}
+.ig{background:#000;border:1px solid #262626;border-radius:20px;overflow:hidden;color:#f5f5f5;width:100%;max-width:560px;margin:0 auto}
+.ig-top{display:flex;justify-content:space-between;align-items:center;padding:12px 14px}
+.ig-logo{font-family:'Saira Condensed',sans-serif;font-weight:800;font-size:26px;font-style:italic;letter-spacing:.01em;background:linear-gradient(90deg,#ffdb5c,#ff6b6b 55%,#c86bff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.igb{width:40px;height:40px;display:grid;place-items:center;border-radius:10px;color:#f5f5f5}
+.igb:disabled{opacity:.35}
+.igi{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.igb.liked .igi{fill:#ff3040;stroke:#ff3040;animation:pop .35s ease}
+@keyframes pop{50%{transform:scale(1.3)}}
+.ig-tabs{display:flex;border-bottom:1px solid #262626}.ig-tabs button{flex:1;padding:10px;font-weight:600;color:#8e8e8e;border-bottom:2px solid transparent}.ig-tabs button.on{color:#f5f5f5;border-bottom-color:#f5f5f5}
+.ig-stories{display:flex;gap:14px;overflow-x:auto;padding:14px;border-bottom:1px solid #262626;scrollbar-width:none}
+.ig-st{display:flex;flex-direction:column;align-items:center;gap:5px;flex:none;width:70px}
+.ig-ring{padding:2.5px;border-radius:50%;background:linear-gradient(45deg,#ffdb5c,#ff4d4d 50%,#c13cff)}
+.ig-ring.me{background:#363636}
+.ig-ring>.igav{border:3px solid #000}
+.ig-stn{font-size:11.5px;color:#f5f5f5;width:100%;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.igav{display:grid;place-items:center;border-radius:50%;overflow:hidden;font-family:var(--f-display);font-weight:800;color:#fff;flex:none;background:#262626}
+.igav .avsvg{width:100%;height:100%}
+.igav.crestav{background:#111}
+.igp{border-bottom:1px solid #262626}
+.igp-h{display:flex;align-items:center;gap:10px;padding:10px 6px 10px 12px}
+.igp-n{display:flex;flex-direction:column;min-width:0;flex:1;line-height:1.2}.igp-n b{font-size:14px}.igp-n small{font-size:12px;color:#a8a8a8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.igp-n .verif{display:inline-grid;margin-left:4px}
+.igp-a{display:flex;align-items:center;gap:2px;padding:4px 6px}.igp-a .sv{margin-left:auto}
+.igp-b{padding:0 14px 14px;display:flex;flex-direction:column;gap:4px;font-size:14px}
+.igp-b p{overflow-wrap:anywhere}.igp-b .tag{color:#e0f1ff}
+.igp-more,.igp-t{font-size:13px;color:#a8a8a8}.igp-t{font-size:11px;letter-spacing:.04em;margin-top:2px}
+.igp-c{font-size:13.5px}
+.pimg{aspect-ratio:1/1;width:100%;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;overflow:hidden;text-align:center}
+.pm{background:radial-gradient(circle at 25% 30%,color-mix(in srgb,var(--c1) 70%,transparent),transparent 55%),radial-gradient(circle at 75% 70%,color-mix(in srgb,var(--c2) 70%,transparent),transparent 55%),#07090d}
+.pm-l{font-family:var(--f-display);font-weight:700;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#e8eef4;padding:4px 10px;border:1px solid rgba(255,255,255,.3);border-radius:999px}
+.pm-row{display:flex;align-items:center;gap:18px}.pm-row b{font-family:var(--f-mono);font-size:clamp(34px,9vw,58px);color:#fff}.pm-row b i{font-style:normal;color:var(--gold1);margin:0 6px}
+.pm-n{font-family:var(--f-display);font-weight:800;font-size:16px;letter-spacing:.1em;color:#cfd7e2}
+.pm-r{position:absolute;bottom:12px;right:12px;font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;background:var(--gold1);color:#211600}
+.pc{background:linear-gradient(160deg,var(--c1),color-mix(in srgb,var(--c1) 40%,#000))}
+.pc b{font-family:var(--f-display);font-weight:800;font-size:clamp(22px,6vw,34px);color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.5)}
+.pt{background:radial-gradient(circle at 50% 30%,#2a7a52,#0b2a1d)}.pt.v1{background:radial-gradient(circle at 50% 30%,#2b4f8a,#0b1730)}.pt.v2{background:radial-gradient(circle at 50% 30%,#7a5a1f,#21160a)}
+.pt-ic{width:74px;height:74px;border-radius:22px;display:grid;place-items:center;background:rgba(255,255,255,.12);color:#fff}.pt-ic .ic{width:40px;height:40px}
+.pt b{font-family:var(--f-display);font-weight:800;font-size:clamp(22px,6vw,32px);letter-spacing:.06em;color:#fff}.pt small{color:rgba(255,255,255,.7)}
+.pq{background:linear-gradient(150deg,var(--h1),var(--h2));padding:9%;align-items:flex-start;text-align:left;justify-content:center}
+.pq-m{font-family:Georgia,serif;font-size:80px;line-height:.6;color:rgba(255,255,255,.35)}
+.pq p{font-family:var(--f-display);font-weight:700;font-size:clamp(18px,4.8vw,26px);line-height:1.15;color:#fff}.pq small{color:rgba(255,255,255,.65);font-size:13px}
+.ig-prof{padding:14px 0 0}
+.ig-ph{display:flex;align-items:center;gap:22px;padding:0 16px}
+.ig-ring.big{padding:3px}
+.ig-stats{display:flex;flex:1;justify-content:space-around;text-align:center}.ig-stats div{display:flex;flex-direction:column}.ig-stats b{font-size:18px}.ig-stats small{font-size:13px;color:#a8a8a8}
+.ig-bio{padding:12px 16px 0;display:flex;flex-direction:column;gap:2px;font-size:14px}.ig-bio p{margin-top:4px;line-height:1.4}
+.ig-btns{display:flex;gap:8px;padding:12px 16px}.ig-btns .btn{flex:1;background:#262626;border-color:#363636;color:#f5f5f5}
+.ig-hl{display:flex;gap:16px;padding:6px 16px 14px;overflow-x:auto}.ig-hl div{display:flex;flex-direction:column;align-items:center;gap:6px;flex:none}.ig-hl small{font-size:12px}
+.ig-hlc{width:62px;height:62px;border-radius:50%;display:grid;place-items:center;border:1px solid #363636;background:#121212;color:#f5f5f5}.ig-hlc .ic{width:26px;height:26px}
+.ig-gt{display:flex;border-top:1px solid #262626}.ig-gt button{flex:1;padding:10px;color:#8e8e8e;display:grid;place-items:center;border-top:1px solid transparent;margin-top:-1px}.ig-gt button.on{color:#f5f5f5;border-top-color:#f5f5f5}
+.ig-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px}
+.ig-cell{position:relative;padding:0;display:block;overflow:hidden}
+.ig-cell .pimg{gap:4px}.ig-cell .pq{padding:8%}.ig-cell .pq-m{font-size:34px}.ig-cell .pq p{font-size:11px}.ig-cell .pq small,.ig-cell .pm-l,.ig-cell .pt small{display:none}.ig-cell .pm-row{gap:4px}.ig-cell .pm-row b{font-size:16px}.ig-cell .pm-n{font-size:10px}.ig-cell .pt-ic{width:34px;height:34px;border-radius:10px}.ig-cell .pt-ic .ic{width:20px;height:20px}.ig-cell .pt b,.ig-cell .pc b{font-size:12px}
+.ig-cl{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:4px;font-weight:700;background:rgba(0,0,0,.45);opacity:0;transition:opacity .15s;color:#fff}.ig-cl .igi{width:18px;height:18px;fill:#fff;stroke:#fff}
+.ig-cell:hover .ig-cl{opacity:1}
+.ig-mini .igp{background:#000;border:1px solid #262626;border-radius:16px;overflow:hidden;margin-bottom:12px;color:#f5f5f5}
+.cmp-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.cmp-o{display:flex;flex-direction:column;gap:6px;text-align:left;padding:8px;border-radius:14px;background:var(--bg2);border:1px solid var(--line2)}
+.cmp-o .pimg{border-radius:10px;gap:4px}.cmp-o .pq p{font-size:13px}.cmp-o .pm-row b{font-size:22px}.cmp-o .pt b{font-size:16px}
+.cmp-o small{color:var(--muted);font-size:12px}.cmp-o:disabled{opacity:.4}
+.story{position:fixed;inset:0;margin:auto;width:min(420px,100%);height:min(780px,100%);background:#000;border-radius:18px;overflow:hidden;display:flex;flex-direction:column;z-index:2}
+.st-bars{display:flex;gap:4px;padding:10px 10px 6px}.st-bars span{flex:1;height:3px;border-radius:3px;background:rgba(255,255,255,.3);overflow:hidden}.st-bars i{display:block;height:100%;background:#fff}
+.st-h{display:flex;align-items:center;gap:10px;padding:4px 10px;color:#fff;z-index:3}.st-h b{flex:1;font-size:14px}
+.st-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:28px;text-align:center;background:radial-gradient(circle at 30% 25%,color-mix(in srgb,var(--c1) 75%,transparent),transparent 60%),radial-gradient(circle at 70% 80%,color-mix(in srgb,var(--c2) 75%,transparent),transparent 60%),#05070b;color:#fff}
+.st-body h3{font-size:clamp(24px,6vw,32px);text-transform:none;letter-spacing:0;line-height:1.1}.st-body p{color:rgba(255,255,255,.8);font-size:15px}
+.st-ic{width:80px;height:80px;border-radius:24px;display:grid;place-items:center;background:rgba(255,255,255,.12)}.st-ic .ic{width:44px;height:44px}
+.st-r{font-weight:700;padding:6px 14px;border-radius:999px;background:var(--gold1);color:#211600}
+.st-prev,.st-next{position:absolute;top:60px;bottom:0;width:35%;z-index:2}.st-prev{left:0}.st-next{right:0}
+/* ===== v8: post-match ===== */
+.rh-plate{display:flex;align-items:stretch;border-radius:14px;overflow:hidden;box-shadow:0 14px 40px rgba(0,0,0,.6)}
+.rh-plate>span{width:8px}
+.rh-plate .rh-sc{background:rgba(7,11,18,.88);padding:6px 22px;backdrop-filter:blur(6px)}
+.rmain{display:grid;grid-template-columns:260px minmax(0,1fr);gap:16px;align-items:stretch}
+@media (max-width:700px){.rmain{grid-template-columns:minmax(0,1fr)}.refcard{margin:0 auto}}
+.refcard{position:relative;width:260px;min-height:360px;border-radius:24px;padding:18px 18px 16px;display:flex;flex-direction:column;align-items:center;gap:8px;overflow:hidden;color:#24180a;box-shadow:0 30px 60px -24px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.6);isolation:isolate}
+.refcard::before{content:"";position:absolute;inset:0;z-index:-1;background:repeating-linear-gradient(135deg,rgba(255,255,255,.08) 0 2px,transparent 2px 9px)}
+.refcard::after{content:"";position:absolute;top:-40%;left:-60%;width:50%;height:180%;transform:rotate(20deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);animation:shine 2.4s ease .4s 1 both}
+@keyframes shine{from{left:-60%}to{left:130%}}
+.refcard.gold{background:linear-gradient(160deg,#fff1b8 0%,#f5c94a 38%,#c9901f 100%)}
+.refcard.silver{background:linear-gradient(160deg,#ffffff 0%,#cfd6df 40%,#8c97a6 100%)}
+.refcard.bronze{background:linear-gradient(160deg,#ffe0c4 0%,#d39a68 42%,#8a5532 100%)}
+.refcard.elite{background:linear-gradient(160deg,#4a2a7a 0%,#24123f 55%,#0d0718 100%);color:#fff3c4;box-shadow:0 30px 60px -24px rgba(0,0,0,.9),inset 0 0 0 2px #f6c62b}
+.rc-top{display:flex;justify-content:space-between;align-items:flex-start;width:100%}
+.rc-rate{display:flex;flex-direction:column;line-height:1}.rc-rate b{font-size:46px;font-weight:600}.rc-rate small{font-family:var(--f-display);font-weight:800;font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-top:4px;opacity:.75}
+.rc-flag{display:flex;flex-direction:column;align-items:center;gap:4px}.rc-flag small{font-family:var(--f-display);font-weight:800;font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.rc-av{width:118px;height:118px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 3px rgba(0,0,0,.15),0 12px 24px -8px rgba(0,0,0,.6)}.rc-av .avsvg{width:100%;height:100%}
+.rc-name{font-family:var(--f-display);font-weight:800;font-size:22px;text-transform:uppercase;letter-spacing:.02em;text-align:center;line-height:1;border-bottom:1px solid currentColor;padding-bottom:6px;width:100%;opacity:.95}
+.rc-grade{font-family:var(--f-display);font-weight:800;font-size:15px;letter-spacing:.16em;text-transform:uppercase;opacity:.8}
+.rc-stats{display:grid;grid-template-columns:repeat(4,1fr);width:100%;gap:2px;margin-top:auto}
+.rc-stats div{display:flex;flex-direction:column;align-items:center;line-height:1}.rc-stats b{font-size:20px;font-weight:600}.rc-stats small{font-family:var(--f-display);font-weight:800;font-size:11px;letter-spacing:.1em;opacity:.75;margin-top:3px}
+.confetti{position:absolute;inset:0;pointer-events:none;z-index:2}
+.confetti i{position:absolute;top:-10px;left:var(--x);width:6px;height:10px;background:var(--c);border-radius:2px;transform:rotate(var(--r));animation:conf 2.6s cubic-bezier(.3,.7,.4,1) var(--d) 1 both}
+@keyframes conf{0%{transform:translateY(0) rotate(var(--r));opacity:1}100%{transform:translateY(400px) rotate(calc(var(--r) + 540deg));opacity:0}}
+.rsum{display:flex;flex-direction:column;gap:14px;justify-content:center}
+.rs-q{font-family:var(--f-display);font-weight:700;font-size:clamp(20px,2.6vw,26px);line-height:1.2;text-transform:none}
+.rtabs{display:flex;gap:6px;padding:5px;border-radius:14px;background:var(--panel);border:1px solid var(--line);position:sticky;top:8px;z-index:4}
+.rtabs button{flex:1;padding:10px;border-radius:10px;font-weight:700;color:var(--muted);display:flex;justify-content:center;gap:6px;align-items:center}
+.rtabs button.on{background:linear-gradient(180deg,rgba(255,219,92,.18),rgba(255,219,92,.06));color:var(--fg);box-shadow:inset 0 0 0 1px rgba(255,219,92,.4)}
+.rtabs .num{font-size:12px;padding:0 6px;border-radius:999px;background:rgba(255,255,255,.08)}
+.rsum-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:820px){.rsum-grid{grid-template-columns:minmax(0,1fr)}}
+.sr-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.sr-head h3{flex:1;text-align:center}
+.sr{display:grid;grid-template-columns:42px minmax(0,1fr) 42px;align-items:end;gap:10px}
+.sr>.num{font-size:17px;font-weight:600;color:var(--muted)}.sr>.num:last-child{text-align:right}.sr>.num.hi{color:var(--fg)}
+.sr-m small{display:block;text-align:center;font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px}
+.sr-b{display:flex;gap:3px;height:7px}.sr-b i{display:block;height:100%;border-radius:4px;min-width:3px}
+.moments{display:flex;flex-direction:column}
+.mo{display:grid;grid-template-columns:46px 18px minmax(0,1fr);gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}
+.mo:last-child{border-bottom:0}
+.mo-m{color:var(--muted);font-size:13px}
+.mo-i{width:12px;height:12px;justify-self:center}
+.mo-i.goal{border-radius:50%;background:#fff;box-shadow:0 0 0 2px rgba(255,255,255,.2)}.mo-i.yellow,.mo-i.red{width:9px;height:12px;border-radius:2px;background:var(--yellow)}.mo-i.red{background:var(--red)}.mo-i.dc{background:var(--vc);transform:rotate(45deg);width:10px;height:10px}
+.mo-t{min-width:0}
+.rpress-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:820px){.rpress-grid{grid-template-columns:minmax(0,1fr)}}
 
 /* touch / mobile app ergonomics */
 html{-webkit-text-size-adjust:100%}
@@ -987,7 +1141,7 @@ function shortName(n){ const w=n.replace(/\b(SK|FK|FC|AC|SS|AS|CD|SD|UD|CF|US|SC
 function mkTeam(name,str,city,country,nt){
   const id=(nt?'NT':country)+':'+name;
   if(TEAM[id]) return TEAM[id];
-  const k=KITS[hash(id)%KITS.length];
+  const k=nt?KITS[hash(id)%KITS.length]:teamColors(id);
   return TEAM[id]={id,name,str,city:city||'',country,nt:!!nt,c1:k[0],c2:k[1],short:shortName(name)};
 }
 function leagueTeams(key){
@@ -1403,13 +1557,55 @@ function endTournament(){ S.tournament=null; startSeason(false); render(); }
 // =========================================================
 //   WORLD — haberler, sosyal medya, hakem kurulu
 // =========================================================
+function hsl2hex(h,s,l){ s/=100; l/=100; const k=n=>(n+h/30)%12, a=s*Math.min(l,1-l), f=n=>l-a*Math.max(-1,Math.min(k(n)-3,Math.min(9-k(n),1))); return '#'+[f(0),f(8),f(4)].map(x=>Math.round(x*255).toString(16).padStart(2,'0')).join(''); }
+// distinct club colours: hue from the club id, a few white/black clubs, contrasting second colour
+function teamColors(id){ const r=seeded(hash(id+'#col')); const roll=r();
+  const hue=Math.floor(r()*360), sat=55+r()*28, lit=30+r()*20;
+  let c1,c2;
+  if(roll<.12){ c1='#f2f3f5'; c2=hsl2hex(hue,70,36); }
+  else if(roll<.2){ c1='#15171c'; c2=r()<.5?'#f4c430':hsl2hex(hue,75,55); }
+  else { c1=hsl2hex(hue,sat,lit); const t=r(); c2 = t<.45?'#ffffff':t<.7?'#f4c430':t<.85?'#111418':hsl2hex((hue+150+Math.floor(r()*60))%360,70,lit>40?20:78); }
+  return [c1,c2]; }
+const CREST_SHAPES=['M20 2L35 7V18C35 28 28 35 20 38C12 35 5 28 5 18V7Z','CIRCLE','M20 2L35.6 11V29L20 38L4.4 29V11Z','M5 4H35V20C35 30 28 36 20 38C12 36 5 30 5 20Z','RECT','OVAL','M6 4H34V22L20 38L6 22Z','M20 2L37 20L20 38L3 20Z'];
+const CREST_EMB={
+ star:'<path d="M20 12l2.4 5 5.4.6-4 3.7 1.1 5.4L20 24l-4.9 2.7 1.1-5.4-4-3.7 5.4-.6z"/>',
+ ball:'<circle cx="20" cy="20" r="6.5"/><path d="M20 16.6l3 2.2-1.1 3.5h-3.8L17 18.8z" class="inv"/>',
+ crown:'<path d="M12.5 25h15l1.5-9-4.5 3.5L20 13l-4.5 6.5L11 16z"/>',
+ tower:'<path d="M14 27V17h2v-3h2.5v3h3v-3H24v3h2v10h-4v-4.5a2 2 0 0 0-4 0V27z"/>',
+ wave:'<path d="M11 18c3-3 6 3 9 0s6 3 9 0v3c-3 3-6-3-9 0s-6-3-9 0zM11 24c3-3 6 3 9 0s6 3 9 0v3c-3 3-6-3-9 0s-6-3-9 0z"/>',
+ mount:'<path d="M10.5 27l6.5-11 3.5 5.5 2.5-3.5 6.5 9z"/>',
+ bolt:'<path d="M21.5 11l-7 10.5h4.5L17.5 29l7.5-11h-4.6z"/>',
+ anchor:'<path d="M19 13.5a2 2 0 1 1 2 0V16h3v2h-3v8.4c2.6-.4 4.6-2 5.3-4.4l-1.8.2 2.7-3.6 1.6 4.2-1.4-.4c-.9 3.8-4.5 6.5-8.4 6.5s-7.5-2.7-8.4-6.5l-1.4.4 1.6-4.2 2.7 3.6-1.8-.2c.7 2.4 2.7 4 5.3 4.4V18h-3v-2h3z"/>',
+ sun:'<circle cx="20" cy="20" r="4.6"/><path d="M20 11v3M20 26v3M11 20h3M26 20h3M13.6 13.6l2.1 2.1M24.3 24.3l2.1 2.1M13.6 26.4l2.1-2.1M24.3 15.7l2.1-2.1" stroke-width="2" stroke-linecap="round" class="ray"/>',
+ tree:'<path d="M20 11l6 8h-3l4 5h-6v4h-2v-4h-6l4-5h-3z"/>'
+};
+const CREST_EMB_KEYS=Object.keys(CREST_EMB);
+function crest(t,s){ s=s||28; const r=seeded(hash(t.id+'#crest')); const id=uid('cr');
+  const c1=t.c1, c2=t.c2||'#fff', light=lum(c1)>.6, ink=light?'#14161b':'#ffffff';
+  if(t.nt){ return `<svg class="crest" width="${s}" height="${s}" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18.5" fill="${c1}" stroke="${c2}" stroke-width="2.4"/><circle cx="20" cy="20" r="18.5" fill="none" stroke="rgba(0,0,0,.35)" stroke-width=".6"/><path d="M4 16h32v8H4z" fill="${c2}" opacity=".9"/><text x="20" y="20.6" text-anchor="middle" dominant-baseline="middle" font-family="Saira Condensed,sans-serif" font-weight="800" font-size="8.5" fill="${lum(c2)>.6?'#14161b':'#fff'}">${esc(t.short)}</text></svg>`; }
+  const shp=CREST_SHAPES[Math.floor(r()*CREST_SHAPES.length)], pat=Math.floor(r()*9), emb=CREST_EMB_KEYS[Math.floor(r()*CREST_EMB_KEYS.length)], useInit=r()<.32, yr=r()<.4?1890+Math.floor(r()*120):0;
+  const shape = shp==='CIRCLE'?'<circle cx="20" cy="20" r="17.5"/>':shp==='OVAL'?'<ellipse cx="20" cy="20" rx="15.5" ry="18"/>':shp==='RECT'?'<rect x="3.5" y="3.5" width="33" height="33" rx="8"/>':`<path d="${shp}"/>`;
+  const P=[ '',
+    `<g fill="${c2}">${[0,1,2,3,4].map(i=>`<rect x="${2+i*8}" y="0" width="4" height="40"/>`).join('')}</g>`,
+    `<g fill="${c2}"><rect y="9" width="40" height="5"/><rect y="20" width="40" height="5"/><rect y="31" width="40" height="5"/></g>`,
+    `<path d="M-2 8L8-2 42 32 32 42z" fill="${c2}"/>`,
+    `<rect x="20" width="20" height="40" fill="${c2}"/>`,
+    `<g fill="${c2}"><rect x="20" width="20" height="20"/><rect y="20" width="20" height="20"/></g>`,
+    `<path d="M0 12L20 25 40 12V20L20 33 0 20z" fill="${c2}"/>`,
+    `<rect y="15" width="40" height="10" fill="${c2}"/>`,
+    `<path d="M0 0H40V13H0z" fill="${c2}"/>`][pat];
+  const plain = pat===0;
+  const embCol = plain ? c2 : ink, embBg = !plain ? `<circle cx="20" cy="20" r="${useInit?9:9.5}" fill="${c1}" stroke="${c2}" stroke-width="1.6"/>`:'';
+  const embCol2 = !plain ? (lum(c1)>.6?'#14161b':'#fff') : embCol;
+  const mark = useInit ? `<text x="20" y="20.8" text-anchor="middle" dominant-baseline="middle" font-family="Saira Condensed,sans-serif" font-weight="800" font-size="${t.short.length>2?8:10}" fill="${embCol2}">${esc(t.short)}</text>`
+    : `<g fill="${embCol2}" stroke="${embCol2}" stroke-width=".2">${CREST_EMB[emb].replace('class="inv"',`fill="${plain?c1:(lum(c1)>.6?'#fff':'#14161b')}"`).replace('class="ray"',`stroke="${embCol2}"`)}</g>`;
+  const year = yr ? `<text x="20" y="${shp==='M6 4H34V22L20 38L6 22Z'?29:33}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-weight="600" font-size="3.6" fill="${plain?c2:ink}" opacity=".9">${yr}</text>`:'';
+  return `<svg class="crest" width="${s}" height="${s}" viewBox="0 0 40 40" aria-hidden="true"><defs><clipPath id="${id}">${shape}</clipPath></defs>
+    <g fill="${c1}">${shape}</g><g clip-path="url(#${id})">${P}</g>${embBg}${mark}${year}
+    <g fill="none" stroke="${c2}" stroke-width="2.2">${shape}</g><g fill="none" stroke="rgba(0,0,0,.4)" stroke-width=".6">${shape}</g></svg>`; }
+
 function moneyShort(n){ n=Math.round(n); if(n>=1e6) return (n/1e6).toFixed(n>=1e7?0:1).replace('.',',')+' Mn ₺'; if(n>=1e4) return Math.round(n/1e3)+' B ₺'; return n.toLocaleString('tr-TR')+' ₺'; }
 function compactNum(n){ n=Math.round(n); if(n>=1e6) return (n/1e6).toFixed(1).replace('.',',')+' Mn'; if(n>=1e3) return (n/1e3).toFixed(n>=1e4?0:1).replace('.',',')+' B'; return String(n); }
-function crest(t,s){ s=s||28; const h=hash(t.id); const c1=t.c1, c2=(t.c2||'#fff'); const st=h%3;
-  if(t.nt) return `<svg class="crest" width="${s}" height="${s}" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14.5" fill="${c1}" stroke="rgba(255,255,255,.4)"/><path d="M3 13h26v6H3z" fill="${c2}" opacity=".9"/><text x="16" y="16.6" text-anchor="middle" dominant-baseline="middle" font-family="Saira Condensed,sans-serif" font-weight="800" font-size="7.5" fill="${c1}">${esc(t.short)}</text></svg>`;
-  const band = st===0?`<path d="M4 17h24v4H4z" fill="${c2}" opacity=".9"/>`:st===1?`<path d="M13.5 3h5v26h-5z" fill="${c2}" opacity=".85"/>`:`<path d="M5 6l22 18" stroke="${c2}" stroke-width="3.4" opacity=".85"/>`;
-  return `<svg class="crest" width="${s}" height="${s}" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2l12 4v9c0 8-5.4 13-12 15C9.4 28 4 23 4 15V6z" fill="${c1}" stroke="rgba(255,255,255,.45)" stroke-width="1"/>${band}<text x="16" y="${st===0?12.4:st===1?25:13}" text-anchor="middle" dominant-baseline="middle" font-family="Saira Condensed,sans-serif" font-weight="800" font-size="${st===1?6:7}" fill="${st===1?c2:c2}" stroke="${c1}" stroke-width=".6" paint-order="stroke">${esc(t.short)}</text></svg>`; }
-
 const SOURCES=['Spor Gazetesi','Saha Kenarı','90 Dakika','Gece Bülteni','Tribün Haber','Futbol Ekspres'];
 const PRESS=[{n:'Kemal Uysal',h:'@kemaluysal',role:'Spor muhabiri',v:1},{n:'Pozisyon Analiz',h:'@pozisyonanaliz',role:'Hakem yorumcusu',v:1},{n:'Nihat Çakmak',h:'@nihat_kuralda',role:'Eski FIFA hakemi',v:1},{n:'Saha Kenarı',h:'@sahakenari',role:'Spor sitesi',v:1},{n:'Kural Hocası',h:'@kural_hocasi',role:'Kural eğitmeni'},{n:'Futbol Ekspres',h:'@futbolekspres',role:'Haber',v:1}];
 function slug(s){ return s.toLocaleLowerCase('tr-TR').replace(/ç/g,'c').replace(/ğ/g,'g').replace(/ı/g,'i').replace(/ö/g,'o').replace(/ş/g,'s').replace(/ü/g,'u').replace(/[^a-z0-9]+/g,''); }
@@ -1457,7 +1653,7 @@ function weeklyWorld(results){
   if(ph==='NT' && chance(.8)){ const opp=pick(NATIONS.filter(n=>n[2]==='UEFA'&&n[0]!==myNT())); const g=[ri(0,3),ri(0,2)]; news('avrupa',`A Milli Takım ${opp[0]} karşısında ${g[0]>g[1]?'kazandı':g[0]===g[1]?'berabere kaldı':'kaybetti'}: ${g[0]}-${g[1]}`,`Milli arada A Milli Takım ${opp[0]} ile karşılaştı.`); }
   // social chatter
   const T=sortedTable(); const lead=team(T[0].id);
-  addPost({a:{n:lead.name+' Taraftarı',h:'@'+slug(lead.short)+'_tribun'},text:pick([`Bu sezon şampiyonluk bizim! #${lead.short}`,`Liderlik koltuğu bize yakışıyor. Hakemler de adil olsun yeter. #${lead.short}`,`Haftaya da 3 puan. #${lead.short} #zirve`]),likes:engage(140),rts:engage(20)});
+  addPost({img:{k:'crest',t:lead.id},a:{n:lead.name+' Taraftarı',h:'@'+slug(lead.short)+'_tribun',team:lead.id},text:pick([`Bu sezon şampiyonluk bizim! #${lead.short}`,`Liderlik koltuğu bize yakışıyor. Hakemler de adil olsun yeter. #${lead.short}`,`Haftaya da 3 puan. #${lead.short} #zirve`]),likes:engage(140),rts:engage(20)});
   if(chance(.5)) addPost({a:PRESS[4],text:pick(['Haftanın kural sorusu: Taç atışından ofsayt olur mu? Cevap: Hayır. #kural','Hatırlatma: Kaleci topu 8 saniyeden fazla tutarsa rakibe korner. #kural','Ceza alanında topu oynama girişimiyle yapılan DOGSO faulü sarı karttır, kırmızı değil. #kural']),likes:engage(90),rts:engage(30)});
   S.social.followers=Math.max(50,Math.round(S.social.followers*(1+rf(-.004,.012))+S.rep*.6));
   S.kurul.trust=clamp(S.kurul.trust+(55-S.kurul.trust)*.03,0,100);
@@ -1471,9 +1667,10 @@ function matchWorld(r,fx){
   const h0=r.headlines[0]; news('sen',h0.t,`${fx.compName} · ${H.name} ${r.score[0]}-${r.score[1]} ${A.name}. Maçın hakemi ${S.name}${errs.length?'. '+errs[0].min+' dakikadaki "'+errs[0].title.toLowerCase()+'" kararı maçın önüne geçti.':goodBig.length?'. Kritik pozisyonlarda verdiği kararlar uzmanlardan tam not aldı.':'.'}`,[fx.home,fx.away]);
   if(big && r.rating>=8.7) news('hakem',`${sur} yükselişte: "${fx.imp>=4?'Büyük maçların hakemi':'İstikrarın adı'}"`,`Son performansıyla ${S.name}, ${kurulName()} değerlendirmesinde ön plana çıkıyor.`);
   const base=fx.imp*35+fx.lvl*40;
-  r.social.forEach(p=>{ const fan=/tribun|ultra/.test(p.u); addPost({a:{n:p.u.includes('kural')?'Kural Hocası':p.u.replace('@','').replace('_',' ').toUpperCase(),h:p.u},text:p.t+(fan?' #'+(p.u.includes(H.short.toLowerCase())?H.short:A.short):' #hakem'),likes:engage(base*1.4),rts:engage(base*.3),aboutMe:true}); });
+  addPost({a:{n:fx.compName,h:'@'+slug(fx.compName.split(' (')[0]),v:1,role:'Resmi hesap'},text:`Maç sonucu: ${H.name} ${r.score[0]}-${r.score[1]} ${A.name}. Maçın hakemi ${S.name}. #${H.short}${A.short}`,img:{k:'match',h:fx.home,a:fx.away,sc:r.score.slice(),comp:fx.compName,rating:r.rating},likes:engage(base*2.4),rts:engage(base*.5),aboutMe:true});
+  r.social.forEach(p=>{ const fan=/tribun|ultra/.test(p.u); const tm=fan?(p.u.includes(H.short.toLowerCase())?H:A):null; addPost({img:tm?{k:'crest',t:tm.id}:{k:'quote'},a:{team:tm?tm.id:null,n:p.u.includes('kural')?'Kural Hocası':p.u.replace('@','').replace('_',' ').toUpperCase(),h:p.u},text:p.t+(fan?' #'+(p.u.includes(H.short.toLowerCase())?H.short:A.short):' #hakem'),likes:engage(base*1.4),rts:engage(base*.3),aboutMe:true}); });
   if(errs.length){ const e=errs[0]; addPost({a:PRESS[2],text:`${e.min} ${e.title}: ${e.explain.split('.')[0]}. Verilmesi gereken karar: ${e.correct}. ${sur} için zor bir gece. #hakem`,likes:engage(base*2.2),rts:engage(base*.6),aboutMe:true});
-    if(r.clubComplaint){ const ct=r.clubComplaint===H.name?H:A; addPost({a:{n:ct.name,h:'@'+slug(ct.name),v:1,club:1},text:`Kamuoyunun bilgisine: ${fx.compName} karşılaşmasında takımımız aleyhine verilen kararları ${kurulName()}'na taşıyoruz.`,likes:engage(base*4),rts:engage(base*1.4),aboutMe:true}); } }
+    if(r.clubComplaint){ const ct=r.clubComplaint===H.name?H:A; addPost({img:{k:'crest',t:ct.id},a:{n:ct.name,h:'@'+slug(ct.name),v:1,club:1,team:ct.id},text:`Kamuoyunun bilgisine: ${fx.compName} karşılaşmasında takımımız aleyhine verilen kararları ${kurulName()}'na taşıyoruz.`,likes:engage(base*4),rts:engage(base*1.4),aboutMe:true}); } }
   else if(goodBig.length && fx.imp>=3) addPost({a:PRESS[1],text:`${fx.compName}: ${goodBig[0].min} ${goodBig[0].title.toLowerCase()} pozisyonunda ${sur} doğru yerde ve doğru kararda. Ders niteliğinde. #hakem`,likes:engage(base*1.6),rts:engage(base*.4),aboutMe:true});
   const gain=Math.round((r.rating-7.6)*45*(1+fx.lvl*.6)+fx.imp*18+(errs.length?70:0)+(fx.final?1500:0)+(fx.kind==='tour'?400:0));
   S.social.followers=Math.max(50,S.social.followers+Math.max(-30,gain));
@@ -1505,7 +1702,8 @@ function myPost(id){
   if(id==='kural'){ gain+=ri(20,60); if(S.attrs.kural>=55) S.rep=clamp(S.rep+.5,0,100); likes=engage(160); }
   if(id==='tesekkur'){ gain+=ri(15,50); S.rep=clamp(S.rep+.3,0,100); likes=engage(120); }
   if(id==='yanit'){ gain+=ri(150,400); likes=engage(600); S.rep=clamp(S.rep-2,0,100); S.kurul.trust=clamp(S.kurul.trust-6,0,100); kurulDecision(`${S.name}, sosyal medyada eleştirilere yanıt verdiği için yazılı olarak uyarıldı.`,'warn'); mail(kurulName(),'Yazılı uyarı','Hakemlerin maçlarla ilgili kamuoyu tartışmasına girmesi etik kurallara aykırıdır.','fed'); }
-  addPost({a:me,text:p.text(),likes,rts:Math.round(likes/5),aboutMe:true});
+  const lastM=S.history[0]; const img=id==='antrenman'?{k:'train'}:id==='tesekkur'&&lastM?{k:'match',h:lastM.home,a:lastM.away,sc:lastM.score,comp:lastM.comp,rating:lastM.rating}:{k:'quote'};
+  addPost({a:me,text:p.text(),likes,rts:Math.round(likes/5),aboutMe:true,img});
   S.social.followers+=gain; S.social.lastPost=wk;
   if(id==='yanit') addPost({a:PRESS[0],text:`${S.name.split(' ').pop()} eleştirilere sosyal medyadan yanıt verdi. Kurulun tepkisi merak konusu. #hakem`,likes:engage(300),rts:engage(80),aboutMe:true});
   toast('Paylaşıldı: +'+gain+' takipçi'); save(); render();
@@ -2230,7 +2428,7 @@ function finishMatch(){
   if(fx.kind==='guest') milestone('misafir');
   // reactions
   const errs=M.log.filter(d=>(d.cat==='major')&&(d.v==='hata'||d.v==='israr'));
-  const report={fx:{...fx},score:M.score.slice(),rating,repD,fee:fx.fee,log:M.log.slice(),cards:M.cardsLog.slice(),goals:M.goalsLog.map(g=>({side:g.side,min:g.min,p:pl(g.p)})),H:M.H.id,A:M.A.id,tempMax:Math.round(M.tempMax),posGood:M.posGood,posTotal:M.posTotal,gains,auto:M.auto,headlines:headlines(rating,errs),social:socialPosts(rating,errs),varCount:M.varCount};
+  const report={stats:matchStats(),fx:{...fx},score:M.score.slice(),rating,repD,fee:fx.fee,log:M.log.slice(),cards:M.cardsLog.slice(),goals:M.goalsLog.map(g=>({side:g.side,min:g.min,p:pl(g.p)})),H:M.H.id,A:M.A.id,tempMax:Math.round(M.tempMax),posGood:M.posGood,posTotal:M.posTotal,gains,auto:M.auto,headlines:headlines(rating,errs),social:socialPosts(rating,errs),varCount:M.varCount};
   if(errs.length){ const harmed=errs[0].harmed; const t=sideTeam(harmed===null?1:harmed); const lost = harmed!==null && M.score[harmed]<=M.score[1-harmed];
     if(lost && fx.imp>=2){ mail(t.name+' Kulübü','Resmi açıklama: "Hakem hatası sonucu etkiledi"','Kulübümüz '+errs[0].min+' dakikadaki "'+errs[0].title.toLowerCase()+'" kararını Tahkim\'e ve Hakem Kurulu\'na taşıyacaktır. Hakemin performansı kabul edilemez.','club'); S.rep=clamp(S.rep-1.5,0,100); report.clubComplaint=t.name; } }
   if(rating<7.3 && fx.kind==='dom'){ S.suspended=1; mail('Hakem Kurulu','Performans değerlendirmesi','Gözlemci notun '+f1(rating)+'. Gelecek hafta görev verilmeyecek; video analize odaklanmanı öneriyoruz.','fed'); }
@@ -2996,55 +3194,6 @@ function renderSide(){
 // =========================================================
 function minNum(s){ const m=String(s).match(/(\d+)(?:\+(\d+))?/); return m? +m[1]+(m[2]?Math.min(5,+m[2])*.4:0) : 0; }
 const VCOL={dogru:'var(--green)',durdu:'var(--green)',kabul:'var(--blue)',kismen:'var(--amber)',var:'var(--amber)',hata:'var(--red)',israr:'var(--red)'};
-function reportUI(r){
-  const ov=$('#overlay'); ov.hidden=false; document.body.style.overflow='hidden'; $('#modal').hidden=true;
-  const H=team(r.H), A=team(r.A); const fx=r.fx;
-  const maj=r.log.filter(d=>d.cat==='major'); const errs=maj.filter(d=>d.v==='hata'||d.v==='israr');
-  const good=r.log.filter(d=>['dogru','kabul','durdu','var'].includes(d.v)).length;
-  const col = r.rating>=8.6?'var(--green)':r.rating>=8.0?'var(--gold1)':r.rating>=7.5?'var(--amber)':'var(--red)';
-  const needStatement = !r.auto && (errs.length || r.clubComplaint);
-  const obs = (NAMES[(S&&S.nationality)||'TR']||NAMES.TR); const obsName=obs.f[hash(fx.id)%obs.f.length]+' '+obs.l[hash(fx.id+'o')%obs.l.length];
-  const scorers=side=>r.goals.filter(g=>g.side===side).map(g=>`<li><span class="ball-i"></span><span class="nm">${esc(g.p.replace(/^\d+ /,''))}</span><span class="num">${esc(g.min)}</span></li>`).join('');
-  const marks=[...r.goals.map(g=>({m:g.min,k:'goal',side:g.side,tip:'Gol · '+g.p})),...r.cards.map(c=>({m:c.min,k:c.red?'red':'yellow',side:c.side,tip:(c.red?'Kırmızı':'Sarı')+' · '+c.label})),...maj.map(d=>({m:d.min,k:'dc',v:d.v,tip:d.title+' · '+(VLAB[d.v]||'')}))];
-  const lanes={}; marks.map(x=>({x,pos:clamp(minNum(x.m)/96*100,1,99)})).sort((a,b)=>a.pos-b.pos).forEach(o=>{ const ln=o.x.k==='goal'?'g':o.x.k==='dc'?'d':'c'; const L=lanes[ln]||(lanes[ln]={last:-99,lvl:0}); L.lvl = o.pos-L.last<2.6 ? L.lvl+1 : 0; L.last=o.pos; o.x.pos=o.pos; o.x.lvl=L.lvl; });
-  ov.innerHTML=`<div class="ov-in rep">
-    <section class="rhero"><canvas id="repCv" aria-hidden="true"></canvas><div class="rhero-shade"></div>
-      <div class="rh-top"><span class="eyebrow gold">Maç sonu</span><span class="rh-comp">${esc(fx.compName)} · ${esc(fx.stage||'')}</span><span class="chip">${r.auto?'Otomatik yönetildi':'Hakem: '+esc(S.name)}</span></div>
-      <div class="rh-score"><div class="rh-t">${crest(H,84)}<b>${esc(teamLabel(fx,'h'))}</b><ul class="scorers">${scorers(0)}</ul></div>
-        <div class="rh-mid"><div class="rh-sc num"><span>${r.score[0]}</span><i>–</i><span>${r.score[1]}</span></div><small>Maç sonucu</small></div>
-        <div class="rh-t">${crest(A,84)}<b>${esc(teamLabel(fx,'a'))}</b><ul class="scorers">${scorers(1)}</ul></div></div>
-      <div class="tl"><div class="tl-bar"><span class="tl-ht"></span></div>${marks.map(x=>`<span class="tl-m ${x.k} ${x.side===1?'aw':''}" style="left:${x.pos.toFixed(1)}%;--lv:${x.lvl};${x.k==='dc'?`--vc:${VCOL[x.v]}`:''}" title="${esc(x.m+' '+x.tip)}"></span>`).join('')}<div class="tl-lab"><span>0'</span><span>45'</span><span>90'</span></div></div>
-    </section>
-    ${needStatement?`<section class="panel rpress"><div class="stack" style="gap:4px;min-width:0"><span class="eyebrow gold">Basın seni bekliyor</span><p class="muted" style="font-size:14px">Maçtaki kararların konuşuluyor. Bir açıklama yapabilir ya da sessiz kalabilirsin.</p></div><div class="dopts"><button class="dopt" data-st="acikla">Hakem açıklama programında kararını anlat</button><button class="dopt" data-st="yanit">Kulübe sert yanıt ver</button></div></section>`:''}
-    <div class="rgrid">
-      <section class="panel rscore">
-        <div class="rs-top"><div class="rring big"><svg viewBox="0 0 120 120" aria-hidden="true"><defs><linearGradient id="rgG" x1="0" x2="1"><stop offset="0" stop-color="${col}"/><stop offset="1" stop-color="${col}" stop-opacity=".55"/></linearGradient></defs><circle class="bg" cx="60" cy="60" r="52"/><circle class="fg" id="rRing" cx="60" cy="60" r="52" stroke="url(#rgG)" stroke-dasharray="326.7" stroke-dashoffset="326.7"/></svg><div class="rring-in"><b class="num" id="rNum" style="color:${col}">6.0</b><small>Gözlemci notu</small></div></div>
-          <div class="stack" style="gap:6px;min-width:0"><span class="eyebrow">Performans</span><span class="rgrade" style="color:${col}">${gradeOf(r.rating)}</span><p class="muted" style="font-size:14px">${esc(observerText(r.rating,errs.length,maj.length))}</p><span class="muted" style="font-size:12px">Gözlemci: ${esc(obsName)}</span></div></div>
-        <div class="rkpis"><div><span class="eyebrow">Kararlar</span><b class="num">${good}/${r.log.length}</b><i class="mbar2"><i style="width:${r.log.length?good/r.log.length*100:0}%"></i></i></div><div><span class="eyebrow">Kritik hata</span><b class="num" style="color:${errs.length?'var(--red)':'var(--green)'}">${errs.length}</b><small>${maj.length} kritik pozisyon</small></div><div><span class="eyebrow">İdeal konum</span><b class="num">${r.posTotal?r.posGood+'/'+r.posTotal:'—'}</b><small>pozisyon alma</small></div><div><span class="eyebrow">Maç ısısı</span><b class="num" style="color:${r.tempMax>80?'var(--red)':r.tempMax>60?'var(--amber)':'var(--green)'}">%${r.tempMax}</b><small>en yüksek · VAR ${r.varCount}</small></div></div>
-        <div class="rewards"><div class="rw"><span class="rw-ic">${ic('star')}</span><span><small>İtibar</small><b class="num" data-cnt="${r.repD}" data-dec="1" style="color:${r.repD>=0?'var(--green)':'var(--red)'}">0</b></span></div><div class="rw"><span class="rw-ic gold">${ic('coin')}</span><span><small>Ücret</small><b class="num">+${moneyShort(r.fee)}</b></span></div><div class="rw"><span class="rw-ic">${ic('sosyal')}</span><span><small>Takipçi</small><b class="num" data-cnt="${r.followersD||0}">0</b></span></div></div>
-        <div class="gains2">${Object.entries(r.gains).map(([k,v])=>`<span>${ATTR_NAMES[k]} <b class="num">+${v.toFixed(2)}</b></span>`).join('')}</div>
-      </section>
-      <section class="panel stack"><div class="row" style="justify-content:space-between"><h3>Kararların</h3><span class="muted" style="font-size:12px">Kritik pozisyonların tekrarını izleyebilirsin</span></div><div class="declist">${r.log.map((d,i)=>decRow(d,i)).join('')}</div></section>
-      <section class="stack" style="gap:14px;min-width:0">
-        <div class="panel press"><div class="press-mast"><span>Spor Gazetesi</span><span class="muted">${esc(weekDate(Math.min(34,S.week)))}</span></div>${r.headlines.map((h,i)=>`<article class="${i?'np-s':'np-l'}"><small>${esc(h.s)}</small><h4>${esc(h.t)}</h4></article>`).join('')}</div>
-        <div class="panel stack"><h3>Sosyal medya</h3><div class="feedlist">${r.social.map(p=>postHTML({a:{n:p.u.replace('@','').replace(/_/g,' '),h:p.u},text:p.t,likes:Math.round((fx.imp*40+60)*rf(.6,1.6)),rts:ri(5,60),week:S.week})).join('')}</div></div>
-        ${r.clubComplaint?`<div class="panel alert-p"><h3>Kulüp tepkisi</h3><p>${esc(r.clubComplaint)} resmi açıklama yaptı ve kararlarını ${esc(kurulName())}'na taşıdı.</p></div>`:''}
-      </section>
-    </div>
-    <div class="rfoot"><span class="muted rf-t">${needStatement?'Açıklama yapmazsan sessiz kalmış sayılırsın.':'Rapor kurula iletildi.'}</span><button class="btn primary lg" id="bDone">${needStatement?'Sessiz kal ve devam et':'Devam'}</button></div>
-  </div>`;
-  ov.scrollTop=0;
-  const reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
-  { const el=$('#rNum'), ring=$('#rRing'), t0=performance.now(), to=r.rating, C=326.7;
-    const set=v=>{ el.textContent=f1(v); ring.style.strokeDashoffset=(C*(1-clamp((v-5.5)/4,0,1))).toFixed(1); };
-    const cnt=[...ov.querySelectorAll('[data-cnt]')];
-    const setC=k=>cnt.forEach(e=>{ const v=+e.dataset.cnt*k; e.textContent=(v>=0?'+':'')+(e.dataset.dec?f1(v):compactNum(Math.round(v))); });
-    if(reduce){ set(to); setC(1); } else { const step=now=>{ const k=Math.min(1,(now-t0)/1500), e=1-Math.pow(1-k,3); set(6+(to-6)*e); setC(e); if(k<1) requestAnimationFrame(step); }; requestAnimationFrame(step); } }
-  heroStart('repCv',H.id,A.id,'rep'+fx.id);
-  ov.querySelectorAll('[data-st]').forEach(b=>b.onclick=()=>afterReport(b.dataset.st));
-  ov.querySelectorAll('[data-rp]').forEach(b=>b.onclick=()=>{ const d=r.log[+b.dataset.rp]; if(d&&d.inc) replayModal(d); });
-  $('#bDone').onclick=()=>afterReport(null);
-}
 function replayModal(d){
   const inc=d.inc; inc.showOff=true; const cams=['yakin','tv','ters','arka','hakem','ust'];
   openModal(head(esc(d.min)+' · Tekrar',esc(d.title),`<button class="btn sm" id="bRpClose">Kapat</button>`)+`<div class="sh-body"><div class="inc"><div class="stack">${replayHTML(inc,cams)}</div><div class="stack">
@@ -3056,6 +3205,171 @@ function decRow(d,i){
   return `<div class="dec2" style="--vc:${VCOL[d.v]||'var(--line2)'}"><span class="m num">${esc(d.min)}</span><div style="min-width:0"><div class="row" style="justify-content:space-between;gap:8px"><b>${esc(ttl)}</b><span class="vtag">${VLAB[d.v]||d.v}</span></div>${d.text?`<div class="muted" style="font-size:13px">${esc(d.text)}</div>`:''}<div style="font-size:13px;margin-top:2px">Senin: ${esc(d.your)}${d.final&&d.final!==d.your?' → '+esc(d.final):''}</div>${d.v!=='dogru'&&d.v!=='durdu'?`<div style="font-size:13px" class="muted">Doğrusu: ${esc(d.correct)}</div>`:''}
     <div class="row" style="gap:10px;margin-top:6px">${d.inc?`<button class="btn sm rp-btn" data-rp="${i}">▶ Tekrarı izle</button>`:''}<details><summary>Neden?</summary><p>${esc(d.explain)}${d.note?' '+esc(d.note):''}</p></details></div></div></div>`;
 }
+
+function matchStats(){
+  let poss; if(SC){ const t=SC.possT; poss=Math.round(t[0]/(t[0]+t[1])*100); } else poss=Math.round(clamp(50+(M.H.str-M.A.str)*.9+rf(-6,6),28,72));
+  const sh=SC?SC.shots:[0,0]; const shots=[sh[0]+M.score[0]+ri(3,7),sh[1]+M.score[1]+ri(3,7)]; const onT=[Math.min(shots[0],M.score[0]+ri(1,4)),Math.min(shots[1],M.score[1]+ri(1,4))];
+  const y=[0,1].map(s=>M.cardsLog.filter(c=>c.side===s&&!c.red).length), rd=[0,1].map(s=>M.cardsLog.filter(c=>c.side===s&&c.red).length);
+  return {poss:[poss,100-poss],shots,onT,fouls:[ri(8,15)+y[0]*2,ri(8,15)+y[1]*2],corners:[ri(2,8),ri(1,7)],y,rd}; }
+function tierOf(r){ return r>=9?'elite':r>=8.6?'gold':r>=8.0?'silver':'bronze'; }
+let REP_TAB='ozet';
+function reportUI(r){
+  const ov=$('#overlay'); ov.hidden=false; document.body.style.overflow='hidden'; $('#modal').hidden=true; REP_TAB='ozet';
+  const H=team(r.H), A=team(r.A); const fx=r.fx;
+  const maj=r.log.filter(d=>d.cat==='major'); const errs=maj.filter(d=>d.v==='hata'||d.v==='israr');
+  const good=r.log.filter(d=>['dogru','kabul','durdu','var'].includes(d.v)).length;
+  const needStatement = !r.auto && (errs.length || r.clubComplaint);
+  const obs=(NAMES[(S&&S.nationality)||'TR']||NAMES.TR); const obsName=obs.f[hash(fx.id)%obs.f.length]+' '+obs.l[hash(fx.id+'o')%obs.l.length];
+  const tier=tierOf(r.rating); const accPct=r.log.length?Math.round(good/r.log.length*100):0;
+  const scorers=side=>r.goals.filter(g=>g.side===side).map(g=>`<li><span class="ball-i"></span><span class="nm">${esc(g.p.replace(/^\d+ /,''))}</span><span class="num">${esc(g.min)}</span></li>`).join('');
+  const marks=[...r.goals.map(g=>({m:g.min,k:'goal',side:g.side,tip:'Gol · '+g.p})),...r.cards.map(c=>({m:c.min,k:c.red?'red':'yellow',side:c.side,tip:(c.red?'Kırmızı':'Sarı')+' · '+c.label})),...maj.map(d=>({m:d.min,k:'dc',v:d.v,tip:d.title+' · '+(VLAB[d.v]||'')}))];
+  const lanes={}; marks.map(x=>({x,pos:clamp(minNum(x.m)/96*100,1,99)})).sort((a,b)=>a.pos-b.pos).forEach(o=>{ const ln=o.x.k==='goal'?'g':o.x.k==='dc'?'d':'c'; const L=lanes[ln]||(lanes[ln]={last:-99,lvl:0}); L.lvl=o.pos-L.last<2.6?L.lvl+1:0; L.last=o.pos; o.x.pos=o.pos; o.x.lvl=L.lvl; });
+  const confetti = (tier==='gold'||tier==='elite') ? `<div class="confetti" aria-hidden="true">${Array.from({length:18},(_,i)=>`<i style="--x:${(i*53)%100}%;--d:${(i%6)*.18}s;--c:${['#ffdb5c','#fff','#38b27a','#5b9bff','#e3434b'][i%5]};--r:${(i*37)%360}deg"></i>`).join('')}</div>`:'';
+  ov.innerHTML=`<div class="ov-in rep">
+    <section class="rhero"><canvas id="repCv" aria-hidden="true"></canvas><div class="rhero-shade"></div>
+      <div class="rh-top"><span class="eyebrow gold">Maç sonu</span><span class="rh-comp">${esc(fx.compName)} · ${esc(fx.stage||'')}</span><span class="chip">${r.auto?'Otomatik yönetildi':'Hakem: '+esc(S.name)}</span></div>
+      <div class="rh-score"><div class="rh-t">${crest(H,84)}<b>${esc(teamLabel(fx,'h'))}</b><ul class="scorers">${scorers(0)}</ul></div>
+        <div class="rh-mid"><div class="rh-plate"><span style="background:${H.c1}"></span><div class="rh-sc num"><span>${r.score[0]}</span><i>–</i><span>${r.score[1]}</span></div><span style="background:${A.c1}"></span></div><small>Maç sonucu</small></div>
+        <div class="rh-t">${crest(A,84)}<b>${esc(teamLabel(fx,'a'))}</b><ul class="scorers">${scorers(1)}</ul></div></div>
+      <div class="tl"><div class="tl-bar"><span class="tl-ht"></span></div>${marks.map(x=>`<span class="tl-m ${x.k}" style="left:${x.pos.toFixed(1)}%;--lv:${x.lvl};${x.k==='dc'?`--vc:${VCOL[x.v]}`:''}" title="${esc(x.m+' '+x.tip)}"></span>`).join('')}<div class="tl-lab"><span>0'</span><span>45'</span><span>90'</span></div></div>
+    </section>
+    <section class="rmain">
+      <div class="refcard ${tier}">${confetti}<div class="rc-top"><div class="rc-rate"><b class="num" id="rNum">6.0</b><small>Gözlemci</small></div><div class="rc-flag">${flagSVG(S.nationality,30,20)}<small>${esc((S.fifa?'FIFA':rankName(S.tier)).split(' ')[0])}</small></div></div>
+        <div class="rc-av">${avatarSVG(S.look)}</div><div class="rc-name">${esc(S.name)}</div><div class="rc-grade">${gradeOf(r.rating)}</div>
+        <div class="rc-stats"><div><b class="num">${accPct}</b><small>İSB</small></div><div><b class="num">${r.posTotal?Math.round(r.posGood/r.posTotal*100):'—'}</b><small>KON</small></div><div><b class="num">${100-r.tempMax}</b><small>KNT</small></div><div><b class="num">${errs.length}</b><small>HAT</small></div></div></div>
+      <div class="rsum panel"><span class="eyebrow">Gözlemci raporu · ${esc(obsName)}</span><p class="rs-q">“${esc(observerText(r.rating,errs.length,maj.length))}”</p>
+        <div class="rewards"><div class="rw"><span class="rw-ic">${ic('star')}</span><span><small>İtibar</small><b class="num" data-cnt="${r.repD}" data-dec="1" style="color:${r.repD>=0?'var(--green)':'var(--red)'}">0</b></span></div><div class="rw"><span class="rw-ic gold">${ic('coin')}</span><span><small>Ücret</small><b class="num">+${moneyShort(r.fee)}</b></span></div><div class="rw"><span class="rw-ic">${ic('sosyal')}</span><span><small>Takipçi</small><b class="num" data-cnt="${r.followersD||0}">0</b></span></div></div>
+        <div class="gains2">${Object.entries(r.gains).map(([k,v])=>`<span>${ATTR_NAMES[k]} <b class="num">+${v.toFixed(2)}</b></span>`).join('')}</div></div>
+    </section>
+    ${needStatement?`<section class="panel rpress"><div class="stack" style="gap:4px;min-width:0"><span class="eyebrow gold">Basın seni bekliyor</span><p class="muted" style="font-size:14px">Maçtaki kararların konuşuluyor. Bir açıklama yapabilir ya da sessiz kalabilirsin.</p></div><div class="dopts"><button class="dopt" data-st="acikla">Hakem açıklama programında kararını anlat</button><button class="dopt" data-st="yanit">Kulübe sert yanıt ver</button></div></section>`:''}
+    <div class="rtabs" role="tablist"><button data-rt="ozet" class="on">Özet</button><button data-rt="karar">Kararlar <span class="num">${r.log.length}</span></button><button data-rt="basin">Basın</button></div>
+    <div id="rtab"></div>
+    <div class="rfoot"><span class="muted rf-t">${needStatement?'Açıklama yapmazsan sessiz kalmış sayılırsın.':'Rapor kurula iletildi.'}</span><button class="btn primary lg" id="bDone">${needStatement?'Sessiz kal ve devam et':'Devam'}</button></div>
+  </div>`;
+  ov.scrollTop=0;
+  const renderTab=()=>{ const el=$('#rtab'); ov.querySelectorAll('[data-rt]').forEach(b=>b.classList.toggle('on',b.dataset.rt===REP_TAB));
+    if(REP_TAB==='ozet') el.innerHTML=repSummary(r,H,A);
+    else if(REP_TAB==='karar') el.innerHTML=`<section class="panel stack"><div class="declist">${r.log.map((d,i)=>decRow(d,i)).join('')}</div></section>`;
+    else el.innerHTML=`<div class="rpress-grid"><div class="panel press"><div class="press-mast"><span>Spor Gazetesi</span><span class="muted">${esc(weekDate(Math.min(34,S.week)))}</span></div>${r.headlines.map((h,i)=>`<article class="${i?'np-s':'np-l'}"><small>${esc(h.s)}</small><h4>${esc(h.t)}</h4></article>`).join('')}</div>
+      <div class="ig-mini">${r.social.map((p,i)=>igPost({id:'rs'+fx.id+i,a:{n:p.u,h:p.u},text:p.t,likes:Math.round((fx.imp*40+60)*(1+i*.4)),week:S.week,season:S.season,img:/kural/.test(p.u)?{k:'quote'}:{k:'crest',t:p.u.includes(H.short.toLowerCase())?H.id:A.id}})).join('')}</div></div>`;
+    el.querySelectorAll('[data-rp]').forEach(b=>b.onclick=()=>{ const d=r.log[+b.dataset.rp]; if(d&&d.inc) replayModal(d); }); };
+  ov.querySelectorAll('[data-rt]').forEach(b=>b.onclick=()=>{ REP_TAB=b.dataset.rt; renderTab(); });
+  renderTab();
+  const reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  { const el=$('#rNum'), t0=performance.now(), to=r.rating; const cnt=[...ov.querySelectorAll('[data-cnt]')];
+    const setC=k=>cnt.forEach(e=>{ const v=+e.dataset.cnt*k; e.textContent=(v>=0?'+':'')+(e.dataset.dec?f1(v):compactNum(Math.round(v))); });
+    if(reduce){ el.textContent=f1(to); setC(1); } else { const step=now=>{ const k=Math.min(1,(now-t0)/1500), e=1-Math.pow(1-k,3); el.textContent=f1(6+(to-6)*e); setC(e); if(k<1) requestAnimationFrame(step); }; requestAnimationFrame(step); } }
+  heroStart('repCv',H.id,A.id,'rep'+fx.id);
+  ov.querySelectorAll('[data-st]').forEach(b=>b.onclick=()=>afterReport(b.dataset.st));
+  $('#bDone').onclick=()=>afterReport(null);
+}
+function repSummary(r,H,A){
+  const st=r.stats||{poss:[50,50],shots:[r.score[0]+4,r.score[1]+4],onT:[r.score[0]+1,r.score[1]+1],fouls:[11,11],corners:[4,4],y:[0,0],rd:[0,0]};
+  const row=(lab,a,b,pct)=>{ const t=(a+b)||1; const pa=pct?a:a/t*100; return `<div class="sr"><span class="num ${a>b?'hi':''}">${a}${pct?'%':''}</span><div class="sr-m"><small>${lab}</small><div class="sr-b"><i style="width:${pa}%;background:${H.c1}"></i><i style="width:${100-pa}%;background:${A.c1===H.c1?'#cfd5dd':A.c1}"></i></div></div><span class="num ${b>a?'hi':''}">${b}${pct?'%':''}</span></div>`; };
+  const ev=[...r.goals.map(g=>({m:g.min,k:'goal',t:`Gol · ${g.p.replace(/^\d+ /,'')}`,s:g.side})),...r.cards.map(c=>({m:c.min,k:c.red?'red':'yellow',t:`${c.red?'Kırmızı':'Sarı'} kart · ${c.label}`,s:c.side})),...r.log.filter(d=>d.cat==='major').map(d=>({m:d.min,k:'dc',t:d.title,v:d.v}))].sort((a,b)=>minNum(a.m)-minNum(b.m));
+  return `<div class="rsum-grid"><section class="panel stack"><div class="sr-head">${crest(H,30)}<h3>Maç istatistikleri</h3>${crest(A,30)}</div>
+    ${row('Topla oynama',st.poss[0],st.poss[1],true)}${row('Şut',st.shots[0],st.shots[1])}${row('İsabetli şut',st.onT[0],st.onT[1])}${row('Faul',st.fouls[0],st.fouls[1])}${row('Korner',st.corners[0],st.corners[1])}${row('Sarı kart',st.y[0],st.y[1])}${row('Kırmızı kart',st.rd[0],st.rd[1])}</section>
+    <section class="panel stack"><h3>Maçın kritik anları</h3><div class="moments">${ev.map(e=>`<div class="mo ${e.s===1?'aw':''}"><span class="num mo-m">${esc(e.m)}</span><span class="mo-i ${e.k}" style="${e.k==='dc'?`--vc:${VCOL[e.v]}`:''}"></span><span class="mo-t">${esc(e.t)}${e.k==='dc'?` <span class="vtag" style="--vc:${VCOL[e.v]}">${VLAB[e.v]}</span>`:''}</span></div>`).join('')||'<p class="muted">Kritik an yok.</p>'}</div></section></div>`;
+}
+
+const MONTHS_LONG=['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
+function weekDateObj(w){ const d=new Date(S.season,7,9); d.setDate(d.getDate()+(w-1)*7+(w>17?21:0)); return d; }
+function rateCol(r){ return r>=8.6?'var(--green)':r>=8.0?'var(--gold1)':r>=7.5?'var(--amber)':'var(--red)'; }
+function keyFixture(w){ if(!S.fixtures) return null; const rd=S.fixtures[(w-1)%S.fixtures.length]; let best=null,bs=-1; rd.forEach(([h,a])=>{ const H=team(h),A=team(a); const sc=H.str+A.str+(H.city&&H.city===A.city?25:0); if(sc>bs){bs=sc;best=[H,A];} }); return best; }
+function calHTML(){
+  const hist=S.history.filter(h=>h.season===S.season); const av=hist.length?avg(hist.map(h=>h.rating)):null;
+  const best=hist.length?hist.reduce((a,b)=>b.rating>a.rating?b:a):null;
+  const groups=[]; for(let w=1;w<=34;w++){ const d=weekDateObj(w); const key=d.getFullYear()+'-'+d.getMonth(); let g=groups[groups.length-1]; if(!g||g.key!==key){ g={key,m:d.getMonth(),y:d.getFullYear(),weeks:[]}; groups.push(g); } g.weeks.push(w); }
+  const cur=S.phase==='season'?S.week:35;
+  const card=w=>{ const d=weekDateObj(w); const ph=MIDWEEK[w]; const hs=hist.filter(h=>h.week===w); const state=w<cur?'past':w===cur?'now':'future';
+    const tasks = w===cur&&S.tasks? S.tasks.matches.filter(m=>!m.played) : [];
+    let body='';
+    if(hs.length) body=hs.map(h=>{ const H=team(h.home),A=team(h.away); return `<div class="wk-m">${crest(H,26)}<span class="wk-sc"><b class="num">${h.score[0]}<i>–</i>${h.score[1]}</b><small>${esc(H.short)} · ${esc(A.short)}</small></span>${crest(A,26)}<span class="wk-r num" style="--rc:${rateCol(h.rating)}">${f1(h.rating)}</span></div><div class="wk-c">${esc(h.comp)}</div>`; }).join('');
+    if(tasks.length) body+=tasks.map(m=>{ const H=team(m.home),A=team(m.away); return `<div class="wk-m next">${crest(H,26)}<span class="wk-sc"><b>VS</b><small>${esc(H.short)} · ${esc(A.short)}</small></span>${crest(A,26)}<span class="wk-go">Sıradaki</span></div><div class="wk-c">${esc(m.compName)}</div>`; }).join('');
+    if(!body && state==='future'){ const k=keyFixture(w); if(k) body=`<div class="wk-pre"><small>Haftanın maçı</small><div class="row" style="gap:6px;flex-wrap:nowrap">${crest(k[0],20)}<span class="ell">${esc(k[0].short)} – ${esc(k[1].short)}</span>${crest(k[1],20)}</div></div>`; }
+    if(!body) body=`<div class="wk-empty">${state==='past'?'Görev yok':'—'}</div>`;
+    return `<article class="wk ${state}" ${state==='now'?'data-tab2="merkez"':''}><div class="wk-h"><span class="wk-n">${w}. hafta</span><span class="wk-d num">${d.getDate()} ${MONTHS[d.getMonth()]}</span></div>${ph&&S.fifa?`<span class="wk-ph">${esc(PHASE_NAMES[ph])}</span>`:''}${body}${state==='now'?'<span class="wk-now">Bu hafta</span>':''}</article>`; };
+  const pct=Math.min(100,(Math.min(cur,35)-1)/34*100);
+  const y=summerYear(); const summer=[(y-2030)%4===0?'Dünya Kupası':null,(y-2028)%4===0?'Avrupa Şampiyonası':null,y%2===1?'U21 EURO · Uluslar Ligi Finalleri':null,(y-2029)%4===0?'Kulüpler Dünya Kupası':null].filter(Boolean);
+  return `<div class="page-h"><div><div class="eyebrow gold">${esc(leagueName())}</div><h2 class="page-title">${seasonLabel(S.season)} takvimi</h2></div></div>
+    <section class="panel cal-top"><div class="cal-kpis"><div><span class="eyebrow">Yönetilen maç</span><b class="num">${hist.length}</b></div><div><span class="eyebrow">Sezon ortalaması</span><b class="num" style="color:${av?rateCol(av):'var(--fg)'}">${av?f1(av):'—'}</b></div><div><span class="eyebrow">En iyi maç</span><b class="num">${best?f1(best.rating):'—'}</b><small>${best?esc(team(best.home).short+' – '+team(best.away).short):''}</small></div><div><span class="eyebrow">Kalan hafta</span><b class="num">${Math.max(0,34-cur+1)}</b></div></div>
+      <div class="cal-prog"><div class="cal-bar"><i style="width:${pct}%"></i></div><div class="cal-mon">${groups.map(g=>`<span style="flex:${g.weeks.length}">${MONTHS[g.m]}</span>`).join('')}</div></div></section>
+    ${groups.map((g,gi)=>`${gi>0&&groups[gi-1].weeks.includes(17)?`<div class="cal-break"><span>Devre arası · 3 hafta</span></div>`:''}<section class="cal-month"><div class="cal-mh"><h3>${MONTHS_LONG[g.m]} <span class="muted">${g.y}</span></h3><span class="muted" style="font-size:12px">${g.weeks.length} hafta · ${hist.filter(h=>g.weeks.includes(h.week)).length} maç</span></div><div class="wk-grid">${g.weeks.map(card).join('')}</div></section>`).join('')}
+    ${summer.length?`<section class="panel cal-summer"><span class="eyebrow gold">Yaz ${y}</span><h3 style="text-transform:none;letter-spacing:0;font-size:20px">${esc(summer.join(' · '))}</h3><p class="muted" style="font-size:13px">Sezon sonunda performansın ve UEFA kategorin yeterliyse turnuva listesine seçilebilirsin.</p></section>`:''}`;
+}
+
+const IG={heart:'<path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 8 3.4 4.5 7 4.5c2 0 3.5 1.1 5 3 1.5-1.9 3-3 5-3 3.6 0 5.6 3.5 4.3 6.8-1.8 4.6-9.3 9.2-9.3 9.2z"/>',
+ comment:'<path d="M20.5 12a8.5 8.5 0 1 1-3.2-6.6A8.4 8.4 0 0 1 20.5 12zM20.5 12l1 7.5-6-2.6"/>',
+ share:'<path d="M21.5 3.5L10 14M21.5 3.5l-7 18-4.5-7.5L2.5 9.5z"/>',
+ save:'<path d="M6 3.5h12v17l-6-4.5-6 4.5z"/>',
+ plus:'<rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M12 8v8M8 12h8"/>',
+ grid:'<rect x="3.5" y="3.5" width="17" height="17" rx="2"/><path d="M9.2 3.5v17M14.8 3.5v17M3.5 9.2h17M3.5 14.8h17"/>',
+ tag:'<path d="M12 3.5l-8.5 8.5 8.5 8.5 8.5-8.5V3.5z"/><circle cx="16" cy="8" r="1.4"/>',
+ dots:'<circle cx="5" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="19" cy="12" r="1.4"/>'};
+const igi=(k,cls)=>`<svg class="igi ${cls||''}" viewBox="0 0 24 24" aria-hidden="true">${IG[k]}</svg>`;
+const IG_COMMENTS=['Helal olsun hocam','Bu pozisyon net penaltıydı','Kural kitabı gibi adam','Tartışılır…','VAR nerede?','Saygılar','Gelecek sezon üst ligde görürüz','Kartı cebinde unuttu','Çok sakin yönetti','Bu kararı hiç anlamadım','Efsane','Hakemler de insan, saygı','İkinci yarı biraz dağıldı','Doğru karar, tekrarlara bakın','Bravo'];
+const IG_USERS=['tribun_sesi','futbolsever','kale_arkasi','90dakika_tr','sahakenari34','hakem_takip','ofsayt_degil','penalti_mi','bizim_takim','kural_meraklisi'];
+function postImgSpec(p){ if(p.img) return p.img; if(p.a&&p.a.me) return {k:'train'}; return {k:'quote'}; }
+function postImg(p,small){ const im=postImgSpec(p); const r=seeded(hash(p.id||'x'));
+  if(im.k==='match'){ const H=team(im.h), A=team(im.a); if(!H||!A) return postImg({...p,img:{k:'quote'}},small);
+    return `<div class="pimg pm" style="--c1:${H.c1};--c2:${A.c1}"><span class="pm-l">${esc(im.comp||'Maç sonucu')}</span><div class="pm-row">${crest(H,small?34:72)}<b class="num">${im.sc[0]}<i>–</i>${im.sc[1]}</b>${crest(A,small?34:72)}</div><span class="pm-n">${esc(H.short)} · ${esc(A.short)}</span>${im.rating&&!small?`<span class="pm-r">Gözlemci ${f1(im.rating)}</span>`:''}</div>`; }
+  if(im.k==='crest'){ const T=team(im.t); if(!T) return postImg({...p,img:{k:'quote'}},small); const tag=(p.text.match(/#[\p{L}\d_]+/u)||['#'+T.short])[0];
+    return `<div class="pimg pc" style="--c1:${T.c1};--c2:${T.c2}">${crest(T,small?46:110)}<b>${esc(tag)}</b></div>`; }
+  if(im.k==='train'){ const v=Math.floor(r()*3); return `<div class="pimg pt v${v}"><span class="pt-ic">${ic(['bolt','play','book'][v])}</span><b>${['SPRİNT GÜNÜ','VİDEO ANALİZ','KURAL ÇALIŞMASI'][v]}</b><small>${esc(S.name)}</small></div>`; }
+  const hue=Math.floor(r()*360); const txt=p.text.replace(/#[\p{L}\d_]+/gu,'').trim();
+  return `<div class="pimg pq" style="--h1:${hsl2hex(hue,60,30)};--h2:${hsl2hex((hue+50)%360,65,18)}"><span class="pq-m">“</span><p>${esc(txt.length>(small?60:140)?txt.slice(0,small?58:138)+'…':txt)}</p><small>${esc((p.a&&p.a.h)||'')}</small></div>`; }
+function igAvatar(a,size){ size=size||36; if(a&&a.me) return `<span class="igav" style="width:${size}px;height:${size}px">${avatarSVG(S.look)}</span>`; const col=['#3565c4','#b8383d','#2a9d6f','#c58a1c','#7a4fd0','#2b8fb3'][hash((a&&a.h)||'x')%6]; if(a&&a.team){ const T=team(a.team); if(T) return `<span class="igav crestav" style="width:${size}px;height:${size}px">${crest(T,size-6)}</span>`; } return `<span class="igav" style="width:${size}px;height:${size}px;background:${col}">${esc(initials((a&&a.n)||'?'))}</span>`; }
+function igPost(p){ const a=p.a||{}; const r=seeded(hash((p.id||'')+'c')); const nc=2+Math.floor(r()*14);
+  const cm=[0,1].map(i=>({u:IG_USERS[Math.floor(r()*IG_USERS.length)],t:IG_COMMENTS[Math.floor(r()*IG_COMMENTS.length)]}));
+  const txt=esc(p.text).replace(/(#[\p{L}\d_]+)/gu,'<span class="tag">$1</span>');
+  return `<article class="igp"><header class="igp-h">${igAvatar(a,34)}<div class="igp-n"><b>${esc((a.h||'').replace('@',''))}</b>${a.v?'<span class="verif">✓</span>':''}<small>${esc(a.role||(a.club?'Resmi kulüp hesabı':a.me?rankText():''))}</small></div><button class="igb" aria-label="Seçenekler">${igi('dots')}</button></header>
+    ${postImg(p)}
+    <div class="igp-a"><button class="igb ${p.liked?'liked':''}" data-like="${p.id}" aria-label="Beğen">${igi('heart')}</button><button class="igb" aria-label="Yorum">${igi('comment')}</button><button class="igb" aria-label="Gönder">${igi('share')}</button><button class="igb sv" aria-label="Kaydet">${igi('save')}</button></div>
+    <div class="igp-b"><b class="num">${(p.likes+(p.liked?1:0)).toLocaleString('tr-TR')} beğenme</b><p><b>${esc((a.h||'').replace('@',''))}</b> ${txt}</p><span class="muted igp-more">${nc} yorumun tümünü gör</span>${cm.map(c=>`<p class="igp-c"><b>${c.u}</b> ${esc(c.t)}</p>`).join('')}<span class="igp-t">${p.week}. HAFTA · ${seasonLabel(p.season)}</span></div></article>`; }
+let IG_TAB='akis', IG_GRID='mine';
+function storyItems(){ const out=[]; const last=S.history[0]; if(last) out.push({a:{n:S.name,me:1,h:S.social.handle},title:'Son maçım',body:`${team(last.home).name} ${last.score.join('-')} ${team(last.away).name}`,teams:[last.home,last.away],rating:last.rating});
+  S.news.slice(0,7).forEach(n=>out.push({a:{n:n.src,h:'@'+slug(n.src)},title:n.title,body:n.body,teams:n.teams,cat:n.cat})); return out; }
+function socialHTML(){
+  const so=S.social; const wk=S.season*100+S.week; const posted=so.lastPost===wk; const played=S.tasks&&S.tasks.matches.some(m=>m.played);
+  const mine=so.posts.filter(p=>p.a&&p.a.me), tagged=so.posts.filter(p=>p.aboutMe&&!(p.a&&p.a.me));
+  const st=storyItems();
+  const stories=`<div class="ig-stories">${st.map((s,i)=>`<button class="ig-st" data-story="${i}"><span class="ig-ring ${i===0&&s.a.me?'me':''}">${s.a.me?igAvatar(s.a,58):s.teams&&s.teams[0]&&team(s.teams[0])?`<span class="igav crestav" style="width:58px;height:58px">${crest(team(s.teams[0]),46)}</span>`:igAvatar(s.a,58)}</span><span class="ig-stn">${esc(s.a.me?'Hikayen':s.a.n)}</span></button>`).join('')}</div>`;
+  const top=`<div class="ig-top"><span class="ig-logo">Kadraj</span><div class="row" style="gap:4px"><button class="igb" id="igNew" aria-label="Yeni gönderi" ${posted?'disabled':''}>${igi('plus')}</button><button class="igb" aria-label="Bildirimler">${igi('heart')}</button></div></div>
+    <div class="ig-tabs"><button class="${IG_TAB==='akis'?'on':''}" data-igt="akis">Akış</button><button class="${IG_TAB==='profil'?'on':''}" data-igt="profil">Profil</button></div>`;
+  let body;
+  if(IG_TAB==='akis') body=`${stories}<div class="ig-feed">${so.posts.slice(0,30).map(igPost).join('')||'<p class="muted" style="padding:20px">Henüz gönderi yok. Maç yönettikçe hakkında paylaşımlar başlar.</p>'}</div>`;
+  else { const grid=IG_GRID==='mine'?mine:tagged;
+    body=`<section class="ig-prof"><div class="ig-ph"><span class="ig-ring big">${igAvatar({me:1},86)}</span><div class="ig-stats"><div><b class="num">${mine.length}</b><small>gönderi</small></div><div><b class="num">${compactNum(so.followers)}</b><small>takipçi</small></div><div><b class="num">${48+S.history.length%60}</b><small>takip</small></div></div></div>
+      <div class="ig-bio"><b>${esc(S.name)} ${so.followers>=20000?'<span class="verif">✓</span>':''}</b><span class="muted">${esc(so.handle)}</span><p>${esc(rankText())} · ${esc(NAT().fed)}<br>Resmi hakem hesabı. Maç değerlendirmesi yapmaz.</p></div>
+      <div class="ig-btns"><button class="btn sm" id="igNew2" ${posted?'disabled':''}>${posted?'Bu hafta paylaşım yaptın':'Yeni gönderi'}</button><button class="btn sm" data-tab2="kariyer">Kariyer</button></div>
+      <div class="ig-hl">${[['Derbiler','star'],['Avrupa','kariyer'],['Antrenman','bolt'],['Kurul','kurul']].map(([n,k])=>`<div><span class="ig-hlc">${ic(k)}</span><small>${n}</small></div>`).join('')}</div>
+      <div class="ig-gt"><button class="${IG_GRID==='mine'?'on':''}" data-igg="mine">${igi('grid')}</button><button class="${IG_GRID==='tag'?'on':''}" data-igg="tag">${igi('tag')}</button></div>
+      <div class="ig-grid">${grid.slice(0,30).map(p=>`<button class="ig-cell" data-cell="${p.id}">${postImg(p,true)}<span class="ig-cl">${igi('heart')} ${compactNum(p.likes)}</span></button>`).join('')||`<p class="muted" style="grid-column:1/-1;padding:24px;text-align:center">${IG_GRID==='mine'?'İlk gönderini paylaş.':'Henüz seni etiketleyen gönderi yok.'}</p>`}</div></section>`; }
+  return `<div class="ig-wrap"><div class="ig">${top}${body}</div>
+    <aside class="ig-side stack"><section class="panel stack"><h3>Gündemdekiler</h3>${(()=>{ const tags={}; so.posts.slice(0,40).forEach(p=>(p.text.match(/#[\p{L}\d_]+/gu)||[]).forEach(t=>tags[t]=(tags[t]||0)+p.likes)); const tr=Object.entries(tags).sort((a,b)=>b[1]-a[1]).slice(0,6); return tr.length?tr.map(([t,v],i)=>`<div class="trend"><span class="muted num">${i+1}</span><div><b>${esc(t)}</b><small class="muted">${compactNum(v)} etkileşim</small></div></div>`).join(''):'<p class="muted">Gündem boş.</p>'; })()}</section>
+      <section class="panel stack"><h3>Hesap</h3><div class="kv"><span class="muted">Takipçi</span><b class="num">${compactNum(so.followers)}</b></div><div class="kv"><span class="muted">Onaylı rozet</span><span>${so.followers>=20000?'Var':'20 B takipçide'}</span></div><p class="muted" style="font-size:12.5px">Büyük maçlar, finaller ve tartışmalı kararlar takipçi getirir. Eleştirilere yanıt vermek kurulu kızdırır.</p></section></aside></div>`;
+}
+function composeModal(){
+  const played=S.tasks&&S.tasks.matches.some(m=>m.played); const last=S.history[0];
+  const prev={antrenman:{k:'train'},tesekkur:last?{k:'match',h:last.home,a:last.away,sc:last.score,comp:last.comp}:{k:'train'},kural:{k:'quote'},yanit:{k:'quote'}};
+  openModal(`<div class="sh-head"><h2>Yeni gönderi</h2><button class="btn sm" id="cmpX">Kapat</button></div><div class="sh-body"><div class="cmp-grid">${MYPOSTS.map(p=>{ const dis=p.needMatch&&!played; const sample=p.id==='kural'?'Bilgi notu: Taç atışından ofsayt olmaz.':p.id==='yanit'?'Kararlarımın arkasındayım.':''; return `<button class="cmp-o" data-post="${p.id}" ${dis?'disabled':''}>${postImg({id:'cmp'+p.id,text:sample,a:{me:1,h:S.social.handle},img:prev[p.id]},true)}<b>${esc(p.label)}</b><small>${{antrenman:'Takipçi kazandırır',tesekkur:dis?'Bu hafta maç yönetmedin':'İtibar +',kural:'Eğitici; itibar +',yanit:'Çok etkileşim, kurul uyarır'}[p.id]}</small></button>`; }).join('')}</div></div>`,true);
+  $('#cmpX').onclick=()=>{ $('#modal').hidden=true; $('#modal').innerHTML=''; };
+  document.querySelectorAll('#modal [data-post]').forEach(b=>b.onclick=()=>{ $('#modal').hidden=true; $('#modal').innerHTML=''; myPost(b.dataset.post); });
+}
+let STV=null;
+function storyView(i){
+  const items=storyItems(); if(!items.length) return; clearInterval(STV);
+  const show=k=>{ if(k<0) k=0; if(k>=items.length){ closeStory(); return; } const s=items[k]; const tm=(s.teams||[]).map(id=>team(id)).filter(Boolean);
+    const m=$('#modal'); m.hidden=false; m.innerHTML=`<div class="story" role="dialog" aria-modal="true"><div class="st-bars">${items.map((_,j)=>`<span><i style="width:${j<k?100:0}%" ${j===k?'id="stBar"':''}></i></span>`).join('')}</div>
+      <div class="st-h">${s.a.me?igAvatar(s.a,32):tm[0]?`<span class="igav crestav" style="width:32px;height:32px">${crest(tm[0],26)}</span>`:igAvatar(s.a,32)}<b>${esc(s.a.me?S.social.handle.replace('@',''):s.a.n)}</b><button class="igb" id="stX" aria-label="Kapat">✕</button></div>
+      <div class="st-body" style="--c1:${tm[0]?tm[0].c1:'#1b2840'};--c2:${tm[1]?tm[1].c1:'#0b111b'}">${tm.length?`<div class="row" style="gap:18px;justify-content:center">${tm.map(t=>crest(t,84)).join('')}</div>`:`<span class="st-ic">${ic(s.cat==='kurul'?'kurul':'haber')}</span>`}
+        <h3>${esc(s.title)}</h3><p>${esc(s.body)}</p>${s.rating?`<span class="st-r num">Gözlemci notu ${f1(s.rating)}</span>`:''}</div>
+      <button class="st-prev" aria-label="Önceki"></button><button class="st-next" aria-label="Sonraki"></button></div>`;
+    $('#stX').onclick=closeStory; m.querySelector('.st-prev').onclick=()=>show(k-1); m.querySelector('.st-next').onclick=()=>show(k+1);
+    const t0=Date.now(); clearInterval(STV); STV=setInterval(()=>{ const p=(Date.now()-t0)/5000; const b=$('#stBar'); if(b) b.style.width=Math.min(100,p*100)+'%'; if(p>=1) show(k+1); },60); };
+  show(i);
+}
+function closeStory(){ clearInterval(STV); STV=null; const m=$('#modal'); m.hidden=true; m.innerHTML=''; }
 
 function gradeOf(r){ return r>=9?'Olağanüstü':r>=8.6?'Çok iyi':r>=8.3?'İyi':r>=8.0?'Yeterli':r>=7.5?'Zayıf':'Kötü'; }
 function observerText(r,e,n){
@@ -3233,19 +3547,6 @@ function newsHTML(){
     ${lead?`<article class="news-lead"><div class="news-crests">${(lead.teams||[]).map(id=>crest(team(id),56)).join('')}</div><div><span class="chip ${(NEWS_CATS[lead.cat]||['',''])[1]}">${(NEWS_CATS[lead.cat]||['Haber'])[0]}</span><h2 class="lead-t">${esc(lead.title)}</h2><p>${esc(lead.body)}</p><p class="muted" style="font-size:12px;margin-top:6px">${esc(lead.src)} · ${seasonLabel(lead.season)} H${lead.week}</p></div></article>`:'<div class="empty">Bu kategoride haber yok. Haftaları ilerlettikçe gündem oluşur.</div>'}
     <div class="news-list panel">${list.slice(1,40).map(n=>newsItem(n)).join('')}</div>`;
 }
-function socialHTML(){
-  const so=S.social; const wk=S.season*100+S.week; const posted=so.lastPost===wk; const played=S.tasks&&S.tasks.matches.some(m=>m.played);
-  const tags={}; so.posts.slice(0,40).forEach(p=>(p.text.match(/#[\p{L}\d_]+/gu)||[]).forEach(t=>tags[t]=(tags[t]||0)+p.likes)); const trend=Object.entries(tags).sort((a,b)=>b[1]-a[1]).slice(0,6);
-  const mine=so.posts.filter(p=>p.aboutMe);
-  return `<div class="hub"><div class="stack" style="gap:16px;min-width:0">
-    <section class="panel sprof"><div class="sprof-bg"></div><div class="sprof-in"><span class="av xl pic">${avatarSVG(S.look)}</span><div style="min-width:0"><h2 style="text-transform:none">${esc(S.name)} ${so.followers>=20000?'<span class="verif">✓</span>':''}</h2><div class="muted">${esc(so.handle)} · ${esc(rankText())}</div></div></div>
-      <div class="kpis"><div><b class="num">${compactNum(so.followers)}</b><small>Takipçi</small></div><div><b class="num">${so.posts.filter(p=>p.a&&p.a.me).length}</b><small>Paylaşım</small></div><div><b class="num">${mine.length}</b><small>Hakkında</small></div><div><b class="num">${so.followers>=20000?'Onaylı':'—'}</b><small>Rozet</small></div></div></section>
-    <section class="panel stack"><div class="row" style="justify-content:space-between"><h3>Paylaş</h3><span class="muted" style="font-size:13px">${posted?'Bu hafta paylaşım yaptın':'Haftada bir paylaşım'}</span></div>
-      <div class="compose">${MYPOSTS.map(p=>`<button class="act-b" data-post="${p.id}" ${posted||(p.needMatch&&!played)?'disabled':''}><b>${p.label}</b><span>${{antrenman:'Takipçi kazandırır',tesekkur:'Bu hafta maç yönettiysen; itibar +',kural:'Eğitici; kural bilgin yüksekse itibar +',yanit:'Çok takipçi ama kurul uyarır, itibar −'}[p.id]}</span></button>`).join('')}</div></section>
-    <section class="panel"><h3>Akış</h3><div class="feedlist">${so.posts.slice(0,40).map(postHTML).join('')||'<p class="muted">Henüz paylaşım yok. Maç yönettikçe hakkında konuşulmaya başlanır.</p>'}</div></section></div>
-    <div class="stack" style="gap:16px;min-width:0"><section class="panel stack"><h3>Gündemdekiler</h3>${trend.length?trend.map(([t,v],i)=>`<div class="trend"><span class="muted num">${i+1}</span><div><b>${esc(t)}</b><small class="muted">${compactNum(v)} etkileşim</small></div></div>`).join(''):'<p class="muted">Gündem boş.</p>'}</section>
-    <section class="panel stack"><h3>Hakkında yazılanlar</h3><div class="feedlist">${mine.filter(p=>!(p.a&&p.a.me)).slice(0,6).map(postHTML).join('')||'<p class="muted">Henüz yok.</p>'}</div></section></div></div>`;
-}
 function refRanking(){
   const list=S.refs.list.map(r=>({name:r.name,n:r.ratings.length,avg:r.ratings.length?avg(r.ratings):null,last:r.ratings[r.ratings.length-1],fifa:r.fifa}));
   list.push({name:S.name,n:S.stats.dom.length,avg:S.stats.dom.length?avg(S.stats.dom):null,last:S.stats.dom[S.stats.dom.length-1],me:true,fifa:S.fifa});
@@ -3282,11 +3583,6 @@ function endedHTML(){
     <div class="grid3"><div><div class="eyebrow">Maç</div><div class="num" style="font-size:30px">${t.matches}</div></div><div><div class="eyebrow">Doğru karar oranı</div><div class="num" style="font-size:30px">%${t.decisions?Math.round(t.correct/t.decisions*100):0}</div></div><div><div class="eyebrow">Kariyer anı</div><div class="num" style="font-size:30px">${ms.length}/${MILESTONES.length}</div></div></div>
     <div class="trophies">${ms.map(m=>`<div class="trophy on"><b>${esc(m.name)}</b>${esc(S.milestones[m.id])}</div>`).join('')}</div>
     <div><button class="btn primary" id="bNewCareer">Yeni kariyer</button></div></div>`;
-}
-function calHTML(){
-  const rows=[]; for(let w=1;w<=34;w++){ const h=S.history.filter(x=>x.season===S.season&&x.week===w); const ph=MIDWEEK[w];
-    rows.push(`<tr class="${w===S.week?'me':''}"><td class="num">${w}</td><td>${weekDate(w)}</td><td>${h.length?h.map(x=>`${esc(team(x.home).name)} ${x.score.join('-')} ${esc(team(x.away).name)} <span class="muted">(${esc(x.comp)})</span>`).join('<br>'):w===S.week&&S.tasks?S.tasks.matches.map(m=>esc(team(m.home).name)+' – '+esc(team(m.away).name)).join('<br>')||'<span class="muted">Görev yok</span>':'<span class="muted">—</span>'}</td><td>${ph?`<span class="chip">${PHASE_NAMES[ph]}</span>`:''}</td><td class="n">${h.map(x=>f1(x.rating)).join(' / ')}</td></tr>`); }
-  return `<div class="panel stack"><h2>${seasonLabel(S.season)} takvimi</h2><div class="tbl-wrap"><table><thead><tr><th>H</th><th>Tarih</th><th>Görevin</th><th>Avrupa / milli</th><th class="n">Not</th></tr></thead><tbody>${rows.join('')}</tbody></table></div></div>`;
 }
 function inboxHTML(){
   S.inbox.forEach(x=>x.read=true); save();
@@ -3338,6 +3634,12 @@ function bindMain(){
   const q=s=>document.querySelectorAll(s);
   q('[data-nf]').forEach(b=>b.onclick=()=>{ NEWS_F=b.dataset.nf; render(); });
   q('[data-post]').forEach(b=>b.onclick=()=>myPost(b.dataset.post));
+  q('[data-igt]').forEach(b=>b.onclick=()=>{ IG_TAB=b.dataset.igt; render(); });
+  q('[data-igg]').forEach(b=>b.onclick=()=>{ IG_GRID=b.dataset.igg; render(); });
+  q('[data-like]').forEach(b=>b.onclick=()=>{ const p=S.social.posts.find(x=>x.id===b.dataset.like); if(!p) return; p.liked=!p.liked; haptic('light'); save(); const art=b.closest('.igp'); if(art){ art.outerHTML=igPost(p); bindMain(); } });
+  q('[data-story]').forEach(b=>b.onclick=()=>storyView(+b.dataset.story));
+  q('#igNew,#igNew2').forEach(b=>b.onclick=composeModal);
+  q('[data-cell]').forEach(b=>b.onclick=()=>{ const p=S.social.posts.find(x=>x.id===b.dataset.cell); if(!p) return; openModal(`<div class="sh-head"><h2>Gönderi</h2><button class="btn sm" id="cellX">Kapat</button></div><div class="ig" style="border-radius:0;border:0">${igPost(p)}</div>`,true); $('#cellX').onclick=()=>{ $('#modal').hidden=true; $('#modal').innerHTML=''; }; });
   q('[data-hear]').forEach(b=>b.onclick=()=>resolveHearing(b.dataset.hear));
   q('[data-play]').forEach(b=>b.onclick=()=>startMatch(b.dataset.play,false));
   q('[data-auto]').forEach(b=>b.onclick=()=>startMatch(b.dataset.auto,true));
