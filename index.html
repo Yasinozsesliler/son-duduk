@@ -817,7 +817,7 @@ input[type=range]{padding:0;accent-color:var(--gold2);background:none;border:0;h
 .cmp-o{display:flex;flex-direction:column;gap:6px;text-align:left;padding:8px;border-radius:14px;background:var(--bg2);border:1px solid var(--line2)}
 .cmp-o .pimg{border-radius:10px;gap:4px}.cmp-o .pq p{font-size:13px}.cmp-o .pm-row b{font-size:22px}.cmp-o .pt b{font-size:16px}
 .cmp-o small{color:var(--muted);font-size:12px}.cmp-o:disabled{opacity:.4}
-.story{position:fixed;inset:0;margin:auto;width:min(420px,100%);height:min(780px,100%);background:#000;border-radius:18px;overflow:hidden;display:flex;flex-direction:column;z-index:2}
+.igstory{position:fixed;inset:0;margin:auto;width:min(420px,100%);height:min(780px,100%);background:#000;border-radius:18px;overflow:hidden;display:flex;flex-direction:column;z-index:2}
 .st-bars{display:flex;gap:4px;padding:10px 10px 6px}.st-bars span{flex:1;height:3px;border-radius:3px;background:rgba(255,255,255,.3);overflow:hidden}.st-bars i{display:block;height:100%;background:#fff}
 .st-h{display:flex;align-items:center;gap:10px;padding:4px 10px;color:#fff;z-index:3}.st-h b{flex:1;font-size:14px}
 .st-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:28px;text-align:center;background:radial-gradient(circle at 30% 25%,color-mix(in srgb,var(--c1) 75%,transparent),transparent 60%),radial-gradient(circle at 70% 80%,color-mix(in srgb,var(--c2) 75%,transparent),transparent 60%),#05070b;color:#fff}
@@ -3575,7 +3575,7 @@ let STV=null;
 function storyView(i){
   const items=storyItems(); if(!items.length) return; clearInterval(STV);
   const show=k=>{ if(k<0) k=0; if(k>=items.length){ closeStory(); return; } const s=items[k]; const tm=(s.teams||[]).map(id=>team(id)).filter(Boolean);
-    const m=$('#modal'); m.hidden=false; m.innerHTML=`<div class="story" role="dialog" aria-modal="true"><div class="st-bars">${items.map((_,j)=>`<span><i style="width:${j<k?100:0}%" ${j===k?'id="stBar"':''}></i></span>`).join('')}</div>
+    const m=$('#modal'); m.hidden=false; m.innerHTML=`<div class="igstory" role="dialog" aria-modal="true"><div class="st-bars">${items.map((_,j)=>`<span><i style="width:${j<k?100:0}%" ${j===k?'id="stBar"':''}></i></span>`).join('')}</div>
       <div class="st-h">${s.a.me?igAvatar(s.a,32):tm[0]?`<span class="igav crestav" style="width:32px;height:32px">${crest(tm[0],26)}</span>`:igAvatar(s.a,32)}<b>${esc(s.a.me?S.social.handle.replace('@',''):s.a.n)}</b><button class="igb" id="stX" aria-label="Kapat">✕</button></div>
       <div class="st-body" style="--c1:${tm[0]?tm[0].c1:'#1b2840'};--c2:${tm[1]?tm[1].c1:'#0b111b'}">${tm.length?`<div class="row" style="gap:18px;justify-content:center">${tm.map(t=>crest(t,84)).join('')}</div>`:`<span class="st-ic">${ic(s.cat==='kurul'?'kurul':'haber')}</span>`}
         <h3>${esc(s.title)}</h3><p>${esc(s.body)}</p>${s.rating?`<span class="st-r num">Gözlemci notu ${f1(s.rating)}</span>`:''}</div>
