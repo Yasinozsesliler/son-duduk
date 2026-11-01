@@ -873,6 +873,58 @@ input[type=range]{padding:0;accent-color:var(--gold2);background:none;border:0;h
 .rpress-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
 @media (max-width:820px){.rpress-grid{grid-template-columns:minmax(0,1fr)}}
 
+/* ===== v9: standings ===== */
+.lgsel{display:flex;flex-direction:column;gap:8px}
+.lgrow{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.lgchip{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:12px;border:1px solid var(--line2);background:var(--glass),var(--bg2);font-weight:600;font-size:13px;white-space:nowrap;flex:none;color:var(--muted)}
+.lgchip .flag{border-radius:3px}
+.lgchip.on{color:var(--fg);border-color:var(--gold1);background:linear-gradient(180deg,rgba(255,219,92,.16),rgba(255,219,92,.03)),var(--bg2)}
+.lg-me{font-style:normal;font-size:10.5px;font-weight:800;padding:1px 6px;border-radius:999px;background:var(--gold1);color:#211600}
+.lg-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:760px){.lg-kpis{grid-template-columns:minmax(0,1fr)}}
+.lgk{display:flex;align-items:center;gap:12px;padding:14px}.lgk>div{display:flex;flex-direction:column;min-width:0}.lgk b{font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.lgk small{color:var(--muted);font-size:12.5px}
+.lgt{table-layout:auto}
+.lgt td{padding:7px 8px}
+.lgt td:nth-child(2){max-width:220px}
+.zpos{display:inline-grid;place-items:center;min-width:24px;height:24px;border-radius:7px;font-weight:600}
+.lgt tr.z-champ .zpos{background:linear-gradient(180deg,var(--gold1),var(--gold2));color:#211600}
+.lgt tr.z-ucl .zpos{background:rgba(91,155,255,.25);color:#cfe0ff}
+.lgt tr.z-uel .zpos{background:rgba(242,155,56,.22);color:#ffd2a1}
+.lgt tr.z-up .zpos{background:rgba(56,178,122,.28);color:#bff3da}
+.lgt tr.z-po .zpos{background:rgba(0,163,163,.22);color:#aef0f0}
+.lgt tr.z-rel .zpos{background:rgba(227,67,75,.28);color:#ffc3c6}
+.lgt tr.mine td{background:rgba(255,219,92,.06)}
+.form{display:inline-flex;gap:3px}.form i{font-style:normal;width:18px;height:18px;border-radius:5px;display:grid;place-items:center;font-size:10px;font-weight:800;color:#0b111b}
+.f-G{background:var(--green)}.f-B{background:#9aa6b5}.f-M{background:var(--red);color:#fff!important}
+.lg-legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--muted)}.lg-legend span{display:flex;align-items:center;gap:6px}
+.lz{width:12px;height:12px;border-radius:4px;display:inline-block}.lz.z-champ{background:var(--gold1)}.lz.z-ucl{background:#5b9bff}.lz.z-uel{background:var(--amber)}.lz.z-up{background:var(--green)}.lz.z-po{background:#00a3a3}.lz.z-rel{background:var(--red)}.lz.mine{background:rgba(255,219,92,.35)}
+@media (max-width:560px){.hide-s{display:none}.lgt td:nth-child(2){max-width:150px}}
+/* ===== v9: card show ===== */
+.cardfx{position:absolute;inset:auto 0 14px 0;display:flex;justify-content:center;pointer-events:none;z-index:4}
+.cardfx .cf{transform-origin:bottom center}
+@media (max-width:560px){.cf{padding:10px 16px 10px 12px;gap:12px}.cf-cards{width:42px;height:58px}.cf-t span{font-size:14px}}
+.cf{display:flex;align-items:center;gap:18px;padding:16px 26px 16px 18px;border-radius:18px;background:rgba(7,11,18,.86);border:1px solid var(--line2);backdrop-filter:blur(6px);box-shadow:0 30px 60px -20px rgba(0,0,0,.9);animation:cfIn .5s cubic-bezier(.2,1.3,.4,1) both;perspective:600px}
+.cf-cards{position:relative;width:62px;height:86px}
+.cf-c{position:absolute;inset:0;border-radius:8px;box-shadow:0 10px 24px rgba(0,0,0,.6),inset 0 0 0 2px rgba(255,255,255,.25);animation:cardFlip .7s cubic-bezier(.2,1.2,.3,1) .1s both;transform-origin:50% 100%}
+.cf-c.y{background:linear-gradient(160deg,#ffe27a,#f2b51e)}.cf-c.r{background:linear-gradient(160deg,#ff6b72,#c9252f)}
+.cf-c.back{transform:translate(-12px,6px) rotate(-14deg);animation:none;opacity:.9}
+.cf-t{display:flex;flex-direction:column;gap:2px}.cf-t b{font-family:var(--f-display);font-weight:800;font-size:clamp(22px,4vw,34px);text-transform:uppercase;letter-spacing:.04em;line-height:1}
+.cf.y .cf-t b{color:var(--gold1)}.cf.r .cf-t b{color:#ff6b72}.cf-t span{font-size:16px;font-weight:600}.cf-t small{color:var(--muted);font-size:13px}
+@keyframes cfIn{from{opacity:0;transform:translateY(24px) scale(.9)}to{opacity:1;transform:none}}
+@keyframes cardFlip{0%{transform:rotateY(90deg) translateY(40px) rotate(0)}60%{transform:rotateY(-12deg) translateY(-6px) rotate(6deg)}100%{transform:rotateY(0) translateY(0) rotate(4deg)}}
+/* ===== v9: academy ===== */
+.acad-hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:16px;align-items:center;background:linear-gradient(135deg,rgba(91,155,255,.12),rgba(255,219,92,.06)),var(--panel)}
+@media (max-width:760px){.acad-hero{grid-template-columns:minmax(0,1fr)}}
+.ah-badge{display:flex;gap:14px;align-items:center}.ah-badge>div{display:flex;flex-direction:column}.ah-badge b{font-family:var(--f-display);font-weight:800;font-size:28px;text-transform:uppercase}.ah-badge small{color:var(--muted);font-size:12.5px}
+.ah-ic{width:60px;height:60px;border-radius:18px;display:grid;place-items:center;background:linear-gradient(180deg,var(--gold1),var(--gold2));color:#211600;flex:none}.ah-ic .ic{width:30px;height:30px}
+.ah-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.ah-kpis div{display:flex;flex-direction:column;padding:10px;border-radius:12px;background:rgba(7,11,18,.5);border:1px solid var(--line)}.ah-kpis b{font-size:22px;font-weight:600}.ah-kpis small{font-size:11.5px;color:var(--muted)}
+@media (max-width:420px){.ah-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.chips-row.wrap{flex-wrap:wrap}
+.exam{border-color:rgba(255,219,92,.35)}.exam.done{border-color:var(--line)}
+.tstat{display:grid;grid-template-columns:minmax(0,1fr) 90px 44px;gap:10px;align-items:center;font-size:13.5px}.tstat .num{text-align:right;font-size:12.5px}
+.law{border-bottom:1px solid var(--line);padding:8px 0}.law summary{cursor:pointer;font-weight:600}.law p{font-size:13.5px;line-height:1.55;margin-top:6px;color:#cbd5e1}
+.acad-tease{display:flex;align-items:center;gap:12px}.acad-tease .ah-ic{width:44px;height:44px;border-radius:13px}.acad-tease .ah-ic .ic{width:22px;height:22px}
+
 /* touch / mobile app ergonomics */
 html{-webkit-text-size-adjust:100%}
 body{overscroll-behavior-y:none;-webkit-tap-highlight-color:transparent}
@@ -929,16 +981,26 @@ const MONTHS = ['Oca','Şub','Mar','Nis','May','Haz','Tem','Ağu','Eyl','Eki','K
 
 // ---------- names ----------
 const NAMES = {
- TR:{f:['Emre','Burak','Mert','Kerem','Arda','Okan','Serkan','Volkan','Hakan','Oğuz','Cenk','Barış','Yusuf','Kaan','Ozan','Tolga','Umut','Furkan','Enes','Berk','İrfan','Sinan','Taylan','Efe'],l:['Yılmaz','Kaya','Demir','Şahin','Çelik','Aydın','Öztürk','Arslan','Doğan','Kılıç','Aslan','Korkmaz','Polat','Erdem','Kurt','Özdemir','Koç','Bulut','Ateş','Güneş','Tekin','Yavuz','Karaca','Uçar']},
- ENG:{f:['Jack','Harry','Oliver','George','Callum','Mason','Reece','Jordan','Tom','Kyle','Luke','Ben','Declan','Jamie'],l:['Walker','Hughes','Barnes','Fletcher','Cole','Webb','Ward','Bennett','Turner','Hayes','Shaw','Price','Holloway','Marsh']},
- ESP:{f:['Pablo','Sergio','Álvaro','Diego','Iker','Javier','Marcos','Rubén','Raúl','Dani','Hugo','Adrián','Mateo'],l:['García','Martínez','López','Sánchez','Romero','Navarro','Torres','Ruiz','Moreno','Gil','Serrano','Vidal','Ortega']},
- ITA:{f:['Luca','Matteo','Lorenzo','Andrea','Federico','Davide','Marco','Simone','Nicolò','Riccardo','Tommaso'],l:['Rossi','Bianchi','Romano','Colombo','Ricci','Marino','Greco','Bruno','Gallo','Conti','Esposito','Ferrara']},
- GER:{f:['Lukas','Jonas','Leon','Felix','Niklas','Tim','Jan','Florian','Maximilian','Paul','Moritz'],l:['Müller','Schmidt','Schneider','Fischer','Weber','Becker','Hoffmann','Wagner','Koch','Richter','Krause','Lang']},
- FRA:{f:['Lucas','Théo','Hugo','Mathis','Kylian','Antoine','Nathan','Enzo','Bastien','Yanis','Ousmane'],l:['Martin','Bernard','Dubois','Moreau','Laurent','Lefebvre','Girard','Fontaine','Mercier','Diallo','Camara','Roux']},
- POR:{f:['João','Diogo','Rui','Tiago','Gonçalo','Pedro','Nuno','André','Bruno','Rafael','Vitor'],l:['Silva','Santos','Ferreira','Pereira','Costa','Oliveira','Rodrigues','Martins','Sousa','Gomes','Lima']},
- NED:{f:['Daan','Sem','Milan','Jesse','Thijs','Bram','Ruben','Luuk','Stijn','Joey'],l:['de Jong','Jansen','de Vries','van Dijk','Bakker','Visser','Smit','Meijer','Mulder','de Boer']},
- SAU:{f:['Abdullah','Fahad','Salem','Saud','Nawaf','Turki','Faisal','Khalid','Yasser','Majed'],l:['Al-Dawsari','Al-Shehri','Al-Faraj','Al-Ghamdi','Al-Otaibi','Al-Qahtani','Al-Harbi','Al-Mutairi','Al-Zahrani','Al-Malki']},
- GEN:{f:['Ivan','Marko','Luka','Andrej','Nikola','Tomas','Mateusz','Kristian','Dimitris','Petar','Erik','Lars','Mohamed','Youssef','Omar','Kenji','Sadio','Lionel','Carlos'],l:['Novak','Petrović','Horvat','Kovač','Nowak','Papadopoulos','Hansen','Nielsen','Andersson','Popescu','Ivanov','Jovanović','Hassan','Mansour','Tanaka','Mendy','Acosta','Herrera']}
+ TR:{f:['Emre','Burak','Mert','Kerem','Arda','Okan','Serkan','Volkan','Hakan','Oğuz','Cenk','Barış','Yusuf','Kaan','Ozan','Tolga','Umut','Furkan','Enes','Berk','İrfan','Sinan','Taylan','Efe','Alper','Batuhan','Berkay','Bora','Cem','Deniz','Doğukan','Ege','Emir','Eren','Erkan','Ferdi','Gökhan','Halil','Hasan','İbrahim','İsmail','Kadir','Kemal','Koray','Levent','Mehmet','Melih','Murat','Mustafa','Onur','Orkun','Ömer','Rıdvan','Salih','Samet','Selçuk','Semih','Sercan','Taha','Tarık','Tuna','Uğur','Utku','Yasin','Yiğit','Zafer','Atakan','Bertuğ','Cengiz','Dorukhan','Eray','Fatih','Gürkan','Hamza','İlkay','Kubilay','Oğulcan','Serdar','Anıl','Barlas','Çağlar','Ertuğrul','Göktuğ','Kutay','Polat','Recep','Sarp','Toprak'],
+     l:['Yılmaz','Kaya','Demir','Şahin','Çelik','Aydın','Öztürk','Arslan','Doğan','Kılıç','Aslan','Korkmaz','Polat','Erdem','Kurt','Özdemir','Koç','Bulut','Ateş','Güneş','Tekin','Yavuz','Karaca','Uçar','Akın','Aksoy','Altun','Avcı','Bayram','Bozkurt','Cansız','Ceylan','Çakır','Çetin','Duman','Durmaz','Ergin','Gök','Gündoğdu','Gürbüz','Işık','Kaplan','Karakaya','Keskin','Kocabaş','Kahraman','Kalkan','Kartal','Kaymaz','Metin','Oral','Özkan','Özer','Pehlivan','Sarı','Savaş','Sezer','Soylu','Şimşek','Taş','Tuncer','Turan','Tutar','Ünal','Uysal','Yalçın','Yaman','Yazıcı','Yıldırım','Yüksel','Zengin','Akbaba','Bilgin','Coşkun','Dursun','Erkol','Günay','Karabulut','Okur','Sönmez','Topçu','Albayrak','Başaran','Cihan','Dağlı','Elmas','Gezer','İnan','Kırca','Musluk','Saygılı','Tosun','Vural']},
+ ENG:{f:['Jack','Harry','Oliver','George','Callum','Mason','Reece','Jordan','Tom','Kyle','Luke','Ben','Declan','Jamie','Aaron','Bukayo','Conor','Danny','Ethan','Freddie','Gareth','Harvey','Isaac','Jarrod','Kieran','Liam','Marcus','Nathan','Ollie','Phil','Raheem','Sam','Theo','Tyrone','Will','Zack','Alfie','Brandon','Curtis','Dominic','Elliot','Joe'],
+      l:['Walker','Hughes','Barnes','Fletcher','Cole','Webb','Ward','Bennett','Turner','Hayes','Shaw','Price','Holloway','Marsh','Ashworth','Bailey','Carver','Dunn','Ellis','Foster','Gibbs','Harrison','Ingram','Jenkins','Knight','Lowe','Morgan','Norris','Oakley','Palmer','Quinn','Riley','Stones','Thornton','Vaughan','Whitaker','Young','Bradshaw','Coates','Dawson','Fenwick','Grant','Hale','Kemp']},
+ ESP:{f:['Pablo','Sergio','Álvaro','Diego','Iker','Javier','Marcos','Rubén','Raúl','Dani','Hugo','Adrián','Mateo','Alejandro','Borja','Carlos','David','Enrique','Fermín','Gonzalo','Héctor','Ignacio','Jorge','Lucas','Mikel','Nacho','Óscar','Pedro','Rodrigo','Santi','Unai','Víctor','Xabi','Aitor','Bruno','Iñaki'],
+      l:['García','Martínez','López','Sánchez','Romero','Navarro','Torres','Ruiz','Moreno','Gil','Serrano','Vidal','Ortega','Alonso','Blanco','Castro','Delgado','Fuentes','Herrera','Iglesias','Jiménez','Lozano','Medina','Núñez','Ochoa','Pascual','Ramos','Soler','Toledo','Vega','Zamora','Arrieta','Cabello','Domínguez','Echeverría','Garrido']},
+ ITA:{f:['Luca','Matteo','Lorenzo','Andrea','Federico','Davide','Marco','Simone','Nicolò','Riccardo','Tommaso','Alessandro','Bryan','Ciro','Daniele','Emanuele','Fabio','Gianluca','Giacomo','Leonardo','Manuel','Nicola','Pietro','Roberto','Salvatore','Stefano','Vincenzo','Antonio','Christian','Domenico','Giorgio','Mattia'],
+      l:['Rossi','Bianchi','Romano','Colombo','Ricci','Marino','Greco','Bruno','Gallo','Conti','Esposito','Ferrara','Barella','Caputo','De Luca','Fontana','Galli','Lombardi','Mancini','Moretti','Pellegrini','Rinaldi','Santoro','Testa','Vitale','Zanetti','Bellini','Cattaneo','D\'Angelo','Fabbri','Longo','Martini','Orlando','Parisi','Serra']},
+ GER:{f:['Lukas','Jonas','Leon','Felix','Niklas','Tim','Jan','Florian','Maximilian','Paul','Moritz','Benjamin','Christoph','Dominik','Elias','Fabian','Hendrik','Julian','Kai','Lennart','Marvin','Nico','Pascal','Robin','Sebastian','Thilo','Yannick','Joshua','Malte','Tobias','Marcel','Kevin'],
+      l:['Müller','Schmidt','Schneider','Fischer','Weber','Becker','Hoffmann','Wagner','Koch','Richter','Krause','Lang','Bauer','Brandt','Dietrich','Engel','Frank','Graf','Hartmann','Jung','Keller','Lorenz','Meier','Neumann','Otto','Peters','Roth','Schulz','Vogel','Werner','Ziegler','Böhm','Kuhn','Seidel']},
+ FRA:{f:['Lucas','Théo','Hugo','Mathis','Kylian','Antoine','Nathan','Enzo','Bastien','Yanis','Ousmane','Adrien','Benjamin','Clément','Dayot','Eduardo','Florian','Grégoire','Hakim','Ibrahima','Jules','Kingsley','Lilian','Moussa','Noah','Olivier','Paul','Rayan','Sacha','Thomas','Warren','Youssouf'],
+      l:['Martin','Bernard','Dubois','Moreau','Laurent','Lefebvre','Girard','Fontaine','Mercier','Diallo','Camara','Roux','Bonnet','Chevalier','Durand','Fournier','Garnier','Henry','Lambert','Marchand','Noël','Perrin','Robin','Simon','Traoré','Vincent','Blanc','Clément','Faure','Gauthier','Koné','Mendy','Sissoko']},
+ POR:{f:['João','Diogo','Rui','Tiago','Gonçalo','Pedro','Nuno','André','Bruno','Rafael','Vitor','Bernardo','Cristiano','Domingos','Eduardo','Fábio','Gil','Hélder','Ivo','Jota','Luís','Manuel','Otávio','Paulo','Ricardo','Sérgio','Tomás','Vasco','Francisco','Miguel'],
+      l:['Silva','Santos','Ferreira','Pereira','Costa','Oliveira','Rodrigues','Martins','Sousa','Gomes','Lima','Alves','Carvalho','Dias','Esteves','Fonseca','Guerreiro','Henriques','Lopes','Marques','Neves','Pinto','Ribeiro','Teixeira','Vieira','Moutinho','Coelho','Batista','Cardoso','Matos']},
+ NED:{f:['Daan','Sem','Milan','Jesse','Thijs','Bram','Ruben','Luuk','Stijn','Joey','Arjen','Bas','Cody','Davy','Frenkie','Gijs','Jurriën','Kenneth','Lars','Matthijs','Noa','Quinten','Rick','Siem','Teun','Wout','Xavi','Youri','Jorrit','Sven'],
+      l:['de Jong','Jansen','de Vries','van Dijk','Bakker','Visser','Smit','Meijer','Mulder','de Boer','Bos','Dekker','van den Berg','Hendriks','Kok','Koster','Prins','Schouten','van Leeuwen','Vermeulen','Willems','Brouwer','de Graaf','Gerritsen','Hoekstra','Kuipers','Postma','Sneijder','Timmer','Veltman']},
+ SAU:{f:['Abdullah','Fahad','Salem','Saud','Nawaf','Turki','Faisal','Khalid','Yasser','Majed','Abdulrahman','Bader','Firas','Hattan','Hassan','Ibrahim','Mohammed','Mukhtar','Nasser','Omar','Riyadh','Sami','Sultan','Waleed','Ziyad','Ayman'],
+      l:['Al-Dawsari','Al-Shehri','Al-Faraj','Al-Ghamdi','Al-Otaibi','Al-Qahtani','Al-Harbi','Al-Mutairi','Al-Zahrani','Al-Malki','Al-Amri','Al-Bulaihi','Al-Buraikan','Al-Hamdan','Al-Juwayr','Al-Khaibari','Al-Najei','Al-Obaid','Al-Rubaie','Al-Shahrani','Al-Tambakti','Al-Yami','Kanno','Madu']},
+ GEN:{f:['Ivan','Marko','Luka','Andrej','Nikola','Tomas','Mateusz','Kristian','Dimitris','Petar','Erik','Lars','Mohamed','Youssef','Omar','Kenji','Sadio','Lionel','Carlos','Aleksandar','Bogdan','Dušan','Emil','Filip','Giorgos','Hamid','Jakub','Kostas','Lukas','Mikkel','Nemanja','Oskar','Pavel','Rasmus','Stefan','Takumi','Victor','Wojciech','Yerlan','Zoran','Achraf','Enzo','Gabriel','Hirving','Joel','Kaoru','Moises','Rodrigo'],
+     l:['Novak','Petrović','Horvat','Kovač','Nowak','Papadopoulos','Hansen','Nielsen','Andersson','Popescu','Ivanov','Jovanović','Hassan','Mansour','Tanaka','Mendy','Acosta','Herrera','Babić','Christensen','Dragović','Eriksen','Fernández','Georgiou','Hakimi','Ionescu','Jakobsen','Kowalski','Lindqvist','Milinković','Nakamura','Olsen','Pavlović','Quiroga','Radu','Svensson','Tadić','Urbański','Vlahović','Wiśniewski','Yamada','Zieliński','Caicedo','Davies','En-Nesyri','Kamada','Lozano','Valencia']}
 };
 const NT_POOL = {'Türkiye':'TR','İngiltere':'ENG','İspanya':'ESP','İtalya':'ITA','Almanya':'GER','Fransa':'FRA','Portekiz':'POR','Hollanda':'NED','Suudi Arabistan':'SAU','Brezilya':'POR','Arjantin':'ESP','Uruguay':'ESP','Kolombiya':'ESP','Meksika':'ESP','Ekvador':'ESP','İskoçya':'ENG','Galler':'ENG','İrlanda':'ENG','ABD':'ENG','Kanada':'ENG','Avustralya':'ENG','Belçika':'FRA','İsviçre':'GER','Avusturya':'GER'};
 
@@ -1024,6 +1086,8 @@ function flagSVG(c,w,h){ w=w||40; h=h||28; const id='fl'+uid('');
    GER:`<rect width="30" height="7" fill="#111"/><rect y="6.6" width="30" height="7" fill="#dd0000"/><rect y="13.3" width="30" height="6.7" fill="#ffce00"/>`,
    FRA:`<rect width="10" height="20" fill="#0055a4"/><rect x="10" width="10" height="20" fill="#fff"/><rect x="20" width="10" height="20" fill="#ef4135"/>`,
    POR:`<rect width="12" height="20" fill="#006600"/><rect x="12" width="18" height="20" fill="#ff0000"/><circle cx="12" cy="10" r="4" fill="#ffcc00"/><circle cx="12" cy="10" r="2.4" fill="#ff0000"/>`,
+   SAU:`<rect width="30" height="20" fill="#006c35"/><path d="M8 8.5h14M9 11.5h12" stroke="#fff" stroke-width="1.1"/><path d="M8 14.5h13l1.5-1" stroke="#fff" stroke-width=".9" fill="none"/>`,
+   GRE:`<rect width="30" height="20" fill="#0d5eaf"/>${[1,3,5,7].map(i=>`<rect y="${i*2.22}" width="30" height="2.22" fill="#fff"/>`).join('')}<rect width="11.1" height="11.1" fill="#0d5eaf"/><path d="M4.44 0v11.1M0 4.44h11.1" stroke="#fff" stroke-width="2.22"/>`,
    NED:`<rect width="30" height="7" fill="#ae1c28"/><rect y="6.6" width="30" height="7" fill="#fff"/><rect y="13.3" width="30" height="6.7" fill="#21468b"/>`}[c]||'<rect width="30" height="20" fill="#556"/>';
   return `<svg class="flag" width="${w}" height="${h}" viewBox="0 0 30 20" aria-hidden="true"><defs><clipPath id="${id}"><rect width="30" height="20" rx="2.2"/></clipPath></defs><g clip-path="url(#${id})">${body}</g><rect x=".3" y=".3" width="29.4" height="19.4" rx="2" fill="none" stroke="rgba(255,255,255,.25)" stroke-width=".6"/></svg>`; }
 
@@ -1164,8 +1228,8 @@ function squad(t){
   const r=seeded(hash(t.id)); const pool=NAMES[poolKey(t)];
   const nums=[1,2,3,4,5,6,7,8,9,10,11,12,14,15,16,17,18,19,20,21,22,23];
   const pos=['GK','DEF','DEF','DEF','DEF','MID','FWD','MID','FWD','MID','FWD','GK','MID','DEF','MID','FWD','MID','DEF','FWD','MID','DEF','FWD'];
-  const used=new Set();
-  const pl=nums.map((n,i)=>{ let nm,g=0; do{ nm=pool.f[Math.floor(r()*pool.f.length)]+' '+pool.l[Math.floor(r()*pool.l.length)]; }while(used.has(nm)&&g++<50); used.add(nm); return {no:n,name:nm,pos:pos[i]}; });
+  const uf=new Set(), ul=new Set();
+  const pl=nums.map((n,i)=>{ let f,l,g=0; do{ f=pool.f[Math.floor(r()*pool.f.length)]; l=pool.l[Math.floor(r()*pool.l.length)]; }while((uf.has(f)||ul.has(l))&&g++<80); uf.add(f); ul.add(l); return {no:n,name:f+' '+l,pos:pos[i]}; });
   const coach=pool.f[Math.floor(r()*pool.f.length)]+' '+pool.l[Math.floor(r()*pool.l.length)];
   return SQ[t.id]={pl,coach};
 }
@@ -1285,7 +1349,7 @@ function startSeason(first){
   S.fixtures=roundRobin(ids);
   S.table={}; ids.forEach(id=>S.table[id]={p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0});
   S.week=1; S.phase='season'; S.stats={dom:[],intl:[],all:[]}; S.summary=null;
-  initWorld(); makeWeekTasks(); save();
+  initAllLeagues(); initWorld(); makeWeekTasks(); save();
 }
 function leagueName(){ return home() ? tierName(S.tier) : LEAGUES[S.country].league+' ('+LEAGUES[S.country].country+')'; }
 function sortedTable(){ return Object.entries(S.table).sort((a,b)=>b[1].pts-a[1].pts||(b[1].gf-b[1].ga)-(a[1].gf-a[1].ga)||b[1].gf-a[1].gf).map(([id,r],i)=>({id,pos:i+1,...r})); }
@@ -1453,7 +1517,6 @@ function declineOffer(id){ S.offers=S.offers.filter(x=>x.id!==id); save(); rende
 // ---------- week advance ----------
 function simScore(h,a,homeAdv){ const lam=x=>Math.max(.2,1.35*Math.pow(x,1.6)); const H=team(h).str+(homeAdv?4:0), A=team(a).str; const r=H/A; return [poisson(lam(r)), poisson(lam(1/r)*.9)]; }
 function poisson(l){ let L=Math.exp(-l),k=0,p=1; do{k++;p*=rand();}while(p>L); return k-1; }
-function recordResult(h,a,gh,ga){ const T=S.table; if(!T[h]||!T[a]) return; const H=T[h],A=T[a]; H.p++;A.p++;H.gf+=gh;H.ga+=ga;A.gf+=ga;A.ga+=gh; if(gh>ga){H.w++;A.l++;H.pts+=3;} else if(gh<ga){A.w++;H.l++;A.pts+=3;} else {H.d++;A.d++;H.pts++;A.pts++;} }
 function canFinishWeek(){ return S.tasks && S.tasks.matches.every(m=>m.played); }
 function finishWeek(){
   if(!canFinishWeek()) return;
@@ -1461,7 +1524,7 @@ function finishWeek(){
   const mine=S.tasks.matches.find(m=>m.kind==='dom');
   const results=[];
   round.forEach(([h,a])=>{ if(mine&&mine.home===h&&mine.away===a){ recordResult(h,a,mine.score[0],mine.score[1]); results.push([h,a,mine.score[0],mine.score[1]]); } else { const [x,y]=simScore(h,a,true); recordResult(h,a,x,y); results.push([h,a,x,y]); } });
-  weeklyWorld(results);
+  weeklyWorld(results); simOtherLeagues(S.week);
   S.energy=clamp(S.energy+14,0,100);
   if(!S.tasks.activity) S.energy=clamp(S.energy+6,0,100);
   genOffers();
@@ -1709,6 +1772,150 @@ function myPost(id){
   toast('Paylaşıldı: +'+gain+' takipçi'); save(); render();
 }
 
+// =========================================================
+//   ALL LEAGUES — standings for every league in the world
+// =========================================================
+function recordIn(T,h,a,gh,ga){ const H=T[h],A=T[a]; if(!H||!A) return; H.p++;A.p++;H.gf+=gh;H.ga+=ga;A.gf+=ga;A.ga+=gh;
+  const rH=gh>ga?'G':gh<ga?'M':'B', rA=gh>ga?'M':gh<ga?'G':'B';
+  if(rH==='G'){H.w++;A.l++;H.pts+=3;} else if(rH==='M'){A.w++;H.l++;A.pts+=3;} else {H.d++;A.d++;H.pts++;A.pts++;}
+  H.form=(H.form||[]).concat(rH).slice(-5); A.form=(A.form||[]).concat(rA).slice(-5); }
+function sortT(T){ return Object.entries(T).sort((a,b)=>b[1].pts-a[1].pts||(b[1].gf-b[1].ga)-(a[1].gf-a[1].ga)||b[1].gf-a[1].gf).map(([id,r],i)=>({id,pos:i+1,...r})); }
+function leagueKeysAll(){ const ks=['H0','H1','H2','H3','H4']; for(const k in LEAGUES){ const L=LEAGUES[k]; if(!L.league||L.teams.length<8||k===S.nationality) continue; ks.push(k); } return ks; }
+function leagueLabel(k){ if(/^H\d$/.test(k)) return NAT().tiers[+k[1]]; return LEAGUES[k].league; }
+function leagueFlag(k){ return /^H/.test(k)?S.nationality:k; }
+function initAllLeagues(){
+  S.lg={}; leagueKeysAll().forEach(k=>{ if(k===S.leagueKey) return; const ids=shuffle(leagueTeams(k).map(t=>t.id)); const T={}; ids.forEach(id=>T[id]={p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0,form:[]}); S.lg[k]={fx:roundRobin(ids),table:T}; });
+  for(let w=1;w<S.week;w++) simOtherLeagues(w);
+}
+function simOtherLeagues(w){ if(!S.lg) return; for(const k in S.lg){ const L=S.lg[k]; L.fx[(w-1)%L.fx.length].forEach(([h,a])=>{ const [x,y]=simScore(h,a,true); recordIn(L.table,h,a,x,y); }); } }
+function tableOf(k){ if(k===S.leagueKey) return S.table; if(!S.lg||!S.lg[k]) initAllLeagues(); return S.lg[k]?S.lg[k].table:null; }
+let LG_VIEW=null;
+function zoneOf(k,pos,n){ const top=k==='H4'||!/^H/.test(k);
+  if(top){ if(pos===1) return ['champ','Şampiyon']; if(pos<=4) return ['ucl','Şampiyonlar Ligi']; if(pos<=6) return ['uel','Avrupa / Konferans']; if(pos>n-3) return ['rel','Düşme']; return null; }
+  if(pos<=2) return ['up','Doğrudan yükselme']; if(pos<=6) return ['po','Play-off']; if(pos>n-3) return ['rel','Düşme']; return null; }
+function leagueHTML(){
+  const keys=leagueKeysAll(); if(!LG_VIEW||!keys.includes(LG_VIEW)) LG_VIEW=S.leagueKey&&keys.includes(S.leagueKey)?S.leagueKey:keys[0];
+  const T=tableOf(LG_VIEW); const rows=T?sortT(T):[]; const n=rows.length;
+  const reffed=new Set(); S.history.filter(h=>h.season===S.season).forEach(h=>{reffed.add(h.home);reffed.add(h.away);});
+  const chip=k=>`<button class="lgchip ${LG_VIEW===k?'on':''}" data-lg="${k}">${flagSVG(leagueFlag(k),20,14)}<span>${esc(leagueLabel(k))}</span>${k===S.leagueKey?'<i class="lg-me">Sen</i>':''}</button>`;
+  const home=keys.filter(k=>/^H/.test(k)), world=keys.filter(k=>!/^H/.test(k));
+  const lead=rows[0]?team(rows[0].id):null; const att=rows.slice().sort((a,b)=>b.gf-a.gf)[0]; const def=rows.slice().sort((a,b)=>a.ga-b.ga)[0];
+  const zs=new Map(); rows.forEach(r=>{ const z=zoneOf(LG_VIEW,r.pos,n); if(z) zs.set(z[0],z[1]); });
+  return `<div class="page-h"><div><div class="eyebrow gold">${seasonLabel(S.season)} · ${S.week}. hafta</div><h2 class="page-title">Puan durumları</h2></div></div>
+    <section class="panel lgsel"><span class="eyebrow">${esc(NAT().name)}</span><div class="lgrow">${home.map(chip).join('')}</div><span class="eyebrow" style="margin-top:6px">Dünya ligleri</span><div class="lgrow">${world.map(chip).join('')}</div></section>
+    <section class="lg-kpis">${lead?`<div class="panel lgk">${crest(lead,40)}<div><span class="eyebrow">Lider</span><b>${esc(lead.name)}</b><small>${rows[0].pts} puan · ${rows[0].w}G ${rows[0].d}B ${rows[0].l}M</small></div></div>`:''}${att?`<div class="panel lgk">${crest(team(att.id),40)}<div><span class="eyebrow">En golcü</span><b>${esc(team(att.id).name)}</b><small>${att.gf} gol</small></div></div>`:''}${def?`<div class="panel lgk">${crest(team(def.id),40)}<div><span class="eyebrow">En az gol yiyen</span><b>${esc(team(def.id).name)}</b><small>${def.ga} gol</small></div></div>`:''}</section>
+    <section class="panel stack"><div class="row" style="justify-content:space-between"><h3 class="row" style="gap:10px">${flagSVG(leagueFlag(LG_VIEW),26,18)}${esc(leagueLabel(LG_VIEW))}</h3><span class="muted" style="font-size:12px">${n} takım</span></div>
+      <div class="tbl-wrap"><table class="lgt"><thead><tr><th class="n">#</th><th>Takım</th><th class="n">O</th><th class="n">G</th><th class="n">B</th><th class="n">M</th><th class="n hide-s">A</th><th class="n hide-s">Y</th><th class="n">AV</th><th class="n">P</th><th class="hide-s">Form</th></tr></thead><tbody>
+      ${rows.map(r=>{ const tm=team(r.id); const z=zoneOf(LG_VIEW,r.pos,n); return `<tr class="${reffed.has(r.id)&&LG_VIEW===S.leagueKey?'mine':''} ${z?'z-'+z[0]:''}"><td class="n"><span class="zpos">${r.pos}</span></td><td><span class="row" style="gap:8px;flex-wrap:nowrap">${crest(tm,24)}<span class="ell">${esc(tm.name)}</span></span></td><td class="n">${r.p}</td><td class="n">${r.w}</td><td class="n">${r.d}</td><td class="n">${r.l}</td><td class="n hide-s">${r.gf}</td><td class="n hide-s">${r.ga}</td><td class="n">${r.gf-r.ga>0?'+':''}${r.gf-r.ga}</td><td class="n"><b>${r.pts}</b></td><td class="hide-s"><span class="form">${(r.form||[]).map(f=>`<i class="f-${f}">${f}</i>`).join('')}</span></td></tr>`; }).join('')}
+      </tbody></table></div>
+      <div class="lg-legend">${[...zs.entries()].map(([k,v])=>`<span><i class="lz z-${k}"></i>${esc(v)}</span>`).join('')}${LG_VIEW===S.leagueKey?'<span><i class="lz mine"></i>Bu sezon maçını yönettiğin takımlar</span>':''}</div></section>`;
+}
+
+// =========================================================
+//   CARD SHOWING — referee walks in, raises the card
+// =========================================================
+function sceneBusy(sc){ return (M&&M.modal)||['goal','card','buildup'].includes(sc.mode); }
+function sceneQueue(sc,ev){ (sc.evQ=sc.evQ||[]).push(ev); if(M) M.holdQ=true; }
+function sceneNext(sc){ if(!sc) return false; const ev=(sc.evQ||[]).shift(); if(!sc.evQ||!sc.evQ.length) { if(M) M.holdQ=false; } if(!ev) return false; if(ev.k==='goal') sceneGoal(sc,ev.side,ev.p,true); else sceneCard(sc,ev,true); return true; }
+function cardShow(side,p,red,second,coach){
+  const t=sideTeam(side); const label=coach?squad(t).coach+' (TD)':pl(p);
+  if(coach||!SC){ showCardFx(red,second,label,t.name); return; }
+  const ev={k:'card',side,p,red,second,label,team:t.name};
+  if(sceneBusy(SC)) sceneQueue(SC,ev); else sceneCard(SC,ev);
+}
+function sceneCard(sc,ev,fromQ){
+  const pl0=sc.pl.find(q=>q.side===ev.side&&q.num===ev.p.no&&!q.gone&&!q.leaving)||nearestTo(sc.pl.filter(q=>q.side===ev.side&&q.role!=='GK'&&!q.gone&&!q.leaving),sc.ball.x,sc.ball.y);
+  if(!pl0){ showCardFx(ev.red,ev.second,ev.label,ev.team); return; }
+  pl0.num=ev.p.no; const r=sc.refs[0]; const d=v2n(r.x-pl0.x,r.y-pl0.y);
+  sc.card={...ev,pl:pl0,t:0,tx:pl0.x+d[0]*1.7,ty:pl0.y+d[1]*1.7,shown:false}; sc.mode='card'; sc.ball.owner=null; sc.ball.fl=null; sc.gather=[pl0.x,pl0.y];
+  if(M) M.cardHold=true;
+}
+function cardAI(sc,dt){
+  const C=sc.card; if(!C){ sc.mode='play'; return; } C.t+=dt; const r=sc.refs[0], p=C.pl;
+  sc.pl.forEach(q=>{ if(q===p||q.gone) return; if(q.leaving){ steer(q,q.x,-4,dt,2); if(q.y<-3) q.gone=true; return; } const dd=Math.hypot(q.x-p.x,q.y-p.y); if(q.side===C.side&&dd<22&&q.role!=='GK'&&q.i%2===0){ const a=q.i*.8; steer(q,p.x+Math.cos(a)*3,p.y+Math.sin(a)*3,dt,3); setPose(q,'protest',.6); } else steer(q,q.x,q.y,dt,.6); });
+  if(!C.arr){ steer(r,C.tx,C.ty,dt,8); steer(p,p.x,p.y,dt,1); if(Math.hypot(r.x-C.tx,r.y-C.ty)<.7||C.t>3.5){ C.arr=true; C.t0=C.t; } }
+  else { const ta=C.t-C.t0+1; r.speed=0; r.face=v2n(p.x-r.x,p.y-r.y); p.face=v2n(r.x-p.x,r.y-p.y); p.speed=0; const k=Math.min(1,(ta-1)/.22);
+    r.pose={P:POSES.cardUp,k}; r.card=C.red?'r':'y'; p.pose={P:C.red?POSES.faceHold:POSES.protest,k:Math.min(1,(ta-1.1)/.3)};
+    if(!C.shown){ C.shown=true; showCardFx(C.red,C.second,C.label,C.team); whistle(); } }
+  if(C.arr && C.t-C.t0>2.4){ r.pose=null; r.card=null; p.pose=null; sc.pl.forEach(q=>{ if(!q.leaving) q.pose=null; }); if(C.red){ p.leaving=true; p.hl=false; } sc.card=null; if(M) M.cardHold=false; sc.mode='stopped'; sc.gather=null;
+    if(!sceneNext(sc)) sceneResume(sc); }
+}
+function showCardFx(red,second,label,teamName){
+  if(!M||M.auto) return; const el=$('#cardFx'); if(!el) return;
+  el.innerHTML=`<div class="cf ${red?'r':'y'}"><div class="cf-cards">${second?'<i class="cf-c y back"></i>':''}<i class="cf-c ${red?'r':'y'}"></i></div><div class="cf-t"><b>${second?'İkinci sarı · Kırmızı':red?'Kırmızı kart':'Sarı kart'}</b><span>${esc(label)}</span><small>${esc(teamName)}</small></div></div>`;
+  el.hidden=false; el.style.animation='none'; void el.offsetWidth; el.style.animation='';
+  clearTimeout(showCardFx.t); showCardFx.t=setTimeout(()=>{ el.hidden=true; },2600); haptic(red?'heavy':'medium');
+}
+
+// =========================================================
+//   KURAL AKADEMİSİ — practice cases, drills, weekly exam
+// =========================================================
+const ACAD_TOPICS=[['karisik','Karışık'],['penalti_temas','Ceza sahası teması'],['elle_oynama','Elle oynama'],['ofsayt_gol','Ofsayt'],['orta_saha_faul','Müdahale sertliği'],['dogso','DOGSO / SPA'],['dirsek','Dirsek'],['top_disinda','Top dışında olay'],['kaleci_engelleme','Kaleciye müdahale'],['hucum_elle_gol','Golde elle oynama'],['gol_oncesi_faul','Gol öncesi faul'],['geri_pas','Geri pas'],['penalti_atisi','Penaltı vuruşu']];
+const ACAD_RANKS=[[0,'Aday'],[10,'Bilgili'],[30,'Uzman'],[75,'Kural ustası'],[150,'IFAB seviyesi']];
+let ACAD_TOPIC='karisik', ACAD=null;
+function acadState(){ return S.acad||(S.acad={solved:0,correct:0,streak:0,best:0,byType:{},week:-1,gains:0,examWeek:-1,lastExam:null}); }
+function acadRank(n){ let r=ACAD_RANKS[0]; ACAD_RANKS.forEach(x=>{ if(n>=x[0]) r=x; }); const nx=ACAD_RANKS.find(x=>x[0]>n); return {name:r[1],next:nx}; }
+function akademiHTML(){
+  const A=acadState(); const rk=acadRank(A.correct); const pct=A.solved?Math.round(A.correct/A.solved*100):0; const wk=S.season*100+S.week; const examDone=A.examWeek===wk;
+  const tstats=ACAD_TOPICS.slice(1).map(([k,n])=>{ const b=A.byType[k]||{s:0,c:0}; return {k,n,s:b.s,c:b.c,p:b.s?Math.round(b.c/b.s*100):null}; });
+  return `<div class="page-h"><div><div class="eyebrow gold">Eğitim</div><h2 class="page-title">Kural Akademisi</h2></div></div>
+  <section class="acad-hero panel"><div class="ah-badge"><span class="ah-ic">${ic('book')}</span><div><span class="eyebrow">Rütbe</span><b>${rk.name}</b><small>${rk.next?`${rk.next[0]-A.correct} doğru vaka sonra: ${rk.next[1]}`:'En üst seviye'}</small></div></div>
+    <div class="ah-kpis"><div><b class="num">${A.solved}</b><small>Çözülen vaka</small></div><div><b class="num">%${pct}</b><small>İsabet</small></div><div><b class="num">${A.streak}</b><small>Seri</small></div><div><b class="num">${A.best}</b><small>En uzun seri</small></div></div></section>
+  <div class="hub"><div class="stack" style="gap:16px;min-width:0">
+    <section class="panel stack"><h3>Vaka çalışması</h3><p class="muted" style="font-size:14px">Gerçek maç pozisyonları 3D tekrarla gelir. Süre yok; tüm açılardan izle, kuralı uygula. Her hafta ilk 5 doğru vaka Kural bilgisi niteliğini geliştirir.</p>
+      <div class="chips-row wrap">${ACAD_TOPICS.map(([k,n])=>`<button class="fchip ${ACAD_TOPIC===k?'on':''}" data-at="${k}">${n}</button>`).join('')}</div>
+      <button class="btn primary lg" id="bCase">Yeni vaka · ${esc(ACAD_TOPICS.find(x=>x[0]===ACAD_TOPIC)[1])}</button></section>
+    <section class="panel stack exam ${examDone?'done':''}"><div class="row" style="justify-content:space-between"><h3>Haftalık sınav</h3><span class="chip ${examDone?'g':'y'}">${examDone?'Tamamlandı':'Açık'}</span></div>
+      <p class="muted" style="font-size:14px">5 karışık vaka. 4 ve üzeri doğru: Kural bilgisi +1, itibar +1 ve ${moneyShort(15000+S.tier*10000)} sertifika ödülü.</p>
+      ${A.lastExam?`<p style="font-size:14px">Son sınav: <b class="num">${A.lastExam.c}/5</b> · ${seasonLabel(A.lastExam.season)} ${A.lastExam.week}. hafta</p>`:''}
+      <button class="btn ${examDone?'':'primary'}" id="bExam" ${examDone?'disabled':''}>${examDone?'Gelecek hafta yeniden açılır':'Sınava başla'}</button></section></div>
+  <div class="stack" style="gap:16px;min-width:0"><section class="panel stack"><h3>Konu karnesi</h3>${tstats.map(t=>`<div class="tstat"><span>${esc(t.n)}</span><div class="bar"><i style="width:${t.p||0}%;background:${t.p==null?'transparent':t.p>=75?'var(--green)':t.p>=50?'var(--gold1)':'var(--red)'}"></i></div><span class="num muted">${t.p==null?'—':t.c+'/'+t.s}</span></div>`).join('')}</section>
+    <section class="panel stack"><h3>Kural kitabı</h3>${Object.entries(LAWS).map(([k,v])=>`<details class="law"><summary>${esc(TYPE_TITLES[k]||k)}</summary><p>${esc(v)}</p></details>`).join('')}</section></div></div>`;
+}
+function acadPickType(){ if(ACAD_TOPIC!=='karisik') return ACAD_TOPIC; return pick(ACAD_TOPICS.slice(1).map(x=>x[0])); }
+function acadMakeCase(type){
+  const ids=Object.keys(S.table); const h=pick(ids); let a=pick(ids); while(a===h) a=pick(ids);
+  const fx=makeFx({kind:'acad',comp:'LIG',compName:'Kural Akademisi',home:h,away:a,imp:2,derby:false,vr:false,glt:false,lvl:3,fee:0,stage:'Vaka'});
+  const keep=M; M=buildMatch(fx); M.min=ri(6,86); const c=ctxFor(M,ri(0,1)); const inc=genIncident(type,c); inc.minute=M.min+"'"; inc.vis=1; inc.posQ='best'; inc.refPos=SPOTS[inc.pos]?SPOTS[inc.pos].best:[28,15];
+  const ctxM=M; M=keep; return {inc,ctxM};
+}
+function acadStart(exam){ ACAD={exam,n:0,c:0,total:exam?5:1}; acadCase(); }
+function acadCase(){
+  const {inc,ctxM}=acadMakeCase(ACAD.exam?pick(ACAD_TOPICS.slice(1).map(x=>x[0])):acadPickType()); ACAD.inc=inc; ACAD.ctxM=ctxM; inc.sel={d:null,c:inc.steps[1]?null:undefined};
+  const keep=M; M=ctxM; curInc=inc; const cams=['yakin','tv','hakem','ust'];
+  openModal(head(ACAD.exam?`Haftalık sınav · ${ACAD.n+1}/5`:'Vaka çalışması',esc(inc.title),`<button class="btn sm" id="acX">Kapat</button>`)+`<div class="sh-body"><div class="inc"><div class="stack">${replayHTML(inc,cams)}<p class="story">${inc.story}</p></div>
+    <div class="stack"><div class="eyebrow">Olgular</div><div class="facts">${factsHTML(inc,true)}</div><div class="decide" id="decide">${stepsHTML(inc)}</div><button class="btn primary" id="bAc" disabled>Kararı ver</button></div></div></div>`);
+  bindReplay(inc,cams); bindSteps(inc,'bAc'); M=keep;
+  $('#acX').onclick=acadClose;
+  $('#bAc').onclick=()=>{ whistle(); const ans={d:inc.sel.d}; if(inc.steps[1]) ans.c=inc.sel.c||'yok'; acadResult(inc,ans); };
+}
+function acadResult(inc,ans){
+  const A=acadState(); const v=evaluate(inc,ans); const ok=v==='dogru'||v==='kabul'; const wk=S.season*100+S.week;
+  A.solved++; if(ok){ A.correct++; A.streak++; A.best=Math.max(A.best,A.streak); } else A.streak=0;
+  const b=A.byType[inc.type]||(A.byType[inc.type]={s:0,c:0}); b.s++; if(ok) b.c++;
+  if(A.week!==wk){ A.week=wk; A.gains=0; } let gain='';
+  if(ok && !ACAD.exam && A.gains<5){ A.gains++; S.attrs.kural=clamp(S.attrs.kural+.3*(S.growth||1),0,99); gain='Kural bilgisi +0.3'; }
+  ACAD.n++; if(ok) ACAD.c++;
+  const keep=M; M=ACAD.ctxM; const cams=['yakin','tv','hakem','ust']; inc.showOff=true;
+  const last=ACAD.exam&&ACAD.n>=5;
+  openModal(head(ACAD.exam?`Haftalık sınav · ${ACAD.n}/5`:'Vaka çalışması',VLAB[v],`<button class="btn sm" id="acX">Kapat</button>`)+`<div class="sh-body"><div class="inc"><div class="stack">${replayHTML(inc,cams)}</div><div class="stack">
+    <div class="verdict v-${v}"><span class="vi">${VLAB[v]}</span><span class="muted">Senin kararın: ${esc(ansText(inc,ans))}</span></div>${!ok?`<p><b>Doğrusu:</b> ${esc(ansText(inc,inc.correct))}</p>`:''}<p>${esc(inc.explain)}</p><details class="law" open><summary>İlgili kural</summary><p>${esc(inc.law)}</p></details>
+    <div class="row">${gain?`<span class="chip g">${gain}</span>`:''}<span class="chip">Seri ${A.streak}</span></div>
+    <button class="btn primary" id="acN">${last?'Sınavı bitir':ACAD.exam?'Sonraki soru':'Sonraki vaka'}</button></div></div></div>`);
+  bindReplay(inc,cams); M=keep; save();
+  $('#acX').onclick=acadClose;
+  $('#acN').onclick=()=>{ if(last) acadExamEnd(); else acadCase(); };
+}
+function acadExamEnd(){
+  const A=acadState(); const c=ACAD.c; A.examWeek=S.season*100+S.week; A.lastExam={c,season:S.season,week:S.week}; const pass=c>=4; let msg;
+  if(pass){ S.attrs.kural=clamp(S.attrs.kural+1*(S.growth||1),0,99); S.rep=clamp(S.rep+1,0,100); const prize=15000+S.tier*10000; S.money+=prize; msg=`Tebrikler: ${c}/5. Kural bilgisi +1, itibar +1, ${moneyShort(prize)} ödül.`; kurulDecision(`${S.name}, haftalık kural sınavını ${c}/5 ile geçti.`,'ok'); }
+  else msg=`${c}/5. Geçme notu 4. Gelecek hafta yeniden dene.`;
+  replayStop(); openModal(head('Haftalık sınav','Sonuç','')+`<div class="sh-body"><div class="verdict v-${pass?'dogru':'hata'}"><span class="vi">${pass?'Geçtin':'Kaldın'}</span><span class="num" style="font-size:22px">${c}/5</span></div><p>${esc(msg)}</p><button class="btn primary" id="acX">Akademiye dön</button></div>`,true);
+  $('#acX').onclick=acadClose; save();
+}
+function acadClose(){ replayStop(); ACAD=null; const m=$('#modal'); m.hidden=true; m.innerHTML=''; render(); }
+
+function recordResult(h,a,gh,ga){ recordIn(S.table,h,a,gh,ga); }
 // =========================================================
 //   INCIDENT ENGINE
 // =========================================================
@@ -2153,11 +2360,12 @@ function goal(side,p,note){
 }
 function giveCard(side,p,red,coach){
   const t=sideTeam(side);
-  if(coach){ feed(`<span class="mini-card ${red?'r':'y'}"></span> ${esc(squad(t).coach)} (${esc(t.short)} teknik direktör) ${red?'kırmızı':'sarı'} kart gördü.`,'dec'); M.cardsLog.push({side,label:squad(t).coach+' (TD)',red,min:M.minLabel()}); return; }
+  if(coach){ feed(`<span class="mini-card ${red?'r':'y'}"></span> ${esc(squad(t).coach)} (${esc(t.short)} teknik direktör) ${red?'kırmızı':'sarı'} kart gördü.`,'dec'); M.cardsLog.push({side,label:squad(t).coach+' (TD)',red,min:M.minLabel()}); if(!M.auto) cardShow(side,null,red,false,true); return; }
   if(M.sentOff[side].includes(p.no)) return;
-  if(!red && M.yellow[side].includes(p.no)){ red=true; feed(`<span class="mini-card y"></span><span class="mini-card r"></span> ${esc(pl(p))} (${esc(t.short)}) ikinci sarıdan oyundan atıldı!`,'dec'); }
+  const second=!red && M.yellow[side].includes(p.no);
+  if(second){ red=true; feed(`<span class="mini-card y"></span><span class="mini-card r"></span> ${esc(pl(p))} (${esc(t.short)}) ikinci sarıdan oyundan atıldı!`,'dec'); }
   else feed(`<span class="mini-card ${red?'r':'y'}"></span> ${esc(pl(p))} (${esc(t.short)}) ${red?'kırmızı kartla oyundan atıldı!':'sarı kart gördü.'}`,'dec');
-  if(!M.auto){ haptic(red?'heavy':'light'); matchBanner(red?'red':'yellow',red?'Kırmızı kart':'Sarı kart',esc(pl(p))+' · '+esc(t.short)); }
+  if(!M.auto) cardShow(side,p,red,second,false);
   if(red){ M.reds[side]++; M.sentOff[side].push(p.no); stopAdd('Kırmızı kart',ri(40,70)); S.totals.reds++; }
   else { M.yellow[side].push(p.no); S.totals.yellows++; }
   M.cardsLog.push({side,label:pl(p),red,min:M.minLabel()});
@@ -2184,7 +2392,7 @@ function simulateMinute(){
   if(M.temp>78 && M.min-M.mgmtAt>15 && chance(.12)){ M.mgmtAt=M.min; M.queue.push({kind:'mgmt',side:ri(0,1)}); }
 }
 function tick(){
-  if(!M||M.modal||M.paused||M.done||(M.goalHold&&!M.auto)) return;
+  if(!M||M.modal||M.paused||M.done||((M.goalHold||M.cardHold||M.holdQ)&&!M.auto)) return;
   if(M.queue.length && !M.inline){ openEvent(M.queue.shift()); return; }
   switch(M.phase){
     case 'h1': M.min++; simulateMinute(); M.schedule.filter(e=>e.min===M.min).forEach(e=>M.queue.push(e)); if(M.min>=45){ M.phase='uz1'; M.queue.push({kind:'uz',half:1}); } break;
@@ -2557,7 +2765,7 @@ function newScene(H,A){
 const sdir=(sc,side)=> side===0?sc.dirHome:-sc.dirHome;
 const wxf=(sc,side,fx)=> sdir(sc,side)>0?fx:105-fx;
 function kickoffPositions(sc,possSide){
-  sc.pl.forEach(p=>{ let fx=Math.min(p.bx*.62+2,48.5); if(p.side===possSide&&p.i===9) fx=52.2; if(p.side===possSide&&p.i===6) fx=50; p.x=wxf(sc,p.side,fx); p.y=p.side===possSide&&p.i===9?34:p.by; p.vx=p.vy=0; p.fall=0; });
+  sc.pl.forEach(p=>{ if(p.leaving){ p.leaving=false; p.gone=true; } if(p.gone) return; let fx=Math.min(p.bx*.62+2,48.5); if(p.side===possSide&&p.i===9) fx=52.2; if(p.side===possSide&&p.i===6) fx=50; p.x=wxf(sc,p.side,fx); p.y=p.side===possSide&&p.i===9?34:p.by; p.vx=p.vy=0; p.fall=0; });
   sc.ball={x:52.5,y:34,z:0,owner:null,fl:null}; sc.poss=possSide; sc.mode='kickoff'; sc.mt=0; sc.forced=null; sc.spots=null; sc.mark=null; sc.refTarget=null; sc.gather=null;
 }
 function nearestTo(list,x,y){ let b=null,d=1e9; list.forEach(p=>{ const e=(p.x-x)**2+(p.y-y)**2; if(e<d){d=e;b=p;} }); return b; }
@@ -2574,6 +2782,7 @@ function sceneUpdate(sc,dt){
   if(sc.mode==='play'){ sc.possT[sc.poss]+=dt; playAI(sc,dt); }
   else if(sc.mode==='buildup') buildAI(sc,dt);
   else if(sc.mode==='goal') goalAI(sc,dt);
+  else if(sc.mode==='card') cardAI(sc,dt);
   else if(sc.mode==='kickoff') sc.pl.forEach(p=>steer(p,p.x,p.y,dt,2));
   else idleAI(sc,dt);
   refAI(sc,dt);
@@ -2581,8 +2790,9 @@ function sceneUpdate(sc,dt){
 }
 function playAI(sc,dt){
   const b=sc.ball, o=b.owner; const def=1-sc.poss;
-  const presser=nearestTo(sc.pl.filter(p=>p.side===def&&p.role!=='GK'),b.x,b.y);
+  const presser=nearestTo(sc.pl.filter(p=>p.side===def&&p.role!=='GK'&&!p.gone&&!p.leaving),b.x,b.y);
   sc.pl.forEach(p=>{
+    if(p.gone) return; if(p.leaving){ steer(p,p.x,-4,dt,2); if(p.y<-3) p.gone=true; return; }
     if(p.fall>0){ p.fall=Math.max(0,p.fall-dt*.9); if(p.fall>.3){ p.speed=0; return; } }
     let t, v=5.2;
     if(p===o){ const d=sdir(sc,p.side); t=[p.x+d*7,p.y+(34-p.y)*.15+Math.sin(sc.t*1.3+p.i)*2]; v=5.4; p.hold+=dt; if(p.hold>p.next) ownerAct(sc,p); }
@@ -2599,13 +2809,14 @@ function ownerAct(sc,p){
     b.owner=null; b.fl={from:[b.x,b.y],to:[saved?gx-d*1.1:gx+d*.5,ty],t:0,dur:.7,h:saved?1:1.6,done:()=>{ const gk=sc.pl.find(q=>q.side!==p.side&&q.role==='GK'); b.owner=gk; sc.poss=gk.side; gk.hold=0; gk.next=rf(.9,1.8); }};
     return;
   }
-  const mates=sc.pl.filter(q=>q.side===p.side&&q!==p);
+  const mates=sc.pl.filter(q=>q.side===p.side&&q!==p&&!q.gone&&!q.leaving);
   const to=wpick(mates.map(q=>{ const qf=d>0?q.x:105-q.x; return [q,Math.max(.6,(qf-fx)+18)*(q.role==='GK'?.12:1)]; }));
   const dist=Math.hypot(to.x-p.x,to.y-p.y);
   b.owner=null; b.fl={from:[b.x,b.y],to:[clamp(to.x+to.vx*.5,1,104),clamp(to.y+to.vy*.5,1,67)],t:0,dur:Math.max(.35,dist/17),h:dist>24?3.2:.25,side:chance(.13)?1-p.side:p.side};
 }
 function idleAI(sc,dt){
   sc.pl.forEach((p,i)=>{
+    if(p.gone) return; if(p.leaving){ steer(p,p.x,-4,dt,2); if(p.y<-3) p.gone=true; return; }
     if(p.keepDown){ p.speed=0; return; }
     if(p.fall>0) p.fall=Math.max(0,p.fall-dt*.5);
     if(sc.gather && i%3!==0 && p.role!=='GK' && Math.hypot(p.x-sc.gather[0],p.y-sc.gather[1])<26){ const a=i*.9; steer(p,sc.gather[0]+Math.cos(a)*3.4,sc.gather[1]+Math.sin(a)*3.4,dt,2.6); return; }
@@ -2678,6 +2889,8 @@ const POSES={
  dive:{jump:.15,armL:{s:.35,f:.2,h:1.95},armR:{s:-.35,f:.2,h:1.95}},
  faceHold:{armL:{s:.12,f:.22,h:1.62},armR:{s:-.12,f:.22,h:1.62}},
  celebrate:{jump:.1,armL:{s:.4,f:.15,h:2.05},armR:{s:-.4,f:.15,h:2.05}},
+ cardUp:{armR:{s:-.12,f:.14,h:2.22},armL:{s:.3,f:0,h:.95}},
+ protest:{lean:.06,armL:{s:.55,f:.28,h:1.25},armR:{s:-.55,f:.28,h:1.25}},
  slump:{hipH:.88,lean:.22,headF:.08,armL:{s:.22,f:.05,h:.85},armR:{s:-.22,f:.05,h:.85}}
 };
 const ARM_POSE={bitisik:'armTight',dogal:'armNat',siluet:'armSide',omuz:'armUp',destek:'slideArm'};
@@ -2789,7 +3002,7 @@ function sceneBuildup(sc,inc){
   const d=sdir(sc,inc.ai); const map=diaMap(inc.dia.mode,d); sc.map=map; sc.inc=inc; inc.anim=inc.anim||animSpec(inc); inc.tracks=inc.tracks||replayTracks(inc);
   const used=new Set(); sc.forced=[]; sc.pl.forEach(p=>{p.hl=false;p.label=null;p.keepDown=false;p.t=null;p.pose=null;p.fall=0;});
   inc.tracks.forEach(t=>{ if(t.s==='AR') return; const side=t.s==='A'?inc.ai:inc.di; const gk=t.s==='G'; const to=map(t.to[0],t.to[1]);
-    const best=nearestTo(sc.pl.filter(p=>p.side===side&&!used.has(p)&&(gk?p.role==='GK':p.role!=='GK')),to[0],to[1]); if(!best) return; used.add(best);
+    const best=nearestTo(sc.pl.filter(p=>p.side===side&&!used.has(p)&&!p.gone&&!p.leaving&&(gk?p.role==='GK':p.role!=='GK')),to[0],to[1]); if(!best) return; used.add(best);
     if(t.n) best.num=t.n; best.hl=!!t.hl; best.t=t; sc.forced.push({p:best,pre:map(t.from[0],t.from[1]),to,role:t.role}); });
   sc.mode='buildup'; sc.stage=1; sc.bt=0; sc.mark=map(inc.dia.mark[0],inc.dia.mark[1]); sc.flash=null;
   sc.bkf=mapKeys(ballKeys(inc),map);
@@ -2800,7 +3013,7 @@ function sceneBuildup(sc,inc){
 function buildAI(sc,dt){
   sc.bt+=dt; const b=sc.ball;
   const forcedSet=new Set(sc.forced.map(f=>f.p));
-  sc.pl.forEach(p=>{ if(forcedSet.has(p)) return; const t=formTarget(sc,p); steer(p,t[0]*.5+sc.mark[0]*.5,t[1]*.6+sc.mark[1]*.4,dt,3.2); });
+  sc.pl.forEach(p=>{ if(forcedSet.has(p)||p.gone||p.leaving) return; const t=formTarget(sc,p); steer(p,t[0]*.5+sc.mark[0]*.5,t[1]*.6+sc.mark[1]*.4,dt,3.2); });
   if(sc.stage===1){
     sc.forced.forEach(f=>steer(f.p,f.pre[0],f.pre[1],dt,4.2));
     const k=Math.min(1,sc.bt/1.2); b.x=sc.ballFrom[0]+(sc.ballPre[0]-sc.ballFrom[0])*k; b.y=sc.ballFrom[1]+(sc.ballPre[1]-sc.ballFrom[1])*k; b.z=0;
@@ -2817,14 +3030,15 @@ function buildAI(sc,dt){
 function sceneResume(sc){ if(!sc||sc.mode==='goal'||sc.mode==='kickoff') return; sc.mode='play'; sc.forced=null; sc.spots=null; sc.mark=null; sc.refTarget=null; sc.gather=null; sc.flash=null; sc.pl.forEach(p=>{ p.keepDown=false; p.label=null; p.hl=false; p.t=null; p.pose=null; }); const b=sc.ball; b.fl=null; b.owner=nearestTo(sc.pl,b.x,b.y); sc.poss=b.owner.side; b.owner.hold=0; b.owner.next=1; }
 function liveCamDesired(W,H){ const x=SC.camX;
   if(SC.cam==='ust') return {p:[52.5,-40,66],t:[52.5,31,0],f:.63};
+  if(SC.mode==='card'&&SC.card){ const r=SC.refs[0], p=SC.card.pl; const mx=SC.card.arr?(r.x+p.x)/2:p.x, my=SC.card.arr?(r.y+p.y)/2:p.y; return {p:[mx-2.5,my-8.5,3.4],t:[mx,my,1.3],f:1.05}; }
   if(SC.mode==='goal'&&SC.goal){ const G=SC.goal; const fp=G.t<2.35?[SC.ball.x,SC.ball.y]:[G.sp.x,G.sp.y]; return {p:[fp[0]-G.d*8,fp[1]-15,7],t:[fp[0]+G.d*3,fp[1]+1,.6],f:1.0}; }
   if((SC.mode==='buildup'&&SC.stage===2)||(SC.mode==='stopped'&&SC.mark)){ const m=SC.mark; return {p:[m[0]-3.5,m[1]-12.5,5.6],t:[m[0],m[1]+.5,.7],f:1.0}; }
   if(SC.mode==='buildup'){ const pts=[SC.mark,...(SC.spots||[]).map(s=>[s.x,s.y])]; const cx=avg(pts.map(p=>p[0])), cy=avg(pts.map(p=>p[1])); const span=Math.max(18,...pts.map(p=>Math.hypot(p[0]-cx,p[1]-cy))); const tall=H/W>.68; const z=SC.spots?(tall?1.15:1.35):1;
     return {p:[cx,cy-span*1.05*z-4,span*1.55*z+14],t:[cx,cy-span*.12,0],f:.7}; }
   if(SC.cam==='yakin') return {p:[x,-15,10.5],t:[x,30,0],f:1.15};
   return {p:[x,-27,17],t:[x,31,0],f:1.02}; }
-function liveCam(W,H,dpr){ const d=liveCamDesired(W,H); const s=SC.cs||(SC.cs={p:d.p.slice(),t:d.t.slice(),f:d.f}); const k=.075; for(let i=0;i<3;i++){ s.p[i]+=(d.p[i]-s.p[i])*k; s.t[i]+=(d.t[i]-s.t[i])*k; } s.f+=(d.f-s.f)*k; return camera(s.p,s.t,s.f,W,H,dpr); }
-function drawLive(cv){ const [W,H,dpr]=fitCanvas(cv); const ctx=cv.getContext('2d'); drawWorld(ctx,liveCam(W,H,dpr),{actors:[...SC.pl,...SC.refs],ball:SC.ball,spots:SC.spots,t:SC.t,flash:SC.mode==='buildup'?SC.flash:null,net:SC.net}); }
+function liveCam(W,H,dpr){ const d=liveCamDesired(W,H); const s=SC.cs||(SC.cs={p:d.p.slice(),t:d.t.slice(),f:d.f}); const k=SC.mode==='card'?.14:.075; for(let i=0;i<3;i++){ s.p[i]+=(d.p[i]-s.p[i])*k; s.t[i]+=(d.t[i]-s.t[i])*k; } s.f+=(d.f-s.f)*k; return camera(s.p,s.t,s.f,W,H,dpr); }
+function drawLive(cv){ const [W,H,dpr]=fitCanvas(cv); const ctx=cv.getContext('2d'); drawWorld(ctx,liveCam(W,H,dpr),{actors:[...SC.pl.filter(p=>!p.gone),...SC.refs],ball:SC.ball,spots:SC.spots,t:SC.t,flash:SC.mode==='buildup'?SC.flash:null,net:SC.net}); }
 let RP=null;
 function replayStart(cv,inc,mode,opt){
   replayStop(); opt=opt||{};
@@ -2855,7 +3069,7 @@ function replayDraw(){
   const kf_=ease(clamp((t-CT)/.2,0,1))*(NETTYPES.includes(R.inc.type)||R.inc.anim.pen?1:.35); const mx=R.mk[0]+(b[0]-R.mk[0])*kf_, my=R.mk[1]+(b[1]-R.mk[1])*kf_; const rf_=R.refA; { const dx=mx-rf_.x, dy=my-rf_.y, l=Math.hypot(dx,dy)||1; rf_.face=[dx/l,dy/l]; rf_.speed=t<CT?2.5:0; rf_.phase=t*20; }
   let cam;
   if(R.cam==='yakin'){ const off=R.actors.find(a=>a.t.role==='offender'), vic=R.actors.find(a=>a.t.role==='victim'); let px=0,py=-1; if(off&&vic&&Math.hypot(vic.x-off.x,vic.y-off.y)>.2){ const v=v2n(vic.x-off.x,vic.y-off.y); px=-v[1]; py=v[0]; if(py>0){px=-px;py=-py;} }
-    const cx=off&&vic&&kf_<.5?(off.x+vic.x)/2:mx, cy=off&&vic&&kf_<.5?(off.y+vic.y)/2:my; cam=camera([cx+px*7.5,cy+py*7.5,2.2],[cx,cy,.85],1.2,W,H,dpr); }
+    if(off&&vic){ const cx=kf_<.5?(off.x+vic.x)/2:mx, cy=kf_<.5?(off.y+vic.y)/2:my; cam=camera([cx+px*7.5,cy+py*7.5,2.2],[cx,cy,.85],1.2,W,H,dpr); } else { const fx=(b[0]+mx)/2, fy=(b[1]+my)/2; cam=camera([fx-7,fy-8,3.2],[fx+1.5,fy,.8],1.05,W,H,dpr); } }
   else if(R.cam==='hakem'){ const dx=mx-rf_.x, dy=my-rf_.y, l=Math.hypot(dx,dy)||1; cam=camera([rf_.x-dx/l*.6,rf_.y-dy/l*.6,1.75],[mx,my,.7],Math.min(1.5,.55+l/28),W,H,dpr); }
   else if(R.cam==='tv') cam=camera([mx-3,my-16,7.5],[mx,my,.4],1.3,W,H,dpr);
   else if(R.cam==='ters') cam=camera([mx+3,my+16,7],[mx,my,.4],1.3,W,H,dpr);
@@ -2920,6 +3134,7 @@ function drawFig(ctx,c,a){
   L(S2.nk,S2.hd,.11,skin);
   const hr=Math.max(1.2*c.dpr,.125*sc); dot(S2.hd,.125,skin);
   ctx.fillStyle=a.hair||'#1d1611'; ctx.beginPath(); ctx.arc(S2.hd[0],S2.hd[1]-hr*.08,hr*1.02,Math.PI*1.05,Math.PI*1.95); ctx.closePath(); ctx.fill();
+  if(a.card){ const hw=S2.wR; const w=Math.max(6*c.dpr,.11*sc), h=Math.max(8*c.dpr,.15*sc); ctx.save(); ctx.translate(hw[0],hw[1]-h*.55); ctx.rotate(-.15); ctx.shadowColor=a.card==='r'?'rgba(255,80,90,.9)':'rgba(255,215,80,.9)'; ctx.shadowBlur=10*c.dpr; ctx.fillStyle=a.card==='r'?'#e3434b':'#f6c62b'; ctx.fillRect(-w/2,-h/2,w,h); ctx.restore(); }
   if(a.flag){ const f0=P(c,at(1.95,.34,0)); if(f0){ ctx.fillStyle=a.flagUp?'#ffd84a':'#f2b81f'; ctx.fillRect(f0[0],f0[1]-(a.flagUp?.25*sc:0),.32*sc,.24*sc); } }
   if(a.num!=null && sc>15 && fall<.5){ ctx.fillStyle=a.kit.numCol; ctx.font=`700 ${Math.round(.19*sc)}px "IBM Plex Mono",monospace`; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(a.num,S2.ch[0],S2.ch[1]); }
   if(a.label && sc>3){ const fs=11*c.dpr; ctx.font=`600 ${fs}px Barlow,sans-serif`; const w=ctx.measureText(a.label).width+fs*.9; const x=S2.hd[0]-w/2, y=S2.hd[1]-.25*sc-fs*1.9; ctx.fillStyle='rgba(8,13,20,.86)'; rrect(ctx,x,y,w,fs*1.55,fs*.4); ctx.fill(); ctx.fillStyle='#fff'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(a.label,S2.hd[0],y+fs*.8); }
@@ -2945,11 +3160,11 @@ function crowdRoar(){
 // live goal sequence: carry, shot, keeper beaten, net bulge, celebration
 function sceneGoal(sc,side,p){
   if(!sc) return;
-  if(M && M.modal){ sc.pendingGoal=[side,p]; if(M) M.goalHold=true; return; }
+  if(!arguments[3] && sceneBusy(sc)){ sceneQueue(sc,{k:'goal',side,p}); return; }
   const d=sdir(sc,side), gx=d>0?105:0;
   sc.forced=null; sc.spots=null; sc.mark=null; sc.refTarget=null; sc.gather=null; sc.flash=null;
   sc.pl.forEach(q=>{ q.keepDown=false; q.fall=0; q.pose=null; q.t=null; q.hl=false; });
-  const mates=sc.pl.filter(q=>q.side===side&&q.role!=='GK');
+  const mates=sc.pl.filter(q=>q.side===side&&q.role!=='GK'&&!q.gone&&!q.leaving);
   let sp=p?mates.find(q=>q.num===p.no):null; if(!sp) sp=nearestTo(mates.filter(q=>q.role==='F'),gx,34)||mates[0]; if(p) sp.num=p.no;
   const shotPos=[gx-d*rf(11,16),34+rf(-8,8)], target=[gx+d*1.15,34+(chance(.5)?1:-1)*rf(1.8,3.1)];
   sc.goal={side,sp,shotPos,target,d,gx,t:0,gk:sc.pl.find(q=>q.side!==side&&q.role==='GK'),label:esc(sideTeam(side).name)+(p?' · '+esc(p.name):'')};
@@ -2959,7 +3174,7 @@ function sceneGoal(sc,side,p){
 function goalAI(sc,dt){
   const G=sc.goal; if(!G){ kickoffPositions(sc,0); return; } G.t+=dt; const b=sc.ball, sp=G.sp, d=G.d;
   const T1=1.7,T2=1.95,T3=2.35,END=5.6;
-  sc.pl.forEach(q=>{ if(q===sp||q===G.gk) return;
+  sc.pl.forEach(q=>{ if(q===sp||q===G.gk||q.gone||q.leaving) return;
     if(G.t<T3){ if(q.side===G.side) steer(q,G.gx-d*(13+(q.i%4)*5),34+((q.i%5)-2)*8,dt,5.6); else steer(q,G.gx-d*(5+(q.i%4)*2.5),34+((q.i%5)-2)*6,dt,6); }
     else if(q.side===G.side){ steer(q,sp.x-d*(1+(q.i%3)*.8),sp.y+((q.i%4)-1.5)*1.3,dt,6.8); if(G.t>T3+1.2) setPose(q,'celebrate',.6); }
     else { steer(q,q.x,q.y,dt,.6); q.pose={P:POSES.slump,k:Math.min(1,(G.t-T3)*2)}; } });
@@ -2972,7 +3187,7 @@ function goalAI(sc,dt){
     b.x=G.target[0]+d*.4; b.z=Math.max(.11,(b.z||0)-dt*2.5);
     const corner=[G.gx-d*1.5,G.target[1]>34?66:2]; steer(sp,corner[0],corner[1],dt,7.5); if(G.t>T3+.5) sp.pose={P:POSES.celebrate,k:Math.min(1,(G.t-T3-.5)*3)}; }
   if(sc.net) sc.net.t+=dt;
-  if(G.t>END){ sc.goal=null; sc.net=null; gk.fall=0; gk.pose=null; sc.pl.forEach(q=>q.pose=null); kickoffPositions(sc,1-G.side); if(M) M.goalHold=false; }
+  if(G.t>END){ sc.goal=null; sc.net=null; gk.fall=0; gk.pose=null; sc.pl.forEach(q=>q.pose=null); kickoffPositions(sc,1-G.side); if(M) M.goalHold=false; sceneNext(sc); }
 }
 
 // =========================================================
@@ -2980,7 +3195,7 @@ function goalAI(sc,dt){
 // =========================================================
 let curInc=null, PTIMER=null;
 function openModal(html,narrow){ const m=$('#modal'); m.innerHTML=`<div class="sheet ${narrow?'narrow':''}" role="dialog" aria-modal="true">${html}</div>`; m.hidden=false; m.scrollTop=0; }
-function closeModal(){ stopTimer(); replayStop(); clearInterval(FBT); const m=$('#modal'); m.hidden=true; m.innerHTML=''; if(M){ M.modal=false; if(SC&&SC.pendingGoal){ const g=SC.pendingGoal; SC.pendingGoal=null; sceneGoal(SC,g[0],g[1]); } else if(SC&&SC.mode==='stopped') sceneResume(SC); updateBoard(); } }
+function closeModal(){ stopTimer(); replayStop(); clearInterval(FBT); const m=$('#modal'); m.hidden=true; m.innerHTML=''; if(M){ M.modal=false; if(SC&&SC.evQ&&SC.evQ.length){ sceneNext(SC); } else if(SC&&SC.mode==='stopped') sceneResume(SC); updateBoard(); } }
 let TIMER_T0=0, HIDDEN_AT=0, FBT=null;
 function stopTimer(){ clearInterval(TIMER); TIMER=null; }
 function startTimer(sec,onEnd,elId,labId){
@@ -3159,7 +3374,7 @@ function prematchUI(){
 function matchUI(){
   const ov=$('#overlay'); const fx=M.fx; kickoffPositions(SC,0);
   ov.innerHTML=`<div class="ov-in match">
-    <div class="stage"><canvas id="cv"></canvas>${bugHTML(fx)}<div class="banner" id="banner" hidden></div></div><div class="prompt" id="prompt" hidden></div>
+    <div class="stage"><canvas id="cv"></canvas>${bugHTML(fx)}<div class="banner" id="banner" hidden></div><div class="cardfx" id="cardFx" hidden></div></div><div class="prompt" id="prompt" hidden></div>
     <div class="mbar">
       <div class="meter"><span class="eyebrow">Maç ısısı</span><div class="bar temp"><i id="mTemp"></i></div></div>
       <div class="meter"><span class="eyebrow">Enerjin</span><div class="bar"><i id="mSta" style="background:var(--green)"></i></div></div>
@@ -3396,6 +3611,7 @@ const ICONS={
  kariyer:'<path d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8 20h8"/>',
  ayarlar:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/>',
  menu:'<path d="M4 7h16M4 12h16M4 17h16"/>',
+ akademi:'<path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2.5 9 2.5 12 0v-5M22 9v6"/>',
  coin:'<circle cx="12" cy="12" r="8"/><path d="M12 7v10M9.5 9.5h4a1.5 1.5 0 0 1 0 3h-3a1.5 1.5 0 0 0 0 3h4"/>',
  star:'<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',
  bolt:'<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',
@@ -3405,7 +3621,7 @@ const ICONS={
  target:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><path d="M12 12h.01"/>'
 };
 const ic=(k,cls)=>`<svg class="ic ${cls||''}" viewBox="0 0 24 24" aria-hidden="true">${ICONS[k]}</svg>`;
-const TABS=[['merkez','Merkez'],['haber','Haberler'],['sosyal','Sosyal'],['kurul','Hakem Kurulu'],['takvim','Takvim'],['lig','Puan durumu'],['kariyer','Kariyer'],['gelisim','Gelişim'],['teklifler','Teklifler'],['gelen','Gelen kutusu'],['ayarlar','Ayarlar']];
+const TABS=[['merkez','Merkez'],['haber','Haberler'],['sosyal','Sosyal'],['kurul','Hakem Kurulu'],['akademi','Kural Akademisi'],['takvim','Takvim'],['lig','Puan durumu'],['kariyer','Kariyer'],['gelisim','Gelişim'],['teklifler','Teklifler'],['gelen','Gelen kutusu'],['ayarlar','Ayarlar']];
 const MOBILE_TABS=['merkez','haber','sosyal','kurul'];
 const WHISTLE_SVG=`<svg viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="12" height="17" rx="2.5" fill="var(--red)" transform="rotate(-12 11 13)"/><rect x="12" y="7" width="12" height="17" rx="2.5" fill="var(--yellow)" transform="rotate(8 18 15)"/></svg>`;
 function initials(n){ return n.split(' ').filter(Boolean).slice(0,2).map(w=>w[0]).join('').toLocaleUpperCase('tr-TR'); }
@@ -3414,7 +3630,7 @@ function render(){
   const app=$('#app');
   if(!S){ app.innerHTML=startHTML(); bindStart(); return; }
   initWorld();
-  const fn={merkez:hubHTML,haber:newsHTML,sosyal:socialHTML,kurul:kurulHTML,takvim:calHTML,gelen:inboxHTML,kariyer:careerHTML,lig:leagueHTML,gelisim:devHTML,teklifler:offersHTML,ayarlar:settingsHTML}[TAB]||hubHTML;
+  const fn={akademi:akademiHTML,merkez:hubHTML,haber:newsHTML,sosyal:socialHTML,kurul:kurulHTML,takvim:calHTML,gelen:inboxHTML,kariyer:careerHTML,lig:leagueHTML,gelisim:devHTML,teklifler:offersHTML,ayarlar:settingsHTML}[TAB]||hubHTML;
   const mainHTML=fn();
   const repPct=clamp(S.rep,0,100); const C=2*Math.PI*15;
   const stateLine = S.phase==='tournament'?'Turnuva':S.phase==='seasonEnd'?'Sezon sonu':S.week+'. hafta';
@@ -3534,6 +3750,7 @@ function hubHTML(){
       <div class="stack" style="gap:8px">${Object.keys(ATTR_NAMES).map(k=>`<div class="attr"><span>${ATTR_NAMES[k]}</span><div class="bar"><i style="width:${S.attrs[k]}%"></i></div><span class="num">${Math.round(S.attrs[k])}</span></div>`).join('')}
         <div class="attr"><span>Kurul güveni</span><div class="bar"><i style="width:${S.kurul.trust}%;background:var(--yellow)"></i></div><span class="num">${Math.round(S.kurul.trust)}</span></div></div>
       <div class="next-step"><div class="eyebrow">Sonraki adım</div><p style="font-size:14px">${esc(nextStepText())}</p></div></section>
+    <section class="panel acad-tease"><span class="ah-ic">${ic('akademi')}</span><div style="flex:1;min-width:0"><b>Kural Akademisi</b><div class="muted" style="font-size:13px">${(S.acad&&S.acad.examWeek===S.season*100+S.week)?'Bu haftanın sınavı tamamlandı':'Haftalık sınav açık · vaka çöz, kural bilgini geliştir'}</div></div><button class="btn sm" data-tab2="akademi">Aç</button></section>
     <section class="panel"><div class="row" style="justify-content:space-between"><h3>Gündem</h3><button class="btn sm" data-tab="haber">Haberler</button></div><div class="news-list">${S.news.slice(0,3).map(n=>newsItem(n,true)).join('')||'<p class="muted">Henüz haber yok.</p>'}</div></section>
     <section class="panel"><div class="row" style="justify-content:space-between"><h3>Sosyal medyada</h3><button class="btn sm" data-tab="sosyal">Akış</button></div><div class="feedlist">${S.social.posts.slice(0,2).map(postHTML).join('')||'<p class="muted">Henüz paylaşım yok.</p>'}</div></section>`;
   return `<div class="hub"><div class="stack" style="gap:16px;min-width:0">${left}</div><div class="stack" style="gap:16px;min-width:0">${right}</div></div>`;
@@ -3601,12 +3818,6 @@ function careerHTML(){
     <div class="panel stack"><h3>Sezonlar</h3>${S.seasons.length?`<div class="tbl-wrap"><table><thead><tr><th>Sezon</th><th>Lig</th><th class="n">Maç</th><th class="n">Lig</th><th class="n">Ulusl.</th><th>Not</th></tr></thead><tbody>${S.seasons.slice().reverse().map(s=>`<tr><td>${seasonLabel(s.season)}</td><td>${esc(s.league)}</td><td class="n">${s.matches}</td><td class="n">${s.dAvg?f1(s.dAvg):'—'}</td><td class="n">${s.iAvg?f1(s.iAvg):'—'}</td><td>${s.award?'<span class="chip y">Yılın hakemi</span>':''}${s.tour?`<span class="chip b">${esc(s.tour)}</span>`:''}</td></tr>`).join('')}</tbody></table></div>`:'<p class="muted">İlk sezonun devam ediyor.</p>'}</div>
     <div class="panel stack"><h3>Son maçlar</h3>${S.history.length?`<div class="tbl-wrap"><table><tbody>${S.history.slice(0,15).map(h=>`<tr><td class="muted">${seasonLabel(h.season)} H${h.week}</td><td>${esc(team(h.home).name)} ${h.score.join('-')} ${esc(team(h.away).name)}</td><td class="muted">${esc(h.comp)}</td><td class="n">${f1(h.rating)}</td></tr>`).join('')}</tbody></table></div>`:'<p class="muted">Henüz maç yok.</p>'}</div></div></div>`;
 }
-function leagueHTML(){
-  const t=sortedTable(); const reffed=new Set(); S.history.filter(h=>h.season===S.season).forEach(h=>{reffed.add(h.home);reffed.add(h.away);});
-  return `<div class="panel stack"><div><div class="eyebrow">${seasonLabel(S.season)}</div><h2>${esc(leagueName())}</h2></div><div class="tbl-wrap"><table><thead><tr><th class="n">#</th><th>Takım</th><th class="n">O</th><th class="n">G</th><th class="n">B</th><th class="n">M</th><th class="n">A</th><th class="n">Y</th><th class="n">AV</th><th class="n">P</th></tr></thead><tbody>
-    ${t.map(r=>{ const tm=team(r.id); return `<tr class="${reffed.has(r.id)?'me':''}"><td class="n">${r.pos}</td><td><span class="row" style="gap:8px;flex-wrap:nowrap">${crest(tm,24)}${esc(tm.name)}</span></td><td class="n">${r.p}</td><td class="n">${r.w}</td><td class="n">${r.d}</td><td class="n">${r.l}</td><td class="n">${r.gf}</td><td class="n">${r.ga}</td><td class="n">${r.gf-r.ga}</td><td class="n"><b>${r.pts}</b></td></tr>`; }).join('')}
-    </tbody></table></div><p class="muted" style="font-size:13px">Vurgulu satırlar: bu sezon maçını yönettiğin takımlar.</p></div>`;
-}
 function devHTML(){
   const engCost=[0,60000,90000,140000][S.english+1];
   return `<div class="grid2"><div class="panel stack"><h2>Nitelikler</h2>
@@ -3634,6 +3845,9 @@ function bindMain(){
   const q=s=>document.querySelectorAll(s);
   q('[data-nf]').forEach(b=>b.onclick=()=>{ NEWS_F=b.dataset.nf; render(); });
   q('[data-post]').forEach(b=>b.onclick=()=>myPost(b.dataset.post));
+  q('[data-lg]').forEach(b=>b.onclick=()=>{ LG_VIEW=b.dataset.lg; render(); });
+  q('[data-at]').forEach(b=>b.onclick=()=>{ ACAD_TOPIC=b.dataset.at; render(); });
+  { const bc=$('#bCase'); if(bc) bc.onclick=()=>acadStart(false); const be=$('#bExam'); if(be) be.onclick=()=>acadStart(true); }
   q('[data-igt]').forEach(b=>b.onclick=()=>{ IG_TAB=b.dataset.igt; render(); });
   q('[data-igg]').forEach(b=>b.onclick=()=>{ IG_GRID=b.dataset.igg; render(); });
   q('[data-like]').forEach(b=>b.onclick=()=>{ const p=S.social.posts.find(x=>x.id===b.dataset.like); if(!p) return; p.liked=!p.liked; haptic('light'); save(); const art=b.closest('.igp'); if(art){ art.outerHTML=igPost(p); bindMain(); } });
