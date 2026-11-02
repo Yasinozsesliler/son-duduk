@@ -962,6 +962,162 @@ input[type=range]{padding:0;accent-color:var(--gold2);background:none;border:0;h
 @media (max-width:640px){.trw{padding:14px 0 12px;border-radius:16px}.trw-h{padding:0 14px;align-items:center}.trw-h h3{font-size:17px}.batt{width:40px;height:18px}.batt::after{top:3px}.batt-w small{display:none}.tr-art{aspect-ratio:200/88}
  .trs{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;padding:0 14px 6px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
  .trs::-webkit-scrollbar{display:none}.tr{flex:0 0 72%;scroll-snap-align:start}}
+/* ===== v11: editorial data layer ===== */
+.panel{border-radius:14px;background:var(--panel);box-shadow:inset 0 1px 0 rgba(255,255,255,.045),0 18px 40px -28px rgba(0,0,0,.8)}
+th{font-family:var(--f-mono);font-size:10.5px;font-weight:500;letter-spacing:.1em;color:var(--dim);border-bottom:1px solid var(--line2);padding:9px 8px}
+td{border-bottom:1px solid rgba(255,255,255,.05)}
+tbody tr:last-child td{border-bottom:0}
+.xh{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-bottom:12px;margin-bottom:4px;border-bottom:1px solid var(--line)}
+.xh h3{font-size:14px;letter-spacing:.12em;color:#dfe6ee}
+.xh-s{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:12px}.xh-s i{width:10px;height:1px;background:var(--line2)}
+/* report tabs + footer */
+.rtabs{gap:0;padding:0;border-radius:0;background:rgba(7,11,18,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:0;border-bottom:1px solid var(--line2);top:0}
+.rtabs button{border-radius:0;padding:15px 10px 13px;font-family:var(--f-display);font-size:15px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;box-shadow:none;background:none}
+.rtabs button.on{background:none;box-shadow:inset 0 -2px 0 var(--gold1);color:var(--fg)}
+.rtabs .num{font-family:var(--f-mono);font-size:11px;letter-spacing:0;background:rgba(255,255,255,.07);border-radius:4px;padding:1px 5px}
+.rfoot{border-radius:14px}
+/* match stats */
+.ms{padding:16px 18px 18px}
+.ms-teams{display:flex;justify-content:space-between;padding:10px 0 2px}
+.ms-teams span{display:flex;align-items:center;gap:8px}.ms-teams b{font-family:var(--f-display);font-size:16px;letter-spacing:.06em}
+.ms-poss{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:12px;padding:12px 0 16px;border-bottom:1px solid var(--line)}
+.ms-poss>b{font-family:var(--f-display);font-size:30px;font-weight:800;line-height:1}.ms-poss>b small{font-size:15px;margin-left:1px;opacity:.7}
+.ms-pb{display:flex;gap:3px;height:10px;border-radius:2px;overflow:hidden}.ms-pb i{display:block;min-width:2px}
+.ms-pl{grid-column:1/-1;text-align:center;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-top:-6px}
+.ms-rows{display:flex;flex-direction:column}
+.ms-r{display:grid;grid-template-columns:44px minmax(0,1fr) 44px;align-items:center;row-gap:7px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.045)}
+.ms-r:last-child{border-bottom:0}
+.ms-l{text-align:center;font-size:13.5px;color:#c5cfdb}
+.ms-v{justify-self:start;font-family:var(--f-mono);font-size:14px;color:var(--muted);min-width:28px;text-align:center;padding:2px 6px;border-radius:5px}
+.ms-v.r{justify-self:end}
+.ms-v.lead{color:var(--k);background:var(--c);font-weight:600}
+.ms-b{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.ms-b span{height:4px;background:rgba(255,255,255,.06);border-radius:2px;display:flex;overflow:hidden}
+.ms-b .h{justify-content:flex-end}
+.ms-b i{display:block;height:100%;background:rgba(255,255,255,.22);border-radius:2px}
+/* match flow */
+.mf{padding:16px 18px 18px}
+.mf-div{display:flex;align-items:center;justify-content:center;gap:10px;margin:10px 0;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.mf-div::before,.mf-div::after{content:"";flex:1;height:1px;background:var(--line)}
+.mf-div b{font-size:12px;color:var(--fg);letter-spacing:.04em;padding:2px 8px;border:1px solid var(--line2);border-radius:5px}
+.mf-div.mf-st{margin-top:14px}
+.mf-e{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 52px minmax(0,1fr);align-items:center;min-height:44px}
+.mf-e::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line);transform:translateX(-.5px)}
+.mf-m{position:relative;justify-self:center;font-size:12px;color:#c9d2de;background:var(--panel);padding:2px 4px}
+.mf-c{display:flex;align-items:center;gap:10px;min-width:0}
+.mf-e.hm .mf-c:first-child{justify-content:flex-start;text-align:right;flex-direction:row-reverse}.mf-e.hm .mf-tx{align-items:flex-end}
+.mf-tx{display:flex;flex-direction:column;min-width:0}.mf-tx b{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mf-tx small{font-size:11.5px;color:var(--muted)}
+.mf-e.goal .mf-tx small{font-family:var(--f-mono);color:var(--fg)}
+.mf-ic{flex:none}
+.mf-ic.goal{width:16px;height:16px;border-radius:50%;background:radial-gradient(circle at 50% 50%,#20242b 0 2.6px,transparent 3px),radial-gradient(circle at 18% 30%,#20242b 0 1.8px,transparent 2.2px),radial-gradient(circle at 82% 30%,#20242b 0 1.8px,transparent 2.2px),radial-gradient(circle at 30% 86%,#20242b 0 1.8px,transparent 2.2px),radial-gradient(circle at 70% 86%,#20242b 0 1.8px,transparent 2.2px),#f4f6f8}
+.mf-ic.card{width:11px;height:15px;border-radius:2px;background:var(--yellow);transform:rotate(8deg)}.mf-ic.card.red{background:var(--red)}
+.mf-e.ref{display:block;padding:5px 0}
+.mf-rm{font-size:12px;color:#c9d2de;width:34px;flex:none}
+.mf-rc{position:relative;display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;background:#121b29;border:1px solid var(--line);border-left:2px solid var(--vc);min-width:0}
+.mf-g{font-family:var(--f-mono);font-weight:600;color:var(--vc);width:14px;text-align:center}
+.mf-rt{flex:1;min-width:0;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mf-rv{font-size:11.5px;color:var(--vc);white-space:nowrap;font-weight:600}
+.mf-div.mf-en b{border-color:var(--gold1);color:var(--gold1)}
+/* decisions */
+.dl{padding:0;overflow:hidden}
+.dl-top{display:grid;grid-template-columns:repeat(3,auto) minmax(120px,1fr);align-items:center;gap:22px;padding:16px 18px;border-bottom:1px solid var(--line)}
+.dl-k{display:flex;flex-direction:column}.dl-k b{font-family:var(--f-display);font-size:26px;font-weight:800;line-height:1;color:var(--green)}.dl-k small{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:3px}
+.dl-k.mid b{color:var(--blue)}.dl-k.bad b{color:var(--red)}
+.dl-bar{display:flex;gap:2px;height:6px;border-radius:3px;overflow:hidden}.dl-bar i{display:block}
+.dl-list{display:flex;flex-direction:column}
+.dl-r{display:grid;grid-template-columns:62px minmax(0,1fr);gap:14px;padding:16px 18px;border-bottom:1px solid var(--line)}
+.dl-r:last-child{border-bottom:0}
+.dl-m{display:flex;flex-direction:column;align-items:flex-start;gap:8px}.dl-m b{font-size:15px;color:#d5dde7}
+.dl-g{display:grid;place-items:center;width:26px;height:26px;border-radius:7px;font-family:var(--f-mono);font-weight:700;font-size:13px;color:var(--vc);background:color-mix(in srgb,var(--vc) 13%,transparent);border:1px solid color-mix(in srgb,var(--vc) 35%,transparent)}
+.dl-b{min-width:0;display:flex;flex-direction:column;gap:8px}
+.dl-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px}.dl-h b{font-size:15.5px;font-weight:600}
+.dl-v{font-size:12px;font-weight:700;color:var(--vc);white-space:nowrap}
+.dl-x{font-size:13.5px;color:var(--muted);line-height:1.45;margin:0}
+.dl-cmp{display:grid;grid-template-columns:minmax(0,1fr);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.dl-cmp.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.dl-cmp>div{display:flex;flex-direction:column;gap:2px;padding:8px 12px;font-size:13.5px}
+.dl-cmp>div+div{border-left:1px solid var(--line)}
+.dl-cmp small{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.dl-cmp .ok span{color:#bfe9d3}
+.dl-arr{font-style:normal;color:var(--muted)}
+.dl-a{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.dl-rp{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:var(--gold1);padding:0;background:none;border:0;cursor:pointer}
+.dl-rp svg{width:12px;height:12px}
+.dl-a details{font-size:13px}.dl-a summary{cursor:pointer;color:var(--muted);list-style:none}.dl-a summary::-webkit-details-marker{display:none}.dl-a summary::after{content:" +";color:var(--dim)}.dl-a details[open] summary::after{content:" −"}
+.dl-a details p{margin:6px 0 0;line-height:1.5;color:#c5cfdb;max-width:70ch}
+.dl-a details[open]{flex-basis:100%}
+@media (max-width:560px){.dl-top{grid-template-columns:repeat(3,1fr);gap:12px}.dl-bar{grid-column:1/-1}.dl-r{grid-template-columns:44px minmax(0,1fr);gap:10px;padding:14px}.dl-cmp.two{grid-template-columns:minmax(0,1fr)}.dl-cmp>div+div{border-left:0;border-top:1px solid var(--line)}.dl-h{flex-direction:column;gap:2px}}
+/* standings */
+.lt-sel{display:flex;flex-direction:column;gap:10px}
+.lt-grp{display:grid;grid-template-columns:76px minmax(0,1fr);align-items:center;gap:10px}
+.lt-gl{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.lgrow{gap:4px}
+.lgchip{border:0;border-radius:8px;background:rgba(255,255,255,.035);padding:8px 11px;color:var(--muted);position:relative}
+.lgchip:hover{color:var(--fg);background:rgba(255,255,255,.06)}
+.lgchip.on{background:#1d2a3d;color:var(--fg);box-shadow:inset 0 -2px 0 var(--gold1)}
+.lgchip .lg-me{width:6px;height:6px;border-radius:50%;background:var(--gold1);padding:0;font-size:0}
+.lt{padding:0;overflow:hidden}
+.lt-h{display:flex;align-items:center;gap:12px;padding:16px 18px}
+.lt-h .flag{border-radius:3px;box-shadow:0 0 0 1px rgba(255,255,255,.12)}
+.lt-h h3{font-size:18px;letter-spacing:.06em;text-transform:uppercase}.lt-h small{font-size:12px;color:var(--muted)}
+.lt-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.lt-k{display:flex;align-items:center;gap:10px;padding:12px 18px;min-width:0}.lt-k+.lt-k{border-left:1px solid var(--line)}
+.lt-k>div{display:flex;flex-direction:column;min-width:0}.lt-k small{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}.lt-k b{font-size:14px}.lt-k .num{font-size:12px;color:var(--gold1)}
+.lt-t th:first-child{padding-left:18px}.lt-t th:last-child,.lt-t td:last-child{padding-right:18px}
+.lt-t td{padding:0 8px;height:42px;font-size:13.5px}
+.lt-t tbody tr:hover td{background:rgba(255,255,255,.025)}
+.lt-pos{position:relative;width:46px;padding-left:18px!important;color:var(--muted);font-size:13px}
+.lt-t tr[class*="z-"] .lt-pos::before{content:"";position:absolute;left:0;top:7px;bottom:7px;width:3px;border-radius:0 2px 2px 0;background:var(--zc)}
+.lt-t tr.z-champ{--zc:var(--gold1)}.lt-t tr.z-ucl{--zc:#5b9bff}.lt-t tr.z-uel{--zc:var(--amber)}.lt-t tr.z-up{--zc:var(--green)}.lt-t tr.z-po{--zc:#16b3b3}.lt-t tr.z-rel{--zc:var(--red)}
+.lt-t tr.z-champ .lt-pos{color:var(--gold1);font-weight:600}
+.lt-t tr.zb td{border-top:1px dashed rgba(255,255,255,.14)}
+.lt-tm span{display:flex;align-items:center;gap:10px;min-width:0;max-width:260px}.lt-tm b{font-weight:600;font-size:14px}
+.lt-tm em{color:var(--gold1);display:inline-flex;flex:none}
+.lt-t tr.mine .lt-tm b{color:#fff3c4}
+.lt-gd.p{color:#7ee2a8}.lt-gd.m{color:#ff9a9f}
+.lt-pts{font-weight:700;font-size:15px!important;color:#fff;background:rgba(255,255,255,.035)}
+.lt-t th.n:nth-last-child(2){background:rgba(255,255,255,.035);color:var(--fg)}
+.lt-form .form i{width:16px;height:16px;border-radius:4px;font-size:9.5px}
+.form i.f-x{background:rgba(255,255,255,.06)}
+.lt-leg{display:flex;flex-wrap:wrap;gap:16px;padding:12px 18px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+.lt-leg span{display:flex;align-items:center;gap:7px}.lt-leg .lz{width:3px;height:12px;border-radius:2px}.lt-leg em{color:var(--gold1);display:inline-flex}
+@media (max-width:640px){.lt-grp{grid-template-columns:minmax(0,1fr);gap:6px}.lt-kpis{grid-template-columns:minmax(0,1fr)}.lt-k+.lt-k{border-left:0;border-top:1px solid var(--line)}.lt-t td,.lt-t th{padding-left:5px;padding-right:5px}.lt-pos{padding-left:12px!important;width:36px}.lt-tm span{max-width:150px;gap:7px}.lt-tm b{font-size:13px}.lt-h{padding:14px}.lt-t .lt-pts,.lt-t th.n:nth-last-child(2){padding-right:12px}}
+/* kurul / generic tables */
+.ktable td{height:40px;padding-top:0;padding-bottom:0}
+.ktable tr.me td{background:rgba(255,219,92,.06)}
+.ktable tr.me td:first-child{box-shadow:inset 3px 0 0 var(--gold1)}
+/* career */
+.cs{padding:16px 18px}
+.cs-g{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.cs-c{display:flex;flex-direction:column;gap:2px;padding:14px 4px 6px 0}
+.cs-c:nth-child(n+4){border-top:1px solid var(--line)}
+.cs-c:not(:nth-child(3n+1)){padding-left:16px;border-left:1px solid var(--line)}
+.cs-c b{font-family:var(--f-display);font-size:30px;font-weight:800;line-height:1}
+.cs-c small{font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.cs-c.acc b{color:var(--gold1)}
+.cs-bar{display:block;height:3px;border-radius:2px;background:rgba(255,255,255,.08);margin-top:6px}.cs-bar i{display:block;height:100%;border-radius:2px;background:var(--gold1)}
+.ka{padding:16px 18px}
+.ka-g{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 18px}
+.ka-i{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--line);min-width:0}
+.ka-i>div{display:flex;flex-direction:column;min-width:0}.ka-i b{font-size:14px;font-weight:600;color:var(--muted)}.ka-i small{font-size:12px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ka-md{flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;border:1px solid var(--line2);color:var(--dim)}.ka-md svg{width:16px;height:16px}
+.ka-i.on b{color:var(--fg)}.ka-i.on small{color:var(--gold1)}
+.ka-i.on .ka-md{border:0;color:#2a1c00;background:radial-gradient(circle at 35% 30%,#fff1b8,var(--gold1) 45%,var(--gold2));box-shadow:0 0 0 3px rgba(255,219,92,.14)}
+@media (max-width:560px){.ka-g{grid-template-columns:minmax(0,1fr)}}
+.md-l{display:flex;flex-direction:column}
+.md-r{display:grid;grid-template-columns:76px minmax(0,1fr) 48px minmax(0,1fr) minmax(0,110px) 44px;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.md-r:last-child{border-bottom:0}
+.md-w{font-size:11.5px;color:var(--dim)}
+.md-t{display:flex;align-items:center;gap:8px;min-width:0}.md-t.r{justify-content:flex-end}.md-t b{font-weight:600}
+.md-s{text-align:center;font-size:14px;padding:3px 0;border-radius:5px;background:rgba(255,255,255,.06)}
+.md-c{font-size:12px;color:var(--muted)}
+.md-rt{justify-self:end;font-size:13px;font-weight:600;color:var(--rc)}
+@media (max-width:560px){.md-r{grid-template-columns:minmax(0,1fr) 44px minmax(0,1fr) 38px}.md-w,.md-c{display:none}}
+.panel>h3:first-child{font-size:14px;letter-spacing:.12em;color:#dfe6ee;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.panel>h2:first-child{font-size:20px;letter-spacing:.06em;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.rung .chip{border:0;background:none;padding:0;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.rung .chip.g{color:var(--green)}.rung .chip.y{color:#1d1400;background:var(--gold1);padding:2px 7px;border-radius:4px}
+.md-w{white-space:nowrap}
 /* touch / mobile app ergonomics */
 html{-webkit-text-size-adjust:100%}
 body{overscroll-behavior-y:none;-webkit-tap-highlight-color:transparent}
@@ -1830,24 +1986,6 @@ let LG_VIEW=null;
 function zoneOf(k,pos,n){ const top=k==='H4'||!/^H/.test(k);
   if(top){ if(pos===1) return ['champ','Şampiyon']; if(pos<=4) return ['ucl','Şampiyonlar Ligi']; if(pos<=6) return ['uel','Avrupa / Konferans']; if(pos>n-3) return ['rel','Düşme']; return null; }
   if(pos<=2) return ['up','Doğrudan yükselme']; if(pos<=6) return ['po','Play-off']; if(pos>n-3) return ['rel','Düşme']; return null; }
-function leagueHTML(){
-  const keys=leagueKeysAll(); if(!LG_VIEW||!keys.includes(LG_VIEW)) LG_VIEW=S.leagueKey&&keys.includes(S.leagueKey)?S.leagueKey:keys[0];
-  const T=tableOf(LG_VIEW); const rows=T?sortT(T):[]; const n=rows.length;
-  const reffed=new Set(); S.history.filter(h=>h.season===S.season).forEach(h=>{reffed.add(h.home);reffed.add(h.away);});
-  const chip=k=>`<button class="lgchip ${LG_VIEW===k?'on':''}" data-lg="${k}">${flagSVG(leagueFlag(k),20,14)}<span>${esc(leagueLabel(k))}</span>${k===S.leagueKey?'<i class="lg-me">Sen</i>':''}</button>`;
-  const home=keys.filter(k=>/^H/.test(k)), world=keys.filter(k=>!/^H/.test(k));
-  const lead=rows[0]?team(rows[0].id):null; const att=rows.slice().sort((a,b)=>b.gf-a.gf)[0]; const def=rows.slice().sort((a,b)=>a.ga-b.ga)[0];
-  const zs=new Map(); rows.forEach(r=>{ const z=zoneOf(LG_VIEW,r.pos,n); if(z) zs.set(z[0],z[1]); });
-  return `<div class="page-h"><div><div class="eyebrow gold">${seasonLabel(S.season)} · ${S.week}. hafta</div><h2 class="page-title">Puan durumları</h2></div></div>
-    <section class="panel lgsel"><span class="eyebrow">${esc(NAT().name)}</span><div class="lgrow">${home.map(chip).join('')}</div><span class="eyebrow" style="margin-top:6px">Dünya ligleri</span><div class="lgrow">${world.map(chip).join('')}</div></section>
-    <section class="lg-kpis">${lead?`<div class="panel lgk">${crest(lead,40)}<div><span class="eyebrow">Lider</span><b>${esc(lead.name)}</b><small>${rows[0].pts} puan · ${rows[0].w}G ${rows[0].d}B ${rows[0].l}M</small></div></div>`:''}${att?`<div class="panel lgk">${crest(team(att.id),40)}<div><span class="eyebrow">En golcü</span><b>${esc(team(att.id).name)}</b><small>${att.gf} gol</small></div></div>`:''}${def?`<div class="panel lgk">${crest(team(def.id),40)}<div><span class="eyebrow">En az gol yiyen</span><b>${esc(team(def.id).name)}</b><small>${def.ga} gol</small></div></div>`:''}</section>
-    <section class="panel stack"><div class="row" style="justify-content:space-between"><h3 class="row" style="gap:10px">${flagSVG(leagueFlag(LG_VIEW),26,18)}${esc(leagueLabel(LG_VIEW))}</h3><span class="muted" style="font-size:12px">${n} takım</span></div>
-      <div class="tbl-wrap"><table class="lgt"><thead><tr><th class="n">#</th><th>Takım</th><th class="n">O</th><th class="n">G</th><th class="n">B</th><th class="n">M</th><th class="n hide-s">A</th><th class="n hide-s">Y</th><th class="n">AV</th><th class="n">P</th><th class="hide-s">Form</th></tr></thead><tbody>
-      ${rows.map(r=>{ const tm=team(r.id); const z=zoneOf(LG_VIEW,r.pos,n); return `<tr class="${reffed.has(r.id)&&LG_VIEW===S.leagueKey?'mine':''} ${z?'z-'+z[0]:''}"><td class="n"><span class="zpos">${r.pos}</span></td><td><span class="row" style="gap:8px;flex-wrap:nowrap">${crest(tm,24)}<span class="ell">${esc(tm.name)}</span></span></td><td class="n">${r.p}</td><td class="n">${r.w}</td><td class="n">${r.d}</td><td class="n">${r.l}</td><td class="n hide-s">${r.gf}</td><td class="n hide-s">${r.ga}</td><td class="n">${r.gf-r.ga>0?'+':''}${r.gf-r.ga}</td><td class="n"><b>${r.pts}</b></td><td class="hide-s"><span class="form">${(r.form||[]).map(f=>`<i class="f-${f}">${f}</i>`).join('')}</span></td></tr>`; }).join('')}
-      </tbody></table></div>
-      <div class="lg-legend">${[...zs.entries()].map(([k,v])=>`<span><i class="lz z-${k}"></i>${esc(v)}</span>`).join('')}${LG_VIEW===S.leagueKey?'<span><i class="lz mine"></i>Bu sezon maçını yönettiğin takımlar</span>':''}</div></section>`;
-}
-
 // =========================================================
 //   CARD SHOWING — referee walks in, raises the card
 // =========================================================
@@ -3492,14 +3630,8 @@ function replayModal(d){
     <div class="verdict v-${d.v}"><span class="vi">${VLAB[d.v]}</span></div><p><b>Senin kararın:</b> ${esc(d.final||d.your)}</p>${d.v!=='dogru'&&d.v!=='durdu'?`<p><b>Doğrusu:</b> ${esc(d.correct)}</p>`:''}<p>${esc(d.explain)}</p><p class="muted" style="font-size:13px">${esc(d.law||'')}</p></div></div></div>`);
   bindReplay(inc,cams); $('#bRpClose').onclick=()=>{ replayStop(); const m=$('#modal'); m.hidden=true; m.innerHTML=''; };
 }
-function decRow(d,i){
-  const ttl = d.cat==='major'?d.title:d.cat==='quick'?'Hızlı karar':d.cat==='mgmt'?'Maç yönetimi':d.title;
-  return `<div class="dec2" style="--vc:${VCOL[d.v]||'var(--line2)'}"><span class="m num">${esc(d.min)}</span><div style="min-width:0"><div class="row" style="justify-content:space-between;gap:8px"><b>${esc(ttl)}</b><span class="vtag">${VLAB[d.v]||d.v}</span></div>${d.text?`<div class="muted" style="font-size:13px">${esc(d.text)}</div>`:''}<div style="font-size:13px;margin-top:2px">Senin: ${esc(d.your)}${d.final&&d.final!==d.your?' → '+esc(d.final):''}</div>${d.v!=='dogru'&&d.v!=='durdu'?`<div style="font-size:13px" class="muted">Doğrusu: ${esc(d.correct)}</div>`:''}
-    <div class="row" style="gap:10px;margin-top:6px">${d.inc?`<button class="btn sm rp-btn" data-rp="${i}">▶ Tekrarı izle</button>`:''}<details><summary>Neden?</summary><p>${esc(d.explain)}${d.note?' '+esc(d.note):''}</p></details></div></div></div>`;
-}
-
 function matchStats(){
-  let poss; if(SC){ const t=SC.possT; poss=Math.round(t[0]/(t[0]+t[1])*100); } else poss=Math.round(clamp(50+(M.H.str-M.A.str)*.9+rf(-6,6),28,72));
+  let poss; const pt=SC&&SC.possT; if(pt&&pt[0]+pt[1]>120){ poss=Math.round(clamp(pt[0]/(pt[0]+pt[1])*100,25,75)); } else poss=Math.round(clamp(50+(M.H.str-M.A.str)*.9+rf(-6,6),28,72));
   const sh=SC?SC.shots:[0,0]; const shots=[sh[0]+M.score[0]+ri(3,7),sh[1]+M.score[1]+ri(3,7)]; const onT=[Math.min(shots[0],M.score[0]+ri(1,4)),Math.min(shots[1],M.score[1]+ri(1,4))];
   const y=[0,1].map(s=>M.cardsLog.filter(c=>c.side===s&&!c.red).length), rd=[0,1].map(s=>M.cardsLog.filter(c=>c.side===s&&c.red).length);
   return {poss:[poss,100-poss],shots,onT,fouls:[ri(8,15)+y[0]*2,ri(8,15)+y[1]*2],corners:[ri(2,8),ri(1,7)],y,rd}; }
@@ -3541,7 +3673,7 @@ function reportUI(r){
   ov.scrollTop=0;
   const renderTab=()=>{ const el=$('#rtab'); ov.querySelectorAll('[data-rt]').forEach(b=>b.classList.toggle('on',b.dataset.rt===REP_TAB));
     if(REP_TAB==='ozet') el.innerHTML=repSummary(r,H,A);
-    else if(REP_TAB==='karar') el.innerHTML=`<section class="panel stack"><div class="declist">${r.log.map((d,i)=>decRow(d,i)).join('')}</div></section>`;
+    else if(REP_TAB==='karar') el.innerHTML=decListHTML(r);
     else el.innerHTML=`<div class="rpress-grid"><div class="panel press"><div class="press-mast"><span>Spor Gazetesi</span><span class="muted">${esc(weekDate(Math.min(34,S.week)))}</span></div>${r.headlines.map((h,i)=>`<article class="${i?'np-s':'np-l'}"><small>${esc(h.s)}</small><h4>${esc(h.t)}</h4></article>`).join('')}</div>
       <div class="ig-mini">${r.social.map((p,i)=>igPost({id:'rs'+fx.id+i,a:{n:p.u,h:p.u},text:p.t,likes:Math.round((fx.imp*40+60)*(1+i*.4)),week:S.week,season:S.season,img:/kural/.test(p.u)?{k:'quote'}:{k:'crest',t:p.u.includes(H.short.toLowerCase())?H.id:A.id}})).join('')}</div></div>`;
     el.querySelectorAll('[data-rp]').forEach(b=>b.onclick=()=>{ const d=r.log[+b.dataset.rp]; if(d&&d.inc) replayModal(d); }); };
@@ -3555,15 +3687,88 @@ function reportUI(r){
   ov.querySelectorAll('[data-st]').forEach(b=>b.onclick=()=>afterReport(b.dataset.st));
   $('#bDone').onclick=()=>afterReport(null);
 }
+// ---------- v11: editorial data surfaces ----------
+function hexDist(a,b){ const p=h=>{ const n=parseInt(h.slice(1),16); return [n>>16&255,n>>8&255,n&255]; }; const x=p(a),y=p(b); return Math.hypot(x[0]-y[0],x[1]-y[1],x[2]-y[2]); }
+function teamTone(t){ const ok=c=>c&&/^#[0-9a-f]{6}$/i.test(c)&&lum(c)>.16; return ok(t.c1)?t.c1:ok(t.c2)?t.c2:'#cfd5dd'; }
+function pairTones(H,A){ const h=teamTone(H); let a=teamTone(A); if(hexDist(h,a)<90){ const alt=A.c2&&/^#[0-9a-f]{6}$/i.test(A.c2)&&lum(A.c2)>.16&&hexDist(h,A.c2)>=90?A.c2:(lum(h)>.7?'#7d8aa0':'#e9edf2'); a=alt; } return [h,a]; }
+const VGLYPH={dogru:'✓',durdu:'✓',kabul:'≈',var:'↺',kismen:'½',hata:'✕',israr:'✕'};
 function repSummary(r,H,A){
   const st=r.stats||{poss:[50,50],shots:[r.score[0]+4,r.score[1]+4],onT:[r.score[0]+1,r.score[1]+1],fouls:[11,11],corners:[4,4],y:[0,0],rd:[0,0]};
-  const row=(lab,a,b,pct)=>{ const t=(a+b)||1; const pa=pct?a:a/t*100; return `<div class="sr"><span class="num ${a>b?'hi':''}">${a}${pct?'%':''}</span><div class="sr-m"><small>${lab}</small><div class="sr-b"><i style="width:${pa}%;background:${H.c1}"></i><i style="width:${100-pa}%;background:${A.c1===H.c1?'#cfd5dd':A.c1}"></i></div></div><span class="num ${b>a?'hi':''}">${b}${pct?'%':''}</span></div>`; };
-  const ev=[...r.goals.map(g=>({m:g.min,k:'goal',t:`Gol · ${g.p.replace(/^\d+ /,'')}`,s:g.side})),...r.cards.map(c=>({m:c.min,k:c.red?'red':'yellow',t:`${c.red?'Kırmızı':'Sarı'} kart · ${c.label}`,s:c.side})),...r.log.filter(d=>d.cat==='major').map(d=>({m:d.min,k:'dc',t:d.title,v:d.v}))].sort((a,b)=>minNum(a.m)-minNum(b.m));
-  return `<div class="rsum-grid"><section class="panel stack"><div class="sr-head">${crest(H,30)}<h3>Maç istatistikleri</h3>${crest(A,30)}</div>
-    ${row('Topla oynama',st.poss[0],st.poss[1],true)}${row('Şut',st.shots[0],st.shots[1])}${row('İsabetli şut',st.onT[0],st.onT[1])}${row('Faul',st.fouls[0],st.fouls[1])}${row('Korner',st.corners[0],st.corners[1])}${row('Sarı kart',st.y[0],st.y[1])}${row('Kırmızı kart',st.rd[0],st.rd[1])}</section>
-    <section class="panel stack"><h3>Maçın kritik anları</h3><div class="moments">${ev.map(e=>`<div class="mo ${e.s===1?'aw':''}"><span class="num mo-m">${esc(e.m)}</span><span class="mo-i ${e.k}" style="${e.k==='dc'?`--vc:${VCOL[e.v]}`:''}"></span><span class="mo-t">${esc(e.t)}${e.k==='dc'?` <span class="vtag" style="--vc:${VCOL[e.v]}">${VLAB[e.v]}</span>`:''}</span></div>`).join('')||'<p class="muted">Kritik an yok.</p>'}</div></section></div>`;
+  const [hc,ac]=pairTones(H,A);
+  const row=(lab,a,b)=>{ const t=(a+b)||1, wa=a/t*100, wb=b/t*100; const la=a>b, lb=b>a;
+    return `<div class="ms-r"><span class="ms-v ${la?'lead':''}" style="--c:${hc};--k:${lum(hc)>.5?'#0b111b':'#fff'}">${a}</span><span class="ms-l">${lab}</span><span class="ms-v r ${lb?'lead':''}" style="--c:${ac};--k:${lum(ac)>.5?'#0b111b':'#fff'}">${b}</span>
+      <div class="ms-b"><span class="h"><i style="width:${wa}%;${la?`background:${hc}`:''}"></i></span><span class="a"><i style="width:${wb}%;${lb?`background:${ac}`:''}"></i></span></div></div>`; };
+  const p0=st.poss[0], p1=st.poss[1];
+  // match flow with running score
+  const ev=[...r.goals.map(g=>({m:g.min,k:'goal',who:g.p.replace(/^\d+ /,''),s:g.side})),...r.cards.map(c=>({m:c.min,k:c.red?'red':'yellow',who:String(c.label).replace(/^\d+ /,''),no:(String(c.label).match(/^\d+/)||[''])[0],s:c.side})),...r.log.filter(d=>d.cat==='major').map(d=>({m:d.min,k:'ref',t:d.title,v:d.v}))].sort((a,b)=>minNum(a.m)-minNum(b.m));
+  const sc=[0,0]; let ht=null, out='';
+  const htMark=()=>`<div class="mf-div"><span>Devre arası</span><b class="num">${sc[0]} – ${sc[1]}</b></div>`;
+  ev.forEach(e=>{ const half=parseInt(e.m)>45?2:1; if(half===2&&!ht){ ht=1; out+=htMark(); }
+    if(e.k==='ref'){ out+=`<div class="mf-e ref" style="--vc:${VCOL[e.v]||'var(--muted)'}"><div class="mf-rc"><span class="mf-rm num">${esc(e.m)}</span><span class="mf-g">${VGLYPH[e.v]||'•'}</span><span class="mf-rt">${esc(e.t)}</span><span class="mf-rv">${VLAB[e.v]||''}</span></div></div>`; return; }
+    if(e.k==='goal') sc[e.s]++;
+    const body=e.k==='goal'?`<span class="mf-ic goal"></span><span class="mf-tx"><b>${esc(e.who)}</b><small class="num">${sc[0]} – ${sc[1]}</small></span>`:`<span class="mf-ic card ${e.k}"></span><span class="mf-tx"><b>${esc(e.who)}</b><small>${e.k==='red'?'Kırmızı kart':'Sarı kart'}</small></span>`;
+    out+=`<div class="mf-e ${e.s?'aw':'hm'} ${e.k}"><div class="mf-c">${e.s?'':body}</div><span class="mf-m num">${esc(e.m)}</span><div class="mf-c">${e.s?body:''}</div></div>`; });
+  if(!ht) out+=htMark();
+  return `<div class="rsum-grid">
+    <section class="panel ms"><header class="xh"><h3>Maç istatistikleri</h3></header>
+      <div class="ms-teams"><span>${crest(H,24)}<b>${esc(H.short)}</b></span><span><b>${esc(A.short)}</b>${crest(A,24)}</span></div>
+      <div class="ms-poss"><b class="num" style="color:${p0>=p1?hc:'var(--muted)'}">${p0}<small>%</small></b><div class="ms-pb"><i style="flex:${p0};background:${hc}"></i><i style="flex:${p1};background:${ac}"></i></div><b class="num" style="color:${p1>p0?ac:'var(--muted)'}">${p1}<small>%</small></b><span class="ms-pl">Topla oynama</span></div>
+      <div class="ms-rows">${row('Şut',st.shots[0],st.shots[1])}${row('İsabetli şut',st.onT[0],st.onT[1])}${row('Korner',st.corners[0],st.corners[1])}${row('Faul',st.fouls[0],st.fouls[1])}${row('Sarı kart',st.y[0],st.y[1])}${row('Kırmızı kart',st.rd[0],st.rd[1])}</div></section>
+    <section class="panel mf"><header class="xh"><h3>Maç akışı</h3><span class="xh-s">${crest(H,18)}<i></i>${crest(A,18)}</span></header>
+      <div class="mf-div mf-st"><span>Başlama</span><b class="num">0 – 0</b></div>${out}<div class="mf-div mf-en"><span>Maç sonu</span><b class="num">${r.score[0]} – ${r.score[1]}</b></div></section></div>`;
 }
-
+function decRow(d,i){
+  const ttl = d.cat==='major'?d.title:d.cat==='quick'?'Hızlı karar':d.cat==='mgmt'?'Maç yönetimi':d.title;
+  const wrong = d.v!=='dogru'&&d.v!=='durdu';
+  const yours = esc(d.your)+(d.final&&d.final!==d.your?` <i class="dl-arr">→</i> ${esc(d.final)}`:'');
+  return `<article class="dl-r" style="--vc:${VCOL[d.v]||'var(--line2)'}"><div class="dl-m"><b class="num">${esc(d.min)}</b><span class="dl-g">${VGLYPH[d.v]||'•'}</span></div>
+    <div class="dl-b"><div class="dl-h"><b>${esc(ttl)}</b><span class="dl-v">${VLAB[d.v]||esc(d.v)}</span></div>${d.text?`<p class="dl-x">${esc(d.text)}</p>`:''}
+      <div class="dl-cmp ${wrong?'two':''}"><div><small>Kararın</small><span>${yours}</span></div>${wrong?`<div class="ok"><small>Doğrusu</small><span>${esc(d.correct)}</span></div>`:''}</div>
+      <div class="dl-a">${d.inc?`<button class="dl-rp" data-rp="${i}"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1.8v8.4L10 6z" fill="currentColor"/></svg>Tekrarı izle</button>`:''}<details><summary>Neden?</summary><p>${esc(d.explain)}${d.note?' '+esc(d.note):''}</p></details></div></div></article>`;
+}
+function decListHTML(r){
+  const L=r.log, g={ok:0,mid:0,bad:0}; L.forEach(d=>{ if(d.v==='dogru'||d.v==='durdu') g.ok++; else if(d.v==='hata'||d.v==='israr') g.bad++; else g.mid++; });
+  const n=L.length||1;
+  return `<section class="panel dl"><header class="dl-top"><div class="dl-k"><b class="num">${g.ok}</b><small>Doğru</small></div><div class="dl-k mid"><b class="num">${g.mid}</b><small>Kabul / kısmen</small></div><div class="dl-k bad"><b class="num">${g.bad}</b><small>Hatalı</small></div>
+      <div class="dl-bar"><i style="flex:${g.ok};background:var(--green)"></i><i style="flex:${g.mid};background:var(--blue)"></i><i style="flex:${g.bad};background:var(--red)"></i></div></header>
+    <div class="dl-list">${L.map((d,i)=>decRow(d,i)).join('')||'<p class="muted" style="padding:16px">Karar yok.</p>'}</div></section>`;
+}
+function leagueHTML(){
+  const keys=leagueKeysAll(); if(!LG_VIEW||!keys.includes(LG_VIEW)) LG_VIEW=S.leagueKey&&keys.includes(S.leagueKey)?S.leagueKey:keys[0];
+  const T=tableOf(LG_VIEW); const rows=T?sortT(T):[]; const n=rows.length;
+  const reffed=new Set(); S.history.filter(h=>h.season===S.season).forEach(h=>{reffed.add(h.home);reffed.add(h.away);});
+  const chip=k=>`<button class="lgchip ${LG_VIEW===k?'on':''}" data-lg="${k}">${flagSVG(leagueFlag(k),18,13)}<span>${esc(leagueLabel(k))}</span>${k===S.leagueKey?'<i class="lg-me" title="Senin ligin"></i>':''}</button>`;
+  const home=keys.filter(k=>/^H/.test(k)), world=keys.filter(k=>!/^H/.test(k));
+  const played=rows.some(r=>r.p>0);
+  const lead=rows[0], att=rows.slice().sort((a,b)=>b.gf-a.gf)[0], def=rows.slice().sort((a,b)=>a.ga-b.ga)[0];
+  const kpi=(lab,r,val)=>r?`<div class="lt-k">${crest(team(r.id),30)}<div><small>${lab}</small><b class="ell">${esc(team(r.id).name)}</b><span class="num">${val}</span></div></div>`:'';
+  const zs=new Map(); let prevZ=null;
+  const body=rows.map(r=>{ const tm=team(r.id); const z=zoneOf(LG_VIEW,r.pos,n); if(z) zs.set(z[0],z[1]); const zk=z?z[0]:'';
+    const brk=r.pos>1&&zk!==prevZ; prevZ=zk; const gd=r.gf-r.ga; const mine=reffed.has(r.id)&&LG_VIEW===S.leagueKey;
+    const form=(r.form||[]).slice(-5); const fpad=Array.from({length:5-form.length},()=>'<i class="f-x"></i>').join('');
+    return `<tr class="${zk?'z-'+zk:''} ${brk?'zb':''} ${mine?'mine':''}"><td class="lt-pos num">${r.pos}</td><td class="lt-tm"><span>${crest(tm,22)}<b class="ell">${esc(tm.name)}</b>${mine?'<em title="Bu sezon maçını yönettin">'+WHISTLE_MINI+'</em>':''}</span></td><td class="n">${r.p}</td><td class="n">${r.w}</td><td class="n">${r.d}</td><td class="n">${r.l}</td><td class="n hide-s">${r.gf}:${r.ga}</td><td class="n lt-gd ${gd>0?'p':gd<0?'m':''}">${gd>0?'+':''}${gd}</td><td class="n lt-pts">${r.pts}</td><td class="hide-s lt-form"><span class="form">${fpad}${form.map(f=>`<i class="f-${f}">${f}</i>`).join('')}</span></td></tr>`; }).join('');
+  return `<div class="page-h"><div><div class="eyebrow gold">${seasonLabel(S.season)} · ${S.week}. hafta</div><h2 class="page-title">Puan durumları</h2></div></div>
+    <section class="lt-sel"><div class="lt-grp"><span class="lt-gl">${esc(NAT().name)}</span><div class="lgrow">${home.map(chip).join('')}</div></div><div class="lt-grp"><span class="lt-gl">Dünya</span><div class="lgrow">${world.map(chip).join('')}</div></div></section>
+    <section class="panel lt">
+      <header class="lt-h">${flagSVG(leagueFlag(LG_VIEW),30,20)}<div><h3>${esc(leagueLabel(LG_VIEW))}</h3><small>${n} takım · ${played?`${Math.max(...rows.map(r=>r.p))}. hafta sonrası`:'Sezon henüz başlamadı'}</small></div></header>
+      ${played?`<div class="lt-kpis">${kpi('Lider',lead,lead.pts+' P')}${kpi('En golcü',att,att.gf+' gol')}${kpi('En sağlam savunma',def,def.ga+' yenen')}</div>`:''}
+      <div class="tbl-wrap"><table class="lt-t"><thead><tr><th class="n">#</th><th>Takım</th><th class="n" title="Oynanan">O</th><th class="n" title="Galibiyet">G</th><th class="n" title="Beraberlik">B</th><th class="n" title="Mağlubiyet">M</th><th class="n hide-s">Gol</th><th class="n" title="Averaj">Av</th><th class="n">P</th><th class="hide-s">Son 5</th></tr></thead><tbody>${body}</tbody></table></div>
+      <footer class="lt-leg">${[...zs.entries()].map(([k,v])=>`<span><i class="lz z-${k}"></i>${esc(v)}</span>`).join('')}${LG_VIEW===S.leagueKey?`<span><em>${WHISTLE_MINI}</em>Bu sezon maçını yönettiğin takım</span>`:''}</footer></section>`;
+}
+const WHISTLE_MINI='<svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M2 8.5a4 4 0 0 0 7.6 1.7L14 9V6H7.3A4 4 0 0 0 2 8.5z" fill="currentColor"/><circle cx="6" cy="8.6" r="1.3" fill="#0b111b"/></svg>';
+function careerStatsHTML(t){
+  const acc=t.decisions?Math.round(t.correct/t.decisions*100):0;
+  const c=[['Maç',t.matches],['Sarı kart',t.yellows],['Kırmızı kart',t.reds],['Penaltı',t.pens],['VAR',t.var],['İsabet','%'+acc]];
+  return `<div class="panel cs"><header class="xh"><h3>Kariyer sayıları</h3></header><div class="cs-g">${c.map(([l,v],i)=>`<div class="cs-c ${i===5?'acc':''}"><b class="num">${v}</b><small>${l}</small>${i===5?`<span class="cs-bar"><i style="width:${acc}%"></i></span>`:''}</div>`).join('')}</div></div>`;
+}
+function trophiesHTML(){
+  const got=MILESTONES.filter(m=>S.milestones[m.id]).length;
+  return `<div class="panel ka"><header class="xh"><h3>Kariyer anları</h3><span class="xh-s num">${got}/${MILESTONES.length}</span></header><div class="ka-g">${MILESTONES.map(m=>{ const on=!!S.milestones[m.id];
+    return `<div class="ka-i ${on?'on':''}"><span class="ka-md">${on?'<svg viewBox="0 0 20 20"><path d="M10 1.5l2.4 5 5.4.6-4 3.7 1.1 5.4L10 13.5l-4.9 2.7 1.1-5.4-4-3.7 5.4-.6z" fill="currentColor"/></svg>':'<svg viewBox="0 0 20 20"><rect x="5" y="9" width="10" height="8" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M7.2 9V6.8a2.8 2.8 0 0 1 5.6 0V9" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>'}</span><div><b>${esc(m.name)}</b><small>${on?esc(S.milestones[m.id]):esc(m.d)}</small></div></div>`; }).join('')}</div></div>`;
+}
+function recentHTML(){
+  return `<div class="panel"><header class="xh"><h3>Son maçlar</h3></header>${S.history.length?`<div class="md-l">${S.history.slice(0,12).map(h=>{ const H=team(h.home),A=team(h.away); return `<div class="md-r"><span class="md-w num">${seasonLabel(h.season).slice(2)} · H${h.week}</span><span class="md-t r"><b class="ell">${esc(H.short)}</b>${crest(H,20)}</span><b class="md-s num">${h.score[0]}–${h.score[1]}</b><span class="md-t">${crest(A,20)}<b class="ell">${esc(A.short)}</b></span><span class="md-c ell">${esc(h.comp)}</span><span class="md-rt num" style="--rc:${rateCol(h.rating)}">${f1(h.rating)}</span></div>`; }).join('')}</div>`:'<p class="muted">Henüz maç yok.</p>'}</div>`;
+}
 const MONTHS_LONG=['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
 function weekDateObj(w){ const d=new Date(S.season,7,9); d.setDate(d.getDate()+(w-1)*7+(w>17?21:0)); return d; }
 function rateCol(r){ return r>=8.6?'var(--green)':r>=8.0?'var(--gold1)':r>=7.5?'var(--amber)':'var(--red)'; }
@@ -3880,7 +4085,7 @@ function kurulHTML(){
     ${h?`<section class="panel hearing stack"><div class="eyebrow">Kurul toplantısı</div><h3 style="text-transform:none;letter-spacing:0;font-size:20px">${esc(h.match)} · ${esc(h.min)} ${esc(h.title)}</h3>
       <p>Senin kararın: <b>${esc(h.your)}</b>. ${h.wrong?'Video incelemesinde kurul üyeleri kararın hatalı olabileceğini düşünüyor.':'Kulüp kararın hatalı olduğunu iddia ederek başvurdu.'} Ne diyeceksin?</p>
       <div class="dopts"><button class="dopt" data-hear="kabul">Hatamı kabul ediyorum</button><button class="dopt" data-hear="savun">Kararımın arkasındayım, görüntülerle savunurum</button></div></section>`:''}
-    <section class="panel stack"><div class="row" style="justify-content:space-between"><h3>Klasman sıralaması</h3><span class="muted" style="font-size:13px">Sezon ortalamasına göre</span></div>
+    <section class="panel stack"><header class="xh"><h3>Klasman sıralaması</h3><span class="xh-s">Sezon ortalamasına göre</span></header>
       <div class="tbl-wrap"><table class="ktable"><colgroup><col style="width:34px"><col><col style="width:46px"><col style="width:56px"><col style="width:46px"></colgroup><thead><tr><th class="n">#</th><th>Hakem</th><th class="n">Maç</th><th class="n">Ort.</th><th class="n">Son</th></tr></thead><tbody>${rank.map((r,i)=>`<tr class="${r.me?'me':''}"><td class="n">${i+1}</td><td><div class="kname"><span class="ell">${esc(r.name)}</span>${r.fifa?'<span class="chip b">FIFA</span>':''}${r.me?'<span class="chip y">Sen</span>':''}</div></td><td class="n">${r.n}</td><td class="n" style="color:${r.avg==null?'':r.avg>=8.35?'var(--green)':r.avg<7.7?'var(--red)':''}">${r.avg==null?'—':r.avg.toFixed(2)}</td><td class="n">${r.last!=null?f1(r.last):'—'}</td></tr>`).join('')}</tbody></table></div>
       <p class="muted" style="font-size:12px">Yeşil: yükselme sınırının (8.35) üstü · Kırmızı: düşme sınırının (7.70) altı.</p></section>
     <section class="panel stack"><h3>Bu haftanın atamaları</h3>${ap.length?`<div class="appts">${ap.map(a=>{ const H=team(a.h),A=team(a.a); return `<div class="appt ${a.mine?'me':''}"><span class="row" style="gap:6px;flex-wrap:nowrap;min-width:0">${crest(H,20)}<span class="ell">${esc(H.short)}</span><span class="muted">–</span><span class="ell">${esc(A.short)}</span>${crest(A,20)}</span><span class="ell ${a.mine?'':'muted'}">${esc(a.ref)}</span></div>`; }).join('')}</div>`:'<p class="muted">Bu hafta lig maçı ataması yok.</p>'}</section></div>
@@ -3917,10 +4122,10 @@ function careerHTML(){
   let cur=st.findIndex(x=>!x[2]); if(cur<0) cur=st.length;
   const t=S.totals;
   return `<div class="grid2"><div class="panel stack"><h2>Kariyer basamakları</h2><div class="ladder">${st.map((x,i)=>`<div class="rung ${x[2]?'done':i===cur?'cur':''}"><span class="dot"></span><div><b>${esc(x[0])}</b><div class="req">${esc(x[1])}</div></div><span class="chip ${x[2]?'g':i===cur?'y':''}">${x[2]?'Tamam':i===cur?'Hedef':'Kilitli'}</span></div>`).join('')}</div></div>
-    <div class="stack" style="gap:16px"><div class="panel stack"><h3>Kariyer sayıları</h3><div class="grid3"><div><div class="eyebrow">Maç</div><div class="num" style="font-size:24px">${t.matches}</div></div><div><div class="eyebrow">Sarı</div><div class="num" style="font-size:24px">${t.yellows}</div></div><div><div class="eyebrow">Kırmızı</div><div class="num" style="font-size:24px">${t.reds}</div></div><div><div class="eyebrow">Penaltı</div><div class="num" style="font-size:24px">${t.pens}</div></div><div><div class="eyebrow">VAR</div><div class="num" style="font-size:24px">${t.var}</div></div><div><div class="eyebrow">İsabet</div><div class="num" style="font-size:24px">%${t.decisions?Math.round(t.correct/t.decisions*100):0}</div></div></div></div>
-    <div class="panel stack"><h3>Kariyer anları</h3><div class="trophies">${MILESTONES.map(m=>`<div class="trophy ${S.milestones[m.id]?'on':''}"><b>${esc(m.name)}</b>${S.milestones[m.id]?esc(S.milestones[m.id]):esc(m.d)}</div>`).join('')}</div></div>
+    <div class="stack" style="gap:16px">${careerStatsHTML(t)}
+    ${trophiesHTML()}
     <div class="panel stack"><h3>Sezonlar</h3>${S.seasons.length?`<div class="tbl-wrap"><table><thead><tr><th>Sezon</th><th>Lig</th><th class="n">Maç</th><th class="n">Lig</th><th class="n">Ulusl.</th><th>Not</th></tr></thead><tbody>${S.seasons.slice().reverse().map(s=>`<tr><td>${seasonLabel(s.season)}</td><td>${esc(s.league)}</td><td class="n">${s.matches}</td><td class="n">${s.dAvg?f1(s.dAvg):'—'}</td><td class="n">${s.iAvg?f1(s.iAvg):'—'}</td><td>${s.award?'<span class="chip y">Yılın hakemi</span>':''}${s.tour?`<span class="chip b">${esc(s.tour)}</span>`:''}</td></tr>`).join('')}</tbody></table></div>`:'<p class="muted">İlk sezonun devam ediyor.</p>'}</div>
-    <div class="panel stack"><h3>Son maçlar</h3>${S.history.length?`<div class="tbl-wrap"><table><tbody>${S.history.slice(0,15).map(h=>`<tr><td class="muted">${seasonLabel(h.season)} H${h.week}</td><td>${esc(team(h.home).name)} ${h.score.join('-')} ${esc(team(h.away).name)}</td><td class="muted">${esc(h.comp)}</td><td class="n">${f1(h.rating)}</td></tr>`).join('')}</tbody></table></div>`:'<p class="muted">Henüz maç yok.</p>'}</div></div></div>`;
+    ${recentHTML()}</div></div>`;
 }
 function devHTML(){
   const engCost=[0,60000,90000,140000][S.english+1];
