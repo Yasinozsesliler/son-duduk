@@ -13,3 +13,5 @@ ios/DerivedData/
 *.keystore
 .DS_Store
 dist/
+store/raw/
+*.p8

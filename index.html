@@ -3300,7 +3300,7 @@ function replayHTML(inc,cams){
 }
 function bindReplay(inc,cams,opt){
   const cv=$('#rcv'); if(!cv) return; replayStart(cv,inc,cams[0],opt);
-  document.querySelectorAll('[data-cam]').forEach(b=>b.onclick=()=>{ RP.cam=b.dataset.cam; document.querySelectorAll('[data-cam]').forEach(x=>x.classList.toggle('on',x===b)); RP.actors.forEach(a=>a.hl=!!a.t.hl&&RP.cam!=='hakem'); });
+  document.querySelectorAll('[data-cam]').forEach(b=>b.onclick=()=>{ if(!RP) return; RP.cam=b.dataset.cam; document.querySelectorAll('[data-cam]').forEach(x=>x.classList.toggle('on',x===b)); RP.actors.forEach(a=>a.hl=!!a.t.hl&&RP.cam!=='hakem'); });
   $('#rpSlow').onclick=()=>{ RP.slow=!RP.slow; $('#rpSlow').classList.toggle('on',RP.slow); };
   $('#rpPlay').onclick=()=>{ RP.playing=!RP.playing; $('#rpPlay').textContent=RP.playing?'Durdur':'Oynat'; };
 }
@@ -3599,7 +3599,7 @@ function matchUI(){
     </div>
     <div class="mgrid"><div class="panel feedp"><div class="eyebrow" style="padding:12px 14px 0">Maç akışı</div><div class="feed" id="feed"></div></div><aside class="panel stack" id="side"></aside></div></div>`;
   document.querySelectorAll('[data-speed]').forEach(b=>b.onclick=()=>setSpeed(+b.dataset.speed));
-  document.querySelectorAll('[data-lcam]').forEach(b=>b.onclick=()=>{ SC.cam=b.dataset.lcam; document.querySelectorAll('[data-lcam]').forEach(x=>x.classList.toggle('on',x===b)); });
+  document.querySelectorAll('[data-lcam]').forEach(b=>b.onclick=()=>{ if(!SC) return; SC.cam=b.dataset.lcam; document.querySelectorAll('[data-lcam]').forEach(x=>x.classList.toggle('on',x===b)); });
   $('#bPause').onclick=()=>{ M.paused=!M.paused; $('#bPause').textContent=M.paused?'Devam':'Duraklat'; };
   M.feed.forEach(renderFeedLine); renderSide(); updateBoard(); startRender();
 }
