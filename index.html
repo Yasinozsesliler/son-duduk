@@ -1138,6 +1138,15 @@ button,.btn,.dopt,.cbtn,.posopt,.opt,.act-b{touch-action:manipulation;-webkit-us
   .feed{max-height:52vh}
   .rep-top .bignote{font-size:64px}
 }
+.so{display:flex;flex-direction:column;gap:10px}
+.so-r{display:grid;grid-template-columns:minmax(0,7em) minmax(0,1fr) 2ch;gap:12px;align-items:center}
+.so-r b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.so-ds{display:flex;gap:6px;flex-wrap:wrap}
+.so-d{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--line2);display:inline-block}
+.so-d.g{background:var(--green);border-color:var(--green)}
+.so-d.m{background:transparent;border-color:var(--red);position:relative}
+.so-d.m::after{content:"";position:absolute;left:3px;right:3px;top:7px;height:2px;background:var(--red);transform:rotate(45deg)}
+.so-n{font-size:22px;font-weight:800;text-align:right}
 /* tracked büyük harf etiketleri: cümle düzeni */
 .ah-badge b,
 .banner b,
@@ -2758,7 +2767,7 @@ function buildMatch(fx){
   const m={fx,H,A,score:[0,0],min:0,addMin:0,phase:'h1',added:{1:0,2:0},reds:[0,0],yellow:[[],[]],sentOff:[[],[]],cardsLog:[],feed:[],queue:[],schedule:[],log:[],stop:{1:[],2:[]},
     temp:clamp(12+fx.imp*6+(fx.derby?18:0),0,90),tempMax:0,tempSum:0,tempN:0,stamina:0,visMod:0,lawUses:1+S.lawBonus+(S.attrs.kural>=70?1:0),done:false,paused:false,modal:false,auto:false,
     possession:[0,0],shots:[0,0],posGood:0,posTotal:0,mgmtAt:-99,goalsLog:[],penalties:0,varCount:0};
-  m.minLabel=function(){ return (this.phase==='h1add'?'45+'+this.addMin:this.phase==='h2add'||this.phase==='ft'?'90+'+this.addMin:this.min)+"'"; };
+  m.minLabel=function(){ return this.phase==='pens'?'Pen.':(this.phase==='h1add'?'45+'+this.addMin:(this.phase==='h2add'||this.phase==='etb'||(this.phase==='ft'&&!this.et))?'90+'+this.addMin:this.min)+"'"; };
   m.stamina=clamp(55+S.attrs.kondisyon*.42+(S.energy-60)*.25,30,100);
   // incident schedule
   const nMaj=clamp(4+(lvl>=3?1:0)+(fx.imp>=4?1:0)+ri(0,1),4,7), nQ=ri(3,4);
@@ -2826,7 +2835,9 @@ function tick(){
     case 'h1': M.min++; simulateMinute(); M.schedule.filter(e=>e.min===M.min).forEach(e=>M.queue.push(e)); if(M.min>=45){ M.phase='uz1'; M.queue.push({kind:'uz',half:1}); } break;
     case 'h1add': M.addMin++; simulateMinute(); if(M.addMin>=M.added[1]){ feed('İlk yarı sona erdi. Skor '+M.score[0]+'-'+M.score[1]+'.','sys'); whistle('long'); M.phase='ht'; M.queue.push({kind:'ht'}); } break;
     case 'h2': M.min++; simulateMinute(); M.schedule.filter(e=>e.min===M.min).forEach(e=>M.queue.push(e)); if(M.min>=90){ M.phase='uz2'; M.queue.push({kind:'uz',half:2}); } break;
-    case 'h2add': M.addMin++; simulateMinute(); if(M.addMin>=M.added[2]){ M.phase='ft'; finishMatch(); } break;
+    case 'h2add': M.addMin++; simulateMinute(); if(M.addMin>=M.added[2]){ if(isKO(M.fx)&&M.score[0]===M.score[1]&&!M.et){ M.et=true; M.phase='etb'; feed('Normal süre '+M.score[0]+'-'+M.score[1]+' bitti. Uzatmalara gidiyoruz.','sys'); whistle('long'); M.queue.push({kind:'etb'}); } else { M.phase='ft'; finishMatch(); } } break;
+    case 'e1': M.min++; simulateMinute(); M.schedule.filter(e=>e.min===M.min).forEach(e=>M.queue.push(e)); if(M.min>=105){ feed('Uzatmaların ilk yarısı bitti. Skor '+M.score[0]+'-'+M.score[1]+'.','sys'); whistle(); M.phase='e2'; } break;
+    case 'e2': M.min++; simulateMinute(); M.schedule.filter(e=>e.min===M.min).forEach(e=>M.queue.push(e)); if(M.min>=120){ whistle('long'); if(M.score[0]===M.score[1]){ M.phase='pens'; feed('120 dakika '+M.score[0]+'-'+M.score[1]+' bitti. Kazanan seri penaltılarla belirlenecek.','sys'); M.queue.push({kind:'pens'}); } else { M.phase='ft'; finishMatch(); } } break;
   }
   if(!M.auto) updateBoard();
 }
@@ -2840,6 +2851,8 @@ function openEvent(ev){
   if(ev.kind==='mgmt') return runMgmt(ev);
   if(ev.kind==='uz') return runStoppage(ev.half);
   if(ev.kind==='ht') return runHalftime();
+  if(ev.kind==='etb') return runEtBreak();
+  if(ev.kind==='pens') return runShootout();
 }
 
 // ---------- incident evaluation ----------
@@ -2997,6 +3010,61 @@ function runStoppage(half){
   if(M.auto){ resolve(chance(skillP())?rec:clamp(rec+pick([-2,-1,1,2]),1,12)); return; }
   M.modal=true; stoppageUI(half,rec,resolve);
 }
+
+// ---------- uzatmalar ve seri penaltılar ----------
+function isKO(fx){ return !!(fx.final || fx.kind==='cup' || (fx.kind==='tour' && !/Grup|U21/.test(fx.stage||''))); }
+function runEtBreak(){
+  const opts=[['yazi','Kaptanları çağır, yeni yazı-tura at',1],['ayni','Maç başındaki yazı-tura geçerli, devam',0],['ev','Başlama vuruşunu ev sahibine ver',0]];
+  const ex='Kural 7 ve 10: Uzatmalardan önce yeni bir yazı-tura atılır. Kazanan kaptan, ilk uzatma yarısında hangi kaleye hücum edeceğini ya da başlama vuruşunu seçer.';
+  const resolve=id=>{ const ok=id==='yazi'; M.log.push({cat:'quick',title:'Uzatma öncesi',min:"90'",text:'Uzatmalar başlamadan önce',your:opts.find(o=>o[0]===id)[1],correct:opts[0][1],v:ok?'dogru':'hata',explain:ex}); S.totals.decisions++; if(ok) S.totals.correct++;
+    M.phase='e1'; M.min=90; M.addMin=0; M.stamina=clamp(M.stamina-6,5,100);
+    const W=[['penalti_temas',14],['orta_saha_faul',20],['dogso',8],['yuksek_ayak',8],['dirsek',6],['top_disinda',5],['korner_cekme',7],['elle_oynama',8]];
+    if(chance(.8)) M.schedule.push({min:ri(93,118),kind:'inc',type:wpick(W),side:ri(0,1)});
+    if(chance(.6)){ const q=shuffle(QUICK.filter(q=>!q.need&&!q.needBooked))[0]; if(q) M.schedule.push({min:ri(94,117),kind:'quick',q:q.id,side:ri(0,1)}); }
+    feed('Uzatmalar başladı.','sys'); if(!M.auto&&SC) sceneHalf(SC); whistle(); return ok?'dogru':'hata'; };
+  if(M.auto){ resolve(chance(skillP())?'yazi':'ayni'); return; }
+  M.modal=true; mgmtUI('Normal süre berabere bitti; 2×15 dakika uzatma oynanacak. Oyuncular sahada su içiyor, teknik direktörler talimat veriyor. Uzatmalara nasıl başlarsın?',opts,resolve,ex);
+}
+const SO_CASES=[
+ {t:'Kaleci, vuruş anında iki ayağıyla çizgiden öne çıktı ve topu kurtardı.',o:[['tekrar','Vuruş tekrarlanır, kaleci uyarılır',1],['kurtaris','Kurtarış geçerli, vuruş kaçtı',0],['gol','Gol say',0]],ex:'Kaleci ihlal etti ve top kaleye girmedi: vuruş tekrarlanır. İlk ihlalde kaleci uyarılır, tekrarında sarı kart görür.',res:{tekrar:'re',kurtaris:'miss',gol:'goal'}},
+ {t:'Kaleci erken çıktı ama vurucu topu direğin dışına gönderdi.',o:[['kacti','Vuruş kaçtı, tekrar yok',1],['tekrar','Kaleci ihlali: tekrar',0]],ex:'Kalecinin ihlali vurucuyu etkilemedi ve top dışarı gitti: tekrar yok, vuruş kaçmış sayılır.',res:{kacti:'miss',tekrar:'re'}},
+ {t:'Vurucu koşusunu tamamladı, durdu ve kaleciyi aldatıp golü attı.',o:[['kacti_sari','Vuruş kaçmış sayılır, vurucuya sarı kart',1],['tekrar','Vuruş tekrarlanır',0],['gol','Gol geçerli',0]],ex:'Koşu tamamlandıktan sonra aldatma ihlaldir. Seri penaltılarda vuruş kaçmış sayılır ve vurucu sarı kart görür.',res:{kacti_sari:'miss',tekrar:'re',gol:'goal'}},
+ {t:'Top üst direğe çarptı, kalecinin sırtından sekip kaleye girdi.',o:[['gol','Gol',1],['kacti','Direğe çarptığı an vuruş bitti, gol yok',0],['tekrar','Tekrar',0]],ex:'Seri penaltıda vuruş, top durana ya da oyun dışına çıkana kadar sürer. Direk ve kaleciden sekerek giren top goldür; ancak top ikinci kez vurucuya dokunamaz.',res:{gol:'goal',kacti:'miss',tekrar:'re'}},
+ {t:'Top üst direkten aşağı, çizginin üzerine vurup dışarı çıktı. Topun tamamı çizgiyi geçmedi.',o:[['kacti','Gol değil',1],['gol','Gol',0]],ex:'Topun tamamı kale çizgisini geçmedikçe gol olmaz.',res:{kacti:'miss',gol:'goal'}},
+ {t:'Teknik direktör, uzatmaların sonunda oyunda olmayan bir yedeği penaltı kullanması için çizgiye gönderdi.',o:[['red','İzin verme; sadece maç sonunda oyunda olanlar vurabilir',1],['izin','İzin ver',0]],ex:'Seri penaltıları yalnızca maç sona erdiğinde sahada olan oyuncular kullanabilir. Tek istisna, sakatlanan kalecinin yerine yedek kalecinin girmesidir.',res:{red:'skip',izin:'skip'}},
+ {t:'Bir takım, sırası gelmeden aynı oyuncuyu ikinci kez vuruşa göndermek istiyor; takımdaki herkes henüz vurmadı.',o:[['red','İzin verme; tüm uygun oyuncular vurmadan kimse ikinci kez vuramaz',1],['izin','Takımın tercihi, izin ver',0]],ex:'Bir oyuncu ikinci vuruşu, takımının tüm uygun oyuncuları birer vuruş kullandıktan sonra yapabilir.',res:{red:'skip',izin:'skip'}}
+];
+function runShootout(){
+  const side0=chance(.5)?0:1; const kicks=[]; const sc=[0,0]; const taken=[0,0];
+  const nDec=M.auto?0:ri(1,2); const decAt=new Set(); while(decAt.size<nDec) decAt.add(ri(0,9));
+  const strF=s=>clamp(.74+(sideTeam(s).str-sideTeam(1-s).str)*.003,.62,.86);
+  const decided=()=>{ const n=taken[0]+taken[1]; if(n<10){ const rem0=5-taken[0], rem1=5-taken[1]; return sc[0]>sc[1]+rem1 || sc[1]>sc[0]+rem0; } return taken[0]===taken[1] && sc[0]!==sc[1]; };
+  const cases=shuffle(SO_CASES.slice());
+  let i=0;
+  const step=()=>{
+    if(decided()) return done();
+    const s=(i%2===0)?side0:1-side0; const p=pickPlayer(M,s,['FWD','MID','DEF']);
+    const rec={s,p,res:chance(strF(s))?'goal':'miss'};
+    const fin=()=>{ if(rec.res!=='skip'){ taken[s]++; if(rec.res==='goal') sc[s]++; kicks.push(rec); } i++; drawSO(); if(M.auto) step(); else setTimeout(step,650); };
+    if(decAt.has(i)&&cases.length){ decAt.delete(i); const C=cases.pop();
+      const resolve=id=>{ const o=C.o.find(x=>x[0]===id)||C.o[C.o.length-1]; const ok=!!o[2];
+        M.log.push({cat:'quick',title:'Seri penaltılar',min:'Pen.',text:C.t,your:o[1],correct:C.o.find(x=>x[2])[1],v:ok?'dogru':'hata',explain:C.ex}); S.totals.decisions++; if(ok) S.totals.correct++;
+        let r=C.res[id]; if(r==='re') r=chance(strF(s))?'goal':'miss'; if(r==='skip') r=chance(strF(s))?'goal':'miss';
+        if(id==='kacti_sari') giveCard(s,p,false);
+        rec.res=r; return ok?'dogru':'hata'; };
+      M.modal=true; mgmtUI(sideTeam(s).name+' · '+pl(p)+' vuruşta. '+C.t,C.o,resolve,C.ex);
+      const ob=new MutationObserver(()=>{ if($('#modal').hidden){ ob.disconnect(); M.modal=true; showSO(); fin(); } }); ob.observe($('#modal'),{attributes:true,attributeFilter:['hidden']});
+      return; }
+    fin();
+  };
+  const dots=s=>{ const k=kicks.filter(x=>x.s===s); const n=Math.max(5,k.length); let h=''; for(let j=0;j<n;j++){ const x=k[j]; h+=`<i class="so-d ${x?(x.res==='goal'?'g':'m'):''}" title="${x?esc(pl(x.p)):''}"></i>`; } return h; };
+  const showSO=()=>{ if(M.auto) return; openModal(head('120\' · '+M.score[0]+'-'+M.score[1],'Seri penaltılar','')+`<div class="sh-body"><div class="so" id="soBox"></div><p class="muted" id="soNote" style="margin-top:12px">Vuruşlar kale önünden takip ediliyor.</p><div id="soEnd"></div></div>`,true); drawSO(); };
+  const drawSO=()=>{ const b=$('#soBox'); if(!b) return; b.innerHTML=[0,1].map(s=>`<div class="so-r"><b>${esc(sideTeam(s).short||sideTeam(s).name)}</b><span class="so-ds">${dots(s)}</span><span class="num so-n">${sc[s]}</span></div>`).join(''); };
+  const done=()=>{ const w=sc[0]>sc[1]?0:1; M.pens=sc.slice(); M.fx.pens=sc.slice(); feed(`Seri penaltılarda <b>${esc(sideTeam(w).name)}</b> kazandı: ${sc[0]}-${sc[1]}.`,'goal'); M.phase='ft';
+    if(M.auto){ finishMatch(); return; }
+    const e=$('#soEnd'); if(e){ $('#soNote').textContent=sideTeam(w).name+' seriyi '+sc[w]+'-'+sc[1-w]+' kazandı.'; e.innerHTML='<button class="btn primary" id="soGo" style="width:100%;margin-top:14px">Maçı bitir</button>'; $('#soGo').onclick=()=>{ closeModal(); finishMatch(); }; } else finishMatch(); };
+  if(!M.auto){ M.modal=true; showSO(); setTimeout(step,700); } else step();
+}
 function runHalftime(){
   const resolve=(id)=>{
     if(id==='plan') M.visMod+=.06; if(id==='kaptan') M.temp=clamp(M.temp-14*(.6+S.attrs.iletisim/120),0,100); if(id==='dinlen') M.stamina=clamp(M.stamina+12,0,100);
@@ -3069,7 +3137,7 @@ function finishMatch(){
     if(lost && fx.imp>=2){ mail(t.name+' Kulübü','Resmi açıklama: "Hakem hatası sonucu etkiledi"','Kulübümüz '+errs[0].min+' dakikadaki "'+errs[0].title.toLowerCase()+'" kararını Tahkim\'e ve Hakem Kurulu\'na taşıyacaktır. Hakemin performansı kabul edilemez.','club'); S.rep=clamp(S.rep-1.5,0,100); report.clubComplaint=t.name; } }
   if(rating<7.3 && fx.kind==='dom'){ S.suspended=1; mail('Hakem Kurulu','Performans değerlendirmesi','Gözlemci notun '+f1(rating)+'. Gelecek hafta görev verilmeyecek; video analize odaklanmanı öneriyoruz.','fed'); }
   if(rating>=8.8) mail('Gözlemci','Maç sonu not: '+f1(rating),'Pozisyon alma, kart yönetimi ve iletişim üst düzeydi. '+(fx.imp>=4?'Bu ölçekte bir maçta bu sakinlik kurul tarafından not edildi.':''),'obs');
-  S.history.unshift({season:S.season,week:S.week,comp:fx.compName,stage:fx.stage,home:fx.home,away:fx.away,score:M.score.slice(),rating,kind:fx.kind});
+  S.history.unshift({season:S.season,week:S.week,comp:fx.compName,stage:fx.stage,home:fx.home,away:fx.away,score:M.score.slice(),pens:M.pens||null,et:!!M.et,rating,kind:fx.kind});
   if(S.history.length>200) S.history.length=200;
   v11AfterMatch(report,fx);
   matchWorld(report,fx);
