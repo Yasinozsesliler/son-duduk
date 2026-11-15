@@ -28,7 +28,7 @@ for i in range(40):
     rows=[(vers.get(x['relationships']['preReleaseVersion']['data']['id']),x['attributes']['version'],x['attributes']['processingState']) for x in b['data']]
     print('builds',rows)
     top=b['data'][0]
-    if top['attributes']['version']=='8' and top['attributes']['processingState']!='PROCESSING':
+    if top['attributes']['processingState']!='PROCESSING':
         bid=top['id']
         call('POST',f'/betaGroups/{gid}/relationships/builds',{'data':[{'type':'builds','id':bid}]})
         d=call('GET',f'/builds/{bid}/buildBetaDetail')
