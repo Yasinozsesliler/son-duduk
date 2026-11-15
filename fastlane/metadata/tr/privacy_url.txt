@@ -1,1 +1,1 @@
-PRIVACY_URL
+https://ozsstudio.vercel.app/son-duduk/privacy.html

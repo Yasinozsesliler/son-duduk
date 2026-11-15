@@ -65,15 +65,13 @@ Toplam süre: hesap onayı hariç yaklaşık 1–2 saat.
      ```
    Çıkan uzun metni olduğu gibi yapıştır.
 
-## 5. Gizlilik ve destek sayfalarını yayınla
+## 5. Gizlilik ve destek sayfaları
 
-1. `docs/privacy.html` ve `docs/support.html` içindeki `ILETISIM_EPOSTASI` yazan yerlere iletişim e-postanı yaz, commit'leyip push et.
-2. Depo → **Settings** → **Pages** → Source: **Deploy from a branch** → Branch: `main`, klasör: `/docs` → Save.
-   - GitHub Pages ücretsiz planda yalnızca **public** depolarda çalışır.
-   - Depon private ise iki sayfayı ayrı bir public depoya koy ya da başka bir yerde yayınla.
-3. Birkaç dakika sonra sayfalar şu adreslerde açılır:
-   - `https://<kullanıcı-adın>.github.io/son-duduk/privacy.html`
-   - `https://<kullanıcı-adın>.github.io/son-duduk/support.html`
+Hazır ve yayında (OZS Studio sitesi, `yasinozsesliler.github.io` deposunun `site/son-duduk/` klasörü):
+- https://ozsstudio.vercel.app/son-duduk/privacy.html
+- https://ozsstudio.vercel.app/son-duduk/support.html
+
+İletişim e-postası: yasinozsesliler@icloud.com. `docs/` klasörü bu sayfaların kaynağıdır; değiştirirsen site deposuna da kopyala.
 
 ## 6. Uygulamayı derle ve yükle (Mac gerekmez)
 

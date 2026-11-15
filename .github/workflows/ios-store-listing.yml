@@ -51,13 +51,9 @@ jobs:
           fi
           echo "API key OK"
           ruby -rjson -e 'puts JSON.generate({key_id: ENV["ASC_KEY_ID"], issuer_id: ENV["ASC_ISSUER_ID"], key: File.read(ARGV[0]), in_house: false})' "$KEYFILE" > "$RUNNER_TEMP/keys/api_key.json"
-          OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
-          BASE="https://$OWNER.github.io/${{ github.event.repository.name }}"
-          echo "$BASE/support.html" > fastlane/metadata/tr/support_url.txt
-          echo "$BASE/privacy.html" > fastlane/metadata/tr/privacy_url.txt
           mkdir -p fastlane/screenshots/tr
           cp store/screenshots/*.png fastlane/screenshots/tr/
-          echo "Destek: $BASE/support.html"
+          echo "Destek: $(cat fastlane/metadata/tr/support_url.txt)"
 
       - name: Upload listing
         run: |
