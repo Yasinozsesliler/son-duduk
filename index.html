@@ -1147,6 +1147,8 @@ button,.btn,.dopt,.cbtn,.posopt,.opt,.act-b{touch-action:manipulation;-webkit-us
 .so-d.m{background:transparent;border-color:var(--red);position:relative}
 .so-d.m::after{content:"";position:absolute;left:3px;right:3px;top:7px;height:2px;background:var(--red);transform:rotate(45deg)}
 .so-n{font-size:22px;font-weight:800;text-align:right}
+.var-onfield{display:flex;justify-content:space-between;gap:12px;align-items:baseline;padding:12px 14px;margin-top:12px;border-radius:10px;background:var(--bg2);border:1px solid var(--line2)}
+.var-onfield b{font-size:16px;text-align:right}
 /* tracked büyük harf etiketleri: cümle düzeni */
 .ah-badge b,
 .banner b,
@@ -1768,6 +1770,12 @@ function makeWeekTasks(){
     T.matches.push(makeFx({kind:'dom',comp:'LIG',compName:leagueName(),home:f.h,away:f.a,imp:f.imp,derby:f.derby,
       vr: home()? S.tier>=3 : !!L.vr, glt: home()? (S.tier===4&&!!LEAGUES[S.nationality].glt) : !!L.glt, lvl:domLvl(), fee:domFee(), stage:S.week+'. hafta'}));
   }
+  // ek roller: VAR odası / yardımcı hakem
+  if(S.suspended<=0 && T.matches.length && S.fixtures){ const round=S.fixtures[(S.week-1)%S.fixtures.length]; const main=T.matches[0];
+    const others=round.filter(([h,a])=>h!==main.home&&h!==main.away&&a!==main.home&&a!==main.away); const L=home()?null:LEAGUES[S.country];
+    const vrOk = home()? S.tier>=3 : !!(L&&L.vr);
+    if(others.length && vrOk && chance(.32)){ const [h,a]=pick(others); const fi=fixtureImp(h,a); T.matches.push(makeFx({kind:'dom',role:'var',comp:'LIG',compName:leagueName(),home:h,away:a,imp:fi.imp,derby:fi.derby,vr:true,glt:main.glt,lvl:domLvl(),fee:Math.round(domFee()*.4),stage:'VAR odası'})); }
+    else if(others.length && home() && S.tier<=2 && chance(.28)){ const [h,a]=pick(others); const fi=fixtureImp(h,a); T.matches.push(makeFx({kind:'dom',role:'ar',comp:'LIG',compName:leagueName(),home:h,away:a,imp:fi.imp,derby:fi.derby,vr:false,glt:false,lvl:domLvl(),fee:Math.round(domFee()*.35),stage:'Yardımcı hakem'})); } }
   // midweek
   const ph=MIDWEEK[S.week];
   if(ph && uefaActive()){ const mw=assignMidweek(ph); if(mw) T.matches.push(mw); }
@@ -2744,6 +2752,11 @@ const GEN = {
 
 // ---------- quick decisions ----------
 const QUICK = [
+ {id:'ar_korner',need:'ar',text:c=>`Top ${pl(c.dp)}'nın dizine çarpıp kale çizgisini geçti. ${c.D.name} oyuncuları kale vuruşu istiyor; hakem sana bakıyor.`,opts:[['korner','Bayrakla köşe gönderini göster: korner',1],['kale','Kale vuruşu',0],['bilmiyorum','İşaret verme, hakeme bırak',0]],ex:'Topa en son savunma oyuncusu dokundu: köşe vuruşu. Yardımcı hakem yön işaretini net ve hemen vermelidir.'},
+ {id:'ar_tac',need:'ar',text:c=>`Top kenar çizgisinin üzerinde yuvarlandı ama tamamı dışarı çıkmadan ${pl(c.ap)} içeri çevirdi. ${c.D.name} taç istiyor.`,opts:[['devam','Bayrak kaldırma, oyun devam',1],['tac','Taç işareti ver',0]],ex:'Kural 9: Topun tamamı çizgiyi geçmedikçe top oyundadır. Çizgi oyun alanına dahildir.'},
+ {id:'ar_pasif',need:'ar',text:c=>`Ofsayt konumundaki ${pl(c.ap)} topa hiç yaklaşmadı, rakibin görüşünü de kapatmadı; gol onside olan takım arkadaşından geldi.`,opts:[['yok','Bayrak kaldırma; ihlal yok',1],['ofsayt','Ofsayt bayrağı kaldır',0]],ex:'Kural 11: Ofsayt konumunda olmak tek başına ihlal değildir. Oyuncu oyuna ya da rakibe müdahale etmedi: ofsayt yok.'},
+ {id:'ar_bilerek',need:'ar',text:c=>`${pl(c.dp)} topu kontrollü şekilde, bilerek geri oynamak istedi ama ofsayt konumundaki ${pl(c.ap)}'ya kaptırdı.`,opts:[['yok','Ofsayt yok, devam',1],['ofsayt','Ofsayt',0]],ex:'Kural 11: Rakibin bilerek oynadığı (kurtarış hariç) toptan faydalanan oyuncu ofsayt cezası almaz.'},
+ {id:'ar_kaleci',need:'ar',text:c=>`Şut, kalecinin parmak uçlarına değip kale çizgisinin dışına çıktı. Kaleci hiçbir şeye dokunmadığını söylüyor.`,opts:[['korner','Köşe vuruşu işareti',1],['kale','Kale vuruşu işareti',0]],ex:'Topa en son kaleci dokundu: köşe vuruşu. Yardımcı hakem, hakemin göremediği bu teması bildirmekle yükümlüdür.'},
  {id:'forma',need:'goal',text:c=>`${pl(c.ap)} golden sonra formasını çıkarıp tribünlere koştu.`,opts:[['sari','Sarı kart',1],['uyari','Sözlü uyarı',0],['yok','Hiçbir şey yapma',0]],ex:'Gol sevincinde formayı çıkarmak sportmenlik dışı davranıştır: sarı kart.',card:c=>({side:'A',p:c.ap})},
  {id:'td',text:c=>`${squad(c.D).coach} (${c.D.name} teknik direktörü) teknik alanın dışına çıkıp dördüncü hakeme bağırıyor, su şişesini yere fırlattı.`,opts:[['sari','Teknik direktöre sarı kart',1],['kirmizi','Teknik direktöre kırmızı kart',0],['uyari','Sözlü uyarı',0]],ex:'Takım yetkilileri de kart görür. Şişeyi yere fırlatmak ve teknik alanı terk ederek itiraz: sarı kart. Şişe birine fırlatılsaydı kırmızı olurdu.',coach:true},
  {id:'gk8',text:c=>`${c.D.name} kalecisi topu elinde tutuyor. Elinle beşten geri saydın; 8 saniye doldu ve top hâlâ elinde.`,opts:[['korner','Rakibe köşe vuruşu',1],['endirekt','Endirekt serbest vuruş',0],['devam','Uyar ve devam ettir',0]],ex:'Güncel kural: kaleci topu 8 saniyeden fazla elinde tutarsa rakip takıma köşe vuruşu verilir. Hakem son 5 saniyeyi eliyle görünür şekilde sayar.'},
@@ -2773,10 +2786,12 @@ function buildMatch(fx){
   const nMaj=clamp(4+(lvl>=3?1:0)+(fx.imp>=4?1:0)+ri(0,1),4,7), nQ=ri(3,4);
   const weights=[['penalti_temas',14],['elle_oynama',11],['hucum_elle_gol',5],['ofsayt_gol',13],['orta_saha_faul',20],['dogso',6],['dirsek',7],['top_disinda',4],['kaleci_engelleme',6],['gol_oncesi_faul',7],['geri_pas',lvl<=3?5:2],['yuksek_ayak',7],['korner_cekme',8],['kaleci_disari',4]];
   if(!fx.glt && lvl<=3) weights.push(['gol_cizgisi',6]);
+  if(fx.role==='ar'){ weights.length=0; weights.push(['ofsayt_gol',10],['gol_cizgisi',3],['kaleci_disari',2]); }
+  if(fx.role==='var'){ weights.length=0; weights.push(['penalti_temas',16],['elle_oynama',12],['hucum_elle_gol',6],['ofsayt_gol',14],['dogso',8],['top_disinda',6],['kaleci_engelleme',6],['gol_oncesi_faul',8],['yuksek_ayak',5],['korner_cekme',6],['orta_saha_faul',8]); }
   const used={}; const mins=new Set();
   const minPick=()=>{ let x; do{ x=chance(.5)?ri(4,43):ri(48,88); }while(mins.has(x)||mins.has(x-1)||mins.has(x+1)); mins.add(x); return x; };
   for(let i=0;i<nMaj;i++){ let t; let g=0; do{ t=wpick(weights); }while((used[t]||0)>=2&&g++<20); used[t]=(used[t]||0)+1; m.schedule.push({min:minPick(),kind:'inc',type:t,side:chance(H.str/(H.str+A.str))?0:1}); }
-  const qs=shuffle(QUICK.filter(q=>!q.need&&(!q.needBooked||ri(0,1)))).slice(0,nQ);
+  const qs=fx.role==='var'?[]:fx.role==='ar'?shuffle(QUICK.filter(q=>q.need==='ar')).slice(0,ri(2,3)):shuffle(QUICK.filter(q=>!q.need&&(!q.needBooked||ri(0,1)))).slice(0,nQ);
   qs.forEach(q=>m.schedule.push({min:minPick(),kind:'quick',q:q.id,side:chance(.5)?0:1}));
   m.schedule.sort((a,b)=>a.min-b.min);
   return m;
@@ -2924,6 +2939,8 @@ function randomWrong(inc){
   return pick(chance(.8)&&near.length?near:combos);
 }
 function runIncident(inc){
+  if(M.fx.role==='var') return runVarRoom(inc);
+  if(M.fx.role==='ar') inc.pos=null;
   if(M.auto){
     let pq = S.settings.pos&&SPOTS[inc.pos] ? (chance(S.attrs.pozisyon/100+.2)?'best':chance(.5)?'ok':'bad') : null;
     inc.posQ=pq; if(pq){ M.posTotal++; if(pq==='best') M.posGood++; }
@@ -2933,6 +2950,41 @@ function runIncident(inc){
     return;
   }
   liveIncident(inc);
+}
+
+// ---------- VAR odası görevi ----------
+function matchChanging(inc,a){ if(!a) return false; const e=inc.onD[a.d]; return e==='goalA'||e==='penA'||/penalti|gol/.test(a.d)||a.c==='kirmizi'||(inc.cards[a.c]&&inc.cards[a.c].red); }
+function runVarRoom(inc){
+  const refAns = chance(.62)? {...inc.correct} : (inc.accept.length&&chance(.4)? {...inc.accept[0]} : randomWrong(inc));
+  const ev=evaluate(inc,refAns);
+  const should = ev==='hata' && inc.reviewable!==false && (matchChanging(inc,inc.correct)||matchChanging(inc,refAns));
+  const right = !should ? 'onay' : inc.factual ? 'direkt' : 'ofr';
+  const opts=[['onay','Kontrol tamam: açık ve net hata yok'],['ofr','Hakemi monitöre çağır (OFR)'],['direkt','Olgusal hata: kararı doğrudan düzelt']];
+  const why = !should ? (ev==='hata' ? 'Sahadaki karar hatalı olsa da VAR protokolü kapsamında değil (gol, penaltı, direkt kırmızı ya da kimlik hatası değil).' : ev==='dogru' ? 'Sahadaki karar doğruydu.' : 'Sahadaki karar savunulabilir bir yorum; açık ve net hata yok.')+' VAR müdahale etmemeli.'
+    : inc.factual ? 'Olgusal bir karar (çizgi, ofsayt, topun yeri) hatalı: VAR bunu hakemi monitöre çağırmadan düzeltebilir.' : 'Maçın sonucunu etkileyen açık ve net bir yorum hatası: hakem saha kenarındaki monitöre çağrılır.';
+  const done=(id)=>{
+    let v = id===right ? 'dogru' : (should && (id==='ofr'||id==='direkt')) ? 'kismen' : 'hata';
+    let fin = (should && id!=='onay') ? {...inc.correct} : refAns; if(inc.steps[1]===undefined) delete fin.c;
+    if(id!=='onay'){ M.varCount++; S.totals.var++; stopAdd('VAR kontrolü',ri(60,140)); if(!should) M.temp=clamp(M.temp+9,0,100); }
+    if(should && id==='onay') M.temp=clamp(M.temp+12,0,100);
+    inc.ans={...refAns}; applyFinal(inc,fin);
+    pushLog(inc,{cat:'major',type:inc.type,title:'VAR · '+inc.title,min:inc.minute,your:opts.find(o=>o[0]===id)[1],final:ansText(inc,fin),correct:opts.find(o=>o[0]===right)[1],v,explain:why+' '+inc.explain,law:inc.law,note:'Sahadaki karar: '+ansText(inc,refAns),harmed:null,reviewable:true});
+    S.totals.decisions++; if(v==='dogru') S.totals.correct++;
+    return {v,why,fin};
+  };
+  if(M.auto){ done(chance(skillP()+.05)?right:pick(opts.filter(o=>o[0]!==right))[0]); return; }
+  M.modal=true; if(SC) sceneStop(SC,[SC.refs[0].x+2,SC.refs[0].y+1.5]);
+  const cams=['tv','yakin','ters','arka','ust'];
+  openModal(head(M.minLabel()+' · VAR odası',esc(inc.title),`<span class="num tm-l" id="tmrLab"></span>`)+`<div class="timer" id="tmr"><i></i></div><div class="sh-body">
+    <div class="monitor">${replayHTML(inc,cams)}</div>
+    <div class="var-onfield"><span class="muted">Sahadaki karar</span><b>${esc(ansText(inc,refAns))}</b></div>
+    <div class="facts" style="margin-top:12px">${factsHTML(inc,true)}</div>
+    <div class="dopts">${opts.map(o=>`<button class="dopt" data-id="${o[0]}">${esc(o[1])}</button>`).join('')}</div><div id="varFb"></div></div>`);
+  bindReplay(inc,cams);
+  const go=id=>{ stopTimer(); const r=done(id); document.querySelectorAll('#modal .dopt').forEach(b=>{ b.disabled=true; if(b.dataset.id===id) b.classList.add('on'); });
+    $('#varFb').innerHTML=`<div class="verdict v-${r.v}" style="margin-top:12px"><span class="vi">${VLAB[r.v]}</span></div>${S.settings.feedback?`<p style="margin-top:10px">${esc(r.why)}</p><p class="muted" style="margin-top:6px">${esc(inc.explain)}</p>`:''}<button class="btn primary" id="bGo" style="margin-top:12px;width:100%">Devam</button>`; $('#bGo').onclick=closeModal; };
+  document.querySelectorAll('#modal .dopt').forEach(b=>b.onclick=()=>go(b.dataset.id));
+  startTimer(Math.max(25,decisionTime()+12),()=>go('onay'));
 }
 function finalizeIncident(inc,ans,opt){
   inc.ans={...ans};
@@ -2959,7 +3011,7 @@ function finalizeIncident(inc,ans,opt){
 
 // ---------- quick & mgmt ----------
 function runQuick(ev){
-  let q=QUICK.find(x=>x.id===ev.q); const c=ctxFor(M,ev.side); if(ev.scorer) c.ap=ev.scorer;
+  let q=QUICK.find(x=>x.id===ev.q); if(M.fx.role && q && q.need!=='ar') return; const c=ctxFor(M,ev.side); if(ev.scorer) c.ap=ev.scorer;
   if(q.needBooked){ const b=M.yellow[c.di].filter(n=>!M.sentOff[c.di].includes(n)); if(!b.length) q=QUICK.find(x=>x.id==='zaman'); else c.dp=squad(c.D).pl.find(p=>p.no===b[0])||c.dp; }
   const text=q.text(c);
   const resolve=(id)=>{
@@ -2976,6 +3028,7 @@ function runQuick(ev){
   quickInline(q,text,resolve);
 }
 function runMgmt(ev){
+  if(M.fx.role){ M.temp=clamp(M.temp-8,0,100); feed('Hakem, oyuncuları sakinleştirdi.','sys'); return; }
   const c=ctxFor(M,ev.side); const push=chance(.3);
   const text = push ? `Kararın sonrası ${c.D.name} oyuncuları seni çevreledi. ${pl(c.dp)} göğsünle temas kurup seni itti! Kameralar üzerinde.` : `Maç ısındı: ${c.D.name} oyuncularından beşi seni çevreledi, ${pl(c.dp)} yüzüne doğru bağırıyor. Kaptan geride kaldı.`;
   const opts = push ? [['kirmizi','Hakemi iten oyuncuya kırmızı kart',1],['sari','Sarı kart göster',0],['uyar','Sözlü uyar, oyunu başlat',0]]
@@ -3007,6 +3060,7 @@ function runStoppage(half){
     feed(`Dördüncü hakem tabelayı kaldırdı: <b>+${n}</b> dakika.`,'dec');
     M.phase = half===1?'h1add':'h2add'; M.addMin=0;
   };
+  if(M.fx.role){ M.added[half]=rec; feed(`Dördüncü hakem tabelayı kaldırdı: <b>+${rec}</b> dakika.`,'dec'); M.phase=half===1?'h1add':'h2add'; M.addMin=0; return; }
   if(M.auto){ resolve(chance(skillP())?rec:clamp(rec+pick([-2,-1,1,2]),1,12)); return; }
   M.modal=true; stoppageUI(half,rec,resolve);
 }
@@ -3104,6 +3158,7 @@ function startMatch(fxId,auto){
 }
 function fxById(id){ if(S.tournament&&S.tournament.fx&&S.tournament.fx.id===id) return S.tournament.fx; return S.tasks&&S.tasks.matches.find(m=>m.id===id); }
 function kickOff(prep){
+  if(M&&M.fx.role) setTimeout(()=>{ if(M&&!M.done) feed(M.fx.role==='var'?'Bu maçta VAR odasındasın. Sahadaki kararları izleyip yalnızca açık ve net hatalarda müdahale edeceksin.':'Bu maçta yardımcı hakemsin. Ofsayt, çizgi ve yön kararları senin bayrağında.','sys'); },400);
   if(prep==='analiz') M.visMod+=.06; if(prep==='kaptan') M.temp=clamp(M.temp-10*(.6+S.attrs.iletisim/120),0,100); if(prep==='isinma') M.stamina=clamp(M.stamina+8,0,100);
   matchUI(); feed('Başlama düdüğünü çaldın. '+esc(M.H.name)+' – '+esc(M.A.name)+' başladı.','sys'); whistle();
   setSpeed(S.settings.speed||1);
@@ -4357,7 +4412,7 @@ function openMenu(){
 function fxCard(fx){
   const H=team(fx.home), A=team(fx.away);
   return `<div class="fxc ${fx.imp>=4?'big':''} ${fx.played?'done':''}">
-    <div class="fxc-top"><span class="eyebrow">${esc(fx.compName)} · ${esc(fx.stage||'')}</span><span class="row" style="gap:6px">${fx.derby?'<span class="chip r">Derbi</span>':''}${fx.final?'<span class="chip y">Final</span>':''}${fx.vr?'<span class="chip b">VAR</span>':''}</span></div>
+    <div class="fxc-top"><span class="eyebrow">${esc(fx.compName)} · ${esc(fx.stage||'')}</span><span class="row" style="gap:6px">${fx.derby?'<span class="chip r">Derbi</span>':''}${fx.final?'<span class="chip y">Final</span>':''}${fx.role==='var'?'<span class="chip b">VAR odası</span>':fx.role==='ar'?'<span class="chip a">Yardımcı hakem</span>':fx.vr?'<span class="chip b">VAR</span>':''}</span></div>
     <div class="fxc-mid"><div class="fxc-t">${crest(H,44)}<b>${esc(teamLabel(fx,'h'))}</b></div>
       <div class="fxc-c">${fx.played?`<span class="fxc-sc num">${fx.score.join(' – ')}</span>`:'<span class="fxc-vs">VS</span>'}<span class="stars" aria-label="Önem">${'★'.repeat(Math.round(fx.imp))}<span>${'★'.repeat(5-Math.round(fx.imp))}</span></span></div>
       <div class="fxc-t">${crest(A,44)}<b>${esc(teamLabel(fx,'a'))}</b></div></div>
