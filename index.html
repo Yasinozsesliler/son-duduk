@@ -2192,6 +2192,10 @@ function ctxFor(M,ai){ const di=1-ai; const A=team(ai?M.fx.away:M.fx.home), D=te
 function pickPlayer(M,side,pos,excl){ const t=team(side?M.fx.away:M.fx.home); const out=M.sentOff[side]; const list=squad(t).pl.filter(p=>p.pos!=='GK'&&(!pos||pos.includes(p.pos))&&!out.includes(p.no)&&!(excl||[]).includes(p.no)); return pick(list.length?list:squad(t).pl.slice(1,11)); }
 const tag = (side,p)=>({side,p,label:pl(p)+(side==='A'?' (hücum)':' (savunma)')});
 
+const DIR_S={'önden':'önden','yandan':'yan taraftan','arkadan':'arka taraftan'};
+const DIR_L={'önden':'Önden','yandan':'Yan taraftan','arkadan':'Arka taraftan'};
+const AREA_L={'omuz':'Omuz bölgesi','yüz':'Yüz bölgesi','kafa':'Baş bölgesi','göğüs':'Göğüs bölgesi'};
+const AREA_HIT={'omuz':'rakibin omzuna','yüz':'rakibin yüzüne','kafa':'rakibin başına','göğüs':'rakibin göğsüne'};
 const GEN = {
  penalti_temas(c){
   const inc=incidentBase('penalti_temas',c); const {ap,dp}=c;
@@ -2354,9 +2358,9 @@ const GEN = {
   const counter = chance(.35);
   const adv = chance(.28);
   let score=(studs?2:0)+({top:0,bilek:1,kaval:2}[h])+({kontrollu:0,hizli:1,asiri:3}[force])+(dir==='arkadan'?1:0);
-  inc.story = pick([`Orta sahada <b>${esc(pl(vic))}</b> topu alıp döndü, <b>${esc(pl(off))}</b> ${dir} müdahaleye girdi. ${esc(vic.name.split(' ')[0])} yerde kıvranıyor; iki takım oyuncuları birbirine giriyor.`,
-     `${esc(c.A.name)} hızlı çıkıyor; <b>${esc(pl(vic))}</b> kenara açılırken <b>${esc(pl(off))}</b> ${dir} kayarak girdi.`]) + (booked?` <b>Dikkat:</b> ${esc(off.name)} daha önce sarı kart görmüştü.`:'');
-  inc.facts=[F('Müdahale yönü',dir.charAt(0).toUpperCase()+dir.slice(1),false),
+  inc.story = pick([`Orta sahada <b>${esc(pl(vic))}</b> topu alıp döndü, <b>${esc(pl(off))}</b> ${DIR_S[dir]} müdahaleye girdi. ${esc(vic.name.split(' ')[0])} yerde kıvranıyor; iki takım oyuncuları birbirine giriyor.`,
+     `${esc(c.A.name)} hızlı çıkıyor; <b>${esc(pl(vic))}</b> kenara açılırken <b>${esc(pl(off))}</b> ${DIR_S[dir]} kayarak girdi.`]) + (booked?` <b>Dikkat:</b> ${esc(off.name)} daha önce sarı kart görmüştü.`:'');
+  inc.facts=[F('Müdahale yönü',DIR_L[dir],false),
     F('Krampon',studs?'Krampon tabanı açık, öne doğru':'Ayak içi / yan taraf',true,studs?'Ayak yanı ile gibi':'Krampon kalkık olabilir'),
     F('Temas yüksekliği',{top:'Top seviyesinde (ayak)',bilek:'Ayak bileği üstü',kaval:'Kaval kemiği / diz altı'}[h],h!=='top',h==='top'?'Bileğe gelmiş olabilir':'Ayak seviyesinde gibi'),
     F('Hız ve güç',{kontrollu:'Kontrollü',hizli:'Hızlı, kontrolü zayıf',asiri:'Aşırı güç, iki ayakla havalanarak'}[force],force!=='kontrollu','Kontrollü gibi'),
@@ -2382,7 +2386,7 @@ const GEN = {
     inc.explain=ex.join(' ');
   }
   inc.pos='orta_saha'; inc.booked=booked;
-  const by={önden:[34,18.4],yandan:[36.6,21],arkadan:[34,23.8]}[dir];
+  const by={'önden':[34,18.4],'yandan':[36.6,21],'arkadan':[34,23.8]}[dir];
   inc.dia={mode:'mid',pl:[{x:34,y:21,s:'A',n:vic.no,hl:1},{x:by[0],y:by[1],s:'D',n:off.no,hl:1},{x:42,y:13,s:'A',n:ri(7,11)},{x:24,y:16,s:'D',n:ri(2,6)},{x:28,y:27,s:'A',n:ri(14,20)},{x:46,y:26,s:'D',n:ri(13,18)}],
     arrows:[{f:[34,28],t:[34,21.8],k:'run'}].concat(adv?[{f:[34.5,20.5],t:[41.5,13.8],k:'pass'}]:[]),ball:[34.6,20.2],mark:[34.3,21.6]};
   inc.sx={dir,studs,h,force,ballPlayed,clean:ballPlayed&&score<=1};
@@ -2392,7 +2396,7 @@ const GEN = {
   const inc=incidentBase('dogso',c); const {ap,dp}=c;
   const d=pick([24,27,30,34,40]); const dirK=chance(.75); const ctrl=chance(.72); const defs=wpick([['0',45],['far',25],['close',20],['2',10]]);
   const ftype=pick(['arkadan topa uzanarak çelme','formadan çekme','omuzdan iki elle itme']);
-  const attempt=ftype.startsWith('arkadan');
+  const attempt=ftype==='arkadan topa uzanarak çelme';
   const onLine=chance(.16);
   const dogsoYes = (onLine||d<=30) && dirK && ctrl && (defs==='0'||defs==='far');
   inc.story=`${esc(c.D.name)} savunması önde yakalandı! <b>${esc(pl(ap))}</b> topla kaleye doğru tek başına koşuyor, son adam <b>${esc(pl(dp))}</b> geriden yetişti ve… yerde! ${esc(c.A.name)} oyuncuları kırmızı kart istiyor.`;
@@ -2422,12 +2426,12 @@ const GEN = {
   const use=wpick([['dogal',45],['kaldirac',37],['savurma',18]]); const area=use==='dogal'?pick(['omuz','yüz']):pick(['yüz','kafa','göğüs']); const hard=chance(.5);
   inc.story=`Uzun topta <b>${esc(pl(off))}</b> ile <b>${esc(pl(vic))}</b> hava topuna yükseldi. ${esc(vic.name.split(' ')[0])} elleri yüzünde yerde kaldı; ${esc(c.A.name)} sağlık ekibini çağırıyor.`;
   inc.facts=[F('Kol kullanımı',{dogal:'Sıçrama ve denge için doğal kol hareketi',kaldirac:'Kol rakibe yaslanıp kaldıraç olarak kullanıldı',savurma:'Dirsek rakibe doğru savruldu'}[use],true,use==='dogal'?'Kol rakibe yöneltilmiş olabilir':'Doğal kol hareketi gibi'),
-    F('Temas bölgesi',area.charAt(0).toUpperCase()+area.slice(1),false),F('Şiddet',hard?'Sert':'Hafif',use!=='dogal','Hafif gibi'),F('Gözü topta mı',use==='savurma'?'Hayır, rakibe bakıyordu':'Evet',use==='savurma','Topa bakıyor gibi')];
+    F('Temas bölgesi',AREA_L[area],false),F('Şiddet',hard?'Sert':'Hafif',use!=='dogal','Hafif gibi'),F('Gözü topta mı',use==='savurma'?'Hayır, rakibe bakıyordu':'Evet',use==='savurma','Topa bakıyor gibi')];
   inc.steps=[{id:'d',q:'Karar',opts:[{id:'devam',label:'Faul yok, devam'},{id:'faul',label:'Faul — serbest vuruş'}]},{id:'c',q:'Disiplin',opts:cardOpts({sari:tag('D',off),kirmizi:tag('D',off)})}];
   inc.cards={sari:{side:'D',p:off},kirmizi:{side:'D',p:off,red:true}}; inc.reviewable=false; inc.redReview=true;
   if(use==='dogal'){ inc.correct={d:'devam',c:'yok'}; if(area==='yüz') inc.accept=[{d:'faul',c:'yok'}]; inc.explain='Kol sıçrama ve denge için doğal kullanıldı; temas mücadelenin parçası. Faul yok'+(area==='yüz'?' (yüze temas nedeniyle faul çalmak da kabul edilebilir).':'.'); }
   else if(use==='kaldirac'){ inc.correct={d:'faul',c:'sari'}; inc.explain='Kol kaldıraç olarak kullanıldı: pervasız, sarı kart.'; }
-  else { inc.correct={d:'faul',c:area==='göğüs'&&!hard?'sari':'kirmizi'}; inc.explain = area==='göğüs'&&!hard ? 'Dirsek savruldu ama göğse hafif geldi: pervasız, sarı kart.' : 'Dirsek bilerek rakibin '+area+'ına savruldu: şiddetli hareket, kırmızı kart.'; if(area==='göğüs'&&!hard) inc.accept=[{d:'faul',c:'kirmizi'}]; }
+  else { inc.correct={d:'faul',c:area==='göğüs'&&!hard?'sari':'kirmizi'}; inc.explain = area==='göğüs'&&!hard ? 'Dirsek savruldu ama göğse hafif geldi: pervasız, sarı kart.' : 'Dirsek bilerek '+AREA_HIT[area]+' savruldu: şiddetli hareket, kırmızı kart.'; if(area==='göğüs'&&!hard) inc.accept=[{d:'faul',c:'kirmizi'}]; }
   inc.pos='orta_saha';
   inc.dia={mode:'mid',pl:[{x:33.4,y:20.6,s:'A',n:vic.no,hl:1},{x:34.8,y:21.4,s:'D',n:off.no,hl:1},{x:26,y:14,s:'D',n:ri(2,6)},{x:42,y:16,s:'A',n:ri(7,11)},{x:30,y:30,s:'A',n:ri(14,20)}],arrows:[{f:[20,36],t:[33.6,20.2],k:'pass'}],ball:[34,19.8],mark:[34.1,21]};
   inc.sx={use,area};
@@ -4248,6 +4252,7 @@ function bindMain(){
 //   v1.1 — EKONOMİ · MAĞAZA · TATİL · RÜŞVET · GELİR MODELİ
 // =========================================================
 const NV = () => window.NATIVE || null;
+const lc11 = s => (document.documentElement.lang==='de'?s:s.toLocaleLowerCase('tr-TR'));
 const PREMIUM_ID = 'com.sonduduk.hakem.premium';
 const PREM_KEY = 'sonduduk_premium';
 function isPremium(){ try{ return localStorage.getItem(PREM_KEY)==='1'; }catch(e){ return false; } }
@@ -4376,10 +4381,10 @@ function buy11(id){
   if(it.rep) S.rep=clamp(S.rep+it.rep,0,100);
   if(it.trust) S.kurul.trust=clamp(S.kurul.trust+it.trust,0,100);
   if(it.fol) S.social.followers+=it.fol;
-  if(it.price>=5000){ addPost({a:{n:S.name,me:1,h:S.social.handle},text:pick([`Yeni ${it.name.toLocaleLowerCase('tr-TR')} ile sezona hazırım.`,`Emeklerin karşılığı: ${it.name.toLocaleLowerCase('tr-TR')}.`,`Kendime küçük bir ödül: ${it.name.toLocaleLowerCase('tr-TR')}.`]),img:{k:'train'},likes:engage(60+it.price/2500),rts:engage(8)}); }
+  if(it.price>=5000){ addPost({a:{n:S.name,me:1,h:S.social.handle},text:pick([`Yeni ${lc11(it.name)} ile sezona hazırım.`,`Emeklerin karşılığı: ${lc11(it.name)}.`,`Kendime küçük bir ödül: ${lc11(it.name)}.`]),img:{k:'train'},likes:engage(60+it.price/2500),rts:engage(8)}); }
   // gösterişli harcama + rüşvet geçmişi = soru işaretleri
   if(it.lux && S.bribe.taken>0){ S.bribe.susp=clamp(S.bribe.susp+it.lux*7,0,100); news('hakem',`${S.name.split(' ').slice(-1)[0]} için "lüks yaşam" soruları`,`Hakemin son dönemdeki harcamaları sosyal medyada gündem oldu. Gelir kaynağı merak ediliyor.`); }
-  else if(it.lux>=2) news('hakem',`${S.name}: "Hakemlik artık iyi para kazandırıyor"`,`Ünlü hakem, ${it.name.toLocaleLowerCase('tr-TR')} paylaşımıyla sosyal medyada gündem oldu.`);
+  else if(it.lux>=2) news('hakem',`${S.name}: "Hakemlik artık iyi para kazandırıyor"`,`Ünlü hakem, ${lc11(it.name)} paylaşımıyla sosyal medyada gündem oldu.`);
   haptic('success'); toast(it.name+' artık senin'); save(); render();
 }
 
@@ -4661,6 +4666,7 @@ async function nativeInit(){
   try{ const SP=PLUG('SplashScreen'); if(SP) setTimeout(()=>SP.hide(),250); }catch(e){}
 }
 async function boot(data){
+  try{ if(window.__SD_PRE) await window.__SD_PRE; }catch(e){}
   await nativeInit(); migrateOld();
   if(data && data.save){ S=migrateSave(data.save); SLOT=S.slot||1; ensureRegistry(); }
   render();

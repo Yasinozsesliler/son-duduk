@@ -1,5 +1,6 @@
 // Builds the Capacitor web bundle (www/) from the single-file game in index.html.
-import { readFileSync, writeFileSync, mkdirSync, cpSync, rmSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, cpSync, rmSync, existsSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
 
 const src = readFileSync('index.html', 'utf8');
 const split = src.indexOf('<div id="app">');
@@ -22,6 +23,7 @@ const html = `<!doctype html>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
+<script src="native.js"></script>
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px/1.45 system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
 ${head}</head>
 <body>
@@ -40,3 +42,12 @@ mkdirSync('www', { recursive: true });
 cpSync('public', 'www', { recursive: true });
 writeFileSync('www/index.html', html);
 console.log('www/ built:', (html.length / 1024).toFixed(0) + ' KB');
+
+// Yerel köprü (reklam, satın alma, dil) — tarayıcıda zararsız
+execFileSync('npx', ['esbuild', 'native/native.js', '--bundle', '--minify', '--format=iife', '--target=safari15', '--outfile=www/native.js'], { stdio: 'inherit' });
+
+// Diğer diller: i18n/<dil>.json sözlüğüyle www/<dil>.html üretilir
+for (const l of ['en', 'de', 'es']) {
+  if (!existsSync(`i18n/${l}.json`)) { console.warn('i18n: eksik sözlük', l); continue; }
+  execFileSync('node', ['i18n/apply.cjs', 'www/index.html', `www/${l}.html`, `i18n/${l}.json`, l], { stdio: 'inherit' });
+}
