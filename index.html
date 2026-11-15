@@ -2211,7 +2211,7 @@ function showCardFx(red,second,label,teamName){
 // =========================================================
 //   KURAL AKADEMİSİ — practice cases, drills, weekly exam
 // =========================================================
-const ACAD_TOPICS=[['karisik','Karışık'],['penalti_temas','Ceza sahası teması'],['elle_oynama','Elle oynama'],['ofsayt_gol','Ofsayt'],['orta_saha_faul','Müdahale sertliği'],['dogso','DOGSO / SPA'],['dirsek','Dirsek'],['top_disinda','Top dışında olay'],['kaleci_engelleme','Kaleciye müdahale'],['hucum_elle_gol','Golde elle oynama'],['gol_oncesi_faul','Gol öncesi faul'],['geri_pas','Geri pas'],['penalti_atisi','Penaltı vuruşu']];
+const ACAD_TOPICS=[['karisik','Karışık'],['penalti_temas','Ceza sahası teması'],['elle_oynama','Elle oynama'],['ofsayt_gol','Ofsayt'],['orta_saha_faul','Müdahale sertliği'],['dogso','DOGSO / SPA'],['dirsek','Dirsek'],['top_disinda','Top dışında olay'],['kaleci_engelleme','Kaleciye müdahale'],['hucum_elle_gol','Golde elle oynama'],['gol_oncesi_faul','Gol öncesi faul'],['geri_pas','Geri pas'],['penalti_atisi','Penaltı vuruşu'],['yuksek_ayak','Yüksek ayak'],['korner_cekme','Duran topta tutma'],['kaleci_disari','Kaleci dışarıda']];
 const ACAD_RANKS=[[0,'Aday'],[10,'Bilgili'],[30,'Uzman'],[75,'Kural ustası'],[150,'Kural kurulu seviyesi']];
 let ACAD_TOPIC='karisik', ACAD=null;
 function acadState(){ return S.acad||(S.acad={solved:0,correct:0,streak:0,best:0,byType:{},week:-1,gains:0,examWeek:-1,lastExam:null}); }
@@ -2283,6 +2283,9 @@ function recordResult(h,a,gh,ga){ recordIn(S.table,h,a,gh,ga); }
 const F=(label,val,key,alt)=>({label,val,key:!!key,alt:alt||null});
 const pl = p => p.no+' '+p.name;
 const LAWS = {
+ yuksek_ayak:'Kural 12: Temas olmadan, rakibi tehlikeye sokan ve onu sakınmaya zorlayan hareket tehlikeli oyundur: endirekt serbest vuruş. Temas olursa faul olur ve direkt serbest vuruş verilir; pervasızsa sarı, aşırı güç varsa kırmızı kart.',
+ korner_cekme:'Kural 12: Rakibi tutmak direkt serbest vuruş gerektiren bir fauldür; kendi ceza alanında penaltıdır. Duran top öncesi ya da sırasında da geçerlidir. Karşılıklı, etkisiz temas faul sayılmaz.',
+ kaleci_disari:'Kural 12: Kaleci kendi ceza alanı dışında topa eliyle dokunursa direkt serbest vuruş verilir. Çizgi ceza alanına dahildir. Bariz gol fırsatını elle engellemek kırmızı, umut vaat eden atağı kesmek sarı karttır.',
  penalti_temas:'Kural 12: Rakibe dikkatsiz, pervasız ya da aşırı güçle çelme takmak, itmek, tutmak direkt serbest vuruş; kendi ceza alanında penaltıdır. Pervasız = sarı, aşırı güç = kırmızı. Bariz gol şansı (DOGSO) dört ölçütle bakılır: kaleye mesafe, oyunun yönü, top kontrolü olasılığı, savunmacıların sayısı ve konumu. Ceza alanında topu oynama girişimiyle yapılan DOGSO faulü sarıya, umut vaat eden atağı kesen (SPA) faul kartsıza iner. Tutma, itme, çekme gibi topu oynama girişimi olmayan ihlallerde bu indirim uygulanmaz. Simülasyon (faul yapılmış gibi kendini atmak) sarı kart ve rakip lehine endirekt serbest vuruştur.',
  elle_oynama:'Kural 12: Oyuncu eli/koluyla topa bilerek dokunursa ya da eli/kolu vücudunu doğal olmayan şekilde büyütüyorsa ihlal vardır. Kolun pozisyonu o anki vücut hareketiyle açıklanamıyorsa doğal değildir; omuz hizasının üstündeki kol nadiren açıklanabilir. Kolun üst sınırı koltuk altının alt hizasıdır. Düşerken vücut ile zemin arasında destek veren kol (yana/yukarı açılmamışsa) ihlal değildir. Topun oyuncunun kendi vücudundan sekmesi değerlendirmede hafifletici bir unsurdur. Bariz golü eliyle engelleyen oyuncu (kendi ceza alanındaki kaleci hariç) kırmızı kart görür.',
  hucum_elle_gol:'Kural 12: Hücum oyuncusu topa kazara eli/koluyla dokunduktan hemen sonra gol atarsa gol geçersizdir. Kazara temastan sonra top bir takım arkadaşına geçip gol olursa bu temas tek başına golü iptal ettirmez. Bilerek elle oynayarak gol atmaya çalışmak sarı karttır. Omuz kol sayılmaz; kolun üst sınırı koltuk altının alt hizasıdır.',
@@ -2297,7 +2300,7 @@ const LAWS = {
  gol_oncesi_faul:'Kural 12: Hücum oyuncusunun gol öncesi rakibini iterek, tutarak ya da ayağına basarak avantaj sağlaması faul nedeniyle golü geçersiz kılar. Normal omuz omuza mücadele ve hafif denge teması faul değildir.',
  penalti_atisi:'Kural 14: Kaleci vuruş anında en az bir ayağının bir kısmı çizgiye değer ya da çizgi hizasında olmalıdır. Kaleci ihlal eder ve top kaleye girmezse vuruş tekrarlanır; top dışarı giderse (kaleci vurucuyu etkilememişse) tekrarlanmaz. İlk ihlalde kaleci uyarılır, sonraki ihlallerde sarı kart görür. Vurucu koşusunu tamamladıktan sonra aldatma hareketi yaparsa endirekt serbest vuruş ve sarı kart. Hücumcu erken girer: gol olursa tekrar, olmazsa endirekt serbest vuruş. Savunmacı erken girer: gol olursa gol geçerli, olmazsa tekrar.'
 };
-const TYPE_TITLES = {penalti_temas:'Ceza sahasında temas',elle_oynama:'Elle oynama itirazı',hucum_elle_gol:'Golde elle oynama şüphesi',ofsayt_gol:'Ofsayt şüphesi',orta_saha_faul:'Sert müdahale',dogso:'Son adam faulü',dirsek:'Hava topunda dirsek',top_disinda:'Top dışında olay',kaleci_engelleme:'Kaleciye müdahale',gol_cizgisi:'Gol çizgisi',geri_pas:'Kaleciye geri pas',gol_oncesi_faul:'Gol öncesi faul şüphesi',penalti_atisi:'Penaltı vuruşu'};
+const TYPE_TITLES = {yuksek_ayak:'Yüksek ayak',korner_cekme:'Duran topta tutma',kaleci_disari:'Kaleci ceza sahası dışında',penalti_temas:'Ceza sahasında temas',elle_oynama:'Elle oynama itirazı',hucum_elle_gol:'Golde elle oynama şüphesi',ofsayt_gol:'Ofsayt şüphesi',orta_saha_faul:'Sert müdahale',dogso:'Son adam faulü',dirsek:'Hava topunda dirsek',top_disinda:'Top dışında olay',kaleci_engelleme:'Kaleciye müdahale',gol_cizgisi:'Gol çizgisi',geri_pas:'Kaleciye geri pas',gol_oncesi_faul:'Gol öncesi faul şüphesi',penalti_atisi:'Penaltı vuruşu'};
 
 // positioning contexts (box-mode coordinates in metres: x across 0..68, y from goal line 0..42)
 const SPOTS = {
@@ -2653,6 +2656,66 @@ const GEN = {
   inc.sx={v};
   return inc;
  },
+ yuksek_ayak(c){
+  const inc=incidentBase('yuksek_ayak',c); const {ap,dp}=c;
+  const v=wpick([['temassiz',30],['temas',26],['asiri',10],['guvenli',18],['egilme',16]]);
+  inc.story=`Havada kalan topa <b>${esc(pl(ap))}</b> kafayla, <b>${esc(pl(dp))}</b> ise ayağıyla gitti. Krampon ${esc(ap.name.split(' ')[0])}'ın yüzüne çok yakın geçti; ${esc(c.A.name)} oyuncuları tehlikeli oyun diye bağırıyor.`;
+  const txt={temassiz:'Ayak baş hizasında; temas yok ama hücumcu kafasını geri çekmek zorunda kaldı',temas:'Ayak yüksekte; krampon hücumcunun omzuna/yüzüne değdi',asiri:'Krampon açık, yüksek hızla yüze isabet etti',guvenli:'Ayak yüksekte ama hücumcu 2 m uzakta, tehlike yok',egilme:'Hücumcu topa kafayla gitmek için bel hizasına kadar eğildi; ayak normal yükseklikteydi'}[v];
+  inc.facts=[F('Ayağın konumu',txt,true,v==='temassiz'||v==='guvenli'?'Krampon değmiş olabilir':'Temas yok gibiydi'),
+    F('Topu oynama girişimi','Var — savunmacı topa ayağıyla uzandı',false),
+    F('Hücumcunun hareketi',v==='egilme'?'Kafasını ayak hizasına indirdi':'Normal yükseklikte kafa vuruşuna çıktı',v==='egilme')];
+  inc.steps=[{id:'d',q:'Karar',opts:[{id:'devam',label:'İhlal yok, devam'},{id:'endirekt',label:'Tehlikeli oyun — endirekt serbest vuruş'},{id:'serbest',label:'Faul — direkt serbest vuruş'}]},{id:'c',q:'Disiplin',opts:cardOpts({sari:tag('D',dp),kirmizi:tag('D',dp)})}];
+  inc.cards={sari:{side:'D',p:dp},kirmizi:{side:'D',p:dp,red:true}}; inc.onD={serbest:'fkA',endirekt:'ifkA'};
+  const map={temassiz:['endirekt','yok'],temas:['serbest','sari'],asiri:['serbest','kirmizi'],guvenli:['devam','yok'],egilme:['devam','yok']};
+  inc.correct={d:map[v][0],c:map[v][1]};
+  if(v==='temassiz') inc.accept=[{d:'endirekt',c:'sari'}];
+  if(v==='temas') inc.partial=[{d:'endirekt',c:'sari'}];
+  inc.explain={temassiz:'Temas olmadan rakibi tehlikeye sokan ve onu sakınmaya zorlayan hareket tehlikeli oyundur: endirekt serbest vuruş. Kart gerekmez; pervasızsa sarı da savunulabilir.',temas:'Yüksek ayak temasla sonuçlandı: artık tehlikeli oyun değil faul, direkt serbest vuruş. Rakibin güvenliğini umursamayan pervasız hareket: sarı kart.',asiri:'Açık kramponla, hızla yüze isabet: rakibin sağlığını tehlikeye atan aşırı güç. Direkt serbest vuruş ve kırmızı kart.',guvenli:'Ayak yüksekte olsa da yakında rakip yok, kimse tehlikeye girmedi: ihlal yok.',egilme:'Tehlikeyi yaratan, kafasını bel hizasına indiren hücumcuydu; savunmacının hareketi normal: devam.'}[v];
+  inc.pos='orta_saha';
+  const gap=v==='guvenli'?2.2:0;
+  inc.dia={mode:'mid',pl:[{x:33.4,y:20.6,s:'A',n:ap.no,hl:1},{x:34.8+gap,y:21.4,s:'D',n:dp.no,hl:1},{x:26,y:14,s:'D',n:ri(2,6)},{x:42,y:16,s:'A',n:ri(7,11)},{x:30,y:30,s:'A',n:ri(14,20)}],arrows:[{f:[18,34],t:[34,20.4],k:'pass'}],ball:[34,20],mark:[34.1,21]};
+  inc.sx={v};
+  return inc;
+ },
+ korner_cekme(c){
+  const inc=incidentBase('korner_cekme',c); const {ap,dp}=c;
+  const v=wpick([['belirgin',30],['gures',14],['karsilikli',22],['hafif',18],['hucumcu',16]]);
+  inc.story=`Köşe vuruşu kullanılıyor. Top havadayken penaltı noktası civarında <b>${esc(pl(dp))}</b> ile <b>${esc(pl(ap))}</b> birbirine girdi; ${esc(ap.name.split(' ')[0])} topa sıçrayamadan yerde. ${esc(c.A.name)} penaltı istiyor.`;
+  const txt={belirgin:'Savunmacı, hücumcunun formasını iki eliyle uzun süre çekti; hücumcu sıçrayamadı',gures:'Savunmacı hücumcuyu belinden kavrayıp yere indirdi',karsilikli:'İki oyuncu da birbirini tutuyor; hiçbiri belirgin üstünlük kurmadı',hafif:'Savunmacının eli kısa süre formada; hücumcunun hareketini etkilemedi',hucumcu:'Önce hücumcu, savunmacıyı iterek boşluk açtı; sonra ikisi düştü'}[v];
+  inc.facts=[F('Tutma',txt,true,['belirgin','gures'].includes(v)?'Karşılıklı tutma gibi':'Savunmacı çekmiş gibi'),
+    F('Etki',['belirgin','gures'].includes(v)?'Hücumcunun topa oynama şansı ortadan kalktı':v==='hucumcu'?'Savunmacı dengesini kaybetti':'Topa oynama şansı değişmedi',true),
+    F('Top','Penaltı noktası hizasına iniyordu, oynanabilir mesafede',false)];
+  inc.steps=[{id:'d',q:'Karar',opts:[{id:'penalti',label:'Penaltı'},{id:'devam',label:'Faul yok, devam'},{id:'hucum_faulu',label:'Hücum faulü — savunmaya serbest vuruş'}]},{id:'c',q:'Disiplin',opts:cardOpts({sari:tag('D',dp),h_sari:tag('A',ap)})}];
+  inc.cards={sari:{side:'D',p:dp},h_sari:{side:'A',p:ap}}; inc.onD={penalti:'penA'};
+  const map={belirgin:['penalti','yok'],gures:['penalti','sari'],karsilikli:['devam','yok'],hafif:['devam','yok'],hucumcu:['hucum_faulu','yok']};
+  inc.correct={d:map[v][0],c:map[v][1]};
+  if(v==='belirgin') inc.accept=[{d:'penalti',c:'sari'}];
+  if(v==='gures') inc.accept=[{d:'penalti',c:'yok'}];
+  if(v==='karsilikli') inc.borderline=true;
+  inc.explain={belirgin:'Duran topta da tutma fauldür: hareketi etkileyen belirgin forma çekmesi ceza alanında penaltıdır. Kart zorunlu değil.',gures:'Rakibi kavrayıp yere indirmek, topa oynama girişimi olmayan bir tutma: penaltı ve sportmenlik dışı hareket için sarı kart.',karsilikli:'İki taraf da tutuyor, kimse avantaj sağlamadı: oyun devam. Bu tür pozisyonlarda duran top öncesi uyarı yapmak önleyici bir yöntemdir.',hafif:'Kısa, etkisiz temas faul değildir: devam.',hucumcu:'İlk ihlali hücumcu yaptı: savunma lehine direkt serbest vuruş.'}[v];
+  inc.pos='korner';
+  inc.dia={mode:'box',pl:[{x:34.2,y:10.4,s:'A',n:ap.no,hl:1},{x:35.2,y:11.2,s:'D',n:dp.no,hl:1},{x:34,y:1.5,s:'G',n:1},{x:30,y:7,s:'D',n:ri(2,6)},{x:39,y:7.5,s:'A',n:ri(7,11)},{x:28,y:12,s:'A',n:ri(14,20)},{x:41,y:12.5,s:'D',n:ri(13,18)}],arrows:[{f:[67.5,.6],t:[34.5,10],k:'pass'}],ball:[34.4,9.6],mark:[34.6,10.8]};
+  inc.sx={v};
+  return inc;
+ },
+ kaleci_disari(c){
+  const inc=incidentBase('kaleci_disari',c); const {ap,gk}=c;
+  const v=wpick([['disari_dogso',22],['disari_spa',26],['cizgi',20],['ici',18],['disari_kafa',14]]);
+  inc.story=`Arkaya atılan uzun topa <b>${esc(pl(ap))}</b> çıktı; kaleci <b>${esc(pl(gk))}</b> ceza sahasının kenarına kadar koşup topu eliyle kavradı. ${esc(c.A.name)} oyuncuları "Dışarıda!" diye bağırıyor.`;
+  const txt={disari_dogso:'Kaleci topu ceza sahası çizgisinin ~1 m dışında eliyle tuttu',disari_spa:'Kaleci topu çizginin ~50 cm dışında eliyle çeldi',cizgi:'Top, kalecinin eline değdiği anda çizginin üzerindeydi',ici:'Kaleci topu çizginin ~40 cm içinde tuttu, sonra kayarak dışarı çıktı',disari_kafa:'Kaleci ceza sahası dışında topa kafayla vurdu'}[v];
+  const sit={disari_dogso:'Hücumcu topla boş kaleye gidecekti; arkada savunmacı yok',disari_spa:'Hücumcu topa yetişebilirdi; bir savunmacı geri dönüyordu',cizgi:'Hücumcu topa yetişebilirdi',ici:'Hücumcu topa yetişebilirdi',disari_kafa:'Kaleci topu taça gönderdi'}[v];
+  inc.facts=[F('Temas yeri',txt,true,v==='cizgi'||v==='ici'?'Dışarıda tutmuş gibi':'Çizginin üzerinde olabilir'),F('Hücumcunun durumu',sit,v.startsWith('disari')),F('Yardımcı hakem','Son savunmacı hizasında, çizgiye 25 m uzakta',false)];
+  inc.steps=[{id:'d',q:'Karar',opts:[{id:'devam',label:'İhlal yok, devam'},{id:'serbest',label:'Elle oynama — direkt serbest vuruş'}]},{id:'c',q:'Disiplin',opts:cardOpts({sari:tag('D',gk),kirmizi:tag('D',gk)})}];
+  inc.cards={sari:{side:'D',p:gk},kirmizi:{side:'D',p:gk,red:true}}; inc.onD={serbest:'fkA'}; inc.factual=true;
+  const map={disari_dogso:['serbest','kirmizi'],disari_spa:['serbest','sari'],cizgi:['devam','yok'],ici:['devam','yok'],disari_kafa:['devam','yok']};
+  inc.correct={d:map[v][0],c:map[v][1]};
+  inc.explain={disari_dogso:'Kaleci ceza alanı dışında sıradan bir oyuncudur. Elle oynayarak bariz gol fırsatını engelledi: direkt serbest vuruş ve kırmızı kart.',disari_spa:'Ceza alanı dışında elle oynama: direkt serbest vuruş. Umut vaat eden atak kesildi: sarı kart.',cizgi:'Çizgi ceza alanına dahildir; kaleci topu kendi alanında tuttu: ihlal yok.',ici:'Topa ceza alanı içinde dokundu; sonradan kayarak çıkması ihlal değildir.',disari_kafa:'Ceza alanı dışında kafayla oynamak serbesttir: ihlal yok.'}[v];
+  inc.pos='uzun_top';
+  const gy=v==='disari_dogso'?17.6:v==='disari_spa'?17:v==='cizgi'?16.5:v==='ici'?16.1:18.5;
+  inc.dia={mode:'box',pl:[{x:36,y:gy,s:'G',n:gk.no,hl:1},{x:37,y:gy+1.4,s:'A',n:ap.no,hl:1},{x:24,y:26,s:'D',n:ri(2,6)},{x:47,y:24,s:'D',n:ri(13,18)},{x:68.6,y:30,s:'AR',n:0}],arrows:[{f:[34,1.5],t:[36,gy],k:'run'},{f:[40,32],t:[37.1,gy+1.4],k:'run'},{f:[26,40],t:[36.2,gy-.3],k:'pass'}],ball:[36.2,gy-.2],mark:[36,gy]};
+  inc.sx={v};
+  return inc;
+ },
  penalti_atisi(c){
   const inc=incidentBase('penalti_atisi',c); const {ap,gk}=c; const kicker=ap;
   const v=wpick([['gk_save',24],['gk_wide',12],['feint',14],['att_goal',16],['def_goal',14],['def_save',12],['clean',8]]);
@@ -2699,7 +2762,7 @@ function buildMatch(fx){
   m.stamina=clamp(55+S.attrs.kondisyon*.42+(S.energy-60)*.25,30,100);
   // incident schedule
   const nMaj=clamp(4+(lvl>=3?1:0)+(fx.imp>=4?1:0)+ri(0,1),4,7), nQ=ri(3,4);
-  const weights=[['penalti_temas',14],['elle_oynama',11],['hucum_elle_gol',5],['ofsayt_gol',13],['orta_saha_faul',20],['dogso',6],['dirsek',7],['top_disinda',4],['kaleci_engelleme',6],['gol_oncesi_faul',7],['geri_pas',lvl<=3?5:2]];
+  const weights=[['penalti_temas',14],['elle_oynama',11],['hucum_elle_gol',5],['ofsayt_gol',13],['orta_saha_faul',20],['dogso',6],['dirsek',7],['top_disinda',4],['kaleci_engelleme',6],['gol_oncesi_faul',7],['geri_pas',lvl<=3?5:2],['yuksek_ayak',7],['korner_cekme',8],['kaleci_disari',4]];
   if(!fx.glt && lvl<=3) weights.push(['gol_cizgisi',6]);
   const used={}; const mins=new Set();
   const minPick=()=>{ let x; do{ x=chance(.5)?ri(4,43):ri(48,88); }while(mins.has(x)||mins.has(x-1)||mins.has(x+1)); mins.add(x); return x; };
@@ -3233,7 +3296,7 @@ function sceneStop(sc,gather){ if(!sc||sc.mode==='goal') return; sc.mode='stoppe
 function sceneHalf(sc){ if(!sc) return; sc.dirHome=-1; kickoffPositions(sc,1); }
 
 // incident build-up on the live pitch -----------------------
-const VICTIM={penalti_temas:'A',dogso:'A',orta_saha_faul:'A',dirsek:'A',top_disinda:'A',gol_oncesi_faul:'D',kaleci_engelleme:'G'};
+const VICTIM={yuksek_ayak:'A',korner_cekme:'A',penalti_temas:'A',dogso:'A',orta_saha_faul:'A',dirsek:'A',top_disinda:'A',gol_oncesi_faul:'D',kaleci_engelleme:'G'};
 function diaMap(mode,d){ return mode==='mid' ? (x,y)=>[52.5+d*(21-y), d>0?x:68-x] : (x,y)=> d>0?[105-y,x]:[y,68-x]; }
 const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
 function sceneBuildGo(sc,onContact){ sc.stage=2; sc.bt=0; sc.forced.forEach(f=>f.start=[f.p.x,f.p.y]); sc.onContact=onContact; sc.contactDone=false; sc.spots=null; }
@@ -3311,6 +3374,10 @@ function animSpec(inc){
     case 'top_disinda': return {off:{itme:'push',yumruk:'punch',kafa:'headbutt',basma:'stamp',kufur:'gesture'}[x.act],vic:x.act==='basma'?'down':x.act==='kufur'?'none':x.act==='itme'?'stumble':'fall',contact:x.act!=='kufur',hitZ:x.act==='basma'?.1:1.55};
     case 'kaleci_engelleme': return {off:{tuttu:'hold',itti:'push',omuz:'shoulder',engel:'block',arkadas:'header'}[x.v],offS:x.v==='arkadas'?'D':'A',vicS:'G',vicPose:'gkJump',vic:['tuttu','itti','engel'].includes(x.v)?'fall':x.v==='arkadas'?'fall':'stumble',contact:true,hitZ:1.4};
     case 'gol_oncesi_faul': return {gk:'dive',gkT:.82,off:{itme:'push',omuz:'shoulder',basma:'stamp',hafif:'shoulder',cekme:'hold'}[x.v],offS:'A',vicS:'D',vic:['itme','basma','cekme'].includes(x.v)?'fall':'stumble',contact:true,hitZ:x.v==='basma'?.1:1.2};
+    case 'yuksek_ayak': { const v=x.v; return {off:'tackleHigh',vicPose:'header',vic:v==='temas'||v==='asiri'?'fall':v==='temassiz'?'stumble':'none',contact:v==='temas'||v==='asiri',hitZ:1.6,gap:v==='guvenli'?1.6:0}; }
+    case 'korner_cekme': { const v=x.v; if(v==='hucumcu') return {off:'push',offS:'A',vicS:'D',vic:'fall',contact:true,hitZ:1.25};
+      return {off:v==='gures'?'hold':'hold',offS:'D',vicS:'A',vicPose:'header',vic:['belirgin','gures'].includes(v)?'fall':'stumble',contact:true,hitZ:1.15}; }
+    case 'kaleci_disari': return {gk:x.v==='disari_kafa'?null:'catch',gkT:.62,contact:false,headerGK:x.v==='disari_kafa'};
     case 'gol_cizgisi': return {gk:'dive',contact:false,headerA:true};
     case 'ofsayt_gol': return {ofs:true,scorer:x.who==='scorer',gk:'dive',gkT:.86,contact:false};
     case 'geri_pas': return {gk:'catch',contact:false,flick:x.v==='hile'};
@@ -3326,7 +3393,7 @@ function replayTracks(inc){
   const d=inc.dia, runs=(d.arrows||[]).filter(a=>a.k==='run'), shot=(d.arrows||[]).find(a=>a.k==='shot'), pass=(d.arrows||[]).find(a=>a.k==='pass');
   const an=inc.anim||(inc.anim=animSpec(inc)); const vs=an.vicS!==undefined?an.vicS:VICTIM[inc.type]; const os=an.offS;
   let vSet=false, oSet=false; const r=seeded(hash(inc.title+inc.minute));
-  const tr=d.pl.map(p=>{ const run=runs.find(a=>Math.hypot(a.t[0]-p.x,a.t[1]-p.y)<3.4);
+  const tr=d.pl.map(p=>{ const run=runs.map(a=>[a,Math.hypot(a.t[0]-p.x,a.t[1]-p.y)]).filter(q=>q[1]<3.4).sort((u,w)=>u[1]-w[1]).map(q=>q[0])[0];
     let from = run? run.f.slice() : (p.s==='G'||p.s==='AR') ? [p.x,p.y] : [p.x+(r()*2.4-1.2), p.y+(p.s==='A'?4+r()*3:2.5+r()*2)];
     if(an.pen && p.s==='G') from=[p.x,.3];
     if(an.pen && p.hl && p.s==='A' && Math.hypot(p.x-34,p.y-12.4)<1) from=[34,15.5];
@@ -3374,6 +3441,7 @@ function applyAnim(actors,inc,t,map){
   actors.forEach(a=>{ const tr=a.t; if(!tr) return; a.fall=0;
     if(tr.passer){ if(an.ofs) setPose(a,'pass',t<CT-.05?0:t<CT?(t-(CT-.05))/.05:1-(t-CT)/.1); else setPose(a,an.flick?'header':'pass',t<.08?t/.08:1-(t-.08)/.12); }
     if(tr.shootAt!=null && tr.role!=='victim'){ const s0=tr.shootAt; const k=t<s0-.04?0:t<s0?(t-(s0-.04))/.04:1-(t-s0)/.1; setPose(a,'shot',k); }
+    if(tr.s==='G' && an.headerGK){ setPose(a,'header',clamp((t-.58)/.1,0,1)*(1-clamp((t-.8)/.1,0,1))); }
     if(tr.s==='A' && an.headerA && tr.hl){ setPose(a,'header',clamp((t-.55)/.12,0,1)*(1-clamp((t-.82)/.1,0,1))); }
     if(tr.s==='A' && an.pen && tr.hl && Math.hypot(tr.to[0]-34,tr.to[1]-12.4)<1.2){ const kt=an.feint?.78:CT; const k=t<kt-.05?0:t<kt?(t-(kt-.05))/.05:1-(t-kt)/.12; setPose(a,'shot',k); }
     if(tr.s==='G' && an.gk && tr.role!=='victim'){ const st=an.gkT!=null?an.gkT:an.pen?(an.gkEarly?.62:CT):.66; const k=clamp((t-st)/.12,0,1);
