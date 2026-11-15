@@ -49,10 +49,22 @@ jobs:
           npx cap sync ios
 
       - name: Install App Store Connect API key
+        env:
+          P8_RAW: ${{ secrets.ASC_KEY_P8_BASE64 }}
         run: |
           mkdir -p "$RUNNER_TEMP/keys"
-          echo "${{ secrets.ASC_KEY_P8_BASE64 }}" | base64 --decode > "$RUNNER_TEMP/keys/AuthKey_$ASC_KEY_ID.p8"
-          echo "ASC_KEY_PATH=$RUNNER_TEMP/keys/AuthKey_$ASC_KEY_ID.p8" >> "$GITHUB_ENV"
+          KEYFILE="$RUNNER_TEMP/keys/AuthKey_$ASC_KEY_ID.p8"
+          if printf '%s' "$P8_RAW" | grep -q "BEGIN PRIVATE KEY"; then
+            printf '%s\n' "$P8_RAW" | tr -d '\r' > "$KEYFILE"
+          else
+            printf '%s' "$P8_RAW" | tr -d ' \r\n\t' | base64 --decode > "$KEYFILE" 2>/dev/null || true
+          fi
+          if ! openssl pkey -in "$KEYFILE" -noout 2>/dev/null; then
+            echo "::error::ASC_KEY_P8_BASE64 is not a valid .p8 key. Paste either the full .p8 file content (-----BEGIN PRIVATE KEY----- ...) or its base64 text."
+            exit 1
+          fi
+          echo "API key OK"
+          echo "ASC_KEY_PATH=$KEYFILE" >> "$GITHUB_ENV"
 
       - name: Archive
         run: |

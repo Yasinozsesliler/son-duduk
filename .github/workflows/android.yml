@@ -8,6 +8,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      HAS_KEYSTORE: ${{ secrets.ANDROID_KEYSTORE_BASE64 != '' }}
     steps:
       - uses: actions/checkout@v4
 
@@ -34,7 +36,7 @@ jobs:
           ./gradlew assembleDebug --no-daemon
 
       - name: Signed release AAB/APK (Google Play)
-        if: ${{ env.KEYSTORE != '' }}
+        if: ${{ env.HAS_KEYSTORE == 'true' }}
         env:
           KEYSTORE: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
