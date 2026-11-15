@@ -1,0 +1,21 @@
+name: TestFlight testers
+on:
+  workflow_dispatch:
+jobs:
+  testers:
+    runs-on: ubuntu-latest
+    env:
+      ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+      ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install key
+        env:
+          P8_RAW: ${{ secrets.ASC_KEY_P8_BASE64 }}
+        run: |
+          KEYFILE="$RUNNER_TEMP/AuthKey.p8"
+          if printf '%s' "$P8_RAW" | grep -q "BEGIN PRIVATE KEY"; then printf '%s\n' "$P8_RAW" | tr -d '\r' > "$KEYFILE"; else printf '%s' "$P8_RAW" | tr -d ' \r\n\t' | base64 --decode > "$KEYFILE"; fi
+          echo "ASC_KEY_PATH=$KEYFILE" >> "$GITHUB_ENV"
+      - run: pip install -q pyjwt cryptography requests && python scripts/testflight-internal.py
+      - if: always()
+        run: rm -f "$RUNNER_TEMP/AuthKey.p8"
