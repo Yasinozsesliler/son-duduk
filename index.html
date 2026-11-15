@@ -1149,6 +1149,11 @@ button,.btn,.dopt,.cbtn,.posopt,.opt,.act-b{touch-action:manipulation;-webkit-us
 .so-n{font-size:22px;font-weight:800;text-align:right}
 .var-onfield{display:flex;justify-content:space-between;gap:12px;align-items:baseline;padding:12px 14px;margin-top:12px;border-radius:10px;background:var(--bg2);border:1px solid var(--line2)}
 .var-onfield b{font-size:16px;text-align:right}
+.story-card{padding:18px 18px 16px;border-radius:14px;background:var(--panel);border:1px solid var(--line2);box-shadow:inset 3px 0 0 var(--fg)}
+.story-card .story-from{font-size:13px;color:var(--muted);font-weight:600}
+.story-card h3{font-size:22px;margin:2px 0 8px}
+.story-card p{color:#cfd6d1;max-width:62ch;line-height:1.55}
+.story-card .dopts{margin-top:14px}
 /* tracked büyük harf etiketleri: cümle düzeni */
 .ah-badge b,
 .banner b,
@@ -1789,6 +1794,7 @@ function makeWeekTasks(){
   const rnd=S.fixtures[(S.week-1)%S.fixtures.length]; if(S.refs) T.appts=makeAppointments(rnd,T.matches.find(m=>m.kind==='dom'));
   v11WeekTasks(T);
   S.tasks=T;
+  try{ storyWeek(); }catch(e){}
 }
 
 function poolClubs(min,max){ const out=[]; for(const k in LEAGUES){ if(LEAGUES[k].pool!=='uefa') continue; leagueTeams(k).forEach(t=>{ if(t.str>=min&&t.str<=max) out.push(t); }); } return out.filter(t=>t.country!==S.nationality); }
@@ -4517,7 +4523,7 @@ function hubHTML(){
     left=`<div class="hero-h"><div><div class="eyebrow gold">${seasonLabel(S.season)} · ${esc(leagueName())}</div><h2 class="page-title">${S.week}. hafta<span class="muted">${weekDate(S.week)}</span></h2></div>${ph&&S.fifa?`<span class="chip b">Hafta içi: ${PHASE_NAMES[ph]}</span>`:''}</div>
       ${heroHTML(next,T.matches)}
       ${rest.length&&next?`<div class="stack">${rest.map(fxCard).join('')}</div>`:''}
-      ${v11HubLeft()}${S.kurul.hearing?`<button class="alert" data-tab="kurul">${ic('kurul')}<span><b>Kurul toplantısına çağrıldın</b><small>${esc(S.kurul.hearing.match)} · ${esc(S.kurul.hearing.min)} ${esc(S.kurul.hearing.title)}</small></span></button>`:''}
+      ${v11HubLeft()}${storyHubHTML()}${S.kurul.hearing?`<button class="alert" data-tab="kurul">${ic('kurul')}<span><b>Kurul toplantısına çağrıldın</b><small>${esc(S.kurul.hearing.match)} · ${esc(S.kurul.hearing.min)} ${esc(S.kurul.hearing.title)}</small></span></button>`:''}
       ${trainHTML()}`;
   }
   const last=S.history.slice(0,10).map(h=>h.rating).reverse();
@@ -5004,6 +5010,106 @@ function premiumHTML(){
     ${isPremium()?'<p class="chip y" style="font-size:14px;padding:6px 12px">Premium etkin. Teşekkürler!</p>':`<button class="btn primary lg" id="bBuyPrem">Premium al · <span id="premPrice">${PREM_PRICE||'₺249,99'}</span></button>`}
     <button class="btn sm" id="bRestore">Satın alımları geri yükle</button></div>`;
 }
+
+// ---------- hikâye olayları ----------
+const STORIES={
+ mentor:{when:()=>S.totals.matches>=2&&S.tier<=2,w:3,from:'Emekli FIFA hakemi',title:'Bir usta seni izliyor',
+  text:()=>`Kariyerinde iki Dünya Kupası görmüş emekli hakem Necdet Aral, geçen haftaki maçını tribünden izlemiş. "Pozisyon alman iyi, ama yorgunlukta kararların gecikiyor. İstersen sezon boyunca seninle çalışırım" diyor.`,
+  ch:[{id:'evet',l:'Teklifi kabul et, haftalık video analizi yapın',e:{energy:-6,attr:{pozisyon:1.2,kural:.8}},next:['mentor2',4],t:'Necdet Hoca ile çalışmaya başladın.'},
+      {id:'hayir',l:'Teşekkür et, kendi yolunla ilerle',e:{},t:'Kendi yöntemlerinle devam ediyorsun.'}]},
+ mentor2:{chain:1,from:'Necdet Aral',title:'Ustanın son dersi',
+  text:()=>`Necdet Hoca dört haftalık çalışmanızın sonunda seni yemeğe çağırdı. "Sana öğretebileceğim en önemli şey şu: sahada herkes bir şey ister. Sen sadece kuralı iste." Bir de kurul başkanına senin için bir referans mektubu yazmayı teklif ediyor.`,
+  ch:[{id:'mektup',l:'Mektubu memnuniyetle kabul et',e:{trust:6,rep:1},t:'Referans mektubu kurula ulaştı.'},
+      {id:'kendin',l:'"Yerimi sahada kazanmak istiyorum" de',e:{attr:{sogukkanlilik:1.2},rep:2},t:'Necdet Hoca gülümsedi: "Doğru cevap."'}]},
+ gazeteci:{when:()=>S.totals.matches>=4,w:3,from:'Spor muhabiri',title:'Röportaj isteği',
+  text:()=>`Tanınmış bir spor muhabiri, son haftalarda tartışılan kararların hakkında seninle konuşmak istiyor. "Kendi tarafını anlatma fırsatı" diyor. Hakem talimatları basına izinsiz demeç vermeyi yasaklıyor.`,
+  ch:[{id:'ret',l:'Kibarca reddet, kurulun iletişim birimine yönlendir',e:{trust:4},t:'Kurul, profesyonel tavrını not etti.'},
+      {id:'kayit',l:'"Kayıt dışı" konuş',e:{fol:400},next:['sizinti',2],t:'Muhabir, isminin geçmeyeceğine söz verdi.'},
+      {id:'acik',l:'İsimli röportaj ver, kararlarını savun',e:{rep:3,trust:-9,fol:1500},t:'Röportaj gündem oldu; kurul memnun değil.'}]},
+ sizinti:{chain:1,from:'Hakem Kurulu',title:'Kayıt dışı sözler manşette',
+  text:()=>`"Kayıt dışı" dediğin sözler, "kaynağa yakın isimler" diye bir köşe yazısında yayımlandı. Kurul, kaynağın sen olup olmadığını soruyor.`,
+  ch:[{id:'itiraf',l:'Dürüstçe kabul et ve özür dile',e:{trust:-4,rep:1},t:'Kurul uyarıyla yetindi.'},
+      {id:'inkar',l:'İnkâr et',e:{},risk:[.5,{trust:-14,rep:-3},'Yazışma kayıtları ortaya çıktı; kurul güveni ciddi zarar gördü.','Konu kapandı, ama bazıları sana artık daha temkinli bakıyor.']}]},
+ rakip:{when:()=>S.totals.matches>=6,w:2,from:'Bir meslektaş',title:'Arkandan konuşan biri var',
+  text:()=>`Kurul toplantısından çıkan bir meslektaşın fısıldıyor: aynı klasmandaki bir hakem, "kayırıldığını" ve kondisyon testinde kolaylık gördüğünü anlatıp duruyormuş.`,
+  ch:[{id:'yuzles',l:'Onunla yüz yüze konuş',e:{attr:{iletisim:.8}},risk:[.35,{trust:-5},'Konuşma tartışmaya döndü; kurul ikinizi de uyardı.','Sakin bir konuşma oldu; söylentiler kesildi.']},
+      {id:'gormezden',l:'Görmezden gel, sahada cevap ver',e:{attr:{sogukkanlilik:.8}},t:'Odağını maçlara verdin.'},
+      {id:'kurul',l:'Kurula yazılı bildir',e:{trust:2},next:['rakip2',3],t:'Kurul konuyu incelemeye aldı.'}]},
+ rakip2:{chain:1,from:'Hakem Kurulu',title:'İnceleme sonuçlandı',
+  text:()=>`Kurul, söylentileri yayan hakemi dinledi ve kınama cezası verdi. Başkan, seni de odasına çağırdı: "Bundan sonra böyle şeyleri önce bana söyle." Kondisyon testinde bir sonraki turu sen yönetebilirsin, diyor.`,
+  ch:[{id:'kabul',l:'Test gözlemciliğini üstlen',e:{trust:5,energy:-5},t:'Kurulun gözünde sorumluluk sahibi bir isim oldun.'},
+      {id:'odak',l:'Kendi hazırlığına odaklanmak istediğini söyle',e:{attr:{kondisyon:1}},t:'Antrenmanlarına yoğunlaştın.'}]},
+ sakatlik:{when:()=>S.energy<70,w:2,from:'Fizyoterapist',title:'Arka adalede gerginlik',
+  text:()=>`Hafta içi koşusunda arka adalende bir sızı hissettin. Fizyoterapist "Ciddi değil ama zorlarsan yırtılabilir" diyor. Bu hafta görevin var.`,
+  ch:[{id:'oyna',l:'Bantla ve maça çık',e:{},risk:[.3,{energy:-30,trust:-3},'Maçın ortasında sakatlık nüksetti; iki hafta zorlandın.','Bant işini gördü, sorun çıkmadı.']},
+      {id:'dinlen',l:'Kurula bildir, bu hafta dinlen',e:{energy:28,suspend:1},t:'Bir hafta dinlenme verdin; kurul anlayışla karşıladı.'}]},
+ tehdit:{when:()=>S.totals.matches>=5&&S.social&&S.social.followers>800,w:2,from:'Sosyal medya',title:'Hesabına tehditler yağıyor',
+  text:()=>`Son maçtan sonra hesabın taraftarların hedefi oldu. Mesajların bir kısmı hakaretten öte, aileni ve adresini hedef alıyor.`,
+  ch:[{id:'guvenlik',l:'Federasyonun güvenlik birimine ve savcılığa bildir',e:{trust:3},t:'Hukuki süreç başladı; federasyon destek açıklaması yaptı.'},
+      {id:'cevap',l:'Paylaşımla cevap ver',e:{fol:900,trust:-6,rep:-1},t:'Cevabın viral oldu; kurul memnun değil.'},
+      {id:'kapat',l:'Hesabını bir süre gizle',e:{fol:-500,attr:{sogukkanlilik:.6}},t:'Bir süre sessizlik iyi geldi.'}]},
+ baskan:{when:()=>S.totals.matches>=3,w:2,from:'Kulüp başkanı',title:'Akşam yemeği daveti',
+  text:()=>`Ligdeki bir kulübün başkanı, "hakemlerle tanışmak ve futbolu konuşmak için" seni şehrin en pahalı restoranına davet ediyor. Bu sezon o takımın maçlarına atanabilirsin.`,
+  ch:[{id:'ret',l:'Kibarca reddet',e:{trust:2},t:'Mesafeni korudun.'},
+      {id:'bildir',l:'Reddet ve daveti kurula bildir',e:{trust:5,rep:1},t:'Kurul davetin kayıt altına alınmasını takdir etti.'},
+      {id:'git',l:'Davete git, sadece yemek',e:{susp:10},risk:[.35,{trust:-12,rep:-4},'Restorandan çıkarken fotoğrafın çekildi; manşetlerdesin.','Yemek sessizce geçti. Ama başkanın numarası artık telefonunda.']}]},
+ genc:{when:()=>S.tier>=2,w:2,from:'Genç bir hakem',title:'"Bana yol gösterir misin?"',
+  text:()=>`Bölgesel ligde ilk sezonunu geçiren 19 yaşında bir hakem, maç videolarını birlikte izlemek için senden zaman istiyor. "Senin gibi olmak istiyorum" diyor.`,
+  ch:[{id:'evet',l:'Haftada bir akşam ona zaman ayır',e:{energy:-5,attr:{iletisim:1.2},rep:1},t:'Öğretmek, kendi kararlarını da netleştirdi.'},
+      {id:'hayir',l:'Şimdilik vaktin olmadığını söyle',e:{},t:'Kendi programına odaklandın.'}]},
+ test:{when:()=>S.week>=10,w:2,from:'Hakem Kurulu',title:'Ara dönem kondisyon testi',
+  text:()=>`Kurul, haftaya tüm klasman hakemleri için mekik koşusu ve sprint testi yapacak. Kalanlar iki hafta görev alamayacak.`,
+  ch:[{id:'hazirlan',l:'Ekstra antrenman yap',e:{energy:-10,attr:{kondisyon:1}},t:'Testi rahat geçtin.'},
+      {id:'normal',l:'Programını değiştirme',e:{},riskF:()=>S.attrs.kondisyon<60?.45:.12,risk:[.2,{trust:-8,suspend:1},'Sprint testinde barajın altında kaldın; bir hafta görev yok.','Testi sorunsuz geçtin.']}]},
+ seminer:{when:()=>true,w:1,from:'Federasyon',title:'Kural değişikliği semineri',
+  text:()=>`Uluslararası kurul (IFAB), yeni sezon için elle oynama ve kaleci kurallarında güncelleme yaptı. Federasyon hafta sonu iki günlük bir seminer düzenliyor; katılım isteğe bağlı.`,
+  ch:[{id:'katil',l:'Semineri baştan sona takip et',e:{energy:-6,attr:{kural:1.5}},t:'Yeni yorumları ilk ağızdan öğrendin.'},
+      {id:'ozet',l:'Sunum dosyalarını oku, yetinsin',e:{attr:{kural:.5}},t:'Ana başlıklara göz attın.'}]},
+ belgesel:{when:()=>S.rep>=45,w:1,from:'Yapım şirketi',title:'Belgesel teklifi',
+  text:()=>`Bir yapım şirketi, bir hakemin sezonunu anlatan bir belgesel çekmek istiyor. Soyunma odası, kurul toplantıları, ailen… Her şey kamerada olacak.`,
+  ch:[{id:'kabul',l:'Kabul et',e:{fol:2500,rep:3,energy:-8},risk:[.25,{trust:-6},'Kurul toplantısından bir kesit izinsiz yayımlandı; başkan çok kızgın.','Belgesel olumlu yorumlar aldı.']},
+      {id:'ret',l:'Odağını dağıtmak istemiyorsun',e:{attr:{sogukkanlilik:.5}},t:'Teklifi geri çevirdin.'}]},
+ aile:{when:()=>true,w:2,from:'Ailen',title:'Hafta sonu düğün var',
+  text:()=>`Kardeşinin düğünü bu cumartesi. Maçın pazar öğlen, ama düğün şehir dışında ve gece geç bitecek.`,
+  ch:[{id:'git',l:'Düğüne git, sabah ilk uçakla dön',e:{energy:-14},t:'Ailenle güzel bir gece geçirdin; maça biraz yorgun gideceksin.'},
+      {id:'erken',l:'Nikâhta ol, gece dönmeden ayrıl',e:{energy:-5},t:'Hem aileni hem işini idare ettin.'},
+      {id:'gitme',l:'Maça odaklan, gitme',e:{energy:6,rep:0},t:'Ailen anlayış gösterdi ama biraz kırgınlar.'}]}
+};
+function storyEnsure(){ if(!S.story) S.story={cur:null,done:{},q:[],n:0}; return S.story; }
+function storyWeek(){
+  const st=storyEnsure(); if(S.ended) return;
+  const wk=S.season*100+S.week;
+  const due=st.q.findIndex(x=>x.at<=wk);
+  if(st.cur) return;
+  if(due>=0){ st.cur={id:st.q[due].id}; st.q.splice(due,1); return; }
+  if(S.bribe&&S.bribe.offer) return;
+  if(!chance(.32)) return;
+  const pool=Object.entries(STORIES).filter(([k,v])=>!v.chain&&!st.done[k]&&v.when());
+  if(!pool.length) return; st.cur={id:wpick(pool.map(([k,v])=>[k,v.w]))};
+}
+function storyEff(e){ const out=[];
+  if(e.rep){ S.rep=clamp(S.rep+e.rep,0,100); out.push('İtibar '+(e.rep>0?'+':'')+e.rep); }
+  if(e.trust&&S.kurul){ S.kurul.trust=clamp(S.kurul.trust+e.trust,0,100); out.push('Kurul güveni '+(e.trust>0?'+':'')+e.trust); }
+  if(e.energy){ S.energy=clamp(S.energy+e.energy,0,100); out.push('Enerji '+(e.energy>0?'+':'')+e.energy); }
+  if(e.fol&&S.social){ S.social.followers=Math.max(50,S.social.followers+e.fol); out.push('Takipçi '+(e.fol>0?'+':'')+e.fol); }
+  if(e.money){ S.money=Math.max(0,S.money+e.money); }
+  if(e.attr) for(const k in e.attr){ S.attrs[k]=clamp(S.attrs[k]+e.attr[k],0,99); out.push(ATTR_NAMES[k]+' +'+e.attr[k]); }
+  if(e.susp&&S.bribe) S.bribe.susp=clamp(S.bribe.susp+e.susp,0,100);
+  if(e.suspend) S.suspended=Math.max(S.suspended||0,e.suspend);
+  return out; }
+function storyChoice(cid){
+  const st=storyEnsure(); if(!st.cur) return; const E=STORIES[st.cur.id]; const c=E.ch.find(x=>x.id===cid); if(!c) return;
+  let msg=c.t||''; const fx=storyEff(c.e||{});
+  if(c.risk){ const p=c.riskF?c.riskF():c.risk[0]; if(chance(p)){ fx.push(...storyEff(c.risk[1])); msg=c.risk[2]; } else msg=c.risk[3]; }
+  if(c.next){ st.q.push({id:c.next[0],at:S.season*100+S.week+c.next[1]}); }
+  st.done[st.cur.id]=true; st.n++; st.last={title:E.title,msg,fx};
+  st.cur=null; toast(msg+(fx.length?' · '+fx.join(' · '):'')); save(); render();
+}
+function storyHubHTML(){
+  const st=S&&S.story; if(!st||!st.cur) return ''; const E=STORIES[st.cur.id]; if(!E) { st.cur=null; return ''; }
+  return `<section class="story-card"><div class="story-from">${esc(E.from)}</div><h3>${esc(E.title)}</h3><p>${esc(E.text())}</p>
+    <div class="dopts">${E.ch.map(c=>`<button class="dopt" data-sev="${c.id}">${esc(c.l)}</button>`).join('')}</div></section>`;
+}
 function v11HubLeft(){
   if(!S.bribe) return ''; const o=S.bribe.offer; if(!o) return '';
   const fx=S.tasks&&S.tasks.matches.find(m=>m.id===o.fx); if(!fx||fx.played){ S.bribe.offer=null; return ''; }
@@ -5040,6 +5146,7 @@ function v11Bind(){
   q('[data-buy]').forEach(b=>b.onclick=()=>buy11(b.dataset.buy));
   q('[data-vac]').forEach(b=>b.onclick=()=>takeVac(b.dataset.vac));
   q('[data-bribe]').forEach(b=>b.onclick=()=>bribeChoice(b.dataset.bribe));
+  q("[data-sev]").forEach(b=>b.onclick=()=>storyChoice(b.dataset.sev));
   q('[data-lang]').forEach(b=>b.onclick=()=>{ if(b.dataset.lang!==curLang()) setLang(b.dataset.lang); });
   const bp=$('#bBuyPrem'); if(bp) bp.onclick=buyPremium;
   q('#bRestore,#bRestore2').forEach(b=>b.onclick=restorePremium);
