@@ -1139,6 +1139,57 @@ button,.btn,.dopt,.cbtn,.posopt,.opt,.act-b{touch-action:manipulation;-webkit-us
   .rep-top .bignote{font-size:64px}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ---------- v1.1: mağaza, tatil, rüşvet, premium ---------- */
+.v11-gl{display:inline-grid;place-items:center;flex:none;width:40px;height:40px;border-radius:12px;color:var(--gc);background:color-mix(in srgb,var(--gc) 16%,var(--bg2));border:1px solid color-mix(in srgb,var(--gc) 40%,transparent)}
+.v11-gl svg{width:58%;height:58%}
+.v11-tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.v11-tabs button{flex:none;padding:8px 14px;border-radius:999px;border:1px solid var(--line2);background:var(--panel);font-weight:700;color:var(--muted)}
+.v11-tabs button.on{background:var(--yellow);border-color:var(--yellow);color:var(--yellow-ink)}
+.v11-shophead{display:flex;justify-content:space-between;align-items:center;gap:12px;background:linear-gradient(120deg,color-mix(in srgb,var(--yellow) 10%,var(--panel)),var(--panel))}
+.v11-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.v11-card{display:flex;flex-direction:column;gap:10px;padding:14px;border-radius:14px;background:var(--bg2);border:1px solid var(--line);min-width:0}
+.v11-card.own{border-color:color-mix(in srgb,var(--green) 55%,transparent)}
+.v11-cb{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1}
+.v11-cb b{font-size:15px}
+.v11-cb small{color:var(--muted);font-size:13px;line-height:1.35}
+.v11-eff{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+.v11-eff span{font-size:11.5px;font-weight:700;padding:2px 7px;border-radius:6px;background:color-mix(in srgb,var(--green) 13%,transparent);color:var(--green)}
+.v11-cf{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.v11-lv{color:var(--yellow);font-size:10px;letter-spacing:2px}
+.v11-mods{gap:6px;flex-wrap:wrap;margin:8px 0 12px}
+.v11-break{display:flex;gap:12px;align-items:center;padding:12px 14px;border-radius:14px;background:var(--bg2);border:1px dashed var(--line2)}
+.v11-break small{display:block;color:var(--muted);font-size:13px}
+.v11-break.on{border-style:solid;border-color:color-mix(in srgb,var(--green) 55%,transparent);background:color-mix(in srgb,var(--green) 9%,var(--bg2))}
+.v11-postcard{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;padding:22px 18px;border-radius:16px;background:linear-gradient(160deg,color-mix(in srgb,var(--gc) 22%,var(--bg2)),var(--bg2) 70%);border:1px solid color-mix(in srgb,var(--gc) 45%,transparent)}
+.v11-postcard p{font-family:Georgia,serif;font-style:italic;font-size:16px;line-height:1.45;margin:0}
+.v11-postcard small{color:var(--muted)}
+.v11-postcard.sm{padding:14px;gap:6px}.v11-postcard.sm p{font-size:13.5px}
+.v11-postcard.locked{--gc:#5b6678;opacity:.6}
+.v11-own{display:inline-flex;align-items:center;gap:8px;padding:4px 10px 4px 4px;border-radius:999px;background:var(--bg2);border:1px solid var(--line);font-size:13px;font-weight:600}
+.v11-own .v11-gl{border-radius:999px}
+.v11-dilemma{padding:16px;border-radius:16px;background:linear-gradient(140deg,color-mix(in srgb,var(--amber) 16%,var(--panel)),var(--panel) 65%);border:1px solid color-mix(in srgb,var(--amber) 55%,transparent);display:flex;flex-direction:column;gap:10px}
+.v11-dh{display:flex;gap:12px;align-items:center}
+.v11-dh h3{font-size:21px;text-transform:none;margin-top:2px}
+.v11-dilemma p{font-size:14px;line-height:1.5;margin:0}
+.dopt.danger{border-color:color-mix(in srgb,var(--red) 60%,transparent);color:#ffc2c6}
+.v11-bribe{display:flex;gap:10px;align-items:center;margin-top:12px;padding:10px 12px;border-radius:12px;background:var(--bg2);border:1px solid var(--line)}
+.v11-bribe.ok{border-color:color-mix(in srgb,var(--amber) 50%,transparent)}.v11-bribe.bad{border-color:color-mix(in srgb,var(--red) 50%,transparent)}
+.v11-bribe small{display:block;color:var(--muted);font-size:13px}
+.v11-ad{gap:6px;border-color:color-mix(in srgb,var(--yellow) 55%,transparent);color:var(--yellow)}
+.v11-ad .ic{width:16px;height:16px}
+.v11-ad small{font-size:10px;padding:1px 5px;border-radius:4px;background:var(--yellow);color:var(--yellow-ink);font-weight:800}
+.v11-dbl{margin-top:10px}
+.batt-w .v11-ad{margin-left:8px}
+.v11-hubshop{display:flex;flex-direction:column;gap:10px}
+.v11-premrow{display:flex;gap:10px;align-items:center;text-align:left;padding:10px 12px;border-radius:12px;background:linear-gradient(120deg,color-mix(in srgb,var(--yellow) 16%,var(--bg2)),var(--bg2));border:1px solid color-mix(in srgb,var(--yellow) 45%,transparent)}
+.v11-premrow small{display:block;color:var(--muted);font-size:12.5px}
+.v11-prem{display:flex;flex-direction:column;gap:16px;align-items:flex-start}
+.v11-prem-h{display:flex;gap:16px;align-items:center}
+.v11-prem-h h2{font-size:34px}
+.v11-perks{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;width:100%}
+.v11-perks>div{display:flex;gap:10px;align-items:center;padding:12px;border-radius:12px;background:var(--bg2);border:1px solid var(--line)}
+.v11-perks small{display:block;color:var(--muted);font-size:13px}
 </style>
 
 <div id="app"></div>
@@ -1507,7 +1558,7 @@ const MILESTONES = [
  {id:'lig3',name:'Profesyonel',d:'İlk profesyonel klasmana yüksel.'},{id:'super',name:'Zirve ligi',d:'Ülkenin en üst ligine yüksel.'},{id:'fifa',name:'DFF kokartı',d:'DFF listesine gir.'},
  {id:'avrupa',name:'Avrupa gecesi',d:'İlk AFK maçını yönet.'},{id:'ucl',name:'Marş çalıyor',d:'Elitler Ligi maçı yönet.'},{id:'elit',name:'Elit',d:'AFK Elit kategorisine çık.'},
  {id:'final',name:'Final hakemi',d:'Bir Avrupa kupası finali yönet.'},{id:'misafir',name:'Yabancı derbi',d:'Başka ülkede misafir hakem ol.'},{id:'yurtdisi',name:'Gurbet',d:'Yabancı bir ligde sözleşme imzala.'},
- {id:'turnuva',name:'Büyük turnuva',d:'Avrupa ya da Dünya Şampiyonası\'na seçil.'},{id:'dkfinal',name:'Dünya Şampiyonası finali',d:'Dünya Şampiyonası finalini yönet.'},{id:'yilin',name:'Yılın hakemi',d:'Sezonu yılın hakemi ödülüyle bitir.'}
+ {id:'turnuva',name:'Büyük turnuva',d:'Avrupa ya da Dünya Şampiyonası\'na seçil.'},{id:'dkfinal',name:'Dünya Şampiyonası finali',d:'Dünya Şampiyonası finalini yönet.'},{id:'yilin',name:'Yılın hakemi',d:'Sezonu yılın hakemi ödülüyle bitir.'},{id:'temiz',name:'Temiz eller',d:'Üç şike teklifini geri çevir ya da bildir.'}
 ];
 
 function newCareer(o){
@@ -1586,6 +1637,7 @@ function makeWeekTasks(){
   // accepted guest offers
   if(S.pendingGuest && S.pendingGuest.length){ S.pendingGuest.forEach(g=>T.matches.push(makeFx(g))); S.pendingGuest=[]; }
   const rnd=S.fixtures[(S.week-1)%S.fixtures.length]; if(S.refs) T.appts=makeAppointments(rnd,T.matches.find(m=>m.kind==='dom'));
+  v11WeekTasks(T);
   S.tasks=T;
 }
 
@@ -1656,7 +1708,7 @@ const UPGRADES = [
 function doActivity(id){
   if(S.tasks.activity) return;
   const a=ACTS.find(x=>x.id===id); S.tasks.activity=id;
-  const mult = S.upgrades.kondisyoner?1.4:1;
+  const mult = (S.upgrades.kondisyoner?1.4:1)*(1+v11Mod('train'));
   const ageMod = S.age>36 ? .75 : 1;
   for(const k in a.eff){ S.attrs[k]=clamp(S.attrs[k]+a.eff[k]*mult*ageMod*(S.growth||1)*(S.attrs[k]>80?.6:1),0,99); }
   S.energy=clamp(S.energy+a.energy,0,100);
@@ -1718,7 +1770,8 @@ function finishWeek(){
   const results=[];
   round.forEach(([h,a])=>{ if(mine&&mine.home===h&&mine.away===a){ recordResult(h,a,mine.score[0],mine.score[1]); results.push([h,a,mine.score[0],mine.score[1]]); } else { const [x,y]=simScore(h,a,true); recordResult(h,a,x,y); results.push([h,a,x,y]); } });
   weeklyWorld(results); simOtherLeagues(S.week);
-  S.energy=clamp(S.energy+14,0,100);
+  S.energy=clamp(S.energy+14+v11Mod('rest'),0,100);
+  if(v11Week()==='ended'){ TAB='merkez'; save(); render(); window.scrollTo(0,0); return; }
   if(!S.tasks.activity) S.energy=clamp(S.energy+6,0,100);
   genOffers();
   if(S.week%6===0){ const t=sortedTable(); mail('Lig bülteni',leagueName()+': '+team(t[0].id).name+' zirvede',team(t[0].id).name+' '+t[0].pts+' puanla lider. En yakın takipçisi '+team(t[1].id).name+' ('+t[1].pts+'). Ligin dibinde '+team(t[t.length-1].id).name+' var.','news'); }
@@ -2638,7 +2691,7 @@ function ansText(inc,a){ let t=labelOf(inc,'d',a.d); if(inc.steps[1]) t+=' · '+
 
 // ---------- visibility ----------
 function computeVis(posQ){
-  let v=.34+S.attrs.pozisyon/260+(M.stamina-60)/320+DIFFS[S.diff].vis+M.visMod+(S.upgrades.analist?.06:0);
+  let v=.34+S.attrs.pozisyon/260+(M.stamina-60)/320+DIFFS[S.diff].vis+M.visMod+(S.upgrades.analist?.06:0)+v11Mod('vis');
   if(posQ==='best') v+=.24; else if(posQ==='ok') v+=.07; else if(posQ==='bad') v-=.16;
   if(M.fx.lvl>=5) v-=.03;
   return clamp(v,.15,.96);
@@ -2646,7 +2699,7 @@ function computeVis(posQ){
 function obscureFacts(inc,vis){
   inc.facts.forEach(f=>{ f.obs=false; f.hint=null; if(f.key && rand()>vis){ f.obs=true; const right=rand()<.6+vis*.25; f.hint= right? f.val : (f.alt||f.val); } });
 }
-function decisionTime(){ let t=DIFFS[S.diff].timer + (S.attrs.sogukkanlilik-50)/9 - (M.fx.imp>=4?2:0) - (M.fx.lvl>=5?1:0) + (S.upgrades.mentalkoc?3:0); return clamp(Math.round(t),7,40); }
+function decisionTime(){ let t=DIFFS[S.diff].timer + (S.attrs.sogukkanlilik-50)/9 - (M.fx.imp>=4?2:0) - (M.fx.lvl>=5?1:0) + (S.upgrades.mentalkoc?3:0) + v11Mod('dt'); return clamp(Math.round(t),7,40); }
 
 // ---------- auto resolve ----------
 function skillP(){ return clamp(.37+(S.attrs.kural+S.attrs.pozisyon+S.attrs.sogukkanlilik)/640,.45,.88); }
@@ -2672,8 +2725,8 @@ function finalizeIncident(inc,ans,opt){
   inc.ans={...ans};
   let verdict=evaluate(inc,ans); let varRes=varCheck(inc,ans,verdict); let final={...ans}; let v=verdict;
   const after=(fin,vv,note)=>{
-    applyFinal(inc,fin);
-    const tempD = vv==='hata'||vv==='israr' ? 13*(M.fx.derby?1.4:1) : vv==='kismen'?5 : vv==='var'?4 : -3*(S.attrs.iletisim/60);
+    applyFinal(inc,fin); v11Bias(inc,fin);
+    const tempD = (vv==='hata'||vv==='israr' ? 13*(M.fx.derby?1.4:1) : vv==='kismen'?5 : vv==='var'?4 : -3*(S.attrs.iletisim/60)) * (1-v11Mod('temp'));
     M.temp=clamp(M.temp+tempD,0,100);
     const harmed = (vv==='hata'||vv==='israr') ? (favorScore(inc,inc.correct)>favorScore(inc,fin)?inc.ai:inc.di) : null;
     pushLog(inc,{cat:'major',type:inc.type,title:inc.title,min:inc.minute,your:ansText(inc,inc.ans),final:ansText(inc,fin),correct:ansText(inc,inc.correct),v:vv,explain:inc.explain,law:inc.law,note,harmed,reviewable:inc.reviewable||inc.redReview,late:inc.late,posQ:inc.posQ});
@@ -2799,7 +2852,7 @@ function finishMatch(){
   S.totals.matches++;
   // rep
   const lvlF=1+fx.lvl*.15; let repD=(rating-8.2)*3*lvlF; if(rating>=9) repD+=1; repD=Math.round(repD*10)/10; S.rep=clamp(S.rep+repD,0,100);
-  S.money+=fx.fee; S.energy=clamp(S.energy-(fx.lvl>=4?20:16)+(S.upgrades.fizyo?6:0),0,100);
+  S.money+=fx.fee; S.energy=clamp(S.energy-(fx.lvl>=4?20:16)+(S.upgrades.fizyo?6:0)+v11Mod('en'),0,100);
   // attr growth
   const gains={}; const add=(k,v)=>{ const ageMod=S.age>36?.7:1; const g=v*ageMod*(S.growth||1)*(S.attrs[k]>80?.5:1); S.attrs[k]=clamp(S.attrs[k]+g,0,99); gains[k]=(gains[k]||0)+g; };
   add('kondisyon',.15+rand()*.15); add('kural',.12+M.log.filter(d=>d.cat==='major'&&(d.v==='dogru')).length*.06);
@@ -2818,6 +2871,7 @@ function finishMatch(){
   if(rating>=8.8) mail('Gözlemci','Maç sonu not: '+f1(rating),'Pozisyon alma, kart yönetimi ve iletişim üst düzeydi. '+(fx.imp>=4?'Bu ölçekte bir maçta bu sakinlik kurul tarafından not edildi.':''),'obs');
   S.history.unshift({season:S.season,week:S.week,comp:fx.compName,stage:fx.stage,home:fx.home,away:fx.away,score:M.score.slice(),rating,kind:fx.kind});
   if(S.history.length>200) S.history.length=200;
+  v11AfterMatch(report,fx);
   matchWorld(report,fx);
   if(!M.auto&&SC) sceneStop(SC,null);
   S.lastReport=report;
@@ -2854,7 +2908,7 @@ function afterReport(choice){
     if(choice==='yanit'){ S.rep=clamp(S.rep-3,0,100); mail('Hakem Kurulu','Uyarı','Kulüplere medya üzerinden yanıt vermen etik kurallara aykırı. Dikkatli ol.','fed'); toast('Kurul seni uyardı: itibar −3'); }
   }
   M=null; SC=null; cancelAnimationFrame(RAF); replayStop(); $('#overlay').hidden=true; $('#overlay').innerHTML=''; document.body.style.overflow='';
-  save(); render();
+  save(); render(); v11AfterReport();
 }
 
 // =========================================================
@@ -3686,6 +3740,7 @@ function reportUI(r){
   heroStart('repCv',H.id,A.id,'rep'+fx.id);
   ov.querySelectorAll('[data-st]').forEach(b=>b.onclick=()=>afterReport(b.dataset.st));
   $('#bDone').onclick=()=>afterReport(null);
+  v11ReportExtras(r);
 }
 // ---------- v11: editorial data surfaces ----------
 function hexDist(a,b){ const p=h=>{ const n=parseInt(h.slice(1),16); return [n>>16&255,n>>8&255,n&255]; }; const x=p(a),y=p(b); return Math.hypot(x[0]-y[0],x[1]-y[1],x[2]-y[2]); }
@@ -3903,7 +3958,7 @@ const ICONS={
  target:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><path d="M12 12h.01"/>'
 };
 const ic=(k,cls)=>`<svg class="ic ${cls||''}" viewBox="0 0 24 24" aria-hidden="true">${ICONS[k]}</svg>`;
-const TABS=[['merkez','Merkez'],['haber','Haberler'],['sosyal','Sosyal'],['kurul','Hakem Kurulu'],['akademi','Kural Akademisi'],['takvim','Takvim'],['lig','Puan durumu'],['kariyer','Kariyer'],['gelisim','Gelişim'],['teklifler','Teklifler'],['gelen','Gelen kutusu'],['ayarlar','Ayarlar']];
+const TABS=[['merkez','Merkez'],['haber','Haberler'],['sosyal','Sosyal'],['kurul','Hakem Kurulu'],['akademi','Kural Akademisi'],['takvim','Takvim'],['lig','Puan durumu'],['kariyer','Kariyer'],['gelisim','Gelişim'],['magaza','Mağaza'],['teklifler','Teklifler'],['gelen','Gelen kutusu'],['ayarlar','Ayarlar']];
 const MOBILE_TABS=['merkez','haber','sosyal','kurul'];
 const WHISTLE_SVG=`<svg viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="12" height="17" rx="2.5" fill="var(--red)" transform="rotate(-12 11 13)"/><rect x="12" y="7" width="12" height="17" rx="2.5" fill="var(--yellow)" transform="rotate(8 18 15)"/></svg>`;
 function initials(n){ return n.split(' ').filter(Boolean).slice(0,2).map(w=>w[0]).join('').toLocaleUpperCase('tr-TR'); }
@@ -3912,7 +3967,8 @@ function render(){
   const app=$('#app');
   if(!S){ app.innerHTML=startHTML(); bindStart(); return; }
   initWorld();
-  const fn={akademi:akademiHTML,merkez:hubHTML,haber:newsHTML,sosyal:socialHTML,kurul:kurulHTML,takvim:calHTML,gelen:inboxHTML,kariyer:careerHTML,lig:leagueHTML,gelisim:devHTML,teklifler:offersHTML,ayarlar:settingsHTML}[TAB]||hubHTML;
+  v11Ensure();
+  const fn={magaza:v11ShopHTML,akademi:akademiHTML,merkez:hubHTML,haber:newsHTML,sosyal:socialHTML,kurul:kurulHTML,takvim:calHTML,gelen:inboxHTML,kariyer:careerHTML,lig:leagueHTML,gelisim:devHTML,teklifler:offersHTML,ayarlar:settingsHTML}[TAB]||hubHTML;
   const mainHTML=fn();
   const repPct=clamp(S.rep,0,100); const C=2*Math.PI*15;
   const stateLine = S.phase==='tournament'?'Turnuva':S.phase==='seasonEnd'?'Sezon sonu':S.week+'. hafta';
@@ -3931,7 +3987,7 @@ function render(){
     <nav class="bnav" aria-label="Bölümler">${MOBILE_TABS.map(k=>{ const b=badgeFor(k); const n=TABS.find(t=>t[0]===k)[1]; return `<button class="${TAB===k?'on':''}" data-tab="${k}">${ic(k)}<span>${k==='kurul'?'Kurul':n}</span>${b?`<i class="dot"></i>`:''}</button>`; }).join('')}<button class="${MOBILE_TABS.includes(TAB)?'':'on'}" id="bMore">${ic('menu')}<span>Menü</span>${moreBadge?'<i class="dot"></i>':''}</button></nav>`;
   app.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{ TAB=b.dataset.tab; render(); window.scrollTo(0,0); });
   const bm=$('#bMore'); if(bm) bm.onclick=openMenu;
-  bindMain();
+  bindMain(); v11Bind();
 }
 function openMenu(){
   const m=$('#modal'); m.innerHTML=`<div class="sheet narrow menu-sheet" role="dialog" aria-modal="true"><div class="sh-head"><h2>Menü</h2><button class="btn sm" id="bMClose">Kapat</button></div><div class="menu-grid">${TABS.filter(([k])=>!MOBILE_TABS.includes(k)).map(([k,n])=>{ const b=badgeFor(k); return `<button data-mt="${k}">${ic(k)}<span>${n}</span>${b?`<span class="badge">${b}</span>`:''}</button>`; }).join('')}</div></div>`;
@@ -4014,7 +4070,7 @@ const TR_META={
  medya:{kind:'Medya',dur:'Akşam',col:'#e3434b',art:`<rect width="200" height="120" fill="#2a0f14"/><path d="M100 0L40 120h120z" fill="rgba(255,255,255,.05)"/><rect x="88" y="20" width="24" height="44" rx="12" fill="#c9ced6"/>${[30,38,46,54].map(y=>`<path d="M90 ${y}h20" stroke="#8a9099" stroke-width="1.5"/>`).join('')}<path d="M80 50a20 20 0 0 0 40 0M100 70v22M86 94h28" fill="none" stroke="#c9ced6" stroke-width="4" stroke-linecap="round"/><rect x="12" y="12" width="56" height="18" rx="9" fill="#e3434b"/><circle cx="23" cy="21" r="4" fill="#fff"/><text x="31" y="25" font-family="Saira Condensed,sans-serif" font-weight="800" font-size="12" fill="#fff">CANLI</text>`}
 };
 function trCard(a){
-  const T=S.tasks, on=T.activity===a.id, chosen=!!T.activity, m=(S.upgrades.kondisyoner?1.4:1)*(S.growth||1)*(S.age>36?.75:1); const M_=TR_META[a.id];
+  const T=S.tasks, on=T.activity===a.id, chosen=!!T.activity, m=(S.upgrades.kondisyoner?1.4:1)*(1+v11Mod('train'))*(S.growth||1)*(S.age>36?.75:1); const M_=TR_META[a.id];
   let g='';
   for(const k in a.eff){ const cur=S.attrs[k]; const gain=a.eff[k]*m*(cur>80?.6:1); if(on){ g+=`<div class="tr-g"><span>${ATTR_NAMES[k]}</span><b class="num hi">+${gain.toFixed(1)}</b><i>kazanıldı</i></div>`; continue; } g+=`<div class="tr-g"><span>${ATTR_NAMES[k]}</span><b class="num">${Math.round(cur)}</b><i>→</i><b class="num hi">${(cur+gain).toFixed(1)}</b></div>`; }
   if(a.id==='dinlen') g=`<div class="tr-g"><span>Enerji</span><b class="num">${Math.round(S.energy)}</b><i>→</i><b class="num hi">${Math.min(100,Math.round(S.energy+a.energy))}</b></div>`;
@@ -4029,7 +4085,7 @@ function trCard(a){
 function trainHTML(){
   const T=S.tasks, E=Math.round(S.energy);
   return `<section class="trw"><div class="trw-h"><div><span class="eyebrow gold">Haftalık program</span><h3>${T.activity?'Bu haftanın çalışması belli':'Bu hafta neye odaklanacaksın?'}</h3></div>
-    <div class="batt-w"><div class="batt" aria-label="Enerji"><i style="width:${E}%;background:${E>60?'var(--green)':E>30?'var(--gold1)':'var(--red)'}"></i></div><span class="num">%${E}</span><small>enerji</small></div></div>
+    <div class="batt-w"><div class="batt" aria-label="Enerji"><i style="width:${E}%;background:${E>60?'var(--green)':E>30?'var(--gold1)':'var(--red)'}"></i></div><span class="num">%${E}</span><small>enerji</small>${v11EnergyBtn()}</div></div>
     <div class="trs">${ACTS.map(trCard).join('')}</div></section>`;
 }
 function hubHTML(){
@@ -4047,7 +4103,7 @@ function hubHTML(){
     left=`<div class="hero-h"><div><div class="eyebrow gold">${seasonLabel(S.season)} · ${esc(leagueName())}</div><h2 class="page-title">${S.week}. hafta<span class="muted">${weekDate(S.week)}</span></h2></div>${ph&&S.fifa?`<span class="chip b">Hafta içi: ${PHASE_NAMES[ph]}</span>`:''}</div>
       ${heroHTML(next,T.matches)}
       ${rest.length&&next?`<div class="stack">${rest.map(fxCard).join('')}</div>`:''}
-      ${S.kurul.hearing?`<button class="alert" data-tab="kurul">${ic('kurul')}<span><b>Kurul toplantısına çağrıldın</b><small>${esc(S.kurul.hearing.match)} · ${esc(S.kurul.hearing.min)} ${esc(S.kurul.hearing.title)}</small></span></button>`:''}
+      ${v11HubLeft()}${S.kurul.hearing?`<button class="alert" data-tab="kurul">${ic('kurul')}<span><b>Kurul toplantısına çağrıldın</b><small>${esc(S.kurul.hearing.match)} · ${esc(S.kurul.hearing.min)} ${esc(S.kurul.hearing.title)}</small></span></button>`:''}
       ${trainHTML()}`;
   }
   const last=S.history.slice(0,10).map(h=>h.rating).reverse();
@@ -4059,6 +4115,7 @@ function hubHTML(){
       <div class="stack" style="gap:8px">${Object.keys(ATTR_NAMES).map(k=>`<div class="attr"><span>${ATTR_NAMES[k]}</span><div class="bar"><i style="width:${S.attrs[k]}%"></i></div><span class="num">${Math.round(S.attrs[k])}</span></div>`).join('')}
         <div class="attr"><span>Kurul güveni</span><div class="bar"><i style="width:${S.kurul.trust}%;background:var(--yellow)"></i></div><span class="num">${Math.round(S.kurul.trust)}</span></div></div>
       <div class="next-step"><div class="eyebrow">Sonraki adım</div><p style="font-size:14px">${esc(nextStepText())}</p></div></section>
+    ${v11HubRight()}
     <section class="panel acad-tease"><span class="ah-ic">${ic('akademi')}</span><div style="flex:1;min-width:0"><b>Kural Akademisi</b><div class="muted" style="font-size:13px">${(S.acad&&S.acad.examWeek===S.season*100+S.week)?'Bu haftanın sınavı tamamlandı':'Haftalık sınav açık · vaka çöz, kural bilgini geliştir'}</div></div><button class="btn sm" data-tab2="akademi">Aç</button></section>
     <section class="panel"><div class="row" style="justify-content:space-between"><h3>Gündem</h3><button class="btn sm" data-tab="haber">Haberler</button></div><div class="news-list">${S.news.slice(0,3).map(n=>newsItem(n,true)).join('')||'<p class="muted">Henüz haber yok.</p>'}</div></section>
     <section class="panel"><div class="row" style="justify-content:space-between"><h3>Sosyal medyada</h3><button class="btn sm" data-tab="sosyal">Akış</button></div><div class="feedlist">${S.social.posts.slice(0,2).map(postHTML).join('')||'<p class="muted">Henüz paylaşım yok.</p>'}</div></section>`;
@@ -4101,11 +4158,12 @@ function seasonEndHTML(){
     <div class="grid3"><div><div class="eyebrow">Maç</div><div class="num" style="font-size:32px">${r.matches}</div></div><div><div class="eyebrow">Lig ortalaması</div><div class="num" style="font-size:32px">${r.dAvg?f1(r.dAvg):'—'}</div></div><div><div class="eyebrow">Uluslararası</div><div class="num" style="font-size:32px">${r.iAvg?f1(r.iAvg):'—'}</div></div></div>
     <div class="stack">${sm.lines.map(([k,t])=>`<div class="row"><span class="chip ${k==='up'?'g':k==='down'?'r':k==='warn'?'a':''}">${k==='up'?'Yükseliş':k==='down'?'Düşüş':k==='warn'?'Not':'Durum'}</span><span>${esc(t)}</span></div>`).join('')}</div>
     ${sm.retire?'<p>45 yaş sınırına ulaştın. Kariyerinin son düdüğü çalıyor.</p>':''}
+    ${v11BreakTease()}
     <div><button class="btn primary" id="bSeason">${sm.retire?'Kariyeri tamamla':sm.tour?COMPS[sm.tour].name+'\'na git':'Yeni sezona başla'}</button></div></div>`;
 }
 function endedHTML(){
   const t=S.totals; const ms=MILESTONES.filter(m=>S.milestones[m.id]);
-  return `<div class="panel stack"><div class="eyebrow">Kariyer sona erdi</div><h2 style="font-size:40px">${esc(S.name)}</h2><p class="muted">${esc(rankText())} olarak emekli oldun.</p>
+  return `<div class="panel stack"><div class="eyebrow">${S.banned?'Lisans iptal edildi':'Kariyer sona erdi'}</div><h2 style="font-size:40px">${esc(S.name)}</h2>${S.banned?'<p class="muted">Şike soruşturması sonucu futboldan ömür boyu men edildin. Düdüğün artık susuyor.</p>':`<p class="muted">${esc(rankText())} olarak emekli oldun.</p>`}
     <div class="grid3"><div><div class="eyebrow">Maç</div><div class="num" style="font-size:30px">${t.matches}</div></div><div><div class="eyebrow">Doğru karar oranı</div><div class="num" style="font-size:30px">%${t.decisions?Math.round(t.correct/t.decisions*100):0}</div></div><div><div class="eyebrow">Kariyer anı</div><div class="num" style="font-size:30px">${ms.length}/${MILESTONES.length}</div></div></div>
     <div class="trophies">${ms.map(m=>`<div class="trophy on"><b>${esc(m.name)}</b>${esc(S.milestones[m.id])}</div>`).join('')}</div>
     <div><button class="btn primary" id="bNewCareer">Yeni kariyer</button></div></div>`;
@@ -4148,7 +4206,7 @@ function settingsHTML(){
     <div class="panel stack"><h3>Kayıt</h3><p class="muted" style="font-size:13px">Oyun bu tarayıcıda otomatik kaydedilir. Başka cihaza taşımak için kayıt kodunu kopyala.</p>
       <textarea id="saveCode" rows="4" readonly>${exportCode()}</textarea><div class="row"><button class="btn sm" id="bCopy">Kodu kopyala</button></div>
       <label class="lbl" for="impCode">Kayıt kodu yükle</label><textarea id="impCode" rows="3" placeholder="Kayıt kodunu buraya yapıştır"></textarea><div class="row"><button class="btn sm" id="bImp">Yükle</button></div>
-      <div class="row" id="resetRow"><button class="btn sm" id="bMenuHome">Ana menü · slotlar</button><button class="btn sm danger" id="bReset">Kariyeri sil</button></div></div></div>`;
+      <div class="row" id="resetRow"><button class="btn sm" id="bMenuHome">Ana menü · slotlar</button><button class="btn sm danger" id="bReset">Kariyeri sil</button></div></div>${v11SettingsHTML()}</div>`;
 }
 function bindMain(){
   const q=s=>document.querySelectorAll(s);
@@ -4185,6 +4243,395 @@ function bindMain(){
   const bmh=$('#bMenuHome'); if(bmh) bmh.onclick=()=>{ save(); S=null; M=null; render(); window.scrollTo(0,0); };
   const br=$('#bReset'); if(br) br.onclick=()=>{ $('#resetRow').innerHTML='<span>Emin misin? Kariyer kalıcı olarak silinir.</span><button class="btn sm danger" id="bReset2">Evet, sil</button><button class="btn sm" id="bReset0">Vazgeç</button>'; $('#bReset2').onclick=()=>{ wipeSave(); S=null; TAB='merkez'; render(); }; $('#bReset0').onclick=render; };
 }
+
+// =========================================================
+//   v1.1 — EKONOMİ · MAĞAZA · TATİL · RÜŞVET · GELİR MODELİ
+// =========================================================
+const NV = () => window.NATIVE || null;
+const PREMIUM_ID = 'com.sonduduk.hakem.premium';
+const PREM_KEY = 'sonduduk_premium';
+function isPremium(){ try{ return localStorage.getItem(PREM_KEY)==='1'; }catch(e){ return false; } }
+function setPremium(on){ try{ localStorage.setItem(PREM_KEY,on?'1':'0'); }catch(e){} try{ const P=PLUG('Preferences'); if(P) P.set({key:PREM_KEY,value:on?'1':'0'}); }catch(e){} }
+const adsOn = () => !!(NV() && NV().isNative);
+
+// ---------- küçük ikonlar ----------
+const V11G={
+ whistle:'<path d="M3 13a5 5 0 0 0 9.6 2.2L21 13V9h-9.3A5 5 0 0 0 3 13z"/><circle cx="8" cy="13" r="1.6" fill="var(--bg)"/><path d="M14 6l2-3"/>',
+ watch:'<rect x="7" y="2" width="10" height="4" rx="1"/><rect x="7" y="18" width="10" height="4" rx="1"/><circle cx="12" cy="12" r="6"/><path d="M12 9v3l2 1.5" stroke="var(--bg)" stroke-width="1.6" fill="none"/>',
+ boot:'<path d="M4 6h6l1 6 8 2.5a2 2 0 0 1 1 1.8V18H4z"/><path d="M6 20h2M11 20h2M16 20h2" stroke="currentColor" stroke-width="2"/>',
+ vest:'<path d="M8 3l4 3 4-3 3 3-2 4v11H7V10L5 6z"/><circle cx="12" cy="12" r="2" fill="var(--bg)"/>',
+ headset:'<path d="M4 14v-2a8 8 0 0 1 16 0v2" fill="none" stroke="currentColor" stroke-width="2"/><rect x="3" y="13" width="4" height="7" rx="1.5"/><rect x="17" y="13" width="4" height="7" rx="1.5"/><path d="M19 20q0 2-6 2" fill="none" stroke="currentColor" stroke-width="1.6"/>',
+ eye:'<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3.2" fill="var(--bg)"/>',
+ massage:'<rect x="9" y="11" width="5" height="11" rx="2"/><path d="M5 5h12a3 3 0 0 1 0 6H5z"/>',
+ snow:'<path d="M12 2v20M3.5 7l17 10M3.5 17l17-10" stroke="currentColor" stroke-width="2.2" fill="none"/>',
+ vr:'<rect x="2" y="7" width="20" height="10" rx="3"/><circle cx="8" cy="12" r="2.2" fill="var(--bg)"/><circle cx="16" cy="12" r="2.2" fill="var(--bg)"/>',
+ home:'<path d="M3 11l9-8 9 8v10h-6v-6H9v6H3z"/>',
+ car:'<path d="M3 13l2-5a2 2 0 0 1 2-1h10a2 2 0 0 1 2 1l2 5v5H3z"/><circle cx="7.5" cy="17" r="2" fill="var(--bg)"/><circle cx="16.5" cy="17" r="2" fill="var(--bg)"/>',
+ phone:'<rect x="7" y="2" width="10" height="20" rx="2.5"/><rect x="9" y="5" width="6" height="11" rx="1" fill="var(--bg)"/>',
+ shirt:'<path d="M8 3h8l5 4-3 3-2-1v12H8V9l-2 1-3-3z"/>',
+ glasses:'<circle cx="6.5" cy="13" r="4"/><circle cx="17.5" cy="13" r="4"/><path d="M10.5 12h3" stroke="currentColor" stroke-width="2"/>',
+ plane:'<path d="M2 13l8-1 5-9h2l-2 9 6 1v2l-6 1 2 7h-2l-5-7-8-1z"/>',
+ boat:'<path d="M2 16h20l-3 5H5z"/><path d="M12 2v13M12 3l7 10h-7z"/>',
+ heart:'<path d="M12 21s-8-5-9.5-10C1.4 7.4 4 4 7.5 4c2 0 3.4 1 4.5 2.6C13.1 5 14.5 4 16.5 4 20 4 22.6 7.4 21.5 11 20 16 12 21 12 21z"/>',
+ camera:'<path d="M3 7h4l2-3h6l2 3h4v13H3z"/><circle cx="12" cy="13" r="4" fill="var(--bg)"/>',
+ gift:'<rect x="3" y="9" width="18" height="12" rx="1.5"/><rect x="2" y="6" width="20" height="4" rx="1"/><path d="M12 6v15" stroke="var(--bg)" stroke-width="2"/>',
+ sun:'<circle cx="12" cy="12" r="5"/><path d="M12 1v4M12 19v4M1 12h4M19 12h4M4 4l3 3M17 17l3 3M4 20l3-3M17 7l3-3" stroke="currentColor" stroke-width="2"/>',
+ mountain:'<path d="M2 20l7-12 4 6 3-4 6 10z"/>',
+ balloon:'<ellipse cx="12" cy="9" rx="7" ry="8"/><path d="M9 17h6l-1 4h-4z"/>',
+ palm:'<path d="M12 22V10" stroke="currentColor" stroke-width="2"/><path d="M12 10C9 5 4 5 2 7c4 0 7 1 10 3zM12 10c3-5 8-5 10-3-4 0-7 1-10 3zM12 10c-1-5 1-8 3-9 0 3-1 6-3 9z"/><path d="M5 22h14" stroke="currentColor" stroke-width="2"/>',
+ city:'<path d="M3 21V9h5v12M10 21V3h6v18M18 21v-9h3v9" /><path d="M2 21h20" stroke="currentColor" stroke-width="1.5"/>',
+ crown:'<path d="M3 18l-1-11 6 5 4-8 4 8 6-5-1 11z"/><rect x="3" y="19" width="18" height="2.5" rx="1"/>',
+ star:'<path d="M12 2l3 6.6 7.2.8-5.4 4.9 1.5 7.1L12 17.8 5.7 21.4l1.5-7.1L1.8 9.4 9 8.6z"/>',
+ ad:'<rect x="2" y="5" width="20" height="14" rx="3"/><path d="M10 9l5 3-5 3z" fill="var(--bg)"/>',
+ lock:'<rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2"/>',
+ envelope:'<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 7l10 7 10-7" fill="none" stroke="var(--bg)" stroke-width="1.8"/>',
+ book:'<path d="M4 4h7a2 2 0 0 1 2 2v14a2 2 0 0 0-2-2H4zM20 4h-5a2 2 0 0 0-2 2v14a2 2 0 0 1 2-2h5z"/>',
+};
+const v11g=(k,col,size)=>`<span class="v11-gl" style="--gc:${col||'var(--yellow)'};${size?`width:${size}px;height:${size}px`:''}"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">${V11G[k]||V11G.gift}</svg></span>`;
+ICONS.magaza='<path d="M4 8h16l-1.5 12h-13z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8.5 8V6.5a3.5 3.5 0 0 1 7 0V8" fill="none" stroke="currentColor" stroke-width="2"/>';
+
+// ---------- mağaza kataloğu ----------
+// mod: dt (karar süresi sn), vis (görüş), temp (maç ısısı artışını azaltır), en (maç yorgunluğu −), rest (haftalık toparlanma +), train (antrenman %)
+// rep: tek seferlik itibar · fol: takipçi · trust: kurul güveni · lux: gösterişli (şüphe çeker)
+const SHOP11=[
+ // Ekipman
+ {id:'duduk1',cat:'ekipman',g:'whistle',col:'#e3434b',grp:'duduk',lv:1,name:'Profesyonel düdük',desc:'Kalabalık statta bile net duyulan, plastik maç düdüğü.',price:900,mod:{temp:.04}},
+ {id:'duduk2',cat:'ekipman',g:'whistle',col:'#5b9bff',grp:'duduk',lv:2,name:'Çift tonlu maç düdüğü',desc:'Oyunu durduran kesin, keskin bir ses. Oyuncular itiraz etmeden önce düşünür.',price:6500,mod:{temp:.07}},
+ {id:'duduk3',cat:'ekipman',g:'whistle',col:'#f6c62b',grp:'duduk',lv:3,name:'Altın kaplama final düdüğü',desc:'Büyük finallerin düdüğü. Taşıyana otorite, kameralara poz.',price:48000,mod:{temp:.11},rep:1},
+ {id:'saat1',cat:'ekipman',g:'watch',col:'#9aa6b6',grp:'hsaat',lv:1,name:'Hakem kronometresi',desc:'Çift kronometre, uzatma sayacı. Karar anında zamanı yönetirsin.',price:1200,mod:{dt:1}},
+ {id:'saat2',cat:'ekipman',g:'watch',col:'#38b27a',grp:'hsaat',lv:2,name:'Titreşimli hakem saati',desc:'Gol çizgisi ve VAR bildirimleri bileğinde. Düşünmek için fazladan an.',price:14000,mod:{dt:2}},
+ {id:'krampon1',cat:'ekipman',g:'boot',col:'#f29b38',grp:'krampon',lv:1,name:'Hafif hakem kramponu',desc:'90 dakika koşu için hafif taban.',price:1600,mod:{en:2}},
+ {id:'krampon2',cat:'ekipman',g:'boot',col:'#e3434b',grp:'krampon',lv:2,name:'Karbon tabanlı krampon',desc:'Daha az yorgunluk, daha hızlı yön değiştirme.',price:16000,mod:{en:4}},
+ {id:'gps',cat:'ekipman',g:'vest',col:'#5b9bff',name:'GPS koşu yeleği',desc:'Sprint ve mesafe verilerin analiz edilir. Antrenman kazanımı artar.',price:7500,mod:{train:.1}},
+ {id:'lens',cat:'ekipman',g:'eye',col:'#2b8fb3',name:'Spor lensi ve göz kontrolü',desc:'Uzak mesafede temas detaylarını daha net görürsün.',price:5200,mod:{vis:.03}},
+ {id:'kulaklik',cat:'ekipman',g:'headset',col:'#b57bff',name:'Hakem iletişim seti',desc:'Yardımcı hakemlerle kesintisiz iletişim. Daha net görüş, daha sakin maç.',price:24000,mod:{vis:.02,temp:.04}},
+ {id:'masaj',cat:'ekipman',g:'massage',col:'#38b27a',name:'Masaj tabancası',desc:'Maç sonrası kas toparlanması. Haftalık enerji yenilenmesi artar.',price:2200,mod:{rest:3}},
+ {id:'kriyo',cat:'ekipman',g:'snow',col:'#9be3f5',name:'Kriyoterapi aboneliği',desc:'Elit sporcuların toparlanma yöntemi.',price:65000,mod:{rest:6}},
+ {id:'vrsim',cat:'ekipman',g:'vr',col:'#f6c62b',name:'VR karar simülatörü',desc:'Evde binlerce pozisyon izle. Antrenmanın ve görüşün güçlenir.',price:38000,mod:{train:.12,vis:.02}},
+ // Yaşam: ev
+ {id:'ev1',cat:'yasam',sub:'ev',g:'home',col:'#9aa6b6',grp:'ev',lv:1,name:'Kiralık 1+1 daire',desc:'Stada yakın, sessiz bir oda.',price:3000,mod:{rest:2}},
+ {id:'ev2',cat:'yasam',sub:'ev',g:'home',col:'#5b9bff',grp:'ev',lv:2,name:'Şehir merkezinde daire',desc:'Kendi evin. Maç sonrası huzur.',price:95000,mod:{rest:4},rep:1},
+ {id:'ev3',cat:'yasam',sub:'ev',g:'home',col:'#38b27a',grp:'ev',lv:3,name:'Bahçeli müstakil ev',desc:'Bahçede koşu parkuru, garajda ev salonu.',price:240000,mod:{rest:6},rep:1},
+ {id:'ev4',cat:'yasam',sub:'ev',g:'home',col:'#f6c62b',grp:'ev',lv:4,name:'Deniz manzaralı villa',desc:'Havuz, sauna, sessizlik. Bir elit hakemin evi.',price:900000,mod:{rest:8},rep:2,lux:1},
+ {id:'ev5',cat:'yasam',sub:'ev',g:'city',col:'#b57bff',grp:'ev',lv:5,name:'Gökdelen penthouse',desc:'Şehir ayaklarının altında.',price:2600000,mod:{rest:9},rep:3,lux:2},
+ // Yaşam: araba
+ {id:'araba1',cat:'yasam',sub:'araba',g:'car',col:'#9aa6b6',grp:'araba',lv:1,name:'İkinci el hatchback',desc:'Maçlara otobüsle gitmeye son.',price:6500,mod:{rest:1}},
+ {id:'araba2',cat:'yasam',sub:'araba',g:'car',col:'#5b9bff',grp:'araba',lv:2,name:'Kompakt sedan',desc:'Güvenilir, ekonomik, yeni.',price:24000,mod:{rest:2}},
+ {id:'araba3',cat:'yasam',sub:'araba',g:'car',col:'#2e8b57',grp:'araba',lv:3,name:'Lüks SUV',desc:'Uzun deplasman yolları artık konforlu.',price:98000,mod:{rest:3},rep:1},
+ {id:'araba4',cat:'yasam',sub:'araba',g:'car',col:'#e3434b',grp:'araba',lv:4,name:'İtalyan süper spor',desc:'Her paylaşımın gündem olur. Ama soru da çeker.',price:360000,mod:{rest:3},fol:900,lux:2},
+ // Yaşam: saat, moda, teknoloji
+ {id:'ksaat1',cat:'yasam',sub:'saat',g:'watch',col:'#c9ced6',name:'Çelik kronograf',desc:'Klasik bir saat. Maç sonu röportajlarında şık.',price:6800,rep:1},
+ {id:'ksaat2',cat:'yasam',sub:'saat',g:'watch',col:'#f6c62b',name:'İsviçre lüks saat',desc:'Zaman senin tarafında.',price:32000,rep:1,fol:200,lux:1},
+ {id:'takim',cat:'yasam',sub:'moda',g:'shirt',col:'#3a4252',name:'Tasarım takım elbise',desc:'Kurul toplantılarına ve galalara şık gir.',price:9000,trust:2},
+ {id:'gozluk',cat:'yasam',sub:'moda',g:'glasses',col:'#f6c62b',name:'Tasarım güneş gözlüğü',desc:'Havalimanı fotoğraflarının vazgeçilmezi.',price:1100,fol:60},
+ {id:'telefon',cat:'yasam',sub:'teknoloji',g:'phone',col:'#e3434b',name:'Son model telefon',desc:'Sosyal medya için en iyi kamera.',price:1700,fol:120},
+ {id:'kamera',cat:'yasam',sub:'teknoloji',g:'camera',col:'#5b9bff',name:'Vlog kamerası',desc:'Hakem gününü paylaş, takipçini büyüt.',price:3200,fol:400},
+ {id:'tekne',cat:'yasam',sub:'tasit',g:'boat',col:'#5b9bff',name:'Sürat teknesi',desc:'Hafta sonu kıyı boyunca rüzgâr.',price:190000,mod:{rest:3},fol:700,lux:2},
+ {id:'jet',cat:'yasam',sub:'tasit',g:'plane',col:'#9aa6b6',name:'Özel jet',desc:'Uluslararası görevlere kendi uçağınla. Efsane statüsü.',price:9500000,mod:{rest:5,en:2},fol:6000,rep:3,lux:3},
+ {id:'okul',cat:'yasam',sub:'diger',g:'heart',col:'#e3434b',name:'Genç hakem okulu bursu',desc:'Mahalle maçlarından gelecek hakemlere burs. Kurul ve kamuoyu bunu sever.',price:120000,rep:3,trust:8,fol:500},
+];
+// Premium üyelere özel
+const PREM_ITEMS=[
+ {id:'p_duduk',cat:'ekipman',g:'whistle',col:'#f6c62b',grp:'duduk',lv:4,name:'Elmas kakmalı efsane düdüğü',desc:'Premium üyelere özel. Sahadaki en otoriter ses.',price:0,mod:{temp:.14},rep:1,prem:1},
+ {id:'p_saat',cat:'ekipman',g:'watch',col:'#f6c62b',grp:'hsaat',lv:3,name:'Altın hakem saati',desc:'Premium üyelere özel. Her kararda fazladan iki buçuk saniye.',price:0,mod:{dt:2.5},prem:1},
+];
+const CAPS11={dt:3,vis:.06,temp:.16,en:6,rest:12,train:.3};
+const shopAll=()=>SHOP11.concat(PREM_ITEMS);
+const itemById11=id=>shopAll().find(x=>x.id===id);
+function v11Ensure(){
+  if(!S) return;
+  if(!S.inv) S.inv=[];
+  if(!S.post) S.post=[];
+  if(!S.vac) S.vac={count:0,winter:-1,summer:-1};
+  if(!S.bribe) S.bribe={offer:null,taken:0,refused:0,reported:0,susp:0,caught:0,banW:0,lastW:-99,total:0};
+  if(!S.ads) S.ads={energyWk:-1};
+  if(isPremium() && !S.premGift){ S.premGift=1; S.money+=250000; S.inv=S.inv.concat(PREM_ITEMS.map(x=>x.id).filter(id=>!S.inv.includes(id))); mail('OZS Studio','Premium hediyen kasanda','Premium için teşekkürler! Kariyerine 250.000 ₺ eklendi; elmas kakmalı efsane düdüğü ve altın hakem saati çantanda.','fed'); }
+}
+function activeItems11(){
+  const best={}, out=[];
+  (S.inv||[]).map(itemById11).filter(Boolean).forEach(it=>{ if(!it.grp) out.push(it); else if(!best[it.grp]||best[it.grp].lv<it.lv) best[it.grp]=it; });
+  return out.concat(Object.values(best));
+}
+function v11Mod(k){ if(!S||!S.inv) return 0; const v=activeItems11().reduce((a,it)=>a+((it.mod&&it.mod[k])||0),0); return Math.min(v,CAPS11[k]||v); }
+const owns11=id=>S.inv.includes(id);
+function outclassed11(it){ if(!it.grp) return false; return activeItems11().some(x=>x.grp===it.grp&&x.lv>=it.lv); }
+function effChips(it){
+  const out=[]; const m=it.mod||{};
+  if(m.dt) out.push(`+${String(m.dt).replace('.',',')} sn karar süresi`);
+  if(m.vis) out.push(`+%${Math.round(m.vis*100)} görüş`);
+  if(m.temp) out.push(`−%${Math.round(m.temp*100)} maç gerginliği`);
+  if(m.en) out.push(`−${m.en} maç yorgunluğu`);
+  if(m.rest) out.push(`+${m.rest} haftalık enerji`);
+  if(m.train) out.push(`+%${Math.round(m.train*100)} antrenman`);
+  if(it.rep) out.push(`+${it.rep} itibar`);
+  if(it.trust) out.push(`+${it.trust} kurul güveni`);
+  if(it.fol) out.push(`+${compactNum(it.fol)} takipçi`);
+  return out;
+}
+function buy11(id){
+  const it=itemById11(id); if(!it||owns11(id)||outclassed11(it)) return;
+  if(it.prem && !isPremium()){ SHOP_TAB='premium'; render(); return; }
+  if(S.money<it.price){ toast('Kasanda yeterli para yok'); return; }
+  S.money-=it.price; S.inv.push(id);
+  if(it.rep) S.rep=clamp(S.rep+it.rep,0,100);
+  if(it.trust) S.kurul.trust=clamp(S.kurul.trust+it.trust,0,100);
+  if(it.fol) S.social.followers+=it.fol;
+  if(it.price>=5000){ addPost({a:{n:S.name,me:1,h:S.social.handle},text:pick([`Yeni ${it.name.toLocaleLowerCase('tr-TR')} ile sezona hazırım.`,`Emeklerin karşılığı: ${it.name.toLocaleLowerCase('tr-TR')}.`,`Kendime küçük bir ödül: ${it.name.toLocaleLowerCase('tr-TR')}.`]),img:{k:'train'},likes:engage(60+it.price/2500),rts:engage(8)}); }
+  // gösterişli harcama + rüşvet geçmişi = soru işaretleri
+  if(it.lux && S.bribe.taken>0){ S.bribe.susp=clamp(S.bribe.susp+it.lux*7,0,100); news('hakem',`${S.name.split(' ').slice(-1)[0]} için "lüks yaşam" soruları`,`Hakemin son dönemdeki harcamaları sosyal medyada gündem oldu. Gelir kaynağı merak ediliyor.`); }
+  else if(it.lux>=2) news('hakem',`${S.name}: "Hakemlik artık iyi para kazandırıyor"`,`Ünlü hakem, ${it.name.toLocaleLowerCase('tr-TR')} paylaşımıyla sosyal medyada gündem oldu.`);
+  haptic('success'); toast(it.name+' artık senin'); save(); render();
+}
+
+// ---------- tatil ----------
+const VAC11=[
+ {id:'memleket',kind:'kisa',g:'home',col:'#38b27a',name:'Memlekette aile ziyareti',desc:'Annenin yemekleri, çocukluk arkadaşları. Telefon sessizde.',price:400,en:16,post:'Annemin bahçesinde bir pazar. Kafa dinlemek böyle bir şey.'},
+ {id:'kapadokya',kind:'kisa',g:'balloon',col:'#f29b38',name:'Kapadokya balon turu',desc:'Gün doğumunda yüzlerce balon. Hafta sonu kaçamağı.',price:3800,en:20,fol:120,post:'Gün doğumunda Kapadokya. Hayatımda ilk kez kafam bu kadar sessiz.'},
+ {id:'sapanca',kind:'kisa',g:'mountain',col:'#2e8b57',name:'Göl kenarında bungalov',desc:'Orman yürüyüşü, şömine, sessizlik.',price:2600,en:18,post:'Göl kenarında iki gün. Pil doldu.'},
+ {id:'antalya',kind:'uzun',g:'sun',col:'#f6c62b',name:'Antalya\'da her şey dahil',desc:'Deniz, kum, açık büfe. Kondisyona dikkat!',price:7000,en:45,attr:{kondisyon:-1},post:'Deniz, güneş, açık büfe… Antrenörüm bu fotoğrafı görmesin.'},
+ {id:'bali',kind:'uzun',g:'palm',col:'#38b27a',name:'Bali\'de yoga ve sörf',desc:'Ruhunu ve bedenini sıfırla. Soğukkanlılığın artar.',price:16000,en:55,attr:{sogukkanlilik:1},fol:250,post:'Bali\'de sörf: ilk dalgada düştüm, onuncuda ayaktaydım.'},
+ {id:'dubai',kind:'uzun',g:'city',col:'#b57bff',name:'Dubai\'de lüks tatil',desc:'Gökdelenler, süper arabalar, ünlülerle fotoğraflar.',price:45000,en:30,fol:900,lux:1,attr:{kondisyon:-1},post:'Dubai\'den selamlar. Hakemler de tatil yapar!'},
+ {id:'maldivler',kind:'uzun',g:'palm',col:'#2b8fb3',name:'Maldivler\'de su üstü villa',desc:'Telefonsuz iki hafta. Tam yenilenme.',price:95000,en:70,fol:400,post:'İki hafta boyunca telefona bakmadım. Yeni sezona tam hazırım.'},
+ {id:'monako',kind:'uzun',g:'boat',col:'#e3434b',name:'Monako\'da yat partisi',desc:'Jet sosyete, yarış haftası. Kurul bu fotoğrafları pek sevmez.',price:260000,en:15,fol:2500,lux:2,trust:-4,attr:{kondisyon:-2},post:'Monako\'da yat partisi. Kimin partisi olduğunu hâlâ bilmiyorum.'},
+];
+function breakNow(){ // 'winter' | 'summer' | null
+  if(!S) return null;
+  if(S.phase==='seasonEnd') return S.vac.summer===S.season?null:'summer';
+  if(S.phase==='season' && (S.week===17||S.week===18) && S.vac.winter!==S.season) return 'winter';
+  return null;
+}
+function vacAvail(v){
+  if(v.kind==='kisa') return S.phase==='season' && S.tasks && !S.tasks.activity;
+  return !!breakNow();
+}
+function takeVac(id){
+  const v=VAC11.find(x=>x.id===id); if(!v||!vacAvail(v)) return;
+  if(S.money<v.price){ toast('Bu tatil için kasan yetmiyor'); return; }
+  S.money-=v.price; S.vac.count++;
+  if(v.kind==='kisa') S.tasks.activity='tatil';
+  else { const b=breakNow(); if(b==='winter') S.vac.winter=S.season; else S.vac.summer=S.season; }
+  S.energy=clamp(S.energy+v.en,0,100);
+  const lost=[]; if(v.attr) for(const k in v.attr){ S.attrs[k]=clamp(S.attrs[k]+v.attr[k],0,99); if(v.attr[k]<0) lost.push(ATTR_NAMES[k]+' '+v.attr[k]); }
+  if(v.fol) S.social.followers+=v.fol;
+  if(v.trust) S.kurul.trust=clamp(S.kurul.trust+v.trust,0,100);
+  if(v.lux && S.bribe.taken>0) S.bribe.susp=clamp(S.bribe.susp+v.lux*6,0,100);
+  if(!S.post.includes(v.id)) S.post.push(v.id);
+  addPost({a:{n:S.name,me:1,h:S.social.handle},text:v.post,img:{k:'quote'},likes:engage(120+(v.fol||0)/4),rts:engage(10)});
+  if(v.trust) kurulDecision(`${S.name}'ın tatil paylaşımları kurul gündeminde: "Hakem, kamuoyu önünde ölçülü olmalı."`,'warn');
+  haptic('success');
+  openModal(`<div class="sh-head"><h2>${esc(v.name)}</h2><button class="btn sm" id="vacX">Kapat</button></div>
+    <div class="v11-postcard" style="--gc:${v.col}">${v11g(v.g,v.col,56)}<p>“${esc(v.post)}”</p><small>${esc(weekDate(Math.min(34,S.week)))} · ${seasonLabel(S.season)}</small></div>
+    <div class="stack" style="gap:6px;margin-top:12px"><div class="row"><span class="chip g">Enerji +${v.en}</span>${v.fol?`<span class="chip b">+${compactNum(v.fol)} takipçi</span>`:''}${v.attr&&v.attr.sogukkanlilik?'<span class="chip g">Soğukkanlılık +1</span>':''}${v.trust?`<span class="chip r">Kurul güveni ${v.trust}</span>`:''}</div>
+    ${lost.length?`<p class="muted" style="font-size:13px">Disiplin bozuldu, form kaybı: ${esc(lost.join(', '))}.</p>`:''}<p class="muted" style="font-size:13px">Kartpostal hatıra koleksiyonuna eklendi.</p></div>`,true);
+  $('#vacX').onclick=()=>{ closeModal(); render(); };
+  save();
+}
+
+// ---------- rüşvet ikilemi ----------
+const FIXERS=['"Bir dost"','Tanımadığın bir numara','Kulüp çevresinden bir aracı','"Menajer" olduğunu söyleyen biri'];
+function v11WeekTasks(T){
+  v11Ensure(); const B=S.bribe;
+  if(B.banW>0){ B.banW--; T.matches=[]; mail(kurulName(),'Soruşturma sürüyor','Disiplin cezan devam ediyor. Bu hafta görev verilmedi. Kalan: '+B.banW+' hafta.','fed'); return; }
+  B.offer=null;
+  const dom=T.matches.find(m=>m.kind==='dom'); if(!dom) return;
+  const wk=S.season*100+S.week; if(wk-B.lastW<5 || S.totals.matches<3) return;
+  const p=.07 + (dom.imp>=3?.05:0) + (S.tier<=1?.03:0) - B.reported*.02 - (S.fifa?.03:0);
+  if(!chance(Math.max(.02,p))) return;
+  const side=chance(.5)?0:1; const t=team(side?dom.away:dom.home);
+  const amt=Math.round(dom.fee*ri(4,9)/1000)*1000;
+  B.lastW=wk;
+  B.offer={fx:dom.id,side,team:t.id,amount:amt,from:pick(FIXERS)};
+  mail(B.offer.from,'Konuşmamız lazım',`Bu hafta ${team(dom.home).name} – ${team(dom.away).name} maçına atandığını biliyoruz. ${t.name} için "anlayışlı" bir maç çıkarırsan ${money(amt)} senin. Yarısı peşin. Kimse bilmeyecek.`,'offer');
+}
+function bribeChoice(ch){
+  const B=S.bribe, o=B.offer; if(!o) return; const fx=S.tasks.matches.find(m=>m.id===o.fx); B.offer=null;
+  const tn=team(o.team).name;
+  if(ch==='kabul' && fx){
+    fx.bribe={side:o.side,amount:o.amount,team:o.team}; const half=Math.round(o.amount/2);
+    S.money+=half; B.taken++; B.total+=half; B.susp=clamp(B.susp+6,0,100);
+    toast('Zarf alındı: '+money(half)+'. Maç '+tn+' lehine bitmeli.');
+    mail(o.from,'Anlaştık','Ön ödeme hesabında. Kalanı maçtan sonra. '+tn+' kaybetmezse sorun yok.','offer');
+  } else if(ch==='bildir'){
+    B.reported++; S.kurul.trust=clamp(S.kurul.trust+7,0,100); S.rep=clamp(S.rep+2,0,100);
+    news('kurul',`${S.name} şike teklifini federasyona bildirdi`,`${kurulName()}, hakemin dürüst tavrı sonrası soruşturma başlattı. Kurul başkanı: "Örnek bir davranış."`);
+    kurulDecision(`${S.name}, kendisine yapılan uygunsuz teklifi bildirdi. Soruşturma başlatıldı.`,'ok');
+    addPost({a:PRESS[0],text:`Son dakika: ${S.name}, kendisine yapılan şike teklifini federasyona bildirdi. Saygı duyulacak bir tavır. #hakem`,likes:engage(400),rts:engage(120),aboutMe:true});
+    S.social.followers+=ri(300,900);
+    if(chance(.3)) mail('Bilinmeyen numara','Pişman olacaksın','Sen kimsin ki bizi ihbar ediyorsun? Sahada görüşürüz.','offer');
+    if(B.reported+B.refused>=3) milestone('temiz');
+    toast('Teklifi kurula bildirdin: kurul güveni +7, itibar +2');
+  } else { B.refused++; if(B.reported+B.refused>=3) milestone('temiz'); toast('Teklifi geri çevirdin'); }
+  save(); render();
+}
+function v11Bias(inc,fin){ if(!M||!M.fx||!M.fx.bribe) return; const f=favorScore(inc,fin); M.bias=(M.bias||0)+(inc.ai===M.fx.bribe.side?f:-f); }
+function v11AfterMatch(r,fx){
+  if(!fx.bribe) return; const B=S.bribe, b=fx.bribe; const sd=b.side, tn=team(b.team).name;
+  const my=r.score[sd], op=r.score[1-sd]; const bias=M&&M.bias||0;
+  const harmOther=r.log.filter(d=>d.cat==='major'&&(d.v==='hata'||d.v==='israr')&&d.harmed===1-sd).length;
+  r.bribe={team:tn};
+  if(my>=op){ const rest=b.amount-Math.round(b.amount/2); S.money+=rest; B.total+=rest; r.bribe.ok=true; r.bribe.paid=rest;
+    B.susp=clamp(B.susp+10+Math.max(0,bias)*3+harmOther*9,0,100);
+    mail('Bilinmeyen numara','Kalan ödeme',`Sözünü tuttun. ${money(rest)} hesabında. Yine görüşürüz.`,'offer'); }
+  else { r.bribe.ok=false; B.susp=clamp(B.susp+4,0,100);
+    if(chance(.45)){ B.susp=clamp(B.susp+22,0,100); mail('Bilinmeyen numara','Bunu ödeyeceksin','Anlaşmamız böyle değildi. Bazı ses kayıtları yanlış ellere geçebilir…','offer'); r.bribe.leak=true; }
+    else mail('Bilinmeyen numara','Hayal kırıklığı','Ön ödemeyi geri istemiyoruz. Ama bir dahaki sefere daha dikkatli ol.','offer'); }
+}
+function v11Week(){
+  v11Ensure(); const B=S.bribe; if(!B) return null;
+  if(B.susp>0 && !B.banW){
+    if(chance(B.susp/260)){ B.caught++; const fine=Math.round(B.total*2);
+      if(B.caught>=2 || B.taken>=4){
+        S.money=Math.max(0,S.money-fine); S.banned=true; S.phase='ended'; S.ended=true;
+        news('kurul',`${S.name} futboldan ömür boyu men edildi`,`Şike soruşturmasında ses kayıtları ve banka hareketleri ortaya çıktı. ${kurulName()}: "Futbolun temiz yüzünü kirletenlere yer yok."`);
+        mail(kurulName(),'Ömür boyu men','Soruşturma tamamlandı. Lisansın kalıcı olarak iptal edildi. Para cezası: '+money(fine)+'.','fed');
+        return 'ended';
+      }
+      B.banW=10; B.susp=20; S.money=Math.max(0,S.money-fine); S.rep=clamp(S.rep-30,0,100); S.kurul.trust=clamp(S.kurul.trust-40,0,100); S.social.followers=Math.round(S.social.followers*.7);
+      news('kurul',`Şike soruşturması: ${S.name} 10 hafta görevden uzaklaştırıldı`,`Federasyon, hakemin şüpheli maçlarla ilgili bağlantılarını incelemeye aldı. Hakeme ${money(fine)} para cezası verildi.`);
+      addPost({a:PRESS[2],text:`Şike soruşturması patladı. ${S.name} için ciddi iddialar var. Bir daha düdük çalabilecek mi? #hakem`,likes:engage(900),rts:engage(400),aboutMe:true});
+      mail(kurulName(),'Disiplin kararı','Hakkındaki şike soruşturması sonucu 10 hafta görev verilmeyecek ve '+money(fine)+' para cezası ödeyeceksin. Bir kez daha tekrarlanırsa lisansın iptal edilecek.','fed');
+      toast('Soruşturma! 10 hafta men, '+money(fine)+' ceza');
+    } else B.susp=clamp(B.susp-2,0,100);
+  }
+  return null;
+}
+
+// ---------- reklamlar ve Premium ----------
+let AD_BUSY=false, LAST_INT=0, MATCH_N=0;
+async function rewarded(label,cb){
+  if(isPremium()){ cb(); return; }
+  if(!adsOn()||AD_BUSY) return;
+  AD_BUSY=true; toast('Reklam yükleniyor…');
+  let ok=false; try{ ok=await NV().rewarded(); }catch(e){}
+  AD_BUSY=false;
+  if(ok) cb(); else toast('Reklam şu an yüklenemedi ya da yarıda kapandı. Biraz sonra tekrar dene.');
+}
+function adBtn(id,label,extra){
+  if(!isPremium() && !adsOn()) return '';
+  return `<button class="btn sm v11-ad" id="${id}" ${extra||''}>${isPremium()?ic('star'):`<svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">${V11G.ad}</svg>`}<span>${label}</span>${isPremium()?'<small>Premium</small>':''}</button>`;
+}
+function v11AfterReport(){
+  MATCH_N++;
+  if(isPremium()||!adsOn()||!S||S.totals.matches<3) return;
+  if(MATCH_N%2!==0 || Date.now()-LAST_INT<150000) return;
+  LAST_INT=Date.now();
+  setTimeout(()=>{ try{ NV().interstitial(); }catch(e){} },350);
+}
+function v11ReportExtras(r){
+  const fee=r.fee, rw=document.querySelector('.rewards');
+  if(rw && fee>0 && !r.doubled){
+    const html=adBtn('bDouble',`Ücreti 2 katına çıkar (+${moneyShort(fee)})`);
+    if(html){ rw.insertAdjacentHTML('afterend',`<div class="v11-dbl">${html}</div>`);
+      $('#bDouble').onclick=()=>rewarded('double',()=>{ if(r.doubled) return; r.doubled=true; S.money+=fee; save(); haptic('success'); toast('Ücret ikiye katlandı: +'+money(fee)); const b=$('#bDouble'); if(b){ b.disabled=true; b.querySelector('span').textContent='Ücret ikiye katlandı'; } }); }
+  }
+  if(r.bribe){ const p=document.querySelector('.rsum');
+    if(p) p.insertAdjacentHTML('beforeend',`<div class="v11-bribe ${r.bribe.ok?'ok':'bad'}">${v11g('envelope',r.bribe.ok?'#f29b38':'#e3434b',30)}<div><b>${r.bribe.ok?'Anlaşma tamam':'Anlaşma bozuldu'}</b><small>${r.bribe.ok?`${esc(r.bribe.team)} kaybetmedi. Kalan ${money(r.bribe.paid)} hesabına geçti. Ama şüphe büyüyor.`:`${esc(r.bribe.team)} kaybetti. Kalan ödeme yok${r.bribe.leak?'; aracı seni tehdit ediyor.':'.'}`}</small></div></div>`); }
+}
+async function buyPremium(){
+  const N=NV();
+  if(!N||!N.iapOn){ toast('Premium yalnızca App Store sürümünde satın alınabilir.'); return; }
+  const res=await N.iap.buy(PREMIUM_ID);
+  if(res==='ok'){ setPremium(true); v11Ensure(); save(); haptic('success'); toast('Premium etkin. Teşekkürler!'); render(); }
+  else if(res==='pending') toast('Satın alma onay bekliyor.');
+  else if(res==='error') toast('Satın alma tamamlanamadı. Daha sonra tekrar dene.');
+}
+async function restorePremium(){
+  const N=NV(); if(!N||!N.iapOn){ toast('Geri yükleme yalnızca App Store sürümünde çalışır.'); return; }
+  const owned=await N.iap.restore(); if(owned.includes(PREMIUM_ID)){ setPremium(true); v11Ensure(); save(); toast('Premium geri yüklendi'); render(); } else toast('Bu Apple hesabında Premium satın alımı bulunamadı.');
+}
+let PREM_PRICE=null;
+async function loadPremPrice(){ const N=NV(); if(!N||!N.iapOn||PREM_PRICE) return; try{ const p=await N.iap.products([PREMIUM_ID]); if(p&&p[0]){ PREM_PRICE=p[0].priceString||p[0].localizedPrice||null; const el=$('#premPrice'); if(el&&PREM_PRICE) el.textContent=PREM_PRICE; } }catch(e){} }
+async function checkPremiumOwned(){ const N=NV(); if(!N||!N.iapOn) return; try{ const o=await N.iap.owned(); if(o.includes(PREMIUM_ID)&&!isPremium()){ setPremium(true); if(S){ v11Ensure(); save(); render(); } } }catch(e){} }
+window.SD_IAP_UPDATE=(id,ok)=>{ if(id===PREMIUM_ID){ setPremium(ok); if(ok&&S){ v11Ensure(); save(); } render(); } };
+
+// ---------- ekranlar ----------
+let SHOP_TAB='ekipman';
+function v11ShopHTML(){
+  v11Ensure();
+  const tabs=[['ekipman','Ekipman'],['yasam','Yaşam'],['tatil','Tatil'],['hatira','Hatıralar'],['premium','Premium']];
+  let body='';
+  if(SHOP_TAB==='ekipman'||SHOP_TAB==='yasam'){
+    const list=shopAll().filter(x=>x.cat===SHOP_TAB);
+    const mods=['dt','vis','temp','en','rest','train'].map(k=>[k,v11Mod(k)]).filter(x=>x[1]);
+    body=`${SHOP_TAB==='ekipman'?`<p class="muted" style="font-size:13px">Aynı türden ekipmanların yalnızca en iyisi etki eder. Bonuslar üst sınırlıdır: her şeyi parayla alamazsın.</p>`:`<p class="muted" style="font-size:13px">Ev ve araba haftalık toparlanmanı artırır; gösterişli harcamalar takipçi getirir ama soru da çeker.</p>`}
+      ${mods.length?`<div class="row v11-mods">${mods.map(([k,v])=>`<span class="chip g">${{dt:`+${f1(v).replace('.',',')} sn karar`,vis:`+%${Math.round(v*100)} görüş`,temp:`−%${Math.round(v*100)} gerginlik`,en:`−${v} yorgunluk`,rest:`+${v} enerji/hafta`,train:`+%${Math.round(v*100)} antrenman`}[k]}</span>`).join('')}</div>`:''}
+      <div class="v11-grid">${list.map(itemCard).join('')}</div>`;
+  } else if(SHOP_TAB==='tatil'){
+    const b=breakNow();
+    body=`<div class="v11-break ${b?'on':''}">${v11g('sun',b?'#f6c62b':'#8b98ab',40)}<div><b>${b==='winter'?'Devre arası: uzun tatil zamanı':b==='summer'?'Sezon arası: uzun tatil zamanı':'Uzun tatiller devre arasında ve sezon sonunda açılır'}</b><small>${b?'Bu arada bir uzun tatile çıkabilirsin. Enerjin dolar, sosyal medyan hareketlenir.':'Kısa kaçamaklar her hafta mümkün ama o haftanın antrenman hakkını kullanır.'}</small></div></div>
+      <h3 style="margin:14px 0 8px">Hafta sonu kaçamakları</h3><div class="v11-grid">${VAC11.filter(v=>v.kind==='kisa').map(vacCard).join('')}</div>
+      <h3 style="margin:18px 0 8px">Uzun tatiller</h3><div class="v11-grid">${VAC11.filter(v=>v.kind==='uzun').map(vacCard).join('')}</div>`;
+  } else if(SHOP_TAB==='hatira'){
+    const owned=activeItems11();
+    body=`<h3>Kartpostallar <span class="muted num">${S.post.length}/${VAC11.length}</span></h3><div class="v11-grid">${VAC11.map(v=>S.post.includes(v.id)?`<div class="v11-postcard sm" style="--gc:${v.col}">${v11g(v.g,v.col,40)}<b>${esc(v.name)}</b><p>“${esc(v.post)}”</p></div>`:`<div class="v11-postcard sm locked">${v11g('lock','#5b6678',40)}<b>${esc(v.name)}</b><p class="muted">Henüz gidilmedi</p></div>`).join('')}</div>
+      <h3 style="margin-top:18px">Koleksiyon <span class="muted num">${S.inv.length}</span></h3>${owned.length?`<div class="row" style="gap:8px;flex-wrap:wrap">${S.inv.map(itemById11).filter(Boolean).map(it=>`<span class="v11-own">${v11g(it.g,it.col,26)}${esc(it.name)}</span>`).join('')}</div>`:'<p class="muted">Henüz bir şey almadın.</p>'}`;
+  } else body=premiumHTML();
+  return `<div class="stack" style="gap:14px"><div class="v11-shophead panel"><div><span class="eyebrow gold">Mağaza</span><h2 style="margin:2px 0 0">Kasa: <span class="num">${money(S.money)}</span></h2><small class="muted">Maç ücretleri, sponsorluklar ve teklifler kasana girer.</small></div>${isPremium()?'<span class="chip y">Premium</span>':''}</div>
+    <div class="v11-tabs" role="tablist">${tabs.map(([k,n])=>`<button class="${SHOP_TAB===k?'on':''}" data-shop="${k}">${n}</button>`).join('')}</div>
+    <div class="panel">${body}</div></div>`;
+}
+function itemCard(it){
+  const own=owns11(it.id), oc=!own&&outclassed11(it), lockP=it.prem&&!isPremium();
+  const btn= own?'<span class="chip g">Sende</span>': oc?'<span class="chip">Daha iyisi sende</span>': lockP?`<button class="btn sm" data-shop="premium">${ic('star')} Premium</button>`:`<button class="btn sm ${S.money>=it.price?'primary':''}" data-buy="${it.id}" ${S.money<it.price?'disabled':''}>${money(it.price)}</button>`;
+  return `<div class="v11-card ${own?'own':''}">${v11g(it.g,it.col,44)}<div class="v11-cb"><b>${esc(it.name)}</b><small>${esc(it.desc)}</small><div class="v11-eff">${effChips(it).map(e=>`<span>${esc(e)}</span>`).join('')}</div></div><div class="v11-cf">${it.lv?`<span class="v11-lv">${'●'.repeat(it.lv)}</span>`:'<span></span>'}${btn}</div></div>`;
+}
+function vacCard(v){
+  const ok=vacAvail(v), been=S.post.includes(v.id);
+  const why= v.kind==='kisa' ? (S.phase!=='season'?'Sezon içinde':S.tasks&&S.tasks.activity?'Bu haftanın programı dolu':'') : (!breakNow()?'Devre arası / sezon sonu':'');
+  const eff=[`Enerji +${v.en}`].concat(v.fol?[`+${compactNum(v.fol)} takipçi`]:[]).concat(v.attr?Object.entries(v.attr).map(([k,d])=>`${ATTR_NAMES[k]} ${d>0?'+':''}${d}`):[]).concat(v.trust?[`Kurul güveni ${v.trust}`]:[]);
+  return `<div class="v11-card">${v11g(v.g,v.col,44)}<div class="v11-cb"><b>${esc(v.name)}${been?' <span class="chip g" style="vertical-align:middle">✓</span>':''}</b><small>${esc(v.desc)}</small><div class="v11-eff">${eff.map(e=>`<span>${esc(e)}</span>`).join('')}</div></div><div class="v11-cf"><span class="muted" style="font-size:12px">${esc(why)}</span><button class="btn sm ${ok&&S.money>=v.price?'primary':''}" data-vac="${v.id}" ${!ok||S.money<v.price?'disabled':''}>${money(v.price)}</button></div></div>`;
+}
+function premiumHTML(){
+  setTimeout(loadPremPrice,0);
+  const perks=[['ad','Reklamsız oyun','Maç aralarındaki geçiş reklamları tamamen kalkar.'],['star','Ödüller reklamsız','Ücreti ikiye katlama ve enerji takviyesi reklam izlemeden anında.'],['gift','250.000 ₺ hoş geldin parası','Her kariyer slotuna bir kez.'],['whistle','Özel ekipman','Elmas kakmalı efsane düdüğü ve altın hakem saati.']];
+  return `<div class="v11-prem"><div class="v11-prem-h">${v11g('crown','#f6c62b',64)}<div><span class="eyebrow gold">Son Düdük</span><h2>Premium</h2><p class="muted">Tek seferlik satın alma. Abonelik yok.</p></div></div>
+    <div class="v11-perks">${perks.map(([g,t,d])=>`<div>${v11g(g,'#f6c62b',34)}<span><b>${t}</b><small>${d}</small></span></div>`).join('')}</div>
+    ${isPremium()?'<p class="chip y" style="font-size:14px;padding:6px 12px">Premium etkin. Teşekkürler!</p>':`<button class="btn primary lg" id="bBuyPrem">Premium al · <span id="premPrice">${PREM_PRICE||'₺249,99'}</span></button>`}
+    <button class="btn sm" id="bRestore">Satın alımları geri yükle</button></div>`;
+}
+function v11HubLeft(){
+  if(!S.bribe) return ''; const o=S.bribe.offer; if(!o) return '';
+  const fx=S.tasks&&S.tasks.matches.find(m=>m.id===o.fx); if(!fx||fx.played){ S.bribe.offer=null; return ''; }
+  return `<section class="v11-dilemma"><div class="v11-dh">${v11g('envelope','#f29b38',40)}<div><span class="eyebrow" style="color:var(--amber)">Gizli mesaj · ${esc(o.from)}</span><h3>${money(o.amount)} karşılığında “anlayışlı” bir maç</h3></div></div>
+    <p>${esc(team(fx.home).name)} – ${esc(team(fx.away).name)} maçında <b>${esc(team(o.team).name)}</b> kaybetmezse para senin. Yarısı peşin. Ama soruşturmalar, ses kayıtları, men cezası… Kariyerin bir zarfa bağlı olabilir.</p>
+    <div class="dopts"><button class="dopt" data-bribe="bildir">Federasyona bildir</button><button class="dopt" data-bribe="red">Sessizce geri çevir</button><button class="dopt danger" data-bribe="kabul">Zarfı al (${money(Math.round(o.amount/2))} peşin)</button></div></section>`;
+}
+function v11HubRight(){
+  const b=breakNow();
+  return `<section class="panel v11-hubshop"><div class="row" style="justify-content:space-between;flex-wrap:nowrap"><div style="min-width:0"><b>Mağaza ve tatil</b><div class="muted" style="font-size:13px">${b?'Devre arası! Uzun tatil seçenekleri açık.':'Ekipman, yaşam, tatil · Kasa '+moneyShort(S.money)}</div></div><button class="btn sm ${b?'primary':''}" data-shopgo="${b?'tatil':'ekipman'}">Aç</button></div>
+    ${!isPremium()?`<button class="v11-premrow" data-shopgo="premium">${v11g('crown','#f6c62b',28)}<span><b>Premium</b><small>Reklamsız oyun, anında ödüller, 250.000 ₺</small></span></button>`:''}</section>`;
+}
+function v11EnergyBtn(){
+  if(!S.tasks||S.energy>=95) return '';
+  const wk=S.season*100+S.week; if(S.ads.energyWk===wk) return '';
+  return adBtn('bAdEnergy','Enerji takviyesi +25');
+}
+function v11BreakTease(){
+  if(!breakNow()) return '';
+  return `<section class="panel v11-break on" style="margin:4px 0">${v11g('palm','#38b27a',40)}<div style="flex:1"><b>Sezon arası tatil zamanı</b><small>Yeni sezondan önce uzun bir tatille enerjini doldur.</small></div><button class="btn sm primary" data-shopgo="tatil">Tatil seç</button></section>`;
+}
+const LANGS=[['tr','Türkçe'],['en','English'],['de','Deutsch'],['es','Español']];
+function curLang(){ return document.documentElement.lang||'tr'; }
+function setLang(l){ try{ localStorage.setItem('sonduduk_lang',l); }catch(e){} try{ const P=PLUG('Preferences'); if(P) P.set({key:'sonduduk_lang',value:l}); }catch(e){} if(S) save(); location.replace(l==='tr'?'index.html':l+'.html'); }
+function v11SettingsHTML(){
+  return `<div class="panel stack"><h3>Dil</h3><div class="row" style="gap:8px;flex-wrap:wrap">${LANGS.map(([k,n])=>`<button class="btn sm ${curLang()===k?'primary':''}" data-lang="${k}">${n}</button>`).join('')}</div>
+    <h3 style="margin-top:8px">Premium ve reklamlar</h3><p class="muted" style="font-size:13px">${isPremium()?'Premium etkin: reklam görmezsin.':'Premium ile reklamlar kalkar.'}</p>
+    <div class="row" style="gap:8px;flex-wrap:wrap">${isPremium()?'':'<button class="btn sm primary" data-shopgo="premium">Premium</button>'}<button class="btn sm" id="bRestore2">Satın alımları geri yükle</button>${adsOn()?'<button class="btn sm" id="bPrivacy">Reklam gizlilik ayarları</button>':''}</div></div>`;
+}
+function v11Bind(){
+  const q=s=>document.querySelectorAll(s);
+  q('[data-shop]').forEach(b=>b.onclick=()=>{ SHOP_TAB=b.dataset.shop; TAB='magaza'; render(); });
+  q('[data-shopgo]').forEach(b=>b.onclick=()=>{ SHOP_TAB=b.dataset.shopgo; TAB='magaza'; render(); window.scrollTo(0,0); });
+  q('[data-buy]').forEach(b=>b.onclick=()=>buy11(b.dataset.buy));
+  q('[data-vac]').forEach(b=>b.onclick=()=>takeVac(b.dataset.vac));
+  q('[data-bribe]').forEach(b=>b.onclick=()=>bribeChoice(b.dataset.bribe));
+  q('[data-lang]').forEach(b=>b.onclick=()=>{ if(b.dataset.lang!==curLang()) setLang(b.dataset.lang); });
+  const bp=$('#bBuyPrem'); if(bp) bp.onclick=buyPremium;
+  q('#bRestore,#bRestore2').forEach(b=>b.onclick=restorePremium);
+  const pv=$('#bPrivacy'); if(pv) pv.onclick=()=>{ try{ NV().privacyOptions(); }catch(e){} };
+  const ae=$('#bAdEnergy'); if(ae) ae.onclick=()=>rewarded('energy',()=>{ S.ads.energyWk=S.season*100+S.week; S.energy=clamp(S.energy+25,0,100); save(); haptic('success'); toast('Enerji +25'); render(); });
+}
+setTimeout(checkPremiumOwned,2500);
 
 // ---------- boot ----------
 function pauseForBackground(){
