@@ -1201,23 +1201,23 @@ const NT_POOL = {'Türkiye':'TR','İngiltere':'ENG','İspanya':'ESP','İtalya':'
 const TR4_RAW = [['Boğaziçi SK',89,'İstanbul'],['Marmara Gücü',87,'İstanbul'],['Haliç Spor',85,'İstanbul'],['Karadeniz FK',80,'Trabzon'],['Başkent Ankara',72,'Ankara'],['Ege İzmir SK',71,'İzmir'],['Anadolu Yıldızları',69,'Kayseri'],['Çukurova FK',67,'Adana'],['Uludağ Bursa',68,'Bursa'],['Konya Selçuklu',69,'Konya'],['Akdeniz Antalya',66,'Antalya'],['Kapadokya SK',63,'Nevşehir'],['Toros Mersin',62,'Mersin'],['Sakarya Akıncılar',63,'Sakarya'],['Gaziantep Kale',65,'Gaziantep'],['Doğu Erzurum',60,'Erzurum'],['Trakya Edirne',58,'Edirne'],['Fırat Malatya',59,'Malatya']];
 const TR_CITIES = ['Samsun','Ordu','Giresun','Rize','Artvin','Sivas','Tokat','Amasya','Çorum','Yozgat','Kırşehir','Aksaray','Niğde','Karaman','Isparta','Burdur','Denizli','Aydın','Muğla','Manisa','Uşak','Afyon','Kütahya','Bilecik','Eskişehir','Bolu','Düzce','Zonguldak','Bartın','Karabük','Kastamonu','Sinop','Çankırı','Kırıkkale','Balıkesir','Çanakkale','Tekirdağ','Kırklareli','Yalova','Kocaeli','Hatay','Osmaniye','Maraş','Adıyaman','Urfa','Diyarbakır','Mardin','Batman','Siirt','Elazığ','Bingöl','Muş','Van','Bitlis','Ağrı','Kars','Ardahan','Iğdır','Erzincan','Gümüşhane','Bayburt','Tunceli','Hakkari','Şırnak','Kilis','İnegöl','Alanya','Bodrum','Fethiye','Ereğli','Tarsus','Nazilli','Söke','Bandırma','Turgutlu','Akhisar'];
 const TR_SUFFIX = ['Gençlik SK','Yıldız FK','Ova SK','Birlik FK','Akademi SK','Şimşek SK','Kale FK','Atletik SK','Demir FK','Sancak SK','Doğan FK','Çınar SK'];
-const TIER_NAMES = ['Bölgesel Amatör Lig','3. Lig','2. Lig','1. Lig','Süper Lig'];
+const TIER_NAMES = ['Bölgesel Amatör Lig','3. Lig','2. Lig','1. Lig','Zirve Lig'];
 const TIER_STR = [[30,46],[40,54],[47,60],[54,68]];
 const TIER_FEE = [4500,9000,17000,34000,78000];
-const RANK_NAMES = ['Bölgesel Hakem','3. Lig Hakemi','2. Lig Hakemi','1. Lig Hakemi','Süper Lig Hakemi'];
+const RANK_NAMES = ['Bölgesel Hakem','3. Lig Hakemi','2. Lig Hakemi','1. Lig Hakemi','Zirve Lig Hakemi'];
 const UEFA_CATS = ['Kategori 3','Kategori 2','Kategori 1','Elit Gelişim','Elit'];
 const ENGLISH = ['A2','B1','B2','C1'];
 
 const LEAGUES = {
- ENG:{country:'İngiltere',league:'Premier Lig',pool:'uefa',vr:true,glt:true,fee:165000,move:true,teams:[['Riverside United',90,'Northam'],['Northbridge City',91,'Northam'],['Kingsport Athletic',84,'Kingsport'],['Harbourgate FC',81,'Kingsport'],['Ashford Rovers',77,'Ashford'],['Millbrook Town',72,'Millbrook'],['Westvale Albion',74,'Westvale'],['Old Foundry FC',70,'Foundry'],['Crownfield Wanderers',69,'Crownfield'],['Seaview County',66,'Seaview'],['Larkhill Rangers',67,'Larkhill'],['Thornbury FC',65,'Thornbury']]},
- ESP:{country:'İspanya',league:'Primera División',pool:'uefa',vr:true,glt:true,fee:150000,move:true,teams:[['Real Costa Blanca',91,'Costa'],['Atlético Meseta',88,'Meseta'],['CD Valle Verde',80,'Valle'],['Unión Sierra',77,'Sierra'],['Deportivo Puerto',75,'Puerto'],['SD Olivar',71,'Olivar'],['Racing Bahía',69,'Bahía'],['CF Castillo',73,'Meseta'],['UD Llano',67,'Llano'],['Real Peñón',68,'Peñón'],['CD Ribera',65,'Ribera'],['Atlético Marea',70,'Costa']]},
- ITA:{country:'İtalya',league:'Serie A',pool:'uefa',vr:true,glt:true,fee:150000,move:true,teams:[['AC Laguna',88,'Laguna'],['Sportiva Laguna',86,'Laguna'],['FC Vesuvio Blu',83,'Vesuvio'],['AC Tevere',80,'Capitolina'],['SS Capitolina',79,'Capitolina'],['US Torre',76,'Torre'],['Atletico Pianura',73,'Pianura'],['SS Lago Nord',72,'Lago'],['AS Dolomiti',70,'Dolomiti'],['Calcio Marina',68,'Marina'],['FC Arno',74,'Arno'],['Virtus Etna',67,'Etna']]},
- GER:{country:'Almanya',league:'Bundesliga',pool:'uefa',vr:true,glt:true,fee:150000,move:true,teams:[['FC Rheinstadt',91,'Rheinstadt'],['Borussia Waldheim',86,'Waldheim'],['SV Elbhafen',80,'Elbhafen'],['Union Elbhafen',71,'Elbhafen'],['TSV Bergtal',76,'Bergtal'],['VfB Hügelburg',75,'Hügelburg'],['1. FC Nordmark',72,'Nordmark'],['Eintracht Moorfeld',73,'Moorfeld'],['SC Donauufer',68,'Donau'],['Fortuna Kohlberg',70,'Kohlberg'],['Hertha Seestadt',71,'Seestadt'],['VfL Lindenau',67,'Lindenau']]},
- FRA:{country:'Fransa',league:'Ligue 1',pool:'uefa',vr:true,glt:true,fee:140000,move:true,teams:[['Paris Lumière FC',91,'Paris'],['Stade Paris Est',70,'Paris'],['Olympique Littoral',84,'Littoral'],['SC Provence',73,'Littoral'],['Olympique Rhône',80,'Rhône'],['AS Montvert',78,'Montvert'],['FC Garonne',75,'Garonne'],['Racing Alsace',72,'Alsace'],['Stade Bretagne',74,'Bretagne'],['US Normandie',68,'Normandie'],['FC Loire',69,'Loire'],['AS Jura',66,'Jura']]},
- POR:{country:'Portekiz',league:'Primeira Liga',pool:'uefa',vr:true,glt:false,fee:110000,move:true,teams:[['SL Tejo',86,'Lizbon'],['Sporting Ribeira',84,'Lizbon'],['FC Atlântico',85,'Porto'],['Boa Vista Douro',70,'Porto'],['Vitória Minho',74,'Minho'],['CD Algarve',68,'Algarve'],['Académica Mondego',69,'Mondego'],['Marítimo Ilha',67,'Ilha'],['Gil Alentejo',65,'Alentejo'],['SC Beira',66,'Beira'],['Estrela Sintra',67,'Sintra'],['FC Serra',64,'Serra']]},
- NED:{country:'Hollanda',league:'Eredivisie',pool:'uefa',vr:true,glt:true,fee:110000,move:true,teams:[['AFC Grachtstad',85,'Amsterdam'],['FC Havenstad',83,'Rotterdam'],['Sparta Haven',66,'Rotterdam'],['Lichtstad FC',84,'Eindhoven'],['Polder FC',76,'Polder'],['SV Kanaal',74,'Kanaal'],['VV Duinwijk',70,'Duinwijk'],['SC Molenveld',68,'Molenveld'],['FC Tulpen',69,'Tulpen'],['Go Vooruit',67,'Deventer'],['SC Heideveen',71,'Heideveen'],['NEC Rivierstad',70,'Rivierstad']]},
- SAU:{country:'Suudi Arabistan',league:'Suudi Pro Lig',pool:'afc',vr:true,glt:true,fee:290000,move:true,teams:[['Al-Najm FC',85,'Riyad'],['Al-Sahraa',83,'Riyad'],['Al-Wahat',80,'Cidde'],['Al-Qimma',78,'Cidde'],['Al-Bahr',74,'Dammam'],['Al-Fajr',72,'Mekke'],['Al-Nakheel',70,'Medine'],['Al-Rimal',68,'Tebük'],['Al-Sharq',71,'Dammam'],['Al-Wadi',66,'Ebha'],['Al-Jabal',65,'Taif'],['Al-Khaleej Dammam',69,'Dammam']]},
- GRE:{country:'Yunanistan',league:'Süper Lig',pool:'uefa',vr:true,glt:false,fee:90000,move:true,teams:[['Pireas Thyella',79,'Atina'],['Athinaikos Aster',78,'Atina'],['Thessaloniki Lefkos',74,'Selanik'],['Aris Thermaikos',71,'Selanik'],['PAS Thessalia',68,'Larisa'],['Kriti FC',66,'Girit'],['Achaia FC',64,'Patras'],['Ionikos Kerkyra',63,'Korfu']]},
+ ENG:{country:'İngiltere',league:'Prestij Lig',pool:'uefa',vr:true,glt:true,fee:165000,move:true,teams:[['Riverside United',90,'Northam'],['Northbridge City',91,'Northam'],['Kingsport Athletic',84,'Kingsport'],['Harbourgate FC',81,'Kingsport'],['Ashford Rovers',77,'Ashford'],['Millbrook Town',72,'Millbrook'],['Westvale Albion',74,'Westvale'],['Old Foundry FC',70,'Foundry'],['Crownfield Wanderers',69,'Crownfield'],['Seaview County',66,'Seaview'],['Larkhill Rangers',67,'Larkhill'],['Thornbury FC',65,'Thornbury']]},
+ ESP:{country:'İspanya',league:'Liga Suprema',pool:'uefa',vr:true,glt:true,fee:150000,move:true,teams:[['Real Costa Blanca',91,'Costa'],['Atlético Meseta',88,'Meseta'],['CD Valle Verde',80,'Valle'],['Unión Sierra',77,'Sierra'],['Deportivo Puerto',75,'Puerto'],['SD Olivar',71,'Olivar'],['Racing Bahía',69,'Bahía'],['CF Castillo',73,'Meseta'],['UD Llano',67,'Llano'],['Real Peñón',68,'Peñón'],['CD Ribera',65,'Ribera'],['Atlético Marea',70,'Costa']]},
+ ITA:{country:'İtalya',league:'Serie Oro',pool:'uefa',vr:true,glt:true,fee:150000,move:true,teams:[['AC Laguna',88,'Laguna'],['Sportiva Laguna',86,'Laguna'],['FC Vesuvio Blu',83,'Vesuvio'],['AC Tevere',80,'Capitolina'],['SS Capitolina',79,'Capitolina'],['US Torre',76,'Torre'],['Atletico Pianura',73,'Pianura'],['SS Lago Nord',72,'Lago'],['AS Dolomiti',70,'Dolomiti'],['Calcio Marina',68,'Marina'],['FC Arno',74,'Arno'],['Virtus Etna',67,'Etna']]},
+ GER:{country:'Almanya',league:'Meisterliga',pool:'uefa',vr:true,glt:true,fee:150000,move:true,teams:[['FC Rheinstadt',91,'Rheinstadt'],['Borussia Waldheim',86,'Waldheim'],['SV Elbhafen',80,'Elbhafen'],['Union Elbhafen',71,'Elbhafen'],['TSV Bergtal',76,'Bergtal'],['VfB Hügelburg',75,'Hügelburg'],['1. FC Nordmark',72,'Nordmark'],['Eintracht Moorfeld',73,'Moorfeld'],['SC Donauufer',68,'Donau'],['Fortuna Kohlberg',70,'Kohlberg'],['Hertha Seestadt',71,'Seestadt'],['VfL Lindenau',67,'Lindenau']]},
+ FRA:{country:'Fransa',league:'Ligue Élite',pool:'uefa',vr:true,glt:true,fee:140000,move:true,teams:[['Paris Lumière FC',91,'Paris'],['Stade Paris Est',70,'Paris'],['Olympique Littoral',84,'Littoral'],['SC Provence',73,'Littoral'],['Olympique Rhône',80,'Rhône'],['AS Montvert',78,'Montvert'],['FC Garonne',75,'Garonne'],['Racing Alsace',72,'Alsace'],['Stade Bretagne',74,'Bretagne'],['US Normandie',68,'Normandie'],['FC Loire',69,'Loire'],['AS Jura',66,'Jura']]},
+ POR:{country:'Portekiz',league:'Liga Lusitana',pool:'uefa',vr:true,glt:false,fee:110000,move:true,teams:[['SL Tejo',86,'Lizbon'],['Sporting Ribeira',84,'Lizbon'],['FC Atlântico',85,'Porto'],['Boa Vista Douro',70,'Porto'],['Vitória Minho',74,'Minho'],['CD Algarve',68,'Algarve'],['Académica Mondego',69,'Mondego'],['Marítimo Ilha',67,'Ilha'],['Gil Alentejo',65,'Alentejo'],['SC Beira',66,'Beira'],['Estrela Sintra',67,'Sintra'],['FC Serra',64,'Serra']]},
+ NED:{country:'Hollanda',league:'Topdivisie',pool:'uefa',vr:true,glt:true,fee:110000,move:true,teams:[['AFC Grachtstad',85,'Amsterdam'],['FC Havenstad',83,'Rotterdam'],['Sparta Haven',66,'Rotterdam'],['Lichtstad FC',84,'Eindhoven'],['Polder FC',76,'Polder'],['SV Kanaal',74,'Kanaal'],['VV Duinwijk',70,'Duinwijk'],['SC Molenveld',68,'Molenveld'],['FC Tulpen',69,'Tulpen'],['Go Vooruit',67,'Deventer'],['SC Heideveen',71,'Heideveen'],['NEC Rivierstad',70,'Rivierstad']]},
+ SAU:{country:'Suudi Arabistan',league:'Çöl Pro Lig',pool:'afc',vr:true,glt:true,fee:290000,move:true,teams:[['Al-Najm FC',85,'Riyad'],['Al-Sahraa',83,'Riyad'],['Al-Wahat',80,'Cidde'],['Al-Qimma',78,'Cidde'],['Al-Bahr',74,'Dammam'],['Al-Fajr',72,'Mekke'],['Al-Nakheel',70,'Medine'],['Al-Rimal',68,'Tebük'],['Al-Sharq',71,'Dammam'],['Al-Wadi',66,'Ebha'],['Al-Jabal',65,'Taif'],['Al-Khaleej Dammam',69,'Dammam']]},
+ GRE:{country:'Yunanistan',league:'Ege Lig',pool:'uefa',vr:true,glt:false,fee:90000,move:true,teams:[['Pireas Thyella',79,'Atina'],['Athinaikos Aster',78,'Atina'],['Thessaloniki Lefkos',74,'Selanik'],['Aris Thermaikos',71,'Selanik'],['PAS Thessalia',68,'Larisa'],['Kriti FC',66,'Girit'],['Achaia FC',64,'Patras'],['Ionikos Kerkyra',63,'Korfu']]},
  BEL:{country:'Belçika',pool:'uefa',teams:[['Club Scheldepoort',76,'Anvers'],['Royal Ardenne',73,'Liège'],['KAA Leie',70,'Gent']]},
  SCO:{country:'İskoçya',pool:'uefa',teams:[['Clydeside FC',77,'Glasgow'],['Glasgow Thistle',75,'Glasgow'],['Highland Athletic',68,'Aberdeen']]},
  AUT:{country:'Avusturya',pool:'uefa',teams:[['SK Alpenstadt',73,'Salzburg'],['FK Donauwien',71,'Viyana']]},
@@ -1234,7 +1234,7 @@ const NATIONS = [['Fransa',90,'UEFA'],['İngiltere',89,'UEFA'],['İspanya',90,'U
 const KITS = [['#d62d3a','#fff'],['#1f4fbf','#fff'],['#f2f2f2','#111'],['#16181d','#fff'],['#f0c419','#111'],['#2e8b57','#fff'],['#7a1f3d','#fff'],['#6aa9e9','#0b1f3a'],['#f37021','#111'],['#5b2a86','#fff'],['#0b6e4f','#fff'],['#a7b1bd','#111'],['#8b0000','#ffd700'],['#003366','#ffcc00'],['#00a3a3','#fff'],['#b5179e','#fff']];
 
 // ---------- home countries (career start) ----------
-LEAGUES.TR={country:'Türkiye',league:'Süper Lig',pool:'uefa',vr:true,glt:false,fee:78000,move:true,teams:TR4_RAW};
+LEAGUES.TR={country:'Türkiye',league:'Zirve Lig',pool:'uefa',vr:true,glt:false,fee:78000,move:true,teams:TR4_RAW};
 const HOME_CITIES={
  ENG:['Bristol','Leeds','Norwich','Hull','Derby','Stoke','Reading','Luton','Wigan','Preston','Blackpool','Exeter','Plymouth','Carlisle','Lincoln','York','Oxford','Swindon','Barnsley','Burnley','Walsall','Crewe','Gillingham','Cheltenham','Bolton','Rotherham','Doncaster','Ipswich','Coventry','Portsmouth'],
  ESP:['Albacete','Badajoz','Burgos','Cádiz','Cáceres','Córdoba','Elche','Gijón','Huelva','Jaén','León','Lleida','Logroño','Lugo','Murcia','Ourense','Palencia','Salamanca','Santander','Segovia','Soria','Tarragona','Teruel','Toledo','Valladolid','Vigo','Zamora','Zaragoza','Almería','Ávila'],
@@ -1246,16 +1246,16 @@ const HOME_CITIES={
 };
 const HOME_SUF={TR:TR_SUFFIX.map(s=>'{c} '+s),ENG:['{c} Harriers','{c} Corinthians','{c} Albion','{c} Sporting','{c} Rangers','{c} Unity','{c} Phoenix'],ESP:['CD {c}','UD {c}','Atlético {c}','Racing {c}','SD {c}','CF {c}','Unión {c}'],ITA:['US {c}','AC {c}','{c} Calcio','SS {c}','Virtus {c}','Atletico {c}','Sporting {c}'],GER:['FC {c}','SV {c}','VfB {c}','TSV {c}','SC {c}','Eintracht {c}','Fortuna {c}'],FRA:['FC {c}','AS {c}','US {c}','Stade {c}','Olympique {c}','SC {c}','Racing {c}'],POR:['FC {c}','SC {c}','CD {c}','Atlético {c}','União {c}','GD {c}','Académico {c}'],NED:['FC {c}','SC {c}','VV {c}','{c} Boys','SV {c}','Go {c}','Quick {c}']};
 const HOMES=(()=>{ const meta={
-  TR:{fed:'TFF',kurul:'Merkez Hakem Kurulu',cup:'Türkiye Kupası Finali',note:'Derbi ateşi ve tribün baskısı. Kararların ertesi gün bütün ülkede konuşulur.',tag:'Tutku'},
-  ENG:{fed:'FA',kurul:'Profesyonel Hakem Kurulu',cup:'İngiltere Kupası Finali',note:'Dünyanın en çok izlenen ligi. Hızlı oyun, sert ikili mücadeleler, acımasız medya.',tag:'Tempo'},
-  ESP:{fed:'RFEF',kurul:'Teknik Hakem Komitesi',cup:'İspanya Kupası Finali',note:'Teknik oyun ve simülasyon. Keskin göz ve sakinlik ister.',tag:'Teknik'},
-  ITA:{fed:'FIGC',kurul:'Hakemler Birliği',cup:'İtalya Kupası Finali',note:'Taktik fauller ve VAR tartışmalarının ülkesi. Her karar didiklenir.',tag:'Taktik'},
-  GER:{fed:'DFB',kurul:'DFB Hakem Komitesi',cup:'Almanya Kupası Finali',note:'Disiplinli yapı ve yüksek tempo. Kondisyonun en çok sınandığı lig.',tag:'Disiplin'},
-  FRA:{fed:'FFF',kurul:'Hakemlik Direktörlüğü',cup:'Fransa Kupası Finali',note:'Atletik, genç oyuncular ve fiziksel ikili mücadeleler.',tag:'Fizik'},
-  POR:{fed:'FPF',kurul:'Hakem Konseyi',cup:'Portekiz Kupası Finali',note:'Üç büyüklerin derbilerinde baskı tavan yapar; yabancı hakem tartışmaları bitmez.',tag:'Baskı'},
-  NED:{fed:'KNVB',kurul:'Hakemlik Departmanı',cup:'Hollanda Kupası Finali',note:'Hücum futbolu, hızlı geçişler ve sık ofsayt pozisyonları.',tag:'Hücum'}};
-  const out={}; for(const k in meta){ const L=LEAGUES[k]; const tiers=k==='TR'?['Bölgesel Amatör Lig','3. Lig','2. Lig','1. Lig','Süper Lig']:['Amatör Lig','4. Lig','3. Lig','2. Lig',L.league];
-    out[k]=Object.assign({code:k,name:L.country,nt:L.country,top:L.league,tiers,ranks:k==='TR'?['Bölgesel Hakem','3. Lig Hakemi','2. Lig Hakemi','1. Lig Hakemi','Süper Lig Hakemi']:tiers.map(t=>t+' Hakemi')},meta[k]); }
+  TR:{fed:'TFB',kurul:'Merkez Hakem Kurulu',cup:'Türkiye Kupası Finali',note:'Derbi ateşi ve tribün baskısı. Kararların ertesi gün bütün ülkede konuşulur.',tag:'Tutku'},
+  ENG:{fed:'EFB',kurul:'Profesyonel Hakem Kurulu',cup:'İngiltere Kupası Finali',note:'Dünyanın en çok izlenen ligi. Hızlı oyun, sert ikili mücadeleler, acımasız medya.',tag:'Tempo'},
+  ESP:{fed:'İFF',kurul:'Teknik Hakem Komitesi',cup:'İspanya Kupası Finali',note:'Teknik oyun ve simülasyon. Keskin göz ve sakinlik ister.',tag:'Teknik'},
+  ITA:{fed:'İTFB',kurul:'Hakemler Birliği',cup:'İtalya Kupası Finali',note:'Taktik fauller ve VAR tartışmalarının ülkesi. Her karar didiklenir.',tag:'Taktik'},
+  GER:{fed:'AFB',kurul:'AFB Hakem Komitesi',cup:'Almanya Kupası Finali',note:'Disiplinli yapı ve yüksek tempo. Kondisyonun en çok sınandığı lig.',tag:'Disiplin'},
+  FRA:{fed:'FFB',kurul:'Hakemlik Direktörlüğü',cup:'Fransa Kupası Finali',note:'Atletik, genç oyuncular ve fiziksel ikili mücadeleler.',tag:'Fizik'},
+  POR:{fed:'PFB',kurul:'Hakem Konseyi',cup:'Portekiz Kupası Finali',note:'Üç büyüklerin derbilerinde baskı tavan yapar; yabancı hakem tartışmaları bitmez.',tag:'Baskı'},
+  NED:{fed:'HFB',kurul:'Hakemlik Departmanı',cup:'Hollanda Kupası Finali',note:'Hücum futbolu, hızlı geçişler ve sık ofsayt pozisyonları.',tag:'Hücum'}};
+  const out={}; for(const k in meta){ const L=LEAGUES[k]; const tiers=k==='TR'?['Bölgesel Amatör Lig','3. Lig','2. Lig','1. Lig','Zirve Lig']:['Amatör Lig','4. Lig','3. Lig','2. Lig',L.league];
+    out[k]=Object.assign({code:k,name:L.country,nt:L.country,top:L.league,tiers,ranks:k==='TR'?['Bölgesel Hakem','3. Lig Hakemi','2. Lig Hakemi','1. Lig Hakemi','Zirve Lig Hakemi']:tiers.map(t=>t+' Hakemi')},meta[k]); }
   return out; })();
 const HOME_ORDER=['TR','ENG','ESP','ITA','GER','FRA','POR','NED'];
 const NAT = () => HOMES[(S&&S.nationality)||'TR']||HOMES.TR;
@@ -1314,7 +1314,7 @@ function readSlot(n){ try{ const t=localStorage.getItem(slotKey(n))||NSAVE[slotK
 function wipeSlot(n){ delete NSAVE[slotKey(n)]; try{localStorage.removeItem(slotKey(n));}catch(e){} try{ const P=PLUG('Preferences'); if(P) P.remove({key:slotKey(n)}); }catch(e){} }
 function migrateOld(){ try{ const old=localStorage.getItem(OLD_KEY)||NSAVE[OLD_KEY]; if(old && !readSlot(1)){ localStorage.setItem(slotKey(1),old); NSAVE[slotKey(1)]=old; const P=PLUG('Preferences'); if(P){ P.set({key:slotKey(1),value:old}); P.remove({key:OLD_KEY}); } localStorage.removeItem(OLD_KEY); } }catch(e){} }
 function migrateSave(d){ if(!d) return d; if(!d.nationality) d.nationality='TR'; if(!d.country) d.country='TR'; if(d.leagueKey&&/^TR\d$/.test(d.leagueKey)) d.leagueKey='H'+d.leagueKey[2]; if(!d.look) d.look=defLook(); if(!d.growth) d.growth=1; return d; }
-function rankOf(d){ const H=HOMES[d.nationality||'TR']||HOMES.TR; return d.fifa?'FIFA · UEFA '+UEFA_CATS[d.uefaCat]:H.ranks[d.tier]; }
+function rankOf(d){ const H=HOMES[d.nationality||'TR']||HOMES.TR; return d.fifa?'DFF · AFK '+UEFA_CATS[d.uefaCat]:H.ranks[d.tier]; }
 
 // ---------- start screen & career wizard ----------
 let CR=null, SLOT_DEL=null;
@@ -1323,8 +1323,8 @@ function startHTML(){
   const slots=[1,2,3].map(n=>({n,d:readSlot(n)}));
   return `<div class="start"><canvas id="startCv" class="start-bg" aria-hidden="true"></canvas><div class="start-in">
     <div class="start-hero"><div class="eyebrow gold">Hakem kariyer simülatörü</div><div class="logo">Son<br><span>Düdük</span></div>
-      <p class="lede">Amatör ligden Dünya Kupası finaline. Her pozisyonu sahada sen okursun: temas, kol pozisyonu, ofsayt çizgisi, DOGSO ölçütleri. VAR monitöre çağırır, gözlemci not verir, kurul hesap sorar.</p>
-      <div class="feat">${['Canlı 3D maç','13 pozisyon türü','VAR ve OFR','8 ülke · 5 klasman','UEFA ve Dünya Kupası','Haberler · Sosyal · Kurul'].map(t=>`<span>${t}</span>`).join('')}</div></div>
+      <p class="lede">Amatör ligden Dünya Şampiyonası finaline. Her pozisyonu sahada sen okursun: temas, kol pozisyonu, ofsayt çizgisi, DOGSO ölçütleri. VAR monitöre çağırır, gözlemci not verir, kurul hesap sorar.</p>
+      <div class="feat">${['Canlı 3D maç','13 pozisyon türü','VAR ve OFR','8 ülke · 5 klasman','Avrupa ve dünya sahnesi','Haberler · Sosyal · Kurul'].map(t=>`<span>${t}</span>`).join('')}</div></div>
     <div class="slots"><div class="row" style="justify-content:space-between"><span class="eyebrow gold">Kariyer slotları</span><span class="muted" style="font-size:12px">${slots.filter(s=>s.d).length}/3 dolu</span></div>
       ${slots.map(slotCard).join('')}
       <details class="imp"><summary>Kayıt kodu ile yükle</summary><div class="stack" style="margin-top:10px"><textarea id="stImp" rows="3" placeholder="Kayıt kodunu yapıştır"></textarea><div class="row"><label class="lbl" for="impSlot" style="margin:0">Hedef slot</label><select id="impSlot" style="width:auto">${[1,2,3].map(n=>`<option value="${n}">Slot ${n}${slots[n-1].d?' (üzerine yaz)':''}</option>`).join('')}</select><button class="btn sm" id="bStImp">Yükle</button></div></div></details>
@@ -1430,12 +1430,12 @@ function squad(t){
 // ---------- competitions ----------
 const COMPS = {
  LIG:{name:'Lig',p:1}, TRCUP:{name:'Kupa Finali',p:4,fee:180000},
- UYL:{name:'UEFA Gençlik Ligi',p:1,fee:55000}, U21Q:{name:'U21 EURO Elemeleri',p:1,fee:60000},
- UECL:{name:'Konferans Ligi',p:3,fee:120000}, UEL:{name:'Avrupa Ligi',p:4,fee:185000}, UCL:{name:'Şampiyonlar Ligi',p:5,fee:290000},
- UNL:{name:'Uluslar Ligi',p:3,fee:150000}, WCQ:{name:'Dünya Kupası Elemeleri',p:4,fee:190000}, ECQ:{name:'EURO Elemeleri',p:4,fee:190000},
- USC:{name:'UEFA Süper Kupa',p:5,fee:320000}, GUEST:{name:'Misafir Hakem Görevi',p:3,fee:200000},
- EURO:{name:'Avrupa Şampiyonası',p:6,fee:420000}, WC:{name:'Dünya Kupası',p:7,fee:520000}, U21E:{name:'U21 Avrupa Şampiyonası',p:3,fee:160000},
- OLY:{name:'Olimpiyat Oyunları',p:4,fee:220000}, CWC:{name:'Kulüpler Dünya Kupası',p:6,fee:400000}, NLF:{name:'Uluslar Ligi Finalleri',p:5,fee:300000}
+ UYL:{name:'Avrupa Gençlik Ligi',p:1,fee:55000}, U21Q:{name:'U21 Avrupa Şampiyonası Elemeleri',p:1,fee:60000},
+ UECL:{name:'Kıta Kupası',p:3,fee:120000}, UEL:{name:'Avrupa Kupası',p:4,fee:185000}, UCL:{name:'Elitler Ligi',p:5,fee:290000},
+ UNL:{name:'Milletler Kupası',p:3,fee:150000}, WCQ:{name:'Dünya Şampiyonası Elemeleri',p:4,fee:190000}, ECQ:{name:'Avrupa Şampiyonası Elemeleri',p:4,fee:190000},
+ USC:{name:'Avrupa Süper Kupası',p:5,fee:320000}, GUEST:{name:'Misafir Hakem Görevi',p:3,fee:200000},
+ EURO:{name:'Avrupa Şampiyonası',p:6,fee:420000}, WC:{name:'Dünya Şampiyonası',p:7,fee:520000}, U21E:{name:'U21 Avrupa Şampiyonası',p:3,fee:160000},
+ OLY:{name:'Dünya Yaz Oyunları',p:4,fee:220000}, CWC:{name:'Kulüpler Dünya Şampiyonası',p:6,fee:400000}, NLF:{name:'Milletler Kupası Finalleri',p:5,fee:300000}
 };
 const MIDWEEK = {2:'Q',4:'PO',5:'NT',6:'MD1',8:'MD2',9:'NT',10:'MD3',12:'MD4',13:'NT',14:'MD5',16:'MD6',19:'MD7',20:'MD8',22:'KOPO',24:'R16',26:'NT',28:'QF',31:'SF',34:'F'};
 const PHASE_NAMES = {Q:'Eleme turu',PO:'Play-off turu',NT:'Milli maç arası',MD1:'Lig aşaması 1. hafta',MD2:'Lig aşaması 2. hafta',MD3:'Lig aşaması 3. hafta',MD4:'Lig aşaması 4. hafta',MD5:'Lig aşaması 5. hafta',MD6:'Lig aşaması 6. hafta',MD7:'Lig aşaması 7. hafta',MD8:'Lig aşaması 8. hafta',KOPO:'Eleme play-off',R16:'Son 16',QF:'Çeyrek final',SF:'Yarı final',F:'Final'};
@@ -1466,7 +1466,7 @@ function toast(msg){ const t=$('#toast'); while(t.children.length>=3) t.firstChi
 function mail(from,subject,body,tag){ S.inbox.unshift({id:uid('m'),season:S.season,week:S.week,from,subject,body,tag:tag||'',read:false}); if(S.inbox.length>90) S.inbox.length=90; }
 function seasonLabel(y){ return y+'/'+String(y+1).slice(2); }
 function weekDate(w){ const d=new Date(S.season,7,9); d.setDate(d.getDate()+(w-1)*7+(w>17?21:0)); return d.getDate()+' '+MONTHS[d.getMonth()]+' '+d.getFullYear(); }
-function rankText(){ if(S.fifa) return 'FIFA · UEFA '+UEFA_CATS[S.uefaCat]; return rankName(S.tier); }
+function rankText(){ if(S.fifa) return 'DFF · AFK '+UEFA_CATS[S.uefaCat]; return rankName(S.tier); }
 function abroad(){ return !home(); }
 function uefaActive(){ return S.fifa && (home() || (LEAGUES[S.country]&&LEAGUES[S.country].pool==='uefa')); }
 function milestone(id){ if(!S.milestones[id]){ S.milestones[id]=seasonLabel(S.season)+' · H'+S.week; const m=MILESTONES.find(x=>x.id===id); if(m) toast('Kariyer anı: '+m.name); } }
@@ -1494,7 +1494,7 @@ function whistle(kind){
 // =========================================================
 const SPECS = {
   atlet:{name:'Atlet',desc:'Kondisyonu yüksek, 90 dakika boyunca oyunun içinde.',mod:{kondisyon:14,pozisyon:4}},
-  kural:{name:'Kural kurdu',desc:'IFAB kitabını ezbere bilir, ek kural kitabı hakkı.',mod:{kural:14,pozisyon:4}},
+  kural:{name:'Kural kurdu',desc:'Oyun Kuralları kitabını ezbere bilir, ek kural kitabı hakkı.',mod:{kural:14,pozisyon:4}},
   psikolog:{name:'Buz gibi',desc:'Baskı altında sakin; karar süresi daha uzun.',mod:{sogukkanlilik:14,iletisim:4}},
   lider:{name:'Lider',desc:'Oyuncu yönetimi güçlü; maç ısısını çabuk düşürür.',mod:{iletisim:14,sogukkanlilik:4}},
   genc:{name:'Genç yetenek',desc:'Erken başlar, her şeyi daha hızlı öğrenir. Başlangıç nitelikleri biraz düşük.',mod:{kondisyon:6},base:-3,growth:1.25,ageMax:23},
@@ -1504,10 +1504,10 @@ const ATTR_NAMES = {kondisyon:'Kondisyon',pozisyon:'Pozisyon alma',kural:'Kural 
 const DIFFS = {kolay:{name:'Kolay',desc:'30 sn karar süresi, daha net görüş.',timer:30,vis:.12},normal:{name:'Normal',desc:'20 sn karar süresi.',timer:20,vis:0},gercekci:{name:'Gerçekçi',desc:'13 sn, kısıtlı görüş, anlık geri bildirim yok.',timer:13,vis:-.08}};
 const MILESTONES = [
  {id:'ilk',name:'İlk düdük',d:'İlk resmi maçını yönet.'},{id:'derbi',name:'Derbi ateşi',d:'İlk derbini yönet.'},{id:'kusursuz',name:'Kusursuz',d:'Bir maçtan 9.0+ not al.'},
- {id:'lig3',name:'Profesyonel',d:'İlk profesyonel klasmana yüksel.'},{id:'super',name:'Zirve ligi',d:'Ülkenin en üst ligine yüksel.'},{id:'fifa',name:'FIFA kokartı',d:'FIFA listesine gir.'},
- {id:'avrupa',name:'Avrupa gecesi',d:'İlk UEFA maçını yönet.'},{id:'ucl',name:'Marş çalıyor',d:'Şampiyonlar Ligi maçı yönet.'},{id:'elit',name:'Elit',d:'UEFA Elit kategorisine çık.'},
+ {id:'lig3',name:'Profesyonel',d:'İlk profesyonel klasmana yüksel.'},{id:'super',name:'Zirve ligi',d:'Ülkenin en üst ligine yüksel.'},{id:'fifa',name:'DFF kokartı',d:'DFF listesine gir.'},
+ {id:'avrupa',name:'Avrupa gecesi',d:'İlk AFK maçını yönet.'},{id:'ucl',name:'Marş çalıyor',d:'Elitler Ligi maçı yönet.'},{id:'elit',name:'Elit',d:'AFK Elit kategorisine çık.'},
  {id:'final',name:'Final hakemi',d:'Bir Avrupa kupası finali yönet.'},{id:'misafir',name:'Yabancı derbi',d:'Başka ülkede misafir hakem ol.'},{id:'yurtdisi',name:'Gurbet',d:'Yabancı bir ligde sözleşme imzala.'},
- {id:'turnuva',name:'Büyük turnuva',d:'EURO ya da Dünya Kupası\'na seçil.'},{id:'dkfinal',name:'Dünya Kupası finali',d:'Dünya Kupası finalini yönet.'},{id:'yilin',name:'Yılın hakemi',d:'Sezonu yılın hakemi ödülüyle bitir.'}
+ {id:'turnuva',name:'Büyük turnuva',d:'Avrupa ya da Dünya Şampiyonası\'na seçil.'},{id:'dkfinal',name:'Dünya Şampiyonası finali',d:'Dünya Şampiyonası finalini yönet.'},{id:'yilin',name:'Yılın hakemi',d:'Sezonu yılın hakemi ödülüyle bitir.'}
 ];
 
 function newCareer(o){
@@ -1535,7 +1535,7 @@ function roundRobin(ids){
 function startSeason(first){
   if(!first){
     S.season++; S.age++;
-    if(S.pendingMove){ const to=S.pendingMove; S.pendingMove=null; S.country=to.country; S.contract=to.years||0; if(to.country!==S.nationality){ milestone('yurtdisi'); mail('Sözleşme','Yeni ligine hoş geldin',LEAGUES[to.country].league+' hakem havuzundasın. '+(LEAGUES[to.country].pool==='uefa'?'UEFA görevlerin devam ediyor.':'Bu ligdeyken UEFA görevleri askıya alındı; FIFA kokartın geçerli.'),'fed'); } else mail(NAT().kurul,'Yuvaya dönüş',tierName(4)+' hakem listesine yeniden dahil edildin.','fed'); }
+    if(S.pendingMove){ const to=S.pendingMove; S.pendingMove=null; S.country=to.country; S.contract=to.years||0; if(to.country!==S.nationality){ milestone('yurtdisi'); mail('Sözleşme','Yeni ligine hoş geldin',LEAGUES[to.country].league+' hakem havuzundasın. '+(LEAGUES[to.country].pool==='uefa'?'AFK görevlerin devam ediyor.':'Bu ligdeyken AFK görevleri askıya alındı; DFF kokartın geçerli.'),'fed'); } else mail(NAT().kurul,'Yuvaya dönüş',tierName(4)+' hakem listesine yeniden dahil edildin.','fed'); }
   }
   S.leagueKey = home() ? 'H'+S.tier : S.country;
   const ids=shuffle(leagueTeams(S.leagueKey).map(t=>t.id));
@@ -1613,7 +1613,7 @@ function assignMidweek(ph){
     if(!comp) return null;
     const pool = comp==='UCL'?poolClubs(84,99):comp==='UEL'?poolClubs(76,88):poolClubs(68,82);
     const [h,a]=pair(pool);
-    mail('UEFA Hakem Komitesi','Final ataması: '+COMPS[comp].name,'Tebrikler. Sezonun en kritik maçı için seçildin. Bu görev, kariyerinin dönüm noktası olabilir.','uefa');
+    mail('AFK Hakem Komitesi','Final ataması: '+COMPS[comp].name,'Tebrikler. Sezonun en kritik maçı için seçildin. Bu görev, kariyerinin dönüm noktası olabilir.','uefa');
     return makeFx({kind:'mid',comp,compName:COMPS[comp].name,home:h.id,away:a.id,imp:5,derby:false,vr:true,glt:true,lvl:6,fee:COMPS[comp].fee*2,stage:'Final',final:true});
   }
   if(ph==='Q' && cat>=4 && chance(.35)){
@@ -1641,7 +1641,7 @@ function teamLabel(fx,side){ const t=team(side==='h'?fx.home:fx.away); return t.
 const ACTS = [
  {id:'kondisyon',name:'Saha antrenmanı',desc:'Sprint, interval, yön değiştirme',eff:{kondisyon:1.6},energy:-12},
  {id:'video',name:'Video analiz',desc:'Kendi maçlarından konum kesitleri',eff:{pozisyon:1.5},energy:-4},
- {id:'kural',name:'Kural semineri',desc:'IFAB değişiklikleri, vaka çalışması',eff:{kural:1.6},energy:-3},
+ {id:'kural',name:'Kural semineri',desc:'Kural değişiklikleri, vaka çalışması',eff:{kural:1.6},energy:-3},
  {id:'mental',name:'Spor psikoloğu',desc:'Baskı altında karar, nefes',eff:{sogukkanlilik:1.5},energy:2},
  {id:'iletisim',name:'İletişim atölyesi',desc:'Beden dili, oyuncu yönetimi',eff:{iletisim:1.5},energy:-3},
  {id:'dinlen',name:'Dinlenme',desc:'Enerjini ve formunu toparla',eff:{},energy:30},
@@ -1689,7 +1689,7 @@ function genOffers(){
     else { const L=LEAGUES[k]; const yrs=ri(2,3);
       S.offers.push({id:uid('of'),type:'move',season:S.season,exp:S.week+4,country:k,years:yrs,
         title:L.country+' — '+L.league+' hakem sözleşmesi ('+yrs+' sezon)',
-        body:L.league+' hakem departmanı seni profesyonel kadrosuna istiyor. Maç başı ücret '+money(L.fee)+'. '+(L.pool==='uefa'?'UEFA görevlerin bu ülkeden devam eder.':'Dikkat: bu ligdeyken UEFA ataması alamazsın; FIFA kokartın korunur.')+' Gelecek sezondan itibaren geçerli.'});
+        body:L.league+' hakem departmanı seni profesyonel kadrosuna istiyor. Maç başı ücret '+money(L.fee)+'. '+(L.pool==='uefa'?'AFK görevlerin bu ülkeden devam eder.':'Dikkat: bu ligdeyken AFK ataması alamazsın; DFF kokartın korunur.')+' Gelecek sezondan itibaren geçerli.'});
     }
     mail('Menajerin','Yeni sözleşme teklifi','Teklifler ekranında bekleyen bir transfer teklifi var.','offer');
   }
@@ -1734,24 +1734,24 @@ function seasonEnd(){
   if(home()){
     if(dom.length>=8 && dAvg>=8.35 && S.tier<4){ S.tier++; lines.push(['up','Klasman yükseldi: '+rankName(S.tier)]); if(S.tier===1) milestone('lig3'); if(S.tier===4) milestone('super'); }
     else if(dom.length>=8 && dAvg<7.7 && S.tier>0 && !S.fifa){ S.tier--; lines.push(['down','Klasman düştü: '+rankName(S.tier)]); }
-    else if(dom.length>=8 && dAvg<7.7 && S.fifa){ lines.push(['down','Ortalaman düşük: FIFA listesindeki yerin tartışmaya açıldı.']); S.rep=clamp(S.rep-6,0,100); }
+    else if(dom.length>=8 && dAvg<7.7 && S.fifa){ lines.push(['down','Ortalaman düşük: DFF listesindeki yerin tartışmaya açıldı.']); S.rep=clamp(S.rep-6,0,100); }
     else lines.push(['same','Klasmanın korundu: '+rankName(S.tier)]);
   } else lines.push(['same',LEAGUES[S.country].league+' kadrosunda sezonu tamamladın.']);
-  // FIFA badge
+  // DFF badge
   if(!S.fifa && prevTier===4 && dom.length>=8){
-    if(dAvg>=8.3 && S.age<=38 && S.english>=2){ S.fifa=true; S.uefaCat=0; lines.push(['up','FIFA kokartı kazandın! UEFA Kategori 3 ile Avrupa yolu açıldı.']); milestone('fifa'); }
-    else if(S.english<2) lines.push(['warn','FIFA kokartı için en az B2 İngilizce şart (Gelişim > Dil kursu).']);
-    else if(S.age>38) lines.push(['warn','FIFA listesine ilk giriş için yaş sınırı (38) aşıldı.']);
-    else lines.push(['warn','FIFA kokartı için sezon ortalaması 8.30+ olmalı.']);
+    if(dAvg>=8.3 && S.age<=38 && S.english>=2){ S.fifa=true; S.uefaCat=0; lines.push(['up','DFF kokartı kazandın! AFK Kategori 3 ile Avrupa yolu açıldı.']); milestone('fifa'); }
+    else if(S.english<2) lines.push(['warn','DFF kokartı için en az B2 İngilizce şart (Gelişim > Dil kursu).']);
+    else if(S.age>38) lines.push(['warn','DFF listesine ilk giriş için yaş sınırı (38) aşıldı.']);
+    else lines.push(['warn','DFF kokartı için sezon ortalaması 8.30+ olmalı.']);
   }
-  // UEFA category
+  // AFK category
   if(S.fifa && prevCat>=0 && intl.length>=3){
     if(iAvg>=8.45 && dAvg>=8.0 && S.uefaCat<4){
       if(S.uefaCat===3 && S.english<3) lines.push(['warn','Elit kategori için C1 İngilizce gerekiyor.']);
-      else { S.uefaCat++; lines.push(['up','UEFA kategorin yükseldi: '+UEFA_CATS[S.uefaCat]]); if(S.uefaCat===4) milestone('elit'); }
-    } else if(iAvg<7.85 && S.uefaCat>0){ S.uefaCat--; lines.push(['down','UEFA kategorin düştü: '+UEFA_CATS[S.uefaCat]]); }
-    else lines.push(['same','UEFA kategorin korundu: '+UEFA_CATS[S.uefaCat]]);
-  } else if(S.fifa && prevCat>=0 && uefaActive()) lines.push(['same','UEFA değerlendirmesi için yeterli uluslararası maç yok (en az 3).']);
+      else { S.uefaCat++; lines.push(['up','AFK kategorin yükseldi: '+UEFA_CATS[S.uefaCat]]); if(S.uefaCat===4) milestone('elit'); }
+    } else if(iAvg<7.85 && S.uefaCat>0){ S.uefaCat--; lines.push(['down','AFK kategorin düştü: '+UEFA_CATS[S.uefaCat]]); }
+    else lines.push(['same','AFK kategorin korundu: '+UEFA_CATS[S.uefaCat]]);
+  } else if(S.fifa && prevCat>=0 && uefaActive()) lines.push(['same','AFK değerlendirmesi için yeterli uluslararası maç yok (en az 3).']);
   if(dom.length>=10 && dAvg>=8.6 && (S.tier===4||abroad())){ award=true; S.rep=clamp(S.rep+5,0,100); milestone('yilin'); lines.push(['up','Yılın Hakemi ödülü senin! İtibar +5']); }
   // contract
   if(abroad()){ S.contract--; if(S.contract<=0){ S.pendingMove={country:S.nationality,years:0}; lines.push(['same','Yurt dışı sözleşmen bitti; gelecek sezon '+tierName(4)+'\'e dönüyorsun.']); } }
@@ -1863,7 +1863,7 @@ function crest(t,s){ s=s||28; const r=seeded(hash(t.id+'#crest')); const id=uid(
 function moneyShort(n){ n=Math.round(n); if(n>=1e6) return (n/1e6).toFixed(n>=1e7?0:1).replace('.',',')+' Mn ₺'; if(n>=1e4) return Math.round(n/1e3)+' B ₺'; return n.toLocaleString('tr-TR')+' ₺'; }
 function compactNum(n){ n=Math.round(n); if(n>=1e6) return (n/1e6).toFixed(1).replace('.',',')+' Mn'; if(n>=1e3) return (n/1e3).toFixed(n>=1e4?0:1).replace('.',',')+' B'; return String(n); }
 const SOURCES=['Spor Gazetesi','Saha Kenarı','90 Dakika','Gece Bülteni','Tribün Haber','Futbol Ekspres'];
-const PRESS=[{n:'Kemal Uysal',h:'@kemaluysal',role:'Spor muhabiri',v:1},{n:'Pozisyon Analiz',h:'@pozisyonanaliz',role:'Hakem yorumcusu',v:1},{n:'Nihat Çakmak',h:'@nihat_kuralda',role:'Eski FIFA hakemi',v:1},{n:'Saha Kenarı',h:'@sahakenari',role:'Spor sitesi',v:1},{n:'Kural Hocası',h:'@kural_hocasi',role:'Kural eğitmeni'},{n:'Futbol Ekspres',h:'@futbolekspres',role:'Haber',v:1}];
+const PRESS=[{n:'Kemal Uysal',h:'@kemaluysal',role:'Spor muhabiri',v:1},{n:'Pozisyon Analiz',h:'@pozisyonanaliz',role:'Hakem yorumcusu',v:1},{n:'Nihat Çakmak',h:'@nihat_kuralda',role:'Eski DFF hakemi',v:1},{n:'Saha Kenarı',h:'@sahakenari',role:'Spor sitesi',v:1},{n:'Kural Hocası',h:'@kural_hocasi',role:'Kural eğitmeni'},{n:'Futbol Ekspres',h:'@futbolekspres',role:'Haber',v:1}];
 function slug(s){ return s.toLocaleLowerCase('tr-TR').replace(/ç/g,'c').replace(/ğ/g,'g').replace(/ı/g,'i').replace(/ö/g,'o').replace(/ş/g,'s').replace(/ü/g,'u').replace(/[^a-z0-9]+/g,''); }
 function initWorld(){
   if(!S.social) S.social={followers:ri(90,240),handle:'@'+slug(S.name)+'_hakem',posts:[],lastPost:-1};
@@ -1984,7 +1984,7 @@ function simOtherLeagues(w){ if(!S.lg) return; for(const k in S.lg){ const L=S.l
 function tableOf(k){ if(k===S.leagueKey) return S.table; if(!S.lg||!S.lg[k]) initAllLeagues(); return S.lg[k]?S.lg[k].table:null; }
 let LG_VIEW=null;
 function zoneOf(k,pos,n){ const top=k==='H4'||!/^H/.test(k);
-  if(top){ if(pos===1) return ['champ','Şampiyon']; if(pos<=4) return ['ucl','Şampiyonlar Ligi']; if(pos<=6) return ['uel','Avrupa / Konferans']; if(pos>n-3) return ['rel','Düşme']; return null; }
+  if(top){ if(pos===1) return ['champ','Şampiyon']; if(pos<=4) return ['ucl','Elitler Ligi']; if(pos<=6) return ['uel','Avrupa / Kıta Kupası']; if(pos>n-3) return ['rel','Düşme']; return null; }
   if(pos<=2) return ['up','Doğrudan yükselme']; if(pos<=6) return ['po','Play-off']; if(pos>n-3) return ['rel','Düşme']; return null; }
 // =========================================================
 //   CARD SHOWING — referee walks in, raises the card
@@ -2026,7 +2026,7 @@ function showCardFx(red,second,label,teamName){
 //   KURAL AKADEMİSİ — practice cases, drills, weekly exam
 // =========================================================
 const ACAD_TOPICS=[['karisik','Karışık'],['penalti_temas','Ceza sahası teması'],['elle_oynama','Elle oynama'],['ofsayt_gol','Ofsayt'],['orta_saha_faul','Müdahale sertliği'],['dogso','DOGSO / SPA'],['dirsek','Dirsek'],['top_disinda','Top dışında olay'],['kaleci_engelleme','Kaleciye müdahale'],['hucum_elle_gol','Golde elle oynama'],['gol_oncesi_faul','Gol öncesi faul'],['geri_pas','Geri pas'],['penalti_atisi','Penaltı vuruşu']];
-const ACAD_RANKS=[[0,'Aday'],[10,'Bilgili'],[30,'Uzman'],[75,'Kural ustası'],[150,'IFAB seviyesi']];
+const ACAD_RANKS=[[0,'Aday'],[10,'Bilgili'],[30,'Uzman'],[75,'Kural ustası'],[150,'Kural kurulu seviyesi']];
 let ACAD_TOPIC='karisik', ACAD=null;
 function acadState(){ return S.acad||(S.acad={solved:0,correct:0,streak:0,best:0,byType:{},week:-1,gains:0,examWeek:-1,lastExam:null}); }
 function acadRank(n){ let r=ACAD_RANKS[0]; ACAD_RANKS.forEach(x=>{ if(n>=x[0]) r=x; }); const nx=ACAD_RANKS.find(x=>x[0]>n); return {name:r[1],next:nx}; }
@@ -3553,9 +3553,9 @@ function stakesText(fx){
   if(fx.final) parts.push('Final — milyonlar izliyor');
   if(fx.derby) parts.push('Derbi: stat tamamen dolu, gerilim yüksek');
   if(fx.kind==='dom'&&S.week>6){ const t=sortedTable(); const ph=t.findIndex(x=>x.id===fx.home)+1, pa=t.findIndex(x=>x.id===fx.away)+1; if(ph<=3&&pa<=3) parts.push('Zirve yarışı: '+ph+'. ve '+pa+'. karşı karşıya'); if(ph>t.length-4&&pa>t.length-4) parts.push('Küme düşme hattında hayati maç'); }
-  if(fx.kind==='mid') parts.push('Avrupa gecesi — UEFA gözlemcisi tribünde');
+  if(fx.kind==='mid') parts.push('Avrupa gecesi — AFK gözlemcisi tribünde');
   if(fx.kind==='guest') parts.push('Yabancı hakem olarak tüm baskı üzerinde');
-  if(fx.kind==='tour') parts.push(fx.stage+' — FIFA hakem komitesi izliyor');
+  if(fx.kind==='tour') parts.push(fx.stage+' — DFF hakem komitesi izliyor');
   if(!parts.length) parts.push('Normal lig maçı');
   return parts;
 }
@@ -3787,12 +3787,12 @@ function calHTML(){
     if(!body) body=`<div class="wk-empty">${state==='past'?'Görev yok':'—'}</div>`;
     return `<article class="wk ${state}" ${state==='now'?'data-tab2="merkez"':''}><div class="wk-h"><span class="wk-n">${w}. hafta</span><span class="wk-d num">${d.getDate()} ${MONTHS[d.getMonth()]}</span></div>${ph&&S.fifa?`<span class="wk-ph">${esc(PHASE_NAMES[ph])}</span>`:''}${body}${state==='now'?'<span class="wk-now">Bu hafta</span>':''}</article>`; };
   const pct=Math.min(100,(Math.min(cur,35)-1)/34*100);
-  const y=summerYear(); const summer=[(y-2030)%4===0?'Dünya Kupası':null,(y-2028)%4===0?'Avrupa Şampiyonası':null,y%2===1?'U21 EURO · Uluslar Ligi Finalleri':null,(y-2029)%4===0?'Kulüpler Dünya Kupası':null].filter(Boolean);
+  const y=summerYear(); const summer=[(y-2030)%4===0?'Dünya Şampiyonası':null,(y-2028)%4===0?'Avrupa Şampiyonası':null,y%2===1?'U21 Avrupa Şampiyonası · Milletler Kupası Finalleri':null,(y-2029)%4===0?'Kulüpler Dünya Şampiyonası':null].filter(Boolean);
   return `<div class="page-h"><div><div class="eyebrow gold">${esc(leagueName())}</div><h2 class="page-title">${seasonLabel(S.season)} takvimi</h2></div></div>
     <section class="panel cal-top"><div class="cal-kpis"><div><span class="eyebrow">Yönetilen maç</span><b class="num">${hist.length}</b></div><div><span class="eyebrow">Sezon ortalaması</span><b class="num" style="color:${av?rateCol(av):'var(--fg)'}">${av?f1(av):'—'}</b></div><div><span class="eyebrow">En iyi maç</span><b class="num">${best?f1(best.rating):'—'}</b><small>${best?esc(team(best.home).short+' – '+team(best.away).short):''}</small></div><div><span class="eyebrow">Kalan hafta</span><b class="num">${Math.max(0,34-cur+1)}</b></div></div>
       <div class="cal-prog"><div class="cal-bar"><i style="width:${pct}%"></i></div><div class="cal-mon">${groups.map(g=>`<span style="flex:${g.weeks.length}">${MONTHS[g.m]}</span>`).join('')}</div></div></section>
     ${groups.map((g,gi)=>`${gi>0&&groups[gi-1].weeks.includes(17)?`<div class="cal-break"><span>Devre arası · 3 hafta</span></div>`:''}<section class="cal-month"><div class="cal-mh"><h3>${MONTHS_LONG[g.m]} <span class="muted">${g.y}</span></h3><span class="muted" style="font-size:12px">${g.weeks.length} hafta · ${hist.filter(h=>g.weeks.includes(h.week)).length} maç</span></div><div class="wk-grid">${g.weeks.map(card).join('')}</div></section>`).join('')}
-    ${summer.length?`<section class="panel cal-summer"><span class="eyebrow gold">Yaz ${y}</span><h3 style="text-transform:none;letter-spacing:0;font-size:20px">${esc(summer.join(' · '))}</h3><p class="muted" style="font-size:13px">Sezon sonunda performansın ve UEFA kategorin yeterliyse turnuva listesine seçilebilirsin.</p></section>`:''}`;
+    ${summer.length?`<section class="panel cal-summer"><span class="eyebrow gold">Yaz ${y}</span><h3 style="text-transform:none;letter-spacing:0;font-size:20px">${esc(summer.join(' · '))}</h3><p class="muted" style="font-size:13px">Sezon sonunda performansın ve AFK kategorin yeterliyse turnuva listesine seçilebilirsin.</p></section>`:''}`;
 }
 
 const IG={heart:'<path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 8 3.4 4.5 7 4.5c2 0 3.5 1.1 5 3 1.5-1.9 3-3 5-3 3.6 0 5.6 3.5 4.3 6.8-1.8 4.6-9.3 9.2-9.3 9.2z"/>',
@@ -3950,10 +3950,10 @@ function fxCard(fx){
 }
 function nextStepText(){
   if(home() && S.tier<4) return `${rankName(S.tier+1)} için: sezon sonu ortalaması 8.35+ (en az 8 lig maçı).`;
-  if(!S.fifa) return `FIFA kokartı: ${tierName(4)}'de bir sezonu 8.30+ ortalamayla bitir, en az B2 İngilizce, 38 yaş altı.${S.english<2?' (İngilizcen şu an '+ENGLISH[S.english]+')':''}`;
-  if(!uefaActive()) return 'Suudi Pro Lig\'deyken UEFA görevi yok; sözleşme bitince Avrupa yoluna dönebilirsin.';
-  if(S.uefaCat<4) return `UEFA ${UEFA_CATS[S.uefaCat+1]}: en az 3 uluslararası maçta 8.45+ ve ligde 8.0+ ortalama.${S.uefaCat===3&&S.english<3?' Elit için C1 İngilizce gerekir.':''}`;
-  return 'Zirvedesin. Hedef: Şampiyonlar Ligi finali, EURO ve Dünya Kupası finali.';
+  if(!S.fifa) return `DFF kokartı: ${tierName(4)}'de bir sezonu 8.30+ ortalamayla bitir, en az B2 İngilizce, 38 yaş altı.${S.english<2?' (İngilizcen şu an '+ENGLISH[S.english]+')':''}`;
+  if(!uefaActive()) return 'Suudi Pro Lig\'deyken AFK görevi yok; sözleşme bitince Avrupa yoluna dönebilirsin.';
+  if(S.uefaCat<4) return `AFK ${UEFA_CATS[S.uefaCat+1]}: en az 3 uluslararası maçta 8.45+ ve ligde 8.0+ ortalama.${S.uefaCat===3&&S.english<3?' Elit için C1 İngilizce gerekir.':''}`;
+  return 'Zirvedesin. Hedef: Elitler Ligi finali, Avrupa ve Dünya Şampiyonası finali.';
 }
 function spark(vals){
   if(vals.length<2) return '<p class="muted" style="font-size:13px">Form grafiği için en az iki maç gerekiyor.</p>';
@@ -4086,7 +4086,7 @@ function kurulHTML(){
       <p>Senin kararın: <b>${esc(h.your)}</b>. ${h.wrong?'Video incelemesinde kurul üyeleri kararın hatalı olabileceğini düşünüyor.':'Kulüp kararın hatalı olduğunu iddia ederek başvurdu.'} Ne diyeceksin?</p>
       <div class="dopts"><button class="dopt" data-hear="kabul">Hatamı kabul ediyorum</button><button class="dopt" data-hear="savun">Kararımın arkasındayım, görüntülerle savunurum</button></div></section>`:''}
     <section class="panel stack"><header class="xh"><h3>Klasman sıralaması</h3><span class="xh-s">Sezon ortalamasına göre</span></header>
-      <div class="tbl-wrap"><table class="ktable"><colgroup><col style="width:34px"><col><col style="width:46px"><col style="width:56px"><col style="width:46px"></colgroup><thead><tr><th class="n">#</th><th>Hakem</th><th class="n">Maç</th><th class="n">Ort.</th><th class="n">Son</th></tr></thead><tbody>${rank.map((r,i)=>`<tr class="${r.me?'me':''}"><td class="n">${i+1}</td><td><div class="kname"><span class="ell">${esc(r.name)}</span>${r.fifa?'<span class="chip b">FIFA</span>':''}${r.me?'<span class="chip y">Sen</span>':''}</div></td><td class="n">${r.n}</td><td class="n" style="color:${r.avg==null?'':r.avg>=8.35?'var(--green)':r.avg<7.7?'var(--red)':''}">${r.avg==null?'—':r.avg.toFixed(2)}</td><td class="n">${r.last!=null?f1(r.last):'—'}</td></tr>`).join('')}</tbody></table></div>
+      <div class="tbl-wrap"><table class="ktable"><colgroup><col style="width:34px"><col><col style="width:46px"><col style="width:56px"><col style="width:46px"></colgroup><thead><tr><th class="n">#</th><th>Hakem</th><th class="n">Maç</th><th class="n">Ort.</th><th class="n">Son</th></tr></thead><tbody>${rank.map((r,i)=>`<tr class="${r.me?'me':''}"><td class="n">${i+1}</td><td><div class="kname"><span class="ell">${esc(r.name)}</span>${r.fifa?'<span class="chip b">DFF</span>':''}${r.me?'<span class="chip y">Sen</span>':''}</div></td><td class="n">${r.n}</td><td class="n" style="color:${r.avg==null?'':r.avg>=8.35?'var(--green)':r.avg<7.7?'var(--red)':''}">${r.avg==null?'—':r.avg.toFixed(2)}</td><td class="n">${r.last!=null?f1(r.last):'—'}</td></tr>`).join('')}</tbody></table></div>
       <p class="muted" style="font-size:12px">Yeşil: yükselme sınırının (8.35) üstü · Kırmızı: düşme sınırının (7.70) altı.</p></section>
     <section class="panel stack"><h3>Bu haftanın atamaları</h3>${ap.length?`<div class="appts">${ap.map(a=>{ const H=team(a.h),A=team(a.a); return `<div class="appt ${a.mine?'me':''}"><span class="row" style="gap:6px;flex-wrap:nowrap;min-width:0">${crest(H,20)}<span class="ell">${esc(H.short)}</span><span class="muted">–</span><span class="ell">${esc(A.short)}</span>${crest(A,20)}</span><span class="ell ${a.mine?'':'muted'}">${esc(a.ref)}</span></div>`; }).join('')}</div>`:'<p class="muted">Bu hafta lig maçı ataması yok.</p>'}</section></div>
   <div class="stack" style="gap:16px;min-width:0">
@@ -4117,8 +4117,8 @@ function inboxHTML(){
 function careerHTML(){
   const st=[
     [tierName(0),'Başlangıç',S.tier>=0],[tierName(1),'Sezon ort. 8.35+',S.tier>=1||S.fifa],[tierName(2),'Sezon ort. 8.35+',S.tier>=2||S.fifa],[tierName(3),'Sezon ort. 8.35+ · VAR\'lı maçlar',S.tier>=3||S.fifa],[tierName(4),'Sezon ort. 8.35+',S.tier>=4||S.fifa],
-    ['FIFA kokartı (UEFA Kategori 3)',tierName(4)+'\'de 8.30+, B2 İngilizce, ≤38 yaş',S.fifa],['UEFA Kategori 2','Uluslararası 8.45+',S.uefaCat>=1],['UEFA Kategori 1','Uluslararası 8.45+',S.uefaCat>=2],['UEFA Elit Gelişim','Uluslararası 8.45+',S.uefaCat>=3],['UEFA Elit','Uluslararası 8.45+, C1 İngilizce',S.uefaCat>=4],
-    ['Büyük turnuva','EURO / Dünya Kupası seçimi',!!S.milestones.turnuva],['Dünya Kupası finali','Kariyerin zirvesi',!!S.milestones.dkfinal]];
+    ['DFF kokartı (AFK Kategori 3)',tierName(4)+'\'de 8.30+, B2 İngilizce, ≤38 yaş',S.fifa],['AFK Kategori 2','Uluslararası 8.45+',S.uefaCat>=1],['AFK Kategori 1','Uluslararası 8.45+',S.uefaCat>=2],['AFK Elit Gelişim','Uluslararası 8.45+',S.uefaCat>=3],['AFK Elit','Uluslararası 8.45+, C1 İngilizce',S.uefaCat>=4],
+    ['Büyük turnuva','Avrupa / Dünya Şampiyonası seçimi',!!S.milestones.turnuva],['Dünya Şampiyonası finali','Kariyerin zirvesi',!!S.milestones.dkfinal]];
   let cur=st.findIndex(x=>!x[2]); if(cur<0) cur=st.length;
   const t=S.totals;
   return `<div class="grid2"><div class="panel stack"><h2>Kariyer basamakları</h2><div class="ladder">${st.map((x,i)=>`<div class="rung ${x[2]?'done':i===cur?'cur':''}"><span class="dot"></span><div><b>${esc(x[0])}</b><div class="req">${esc(x[1])}</div></div><span class="chip ${x[2]?'g':i===cur?'y':''}">${x[2]?'Tamam':i===cur?'Hedef':'Kilitli'}</span></div>`).join('')}</div></div>
@@ -4132,11 +4132,11 @@ function devHTML(){
   return `<div class="grid2"><div class="panel stack"><h2>Nitelikler</h2>
     ${Object.keys(ATTR_NAMES).map(k=>`<div class="stack" style="gap:4px"><div class="attr"><span>${ATTR_NAMES[k]}</span><div class="bar"><i style="width:${S.attrs[k]}%"></i></div><span class="num">${Math.round(S.attrs[k])}</span></div><p class="muted" style="font-size:12px">${{kondisyon:'Maç içi enerjin düşükse geç dakikalarda görüşün azalır.',pozisyon:'Pozisyonları net görme ihtimalin; belirsiz bilgi sayısını azaltır.',kural:'Kural kitabı hakkı (70+ ile ek hak) ve otomatik maç isabeti.',sogukkanlilik:'Karar süreni uzatır; büyük maçlarda baskıyı azaltır.',iletisim:'Maç ısısını düşürür; toplu itirazları daha iyi yönetirsin.'}[k]}</p></div>`).join('')}
     <p class="muted" style="font-size:13px">${S.age>36?'36 yaş sonrası gelişim yavaşlar; deneyim ve kondisyon yönetimi önem kazanır.':'Her hafta bir antrenman odağı seçebilirsin. 80 üstünde gelişim yavaşlar.'}</p></div>
-    <div class="stack" style="gap:16px"><div class="panel stack"><h3>Dil kursu</h3><p>İngilizce seviyen: <b>${ENGLISH[S.english]}</b>. FIFA kokartı B2, UEFA Elit C1 ister.</p>${S.english<3?`<button class="btn" data-eng="1" ${S.money<engCost?'disabled':''}>${ENGLISH[S.english+1]} kursuna yazıl · ${money(engCost)}</button>`:'<span class="chip g">En üst seviye</span>'}</div>
+    <div class="stack" style="gap:16px"><div class="panel stack"><h3>Dil kursu</h3><p>İngilizce seviyen: <b>${ENGLISH[S.english]}</b>. DFF kokartı B2, AFK Elit C1 ister.</p>${S.english<3?`<button class="btn" data-eng="1" ${S.money<engCost?'disabled':''}>${ENGLISH[S.english+1]} kursuna yazıl · ${money(engCost)}</button>`:'<span class="chip g">En üst seviye</span>'}</div>
     <div class="panel stack"><h3>Destek ekibi</h3>${UPGRADES.map(u=>`<div class="row" style="justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:10px"><div style="min-width:0;flex:1"><b>${esc(u.name)}</b><div class="muted" style="font-size:13px">${esc(u.desc)}</div></div>${S.upgrades[u.id]?'<span class="chip g">Aktif</span>':`<button class="btn sm" data-up="${u.id}" ${S.money<u.cost?'disabled':''}>${money(u.cost)}</button>`}</div>`).join('')}</div></div></div>`;
 }
 function offersHTML(){
-  return `<div class="panel stack"><h2>Teklifler</h2>${S.offers.length?S.offers.map(o=>`<div class="fx"><div style="min-width:0"><div class="eyebrow">${o.type==='guest'?'Misafir hakem':o.type==='move'?'Transfer':'Sponsorluk'} · ${o.exp-S.week>0?'son '+(o.exp-S.week)+' hafta':'bu hafta son'}</div><b style="font-size:17px">${esc(o.title)}</b><p class="muted" style="font-size:14px;margin-top:4px">${esc(o.body)}</p></div><div class="act"><button class="btn sm" data-dec="${o.id}">Reddet</button><button class="btn primary" data-acc="${o.id}">Kabul et</button></div></div>`).join(''):`<p class="muted">Şu an bekleyen teklif yok. Süper Lig'e yükselip itibarını artırdıkça yurt dışından misafir hakemlik, sözleşme ve sponsorluk teklifleri gelir.</p>`}
+  return `<div class="panel stack"><h2>Teklifler</h2>${S.offers.length?S.offers.map(o=>`<div class="fx"><div style="min-width:0"><div class="eyebrow">${o.type==='guest'?'Misafir hakem':o.type==='move'?'Transfer':'Sponsorluk'} · ${o.exp-S.week>0?'son '+(o.exp-S.week)+' hafta':'bu hafta son'}</div><b style="font-size:17px">${esc(o.title)}</b><p class="muted" style="font-size:14px;margin-top:4px">${esc(o.body)}</p></div><div class="act"><button class="btn sm" data-dec="${o.id}">Reddet</button><button class="btn primary" data-acc="${o.id}">Kabul et</button></div></div>`).join(''):`<p class="muted">Şu an bekleyen teklif yok. Zirve Lig'e yükselip itibarını artırdıkça yurt dışından misafir hakemlik, sözleşme ve sponsorluk teklifleri gelir.</p>`}
     ${S.pendingMove?`<p class="chip a">Gelecek sezon: ${S.pendingMove.country===S.nationality?NAT().name:esc(LEAGUES[S.pendingMove.country].country)}</p>`:''}</div>`;
 }
 function settingsHTML(){

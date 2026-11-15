@@ -34,6 +34,8 @@ Toplam süre: hesap onayı hariç yaklaşık 1–2 saat.
 
 ## 4. Projeyi GitHub'a yükle
 
+> **Kısa yol:** GitHub'da boş bir depo açıp adını Claude'a söylersen, Claude depoyu bu oturuma bağlayıp kodu kendisi yükleyebilir. O durumda aşağıdaki `git` komutlarını atla, yalnızca secret'ları ekle.
+
 1. https://github.com/new adresinden **private** bir depo aç (ör. `son-duduk`).
 2. Bilgisayarında zip'i aç ve klasörde şunları çalıştır:
    ```bash
@@ -81,24 +83,32 @@ Toplam süre: hesap onayı hariç yaklaşık 1–2 saat.
 4. İstersen TestFlight'a kendini test kullanıcısı olarak ekle ve iPhone'una **TestFlight** uygulamasıyla kur.
 5. Sonraki güncellemeler için iş akışını yeni bir sürüm numarasıyla (ör. `1.0.1`) tekrar çalıştır. Build numarası otomatik artar.
 
-## 7. Mağaza sayfasını doldur ve incelemeye gönder
+## 7. Mağaza sayfasını otomatik doldur
 
-`store/metadata.md` dosyasındaki metinleri ilgili alanlara kopyala:
+Metinler (`fastlane/metadata/tr/`) ve 14 ekran görüntüsü (`store/screenshots/`) tek tıkla yüklenir:
 
-1. **Uygulama Bilgileri**: alt başlık, kategori (Spor + Simülasyon), gizlilik politikası URL'si.
-2. **Fiyatlandırma ve Kullanılabilirlik**: ücretsiz veya ücretli, hangi ülkeler.
-3. **App Gizliliği**: "Veri toplamıyoruz".
-4. **Yaş Derecelendirmesi**: tüm sorulara "Yok" → 4+.
-5. **iOS Uygulaması 1.0** sayfası:
-   - Ekran görüntüleri:
-     - `store/screenshots/iphone_*.png` → 6.9" iPhone
-     - `store/screenshots/ipad_*.png` → 13" iPad
-   - Tanıtım metni, açıklama, anahtar kelimeler, destek URL'si.
-   - **Derleme** bölümünden TestFlight'taki derlemeyi seç.
-   - İnceleme notunu ekle; giriş bilgisi gerekmez.
-6. **İncelemeye Gönder**. Apple incelemesi genellikle 1–3 gün sürer.
+1. Depo → **Actions** → **iOS store listing (metadata + screenshots)** → **Run workflow**.
+2. Sürüm `1.0.0` olarak kalsın; "incelemeye gönder" kutusunu **ilk seferde boş bırak**. Süre yaklaşık 5–10 dakika.
+3. App Store Connect'te sayfanın dolduğunu kontrol et.
 
----
+## 8. Elle yapılacak 3 kısa ayar (API ile yapılamıyor, ~5 dk)
+
+App Store Connect'te:
+
+1. **Fiyatlandırma ve Kullanılabilirlik** → fiyat: Ücretsiz (veya istediğin fiyat), ülkeler: Tümü.
+2. **App Gizliliği** → "Veri toplamıyoruz" → Yayınla.
+3. **Uygulama Bilgileri** → **Yaş Derecelendirmesi** → tüm sorulara "Yok" → 4+.
+
+Ardından **iOS Uygulaması 1.0.0** sayfasında **Derleme** bölümünden TestFlight'taki derlemeyi seç.
+
+## 9. İncelemeye gönder
+
+İki yol var:
+
+- App Store Connect'te **İncelemeye Gönder** düğmesine bas, ya da
+- **iOS store listing** iş akışını bu kez "incelemeye gönder" kutusu **işaretli** olarak tekrar çalıştır.
+
+Apple incelemesi genellikle 1–3 gün sürer. Onaylanınca uygulama App Store'da yayına girer.
 
 ## Sorun çıkarsa
 
@@ -108,13 +118,18 @@ Toplam süre: hesap onayı hariç yaklaşık 1–2 saat.
 | `No profiles for 'com.sonduduk.hakem'` / `No Accounts` | API anahtarının rolü **Admin** olmalı; Bundle ID developer.apple.com'da kayıtlı olmalı. |
 | `Cloud signing permission error` | Developer hesabında **Account Holder** veya Admin olarak giriş yapıp Certificates sayfasını bir kez açıp kabul etmen gereken bir sözleşme olabilir. |
 | Bundle ID başka biri tarafından alınmış | `capacitor.config.json` ve `ios/App/App.xcodeproj/project.pbxproj` içindeki `com.sonduduk.hakem`'i kendi kimliğinle (ör. `com.<adın>.sonduduk`) değiştir. |
-| İnceleme reddi 5.2.1 (fikri mülkiyet) | Gerçek lig/organizasyon adlarını kurgusal adlarla değiştir (bkz. aşağı). |
 
-## Önemli risk: gerçek marka adları
+## Marka adları
 
-Oyunda takım ve oyuncular kurgusal, ama bazı **lig ve organizasyon adları gerçek**:
-Premier Lig, Bundesliga, Serie A, Ligue 1, Eredivisie, Süper Lig, UEFA, FIFA, Şampiyonlar Ligi, Dünya Kupası vb.
-Apple, izinsiz marka kullanımını madde 5.2.1 kapsamında reddedebilir.
-En güvenli yol, mağazaya göndermeden önce bunları kurgusal adlarla değiştirmektir.
-Örnekler: "İngiltere Elit Lig", "Avrupa Kulüpler Kupası", "Dünya Futbol Şampiyonası".
-Mağaza metinleri ve ekran görüntüsü başlıkları zaten bu adlar kullanılmadan yazıldı.
+Oyundaki gerçek lig ve kurum adları kurgusal karşılıklarıyla değiştirildi (Apple kuralı 5.2.1):
+
+| Gerçek | Oyunda |
+|---|---|
+| Premier League, LaLiga, Serie A, Bundesliga, Ligue 1, Liga Portugal, Eredivisie | Prestij Lig, Liga Suprema, Serie Oro, Meisterliga, Ligue Élite, Liga Lusitana, Topdivisie |
+| Süper Lig, Saudi Pro League, Yunanistan Süper Lig | Zirve Lig, Çöl Pro Lig, Ege Lig |
+| FIFA, UEFA | DFF (Dünya Futbol Federasyonu), AFK (Avrupa Futbol Konfederasyonu) |
+| Şampiyonlar Ligi, Avrupa Ligi, Konferans Ligi, Uluslar Ligi | Elitler Ligi, Avrupa Kupası, Kıta Kupası, Milletler Kupası |
+| Dünya Kupası, EURO, Olimpiyatlar, Kulüpler Dünya Kupası | Dünya Şampiyonası, Avrupa Şampiyonası, Dünya Yaz Oyunları, Kulüpler Dünya Şampiyonası |
+| TFF, FA, RFEF, FIGC, DFB, FFF, FPF, KNVB, IFAB | TFB, EFB, İFF, İTFB, AFB, FFB, PFB, HFB, "Oyun Kuralları" |
+
+Takım, oyuncu ve hakem adları zaten kurgusaldı.

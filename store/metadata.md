@@ -27,7 +27,7 @@ Kararı sen ver. Canlı maçta her temas gözünün önünde; ofsayt, penaltı, 
 ## Anahtar kelimeler (100, virgülle, boşluksuz)
 
 ```
-hakem,futbol,simülasyon,kariyer,VAR,ofsayt,penaltı,kırmızı kart,lig,maç,karar,düdük,spor,menajer
+hakem,futbol,simülasyon,kariyer,VAR,ofsayt,penaltı,kırmızı kart,lig,maç,karar,düdük,spor
 ```
 
 ## Açıklama (4000)
@@ -91,7 +91,7 @@ Son Düdük is an offline single-player football referee career simulator. No ac
 ## Ekran görüntüleri
 
 `store/screenshots/` klasöründe:
-- `iphone_1.png` … `iphone_7.png` — 1320 × 2868 (iPhone 6.9" alanına yükle)
-- `ipad_1.png` … `ipad_7.png` — 2064 × 2752 (iPad 13" alanına yükle)
+- `iphone_1.png` … `iphone_7.png` — 1290 × 2796 (iPhone 6.7"/6.9" alanı)
+- `ipad_1.png` … `ipad_7.png` — 2048 × 2732 (iPad 12.9"/13" alanı)
 
 Yeniden üretmek için: `npm run build && node scripts/store-shots.js && node scripts/store-frame.js`

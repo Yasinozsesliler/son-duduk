@@ -13,7 +13,7 @@ const SHOTS = [
   ['7_social', 'Taraftar seni konuşuyor', 'Sosyal medya, haberler ve Hakem Kurulu'],
   ['6_start', 'Kendi hakemini yarat', '3 kariyer slotu, ülke ve hakem tipi seçimi'],
 ];
-const DEV = { iphone: { w: 1320, h: 2868, scale: .86, top: 470, title: 104, sub: 44 }, ipad: { w: 2064, h: 2752, scale: .84, top: 420, title: 112, sub: 46 } };
+const DEV = { iphone: { w: 1290, h: 2796, scale: .86, top: 470, title: 104, sub: 44 }, ipad: { w: 2048, h: 2732, scale: .84, top: 420, title: 112, sub: 46 } };
 const fonts = 'file://' + path.join(ROOT, 'www', 'fonts', 'fonts.css');
 (async () => {
   const b = await chromium.launch();
