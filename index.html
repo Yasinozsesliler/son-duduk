@@ -1,8 +1,8 @@
 <title>Son Düdük</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
+
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@500;600&family=Saira+Condensed:wght@600;700;800&display=swap">
+
 <style>
 /* Layout: floodlit night-match app shell. Sticky scoreboard bar, side nav (bottom tabs on phones), one main column.
    Matches open as a full-screen broadcast overlay; incidents open as a referee's review sheet over it. */
@@ -1138,6 +1138,76 @@ button,.btn,.dopt,.cbtn,.posopt,.opt,.act-b{touch-action:manipulation;-webkit-us
   .feed{max-height:52vh}
   .rep-top .bignote{font-size:64px}
 }
+/* tracked büyük harf etiketleri: cümle düzeni */
+.ah-badge b,
+.banner b,
+.batt-w small,
+.bignote small,
+.board .tm,
+.brand,
+.btn.primary,
+.bug,
+.bug-r,
+.cal-break,
+.cal-mon,
+.ccard b,
+.cf-t b,
+.cs-c small,
+.dl-cmp small,
+.dl-k small,
+.eyebrow,
+.fact .k,
+.fx .teams,
+.fxc-t b,
+.hdr-season b,
+.headline,
+.hstat small,
+.logo,
+.lt-gl,
+.lt-h h3,
+.lt-k small,
+.mf-div,
+.mh-t small,
+.mhero-comp,
+.ms-pl,
+.pm-l,
+.pm-t,
+.pr-tag,
+.press h4,
+.press small,
+.press-mast,
+.pv-name,
+.rc-flag small,
+.rc-grade,
+.rc-name,
+.rc-rate small,
+.rgrade,
+.rh-comp,
+.rh-mid small,
+.rh-t b,
+.rring-in small,
+.rtabs button,
+.rung .chip,
+.rung b,
+.rw small,
+.sr-m small,
+.tr-g span,
+.tr-i,
+.tr-k,
+.tr-sel,
+.trophy b,
+.ts span,
+.varpulse,
+.verdict .vi,
+.wk-n,
+.wk-now,
+.wk-pre small,
+h2,
+h3,
+label.lbl,
+th{text-transform:none;letter-spacing:0}
+.panel>h3:first-child,.panel>h2:first-child{letter-spacing:0}
+.panel>h3:first-child{font-size:16px}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
 /* ---------- v1.1: mağaza, tatil, rüşvet, premium ---------- */
@@ -1190,6 +1260,70 @@ button,.btn,.dopt,.cbtn,.posopt,.opt,.act-b{touch-action:manipulation;-webkit-us
 .v11-perks{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;width:100%}
 .v11-perks>div{display:flex;gap:10px;align-items:center;padding:12px;border-radius:12px;background:var(--bg2);border:1px solid var(--line)}
 .v11-perks small{display:block;color:var(--muted);font-size:13px}
+
+/* ===== v12: kimlik katmanı — gece maçı, tebeşir, kart sarısı ===== */
+@font-face{font-family:'Archivo';src:url(fonts/archivo-latin-ext-wdth-normal.woff2) format('woff2');font-weight:100 900;font-stretch:62% 125%;font-display:swap;unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Archivo';src:url(fonts/archivo-latin-wdth-normal.woff2) format('woff2');font-weight:100 900;font-stretch:62% 125%;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+:root{
+  --bg:#0a1310; --bg2:#0e1915; --panel:#12201b; --panel2:#192a23; --line:rgba(236,234,226,.08); --line2:rgba(236,234,226,.15);
+  --fg:#ecebe4; --muted:#98a79f; --dim:#677870;
+  --yellow:#f2c230; --yellow-ink:#1f1800; --red:#d9423a; --green:#4fb586; --blue:#79a7e6; --amber:#e79b45;
+  --gold1:#f2c230; --gold2:#f2c230; --glass:none; --lift:none;
+  --f-display:'Archivo','Arial Narrow',system-ui,sans-serif; --f-body:'Archivo',system-ui,-apple-system,sans-serif; --f-mono:'Archivo',system-ui,sans-serif;
+}
+body{background:radial-gradient(900px 420px at 50% -180px,rgba(236,234,226,.07),transparent 70%),var(--bg);font-family:var(--f-body);font-stretch:100%;font-feature-settings:"tnum" 1}
+h1,h2,h3,.page-title,.logo,.brand,.rgrade,.mh-t b,.mh-vs span,.btn.primary,.pv-name,.wiz-h{font-family:var(--f-display);font-stretch:72%;font-weight:800}
+h2{text-transform:none;letter-spacing:-.005em;font-size:26px}
+h3{text-transform:none;letter-spacing:0;font-size:19px}
+.page-title{text-transform:none;letter-spacing:-.01em}
+.page-title .muted{letter-spacing:0;font-stretch:100%;font-weight:500}
+.eyebrow,.eyebrow.gold{font-family:var(--f-body);font-stretch:100%;font-size:13px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--muted);display:inline-block}
+.eyebrow.gold::before{content:none}
+.num,.ts b,.mh-meta b,.mh-vs small,.rring-in b{font-family:var(--f-body);font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+.ts span,.rring-in small,.mh-t small,.mhero-comp{text-transform:none;letter-spacing:0;font-family:var(--f-body);font-stretch:100%}
+.mhero-comp{font-weight:600;font-size:13.5px}
+.mh-vs span{background:none;color:var(--fg);-webkit-text-fill-color:currentColor;opacity:.55;font-size:clamp(22px,3.4vw,34px)}
+.mh-vs small{color:var(--fg);font-weight:600}
+.mh-t b{letter-spacing:0}
+.panel,.fxc,.mbar{background:var(--panel);box-shadow:none;border:1px solid var(--line);border-radius:14px}
+.panel .panel{background:var(--bg2)}
+.btn{background:var(--panel2);border:1px solid var(--line2);border-radius:8px;box-shadow:none}
+.btn:hover:not(:disabled){background:#21342c;border-color:rgba(236,234,226,.28)}
+.btn.primary{background:var(--yellow);color:var(--yellow-ink);border:0;border-radius:6px;box-shadow:0 1px 0 rgba(0,0,0,.4);text-shadow:none;text-transform:none;letter-spacing:.005em;font-size:19px}
+.btn.primary::after{content:none}
+.btn.primary:hover:not(:disabled){filter:none;background:#f6cd4a}
+.btn.lg{border-radius:7px;font-size:22px;padding:14px 30px}
+.chip{border-radius:5px;background:transparent;border-color:var(--line2);font-weight:600}
+.chip.y{background:var(--yellow);color:var(--yellow-ink)}
+.top{background:rgba(10,19,16,.86)}
+body::before{background:rgba(10,19,16,.96)}
+.hstat,.hdr-right>.me,.kpis>div{background:var(--bg2);border-color:var(--line)}
+.av{background:var(--yellow);box-shadow:0 0 0 2px var(--bg)}
+nav.side button.on{background:rgba(236,234,226,.06);box-shadow:inset 2px 0 0 var(--yellow)}
+main>*{animation:none}
+.profile::before,.rscore::before{content:none}
+.next-step{background:rgba(242,194,48,.07);box-shadow:inset 2px 0 0 var(--yellow)}
+.bar i{background:var(--fg)}
+.tcard,.opt{background:var(--bg2);border-radius:10px}
+.tcard:hover:not(:disabled){transform:none;box-shadow:none;border-color:var(--line2)}
+.tcard.on,.opt.on{background:rgba(242,194,48,.08);border-color:var(--yellow)}
+.tcard .aic{background:rgba(236,234,226,.06);color:var(--fg)}
+.tcard.on .aic{background:var(--yellow);color:var(--yellow-ink)}
+.gchip{border-radius:4px}
+.sheet{background:var(--panel);box-shadow:0 30px 80px -30px rgba(0,0,0,.9)}
+.sh-head{background:var(--panel2)}
+/* başlangıç ekranı */
+.start::before{background:linear-gradient(90deg,rgba(10,19,16,.95) 0%,rgba(10,19,16,.72) 50%,rgba(10,19,16,.5) 100%),linear-gradient(0deg,rgba(10,19,16,.92),transparent 55%)}
+.start-hero .logo{font-size:clamp(76px,13vw,150px);line-height:.84;letter-spacing:-.02em;text-transform:none;font-stretch:66%;font-weight:850;margin:0 0 14px;position:relative;display:inline-block;padding-right:.42em;color:var(--fg)}
+.logo span{background:none;color:inherit;-webkit-text-fill-color:currentColor}
+.logo-card{position:absolute;right:0;top:.06em;width:.28em;height:.38em;border-radius:.03em;background:var(--yellow);transform:rotate(12deg);box-shadow:0 .06em .14em rgba(0,0,0,.5)}
+.start-hero .eyebrow{font-size:15px;color:var(--fg);font-weight:600}
+.start-hero .lede{max-width:46ch;color:var(--muted)}
+.start .panel{background:rgba(14,25,21,.88)}
+.slot{background:rgba(14,25,21,.86);border-radius:12px;border:1px solid var(--line)}
+.slot.empty{background:transparent;border-style:dashed}
+.slot .plus{border-radius:8px;background:transparent;border:1px solid var(--line2);color:var(--fg)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 
 <div id="app"></div>
@@ -1373,9 +1507,8 @@ function startHTML(){
   if(CR) return wizardHTML();
   const slots=[1,2,3].map(n=>({n,d:readSlot(n)}));
   return `<div class="start"><canvas id="startCv" class="start-bg" aria-hidden="true"></canvas><div class="start-in">
-    <div class="start-hero"><div class="eyebrow gold">Hakem kariyer simülatörü</div><div class="logo">Son<br><span>Düdük</span></div>
-      <p class="lede">Amatör ligden Dünya Şampiyonası finaline. Her pozisyonu sahada sen okursun: temas, kol pozisyonu, ofsayt çizgisi, DOGSO ölçütleri. VAR monitöre çağırır, gözlemci not verir, kurul hesap sorar.</p>
-      <div class="feat">${['Canlı 3D maç','13 pozisyon türü','VAR ve OFR','8 ülke · 5 klasman','Avrupa ve dünya sahnesi','Haberler · Sosyal · Kurul'].map(t=>`<span>${t}</span>`).join('')}</div></div>
+    <div class="start-hero"><h1 class="logo">Son Düdük<i class="logo-card" aria-hidden="true"></i></h1><div class="eyebrow gold">Hakem kariyer simülatörü</div>
+      <p class="lede">Amatör ligden Dünya Şampiyonası finaline. Her pozisyonu sahada sen okursun: temas, kol pozisyonu, ofsayt çizgisi, DOGSO ölçütleri. VAR monitöre çağırır, gözlemci not verir, kurul hesap sorar.</p></div>
     <div class="slots"><div class="row" style="justify-content:space-between"><span class="eyebrow gold">Kariyer slotları</span><span class="muted" style="font-size:12px">${slots.filter(s=>s.d).length}/3 dolu</span></div>
       ${slots.map(slotCard).join('')}
       <details class="imp"><summary>Kayıt kodu ile yükle</summary><div class="stack" style="margin-top:10px"><textarea id="stImp" rows="3" placeholder="Kayıt kodunu yapıştır"></textarea><div class="row"><label class="lbl" for="impSlot" style="margin:0">Hedef slot</label><select id="impSlot" style="width:auto">${[1,2,3].map(n=>`<option value="${n}">Slot ${n}${slots[n-1].d?' (üzerine yaz)':''}</option>`).join('')}</select><button class="btn sm" id="bStImp">Yükle</button></div></div></details>

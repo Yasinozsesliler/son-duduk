@@ -40,6 +40,7 @@ if (!(window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.
 rmSync('www', { recursive: true, force: true });
 mkdirSync('www', { recursive: true });
 cpSync('public', 'www', { recursive: true });
+cpSync('fonts', 'www/fonts', { recursive: true });
 writeFileSync('www/index.html', html);
 console.log('www/ built:', (html.length / 1024).toFixed(0) + ' KB');
 
