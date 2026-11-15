@@ -1,0 +1,1 @@
+árbitro,fútbol,simulador,carrera,VAR,fuera de juego,penalti,tarjeta roja,liga,silbato,deporte
