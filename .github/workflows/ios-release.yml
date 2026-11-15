@@ -82,6 +82,14 @@ jobs:
             CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" \
             archive
 
+      - name: Strip vendor signatures from embedded frameworks (re-signed at export)
+        run: |
+          FW="$RUNNER_TEMP/App.xcarchive/Products/Applications/App.app/Frameworks"
+          if [ -d "$FW" ]; then
+            find "$FW" -maxdepth 1 -name "*.framework" -print -exec codesign --remove-signature {} \;
+            find "$FW" -name "_CodeSignature" -type d -prune -exec rm -rf {} +
+          fi
+
       - name: Export and upload to App Store Connect
         run: |
           cat > "$RUNNER_TEMP/ExportOptions.plist" <<EOF
