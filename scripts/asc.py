@@ -24,6 +24,13 @@ if cmd=='release_pending':
 if cmd=='submit':
     ver=sys.argv[2] if len(sys.argv)>2 else None
     v=[x for x in vers if x['attributes']['versionString']==ver][0]; vid=v['id']
+    want=sys.argv[3] if len(sys.argv)>3 and sys.argv[3] else None
+    if want:
+        for i in range(40):
+            bl=call('GET','/builds',params={'filter[app]':aid,'filter[version]':want,'filter[preReleaseVersion.version]':ver}).get('data',[])
+            if bl and bl[0]['attributes']['processingState']=='VALID': break
+            print('waiting for build',want,bl and bl[0]['attributes']['processingState']); time.sleep(30)
+        call('PATCH',f'/appStoreVersions/{vid}/relationships/build',{'data':{'type':'builds','id':bl[0]['id']}}); print('attached build',want)
     # ekran görüntüleri işlenene kadar bekle
     for i in range(30):
         locs=call('GET',f'/appStoreVersions/{vid}/appStoreVersionLocalizations')['data']

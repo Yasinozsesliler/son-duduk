@@ -15,8 +15,6 @@
 	</array>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-3940256099942544~1458002511</string>
-	<key>NSUserTrackingUsageDescription</key>
-	<string>Your advertising identifier is used to show you more relevant ads. The game works the same if you decline. / Reklam kimliğin daha alakalı reklamlar için kullanılır; izin vermesen de oyun aynı şekilde çalışır.</string>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>
