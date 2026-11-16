@@ -15,6 +15,11 @@ on:
         description: "Bittikten sonra Apple incelemesine gönder"
         type: boolean
         default: false
+      task:
+        description: "listing = metin+görsel yükle; release_pending = onaylı sürümü yayınla; status = durum"
+        type: choice
+        options: [listing, release_pending, status]
+        default: listing
 
 jobs:
   listing:
@@ -55,7 +60,14 @@ jobs:
           cp store/screenshots/*.png fastlane/screenshots/tr/
           echo "Destek: $(cat fastlane/metadata/tr/support_url.txt)"
 
+      - name: App Store Connect API task
+        if: inputs.task != 'listing'
+        run: |
+          pip3 install --break-system-packages -q pyjwt cryptography requests || pip3 install -q pyjwt cryptography requests
+          ASC_KEY_PATH="$RUNNER_TEMP/keys/key.p8" python3 scripts/asc.py "${{ inputs.task }}"
+
       - name: Upload listing
+        if: inputs.task == 'listing'
         run: |
           fastlane deliver \
             --api_key_path "$RUNNER_TEMP/keys/api_key.json" \
