@@ -1401,6 +1401,71 @@ button.tile:hover{border-color:var(--line2);background:#16261f}
   .ml-head{padding:4px 0 10px}.ml-f{padding:0 0 10px}
   .ml-row{padding:13px 26px 13px 4px}
 }
+
+/* ===== v1.2: gelişim ve antrenman ===== */
+.dv{display:grid;gap:14px}
+.dv-hero{display:grid;grid-template-columns:minmax(260px,340px) minmax(0,1fr);gap:24px;align-items:center;padding:22px;background:radial-gradient(500px 260px at 15% 50%,rgba(242,194,48,.08),transparent 70%),var(--panel);border:1px solid var(--line);border-radius:10px}
+.dv-radar{position:relative}
+.radar{width:100%;height:auto;display:block}
+.rd-l{font:800 13px var(--f-body);fill:#ecebe4}
+.rd-n{font:600 9.5px var(--f-body);fill:#98a79f}
+.dv-ovr{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;pointer-events:none}
+.dv-ovr b{font:850 46px/1 var(--f-display);font-stretch:68%;color:var(--fg);text-shadow:0 2px 12px rgba(0,0,0,.6)}
+.dv-ovr small{font-size:11.5px;color:var(--muted);font-weight:600}
+.dv-id{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 16px;align-items:center}
+.dv-av{width:84px;height:84px;border-radius:10px;overflow:hidden;background:var(--panel2);grid-row:span 1}
+.dv-id h2{font-size:32px;margin:0}
+.dv-note{grid-column:1/-1;color:var(--muted);font-size:14px;margin-top:10px;max-width:52ch}
+.dv-id .btn{grid-column:1/-1;justify-self:start;margin-top:6px}
+.dv-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.dv-a{display:flex;flex-direction:column;gap:10px;padding:14px;background:var(--panel);border:1px solid var(--line);border-radius:8px;min-width:0}
+.dv-ah{display:flex;align-items:center;gap:8px}
+.dv-ic{width:28px;height:28px;border-radius:6px;display:grid;place-items:center;background:rgba(242,194,48,.12);color:var(--yellow)}
+.dv-ic svg{width:16px;height:16px}
+.dv-an{font-size:13px;font-weight:600;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dv-ah b{font:850 30px/1 var(--f-display);font-stretch:70%}
+.dv-seg{display:grid;grid-template-columns:repeat(10,1fr);gap:3px}
+.dv-seg i{height:6px;border-radius:1px;background:linear-gradient(90deg,var(--yellow) calc(var(--f)*100%),rgba(236,234,226,.1) calc(var(--f)*100%))}
+.dv-af{display:flex;flex-direction:column;gap:8px;margin-top:auto}
+.dv-af small{color:var(--muted);font-size:12px;line-height:1.4}
+.dv-af .num{font-weight:800;font-size:13px;color:var(--dim)}
+.dv-af .num.up{color:var(--green)}
+.dv-af em{font-style:normal;font-weight:500;font-size:11.5px;color:var(--muted);margin-left:5px}
+.dv-two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:14px}
+.dv-panel{display:flex;flex-direction:column;gap:14px;padding:18px;background:var(--panel);border:1px solid var(--line);border-radius:10px}
+.dv-ph{display:flex;justify-content:space-between;align-items:center}
+.dv-ph h3{margin:0;font-size:22px}
+.dv-cefr{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
+.dv-step{position:relative;display:grid;gap:3px;padding:12px 10px;background:var(--bg2);border:1px solid var(--line);clip-path:polygon(0 0,calc(100% - 10px) 0,100% 50%,calc(100% - 10px) 100%,0 100%,10px 50%)}
+.dv-step:first-child{clip-path:polygon(0 0,calc(100% - 10px) 0,100% 50%,calc(100% - 10px) 100%,0 100%)}
+.dv-step b{font:850 22px/1 var(--f-display);font-stretch:72%;padding-left:6px}
+.dv-step small{font-size:11px;color:var(--muted);padding-left:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dv-step.done{background:rgba(79,181,134,.16)}
+.dv-step.cur{background:var(--yellow);color:var(--yellow-ink)}
+.dv-step.cur small{color:var(--yellow-ink)}
+.dv-staff{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.dv-st{display:grid;grid-template-columns:96px minmax(0,1fr);gap:12px;padding:10px;background:var(--bg2);border:1px solid var(--line);border-radius:8px}
+.dv-st svg{width:96px;height:64px;border-radius:5px;display:block}
+.dv-stb{display:flex;flex-direction:column;gap:4px;align-items:flex-start;min-width:0}
+.dv-stb b{font-size:14.5px}
+.dv-stb small{font-size:12px;color:var(--muted);line-height:1.35}
+.dv-stb .btn,.dv-stb .chip{margin-top:auto}
+.dv-st.own{border-color:rgba(79,181,134,.5);box-shadow:inset 3px 0 0 var(--green)}
+@media (max-width:1100px){.dv-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.dv-two{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:700px){.dv-hero{grid-template-columns:minmax(0,1fr);padding:16px}.dv-radar{max-width:280px;margin:0 auto;width:100%}.dv-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.dv-staff{grid-template-columns:minmax(0,1fr)}.dv-id h2{font-size:26px}.dv-grid{grid-template-columns:minmax(0,1fr)}.dv-a{display:grid;grid-template-columns:minmax(0,1fr);gap:8px}}
+/* antrenman kartları yeni palet */
+.trw{background:var(--panel);border:1px solid var(--line);border-radius:10px}
+.trw-h h3{font-stretch:72%;text-transform:none}
+.tr{background:var(--bg2);border-color:var(--line);border-radius:8px}
+.tr-k{font-family:var(--f-body);letter-spacing:0;text-transform:none;font-weight:700;font-size:11.5px}
+.tr-n{font-stretch:72%;font-size:19px}
+.tr-g span{text-transform:none;letter-spacing:0;font-size:11.5px}
+.tr-g b{font-family:var(--f-body);color:var(--fg)}
+.tr-g b.hi{color:var(--green)}
+.tr-i{text-transform:none;letter-spacing:0;border-top-color:var(--line)}
+.tr-i .num{font-family:var(--f-body)}
+.tr-sel{border-radius:4px;color:#0a0f0d;font-family:var(--f-body)}
+.tr:not([disabled]):hover{transform:translateY(-2px)}
 /* tracked büyük harf etiketleri: cümle düzeni */
 .ah-badge b,
 .banner b,
@@ -2024,7 +2089,7 @@ function roundRobin(ids){
 }
 function startSeason(first){
   if(!first){
-    S.season++; S.age++;
+    S.season++; S.age++; S.attrStart={season:S.season,...S.attrs};
     if(S.pendingMove){ const to=S.pendingMove; S.pendingMove=null; S.country=to.country; S.contract=to.years||0; if(to.country!==S.nationality){ milestone('yurtdisi'); mail('Sözleşme','Yeni ligine hoş geldin',LEAGUES[to.country].league+' hakem havuzundasın. '+(LEAGUES[to.country].pool==='uefa'?'AFK görevlerin devam ediyor.':'Bu ligdeyken AFK görevleri askıya alındı; DFF kokartın geçerli.'),'fed'); } else mail(NAT().kurul,'Yuvaya dönüş',tierName(4)+' hakem listesine yeniden dahil edildin.','fed'); }
   }
   S.leagueKey = home() ? 'H'+S.tier : S.country;
@@ -5060,13 +5125,45 @@ function careerHTML(){
     <div class="panel stack"><h3>Sezonlar</h3>${S.seasons.length?`<div class="tbl-wrap"><table><thead><tr><th>Sezon</th><th>Lig</th><th class="n">Maç</th><th class="n">Lig</th><th class="n">Ulusl.</th><th>Not</th></tr></thead><tbody>${S.seasons.slice().reverse().map(s=>`<tr><td>${seasonLabel(s.season)}</td><td>${esc(s.league)}</td><td class="n">${s.matches}</td><td class="n">${s.dAvg?f1(s.dAvg):'—'}</td><td class="n">${s.iAvg?f1(s.iAvg):'—'}</td><td>${s.award?'<span class="chip y">Yılın hakemi</span>':''}${s.tour?`<span class="chip b">${esc(s.tour)}</span>`:''}</td></tr>`).join('')}</tbody></table></div>`:'<p class="muted">İlk sezonun devam ediyor.</p>'}</div>
     ${recentHTML()}</div></div>`;
 }
+const ATTR_DESC={kondisyon:'Maç içi enerjin düşükse geç dakikalarda görüşün azalır.',pozisyon:'Pozisyonları net görme ihtimalin; belirsiz bilgi sayısını azaltır.',kural:'Kural kitabı hakkı (70+ ile ek hak) ve otomatik maç isabeti.',sogukkanlilik:'Karar süreni uzatır; büyük maçlarda baskıyı azaltır.',iletisim:'Maç ısısını düşürür; toplu itirazları daha iyi yönetirsin.'};
+const ATTR_IC={kondisyon:'bolt',pozisyon:'target',kural:'book',sogukkanlilik:'moon',iletisim:'sosyal'};
+const STAFF_ART={
+ kondisyoner:'<rect width="120" height="80" fill="#1d4a2f"/><path d="M0 60 Q30 40 60 55 T120 45" stroke="#f2c230" stroke-width="3" fill="none" stroke-dasharray="6 6"/><path d="M14 66l8-14 8 14z M52 60l8-14 8 14z M92 52l8-14 8 14z" fill="#f08a3c"/>',
+ analist:'<rect width="120" height="80" fill="#14233a"/><rect x="18" y="12" width="84" height="50" rx="4" fill="#0b1422" stroke="#3a5a8a"/><rect x="24" y="18" width="72" height="38" fill="#1f6b45"/><circle cx="60" cy="37" r="7" fill="none" stroke="#fff" opacity=".7"/><circle cx="44" cy="30" r="3" fill="#e0574f"/><circle cx="72" cy="44" r="3" fill="#5b8cff"/><rect x="24" y="66" width="72" height="3" rx="1.5" fill="#24324a"/><rect x="24" y="66" width="44" height="3" rx="1.5" fill="#f2c230"/>',
+ mentalkoc:'<rect width="120" height="80" fill="#241a3a"/><circle cx="60" cy="40" r="26" fill="none" stroke="#7c5cc4" stroke-width="2"/><circle cx="60" cy="40" r="16" fill="none" stroke="#9a7ae0" stroke-width="2"/><circle cx="60" cy="40" r="6" fill="#c9b4ff"/><path d="M8 40h30l6-10 6 20 6-10h56" stroke="#f2c230" stroke-width="2.4" fill="none"/>',
+ fizyo:'<rect width="120" height="80" fill="#3a1e1e"/><rect x="50" y="18" width="20" height="44" rx="3" fill="#e9e6df"/><rect x="38" y="30" width="44" height="20" rx="3" fill="#e9e6df"/><rect x="55" y="23" width="10" height="34" fill="#e0574f"/><rect x="43" y="35" width="34" height="10" fill="#e0574f"/>'};
+function radarSVG(vals){ const keys=Object.keys(ATTR_NAMES), n=keys.length, R=96, C=120; const pt=(i,r)=>{ const a=-Math.PI/2+i*2*Math.PI/n; return [C+Math.cos(a)*r,C+Math.sin(a)*r*.96]; };
+  const ring=f=>keys.map((k,i)=>pt(i,R*f).join(',')).join(' ');
+  const poly=keys.map((k,i)=>pt(i,R*clamp(vals[k],0,99)/99).join(',')).join(' ');
+  return `<svg viewBox="-30 -8 300 256" class="radar" role="img" aria-label="Nitelik grafiği">${[.25,.5,.75,1].map(f=>`<polygon points="${ring(f)}" fill="none" stroke="rgba(236,234,226,${f===1?.22:.09})"/>`).join('')}
+    ${keys.map((k,i)=>{ const p=pt(i,R); return `<line x1="${C}" y1="${C}" x2="${p[0]}" y2="${p[1]}" stroke="rgba(236,234,226,.08)"/>`; }).join('')}
+    <polygon points="${poly}" fill="rgba(242,194,48,.22)" stroke="#f2c230" stroke-width="2.2" stroke-linejoin="round"/>
+    ${keys.map((k,i)=>{ const p=pt(i,R*clamp(vals[k],0,99)/99); return `<circle cx="${p[0]}" cy="${p[1]}" r="3.6" fill="#f2c230"/>`; }).join('')}
+    ${keys.map((k,i)=>{ const p=pt(i,R+16); return `<text x="${p[0]}" y="${p[1]-2}" text-anchor="middle" class="rd-l">${Math.round(vals[k])}</text><text x="${p[0]}" y="${p[1]+11}" text-anchor="middle" class="rd-n">${esc(ATTR_NAMES[k])}</text>`; }).join('')}</svg>`; }
 function devHTML(){
+  if(!S.attrStart||S.attrStart.season!==S.season) S.attrStart={season:S.season,...S.attrs};
   const engCost=[0,60000,90000,140000][S.english+1];
-  return `<div class="grid2"><div class="panel stack"><h2>Nitelikler</h2>
-    ${Object.keys(ATTR_NAMES).map(k=>`<div class="stack" style="gap:4px"><div class="attr"><span>${ATTR_NAMES[k]}</span><div class="bar"><i style="width:${S.attrs[k]}%"></i></div><span class="num">${Math.round(S.attrs[k])}</span></div><p class="muted" style="font-size:12px">${{kondisyon:'Maç içi enerjin düşükse geç dakikalarda görüşün azalır.',pozisyon:'Pozisyonları net görme ihtimalin; belirsiz bilgi sayısını azaltır.',kural:'Kural kitabı hakkı (70+ ile ek hak) ve otomatik maç isabeti.',sogukkanlilik:'Karar süreni uzatır; büyük maçlarda baskıyı azaltır.',iletisim:'Maç ısısını düşürür; toplu itirazları daha iyi yönetirsin.'}[k]}</p></div>`).join('')}
-    <p class="muted" style="font-size:13px">${S.age>36?'36 yaş sonrası gelişim yavaşlar; deneyim ve kondisyon yönetimi önem kazanır.':'Her hafta bir antrenman odağı seçebilirsin. 80 üstünde gelişim yavaşlar.'}</p></div>
-    <div class="stack" style="gap:16px"><div class="panel stack"><h3>Dil kursu</h3><p>İngilizce seviyen: <b>${ENGLISH[S.english]}</b>. DFF kokartı B2, AFK Elit C1 ister.</p>${S.english<3?`<button class="btn" data-eng="1" ${S.money<engCost?'disabled':''}>${ENGLISH[S.english+1]} kursuna yazıl · ${money(engCost)}</button>`:'<span class="chip g">En üst seviye</span>'}</div>
-    <div class="panel stack"><h3>Destek ekibi</h3>${UPGRADES.map(u=>`<div class="row" style="justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:10px"><div style="min-width:0;flex:1"><b>${esc(u.name)}</b><div class="muted" style="font-size:13px">${esc(u.desc)}</div></div>${S.upgrades[u.id]?'<span class="chip g">Aktif</span>':`<button class="btn sm" data-up="${u.id}" ${S.money<u.cost?'disabled':''}>${money(u.cost)}</button>`}</div>`).join('')}</div></div></div>`;
+  const ovr=Math.round(avg(Object.values(S.attrs)));
+  const hired=UPGRADES.filter(u=>S.upgrades[u.id]).length;
+  const attrCard=k=>{ const v=S.attrs[k], d=v-(S.attrStart[k]||v); const segs=10, fill=Math.round(v/99*segs*10)/10;
+    return `<div class="dv-a"><div class="dv-ah"><span class="dv-ic">${ic(ATTR_IC[k])}</span><span class="dv-an">${ATTR_NAMES[k]}</span><b class="num">${Math.round(v)}</b></div>
+      <div class="dv-seg">${Array.from({length:segs},(_,i)=>`<i style="--f:${clamp(fill-i,0,1)}"></i>`).join('')}</div>
+      <div class="dv-af"><small>${esc(ATTR_DESC[k])}</small><span class="num ${d>0?'up':''}">${d>0?'+'+f1(d):'—'}<em>bu sezon</em></span></div></div>`; };
+  const lv=['A2','B1','B2','C1'], req={B2:'DFF kokartı',C1:'AFK Elit'};
+  return `<div class="dv">
+    <section class="dv-hero"><div class="dv-radar">${radarSVG(S.attrs)}<div class="dv-ovr"><b class="num">${ovr}</b><small>Genel</small></div></div>
+      <div class="dv-id"><span class="dv-av">${avatarSVG(S.look,84)}</span><div><h2>${esc(S.name)}</h2><p class="muted">${esc(rankText())} · ${S.age} yaş · ${esc(SPECS[S.spec]?SPECS[S.spec].name:'')}</p></div>
+        <p class="dv-note">${S.age>36?'36 yaş sonrası gelişim yavaşlar; deneyim ve kondisyon yönetimi önem kazanır.':'Her hafta bir antrenman odağı seçebilirsin. 80 üstünde gelişim yavaşlar.'}</p>
+        <button class="btn primary" data-tab="merkez" id="bGoTrain">Haftalık antrenmana git</button></div></section>
+    <div class="dv-grid">${Object.keys(ATTR_NAMES).map(attrCard).join('')}</div>
+    <div class="dv-two">
+      <section class="dv-panel"><div class="dv-ph"><h3>Dil kursu</h3><span class="chip">${ENGLISH[S.english]}</span></div>
+        <div class="dv-cefr">${lv.map((l,i)=>`<div class="dv-step ${i<=S.english?'done':''} ${i===S.english?'cur':''}"><b>${l}</b>${req[l]?`<small>${req[l]}</small>`:'<small>&nbsp;</small>'}</div>`).join('')}</div>
+        <p class="muted" style="font-size:13.5px">DFF kokartı için B2, AFK Elit kategorisi için C1 İngilizce gerekir.</p>
+        ${S.english<3?`<button class="btn ${S.money>=engCost?'primary':''}" data-eng="1" ${S.money<engCost?'disabled':''}>${ENGLISH[S.english+1]} kursuna yazıl · ${money(engCost)}</button>`:'<span class="chip g">En üst seviye</span>'}</section>
+      <section class="dv-panel"><div class="dv-ph"><h3>Destek ekibi</h3><span class="chip">${hired}/${UPGRADES.length}</span></div>
+        <div class="dv-staff">${UPGRADES.map(u=>{ const own=S.upgrades[u.id]; return `<div class="dv-st ${own?'own':''}"><svg viewBox="0 0 120 80" aria-hidden="true">${STAFF_ART[u.id]||''}</svg><div class="dv-stb"><b>${esc(u.name)}</b><small>${esc(u.desc)}</small>${own?'<span class="chip g">Ekipte</span>':`<button class="btn sm ${S.money>=u.cost?'primary':''}" data-up="${u.id}" ${S.money<u.cost?'disabled':''}>İşe al · ${moneyShort(u.cost)}</button>`}</div></div>`; }).join('')}</div></section>
+    </div></div>`;
 }
 function offersHTML(){
   return `<div class="panel stack"><h2>Teklifler</h2>${S.offers.length?S.offers.map(o=>`<div class="fx"><div style="min-width:0"><div class="eyebrow">${o.type==='guest'?'Misafir hakem':o.type==='move'?'Transfer':'Sponsorluk'} · ${o.exp-S.week>0?'son '+(o.exp-S.week)+' hafta':'bu hafta son'}</div><b style="font-size:17px">${esc(o.title)}</b><p class="muted" style="font-size:14px;margin-top:4px">${esc(o.body)}</p></div><div class="act"><button class="btn sm" data-dec="${o.id}">Reddet</button><button class="btn primary" data-acc="${o.id}">Kabul et</button></div></div>`).join(''):`<p class="muted">Şu an bekleyen teklif yok. Zirve Lig'e yükselip itibarını artırdıkça yurt dışından misafir hakemlik, sözleşme ve sponsorluk teklifleri gelir.</p>`}
@@ -5108,6 +5205,7 @@ function bindMain(){
   { const ra=document.getElementById('bReadAll'); if(ra) ra.onclick=()=>{ S.inbox.forEach(x=>x.read=true); save(); render(); }; }
   q('[data-acc]').forEach(b=>b.onclick=()=>acceptOffer(b.dataset.acc));
   q('[data-dec]').forEach(b=>b.onclick=()=>declineOffer(b.dataset.dec));
+  { const gt=document.getElementById('bGoTrain'); if(gt) gt.onclick=()=>{ TAB='merkez'; render(); setTimeout(()=>{ const t=document.getElementById('trainSec'); if(t) t.scrollIntoView({behavior:'smooth'}); },60); }; }
   q('[data-up]').forEach(b=>b.onclick=()=>{ const u=UPGRADES.find(x=>x.id===b.dataset.up); if(S.money>=u.cost){ S.money-=u.cost; S.upgrades[u.id]=true; toast(u.name+' ekibine katıldı'); save(); render(); } });
   q('[data-eng]').forEach(b=>b.onclick=()=>{ const c=[0,60000,90000,140000][S.english+1]; if(S.money>=c){ S.money-=c; S.english++; toast('İngilizce seviyen: '+ENGLISH[S.english]); save(); render(); } });
   q('[data-set]').forEach(b=>b.onchange=()=>{ S.settings[b.dataset.set]=b.checked; save(); });
