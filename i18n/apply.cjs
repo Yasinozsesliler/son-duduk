@@ -36,6 +36,7 @@ function render(n) {
 let res = emit(0, src.length);
 res = res.replace(/'tr-TR'/g, `'${LOCALE}'`).replace(/"tr-TR"/g, `"${LOCALE}"`)
   .replace('<html lang="tr">', `<html lang="${LANG}">`)
+  .replace(/' Mn ₺'/g, `' ${{en:'M',de:'Mio.',es:'M'}[LANG]||'M'} ₺'`).replace(/' B ₺'/g, `' ${{en:'K',de:'Tsd.',es:'mil'}[LANG]||'K'} ₺'`)
   .replace(/₺/g, '€');
 fs.writeFileSync(OUT, res);
 console.log(`i18n ${LANG}: ${used} metin değiştirildi`);
