@@ -1311,7 +1311,9 @@ button.tile:hover{border-color:var(--line2);background:#16261f}
 .rk-word{position:absolute;left:-6px;bottom:-4px;transform-origin:left bottom;transform:rotate(-90deg) translateX(0);font:900 104px/0.78 var(--f-display);font-stretch:70%;letter-spacing:-.03em;color:var(--rk);white-space:nowrap;z-index:0;translate:0 0}
 .rk-word{left:88px;bottom:0;transform:rotate(-90deg);transform-origin:left bottom}
 .rk-ghost{position:absolute;right:-36px;top:40px;transform:rotate(90deg);transform-origin:right top;font:900 92px/0.8 var(--f-display);font-stretch:70%;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.07);white-space:nowrap;z-index:0}
-.rk-in{position:relative;z-index:1;margin-left:92px;padding:14px 14px 14px 0;display:flex;flex-direction:column;gap:10px;min-height:560px}
+.rk-band{position:absolute;left:0;top:0;bottom:0;width:14px;background:var(--rk);z-index:1}
+.rk-band::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(160deg,rgba(0,0,0,.18) 0 3px,transparent 3px 9px)}
+.rk-in{position:relative;z-index:1;margin-left:30px;padding:14px 16px 14px 0;display:flex;flex-direction:column;gap:10px;min-height:560px}
 .rk-comp{display:flex;justify-content:space-between;gap:8px;font-size:10.5px;font-weight:700;color:rgba(242,243,239,.6);text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid rgba(255,255,255,.12);padding-bottom:6px}
 .rk-score{display:flex;align-items:center;gap:10px}
 .rk-score b{font:800 22px/1 var(--f-body);background:#f2f3ef;color:#0a0f0d;padding:3px 10px;border-radius:2px}
@@ -1336,7 +1338,12 @@ button.tile:hover{border-color:var(--line2);background:#16261f}
 .rk-v.v-dogru,.rk-v.v-durdu,.rk-v.v-var{background:#4fb586;color:#08110d}.rk-v.v-kabul,.rk-v.v-kismen{background:#f2c230;color:#1f1800}.rk-v.v-hata,.rk-v.v-israr{background:#e0574f;color:#fff}
 .rk-brand{margin-top:auto;align-self:flex-end;position:relative;padding-right:.5em;font:850 20px/1 var(--f-display);font-stretch:66%}
 .rk-brand i{position:absolute;right:0;top:.04em;width:.3em;height:.42em;background:#f2c230;border-radius:.04em;transform:rotate(12deg)}
-@media (max-width:420px){.rk-word{font-size:88px;left:74px}.rk-in{margin-left:78px}}
+.rk-photo{height:230px;background:linear-gradient(160deg,color-mix(in srgb,var(--rk) 75%,#0a0f0d),color-mix(in srgb,var(--rk) 18%,#101815) 75%)}
+.rk-av{width:220px}
+.rk-score b{background:var(--rk);color:#0a0f0d}
+.rk.bronze .rk-score b{color:#fff}
+.rk-key{border-left-color:var(--rk)}
+.rk{min-height:0}.rk-in{min-height:560px}
 /* tracked büyük harf etiketleri: cümle düzeni */
 .ah-badge b,
 .banner b,
@@ -3536,7 +3543,7 @@ function drawWorld(ctx,c,o){
   fillPoly(ctx,c,[[-18,74.2,1.9],[123,74.2,1.9],[123,74.4,2.2],[-18,74.4,2.2]],'#454b54');
   fillPoly(ctx,c,[[-8,-6,0],[113,-6,0],[113,74,0],[-8,74,0]],'#2f7a37');
   for(let i=0;i<20;i++){ const x0=i*105/20, x1=(i+1)*105/20; fillPoly(ctx,c,[[x0,0,0],[x1,0,0],[x1,68,0],[x0,68,0]], i%2?'#3a8a3f':'#43974a'); }
-  { const a=P(c,[52.5,68,0]), b=P(c,[52.5,0,0]); if(a&&b){ const gl=ctx.createLinearGradient(0,a[1],0,b[1]); gl.addColorStop(0,'rgba(10,30,15,.28)'); gl.addColorStop(.6,'rgba(255,255,230,0)'); gl.addColorStop(1,'rgba(255,255,230,.05)'); ctx.save(); ctx.globalCompositeOperation='source-over'; ctx.fillStyle=gl; const q=[[-8,-6,0],[113,-6,0],[113,74,0],[-8,74,0]].map(p=>P(c,p)); if(q.every(Boolean)){ ctx.beginPath(); q.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1])); ctx.closePath(); ctx.fill(); } ctx.restore(); } }
+  { const a=P(c,[52.5,68,0]), b=P(c,[52.5,0,0]); if(a&&b&&isFinite(a[1])&&isFinite(b[1])&&Math.abs(b[1]-a[1])>1){ const gl=ctx.createLinearGradient(0,a[1],0,b[1]); gl.addColorStop(0,'rgba(10,30,15,.28)'); gl.addColorStop(.6,'rgba(255,255,230,0)'); gl.addColorStop(1,'rgba(255,255,230,.05)'); ctx.save(); ctx.globalCompositeOperation='source-over'; ctx.fillStyle=gl; const q=[[-8,-6,0],[113,-6,0],[113,74,0],[-8,74,0]].map(p=>P(c,p)); if(q.every(Boolean)){ ctx.beginPath(); q.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1])); ctx.closePath(); ctx.fill(); } ctx.restore(); } }
   ctx.strokeStyle='rgba(245,248,244,.92)'; ctx.lineWidth=Math.max(1,c.F/700); ctx.beginPath(); for(const l of PITCH_LINES) segPath(ctx,c,l[0],l[1]); ctx.stroke();
   drawBoards(ctx,c,o.t||0);
   if(o.offX!=null){ ctx.setLineDash([9*c.dpr,6*c.dpr]); ctx.strokeStyle='#f6c62b'; ctx.lineWidth=2.4*c.dpr; ctx.beginPath(); segPath(ctx,c,[o.offX,0,0],[o.offX,68,0]); ctx.stroke(); ctx.setLineDash([]); }
@@ -3587,7 +3594,7 @@ function kickoffPositions(sc,possSide){
 function nearestTo(list,x,y){ let b=null,d=1e9; list.forEach(p=>{ const e=(p.x-x)**2+(p.y-y)**2; if(e<d){d=e;b=p;} }); return b; }
 // Koşucu fiziği: duruşa yaklaşırken yavaşla, ivme/fren/dönüş sınırlı, gövde hareket yönüne döner, adımlar yere basar
 const STEP_L=v=>Math.min(1.25,.55+Math.min(v,8)*.1);
-function steer(p,tx,ty,dt,vmax){ const dx=tx-p.x, dy=ty-p.y, d=Math.hypot(dx,dy);
+function steer(p,tx,ty,dt,vmax){ if(!(dt>0)) return; const dx=tx-p.x, dy=ty-p.y, d=Math.hypot(dx,dy);
   const BRAKE=6.5, ACC=4.6, LAT=8.5;
   const want=d<.3?0:Math.min(vmax,Math.sqrt(2*BRAKE*.8*Math.max(0,d-.3)));
   const ux=d?dx/d:0, uy=d?dy/d:0; const tvx=ux*want, tvy=uy*want;
@@ -3613,6 +3620,7 @@ function formTarget(sc,p){ const b=sc.ball, d=sdir(sc,p.side), ballF=d>0?b.x:105
   if(p.role==='GK'){ const fx=clamp(4+Math.max(0,ballF-(att?20:70))*.06,3,att?16:9); return [wxf(sc,p.side,fx),34+(b.y-34)*.25]; }
   let fx=p.bx+(att?(ballF-35)*.55:(ballF-62)*.5); fx=clamp(fx,8,att?97:90); return [wxf(sc,p.side,fx),clamp(p.by*.72+b.y*.28,2,66)]; }
 function sceneUpdate(sc,dt){
+  if(!(dt>0)) return;
   sc.mt+=dt; sc.t+=dt; const b=sc.ball;
   if(sc.mode==='kickoff' && sc.mt>1.1){ sc.mode='play'; const k=sc.pl.find(p=>p.side===sc.poss&&p.i===9); b.owner=k; k.hold=0; k.next=.25; }
   if(b.fl){ const f=b.fl; f.t+=dt/f.dur; const t=Math.min(1,f.t); b.x=f.from[0]+(f.to[0]-f.from[0])*t; b.y=f.from[1]+(f.to[1]-f.from[1])*t; b.z=f.h*4*t*(1-t);
@@ -4404,17 +4412,16 @@ function tierOf(r){ return r>=9?'elite':r>=8.6?'gold':r>=8.0?'silver':'bronze'; 
 let REP_TAB='ozet';
 
 // ---------- v1.2: maç sonu reyting kartı ----------
-function rateWord(x){ return x>=9?'Kusursuz':x>=8.6?'Usta işi':x>=8.3?'Sağlam':x>=8.0?'Yeterli':x>=7.5?'Zor gece':'Kâbus'; }
 const RATE_COL={elite:'#5b8cff',gold:'#f2c230',silver:'#4fb586',bronze:'#e0574f'};
 function rateCardHTML(r,H,A,maj,errs,good,confetti){
-  const fx=r.fx, tier=tierOf(r.rating), col=RATE_COL[tier], word=rateWord(r.rating);
+  const fx=r.fx, tier=tierOf(r.rating), col=RATE_COL[tier];
   const majOk=maj.filter(d=>['dogru','kabul','durdu','var'].includes(d.v)).length;
   const yc=r.cards.filter(c=>!c.red).length, rc=r.cards.filter(c=>c.red).length;
   const pos=r.posTotal?Math.round(r.posGood/r.posTotal*100)+'%':'—';
   const key=errs[0]||maj[0]||null;
   const row=(k,v)=>`<div class="rk-row"><span>${k}</span><b class="num">${v}</b></div>`;
   return `<div class="rk ${tier}" style="--rk:${col}">${confetti}
-    <span class="rk-word" aria-hidden="true" style="font-size:${Math.round(clamp(560/(word.length*.5),86,150))}px">${esc(word)}</span>
+    <span class="rk-band" aria-hidden="true"></span>
     <div class="rk-in">
       <div class="rk-comp"><span>${esc(fx.compName)}</span><span>${esc(stageTxt(fx.stage))}</span></div>
       <div class="rk-score">${crest(H,26)}<b class="num">${r.score[0]} – ${r.score[1]}</b>${crest(A,26)}</div>
