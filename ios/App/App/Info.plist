@@ -16,7 +16,7 @@
 	<key>NSUserTrackingUsageDescription</key>
 	<string>Your advertising identifier is used to show you more relevant ads. The game works the same if you decline. / Reklam kimliğin daha alakalı reklamlar için kullanılır; izin vermesen de oyun aynı şekilde çalışır.</string>
 	<key>GADApplicationIdentifier</key>
-	<string>ca-app-pub-3940256099942544~1458002511</string>
+	<string>ca-app-pub-6387108639379747~1805254768</string>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>
