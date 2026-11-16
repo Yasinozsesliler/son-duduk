@@ -21,3 +21,27 @@ if cmd=='release_pending':
     print('release request', json.dumps(r)[:300])
     time.sleep(5)
     for v in call('GET',f'/apps/{aid}/appStoreVersions',params={'limit':10})['data']: print('now',v['attributes']['versionString'],v['attributes']['appStoreState'])
+if cmd=='submit':
+    ver=sys.argv[2] if len(sys.argv)>2 else None
+    v=[x for x in vers if x['attributes']['versionString']==ver][0]; vid=v['id']
+    # ekran görüntüleri işlenene kadar bekle
+    for i in range(30):
+        locs=call('GET',f'/appStoreVersions/{vid}/appStoreVersionLocalizations')['data']
+        pending=0; bad=0
+        for L in locs:
+            for ss in call('GET',f"/appStoreVersionLocalizations/{L['id']}/appScreenshotSets")['data']:
+                for sh in call('GET',f"/appScreenshotSets/{ss['id']}/appScreenshots",params={'limit':50})['data']:
+                    st=(sh['attributes'].get('assetDeliveryState') or {}).get('state')
+                    if st in ('AWAITING_UPLOAD','UPLOAD_COMPLETE'): pending+=1
+                    if st=='FAILED': bad+=1
+        print('screenshots pending',pending,'failed',bad)
+        if pending==0: break
+        time.sleep(20)
+    subs=call('GET','/reviewSubmissions',params={'filter[app]':aid,'filter[state]':'READY_FOR_REVIEW'}).get('data',[])
+    sid=subs[0]['id'] if subs else call('POST','/reviewSubmissions',{'data':{'type':'reviewSubmissions','attributes':{'platform':'IOS'},'relationships':{'app':{'data':{'type':'apps','id':aid}}}}})['data']['id']
+    items=call('GET',f'/reviewSubmissions/{sid}/items').get('data',[])
+    if not items:
+        r=call('POST','/reviewSubmissionItems',{'data':{'type':'reviewSubmissionItems','relationships':{'reviewSubmission':{'data':{'type':'reviewSubmissions','id':sid}},'appStoreVersion':{'data':{'type':'appStoreVersions','id':vid}}}}})
+        print('item',json.dumps(r)[:1500])
+    r=call('PATCH',f'/reviewSubmissions/{sid}',{'data':{'type':'reviewSubmissions','id':sid,'attributes':{'submitted':True}}})
+    print('submitted', json.dumps(r.get('data',{}).get('attributes',{})))
