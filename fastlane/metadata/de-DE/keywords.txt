@@ -1,1 +1,1 @@
-Schiedsrichter,Schiri,Fußball,Simulator,Karriere,VAR,Abseits,Elfmeter,Rote Karte,Liga,Pfeife,Sport
+VAR,Abseits,Elfmeter,Rote,Gelbe,Karte,Pfeife,Karriere,Liga,Sport,Foul,Unparteiischer,Spielleiter

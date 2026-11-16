@@ -377,7 +377,7 @@
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.sports-games</string>
 	<key>CFBundleDisplayName</key>
-        <string>Son Düdük</string>
+	<string>Refmania</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>

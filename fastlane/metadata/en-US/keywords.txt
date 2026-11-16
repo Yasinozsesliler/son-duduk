@@ -1,1 +1,1 @@
-referee,football,soccer,simulator,career,VAR,offside,penalty,red card,league,whistle,ref,sports
+VAR,offside,penalty,red,yellow,card,whistle,umpire,match,league,sim,sports,foul,decision,manager

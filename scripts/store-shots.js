@@ -3,20 +3,23 @@
 // Output: store/raw/<device>_<n>.png  — then run scripts/store-frame.py to add captions.
 const { chromium } = require('playwright');
 const path = require('path'); const fs = require('fs');
-const ROOT = path.resolve(__dirname, '..'); const OUT = path.join(ROOT, 'store', 'raw');
-fs.mkdirSync(OUT, { recursive: true });
+const ROOT = path.resolve(__dirname, '..');
+const LANGS = (process.env.LANGS || 'tr,en,de,es').split(',');
+const LOC = { tr: 'tr-TR', en: 'en-US', de: 'de-DE', es: 'es-ES' };
 const DEVICES = [
   { n: 'iphone', viewport: { width: 390, height: 844 }, dpr: 3, mobile: true },
   { n: 'ipad', viewport: { width: 1032, height: 1376 }, dpr: 2, mobile: true },
 ];
 const wait = ms => new Promise(r => setTimeout(r, ms));
 (async () => {
-  const b = await chromium.launch();
-  for (const d of DEVICES) {
-    const ctx = await b.newContext({ viewport: d.viewport, deviceScaleFactor: d.dpr, isMobile: d.mobile, hasTouch: true });
+  const b = await chromium.launch(process.env.CHROME ? { executablePath: process.env.CHROME, args: ['--no-sandbox'] } : {});
+  for (const lang of LANGS) for (const d of DEVICES) {
+    const OUT = path.join(ROOT, 'store', 'raw', lang); fs.mkdirSync(OUT, { recursive: true });
+    const ctx = await b.newContext({ viewport: d.viewport, deviceScaleFactor: d.dpr, isMobile: d.mobile, hasTouch: true, locale: LOC[lang] });
+    await ctx.addInitScript(l => { try { localStorage.setItem('sonduduk_lang', l); } catch (e) {} }, lang);
     const p = await ctx.newPage(); const errs = []; p.on('pageerror', e => errs.push(e.message));
-    const shot = async name => { await p.screenshot({ path: path.join(OUT, `${d.n}_${name}.png`) }); console.log(d.n, name); };
-    await p.goto('file://' + path.join(ROOT, 'www', 'index.html')); await wait(900);
+    const shot = async name => { await p.screenshot({ path: path.join(OUT, `${d.n}_${name}.png`) }); console.log(lang, d.n, name); };
+    await p.goto('file://' + path.join(ROOT, 'www', lang === 'tr' ? 'index.html' : lang + '.html')); await wait(900);
     await shot('6_start');
     await p.click('[data-new="1"]'); for (let i = 0; i < 3; i++) await p.click('#wNext'); await wait(600);
     await shot('4_hub');

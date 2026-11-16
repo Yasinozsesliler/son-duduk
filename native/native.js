@@ -48,6 +48,7 @@ window.__SD_PRE = (async () => {
 /* ---------- Reklamlar (AdMob + UMP/GDPR onayı + iOS takip izni) ---------- */
 let adsReady = null, canAds = true;
 async function initAds() {
+  if (!AD.enabled) return false;
   try {
     await AdMob.initialize({ initializeForTesting: AD.testing });
     try {
@@ -142,4 +143,4 @@ if (N.iapOn) {
     try { window.SD_IAP_UPDATE && window.SD_IAP_UPDATE(t.productIdentifier, okTx(t)); } catch (e) {}
   }).catch(() => {});
 }
-if (isNative) setTimeout(() => { adsReady = adsReady || initAds(); }, 5000);
+if (isNative && AD.enabled) setTimeout(() => { adsReady = adsReady || initAds(); }, 5000);

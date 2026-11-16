@@ -1,6 +1,6 @@
 You've never played football from this angle: the whistle is yours.
 
-Son Düdük is a career simulator that brings football refereeing to life in full detail. You take charge of your first match in a regional amateur league; with the right decisions you climb the tiers, reach your country's top flight, earn your international badge and get appointed to the biggest matches in the world.
+Refmania is a career simulator that brings football refereeing to life in full detail. You take charge of your first match in a regional amateur league; with the right decisions you climb the tiers, reach your country's top flight, earn your international badge and get appointed to the biggest matches in the world.
 
 RUN THE MATCH
 • Live 3D matches: players run, pass and shoot; you take up position.
@@ -8,7 +8,7 @@ RUN THE MATCH
 • Your angle of view affects your decision: standing in the right place is part of the job.
 
 INTERPRET EVERY INCIDENT
-• 13 incident types: penalty-area contact, handball, offside, elbows, denying a goal-scoring opportunity, fouls on the goalkeeper and more.
+• 16 incident types: penalty-area contact, handball, offside, elbows, denying a goal-scoring opportunity, fouls on the goalkeeper and more.
 • Check the rulebook, ask your assistant, go to the video review or stand by your call.
 • Card animations, protests, match management and stoppage-time decisions.
 
@@ -34,6 +34,6 @@ THE WORLD IS TALKING ABOUT YOU
 
 3 career slots, referee types and country choice. English, German, Spanish and Turkish. No internet connection required.
 
-The game is free and contains optional ads. Premium (one-time purchase) removes ads and gives extra rewards.
+The game is free, with no ads and no in-app purchases.
 
 Note: all teams, players and referees in the game are fictional.

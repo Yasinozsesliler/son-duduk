@@ -1,6 +1,6 @@
 Nunca has jugado al fútbol desde este ángulo: el silbato es tuyo.
 
-Son Düdük es un simulador de carrera que recrea el arbitraje de fútbol con todo detalle. Diriges tu primer partido en una liga regional amateur; con las decisiones correctas subes de categoría, llegas a la máxima liga de tu país, consigues la escarapela internacional y te designan para los partidos más grandes del mundo.
+Refmania es un simulador de carrera que recrea el arbitraje de fútbol con todo detalle. Diriges tu primer partido en una liga regional amateur; con las decisiones correctas subes de categoría, llegas a la máxima liga de tu país, consigues la escarapela internacional y te designan para los partidos más grandes del mundo.
 
 DIRIGE EL PARTIDO
 • Partidos en 3D en directo: los jugadores corren, pasan y chutan; tú te colocas.
@@ -8,7 +8,7 @@ DIRIGE EL PARTIDO
 • Tu ángulo de visión influye en tu decisión: estar bien colocado es parte del trabajo.
 
 INTERPRETA CADA JUGADA
-• 13 tipos de jugada: contacto en el área, mano, fuera de juego, codazos, ocasión manifiesta de gol, falta al portero y más.
+• 16 tipos de jugada: contacto en el área, mano, fuera de juego, codazos, ocasión manifiesta de gol, falta al portero y más.
 • Consulta el reglamento, pregunta a tu asistente, ve a la revisión de vídeo o mantén tu decisión.
 • Animación de tarjetas, protestas, gestión del partido y descuento.
 
@@ -34,6 +34,6 @@ EL MUNDO HABLA DE TI
 
 3 ranuras de carrera, tipos de árbitro y elección de país. Español, inglés, alemán y turco. No requiere conexión a internet.
 
-El juego es gratuito e incluye anuncios opcionales. Premium (compra única) elimina los anuncios y da recompensas extra.
+El juego es gratuito, sin anuncios ni compras dentro de la app.
 
 Nota: todos los equipos, jugadores y árbitros del juego son ficticios.

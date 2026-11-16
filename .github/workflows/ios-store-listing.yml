@@ -56,8 +56,11 @@ jobs:
           fi
           echo "API key OK"
           ruby -rjson -e 'puts JSON.generate({key_id: ENV["ASC_KEY_ID"], issuer_id: ENV["ASC_ISSUER_ID"], key: File.read(ARGV[0]), in_house: false})' "$KEYFILE" > "$RUNNER_TEMP/keys/api_key.json"
-          mkdir -p fastlane/screenshots/tr
-          cp store/screenshots/*.png fastlane/screenshots/tr/
+          for pair in tr:tr en:en-US de:de-DE es:es-ES; do
+            src="${pair%%:*}"; dst="${pair##*:}"
+            mkdir -p "fastlane/screenshots/$dst"
+            cp store/screenshots/$src/*.png "fastlane/screenshots/$dst/"
+          done
           echo "Destek: $(cat fastlane/metadata/tr/support_url.txt)"
 
       - name: App Store Connect API task

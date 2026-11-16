@@ -1,4 +1,4 @@
-<title>Son Düdük</title>
+<title>Refmania</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1352,7 +1352,7 @@ main>*{animation:none}
 <script>
 'use strict';
 /* =========================================================
-   SON DÜDÜK — hakem kariyer simülatörü
+   REFMANIA — hakem kariyer simülatörü
    ========================================================= */
 
 // ---------- utilities ----------
@@ -1525,7 +1525,7 @@ function startHTML(){
   if(CR) return wizardHTML();
   const slots=[1,2,3].map(n=>({n,d:readSlot(n)}));
   return `<div class="start"><canvas id="startCv" class="start-bg" aria-hidden="true"></canvas><div class="start-in">
-    <div class="start-hero"><h1 class="logo">Son Düdük<i class="logo-card" aria-hidden="true"></i></h1><div class="eyebrow gold">Hakem kariyer simülatörü</div>
+    <div class="start-hero"><h1 class="logo">Refmania<i class="logo-card" aria-hidden="true"></i></h1><div class="eyebrow gold">Hakem kariyer simülatörü</div>
       <p class="lede">Amatör ligden Dünya Şampiyonası finaline. Her pozisyonu sahada sen okursun: temas, kol pozisyonu, ofsayt çizgisi, DOGSO ölçütleri. VAR monitöre çağırır, gözlemci not verir, kurul hesap sorar.</p></div>
     <div class="slots"><div class="row" style="justify-content:space-between"><span class="eyebrow gold">Kariyer slotları</span><span class="muted" style="font-size:12px">${slots.filter(s=>s.d).length}/3 dolu</span></div>
       ${slots.map(slotCard).join('')}
@@ -4398,7 +4398,7 @@ function render(){
   const stateLine = S.phase==='tournament'?'Turnuva':S.phase==='seasonEnd'?'Sezon sonu':WEEK_FMT.replace('{n}',S.week);
   const moreBadge=TABS.filter(([k])=>!MOBILE_TABS.includes(k)).some(([k])=>badgeFor(k));
   app.innerHTML=`<header class="top"><div class="top-in">
-      <button class="brand" data-tab="merkez" aria-label="Son Düdük, ana sayfa">${WHISTLE_SVG}<span>Son Düdük</span></button>
+      <button class="brand" data-tab="merkez" aria-label="Refmania, ana sayfa">${WHISTLE_SVG}<span>Refmania</span></button>
       <div class="hdr-season"><span class="eyebrow">${seasonLabel(S.season)}</span><b>${stateLine}</b></div>
       <div class="hdr-right">
         <div class="hstat" title="İtibar"><svg class="ring" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15" class="ring-bg"/><circle cx="18" cy="18" r="15" class="ring-fg" stroke-dasharray="${(repPct/100*C).toFixed(1)} ${C.toFixed(1)}"/></svg><span><b class="num">${Math.round(S.rep)}</b><small>İtibar</small></span></div>
@@ -4677,7 +4677,9 @@ const PREMIUM_ID = 'com.sonduduk.hakem.premium';
 const PREM_KEY = 'sonduduk_premium';
 function isPremium(){ try{ return localStorage.getItem(PREM_KEY)==='1'; }catch(e){ return false; } }
 function setPremium(on){ try{ localStorage.setItem(PREM_KEY,on?'1':'0'); }catch(e){} try{ const P=PLUG('Preferences'); if(P) P.set({key:PREM_KEY,value:on?'1':'0'}); }catch(e){} }
-const adsOn = () => !!(NV() && NV().isNative);
+// MONET: reklam ve Premium (AdMob gerçek kimlikleri ve App Store ürünü hazır olunca true)
+const MONET = false;
+const adsOn = () => MONET && !!(NV() && NV().isNative);
 
 // ---------- küçük ikonlar ----------
 const V11G={
@@ -4973,10 +4975,11 @@ window.SD_IAP_UPDATE=(id,ok)=>{ if(id===PREMIUM_ID){ setPremium(ok); if(ok&&S){ 
 let SHOP_TAB='ekipman';
 function v11ShopHTML(){
   v11Ensure();
-  const tabs=[['ekipman','Ekipman'],['yasam','Yaşam'],['tatil','Tatil'],['hatira','Hatıralar'],['premium','Premium']];
+  const tabs=[['ekipman','Ekipman'],['yasam','Yaşam'],['tatil','Tatil'],['hatira','Hatıralar']].concat(MONET?[['premium','Premium']]:[]);
+  if(!MONET&&SHOP_TAB==='premium') SHOP_TAB='ekipman';
   let body='';
   if(SHOP_TAB==='ekipman'||SHOP_TAB==='yasam'){
-    const list=shopAll().filter(x=>x.cat===SHOP_TAB);
+    const list=shopAll().filter(x=>x.cat===SHOP_TAB&&(MONET||!x.prem));
     const mods=['dt','vis','temp','en','rest','train'].map(k=>[k,v11Mod(k)]).filter(x=>x[1]);
     body=`${SHOP_TAB==='ekipman'?`<p class="muted" style="font-size:13px">Aynı türden ekipmanların yalnızca en iyisi etki eder. Bonuslar üst sınırlıdır: her şeyi parayla alamazsın.</p>`:`<p class="muted" style="font-size:13px">Ev ve araba haftalık toparlanmanı artırır; gösterişli harcamalar takipçi getirir ama soru da çeker.</p>`}
       ${mods.length?`<div class="row v11-mods">${mods.map(([k,v])=>`<span class="chip g">${{dt:`+${f1(v).replace('.',',')} sn karar`,vis:`+%${Math.round(v*100)} görüş`,temp:`−%${Math.round(v*100)} gerginlik`,en:`−${v} yorgunluk`,rest:`+${v} enerji/hafta`,train:`+%${Math.round(v*100)} antrenman`}[k]}</span>`).join('')}</div>`:''}
@@ -5009,7 +5012,7 @@ function vacCard(v){
 function premiumHTML(){
   setTimeout(loadPremPrice,0);
   const perks=[['ad','Reklamsız oyun','Maç aralarındaki geçiş reklamları tamamen kalkar.'],['star','Ödüller reklamsız','Ücreti ikiye katlama ve enerji takviyesi reklam izlemeden anında.'],['gift','250.000 ₺ hoş geldin parası','Her kariyer slotuna bir kez.'],['whistle','Özel ekipman','Elmas kakmalı efsane düdüğü ve altın hakem saati.']];
-  return `<div class="v11-prem"><div class="v11-prem-h">${v11g('crown','#f6c62b',64)}<div><span class="eyebrow gold">Son Düdük</span><h2>Premium</h2><p class="muted">Tek seferlik satın alma. Abonelik yok.</p></div></div>
+  return `<div class="v11-prem"><div class="v11-prem-h">${v11g('crown','#f6c62b',64)}<div><span class="eyebrow gold">Refmania</span><h2>Premium</h2><p class="muted">Tek seferlik satın alma. Abonelik yok.</p></div></div>
     <div class="v11-perks">${perks.map(([g,t,d])=>`<div>${v11g(g,'#f6c62b',34)}<span><b>${t}</b><small>${d}</small></span></div>`).join('')}</div>
     ${isPremium()?'<p class="chip y" style="font-size:14px;padding:6px 12px">Premium etkin. Teşekkürler!</p>':`<button class="btn primary lg" id="bBuyPrem">Premium al · <span id="premPrice">${PREM_PRICE||'₺249,99'}</span></button>`}
     <button class="btn sm" id="bRestore">Satın alımları geri yükle</button></div>`;
@@ -5124,7 +5127,7 @@ function v11HubLeft(){
 function v11HubRight(){
   const b=breakNow();
   return `<section class="panel v11-hubshop"><div class="row" style="justify-content:space-between;flex-wrap:nowrap"><div style="min-width:0"><b>Mağaza ve tatil</b><div class="muted" style="font-size:13px">${b?'Devre arası! Uzun tatil seçenekleri açık.':'Ekipman, yaşam, tatil · Kasa '+moneyShort(S.money)}</div></div><button class="btn sm ${b?'primary':''}" data-shopgo="${b?'tatil':'ekipman'}">Aç</button></div>
-    ${!isPremium()?`<button class="v11-premrow" data-shopgo="premium">${v11g('crown','#f6c62b',28)}<span><b>Premium</b><small>Reklamsız oyun, anında ödüller, 250.000 ₺</small></span></button>`:''}</section>`;
+    ${MONET&&!isPremium()?`<button class="v11-premrow" data-shopgo="premium">${v11g('crown','#f6c62b',28)}<span><b>Premium</b><small>Reklamsız oyun, anında ödüller, 250.000 ₺</small></span></button>`:''}</section>`;
 }
 function v11EnergyBtn(){
   if(!S.tasks||S.energy>=95) return '';
@@ -5140,8 +5143,8 @@ function curLang(){ return document.documentElement.lang||'tr'; }
 function setLang(l){ try{ localStorage.setItem('sonduduk_lang',l); }catch(e){} try{ const P=PLUG('Preferences'); if(P) P.set({key:'sonduduk_lang',value:l}); }catch(e){} if(S) save(); location.replace(l==='tr'?'index.html':l+'.html'); }
 function v11SettingsHTML(){
   return `<div class="panel stack"><h3>Dil</h3><div class="row" style="gap:8px;flex-wrap:wrap">${LANGS.map(([k,n])=>`<button class="btn sm ${curLang()===k?'primary':''}" data-lang="${k}">${n}</button>`).join('')}</div>
-    <h3 style="margin-top:8px">Premium ve reklamlar</h3><p class="muted" style="font-size:13px">${isPremium()?'Premium etkin: reklam görmezsin.':'Premium ile reklamlar kalkar.'}</p>
-    <div class="row" style="gap:8px;flex-wrap:wrap">${isPremium()?'':'<button class="btn sm primary" data-shopgo="premium">Premium</button>'}<button class="btn sm" id="bRestore2">Satın alımları geri yükle</button>${adsOn()?'<button class="btn sm" id="bPrivacy">Reklam gizlilik ayarları</button>':''}</div></div>`;
+    ${MONET?`<h3 style="margin-top:8px">Premium ve reklamlar</h3><p class="muted" style="font-size:13px">${isPremium()?'Premium etkin: reklam görmezsin.':'Premium ile reklamlar kalkar.'}</p>
+    <div class="row" style="gap:8px;flex-wrap:wrap">${isPremium()?'':'<button class="btn sm primary" data-shopgo="premium">Premium</button>'}<button class="btn sm" id="bRestore2">Satın alımları geri yükle</button>${adsOn()?'<button class="btn sm" id="bPrivacy">Reklam gizlilik ayarları</button>':''}</div>`:''}</div>`;
 }
 function v11Bind(){
   const q=s=>document.querySelectorAll(s);

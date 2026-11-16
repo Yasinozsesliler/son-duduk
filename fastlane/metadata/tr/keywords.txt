@@ -1,1 +1,1 @@
-hakem,futbol,simülasyon,kariyer,VAR,ofsayt,penaltı,kırmızı kart,lig,maç,karar,düdük,spor
+VAR,ofsayt,penaltı,kırmızı,sarı,kart,düdük,maç,lig,spor,karar,şike,taraftar,derbi,referee

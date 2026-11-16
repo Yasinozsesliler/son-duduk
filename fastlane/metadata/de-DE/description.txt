@@ -1,6 +1,6 @@
 So hast du Fußball noch nie gespielt: Die Pfeife gehört dir.
 
-Son Düdük ist ein Karrieresimulator, der das Schiedsrichterwesen in allen Details erlebbar macht. Du leitest dein erstes Spiel in einer regionalen Amateurliga; mit den richtigen Entscheidungen steigst du auf, erreichst die höchste Liga deines Landes, bekommst das internationale Abzeichen und wirst für die größten Spiele der Welt angesetzt.
+Refmania ist ein Karrieresimulator, der das Schiedsrichterwesen in allen Details erlebbar macht. Du leitest dein erstes Spiel in einer regionalen Amateurliga; mit den richtigen Entscheidungen steigst du auf, erreichst die höchste Liga deines Landes, bekommst das internationale Abzeichen und wirst für die größten Spiele der Welt angesetzt.
 
 LEITE DAS SPIEL
 • Live-3D-Spiele: Die Spieler laufen, passen und schießen; du nimmst Position ein.
@@ -8,7 +8,7 @@ LEITE DAS SPIEL
 • Dein Blickwinkel beeinflusst deine Entscheidung: richtig zu stehen gehört dazu.
 
 BEWERTE JEDE SZENE
-• 13 Situationstypen: Kontakt im Strafraum, Handspiel, Abseits, Ellbogen, Notbremse, Foul am Torwart und mehr.
+• 16 Situationstypen: Kontakt im Strafraum, Handspiel, Abseits, Ellbogen, Notbremse, Foul am Torwart und mehr.
 • Schlag im Regelbuch nach, frag deinen Assistenten, geh zum Videobeweis oder bleib bei deiner Entscheidung.
 • Karten-Animationen, Proteste, Spielleitung und Nachspielzeit.
 
@@ -34,6 +34,6 @@ DIE WELT REDET ÜBER DICH
 
 3 Karriere-Slots, Schiedsrichtertypen und Länderwahl. Deutsch, Englisch, Spanisch und Türkisch. Keine Internetverbindung nötig.
 
-Das Spiel ist kostenlos und enthält optionale Werbung. Premium (einmaliger Kauf) entfernt die Werbung und bringt zusätzliche Belohnungen.
+Das Spiel ist kostenlos, ohne Werbung und ohne In-App-Käufe.
 
 Hinweis: Alle Teams, Spieler und Schiedsrichter im Spiel sind frei erfunden.

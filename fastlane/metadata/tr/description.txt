@@ -1,6 +1,6 @@
 Futbolu hiç bu açıdan oynamadın: düdük sende.
 
-Son Düdük, futbol hakemliğini tüm ayrıntısıyla yaşatan bir kariyer simülatörü. Bölgesel amatör ligde ilk maçına çıkarsın; doğru kararlarla klasman atlar, ülkenin en üst ligine yükselir, uluslararası kokartı alır ve dünyanın en büyük maçlarına atanırsın.
+Refmania, futbol hakemliğini tüm ayrıntısıyla yaşatan bir kariyer simülatörü. Bölgesel amatör ligde ilk maçına çıkarsın; doğru kararlarla klasman atlar, ülkenin en üst ligine yükselir, uluslararası kokartı alır ve dünyanın en büyük maçlarına atanırsın.
 
 SAHADAN YÖNET
 • Canlı 3D maç: oyuncular koşar, pas verir, şut çeker; sen pozisyon alırsın.
@@ -8,7 +8,7 @@ SAHADAN YÖNET
 • Görüş açın kararını etkiler: doğru yerde durmak da işin parçası.
 
 HER POZİSYONU SEN YORUMLA
-• 13 farklı pozisyon türü: ceza sahası teması, elle oynama, ofsayt, dirsek, gol şansını engelleme, kaleci müdahalesi ve daha fazlası.
+• 16 farklı pozisyon türü: ceza sahası teması, elle oynama, ofsayt, dirsek, gol şansını engelleme, kaleci müdahalesi ve daha fazlası.
 • Kural kitabına bak, yardımcı hakeme sor, video incelemesine git ya da kararının arkasında dur.
 • Kart gösterme animasyonu, itirazlar, maç yönetimi ve uzatma kararları.
 
@@ -34,6 +34,6 @@ DÜNYA SENİ KONUŞUYOR
 
 3 kariyer slotu, hakem tipi ve ülke seçimi. Türkçe, İngilizce, Almanca ve İspanyolca. İnternet bağlantısı gerekmez.
 
-Oyun ücretsizdir ve isteğe bağlı reklamlar içerir. Premium (tek seferlik satın alma) reklamları kaldırır ve ek ödüller verir.
+Oyun ücretsizdir; reklam ve uygulama içi satın alma içermez.
 
 Not: Oyundaki tüm takımlar, oyuncular ve hakemler kurgusaldır.
