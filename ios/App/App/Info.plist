@@ -13,10 +13,16 @@
 		<string>de</string>
 		<string>es</string>
 	</array>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>Your advertising identifier is used to show you more relevant ads. The game works the same if you decline. / Reklam kimliğin daha alakalı reklamlar için kullanılır; izin vermesen de oyun aynı şekilde çalışır.</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-3940256099942544~1458002511</string>
 	<key>SKAdNetworkItems</key>
 	<array>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>bvpn9ufa9b.skadnetwork</string>
+		</dict>
 		<dict>
 			<key>SKAdNetworkIdentifier</key>
 			<string>cstr6suwn9.skadnetwork</string>

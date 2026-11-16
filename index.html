@@ -5315,8 +5315,9 @@ const PREM_KEY = 'sonduduk_premium';
 function isPremium(){ try{ return localStorage.getItem(PREM_KEY)==='1'; }catch(e){ return false; } }
 function setPremium(on){ try{ localStorage.setItem(PREM_KEY,on?'1':'0'); }catch(e){} try{ const P=PLUG('Preferences'); if(P) P.set({key:PREM_KEY,value:on?'1':'0'}); }catch(e){} }
 // MONET: reklam ve Premium (AdMob gerçek kimlikleri ve App Store ürünü hazır olunca true)
-const MONET = false;
-const adsOn = () => MONET && !!(NV() && NV().isNative);
+const MONET = false;   // Premium satın alma (kapalı)
+const ADS_LIVE = true; // Ödüllü + geçiş reklamları (AdMob + Unity + Liftoff arabuluculuğu)
+const adsOn = () => ADS_LIVE && !!(NV() && NV().isNative);
 
 // ---------- küçük ikonlar ----------
 const V11G={
@@ -5781,7 +5782,8 @@ function setLang(l){ try{ localStorage.setItem('sonduduk_lang',l); }catch(e){} t
 function v11SettingsHTML(){
   return `<div class="panel stack"><h3>Dil</h3><div class="row" style="gap:8px;flex-wrap:wrap">${LANGS.map(([k,n])=>`<button class="btn sm ${curLang()===k?'primary':''}" data-lang="${k}">${n}</button>`).join('')}</div>
     ${MONET?`<h3 style="margin-top:8px">Premium ve reklamlar</h3><p class="muted" style="font-size:13px">${isPremium()?'Premium etkin: reklam görmezsin.':'Premium ile reklamlar kalkar.'}</p>
-    <div class="row" style="gap:8px;flex-wrap:wrap">${isPremium()?'':'<button class="btn sm primary" data-shopgo="premium">Premium</button>'}<button class="btn sm" id="bRestore2">Satın alımları geri yükle</button>${adsOn()?'<button class="btn sm" id="bPrivacy">Reklam gizlilik ayarları</button>':''}</div>`:''}</div>`;
+    <div class="row" style="gap:8px;flex-wrap:wrap">${isPremium()?'':'<button class="btn sm primary" data-shopgo="premium">Premium</button>'}<button class="btn sm" id="bRestore2">Satın alımları geri yükle</button>${adsOn()?'<button class="btn sm" id="bPrivacy">Reklam gizlilik ayarları</button>':''}</div>`:''}
+    ${!MONET&&adsOn()?`<h3 style="margin-top:8px">Reklamlar</h3><p class="muted" style="font-size:13px">Reklam kişiselleştirme ve onay tercihlerini buradan değiştirebilirsin.</p><div class="row"><button class="btn sm" id="bPrivacy">Reklam gizlilik ayarları</button></div>`:''}</div>`;
 }
 function v11Bind(){
   const q=s=>document.querySelectorAll(s);
