@@ -15,6 +15,10 @@ on:
         description: "Bittikten sonra Apple incelemesine gönder"
         type: boolean
         default: false
+      auto_release:
+        description: "Onaylanınca otomatik yayınla"
+        type: boolean
+        default: false
       build:
         description: "İncelemeye gönderilecek build numarası (boş = en son)"
         required: false
@@ -87,7 +91,7 @@ jobs:
             --overwrite_screenshots true \
             --force true \
             --run_precheck_before_submit false \
-            --automatic_release false \
+            --automatic_release "${{ inputs.auto_release }}" \
             --submit_for_review "${{ inputs.submit }}" \
             --submission_information '{"add_id_info_uses_idfa": false}'
 
