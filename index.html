@@ -548,6 +548,7 @@ main>*:nth-child(2){animation-delay:.05s}main>*:nth-child(3){animation-delay:.1s
 /* start */
 .start{position:relative;isolation:isolate;background:var(--bg)}
 .start-bg{position:fixed;inset:0;width:100%;height:100%;z-index:-2;display:block}
+.wiz{background:rgba(11,20,17,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:10px}
 .start::before{content:"";position:fixed;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(7,11,18,.94) 0%,rgba(7,11,18,.7) 45%,rgba(7,11,18,.55) 100%),linear-gradient(0deg,rgba(7,11,18,.9),transparent 50%)}
 .start .panel{background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.02)),rgba(11,17,27,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
 .logo span{background:linear-gradient(180deg,var(--gold1),var(--gold2));-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -1156,6 +1157,154 @@ button,.btn,.dopt,.cbtn,.posopt,.opt,.act-b{touch-action:manipulation;-webkit-us
 .story-card .dopts{margin-top:14px}
 .monitor.varroom::after{content:none}
 .monitor::after{left:auto;right:10px}
+
+/* ===== v1.2: kariyer merkezi ===== */
+.tstrip{display:none}
+@media (min-width:861px){
+  .tstrip{display:flex;gap:4px;max-width:1240px;margin:14px auto 0;padding:0 max(16px,env(safe-area-inset-left,0px));overflow-x:auto;scrollbar-width:none}
+  .tstrip::-webkit-scrollbar{display:none}
+  .tstrip button{position:relative;flex:0 0 auto;border:0;background:none;padding:0 18px;height:34px;color:var(--fg);font:800 15px/1 var(--f-display);font-stretch:72%;text-transform:uppercase;cursor:pointer;z-index:0}
+  .tstrip button::before{content:"";position:absolute;inset:0;background:var(--panel2);transform:skewX(-20deg);z-index:-1;border-radius:2px}
+  .tstrip button:hover::before{background:#24382f}
+  .tstrip button.on{color:var(--yellow-ink)}
+  .tstrip button.on::before{background:var(--yellow)}
+  .tstrip .tb{font-style:normal;margin-left:8px;display:inline-grid;place-items:center;min-width:20px;height:20px;padding:0 5px;background:var(--fg);color:var(--bg);font-size:12px;font-stretch:100%}
+  .shell{grid-template-columns:minmax(0,1fr)}
+  nav.side{display:none}
+}
+.hub2{display:grid;gap:14px;grid-template-columns:minmax(0,1fr)}
+.hub2>*{min-width:0}
+.story-card .dopts{flex-wrap:wrap}
+.cstrip{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center;padding:12px 14px;background:var(--panel);border:1px solid var(--line);border-radius:6px;position:relative;overflow:hidden}
+.cstrip::after{content:"";position:absolute;right:-40px;top:0;bottom:0;width:120px;background:linear-gradient(90deg,transparent,rgba(242,194,48,.08));transform:skewX(-20deg);pointer-events:none}
+.cs-av{width:64px;height:64px;border-radius:6px;overflow:hidden;background:var(--panel2);display:grid;place-items:center}
+.cs-id{min-width:0;display:grid;gap:3px}
+.cs-id>b{font:800 22px/1 var(--f-display);font-stretch:72%;text-transform:uppercase}
+.cs-sub{display:flex;gap:6px;align-items:center;color:var(--muted);font-size:13px;min-width:0}
+.cs-sub span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cs-row{display:flex;gap:16px;flex-wrap:wrap;align-items:center;font-size:13px;color:var(--muted)}
+.cs-row b{color:var(--yellow);font-size:15px}
+.cs-form{display:flex;gap:3px;align-items:center}
+.cs-form small{margin-left:4px}
+.fm{font-style:normal;display:inline-grid;place-items:center;min-width:30px;height:20px;padding:0 4px;font:700 12px/1 var(--f-body);font-variant-numeric:tabular-nums;color:#08110d;border-radius:2px}
+.fm.g{background:var(--green)} .fm.a{background:var(--yellow)} .fm.r{background:var(--red);color:#fff}
+.cs-kpis{display:flex;gap:18px}
+.cs-kpis div{display:grid;text-align:right}
+.cs-kpis b{font:800 24px/1 var(--f-display);font-stretch:72%}
+.cs-kpis small{color:var(--muted);font-size:11.5px}
+@media (max-width:640px){.cstrip{grid-template-columns:auto minmax(0,1fr)}.cs-kpis{grid-column:1/-1;justify-content:space-between}.cs-kpis div{text-align:left}}
+
+.tiles{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:10px}
+.tile{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:6px;text-align:left;padding:14px;background:var(--panel);border:1px solid var(--line);border-radius:6px;overflow:hidden;color:var(--fg);font:inherit;cursor:pointer;min-height:150px;min-width:0}
+button.tile:hover{border-color:var(--line2);background:#16261f}
+.tile:focus-visible{outline:2px solid var(--yellow);outline-offset:2px}
+.t-h{font:800 19px/1 var(--f-display);font-stretch:72%;text-transform:uppercase;letter-spacing:0}
+.tile small{color:var(--muted);font-size:12.5px;line-height:1.35}
+.tile .big{font:800 34px/1 var(--f-display);font-stretch:72%;margin-top:auto}
+.ts-ic{margin:auto 0;color:var(--fg);width:100%;display:grid;place-items:center}
+.ts-ic svg{width:72px;height:48px;fill:currentColor}
+.ts-ic.sm svg{width:44px;height:44px}
+.t-sim{background:#1c2e26}
+.t-play{grid-column:span 5;grid-row:span 2;min-height:300px;padding:0;background:#0d1714}
+.t-play canvas{position:absolute;inset:0;width:100%;height:100%}
+.tp-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,19,16,.94) 0%,rgba(10,19,16,.72) 55%,rgba(10,19,16,.15) 100%)}
+.tp-ref{position:absolute;right:-18px;bottom:-14px;width:min(46%,230px);opacity:.95;filter:drop-shadow(0 10px 24px rgba(0,0,0,.6))}
+.tp-ref svg{width:100%;height:auto;display:block}
+.tp-in{position:relative;display:flex;flex-direction:column;gap:10px;padding:18px;height:100%;max-width:66%}
+.tp-k{font-size:12.5px;color:var(--muted);font-weight:600}
+.tp-t{font:850 clamp(40px,5vw,58px)/.88 var(--f-display);font-stretch:66%;text-transform:uppercase;letter-spacing:-.01em}
+.tp-home{display:flex;gap:10px;align-items:center;margin-top:4px}
+.tp-home span{display:grid;line-height:1.15}
+.tp-home b{font:800 20px/1 var(--f-display);font-stretch:72%;text-transform:uppercase}
+.tp-home small,.tp-away small{color:var(--muted);font-size:11.5px}
+.tp-away{display:flex;gap:6px;align-items:center;font-size:14px}
+.tp-meta{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;margin-top:auto;font-size:12.5px;color:var(--muted)}
+.tp-meta b{color:var(--fg)}
+.tp-res{display:grid;gap:6px}
+.tp-res span{display:flex;gap:8px;align-items:center}
+.t-play::after{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--yellow)}
+.t-sim,.t-next{grid-column:span 2;min-height:145px}
+.t-news{grid-column:span 3;grid-row:span 2;padding:0;cursor:default}
+.tn-s{display:none;flex-direction:column;height:100%;width:100%}
+.tn-s.on{display:flex}
+.tn-img{flex:1;min-height:150px;display:flex;gap:8px;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 40%,#22382f,#0e1915 75%)}
+.tn-ph svg{width:56px;height:56px;opacity:.5}
+.tn-cap{display:grid;gap:4px;padding:12px 14px 34px;background:var(--panel2)}
+.tn-cap b{font-size:14.5px;line-height:1.3}
+.tn-dots{position:absolute;left:14px;bottom:12px;display:flex;gap:6px}
+.tn-dots button{width:9px;height:9px;border-radius:50%;border:0;padding:0;background:rgba(236,234,226,.25);cursor:pointer}
+.tn-dots button.on{background:var(--fg)}
+.tn-more{position:absolute;right:10px;bottom:6px;border:0;background:none;color:var(--muted);cursor:pointer;padding:4px}
+.tn-more svg{width:18px;height:18px}
+.t-table,.t-refs,.t-attr,.t-step,.t-train,.t-shop,.t-acad,.t-soc{grid-column:span 3}
+.t-step,.t-shop,.t-acad,.t-soc,.t-train,.t-kurul{grid-column:span 3}
+.t-table{grid-column:span 4}
+.t-kurul .batt,.t-train .batt{width:100%;height:6px;border-radius:3px;background:rgba(236,234,226,.08);overflow:hidden}
+.t-kurul .batt i{display:block;height:100%}
+.tt{display:grid;gap:2px;width:100%;font-size:13px}
+.tt-r{display:grid;grid-template-columns:20px auto minmax(0,1fr) auto auto;gap:7px;align-items:center;padding:4px 6px;border-radius:3px}
+.t-refs .tt-r{grid-template-columns:20px minmax(0,1fr) auto}
+.tt-r:nth-child(odd){background:rgba(236,234,226,.035)}
+.tt-r i{font-style:normal;color:var(--muted)}
+.tt-r.me{background:rgba(242,194,48,.14);box-shadow:inset 3px 0 0 var(--yellow)}
+.tt-n{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ta{display:grid;gap:5px;width:100%}
+.ta .attr{display:grid;grid-template-columns:minmax(0,1fr) 70px 24px;gap:8px;align-items:center;font-size:12.5px}
+.ta .bar{height:5px}
+.tr-now{font-size:16px}
+.t-train .batt{width:100%;height:6px;border-radius:3px;background:rgba(236,234,226,.08);overflow:hidden;margin-top:auto}
+.t-train .batt i{display:block;height:100%}
+.soc-q{font-size:12.5px;color:#cfd6d1;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+@media (max-width:1100px){
+  .tiles{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .t-play{grid-column:span 6;grid-row:auto}
+  .t-sim,.t-next{grid-column:span 3}
+  .t-news{grid-column:span 6;grid-row:auto}
+  .t-table,.t-refs,.t-attr,.t-step,.t-train,.t-shop,.t-acad,.t-soc,.t-kurul{grid-column:span 3}
+}
+@media (max-width:640px){
+  .tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .t-play,.t-news,.t-table,.t-attr,.t-refs,.t-train{grid-column:span 2}
+  .t-sim,.t-next,.t-step,.t-shop,.t-acad,.t-soc,.t-kurul{grid-column:span 1}
+  .t-play{min-height:280px}
+  .tp-in{max-width:72%;padding:16px}
+  .tile{min-height:128px;padding:12px}
+  .t-h{font-size:17px}
+  .ts-ic svg{width:56px;height:38px}
+}
+
+/* ===== v1.2: başlangıç ekranı (soyunma odası) ===== */
+.st2{position:relative;isolation:isolate;min-height:100vh;min-height:100dvh;padding:max(28px,env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) 40px max(20px,env(safe-area-inset-left,0px))}
+.st2-bg{position:fixed;inset:0;z-index:-1}
+.st2-bg svg{width:100%;height:100%;display:block}
+.st2-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,rgba(242,194,48,.16) 0%,rgba(242,194,48,0) 32%),linear-gradient(0deg,rgba(10,19,16,.85),rgba(10,19,16,0) 55%)}
+.st2-in{width:min(1180px,100%);margin:0 auto;display:grid;gap:28px}
+.st2-top .logo{font-size:clamp(54px,7vw,92px);margin:0;display:inline-block;position:relative;padding-right:.42em}
+.st2-tag{font-weight:600;color:var(--fg);margin-top:6px;font-size:15px}
+.st2-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:clamp(20px,26vh,300px)}
+.sc{text-align:left;display:flex;flex-direction:column;gap:12px;padding:18px;background:rgba(11,20,17,.84);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line2);border-radius:8px;min-width:0}
+.sc-h{display:flex;gap:12px;align-items:center;min-width:0}
+.sc-h>div{display:grid;min-width:0}
+.sc-h b{font:800 24px/1 var(--f-display);font-stretch:72%;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sc-h small{color:var(--muted);font-size:13px;display:flex;gap:6px;align-items:center;margin-top:3px}
+.sc-ic{width:48px;height:48px;flex:0 0 auto;display:grid;place-items:center;border-radius:6px;background:var(--panel2);overflow:hidden}
+.sc-ic svg{width:30px;height:30px}
+.sc-ic.av svg{width:48px;height:48px}
+.sc-d{color:#c6cec9;font-size:14px;line-height:1.45;min-height:3em;display:flex;flex-wrap:wrap;gap:4px 12px}
+.sc.empty .sc-d{display:block}
+.sc-box{display:grid;gap:2px;padding:10px 12px;border-radius:4px;background:rgba(236,234,226,.06);margin-top:auto}
+.sc-box small{color:var(--muted);font-size:11.5px;font-weight:600}
+.sc-box b{font-size:14px;font-variant-numeric:tabular-nums}
+.sc-bar{width:100%;min-height:44px;padding:0 14px;border-radius:4px;border:1px solid var(--line2);background:rgba(236,234,226,.08);color:var(--fg);font:800 16px/1 var(--f-display);font-stretch:72%;text-transform:uppercase;text-align:left;cursor:pointer}
+.sc-bar:hover{background:rgba(236,234,226,.14)}
+.sc-bar.primary{background:var(--yellow);border-color:var(--yellow);color:var(--yellow-ink)}
+.sc-bar.primary:hover{background:#f6cd4a}
+.sc-bar.ghost{background:transparent;border-color:transparent;color:var(--muted);min-height:34px;font-size:14px}
+.sc-bar.danger{background:var(--red);border-color:var(--red);color:#fff}
+.sc-del{display:grid;gap:8px}
+.sc-del span{font-size:13px;color:var(--muted)}
+.st2-imp{max-width:520px;background:rgba(11,20,17,.8);border-radius:8px;padding:10px 14px}
+@media (max-width:860px){.st2-cards{grid-template-columns:minmax(0,1fr);gap:12px;margin-top:8px}.st2-in{gap:18px}}
 /* tracked büyük harf etiketleri: cümle düzeni */
 .ah-badge b,
 .banner b,
@@ -1524,21 +1673,64 @@ let CR=null, SLOT_DEL=null;
 function startHTML(){
   if(CR) return wizardHTML();
   const slots=[1,2,3].map(n=>({n,d:readSlot(n)}));
-  return `<div class="start"><canvas id="startCv" class="start-bg" aria-hidden="true"></canvas><div class="start-in">
-    <div class="start-hero"><h1 class="logo">Refmania<i class="logo-card" aria-hidden="true"></i></h1><div class="eyebrow gold">Hakem kariyer simülatörü</div>
-      <p class="lede">Amatör ligden Dünya Şampiyonası finaline. Her pozisyonu sahada sen okursun: temas, kol pozisyonu, ofsayt çizgisi, DOGSO ölçütleri. VAR monitöre çağırır, gözlemci not verir, kurul hesap sorar.</p></div>
-    <div class="slots"><div class="row" style="justify-content:space-between"><span class="eyebrow gold">Kariyer slotları</span><span class="muted" style="font-size:12px">${slots.filter(s=>s.d).length}/3 dolu</span></div>
-      ${slots.map(slotCard).join('')}
-      <details class="imp"><summary>Kayıt kodu ile yükle</summary><div class="stack" style="margin-top:10px"><textarea id="stImp" rows="3" placeholder="Kayıt kodunu yapıştır"></textarea><div class="row"><label class="lbl" for="impSlot" style="margin:0">Hedef slot</label><select id="impSlot" style="width:auto">${[1,2,3].map(n=>`<option value="${n}">Slot ${n}${slots[n-1].d?' (üzerine yaz)':''}</option>`).join('')}</select><button class="btn sm" id="bStImp">Yükle</button></div></div></details>
-    </div></div></div>`;
+  return `<div class="st2"><div class="st2-bg" aria-hidden="true">${lockerSVG()}</div><div class="st2-in">
+    <header class="st2-top"><h1 class="logo">Refmania<i class="logo-card" aria-hidden="true"></i></h1><p class="st2-tag">Hakem kariyer simülatörü</p></header>
+    <div class="st2-cards">${slots.map(slotCard).join('')}</div>
+    <details class="imp st2-imp"><summary>Kayıt kodu ile yükle</summary><div class="stack" style="margin-top:10px"><textarea id="stImp" rows="3" placeholder="Kayıt kodunu yapıştır"></textarea><div class="row"><label class="lbl" for="impSlot" style="margin:0">Hedef slot</label><select id="impSlot" style="width:auto">${[1,2,3].map(n=>`<option value="${n}">Slot ${n}</option>`).join('')}</select><button class="btn sm" id="bStImp">Yükle</button></div></div></details>
+  </div></div>`;
+}
+function lastPlayedText(d){
+  if(!d.savedAt) return seasonLabel(d.season);
+  const dt=new Date(d.savedAt); const loc={tr:'tr-TR',en:'en-GB',de:'de-DE',es:'es-ES'}[curLang()]||'tr-TR';
+  return dt.toLocaleDateString(loc,{day:'numeric',month:'short',year:'numeric'})+' · '+seasonLabel(d.season)+' · '+WEEK_FMT.replace('{n}',d.week||1);
 }
 function slotCard({n,d}){
-  if(!d) return `<button class="slot empty" data-new="${n}"><span class="plus">+</span><span><b>Yeni kariyer</b><small>Slot ${n} · boş</small></span></button>`;
+  if(!d) return `<article class="sc empty"><div class="sc-h"><span class="sc-ic">${WHISTLE_SVG}</span><div><b>Kariyer slotu ${n}</b><small>Boş</small></div></div>
+    <p class="sc-d">Ülkeni ve hakem tipini seç; amatör ligden Dünya Şampiyonası finaline kendi kariyerini kur.</p>
+    <div class="sc-box"><small>Son oynanan</small><b>Henüz oynanmadı</b></div>
+    <button class="sc-bar primary" data-new="${n}">Yeni kariyer başlat</button></article>`;
   const recent=(d.history||[]).slice(0,10).map(h=>h.rating);
-  return `<div class="slot"><div class="slot-av">${avatarSVG(d.look,72)}<span class="slot-flag">${flagSVG(d.nationality||'TR',26,18)}</span></div>
-    <div class="slot-main"><div class="row" style="gap:8px"><b>${esc(d.name)}</b><span class="chip">Slot ${n}</span></div><small>${esc(rankOf(d))} · ${esc((HOMES[d.nationality]||HOMES.TR).name)}</small>
-      <div class="slot-stats"><span><b>${seasonLabel(d.season)}</b></span><span><b>${d.age}</b> yaş</span><span><b>${(d.totals||{}).matches||0}</b> maç</span><span><b>${recent.length?f1(avg(recent)):'—'}</b> form</span></div></div>
-    <div class="slot-act" id="sa${n}">${SLOT_DEL===n?`<span class="muted" style="font-size:12px">Kalıcı olarak silinsin mi?</span><button class="btn sm danger" data-delok="${n}">Evet, sil</button><button class="btn sm" data-delno="1">Vazgeç</button>`:`<button class="btn primary" data-cont="${n}">Devam</button><button class="btn sm" data-del="${n}">Sil</button>`}</div></div>`;
+  return `<article class="sc"><div class="sc-h"><span class="sc-ic av">${avatarSVG(d.look,48)}</span><div><b>${esc(d.name)}</b><small>${flagSVG(d.nationality||'TR',16,11)} ${esc(rankOf(d))}</small></div></div>
+    <p class="sc-d"><span>${esc((HOMES[d.nationality]||HOMES.TR).name)}</span><span>${d.age} yaş</span><span>${(d.totals||{}).matches||0} maç</span><span>Form ${recent.length?f1(avg(recent)):'—'}</span></p>
+    <div class="sc-box"><small>Son oynanan</small><b>${esc(lastPlayedText(d))}</b></div>
+    <button class="sc-bar primary" data-cont="${n}">Kariyeri yükle</button>
+    ${SLOT_DEL===n?`<div class="sc-del"><span>Kalıcı olarak silinsin mi?</span><button class="sc-bar danger" data-delok="${n}">Evet, sil</button><button class="sc-bar" data-delno="1">Vazgeç</button></div>`:`<button class="sc-bar ghost" data-del="${n}">Kariyeri sil</button>`}</article>`;
+}
+function lockerSVG(){
+  const W=1600,H=1000, bays=7, bw=206, x0=(W-bays*bw)/2;
+  let g='';
+  for(let i=0;i<bays;i++){ const x=x0+i*bw; const cx=x+bw/2; const sway=((i*37)%11-5)*.6;
+    g+=`<rect x="${x+6}" y="150" width="${bw-12}" height="610" fill="url(#lkIn)"/>
+      <rect x="${x}" y="110" width="6" height="660" fill="#1d3029"/><rect x="${x+bw-6}" y="110" width="6" height="660" fill="#14231d"/>
+      <rect x="${x+6}" y="110" width="${bw-12}" height="40" fill="#18291f"/>${[0,1,2,3,4].map(k=>`<rect x="${cx-40+k*18}" y="124" width="10" height="3" rx="1.5" fill="#0c1612"/>`).join('')}
+      <rect x="${cx-34}" y="160" width="68" height="14" rx="2" fill="#203229"/>
+      <path d="M${cx} 196 v14" stroke="#7d8b84" stroke-width="3" stroke-linecap="round"/><path d="M${cx-58+sway} 238 L${cx} 210 L${cx+58+sway} 238" stroke="#5f6c66" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <g transform="translate(${cx+sway} 230) rotate(${sway*.4})">
+        <path d="M-54 6 L-28 -6 Q0 10 28 -6 L54 6 L84 52 L60 70 L48 48 L48 210 Q0 220 -48 210 L-48 48 L-60 70 L-84 52 Z" fill="url(#shirt)"/>
+        <path d="M-28 -6 Q0 10 28 -6 L18 -2 Q0 26 -18 -2 Z" fill="#f2c230"/>
+        <path d="M-84 52 L-60 70 L-56 64 L-80 47 Z M84 52 L60 70 L56 64 L80 47 Z" fill="#f2c230"/>
+        <path d="M-48 48 L-48 210" stroke="#f2c230" stroke-width="3" opacity=".55"/><path d="M48 48 L48 210" stroke="#f2c230" stroke-width="3" opacity=".55"/>
+        <circle cx="-24" cy="46" r="10" fill="#1d2b25" stroke="#f2c230" stroke-width="2"/>
+        <path d="M-40 70 Q0 86 40 70" stroke="#000" stroke-opacity=".25" stroke-width="10" fill="none"/>
+      </g>
+      <rect x="${x+16}" y="520" width="${bw-32}" height="10" rx="2" fill="#1b2d25"/>`;
+    // boots under bench
+    if(i%2===0){ const c=['#f2c230','#e8eae4','#d9423a','#3d8bd9'][i%4]; g+=`<g transform="translate(${cx-30} 868)"><path d="M0 0 h36 q14 0 18 10 v8 h-58 z" fill="#101815"/><path d="M0 0 h36 q14 0 18 10 v4 h-54z" fill="${c}" opacity=".9"/><path d="M30 6 h40 q14 0 18 10 v8 h-58 z" fill="#0d1411" transform="translate(4 6)"/><path d="M30 6 h40 q14 0 18 10 v4 h-54z" fill="${c}" opacity=".75" transform="translate(4 6)"/></g>`; }
+  }
+  return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice"><defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0d1814"/><stop offset=".75" stop-color="#0f1d18"/><stop offset="1" stop-color="#0a1310"/></linearGradient>
+    <linearGradient id="lkIn" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b1511"/><stop offset="1" stop-color="#101d18"/></linearGradient>
+    <linearGradient id="shirt" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3a4943"/><stop offset=".55" stop-color="#1b2521"/><stop offset="1" stop-color="#0d1311"/></linearGradient>
+    <linearGradient id="bench" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5a4128"/><stop offset="1" stop-color="#2c1f13"/></linearGradient>
+    <radialGradient id="spot" cx=".5" cy="0" r=".8"><stop offset="0" stop-color="#ecebe4" stop-opacity=".22"/><stop offset="1" stop-color="#ecebe4" stop-opacity="0"/></radialGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#13201b"/><stop offset="1" stop-color="#070d0b"/></linearGradient>
+    <radialGradient id="vig" cx=".5" cy=".45" r=".75"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".7"/></radialGradient></defs>
+    <rect width="${W}" height="${H}" fill="url(#wall)"/>${g}
+    <rect x="0" y="770" width="${W}" height="230" fill="url(#floor)"/>
+    <rect x="${x0-20}" y="800" width="${bays*bw+40}" height="22" rx="4" fill="url(#bench)"/><rect x="${x0-20}" y="800" width="${bays*bw+40}" height="4" fill="#7a5a3a" opacity=".6"/>
+    ${[0,1,2,3,4,5,6,7].map(k=>`<rect x="${x0+k*bw-4}" y="822" width="10" height="44" fill="#1a130c"/>`).join('')}
+    <ellipse cx="${W*.3}" cy="0" rx="520" ry="620" fill="url(#spot)"/><ellipse cx="${W*.72}" cy="0" rx="520" ry="620" fill="url(#spot)"/>
+    <rect width="${W}" height="${H}" fill="url(#vig)"/></svg>`;
 }
 const SPEC_IC={atlet:'bolt',kural:'book',psikolog:'target',lider:'kurul',genc:'star',eskioyuncu:'kariyer'};
 function crAttrs(){ const sp=SPECS[CR.spec]; const a={kondisyon:46,pozisyon:43,kural:45,sogukkanlilik:43,iletisim:41}; for(const k in a) a[k]+=(sp.base||0); for(const k in sp.mod) a[k]+=sp.mod[k]; return a; }
@@ -1560,14 +1752,14 @@ function stepId(){ const L=CR.look; const sp=SPECS[CR.spec]; const amin=sp.ageMi
     <div><span class="lbl">Saç rengi</span><div class="swatches">${LOOK_HAIRC.map((c,i)=>`<button class="sw ${L.hc===i?'on':''}" data-hc="${i}" style="background:${c}" aria-label="Saç rengi ${i+1}"></button>`).join('')}</div></div>
     <div><span class="lbl">Sakal</span><div class="row" style="gap:6px"><button class="fchip ${!L.beard?'on':''}" data-beard="0">Yok</button><button class="fchip ${L.beard?'on':''}" data-beard="1">Var</button></div></div></div></div>`; }
 function wizardHTML(){ const st=CR.step; const steps=['Ülke','Hakem tipi','Kimlik'];
-  return `<div class="start"><canvas id="startCv" class="start-bg" aria-hidden="true"></canvas><div class="wiz">
+  return `<div class="start"><div class="st2-bg" aria-hidden="true">${lockerSVG()}</div><div class="wiz">
     <div class="wiz-top"><button class="btn sm" id="wBack">${st===0?'Slotlara dön':'Geri'}</button><ol class="stepper">${steps.map((s,i)=>`<li class="${i<st?'done':i===st?'on':''}"><span>${i<st?'✓':i+1}</span>${s}</li>`).join('')}</ol><span class="chip">Slot ${CR.slot}</span></div>
     <div class="wiz-body"><aside class="wiz-prev" id="wPrev">${previewHTML()}</aside><section class="wiz-main">${[stepCountry,stepType,stepId][st]()}</section></div>
     <div class="wiz-foot"><span class="muted">${['Kariyerine hangi ülkenin amatör liginde başlayacaksın?','Hakemlik tarzın başlangıç niteliklerini belirler.','Son dokunuşlar: görünüm, isim, yaş ve zorluk.'][st]}</span><button class="btn primary lg" id="wNext">${st<2?'Devam':'Kariyere başla'}</button></div></div></div>`; }
 function rndName(c){ const p=NAMES[c]||NAMES.TR; return pick(p.f)+' '+pick(p.l); }
 function rerenderStart(){ const y=window.scrollY; $('#app').innerHTML=startHTML(); bindStart(); window.scrollTo(0,y); }
 function bindStart(){
-  { const h=mkTeam(TR4_RAW[0][0],TR4_RAW[0][1],TR4_RAW[0][2],'TR'), a=mkTeam(TR4_RAW[1][0],TR4_RAW[1][1],TR4_RAW[1][2],'TR'); heroStart('startCv',h.id,a.id,'start'); }
+  if($('#startCv')){ const h=mkTeam(TR4_RAW[0][0],TR4_RAW[0][1],TR4_RAW[0][2],'TR'), a=mkTeam(TR4_RAW[1][0],TR4_RAW[1][1],TR4_RAW[1][2],'TR'); heroStart('startCv',h.id,a.id,'start'); }
   const q=s=>document.querySelectorAll(s);
   if(!CR){
     q('[data-new]').forEach(b=>b.onclick=()=>{ CR={slot:+b.dataset.new,step:0,country:'TR',spec:'atlet',look:defLook(),name:rndName('TR'),nameTouched:false,age:24,diff:'normal'}; rerenderStart(); window.scrollTo(0,0); });
@@ -4406,6 +4598,7 @@ function render(){
         <div class="hstat" title="${money(S.money)}">${ic('coin','hs-ic gold')}<span><b class="num">${moneyShort(S.money)}</b><small>Kasa</small></span></div>
         <button class="me" data-tab="kariyer" aria-label="Kariyer profili"><span class="av pic">${avatarSVG(S.look)}</span><span class="me-t"><b>${esc(S.name)}</b><small>${esc(rankText())}</small></span></button>
       </div></div></header>
+    <nav class="tstrip" aria-label="Bölümler">${TABS.map(([k,n])=>{ const b=badgeFor(k); return `<button class="${TAB===k?'on':''}" data-tab="${k}"><span>${n}</span>${b?`<i class="tb">${b}</i>`:''}</button>`; }).join('')}</nav>
     <div class="shell"><nav class="side" aria-label="Bölümler">${TABS.map(([k,n])=>{ const b=badgeFor(k); return `<button class="${TAB===k?'on':''}" data-tab="${k}">${ic(k)}<span>${n}</span>${b?`<span class="badge">${b}</span>`:''}</button>`; }).join('')}</nav>
     <main id="main">${mainHTML}</main></div>
     <nav class="bnav" aria-label="Bölümler">${MOBILE_TABS.map(k=>{ const b=badgeFor(k); const n=TABS.find(t=>t[0]===k)[1]; return `<button class="${TAB===k?'on':''}" data-tab="${k}">${ic(k)}<span>${k==='kurul'?'Kurul':n}</span>${b?`<i class="dot"></i>`:''}</button>`; }).join('')}<button class="${MOBILE_TABS.includes(TAB)?'':'on'}" id="bMore">${ic('menu')}<span>Menü</span>${moreBadge?'<i class="dot"></i>':''}</button></nav>`;
@@ -4512,6 +4705,66 @@ function trainHTML(){
     <div class="batt-w"><div class="batt" aria-label="Enerji"><i style="width:${E}%;background:${E>60?'var(--green)':E>30?'var(--gold1)':'var(--red)'}"></i></div><span class="num">%${E}</span><small>enerji</small>${v11EnergyBtn()}</div></div>
     <div class="trs">${ACTS.map(trCard).join('')}</div></section>`;
 }
+
+// ---------- v1.2: kariyer merkezi (kutucuklu panel) ----------
+const PLAY_IC='<svg viewBox="0 0 64 40" aria-hidden="true"><path d="M4 4l24 16L4 36z"/><path d="M32 4l24 16-24 16z"/></svg>';
+const PLAY_OUT='<svg viewBox="0 0 64 40" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linejoin="round"><path d="M5 5l22 15L5 35z"/><path d="M33 5l22 15-22 15z"/></svg>';
+let NEWS_I=0;
+function rateCls(r){ return r>=8.4?'g':r<7.8?'r':'a'; }
+function careerStrip(){
+  const last=S.history.slice(0,5);
+  const rank=refRanking(); const myPos=rank.findIndex(r=>r.me)+1;
+  const dAvg=S.stats.dom.length?f1(avg(S.stats.dom)):'—';
+  return `<section class="cstrip"><span class="cs-av">${avatarSVG(S.look,64)}</span>
+    <div class="cs-id"><b>${esc(S.name)}</b><span class="cs-sub">${flagSVG(S.nationality||'TR',18,12)}<span>${esc(rankText())} · ${esc(leagueName())}</span></span>
+      <div class="cs-row"><span>Klasman <b class="num">${myPos?myPos+'.':'—'}</b><small>/${rank.length}</small></span><span class="cs-form">Form ${last.length?last.slice().reverse().map(h=>`<i class="fm ${rateCls(h.rating)}">${f1(h.rating)}</i>`).join(''):'<small class="muted">henüz maç yok</small>'}</span></div></div>
+    <div class="cs-kpis"><div><b class="num">${dAvg}</b><small>Lig ortalaması</small></div><div><b class="num">${Math.round(S.kurul.trust)}</b><small>Kurul güveni</small></div><div><b class="num">${S.totals.matches}</b><small>Maç</small></div></div></section>`;
+}
+function playTile(fx,all){
+  const T=S.tasks; let H,A,key;
+  if(fx){ H=team(fx.home); A=team(fx.away); key=fx.id; }
+  else { const pl=(all||[]).filter(m=>m.played); if(pl.length){ H=team(pl[0].home); A=team(pl[0].away); key='done'+pl[0].id; } else { const t=sortedTable(); H=team(t[0].id); A=team(t[1].id); key='idle'+S.season+S.week; } }
+  const bg=`<canvas id="heroCv" data-h="${H.id}" data-a="${A.id}" data-k="${key}" aria-hidden="true"></canvas><span class="tp-shade"></span><span class="tp-ref">${avatarSVG(S.look,220)}</span>`;
+  if(!fx){ const pl=(all||[]).filter(m=>m.played);
+    return `<button class="tile t-play" id="bWeek">${bg}<span class="tp-in"><span class="tp-k">${pl.length?'Görevler tamamlandı':'Bu hafta görev yok'}</span><span class="tp-t">${S.week>=34?'Sezonu bitir':'Haftayı bitir'}</span>
+      ${pl.length?`<span class="tp-res">${pl.map(m=>`<span>${crest(team(m.home),22)}<b class="num">${m.score.join('-')}</b>${crest(team(m.away),22)}<i class="fm ${rateCls(m.rating)}">${f1(m.rating)}</i></span>`).join('')}</span>`:`<span class="tp-meta">${T.activity?'Antrenman seçildi':'Önce bir antrenman odağı seçebilirsin'}</span>`}</span></button>`; }
+  const when = fx.kind==='mid'||fx.kind==='guest'?'Hafta içi · 21:45':fx.kind==='tour'?'Turnuva · 22:00':fx.kind==='cup'?'Final · 20:45':'Hafta sonu · 19:00';
+  return `<button class="tile t-play" data-play="${fx.id}">${bg}<span class="tp-in"><span class="tp-k">${esc(fx.compName)} · ${esc(stageTxt(fx.stage))}</span><span class="tp-t">Maça çık</span>
+    <span class="tp-home">${crest(H,52)}<span><small>Ev sahibi</small><b>${esc(teamLabel(fx,'h'))}</b><small>${esc(H.city||(H.nt?'Milli takım':''))}</small></span></span>
+    <span class="tp-away"><small>Rakip</small> ${crest(A,22)} <b>${esc(teamLabel(fx,'a'))}</b></span>
+    <span class="tp-meta"><span>${when}</span><span class="stars">${'★'.repeat(Math.round(fx.imp))}<span>${'★'.repeat(5-Math.round(fx.imp))}</span></span><span>Ücret <b>${moneyShort(fx.fee)}</b></span>${fx.derby?'<span class="chip r">Derbi</span>':''}${fx.final?'<span class="chip y">Final</span>':''}${fx.vr?'<span class="chip b">VAR</span>':''}</span></span></button>`;
+}
+function hub2HTML(){
+  const T=S.tasks; const ph=MIDWEEK[S.week]; const next=T.matches.find(m=>!m.played); const rest=T.matches.filter(m=>m!==next&&!m.played);
+  const other=rest[0];
+  const sim = next ? `<button class="tile t-sim" data-auto="${next.id}"><span class="t-h">Otomatik yönet</span><span class="ts-ic">${PLAY_IC}</span><small>Kararları niteliklerine göre simüle eder</small></button>`
+    : `<button class="tile t-sim" data-tab="takvim"><span class="t-h">Takvim</span><span class="ts-ic">${ic('takvim')}</span><small>${weekDate(Math.min(34,S.week+1))}</small></button>`;
+  const nx = other ? `<button class="tile t-next" data-play="${other.id}"><span class="t-h">${other.role==='var'?'VAR odası':other.role==='ar'?'Yardımcı hakem':'İkinci görev'}</span><span class="ts-ic">${PLAY_OUT}</span><small>${crest(team(other.home),18)} ${esc(team(other.home).short||team(other.home).name)} – ${esc(team(other.away).short||team(other.away).name)}</small></button>`
+    : next ? `<button class="tile t-next" data-tab="takvim"><span class="t-h">Takvim</span><span class="ts-ic">${PLAY_OUT}</span><small>${S.week<34?WEEK_FMT.replace('{n}',S.week+1)+' · '+weekDate(S.week+1):''}</small></button>`
+    : `<button class="tile t-next" data-tab="gelen"><span class="t-h">Gelen kutusu</span><span class="ts-ic">${PLAY_OUT}</span><small>${S.inbox.filter(x=>!x.read).length} okunmamış mesaj</small></button>`;
+  const news=S.news.slice(0,3);
+  const newsT=`<div class="tile t-news" id="tNews">${news.length?news.map((n,i)=>`<div class="tn-s ${i===NEWS_I%news.length?'on':''}"><div class="tn-img">${(n.teams||[]).map(id=>team(id)).filter(Boolean).map(t=>crest(t,76)).join('')||`<span class="tn-ph">${ic('haber')}</span>`}</div><div class="tn-cap"><b>${esc(n.title)}</b><small>${esc(n.src||'')}</small></div></div>`).join(''):`<div class="tn-s on"><div class="tn-img"><span class="tn-ph">${ic('haber')}</span></div><div class="tn-cap"><b>Henüz haber yok</b></div></div>`}
+    <div class="tn-dots">${news.map((n,i)=>`<button class="${i===NEWS_I%Math.max(1,news.length)?'on':''}" data-ns="${i}" aria-label="Haber ${i+1}"></button>`).join('')}</div><button class="tn-more" data-tab="haber" aria-label="Haberler">${ic('haber')}</button></div>`;
+  const tbl=sortedTable().slice(0,6);
+  const tableT=`<button class="tile t-table" data-tab="lig"><span class="t-h">Puan durumu</span><span class="tt">${tbl.map(r=>{ const t=team(r.id); return `<span class="tt-r"><i class="num">${r.pos}</i>${crest(t,18)}<span class="tt-n">${esc(t.short||t.name)}</span><span class="num muted">${r.p}</span><b class="num">${r.pts}</b></span>`; }).join('')}</span></button>`;
+  const rank=refRanking(); const mi=rank.findIndex(r=>r.me); const shown=rank.slice(0,4); if(mi>=4) shown.push(rank[mi]);
+  const refsT=`<button class="tile t-refs" data-tab="kariyer"><span class="t-h">Hakem klasmanı</span><span class="tt">${shown.map(r=>`<span class="tt-r ${r.me?'me':''}"><i class="num">${rank.indexOf(r)+1}</i><span class="tt-n">${esc(r.name)}</span><b class="num">${r.avg?f1(r.avg):'—'}</b></span>`).join('')}</span></button>`;
+  const attrT=`<button class="tile t-attr" data-tab="gelisim"><span class="t-h">Nitelikler</span><span class="ta">${Object.keys(ATTR_NAMES).map(k=>`<span class="attr"><span>${ATTR_NAMES[k]}</span><span class="bar"><i style="width:${S.attrs[k]}%"></i></span><span class="num">${Math.round(S.attrs[k])}</span></span>`).join('')}</span></button>`;
+  const act=ACTS.find(a=>a.id===T.activity); const E=Math.round(S.energy);
+  const trainT=`<button class="tile t-train" id="tTrain"><span class="t-h">Haftalık program</span><b class="tr-now">${act?esc(act.name):'Odak seçilmedi'}</b><small class="muted">${act?esc(act.desc):'Bu haftanın antrenmanını seç'}</small><span class="batt"><i style="width:${E}%;background:${E>60?'var(--green)':E>30?'var(--yellow)':'var(--red)'}"></i></span><small class="num">%${E} enerji</small></button>`;
+  const stepT=`<button class="tile t-step" data-tab="${S.offers.length?'teklifler':'kariyer'}"><span class="t-h">${S.offers.length?'Teklifler':'Sonraki adım'}</span>${S.offers.length?`<b class="big num">${S.offers.length}</b><small>bekleyen teklif</small>`:`<small>${esc(nextStepText())}</small>`}</button>`;
+  const shopT=`<button class="tile t-shop" data-tab="magaza"><span class="t-h">Mağaza ve tatil</span><b class="big num">${moneyShort(S.money)}</b><small>Kasa</small></button>`;
+  const done=(S.acad&&S.acad.examWeek===S.season*100+S.week);
+  const acadT=`<button class="tile t-acad" data-tab="akademi"><span class="t-h">Kural Akademisi</span><span class="ts-ic sm">${ic('akademi')}</span><small>${done?'Bu haftanın sınavı tamamlandı':'Haftalık sınav açık'}</small></button>`;
+  const kurT=`<button class="tile t-kurul" data-tab="kurul"><span class="t-h">Hakem Kurulu</span><b class="big num">${Math.round(S.kurul.trust)}</b><small>Kurul güveni${S.kurul.hearing?' · toplantı bekliyor':''}</small><span class="batt"><i style="width:${S.kurul.trust}%;background:var(--yellow)"></i></span></button>`;
+  const post=S.social.posts[0];
+  const socT=`<button class="tile t-soc" data-tab="sosyal"><span class="t-h">Sosyal medya</span><b class="big num">${S.social.followers.toLocaleString('tr-TR')}</b><small>takipçi</small>${post?`<span class="soc-q">“${esc((post.text||'').slice(0,90))}${(post.text||'').length>90?'…':''}”</span>`:''}</button>`;
+  return `<div class="hub2">${careerStrip()}
+    ${ph&&S.fifa?`<span class="chip b" style="justify-self:start">Hafta içi: ${PHASE_NAMES[ph]}</span>`:''}
+    ${v11HubLeft()}${storyHubHTML()}${S.kurul.hearing?`<button class="alert" data-tab="kurul">${ic('kurul')}<span><b>Kurul toplantısına çağrıldın</b><small>${esc(S.kurul.hearing.match)} · ${esc(S.kurul.hearing.min)} ${esc(S.kurul.hearing.title)}</small></span></button>`:''}
+    <div class="tiles">${playTile(next,T.matches)}${sim}${nx}${newsT}${tableT}${attrT}${refsT}${stepT}${trainT}${shopT}${acadT}${socT}${kurT}</div>
+    <div id="trainSec">${trainHTML()}</div></div>`;
+}
 function hubHTML(){
   if(S.phase==='ended') return endedHTML();
   if(S.phase==='seasonEnd') return seasonEndHTML();
@@ -4523,12 +4776,7 @@ function hubHTML(){
       ${T.ratings.length?`<p class="muted">Turnuva ortalaman: <span class="num">${f1(avg(T.ratings))}</span> (${T.ratings.length} maç)</p>`:''}
       ${T.done?`<p>${esc(T.result)}.</p><button class="btn primary" id="bEndTour">Yeni sezona geç</button>`:fxCard(T.fx)}</section>`;
   } else {
-    const T=S.tasks; const ph=MIDWEEK[S.week]; const next=T.matches.find(m=>!m.played); const rest=T.matches.filter(m=>m!==next);
-    left=`<div class="hero-h"><div><div class="eyebrow gold">${seasonLabel(S.season)} · ${esc(leagueName())}</div><h2 class="page-title">${S.week}. hafta<span class="muted">${weekDate(S.week)}</span></h2></div>${ph&&S.fifa?`<span class="chip b">Hafta içi: ${PHASE_NAMES[ph]}</span>`:''}</div>
-      ${heroHTML(next,T.matches)}
-      ${rest.length&&next?`<div class="stack">${rest.map(fxCard).join('')}</div>`:''}
-      ${v11HubLeft()}${storyHubHTML()}${S.kurul.hearing?`<button class="alert" data-tab="kurul">${ic('kurul')}<span><b>Kurul toplantısına çağrıldın</b><small>${esc(S.kurul.hearing.match)} · ${esc(S.kurul.hearing.min)} ${esc(S.kurul.hearing.title)}</small></span></button>`:''}
-      ${trainHTML()}`;
+    return hub2HTML();
   }
   const last=S.history.slice(0,10).map(h=>h.rating).reverse();
   const dAvg=S.stats.dom.length?f1(avg(S.stats.dom)):'—', iAvg=S.stats.intl.length?f1(avg(S.stats.intl)):'—';
@@ -4657,6 +4905,8 @@ function bindMain(){
   q('[data-eng]').forEach(b=>b.onclick=()=>{ const c=[0,60000,90000,140000][S.english+1]; if(S.money>=c){ S.money-=c; S.english++; toast('İngilizce seviyen: '+ENGLISH[S.english]); save(); render(); } });
   q('[data-set]').forEach(b=>b.onchange=()=>{ S.settings[b.dataset.set]=b.checked; save(); });
   const bw=$('#bWeek'); if(bw) bw.onclick=finishWeek;
+  document.querySelectorAll('#tNews [data-ns]').forEach(b=>b.onclick=e=>{ e.stopPropagation(); NEWS_I=+b.dataset.ns; document.querySelectorAll('#tNews .tn-s').forEach((x,i)=>x.classList.toggle('on',i===NEWS_I)); document.querySelectorAll('#tNews [data-ns]').forEach((x,i)=>x.classList.toggle('on',i===NEWS_I)); });
+  const tt=$('#tTrain'); if(tt) tt.onclick=()=>{ const t=$('#trainSec'); if(t) t.scrollIntoView({behavior:'smooth',block:'start'}); };
   const hc=$('#heroCv'); if(hc) heroStart('heroCv',hc.dataset.h,hc.dataset.a,hc.dataset.k);
   const bs=$('#bSeason'); if(bs) bs.onclick=continueAfterSeason;
   const bt=$('#bEndTour'); if(bt) bt.onclick=endTournament;
