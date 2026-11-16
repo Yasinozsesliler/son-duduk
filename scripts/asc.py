@@ -10,6 +10,9 @@ def call(m,path,body=None,params=None):
 app=call('GET','/apps',params={'filter[bundleId]':'com.sonduduk.hakem'})['data'][0]; aid=app['id']
 vers=call('GET',f'/apps/{aid}/appStoreVersions',params={'limit':10})['data']
 for v in vers: print('version',v['attributes']['versionString'],v['attributes']['appStoreState'],v['attributes'].get('releaseType'))
+b=call('GET','/builds',params={'filter[app]':aid,'sort':'-uploadedDate','limit':4,'include':'preReleaseVersion'})
+vm={x['id']:x['attributes']['version'] for x in b.get('included',[])}
+for x in b.get('data',[]): print('build',vm.get(x['relationships']['preReleaseVersion']['data']['id']),x['attributes']['version'],x['attributes']['processingState'])
 cmd=sys.argv[1] if len(sys.argv)>1 else 'status'
 if cmd=='release_pending':
     p=[v for v in vers if v['attributes']['appStoreState']=='PENDING_DEVELOPER_RELEASE']

@@ -15,6 +15,10 @@ on:
         description: "Bittikten sonra Apple incelemesine gönder"
         type: boolean
         default: false
+      build:
+        description: "İncelemeye gönderilecek build numarası (boş = en son)"
+        required: false
+        default: ""
       task:
         description: "listing = metin+görsel yükle; release_pending = onaylı sürümü yayınla; status = durum"
         type: choice
@@ -72,7 +76,8 @@ jobs:
       - name: Upload listing
         if: inputs.task == 'listing'
         run: |
-          fastlane deliver \
+          BUILD_ARG=""; if [ -n "${{ inputs.build }}" ]; then BUILD_ARG="--build_number ${{ inputs.build }}"; fi
+          fastlane deliver $BUILD_ARG \
             --api_key_path "$RUNNER_TEMP/keys/api_key.json" \
             --app_identifier com.sonduduk.hakem \
             --app_version "${{ inputs.version }}" \
