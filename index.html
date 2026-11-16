@@ -1344,6 +1344,63 @@ button.tile:hover{border-color:var(--line2);background:#16261f}
 .rk.bronze .rk-score b{color:#fff}
 .rk-key{border-left-color:var(--rk)}
 .rk{min-height:0}.rk-in{min-height:560px}
+
+/* ===== v1.2: gelen kutusu ===== */
+.mail{display:grid;grid-template-columns:minmax(300px,380px) minmax(0,1fr);gap:0;background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;min-height:calc(100vh - 190px)}
+.ml-pane{border-right:1px solid var(--line);display:flex;flex-direction:column;min-width:0;background:var(--bg2)}
+.ml-head{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;padding:18px 16px 10px}
+.ml-head h2{font-size:28px;margin:0}
+.ml-f{padding:0 16px 12px;flex-wrap:wrap}
+.ml-f .fchip .num{opacity:.6;margin-left:4px}
+.ml-list{overflow-y:auto;flex:1}
+.ml-row{position:relative;display:grid;grid-template-columns:40px minmax(0,1fr);gap:12px;width:100%;text-align:left;padding:14px 28px 14px 16px;border:0;border-top:1px solid var(--line);background:transparent;color:var(--fg);cursor:pointer;font:inherit}
+.ml-row:hover{background:rgba(236,234,226,.035)}
+.ml-row.on{background:rgba(242,194,48,.07);box-shadow:inset 3px 0 0 var(--yellow)}
+.ml-txt{display:grid;gap:2px;min-width:0}
+.ml-top{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.ml-top b{font-size:13px;font-weight:600;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ml-top small{font-size:11.5px;color:var(--dim);white-space:nowrap}
+.ml-sub{font-size:14.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ml-snip{font-size:12.5px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ml-row.unread .ml-top b{color:var(--fg)}
+.ml-row.unread .ml-sub{font-weight:800}
+.ml-dot{position:absolute;right:12px;top:50%;width:8px;height:8px;border-radius:50%;background:var(--yellow);translate:0 -50%}
+.mav{display:grid;place-items:center;border-radius:8px;background:color-mix(in srgb,var(--mc) 22%,transparent);color:var(--mc);font:800 14px/1 var(--f-display);font-stretch:80%;flex:0 0 auto;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--mc) 40%,transparent)}
+.mav b{font-size:18px}
+.md-pane{min-width:0;background:radial-gradient(800px 300px at 70% -10%,rgba(236,234,226,.04),transparent),var(--panel);padding:28px clamp(16px,4vw,48px)}
+.md-empty{height:100%;display:grid;place-content:center;justify-items:center;gap:10px;color:var(--dim)}
+.md-empty svg{width:42px;height:42px;opacity:.5}
+.md-back{display:none;margin-bottom:12px}
+.md-letter{max-width:680px;margin:0 auto;background:#f4f2ea;color:#1c211e;border-radius:6px;padding:clamp(20px,4vw,40px);box-shadow:0 24px 60px -24px rgba(0,0,0,.7);position:relative}
+.md-warn .md-letter{background:#11161a;color:#e7e9ea;border:1px solid rgba(224,87,79,.35)}
+.md-head{display:flex;gap:12px;align-items:center;padding-bottom:14px;margin-bottom:18px;border-bottom:2px solid #1c211e}
+.md-head b{display:block;font:800 15px/1.1 var(--f-body)}
+.md-head small{font-size:11.5px;color:#5b625d}
+.md-seal{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:#1c211e}
+.md-seal svg{width:24px;height:24px}
+.md-head.warn{border-bottom-color:rgba(224,87,79,.6);color:#e0574f;font:700 12px/1 var(--f-body);letter-spacing:.04em}
+.md-head.media{border-bottom:3px double #1c211e;font:850 18px/1 var(--f-display);font-stretch:70%;text-transform:uppercase}
+.md-head.offer{border-bottom-color:#b88a12;color:#8a6608;font:700 12px/1 var(--f-body)}
+.md-sub{font:800 clamp(24px,3.2vw,34px)/1.05 var(--f-display);font-stretch:74%;margin:0 0 16px;color:inherit;text-transform:none;letter-spacing:-.005em}
+.md-meta{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;padding-bottom:16px;margin-bottom:18px;border-bottom:1px solid rgba(28,33,30,.15)}
+.md-warn .md-meta{border-bottom-color:rgba(255,255,255,.1)}
+.md-meta b{font-size:14.5px}
+.md-meta small{display:block;font-size:12px;opacity:.65}
+.md-date{text-align:right;line-height:1.4}
+.md-body p{font-size:16px;line-height:1.65;max-width:62ch;margin:0 0 12px}
+.md-sign{margin-top:24px;display:grid;gap:2px;font-size:14px}
+.md-sign b{font:800 18px/1.1 var(--f-display);font-stretch:74%}
+.md-act{margin-top:22px;display:flex;gap:8px}
+@media (max-width:860px){
+  .mail{grid-template-columns:minmax(0,1fr);border-radius:0;border:0;background:transparent;min-height:0}
+  .ml-pane{border-right:0;background:transparent}
+  .mail.has-sel .ml-pane{display:none}
+  .mail:not(.has-sel) .md-pane{display:none}
+  .md-pane{padding:0;background:transparent}
+  .md-back{display:inline-flex}
+  .ml-head{padding:4px 0 10px}.ml-f{padding:0 0 10px}
+  .ml-row{padding:13px 26px 13px 4px}
+}
 /* tracked büyük harf etiketleri: cümle düzeni */
 .ah-badge b,
 .banner b,
@@ -4963,9 +5020,32 @@ function endedHTML(){
     <div class="trophies">${ms.map(m=>`<div class="trophy on"><b>${esc(m.name)}</b>${esc(S.milestones[m.id])}</div>`).join('')}</div>
     <div><button class="btn primary" id="bNewCareer">Yeni kariyer</button></div></div>`;
 }
+let MAIL_SEL=null, MAIL_F='all';
+const MAIL_CATS={all:'Tümü',fed:'Kurul ve federasyon',offer:'Teklifler',media:'Medya',warn:'Uyarılar'};
+function mailCat(m){ if(/Bilinmeyen/.test(m.from)||m.tag==='warn') return 'warn'; if(m.tag==='offer'||/Menajer|Sözleşme/.test(m.from)) return 'offer'; if(m.tag==='media'||/Medya|Kulübü/.test(m.from)) return 'media'; if(['fed','uefa','start','dec','ok'].includes(m.tag)||/Kurul|Komite|Federasyon|Gözlemci/.test(m.from)) return 'fed'; return 'all'; }
+const MAIL_IC={fed:'kurul',offer:'teklifler',media:'haber',warn:'bolt',all:'gelen'};
+const MAIL_COL={fed:'#79a7e6',offer:'#f2c230',media:'#c58af0',warn:'#e0574f',all:'#98a79f'};
+function mailDate(m){ const d=new Date(m.season,7,9); d.setDate(d.getDate()+(m.week-1)*7+(m.week>17?21:0)); return d.getDate()+' '+MONTHS[d.getMonth()]+' '+d.getFullYear(); }
+function mailAv(m,size){ const c=mailCat(m); return `<span class="mav" style="--mc:${MAIL_COL[c]};width:${size}px;height:${size}px">${c==='warn'?'<b>?</b>':esc(initials(m.from.replace(/[^\p{L} ]/gu,' ')||'?'))}</span>`; }
 function inboxHTML(){
-  S.inbox.forEach(x=>x.read=true); save();
-  return `<div class="panel stack"><h2>Gelen kutusu</h2>${S.inbox.length?S.inbox.map(m=>`<div style="border-bottom:1px solid var(--line);padding:12px 0" class="stack"><div class="row" style="justify-content:space-between"><b>${esc(m.subject)}</b><span class="muted" style="font-size:12px">${esc(m.from)} · ${seasonLabel(m.season)} H${m.week}</span></div><p style="max-width:68ch">${esc(m.body)}</p></div>`).join(''):'<p class="muted">Henüz mesaj yok.</p>'}</div>`;
+  const list=S.inbox.filter(m=>MAIL_F==='all'||mailCat(m)===MAIL_F);
+  const unread=S.inbox.filter(m=>!m.read).length;
+  let sel=MAIL_SEL&&S.inbox.find(m=>m.id===MAIL_SEL); if(sel&&!sel.read){ sel.read=true; save(); }
+  if(!sel && window.innerWidth>860 && list[0]){ sel=list[0]; if(!sel.read){ sel.read=true; save(); } }
+  const row=m=>{ const c=mailCat(m); return `<button class="ml-row ${m.read?'':'unread'} ${sel&&sel.id===m.id?'on':''}" data-mid="${m.id}">${mailAv(m,40)}<span class="ml-txt"><span class="ml-top"><b>${esc(m.from)}</b><small class="num">${esc(mailDate(m))}</small></span><span class="ml-sub">${esc(m.subject)}</span><span class="ml-snip">${esc(m.body)}</span></span>${m.read?'':'<i class="ml-dot" aria-label="Okunmadı"></i>'}</button>`; };
+  const detail=m=>{ if(!m) return `<div class="md-empty">${ic('gelen')}<p>Okumak için bir mesaj seç.</p></div>`; const c=mailCat(m);
+    const act=c==='offer'&&S.offers.length?`<button class="btn primary" data-tab="teklifler">Teklifleri aç</button>`:/Kurul toplantısına/.test(m.subject)&&S.kurul.hearing?`<button class="btn primary" data-tab="kurul">Kurula git</button>`:'';
+    return `<article class="md md-${c}"><button class="md-back btn sm" data-mback="1">${ic('gelen')} Gelen kutusu</button>
+      <div class="md-letter">${c==='fed'?`<div class="md-head"><span class="md-seal">${WHISTLE_SVG}</span><span><b>${esc(m.from)}</b><small>Resmi yazı · Sayı ${String(hash(m.id)%9000+1000)}</small></span></div>`:c==='warn'?`<div class="md-head warn"><span>Şifreli mesaj · gönderen gizli</span></div>`:c==='media'?`<div class="md-head media"><span>Basın bülteni</span></div>`:c==='offer'?`<div class="md-head offer"><span>Gizli · Sözleşme yazışması</span></div>`:''}
+        <h2 class="md-sub">${esc(m.subject)}</h2>
+        <div class="md-meta">${mailAv(m,44)}<div><b>${esc(m.from)}</b><small>Kime: ${esc(S.name)}</small></div><small class="num md-date">${esc(mailDate(m))}<br>${seasonLabel(m.season)} · ${WEEK_FMT.replace('{n}',m.week)}</small></div>
+        <div class="md-body">${esc(m.body).split(/\n+/).map(p=>`<p>${p}</p>`).join('')}</div>
+        ${c==='fed'?`<div class="md-sign"><span>Saygılarımızla,</span><b>${esc(m.from)}</b></div>`:''}
+        ${act?`<div class="md-act">${act}</div>`:''}</div></article>`; };
+  return `<div class="mail ${sel?'has-sel':''}"><div class="ml-pane"><div class="ml-head"><div><h2>Gelen kutusu</h2><small class="muted">${unread?unread+' okunmamış · ':''}${S.inbox.length} mesaj</small></div>${unread?'<button class="btn sm" id="bReadAll">Tümünü okundu say</button>':''}</div>
+    <div class="chips-row ml-f">${Object.entries(MAIL_CATS).map(([k,n])=>{ const cnt=k==='all'?S.inbox.length:S.inbox.filter(m=>mailCat(m)===k).length; return cnt||k==='all'?`<button class="fchip ${MAIL_F===k?'on':''}" data-mf="${k}">${n} <span class="num">${cnt}</span></button>`:''; }).join('')}</div>
+    <div class="ml-list">${list.length?list.map(row).join(''):'<p class="muted" style="padding:20px">Bu klasörde mesaj yok.</p>'}</div></div>
+    <div class="md-pane">${detail(sel)}</div></div>`;
 }
 function careerHTML(){
   const st=[
@@ -5022,6 +5102,10 @@ function bindMain(){
   q('[data-act]').forEach(b=>b.onclick=()=>doActivity(b.dataset.act));
   q('[data-tab2]').forEach(b=>b.onclick=()=>{ TAB=b.dataset.tab2; render(); });
   q('[data-mail]').forEach(b=>b.onclick=()=>{ TAB='gelen'; render(); });
+  q('[data-mid]').forEach(b=>b.onclick=()=>{ MAIL_SEL=b.dataset.mid; render(); if(window.innerWidth<=860) window.scrollTo(0,0); });
+  q('[data-mf]').forEach(b=>b.onclick=()=>{ MAIL_F=b.dataset.mf; MAIL_SEL=null; render(); });
+  q('[data-mback]').forEach(b=>b.onclick=()=>{ MAIL_SEL=null; render(); });
+  { const ra=document.getElementById('bReadAll'); if(ra) ra.onclick=()=>{ S.inbox.forEach(x=>x.read=true); save(); render(); }; }
   q('[data-acc]').forEach(b=>b.onclick=()=>acceptOffer(b.dataset.acc));
   q('[data-dec]').forEach(b=>b.onclick=()=>declineOffer(b.dataset.dec));
   q('[data-up]').forEach(b=>b.onclick=()=>{ const u=UPGRADES.find(x=>x.id===b.dataset.up); if(S.money>=u.cost){ S.money-=u.cost; S.upgrades[u.id]=true; toast(u.name+' ekibine katıldı'); save(); render(); } });
