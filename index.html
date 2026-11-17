@@ -1521,6 +1521,58 @@ button.tile:hover{border-color:var(--line2);background:#16261f}
 .wl-tl small{font-size:11.5px;color:var(--muted)}
 .wl-t>b{font-size:14px}
 @media (max-width:440px){.hstat b{font-size:15px}.hdr-right{padding:2px;border-radius:12px}.wl-sum b{font-size:17px}}
+
+/* ===== v1.2: paketler (Premium / Tam Paket) ===== */
+.pw{max-width:760px;border-color:rgba(242,194,48,.28)}
+.pw-hero{position:relative;text-align:center;padding:26px 22px 20px;display:grid;justify-items:center;gap:6px;
+  background:radial-gradient(520px 240px at 50% -40%,rgba(242,194,48,.35),transparent 70%),radial-gradient(400px 200px at 0% 120%,rgba(79,181,134,.18),transparent 70%),linear-gradient(180deg,#14231d,#0d1713)}
+.pw-hero.sm{padding:18px 16px 14px;border-radius:12px;margin-bottom:14px}
+.pw-hero h2{margin:4px 0 0;font:850 clamp(28px,5vw,40px)/1 var(--f-display);font-stretch:68%;letter-spacing:-.01em}
+.pw-hero p{margin:0;color:var(--muted);max-width:44ch}
+.pw-brand{position:relative;padding-right:.5em;font:850 18px/1 var(--f-display);font-stretch:66%;color:var(--fg);opacity:.85}
+.pw-brand i{position:absolute;right:0;top:.04em;width:.3em;height:.42em;background:#f2c230;border-radius:.04em;transform:rotate(12deg)}
+.pw-x{position:absolute;right:10px;top:8px;width:40px;height:40px;border:0;border-radius:50%;background:rgba(255,255,255,.07);color:var(--fg);font-size:26px;line-height:1;cursor:pointer}
+.pw-dealchip{margin-top:6px;padding:6px 12px;border-radius:999px;background:rgba(242,194,48,.14);color:#ffe08a;font-size:13px;box-shadow:inset 0 0 0 1px rgba(242,194,48,.35)}
+.pw-body{gap:14px}
+.pw-grid{display:grid;grid-template-columns:1.12fr 1fr;gap:12px;align-items:stretch}
+.pw-card{position:relative;display:flex;flex-direction:column;gap:12px;padding:18px 16px 16px;border-radius:14px;background:var(--bg2);border:1px solid var(--line)}
+.pw-tam{background:linear-gradient(180deg,rgba(242,194,48,.13),rgba(242,194,48,.03) 55%),var(--bg2);border:1.5px solid rgba(242,194,48,.6);box-shadow:0 18px 40px -22px rgba(242,194,48,.45)}
+.pw-ribbon{position:absolute;top:-11px;left:16px;padding:4px 10px;border-radius:999px;background:#f2c230;color:#1a1405;font-size:12px;font-weight:800}
+.pw-card header{display:grid;gap:2px}
+.pw-card header b{font:850 26px/1 var(--f-display);font-stretch:70%}
+.pw-card header small{color:var(--muted);font-size:13px}
+.pw-perks{list-style:none;margin:0;padding:0;display:grid;gap:10px;flex:1}
+.pw-perks li{display:grid;grid-template-columns:26px minmax(0,1fr);gap:10px;align-items:start}
+.pw-perks b{display:block;font-size:14.5px}
+.pw-perks small{display:block;color:var(--muted);font-size:12.5px;line-height:1.35}
+.pw-timer{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border-radius:10px;background:rgba(0,0,0,.25);font-size:13px;color:#ffe08a}
+.pw-timer b{font:800 17px/1 var(--f-display);font-stretch:80%}
+.pw-buy{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:52px}
+.pw-buy em{font-style:normal;font-weight:700;opacity:.9}
+.pw-buy *{white-space:nowrap}
+.pw-buy .num{font:850 20px/1 var(--f-display);font-stretch:78%}
+.pw-buy s{opacity:.55;font-weight:600;font-size:14px}
+.pw-prem .pw-buy{background:rgba(255,255,255,.06)}
+.pw-foot{margin:0;text-align:center;color:var(--muted);font-size:12.5px;line-height:1.5}
+.linkbtn{background:none;border:0;padding:0;color:var(--fg);text-decoration:underline;font:inherit;cursor:pointer}
+.pw-owned{display:grid;justify-items:center;gap:6px;padding:10px;text-align:center}
+.pw-owned b{font:850 24px/1 var(--f-display);font-stretch:70%}
+.pw-kits h3{margin:4px 0 10px}
+.pw-kitrow{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.pw-kit{display:grid;justify-items:center;gap:6px;padding:10px 12px;min-width:84px;border-radius:12px;background:var(--bg2);border:1px solid var(--line);color:var(--fg);cursor:pointer;font:inherit;font-size:13px}
+.pw-kit i{width:36px;height:40px;border-radius:8px 8px 4px 4px;background:linear-gradient(180deg,var(--k) 0 64%,var(--s) 64%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.15)}
+.pw-kit.on{border-color:#f2c230;box-shadow:inset 0 0 0 1px #f2c230}
+.pw-dealrow{box-shadow:inset 0 0 0 1.5px rgba(242,194,48,.6)}
+.pw-hour{display:grid;grid-template-columns:26px minmax(0,1fr) auto;gap:10px;align-items:center;margin-top:10px;padding:10px 12px;border-radius:10px;background:var(--bg2);border:1px solid var(--line)}
+.pw-hour b{display:block;font-size:14px}.pw-hour small{color:var(--muted);font-size:12.5px}
+.pw-hour.ready,.pw-hour.on{border-color:rgba(242,194,48,.45);background:linear-gradient(90deg,rgba(242,194,48,.12),transparent),var(--bg2)}
+.pw-hbar{grid-column:1/-1;display:block;height:4px;border-radius:2px;background:rgba(255,255,255,.08);overflow:hidden}
+.pw-hbar i{display:block;height:100%;background:#f2c230}
+.pw-upsell{display:grid;grid-template-columns:30px minmax(0,1fr) auto auto;gap:10px;align-items:center;margin:12px 0;padding:12px;border-radius:12px;background:linear-gradient(90deg,rgba(242,194,48,.12),transparent),var(--bg2);border:1px solid rgba(242,194,48,.35)}
+.pw-upsell b{display:block}.pw-upsell small{color:var(--muted);font-size:12.5px}
+.pw-nudge{display:flex;align-items:center;gap:10px;pointer-events:auto}
+.pw-nudge b{flex:1}
+@media (max-width:640px){.pw-grid{grid-template-columns:1fr}.pw-upsell{grid-template-columns:30px minmax(0,1fr)}.pw-upsell .btn{grid-column:span 1}}
 /* tracked büyük harf etiketleri: cümle düzeni */
 .ah-badge b,
 .banner b,
@@ -2343,7 +2395,7 @@ function finishWeek(){
   if(!S.tasks.activity) S.energy=clamp(S.energy+6,0,100);
   genOffers();
   if(S.week%6===0){ const t=sortedTable(); mail('Lig bülteni',leagueName()+': '+team(t[0].id).name+' zirvede',team(t[0].id).name+' '+t[0].pts+' puanla lider. En yakın takipçisi '+team(t[1].id).name+' ('+t[1].pts+'). Ligin dibinde '+team(t[t.length-1].id).name+' var.','news'); }
-  if(S.week>=34){ seasonEnd(); TAB='merkez'; save(); render(); window.scrollTo(0,0); return; }
+  if(S.week>=34){ seasonEnd(); try{ if(!currentDeal()) milestoneOffer('sezon'); }catch(e){} TAB='merkez'; save(); render(); window.scrollTo(0,0); return; }
   S.week++; makeWeekTasks(); save(); render(); window.scrollTo(0,0);
 }
 
@@ -2353,7 +2405,7 @@ function seasonEnd(){
   const lines=[]; const prevTier=S.tier, prevCat=S.uefaCat;
   let award=false;
   if(home()){
-    if(dom.length>=8 && dAvg>=8.35 && S.tier<4){ S.tier++; lines.push(['up','Klasman yükseldi: '+rankName(S.tier)]); if(S.tier===1) milestone('lig3'); if(S.tier===4) milestone('super'); }
+    if(dom.length>=8 && dAvg>=8.35 && S.tier<4){ S.tier++; lines.push(['up','Klasman yükseldi: '+rankName(S.tier)]); try{ maybeStartPromoDeal(); if(!currentDeal()) milestoneOffer('terfiK'); }catch(e){} if(S.tier===1) milestone('lig3'); if(S.tier===4) milestone('super'); }
     else if(dom.length>=8 && dAvg<7.7 && S.tier>0 && !S.fifa){ S.tier--; lines.push(['down','Klasman düştü: '+rankName(S.tier)]); }
     else if(dom.length>=8 && dAvg<7.7 && S.fifa){ lines.push(['down','Ortalaman düşük: DFF listesindeki yerin tartışmaya açıldı.']); S.rep=clamp(S.rep-6,0,100); }
     else lines.push(['same','Klasmanın korundu: '+rankName(S.tier)]);
@@ -3747,9 +3799,11 @@ function kitsFor(H,A){
   const hk=mk(H); let ak=mk(A);
   if(cdist(H.c1,A.c1)<150){ const w=lum(H.c1)<.5; ak={shirt:w?'#f2f3f5':'#1b2433',shorts:w?'#f2f3f5':'#1b2433',socks:w?'#f2f3f5':'#1b2433',numCol:w?'#111':'#fff'}; }
   const dark=[hk.shirt,ak.shirt].some(c=>lum(c)<.16);
-  const rk={shirt:dark?'#c9f03d':'#121519',shorts:'#111',socks:'#111',numCol:'#000'};
+  let rk={shirt:dark?'#c9f03d':'#121519',shorts:'#111',socks:'#111',numCol:'#000'};
+  { const K=hasAll()&&S&&S.refKit&&REF_KITS.find(k=>k.id===S.refKit); if(K&&K.shirt&&[hk.shirt,ak.shirt,hk.shorts,ak.shorts].every(c=>c&&kitDist(c,K.shirt)>95)) rk={shirt:K.shirt,shorts:K.shorts,socks:K.socks,numCol:'#000'}; }
   return [hk,ak,rk];
 }
+function kitDist(a,b){ const h=x=>{ x=String(x).replace('#',''); if(x.length===3) x=x.split('').map(c=>c+c).join(''); return [0,2,4].map(i=>parseInt(x.substr(i,2),16)||0); }; const p=h(a),q=h(b); return Math.hypot(p[0]-q[0],p[1]-q[1],p[2]-q[2]); }
 const GK_KITS=[{shirt:'#24c49a',shorts:'#173b33',socks:'#24c49a',numCol:'#06231c'},{shirt:'#ff8a3d',shorts:'#3b1f0e',socks:'#ff8a3d',numCol:'#2a1200'}];
 
 // ---------- live scene ----------
@@ -5310,12 +5364,28 @@ function bindMain(){
 // =========================================================
 const NV = () => window.NATIVE || null;
 const lc11 = s => (document.documentElement.lang==='de'?s:s.toLocaleLowerCase('tr-TR'));
-const PREMIUM_ID = 'com.sonduduk.hakem.premium';
-const PREM_KEY = 'sonduduk_premium';
-function isPremium(){ try{ return localStorage.getItem(PREM_KEY)==='1'; }catch(e){ return false; } }
-function setPremium(on){ try{ localStorage.setItem(PREM_KEY,on?'1':'0'); }catch(e){} try{ const P=PLUG('Preferences'); if(P) P.set({key:PREM_KEY,value:on?'1':'0'}); }catch(e){} }
+// Ürünler (hepsi tek seferlik, tüketilmeyen; bütün ülkelerde aynı fiyat — App Store'un otomatik kur karşılığı).
+// Reklamsızlık tek başına satılmaz: yalnızca Premium ve Tam Paket'in içinde.
+const SKU={
+  prem:'com.sonduduk.hakem.premium',   // Premium · 3,99 $ : reklamsız, ödüller anında, 250.000 ₺, 2 özel ekipman
+  tam:'com.sonduduk.hakem.tampaket',   // Tam Paket · 5,99 $ : Premium + Lüks Yaşam Koleksiyonu + Altın Hakem Formaları + 500.000 ₺ daha
+  deal:'com.sonduduk.hakem.firsat',    // Tam Paket Fırsatı · 2,99 $ : yalnızca süreli pencerelerde (Hoş geldin 72 sa, ilk terfi 24 sa)
+  up:'com.sonduduk.hakem.yukseltme'    // Tam Paket'e yükseltme · 2,99 $ : yalnızca Premium sahibine
+};
+const ALL_SKUS=Object.values(SKU);
+const PREMIUM_ID=SKU.prem;
+const PREM_KEY='sonduduk_premium', OWN_KEY='refmania_owned';
+function lsGet(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} try{ const P=PLUG('Preferences'); if(P) P.set({key:k,value:v}); }catch(e){} }
+function lsJ(k,d){ try{ return Object.assign({},d,JSON.parse(lsGet(k)||'{}')); }catch(e){ return Object.assign({},d); } }
+function expandOwned(o){ if(o.has(SKU.deal)||o.has(SKU.up)) o.add(SKU.tam); if(o.has(SKU.tam)) o.add(SKU.prem); return o; }
+let OWNED=(()=>{ const o=new Set(); try{ JSON.parse(lsGet(OWN_KEY)||'[]').forEach(x=>o.add(x)); }catch(e){} if(lsGet(PREM_KEY)==='1') o.add(SKU.prem); return expandOwned(o); })();
+function isPremium(){ return OWNED.has(SKU.prem); }
+function hasAll(){ return OWNED.has(SKU.tam); }
+function grantSku(id){ if(!ALL_SKUS.includes(id)||OWNED.has(id)) return false; OWNED=expandOwned(new Set([...OWNED,id])); lsSet(OWN_KEY,JSON.stringify([...OWNED])); if(isPremium()) lsSet(PREM_KEY,'1'); return true; }
+function setPremium(on){ if(on) grantSku(SKU.prem); }
 // MONET: reklam ve Premium (AdMob gerçek kimlikleri ve App Store ürünü hazır olunca true)
-const MONET = false;   // Premium satın alma (kapalı)
+const MONET = true;    // Premium satın alma (açık)
 const ADS_LIVE = true; // Ödüllü + geçiş reklamları (AdMob + Unity + Liftoff arabuluculuğu)
 const adsOn = () => ADS_LIVE && !!(NV() && NV().isNative);
 
@@ -5400,8 +5470,21 @@ const PREM_ITEMS=[
  {id:'p_duduk',cat:'ekipman',g:'whistle',col:'#f6c62b',grp:'duduk',lv:4,name:'Elmas kakmalı efsane düdüğü',desc:'Premium üyelere özel. Sahadaki en otoriter ses.',price:0,mod:{temp:.14},rep:1,prem:1},
  {id:'p_saat',cat:'ekipman',g:'watch',col:'#f6c62b',grp:'hsaat',lv:3,name:'Altın hakem saati',desc:'Premium üyelere özel. Her kararda fazladan iki buçuk saniye.',price:0,mod:{dt:2.5},prem:1},
 ];
+// Tam Paket'e özel Lüks Yaşam Koleksiyonu
+const TAM_ITEMS=[
+ {id:'t_yali',cat:'yasam',sub:'ev',g:'home',col:'#f6c62b',grp:'ev',lv:6,name:'Boğaz’da tarihi yalı',desc:'Tam Paket’e özel. Sabah kayığı, akşam sessizliği; en iyi toparlanma.',price:0,mod:{rest:11},rep:3,fol:1500,lux:2,prem:1,tam:1},
+ {id:'t_klasik',cat:'yasam',sub:'araba',g:'car',col:'#f6c62b',grp:'araba',lv:5,name:'Klasik Alman spor otomobil',desc:'Tam Paket’e özel. Her geliş bir giriş.',price:0,mod:{rest:4},fol:1200,lux:1,prem:1,tam:1},
+ {id:'t_saat',cat:'yasam',sub:'saat',g:'watch',col:'#f6c62b',name:'Sınırlı üretim tourbillon saat',desc:'Tam Paket’e özel. Dünyada yalnızca 50 tane.',price:0,rep:2,fol:600,prem:1,tam:1},
+];
+// Tam Paket'e özel hakem formaları (takım renkleriyle karışırsa maçta standart forma giyilir)
+const REF_KITS=[
+ {id:'std',name:'Standart',shirt:null},
+ {id:'altin',name:'Altın',shirt:'#d9a91c',shorts:'#141414',socks:'#141414'},
+ {id:'gece',name:'Gece mavisi',shirt:'#1d3a8a',shorts:'#0d1630',socks:'#0d1630'},
+ {id:'buz',name:'Buz',shirt:'#e9f3f7',shorts:'#1c2733',socks:'#1c2733'},
+];
 const CAPS11={dt:3,vis:.06,temp:.16,en:6,rest:12,train:.3};
-const shopAll=()=>SHOP11.concat(PREM_ITEMS);
+const shopAll=()=>SHOP11.concat(PREM_ITEMS,TAM_ITEMS);
 const itemById11=id=>shopAll().find(x=>x.id===id);
 function v11Ensure(){
   if(!S) return;
@@ -5410,6 +5493,7 @@ function v11Ensure(){
   if(!S.vac) S.vac={count:0,winter:-1,summer:-1};
   if(!S.bribe) S.bribe={offer:null,taken:0,refused:0,reported:0,susp:0,caught:0,banW:0,lastW:-99,total:0};
   if(!S.ads) S.ads={energyWk:-1};
+  if(hasAll() && !S.tamGift){ S.tamGift=1; S.money+=500000; tx('Tam Paket hediyesi',500000,'odul'); S.inv=S.inv.concat(TAM_ITEMS.map(x=>x.id).filter(id=>!S.inv.includes(id))); mail('OZS Studio','Tam Paket kasanda','Tam Paket için teşekkürler! Kasana 500.000 ₺ eklendi; Boğaz’daki yalının, klasik otomobilinin ve tourbillon saatinin anahtarları çantanda. Altın hakem formalarını Mağaza › Paketler’den seçebilirsin.','fed'); }
   if(isPremium() && !S.premGift){ S.premGift=1; S.money+=250000; tx('Premium hediyesi',250000,'odul'); S.inv=S.inv.concat(PREM_ITEMS.map(x=>x.id).filter(id=>!S.inv.includes(id))); mail('OZS Studio','Premium hediyen kasanda','Premium için teşekkürler! Kariyerine 250.000 ₺ eklendi; elmas kakmalı efsane düdüğü ve altın hakem saati çantanda.','fed'); }
 }
 function activeItems11(){
@@ -5435,7 +5519,7 @@ function effChips(it){
 }
 function buy11(id){
   const it=itemById11(id); if(!it||owns11(id)||outclassed11(it)) return;
-  if(it.prem && !isPremium()){ SHOP_TAB='premium'; render(); return; }
+  if((it.tam && !hasAll()) || (it.prem && !isPremium())){ openPaywall('esya'); return; }
   if(S.money<it.price){ toast('Kasanda yeterli para yok'); return; }
   S.money-=it.price; tx(it.name,-it.price,'magaza'); S.inv.push(id);
   if(it.rep) S.rep=clamp(S.rep+it.rep,0,100);
@@ -5564,26 +5648,35 @@ function v11Week(){
 // ---------- reklamlar ve Premium ----------
 let AD_BUSY=false, LAST_INT=0, MATCH_N=0;
 async function rewarded(label,cb){
-  if(isPremium()){ cb(); return; }
+  if(isPremium()||hourActive()){ cb(); return; }
   if(!adsOn()||AD_BUSY) return;
   AD_BUSY=true; toast('Reklam yükleniyor…');
   let ok=false; try{ ok=await NV().rewarded(); }catch(e){}
   AD_BUSY=false;
-  if(ok) cb(); else toast('Reklam şu an yüklenemedi ya da yarıda kapandı. Biraz sonra tekrar dene.');
+  if(ok){ cb(); noteRewardedWatched(); } else toast('Reklam şu an yüklenemedi ya da yarıda kapandı. Biraz sonra tekrar dene.');
 }
 function adBtn(id,label,extra){
-  if(!isPremium() && !adsOn()) return '';
-  return `<button class="btn sm v11-ad" id="${id}" ${extra||''}>${isPremium()?ic('star'):`<svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">${V11G.ad}</svg>`}<span>${label}</span>${isPremium()?'<small>Premium</small>':''}</button>`;
+  const free=isPremium()||hourActive();
+  if(!free && !adsOn()) return '';
+  return `<button class="btn sm v11-ad" id="${id}" ${extra||''}>${free?ic('star'):`<svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">${V11G.ad}</svg>`}<span>${label}</span>${isPremium()?'<small>Premium</small>':hourActive()?'<small>Premium Saati</small>':''}</button>`;
 }
 function v11AfterReport(){
   MATCH_N++;
-  if(isPremium()||!adsOn()||!S||S.totals.matches<3) return;
+  maybeStartWelcome();
+  if(isPremium()||hourActive()||!adsOn()||!S||S.totals.matches<3) return;
   if(MATCH_N%2!==0 || Date.now()-LAST_INT<150000) return;
   LAST_INT=Date.now();
-  setTimeout(()=>{ try{ NV().interstitial(); }catch(e){} },350);
+  setTimeout(async()=>{ let ok=false; try{ ok=await NV().interstitial(); }catch(e){} if(ok) noteInterstitialShown(); },350);
 }
 function v11ReportExtras(r){
   const fee=r.fee, rw=document.querySelector('.rewards');
+  const good=(r.rating||0)>=7;
+  if(good && S.totals.matches===10) milestoneOffer('mac10');
+  if(good && MONET && upsellDue()){
+    const host=document.querySelector('.rsum')||rw;
+    if(host){ host.insertAdjacentHTML('afterend',`<div class="pw-upsell">${v11g('crown','#f6c62b',30)}<span><b>Reklamsız oyna</b><small>Premium ile maç arası reklamlar kalkar, ödüller anında gelir.</small></span><button class="btn sm primary" data-up="go">Paketler</button><button class="btn sm" data-up="no">Şimdi değil</button></div>`);
+      const u=document.querySelector('.pw-upsell'); u.querySelector('[data-up="go"]').onclick=()=>openPaywall('nudge'); u.querySelector('[data-up="no"]').onclick=()=>{ dismissUpsell(); u.remove(); }; }
+  }
   if(rw && fee>0 && !r.doubled){
     const html=adBtn('bDouble',`Ücreti 2 katına çıkar (+${moneyShort(fee)})`);
     if(html){ rw.insertAdjacentHTML('afterend',`<div class="v11-dbl">${html}</div>`);
@@ -5592,28 +5685,191 @@ function v11ReportExtras(r){
   if(r.bribe){ const p=document.querySelector('.rsum');
     if(p) p.insertAdjacentHTML('beforeend',`<div class="v11-bribe ${r.bribe.ok?'ok':'bad'}">${v11g('envelope',r.bribe.ok?'#f29b38':'#e3434b',30)}<div><b>${r.bribe.ok?'Anlaşma tamam':'Anlaşma bozuldu'}</b><small>${r.bribe.ok?`${esc(r.bribe.team)} kaybetmedi. Kalan ${money(r.bribe.paid)} hesabına geçti. Ama şüphe büyüyor.`:`${esc(r.bribe.team)} kaybetti. Kalan ödeme yok${r.bribe.leak?'; aracı seni tehdit ediyor.':'.'}`}</small></div></div>`); }
 }
-async function buyPremium(){
+// ---------- satın alma (StoreKit 2) ----------
+const PRICES={};
+const PRICE_FB={[SKU.prem]:'3,99 $',[SKU.tam]:'5,99 $',[SKU.deal]:'2,99 $',[SKU.up]:'2,99 $'};
+const priceOf=id=>PRICES[id]||PRICE_FB[id];
+const iapDemo=()=>!!window.SD_IAP_DEMO;
+let PRICES_LOADING=null;
+function loadPrices(){
+  const N=NV(); if(!N||!N.iapOn) return Promise.resolve();
+  if(PRICES_LOADING) return PRICES_LOADING;
+  PRICES_LOADING=N.iap.products(ALL_SKUS).then(ps=>{ (ps||[]).forEach(p=>{ const id=p.identifier||p.productIdentifier||p.id; const pr=p.priceString||p.localizedPrice||p.displayPrice; if(id&&pr) PRICES[id]=pr; }); document.querySelectorAll('[data-price]').forEach(el=>{ if(PRICES[el.dataset.price]) el.textContent=PRICES[el.dataset.price]; }); }).catch(()=>{ PRICES_LOADING=null; });
+  return PRICES_LOADING;
+}
+const dealReady=()=>iapDemo()||!!PRICES[SKU.deal];
+function afterGrant(){ if(S){ v11Ensure(); save(); } closePaywall(); render(); }
+async function buySku(id){
   const N=NV();
-  if(!N||!N.iapOn){ toast('Premium yalnızca App Store sürümünde satın alınabilir.'); return; }
-  const res=await N.iap.buy(PREMIUM_ID);
-  if(res==='ok'){ setPremium(true); v11Ensure(); save(); haptic('success'); toast('Premium etkin. Teşekkürler!'); render(); }
+  if(iapDemo()){ grantSku(id); haptic('success'); toast(id===SKU.prem?'Premium etkin. Teşekkürler!':'Tam Paket etkin. Teşekkürler!'); afterGrant(); return; }
+  if(!N||!N.iapOn){ toast('Paketler yalnızca App Store sürümünde satın alınabilir.'); return; }
+  const res=await N.iap.buy(id);
+  if(res==='ok'){ grantSku(id); haptic('success'); toast(id===SKU.prem?'Premium etkin. Teşekkürler!':'Tam Paket etkin. Teşekkürler!'); afterGrant(); }
   else if(res==='pending') toast('Satın alma onay bekliyor.');
   else if(res==='error') toast('Satın alma tamamlanamadı. Daha sonra tekrar dene.');
 }
+const buyPremium=()=>buySku(SKU.prem);
 async function restorePremium(){
   const N=NV(); if(!N||!N.iapOn){ toast('Geri yükleme yalnızca App Store sürümünde çalışır.'); return; }
-  const owned=await N.iap.restore(); if(owned.includes(PREMIUM_ID)){ setPremium(true); v11Ensure(); save(); toast('Premium geri yüklendi'); render(); } else toast('Bu Apple hesabında Premium satın alımı bulunamadı.');
+  const owned=await N.iap.restore(); let got=false; (owned||[]).forEach(id=>{ if(grantSku(id)) got=true; });
+  if(owned&&owned.some(id=>ALL_SKUS.includes(id))){ toast(hasAll()?'Tam Paket geri yüklendi':'Premium geri yüklendi'); afterGrant(); }
+  else toast('Bu Apple hesabında paket satın alımı bulunamadı.');
 }
-let PREM_PRICE=null;
-async function loadPremPrice(){ const N=NV(); if(!N||!N.iapOn||PREM_PRICE) return; try{ const p=await N.iap.products([PREMIUM_ID]); if(p&&p[0]){ PREM_PRICE=p[0].priceString||p[0].localizedPrice||null; const el=$('#premPrice'); if(el&&PREM_PRICE) el.textContent=PREM_PRICE; } }catch(e){} }
-async function checkPremiumOwned(){ const N=NV(); if(!N||!N.iapOn) return; try{ const o=await N.iap.owned(); if(o.includes(PREMIUM_ID)&&!isPremium()){ setPremium(true); if(S){ v11Ensure(); save(); render(); } } }catch(e){} }
-window.SD_IAP_UPDATE=(id,ok)=>{ if(id===PREMIUM_ID){ setPremium(ok); if(ok&&S){ v11Ensure(); save(); } render(); } };
+async function checkPremiumOwned(){ const N=NV(); if(!N||!N.iapOn) return; loadPrices(); try{ const o=await N.iap.owned(); let ch=false; (o||[]).forEach(id=>{ if(grantSku(id)) ch=true; }); if(ch&&S){ v11Ensure(); save(); render(); } }catch(e){} }
+window.SD_IAP_UPDATE=(id,ok)=>{ if(ok&&grantSku(id)){ if(S){ v11Ensure(); save(); } render(); } };
+
+// ---------- süreli Tam Paket fırsatı (gerçek sayaç, pencere bitince kapanır) ----------
+const H1=3600*1000, DAY1=24*H1;
+const DEAL_KEY='refmania_firsat';
+let DEAL=lsJ(DEAL_KEY,{hos:0,terfi:0,seen:[]});
+function dealSave(){ lsSet(DEAL_KEY,JSON.stringify(DEAL)); }
+function currentDeal(now=Date.now()){
+  if(hasAll()) return null;
+  if(DEAL.hos && now<DEAL.hos+72*H1) return {kind:'hosgeldin',ends:DEAL.hos+72*H1,key:'hos'};
+  if(DEAL.terfi && now<DEAL.terfi+24*H1) return {kind:'terfi',ends:DEAL.terfi+24*H1,key:'terfi'};
+  return null;
+}
+function maybeStartWelcome(){
+  if(!S||DEAL.hos||hasAll()||S.totals.matches<3||!dealReady()) return;
+  DEAL.hos=Date.now(); dealSave(); PENDING_OFFER=PENDING_OFFER||'hosgeldin';
+}
+function maybeStartPromoDeal(){
+  if(DEAL.terfi||hasAll()||currentDeal()||!dealReady()) return;
+  DEAL.terfi=Date.now(); dealSave(); PENDING_OFFER='terfi';
+}
+function fmtLeft(ms){ const t=Math.max(0,Math.floor(ms/1000)), d=Math.floor(t/86400), h=String(Math.floor(t%86400/3600)).padStart(2,'0'), m=String(Math.floor(t%3600/60)).padStart(2,'0'), x=String(t%60).padStart(2,'0'); return (d>0?d+' gün ':'')+h+':'+m+':'+x; }
+setInterval(()=>{ document.querySelectorAll('[data-left]').forEach(el=>{ const l=+el.dataset.left-Date.now(); el.textContent=fmtLeft(l); if(l<=0&&!el.dataset.done){ el.dataset.done=1; setTimeout(render,50); } }); },1000);
+
+// ---------- teklif anları: oturum başına en fazla bir pencere, sıradan teklifler arasında 20 saat ----------
+const OFFER_KEY='refmania_teklif';
+let OFF=lsJ(OFFER_KEY,{last:0,ms:[],rw:0,rw10:0,ints:0,next:3,nudge:0});
+function offSave(){ lsSet(OFFER_KEY,JSON.stringify(OFF)); }
+let SESSION_OFFER=false, SESSION_RW=0, PENDING_OFFER=null;
+function openOffer(reason,mode){
+  if(hasAll()) return false;
+  if(isPremium() && !['terfi','terfiK','sezon'].includes(reason)) return false;
+  const m=$('#modal'); if(m&&!m.hidden) { PENDING_OFFER=reason; return false; }
+  if(mode==='force'){ openPaywall(reason); return true; }
+  if(SESSION_OFFER) return false;
+  if(mode!=='milestone' && Date.now()-OFF.last<20*H1) return false;
+  SESSION_OFFER=true; OFF.last=Date.now(); offSave(); openPaywall(reason); return true;
+}
+function milestoneOffer(reason){ if(hasAll()||OFF.ms.includes(reason)) return; OFF.ms.push(reason); offSave(); PENDING_OFFER=reason; }
+function flushPendingOffer(){
+  if(!PENDING_OFFER||!S||TAB!=='merkez') return;
+  const r=PENDING_OFFER; PENDING_OFFER=null;
+  const deal=['hosgeldin','terfi'].includes(r);
+  setTimeout(()=>{ if(!openOffer(r,deal?'force':'milestone') && deal) {} },700);
+}
+function noteRewardedWatched(){
+  SESSION_RW++;
+  if(noteHourAd()) return;
+  OFF.rw++; offSave();
+  if(OFF.rw>=10 && Date.now()-OFF.rw10>7*DAY1 && !SESSION_OFFER){ OFF.rw10=Date.now(); OFF.rw=0; offSave(); setTimeout(()=>openOffer('reklam10','milestone'),1500); }
+  else if(SESSION_RW===3) setTimeout(()=>openOffer('reklam'),1500);
+}
+function noteInterstitialShown(){
+  OFF.ints++; offSave();
+  if(isPremium()||SESSION_OFFER||Date.now()-OFF.nudge<DAY1) return;
+  OFF.nudge=Date.now(); offSave();
+  setTimeout(()=>{ const t=$('#toast'); if(!t) return; const d=document.createElement('div'); d.className='pw-nudge'; d.innerHTML=`<span>${v11g('crown','#f6c62b',22)}</span><b>Reklamsız oyna</b><button class="btn sm primary" type="button">Paketler</button>`; d.querySelector('button').onclick=()=>{ d.remove(); openPaywall('nudge'); }; t.appendChild(d); setTimeout(()=>d.remove(),7000); },900);
+}
+function upsellDue(){ return !isPremium() && adsOn() && OFF.ints>=OFF.next; }
+function dismissUpsell(){ OFF.next=OFF.ints+8; offSave(); }
+
+// ---------- Premium Saati: 10 ödüllü reklam = istediğin an başlatacağın 1 saat reklamsız oyun ----------
+const HOUR_KEY='refmania_saat', HOUR_GOAL=10;
+let HOUR=lsJ(HOUR_KEY,{n:0,hak:false,bitis:0,teklif:false});
+function hourSave(){ lsSet(HOUR_KEY,JSON.stringify(HOUR)); }
+function hourActive(now=Date.now()){ return !!HOUR.bitis && now<HOUR.bitis; }
+function noteHourAd(){
+  if(isPremium()||HOUR.hak||hourActive()) return false;
+  HOUR.n++; if(HOUR.n<HOUR_GOAL){ hourSave(); return false; }
+  HOUR.n=0; HOUR.hak=true; hourSave(); setTimeout(()=>{ toast('Premium Saati kazandın! Merkezden istediğin an başlat.'); render(); },600); return true;
+}
+function startHour(){ if(!HOUR.hak||hourActive()) return; HOUR.hak=false; HOUR.bitis=Date.now()+H1; HOUR.teklif=false; hourSave(); haptic('success'); toast('Premium Saati başladı: 1 saat reklamsız'); render(); }
+function hourEndOffer(){ if(!HOUR.bitis||hourActive()||HOUR.teklif) return; HOUR.teklif=true; hourSave(); PENDING_OFFER=PENDING_OFFER||'saat'; }
+
+// ---------- paket penceresi ----------
+const PW_HEAD={
+  shop:['Refmania Paketleri','Tek seferlik satın alma. Abonelik yok.'],
+  reklam:['Reklamlara ara ver','Bugün üç reklam izledin. Premium ile ödüller anında, reklamsız.'],
+  reklam10:['Bir daha reklam izleme','Şimdiye kadar onlarca reklam izledin. Ödülleri tek dokunuşla al.'],
+  nudge:['Reklamsız oyna','Maç aralarındaki reklamlar tamamen kalksın.'],
+  saat:['Premium Saati bitti','Beğendiysen hep böyle oyna: reklamsız, anında ödüllü.'],
+  hosgeldin:['Hoş geldin fırsatı','Tam Paket yalnızca bu pencerede yarı fiyatına.'],
+  terfi:['Terfi ettin!','Yeni klasmanı kutla: Tam Paket 24 saat yarı fiyatına.'],
+  terfiK:['Terfi ettin!','Yeni klasmana lüksle çık: yalı, klasik otomobil ve altın formalar.'],
+  mac10:['10 maç geride kaldı','Artık bir hakemsin. Kariyerini bir üst seviyeye taşı.'],
+  sezon:['Yeni sezon, yeni sen','Sezona Tam Paket’in lüksüyle başla.'],
+  esya:['Özel koleksiyon','Bu eşya paket sahiplerine özel.'],
+};
+const PERKS_PREM=[['ad','Reklamsız oyun','Maç aralarındaki geçiş reklamları tamamen kalkar.'],['star','Ödüller anında','Ücreti ikiye katla ve enerji takviyesi, reklam izlemeden.'],['gift','250.000 ₺','Her kariyerin kasasına bir kez.'],['whistle','2 özel ekipman','Elmas kakmalı düdük ve altın hakem saati.']];
+const PERKS_TAM=[['crown','Premium’un her şeyi','Reklamsız oyun, anında ödüller, 250.000 ₺, özel ekipman.'],['home','Lüks Yaşam Koleksiyonu','Boğaz’da yalı, klasik spor otomobil, tourbillon saat.'],['shirt','Altın Hakem Formaları','Altın, gece mavisi ve buz renkli formalarla sahaya çık.'],['gift','+500.000 ₺','Toplam 750.000 ₺ hoş geldin parası.']];
+function pwPerks(list){ return `<ul class="pw-perks">${list.map(([g,t,d])=>`<li>${v11g(g,'#f6c62b',26)}<span><b>${t}</b><small>${d}</small></span></li>`).join('')}</ul>`; }
+function packsBody(reason){
+  loadPrices();
+  const deal=currentDeal(), up=isPremium()&&!hasAll();
+  if(hasAll()) return `<div class="pw-owned">${v11g('crown','#f6c62b',48)}<b>Tam Paket etkin</b><small>Bütün paket içerikleri sende. Teşekkürler!</small></div>${kitPickerHTML()}`;
+  const tamSku=up?SKU.up:deal?SKU.deal:SKU.tam;
+  const tam=`<article class="pw-card pw-tam">
+      <span class="pw-ribbon">${up?'Yükseltme':deal?'Süreli fırsat':'En çok tercih edilen'}</span>
+      <header><b>Tam Paket</b><small>${up?'Premium’un üstüne kalan her şey':'Parçalarının toplamından çok daha ucuz'}</small></header>
+      ${pwPerks(up?PERKS_TAM.slice(1):PERKS_TAM)}
+      ${deal&&!up?`<div class="pw-timer">Fırsat bitiyor <b class="num" data-left="${deal.ends}">${fmtLeft(deal.ends-Date.now())}</b></div>`:''}
+      <button class="btn primary lg pw-buy" data-sku="${tamSku}">${deal&&!up?`<s class="num" data-price="${SKU.tam}">${priceOf(SKU.tam)}</s> `:''}<span class="num" data-price="${tamSku}">${priceOf(tamSku)}</span><em>${up?'Yükselt':'Tam Paket’i al'}</em></button>
+    </article>`;
+  const prem=up?'':`<article class="pw-card pw-prem">
+      <header><b>Premium</b><small>Reklamsız ve anında ödüllü oyun</small></header>
+      ${pwPerks(PERKS_PREM)}
+      <button class="btn lg pw-buy" data-sku="${SKU.prem}"><span class="num" data-price="${SKU.prem}">${priceOf(SKU.prem)}</span><em>Premium’u al</em></button>
+    </article>`;
+  return `<div class="pw-grid">${tam}${prem}</div>
+    <p class="pw-foot">Tek seferlik satın alma, abonelik yok. Satın aldıklarını aynı Apple hesabıyla başka cihazlarda geri yükleyebilirsin. <button class="linkbtn" id="bRestore">Satın alımları geri yükle</button></p>`;
+}
+function kitPickerHTML(){
+  const cur=(S&&S.refKit)||'std';
+  return `<section class="pw-kits"><h3>Hakem forman</h3><div class="pw-kitrow">${REF_KITS.map(k=>`<button class="pw-kit ${cur===k.id?'on':''}" data-kit="${k.id}" style="--k:${k.shirt||'#121519'};--s:${k.shorts||'#111'}"><i></i><span>${k.name}</span></button>`).join('')}</div><small class="muted">Takım renkleriyle karışırsa maçta standart forma giyilir.</small></section>`;
+}
+function bindPacks(root){
+  root.querySelectorAll('.pw-buy').forEach(b=>b.onclick=()=>buySku(b.dataset.sku));
+  root.querySelectorAll('#bRestore').forEach(b=>b.onclick=restorePremium);
+  root.querySelectorAll('[data-kit]').forEach(b=>b.onclick=()=>{ if(!S) return; S.refKit=b.dataset.kit; save(); haptic('light'); const m=$('#modal'); if(m&&!m.hidden) openPaywall('shop'); else render(); });
+}
+function openPaywall(reason){
+  reason=reason||'shop';
+  const [h,sub]=PW_HEAD[reason]||PW_HEAD.shop;
+  const deal=currentDeal();
+  const m=$('#modal');
+  m.innerHTML=`<div class="sheet pw" role="dialog" aria-modal="true" aria-label="Refmania Paketleri">
+    <div class="pw-hero"><button class="pw-x" id="bPwClose" aria-label="Kapat">×</button>${v11g('crown','#f6c62b',54)}<span class="pw-brand">Refmania<i></i></span><h2>${esc(h)}</h2><p>${esc(sub)}</p>${deal&&!isPremium()&&!['hosgeldin','terfi'].includes(reason)?`<span class="pw-dealchip">Tam Paket fırsatı · <b class="num" data-left="${deal.ends}">${fmtLeft(deal.ends-Date.now())}</b></span>`:''}</div>
+    <div class="sh-body pw-body">${packsBody(reason)}</div></div>`;
+  m.hidden=false;
+  if(deal) { DEAL.seen=[...new Set([...(DEAL.seen||[]),deal.key])]; dealSave(); }
+  $('#bPwClose').onclick=closePaywall; m.onclick=e=>{ if(e.target===m) closePaywall(); };
+  bindPacks(m);
+}
+function closePaywall(){ const m=$('#modal'); if(m&&m.querySelector('.pw')){ m.hidden=true; m.innerHTML=''; } }
+function offerRowHTML(){
+  if(hasAll()) return '';
+  const deal=currentDeal();
+  if(deal&&!isPremium()) return `<button class="v11-premrow pw-dealrow" data-paywall="${deal.kind}">${v11g('crown','#f6c62b',28)}<span><b>Tam Paket yarı fiyatına</b><small>Fırsat bitiyor: <span class="num" data-left="${deal.ends}">${fmtLeft(deal.ends-Date.now())}</span></small></span></button>`;
+  if(isPremium()) return `<button class="v11-premrow" data-paywall="shop">${v11g('crown','#f6c62b',28)}<span><b>Tam Paket’e yükselt</b><small>Lüks Yaşam Koleksiyonu, Altın Hakem Formaları, +500.000 ₺</small></span></button>`;
+  return `<button class="v11-premrow" data-paywall="shop">${v11g('crown','#f6c62b',28)}<span><b>Premium ve Tam Paket</b><small>Reklamsız oyun, anında ödüller, 750.000 ₺’ye kadar</small></span></button>`;
+}
+function hourCardHTML(){
+  if(isPremium()) return '';
+  if(hourActive()) return `<div class="pw-hour on">${v11g('star','#f6c62b',26)}<span><b>Premium Saati</b><small>Reklamsız oynuyorsun · <span class="num" data-left="${HOUR.bitis}">${fmtLeft(HOUR.bitis-Date.now())}</span></small></span></div>`;
+  if(HOUR.hak) return `<div class="pw-hour ready">${v11g('star','#f6c62b',26)}<span><b>Premium Saati hazır</b><small>1 saat reklamsız oyun, ödüller anında</small></span><button class="btn sm primary" id="bHour">Başlat</button></div>`;
+  if(!adsOn()||!HOUR.n) return '';
+  return `<div class="pw-hour">${v11g('star','#8b98ab',26)}<span><b>Premium Saati</b><small>${HOUR.n}/${HOUR_GOAL} ödüllü reklam · 10’da 1 saat reklamsız</small></span><i class="pw-hbar"><i style="width:${HOUR.n/HOUR_GOAL*100}%"></i></i></div>`;
+}
 
 // ---------- ekranlar ----------
 let SHOP_TAB='ekipman';
 function v11ShopHTML(){
   v11Ensure();
-  const tabs=[['ekipman','Ekipman'],['yasam','Yaşam'],['tatil','Tatil'],['hatira','Hatıralar']].concat(MONET?[['premium','Premium']]:[]);
+  const tabs=[['ekipman','Ekipman'],['yasam','Yaşam'],['tatil','Tatil'],['hatira','Hatıralar']].concat(MONET?[['premium','Paketler']]:[]);
   if(!MONET&&SHOP_TAB==='premium') SHOP_TAB='ekipman';
   let body='';
   if(SHOP_TAB==='ekipman'||SHOP_TAB==='yasam'){
@@ -5632,13 +5888,13 @@ function v11ShopHTML(){
     body=`<h3>Kartpostallar <span class="muted num">${S.post.length}/${VAC11.length}</span></h3><div class="v11-grid">${VAC11.map(v=>S.post.includes(v.id)?`<div class="v11-postcard sm" style="--gc:${v.col}">${v11g(v.g,v.col,40)}<b>${esc(v.name)}</b><p>“${esc(v.post)}”</p></div>`:`<div class="v11-postcard sm locked">${v11g('lock','#5b6678',40)}<b>${esc(v.name)}</b><p class="muted">Henüz gidilmedi</p></div>`).join('')}</div>
       <h3 style="margin-top:18px">Koleksiyon <span class="muted num">${S.inv.length}</span></h3>${owned.length?`<div class="row" style="gap:8px;flex-wrap:wrap">${S.inv.map(itemById11).filter(Boolean).map(it=>`<span class="v11-own">${v11g(it.g,it.col,26)}${esc(it.name)}</span>`).join('')}</div>`:'<p class="muted">Henüz bir şey almadın.</p>'}`;
   } else body=premiumHTML();
-  return `<div class="stack" style="gap:14px"><div class="v11-shophead panel"><div><span class="eyebrow gold">Mağaza</span><h2 style="margin:2px 0 0">Kasa: <span class="num">${money(S.money)}</span></h2><small class="muted">Maç ücretleri, sponsorluklar ve teklifler kasana girer.</small></div>${isPremium()?'<span class="chip y">Premium</span>':''}</div>
+  return `<div class="stack" style="gap:14px"><div class="v11-shophead panel"><div><span class="eyebrow gold">Mağaza</span><h2 style="margin:2px 0 0">Kasa: <span class="num">${money(S.money)}</span></h2><small class="muted">Maç ücretleri, sponsorluklar ve teklifler kasana girer.</small></div>${isPremium()?`<span class="chip y">${hasAll()?'Tam Paket':'Premium'}</span>`:''}</div>
     <div class="v11-tabs" role="tablist">${tabs.map(([k,n])=>`<button class="${SHOP_TAB===k?'on':''}" data-shop="${k}">${n}</button>`).join('')}</div>
     <div class="panel">${body}</div></div>`;
 }
 function itemCard(it){
-  const own=owns11(it.id), oc=!own&&outclassed11(it), lockP=it.prem&&!isPremium();
-  const btn= own?'<span class="chip g">Sende</span>': oc?'<span class="chip">Daha iyisi sende</span>': lockP?`<button class="btn sm" data-shop="premium">${ic('star')} Premium</button>`:`<button class="btn sm ${S.money>=it.price?'primary':''}" data-buy="${it.id}" ${S.money<it.price?'disabled':''}>${money(it.price)}</button>`;
+  const own=owns11(it.id), oc=!own&&outclassed11(it), lockP=(it.tam&&!hasAll())||(it.prem&&!isPremium());
+  const btn= own?'<span class="chip g">Sende</span>': oc?'<span class="chip">Daha iyisi sende</span>': lockP?`<button class="btn sm" data-paywall="esya">${ic('star')} ${it.tam?'Tam Paket':'Premium'}</button>`:`<button class="btn sm ${S.money>=it.price?'primary':''}" data-buy="${it.id}" ${S.money<it.price?'disabled':''}>${money(it.price)}</button>`;
   return `<div class="v11-card ${own?'own':''}">${v11g(it.g,it.col,44)}<div class="v11-cb"><b>${esc(it.name)}</b><small>${esc(it.desc)}</small><div class="v11-eff">${effChips(it).map(e=>`<span>${esc(e)}</span>`).join('')}</div></div><div class="v11-cf">${it.lv?`<span class="v11-lv">${'●'.repeat(it.lv)}</span>`:'<span></span>'}${btn}</div></div>`;
 }
 function vacCard(v){
@@ -5648,12 +5904,8 @@ function vacCard(v){
   return `<div class="v11-card">${v11g(v.g,v.col,44)}<div class="v11-cb"><b>${esc(v.name)}${been?' <span class="chip g" style="vertical-align:middle">✓</span>':''}</b><small>${esc(v.desc)}</small><div class="v11-eff">${eff.map(e=>`<span>${esc(e)}</span>`).join('')}</div></div><div class="v11-cf"><span class="muted" style="font-size:12px">${esc(why)}</span><button class="btn sm ${ok&&S.money>=v.price?'primary':''}" data-vac="${v.id}" ${!ok||S.money<v.price?'disabled':''}>${money(v.price)}</button></div></div>`;
 }
 function premiumHTML(){
-  setTimeout(loadPremPrice,0);
-  const perks=[['ad','Reklamsız oyun','Maç aralarındaki geçiş reklamları tamamen kalkar.'],['star','Ödüller reklamsız','Ücreti ikiye katlama ve enerji takviyesi reklam izlemeden anında.'],['gift','250.000 ₺ hoş geldin parası','Her kariyer slotuna bir kez.'],['whistle','Özel ekipman','Elmas kakmalı efsane düdüğü ve altın hakem saati.']];
-  return `<div class="v11-prem"><div class="v11-prem-h">${v11g('crown','#f6c62b',64)}<div><span class="eyebrow gold">Refmania</span><h2>Premium</h2><p class="muted">Tek seferlik satın alma. Abonelik yok.</p></div></div>
-    <div class="v11-perks">${perks.map(([g,t,d])=>`<div>${v11g(g,'#f6c62b',34)}<span><b>${t}</b><small>${d}</small></span></div>`).join('')}</div>
-    ${isPremium()?'<p class="chip y" style="font-size:14px;padding:6px 12px">Premium etkin. Teşekkürler!</p>':`<button class="btn primary lg" id="bBuyPrem">Premium al · <span id="premPrice">${PREM_PRICE||'₺249,99'}</span></button>`}
-    <button class="btn sm" id="bRestore">Satın alımları geri yükle</button></div>`;
+  if(hasAll()) return `<div class="pw-inline">${packsBody('shop')}</div>`;
+  return `<div class="pw-inline"><div class="pw-hero sm">${v11g('crown','#f6c62b',44)}<span class="pw-brand">Refmania<i></i></span><h2>Paketler</h2><p>Tek seferlik satın alma. Abonelik yok.</p></div>${packsBody('shop')}</div>`;
 }
 
 // ---------- hikâye olayları ----------
@@ -5765,7 +6017,7 @@ function v11HubLeft(){
 function v11HubRight(){
   const b=breakNow();
   return `<section class="panel v11-hubshop"><div class="row" style="justify-content:space-between;flex-wrap:nowrap"><div style="min-width:0"><b>Mağaza ve tatil</b><div class="muted" style="font-size:13px">${b?'Devre arası! Uzun tatil seçenekleri açık.':'Ekipman, yaşam, tatil · Kasa '+moneyShort(S.money)}</div></div><button class="btn sm ${b?'primary':''}" data-shopgo="${b?'tatil':'ekipman'}">Aç</button></div>
-    ${MONET&&!isPremium()?`<button class="v11-premrow" data-shopgo="premium">${v11g('crown','#f6c62b',28)}<span><b>Premium</b><small>Reklamsız oyun, anında ödüller, 250.000 ₺</small></span></button>`:''}</section>`;
+    ${hourCardHTML()}${MONET?offerRowHTML():''}</section>`;
 }
 function v11EnergyBtn(){
   if(!S.tasks||S.energy>=95) return '';
@@ -5781,8 +6033,8 @@ function curLang(){ return document.documentElement.lang||'tr'; }
 function setLang(l){ try{ localStorage.setItem('sonduduk_lang',l); }catch(e){} try{ const P=PLUG('Preferences'); if(P) P.set({key:'sonduduk_lang',value:l}); }catch(e){} if(S) save(); location.replace(l==='tr'?'index.html':l+'.html'); }
 function v11SettingsHTML(){
   return `<div class="panel stack"><h3>Dil</h3><div class="row" style="gap:8px;flex-wrap:wrap">${LANGS.map(([k,n])=>`<button class="btn sm ${curLang()===k?'primary':''}" data-lang="${k}">${n}</button>`).join('')}</div>
-    ${MONET?`<h3 style="margin-top:8px">Premium ve reklamlar</h3><p class="muted" style="font-size:13px">${isPremium()?'Premium etkin: reklam görmezsin.':'Premium ile reklamlar kalkar.'}</p>
-    <div class="row" style="gap:8px;flex-wrap:wrap">${isPremium()?'':'<button class="btn sm primary" data-shopgo="premium">Premium</button>'}<button class="btn sm" id="bRestore2">Satın alımları geri yükle</button>${adsOn()?'<button class="btn sm" id="bPrivacy">Reklam gizlilik ayarları</button>':''}</div>`:''}
+    ${MONET?`<h3 style="margin-top:8px">Paketler ve reklamlar</h3><p class="muted" style="font-size:13px">${hasAll()?'Tam Paket etkin: reklam görmezsin.':isPremium()?'Premium etkin: reklam görmezsin.':'Premium ya da Tam Paket ile reklamlar kalkar.'}</p>
+    <div class="row" style="gap:8px;flex-wrap:wrap">${hasAll()?'':`<button class="btn sm primary" data-paywall="shop">${isPremium()?'Tam Paket’e yükselt':'Paketler'}</button>`}<button class="btn sm" id="bRestore2">Satın alımları geri yükle</button>${adsOn()?'<button class="btn sm" id="bPrivacy">Reklam gizlilik ayarları</button>':''}</div>`:''}
     ${!MONET&&adsOn()?`<h3 style="margin-top:8px">Reklamlar</h3><p class="muted" style="font-size:13px">Reklam kişiselleştirme ve onay tercihlerini buradan değiştirebilirsin.</p><div class="row"><button class="btn sm" id="bPrivacy">Reklam gizlilik ayarları</button></div>`:''}</div>`;
 }
 function v11Bind(){
@@ -5794,12 +6046,16 @@ function v11Bind(){
   q('[data-bribe]').forEach(b=>b.onclick=()=>bribeChoice(b.dataset.bribe));
   q("[data-sev]").forEach(b=>b.onclick=()=>storyChoice(b.dataset.sev));
   q('[data-lang]').forEach(b=>b.onclick=()=>{ if(b.dataset.lang!==curLang()) setLang(b.dataset.lang); });
-  const bp=$('#bBuyPrem'); if(bp) bp.onclick=buyPremium;
+  q('[data-paywall]').forEach(b=>b.onclick=e=>{ e.stopPropagation(); openPaywall(b.dataset.paywall); });
+  const bh=$('#bHour'); if(bh) bh.onclick=startHour;
+  const pin=document.querySelector('.pw-inline'); if(pin) bindPacks(pin);
+  maybeStartWelcome(); hourEndOffer(); flushPendingOffer();
   q('#bRestore,#bRestore2').forEach(b=>b.onclick=restorePremium);
   const pv=$('#bPrivacy'); if(pv) pv.onclick=()=>{ try{ NV().privacyOptions(); }catch(e){} };
   const ae=$('#bAdEnergy'); if(ae) ae.onclick=()=>rewarded('energy',()=>{ S.ads.energyWk=S.season*100+S.week; S.energy=clamp(S.energy+25,0,100); save(); haptic('success'); toast('Enerji +25'); render(); });
 }
 setTimeout(checkPremiumOwned,2500);
+try{ if(/[?&]iapdemo=1/.test(location.search)) window.SD_IAP_DEMO=1; }catch(e){}
 
 // ---------- boot ----------
 function pauseForBackground(){
