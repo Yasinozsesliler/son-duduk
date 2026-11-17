@@ -105,8 +105,9 @@ if len(sys.argv)>1 and sys.argv[1]=='submit':
         if bl: call('PATCH',f'/v1/appStoreVersions/{vid}/relationships/build',{'data':{'type':'builds','id':bl[0]['id']}}); print('build attached',bnum)
     subs=call('GET','/v1/reviewSubmissions',params={'filter[app]':aid,'filter[state]':'READY_FOR_REVIEW'}).get('data',[])
     sid=subs[0]['id'] if subs else call('POST','/v1/reviewSubmissions',{'data':{'type':'reviewSubmissions','attributes':{'platform':'IOS'},'relationships':{'app':{'data':{'type':'apps','id':aid}}}}})['data']['id']
-    items=call('GET',f'/v1/reviewSubmissions/{sid}/items').get('data',[])
-    if not items: print('item',json.dumps(call('POST','/v1/reviewSubmissionItems',{'data':{'type':'reviewSubmissionItems','relationships':{'reviewSubmission':{'data':{'type':'reviewSubmissions','id':sid}},'appStoreVersion':{'data':{'type':'appStoreVersions','id':vid}}}}}))[:300])
+    items=call('GET',f'/v1/reviewSubmissions/{sid}/items',params={'include':'appStoreVersion'}).get('data',[])
+    print('draft items',[ (i.get('relationships',{}).get('appStoreVersion',{}).get('data') or {}).get('id') for i in items])
+    if not any((i.get('relationships',{}).get('appStoreVersion',{}).get('data') or {}).get('id')==vid for i in items): print('item',json.dumps(call('POST','/v1/reviewSubmissionItems',{'data':{'type':'reviewSubmissionItems','relationships':{'reviewSubmission':{'data':{'type':'reviewSubmissions','id':sid}},'appStoreVersion':{'data':{'type':'appStoreVersions','id':vid}}}}}))[:300])
     print('draft submission',sid)
     for p in PRODUCTS:
         iap=existing.get(p['pid'])
