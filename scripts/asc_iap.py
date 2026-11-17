@@ -96,4 +96,13 @@ def ensure(p):
     st=call('GET',f'/v2/inAppPurchases/{iid}').get('data',{}).get('attributes',{}).get('state')
     print('STATE',p['pid'],st)
 
-for p in PRODUCTS: ensure(p)
+if len(sys.argv)>1 and sys.argv[1]=='submit':
+    # İlk ürünler sürümle birlikte incelenir: her ürün için gönderim oluştur (sürüm gönderilince birlikte incelenir).
+    for p in PRODUCTS:
+        iap=existing.get(p['pid'])
+        if not iap: print('missing',p['pid']); continue
+        r=call('POST','/v1/inAppPurchaseSubmissions',{'data':{'type':'inAppPurchaseSubmissions','relationships':{'inAppPurchaseV2':{'data':{'type':'inAppPurchases','id':iap['id']}}}}})
+        st=call('GET',f"/v2/inAppPurchases/{iap['id']}").get('data',{}).get('attributes',{}).get('state')
+        print('SUBMIT',p['pid'],'ok' if r.get('data') else 'err',st)
+else:
+    for p in PRODUCTS: ensure(p)

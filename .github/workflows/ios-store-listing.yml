@@ -26,7 +26,7 @@ on:
       task:
         description: "listing = metin+görsel yükle; release_pending = onaylı sürümü yayınla; status = durum"
         type: choice
-        options: [listing, release_pending, status, submit, iap]
+        options: [listing, release_pending, status, submit, iap, iap_submit]
         default: listing
 
 jobs:
@@ -75,7 +75,8 @@ jobs:
         if: inputs.task != 'listing'
         run: |
           pip3 install --break-system-packages -q pyjwt cryptography requests || pip3 install -q pyjwt cryptography requests
-          if [ "${{ inputs.task }}" = "iap" ]; then ASC_KEY_PATH="$RUNNER_TEMP/keys/key.p8" python3 scripts/asc_iap.py; else
+          if [ "${{ inputs.task }}" = "iap" ]; then ASC_KEY_PATH="$RUNNER_TEMP/keys/key.p8" python3 scripts/asc_iap.py;
+          elif [ "${{ inputs.task }}" = "iap_submit" ]; then ASC_KEY_PATH="$RUNNER_TEMP/keys/key.p8" python3 scripts/asc_iap.py submit; else
           ASC_KEY_PATH="$RUNNER_TEMP/keys/key.p8" python3 scripts/asc.py "${{ inputs.task }}" "${{ inputs.version }}" "${{ inputs.build }}"; fi
 
       - name: Upload listing
