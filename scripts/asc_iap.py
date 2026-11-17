@@ -97,7 +97,17 @@ def ensure(p):
     print('STATE',p['pid'],st)
 
 if len(sys.argv)>1 and sys.argv[1]=='submit':
-    # İlk ürünler sürümle birlikte incelenir: her ürün için gönderim oluştur (sürüm gönderilince birlikte incelenir).
+    # İlk ürünler sürümle birlikte incelenir: önce sürümü içeren taslak inceleme gönderimi hazırlanır.
+    ver=sys.argv[2] if len(sys.argv)>2 else '1.2.0'; bnum=sys.argv[3] if len(sys.argv)>3 else ''
+    v=[x for x in call('GET',f'/v1/apps/{aid}/appStoreVersions',params={'limit':10})['data'] if x['attributes']['versionString']==ver][0]; vid=v['id']
+    if bnum:
+        bl=call('GET','/v1/builds',params={'filter[app]':aid,'filter[version]':bnum,'filter[preReleaseVersion.version]':ver}).get('data',[])
+        if bl: call('PATCH',f'/v1/appStoreVersions/{vid}/relationships/build',{'data':{'type':'builds','id':bl[0]['id']}}); print('build attached',bnum)
+    subs=call('GET','/v1/reviewSubmissions',params={'filter[app]':aid,'filter[state]':'READY_FOR_REVIEW'}).get('data',[])
+    sid=subs[0]['id'] if subs else call('POST','/v1/reviewSubmissions',{'data':{'type':'reviewSubmissions','attributes':{'platform':'IOS'},'relationships':{'app':{'data':{'type':'apps','id':aid}}}}})['data']['id']
+    items=call('GET',f'/v1/reviewSubmissions/{sid}/items').get('data',[])
+    if not items: print('item',json.dumps(call('POST','/v1/reviewSubmissionItems',{'data':{'type':'reviewSubmissionItems','relationships':{'reviewSubmission':{'data':{'type':'reviewSubmissions','id':sid}},'appStoreVersion':{'data':{'type':'appStoreVersions','id':vid}}}}}))[:300])
+    print('draft submission',sid)
     for p in PRODUCTS:
         iap=existing.get(p['pid'])
         if not iap: print('missing',p['pid']); continue
