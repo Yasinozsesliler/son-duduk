@@ -5,6 +5,7 @@ import { Preferences } from "@capacitor/preferences";
 import { Device } from "@capacitor/device";
 import { AdMob, AdmobConsentStatus } from "@capacitor-community/admob";
 import { NativePurchases, PURCHASE_TYPE } from "@capgo/native-purchases";
+import { Purchases, PURCHASES_ARE_COMPLETED_BY_TYPE, STOREKIT_VERSION } from "@revenuecat/purchases-capacitor";
 import { ADS } from "./ads.config.js";
 
 const isNative = Capacitor.isNativePlatform();
@@ -104,6 +105,21 @@ N.interstitial = async () => {
   } catch (e) { return false; }
 };
 
+/* ---------- RevenueCat: yalnızca gözlemci ----------
+   Satın almayı StoreKit 2 (@capgo/native-purchases) yapar; RevenueCat satışları ve iadeleri raporlar.
+   Gözlemci çağrıları satın alma akışını bekletmez ya da bozmaz (hata ve zaman aşımı sessizce yutulur). */
+const RC_KEY_IOS = "appl_eBgQhOtRwbFcSZVutLEBAEogEuR"; // açık SDK anahtarı (gizli değildir)
+let rcReady = false;
+const rcQuick = (p) => Promise.race([p, new Promise((r) => setTimeout(r, 4000))]).catch(() => undefined);
+if (isIOS) {
+  Purchases.configure({
+    apiKey: RC_KEY_IOS,
+    purchasesAreCompletedBy: { type: PURCHASES_ARE_COMPLETED_BY_TYPE.MY_APP, storeKitVersion: STOREKIT_VERSION.STOREKIT_2 },
+  }).then(() => { rcReady = true; }).catch(() => {});
+}
+const rcRecord = (id) => (rcReady ? rcQuick(Purchases.recordPurchase({ productID: id })) : undefined);
+const rcSync = () => (rcReady ? rcQuick(Purchases.syncPurchases()) : undefined);
+
 /* ---------- Uygulama içi satın alma (StoreKit 2, şimdilik yalnızca iOS) ---------- */
 const INAPP = PURCHASE_TYPE.INAPP;
 const okTx = (t) => t && !t.revocationDate;
@@ -124,7 +140,8 @@ N.iap = {
     if (!N.iapOn) return "error";
     try {
       const t = await NativePurchases.purchaseProduct({ productIdentifier: id, productType: INAPP, quantity: 1 });
-      return okTx(t) ? "ok" : "error";
+      if (okTx(t)) { await rcRecord(id); return "ok"; }
+      return "error";
     } catch (e) {
       const m = String((e && (e.message || e.code)) || e).toLowerCase();
       if (m.includes("cancel")) return "cancel";
@@ -135,12 +152,14 @@ N.iap = {
   async restore() {
     if (!N.iapOn) return [];
     try { await NativePurchases.restorePurchases(); } catch (e) {}
+    await rcSync();
     return N.iap.owned();
   },
 };
 if (N.iapOn) {
   NativePurchases.addListener("transactionUpdated", (t) => {
     try { window.SD_IAP_UPDATE && window.SD_IAP_UPDATE(t.productIdentifier, okTx(t)); } catch (e) {}
+    if (okTx(t)) rcRecord(t.productIdentifier);
   }).catch(() => {});
 }
 if (isNative && AD.enabled) setTimeout(() => { adsReady = adsReady || initAds(); }, 5000);
