@@ -8,6 +8,7 @@ def call(m,path,body=None,params=None):
     if r.status_code>=400: print('HTTP',r.status_code,m,path,r.text[:800])
     return r.json() if r.text else {}
 app=call('GET','/apps',params={'filter[bundleId]':'com.sonduduk.hakem'})['data'][0]; aid=app['id']
+print('apple_id',aid,'https://apps.apple.com/tr/app/id'+aid)
 vers=call('GET',f'/apps/{aid}/appStoreVersions',params={'limit':10})['data']
 for v in vers: print('version',v['attributes']['versionString'],v['attributes']['appStoreState'],v['attributes'].get('releaseType'))
 b=call('GET','/builds',params={'filter[app]':aid,'sort':'-uploadedDate','limit':4,'include':'preReleaseVersion'})
