@@ -2111,13 +2111,16 @@ function sceneCard(sc,ev,fromQ){
   const pl0=sc.pl.find(q=>q.side===ev.side&&q.num===ev.p.no&&!q.gone&&!q.leaving)||nearestTo(sc.pl.filter(q=>q.side===ev.side&&q.role!=='GK'&&!q.gone&&!q.leaving),sc.ball.x,sc.ball.y);
   if(!pl0){ showCardFx(ev.red,ev.second,ev.label,ev.team); return; }
   pl0.num=ev.p.no; const r=sc.refs[0]; const d=v2n(r.x-pl0.x,r.y-pl0.y);
-  sc.card={...ev,pl:pl0,t:0,tx:pl0.x+d[0]*1.7,ty:pl0.y+d[1]*1.7,shown:false}; sc.mode='card'; sc.ball.owner=null; sc.ball.fl=null; sc.gather=[pl0.x,pl0.y];
+  // the referee must physically reach the player before the card goes up: give him enough time for the distance
+  const dist=Math.hypot(r.x-pl0.x,r.y-pl0.y); sc.refTarget=null;
+  sc.card={...ev,pl:pl0,t:0,tx:pl0.x+d[0]*1.7,ty:pl0.y+d[1]*1.7,shown:false,tmax:2+dist/6.5}; sc.mode='card'; sc.ball.owner=null; sc.ball.fl=null; sc.gather=[pl0.x,pl0.y];
   if(M) M.cardHold=true;
 }
 function cardAI(sc,dt){
   const C=sc.card; if(!C){ sc.mode='play'; return; } C.t+=dt; const r=sc.refs[0], p=C.pl;
   sc.pl.forEach(q=>{ if(q===p||q.gone) return; if(q.leaving){ steer(q,q.x,-4,dt,2); if(q.y<-3) q.gone=true; return; } const dd=Math.hypot(q.x-p.x,q.y-p.y); if(q.side===C.side&&dd<22&&q.role!=='GK'&&q.i%2===0){ const a=q.i*.8; steer(q,p.x+Math.cos(a)*3,p.y+Math.sin(a)*3,dt,3); setPose(q,'protest',.6); } else steer(q,q.x,q.y,dt,.6); });
-  if(!C.arr){ steer(r,C.tx,C.ty,dt,8); steer(p,p.x,p.y,dt,1); if(Math.hypot(r.x-C.tx,r.y-C.ty)<.7||C.t>3.5){ C.arr=true; C.t0=C.t; } }
+  if(!C.arr){ const left=Math.hypot(r.x-C.tx,r.y-C.ty); steer(r,C.tx,C.ty,dt,left>12?8.5:left>4?6.5:3.2); steer(p,p.x,p.y,dt,1);
+    if(left<.7||C.t>C.tmax){ if(left>=.7){ r.x=C.tx; r.y=C.ty; } C.arr=true; C.t0=C.t; } }
   else { const ta=C.t-C.t0+1; r.speed=0; r.face=v2n(p.x-r.x,p.y-r.y); p.face=v2n(r.x-p.x,r.y-p.y); p.speed=0; const k=Math.min(1,(ta-1)/.22);
     r.pose={P:POSES.cardUp,k}; r.card=C.red?'r':'y'; p.pose={P:C.red?POSES.faceHold:POSES.protest,k:Math.min(1,(ta-1.1)/.3)};
     if(!C.shown){ C.shown=true; showCardFx(C.red,C.second,C.label,C.team); whistle(); } }
@@ -3139,7 +3142,8 @@ function idleAI(sc,dt){
 }
 function refAI(sc,dt){
   const b=sc.ball, r=sc.refs[0];
-  if(sc.refTarget) steer(r,sc.refTarget[0],sc.refTarget[1],dt,7.2);
+  if(sc.mode==='card'){} // cardAI drives the referee while he books a player
+  else if(sc.refTarget) steer(r,sc.refTarget[0],sc.refTarget[1],dt,7.2);
   else if(sc.mode==='play'||sc.mode==='kickoff'){ const d=sdir(sc,sc.poss); steer(r,clamp(b.x-d*10,8,97),clamp(b.y>34?b.y-13:b.y+13,6,62),dt,6.2); }
   else if(sc.mode==='stopped'&&sc.gather) steer(r,sc.gather[0]-2,sc.gather[1]-1.5,dt,3);
   else steer(r,r.x,r.y,dt,1);
@@ -3351,7 +3355,7 @@ function buildAI(sc,dt){
 function sceneResume(sc){ if(!sc||sc.mode==='goal'||sc.mode==='kickoff') return; sc.mode='play'; sc.forced=null; sc.spots=null; sc.mark=null; sc.refTarget=null; sc.gather=null; sc.flash=null; sc.pl.forEach(p=>{ p.keepDown=false; p.label=null; p.hl=false; p.t=null; p.pose=null; p.kick=null; p.trap=0; }); const b=sc.ball; b.fl=null; b.free=null; b.owner=nearestTo(sc.pl,b.x,b.y); sc.poss=b.owner.side; b.owner.hold=0; b.owner.next=1; }
 function liveCamDesired(W,H){ const x=SC.camX;
   if(SC.cam==='ust') return {p:[52.5,-40,66],t:[52.5,31,0],f:.63};
-  if(SC.mode==='card'&&SC.card){ const r=SC.refs[0], p=SC.card.pl; const mx=SC.card.arr?(r.x+p.x)/2:p.x, my=SC.card.arr?(r.y+p.y)/2:p.y; return {p:[mx-2.5,my-8.5,3.4],t:[mx,my,1.3],f:1.05}; }
+  if(SC.mode==='card'&&SC.card){ const r=SC.refs[0], p=SC.card.pl; const gap=Math.min(26,Math.hypot(r.x-p.x,r.y-p.y)); const w=SC.card.arr?.5:clamp(.5-gap/60,.12,.5); const mx=p.x+(r.x-p.x)*w, my=p.y+(r.y-p.y)*w; const pull=1+gap/9; return {p:[mx-2.5*pull,my-8.5*pull,3.4+gap*.22],t:[mx,my,1.2],f:1.05}; }
   if(SC.mode==='goal'&&SC.goal){ const G=SC.goal; const fp=G.t<2.35?[SC.ball.x,SC.ball.y]:[G.sp.x,G.sp.y]; return {p:[fp[0]-G.d*8,fp[1]-15,7],t:[fp[0]+G.d*3,fp[1]+1,.6],f:1.0}; }
   if((SC.mode==='buildup'&&SC.stage===2)||(SC.mode==='stopped'&&SC.mark)){ const m=SC.mark; const tight=SC.mode==='buildup'&&SC.bt>1.2; return tight?{p:[m[0]-2.6,m[1]-9,3.9],t:[m[0],m[1]+.4,.8],f:1.1}:{p:[m[0]-3.5,m[1]-12.5,5.6],t:[m[0],m[1]+.5,.7],f:1.0}; }
   if(SC.mode==='buildup'){ const pts=[SC.mark,...(SC.spots||[]).map(s=>[s.x,s.y])]; const cx=avg(pts.map(p=>p[0])), cy=avg(pts.map(p=>p[1])); const span=Math.max(18,...pts.map(p=>Math.hypot(p[0]-cx,p[1]-cy))); const tall=H/W>.68; const z=SC.spots?(tall?1.15:1.35):1;
@@ -3434,11 +3438,16 @@ function drawFig(ctx,c,a){
   const amp=.17+.33*sp7, lft=.1+.24*sp7, cs=Math.cos(a.phase||0);
   const st=amp*sn*run, liftL=.05+Math.max(0,-cs)*lft*run, liftR=.05+Math.max(0,cs)*lft*run;
   const limb=(def,key)=>{ const T=PZ[key]; return T?[def[0]+(T.s-def[0])*K, def[1]+(T.f-def[1])*K, def[2]+(T.h-def[2])*K]:def; };
-  const LL=limb([.12,st,liftL],'legL'), LR=limb([-.12,-st,liftR],'legR'), AL=limb([.27,-st*.9,.97+Math.max(0,-sn)*(.08+.22*sp7)*run],'armL'), AR=limb([-.27,st*.9,.97+Math.max(0,sn)*(.08+.22*sp7)*run],'armR');
-  const J={hip:at(hipH,0,lean*.12),hL:at(hipH,.12,lean*.12),hR:at(hipH,-.12,lean*.12),sL:at(hipH+.5,.22,lean*.92),sR:at(hipH+.5,-.22,lean*.92),nk:at(hipH+.57,0,lean*.98),hd:at(hipH+.75,0,lean*1.12+headF),
+  const LL=limb([.12,st,liftL],'legL'), LR=limb([-.12,-st,liftR],'legR');
+  // arms: relaxed hang beside the hip at rest; while running the elbow stays ~90° and the hand swings hip→chest, opposite to the leg
+  const swA=.11+.12*sp7, swH=.14+.08*sp7, armT=s0=>{ const fw=Math.max(0,s0), bk=Math.max(0,-s0); return [.2-fw*.06*run, .03+s0*swA*run+.04*run, .83+run*(.14+.06*sp7)+fw*swH*run-bk*.1*run]; };
+  const AL=limb((()=>{ const t=armT(-sn); return [t[0],t[1],t[2]]; })(),'armL'), AR=limb((()=>{ const t=armT(sn); return [-t[0],t[1],t[2]]; })(),'armR');
+  const J={hip:at(hipH,0,lean*.12),hL:at(hipH,.12,lean*.12),hR:at(hipH,-.12,lean*.12),sL:at(hipH+.465,.175,lean*.9-st*.12),sR:at(hipH+.465,-.175,lean*.9+st*.12),nk:at(hipH+.57,0,lean*.98),hd:at(hipH+.75,0,lean*1.12+headF),
     fL:at(LL[2],LL[0],LL[1]),fR:at(LR[2],LR[0],LR[1]),wL:at(AL[2],AL[0],AL[1]),wR:at(AR[2],AR[0],AR[1]),oL:at(hipH-.24,.15,lean*.05),oR:at(hipH-.24,-.15,lean*.05),ch:at(hipH+.3,0,lean*.55)};
-  const kb=[fx,fy,.15], eb=[-fx*.7,-fy*.7,-.5];
-  J.kL=ik(J.hL,J.fL,.45*sz,.45*sz,kb); J.kR=ik(J.hR,J.fR,.45*sz,.45*sz,kb); J.eL=ik(J.sL,J.wL,.29*sz,.29*sz,eb); J.eR=ik(J.sR,J.wR,.29*sz,.29*sz,eb);
+  const kb=[fx,fy,.15], ebL=[-fx*.8+px*.12,-fy*.8+py*.12,-.45], ebR=[-fx*.8-px*.12,-fy*.8-py*.12,-.45];
+  J.kL=ik(J.hL,J.fL,.45*sz,.45*sz,kb); J.kR=ik(J.hR,J.fR,.45*sz,.45*sz,kb); J.eL=ik(J.sL,J.wL,.3*sz,.27*sz,ebL); J.eR=ik(J.sR,J.wR,.3*sz,.27*sz,ebR);
+  // hands continue the forearm line
+  ['L','R'].forEach(k=>{ const e=J['e'+k], w=J['w'+k]; const d=V3.norm(V3.sub(w,e)); J['n'+k]=[w[0]+d[0]*.085*sz,w[1]+d[1]*.085*sz,w[2]+d[2]*.085*sz]; });
   const S2={}; for(const k in J){ const p=P(c,J[k]); if(!p) return; S2[k]=p; }
   const sc=c.F/S2.hip[2]; if(sc<1) return;
   // ---- volumetric render: lit capsules, elliptic-section torso, sphere head ----
@@ -3460,31 +3469,42 @@ function drawFig(ctx,c,a){
     const gr=ctx.createLinearGradient(mx+LS[0]*R,my+LS[1]*R,mx-LS[0]*R,my-LS[1]*R); gr.addColorStop(0,shadeHex(col,1.14)); gr.addColorStop(.5,col); gr.addColorStop(1,shadeHex(col,.6));
     ctx.fillStyle=gr; ctx.beginPath(); H.forEach((q,i)=>i?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1])); ctx.closePath(); ctx.fill(); };
   const lw=lean*.12, lc=lean*.55, ls=lean*.92;
+  const delt=k=>{ const o=J['s'+k], out=[]; for(let i=0;i<8;i++){ const t=i/8*Math.PI*2; for(const z of [-.03,.03]){ const q=P(c,[o[0]+Math.cos(t)*.064,o[1]+Math.sin(t)*.064,o[2]+z+.01]); if(q) out.push(q); } } return out; };
   const leg=(s,dim)=>{ cap(S2['h'+s],S2['k'+s],.085,.06,skin,dim); cap(S2['k'+s],S2['f'+s],.062,.045,kit.socks,dim);
     const f=S2['f'+s], k=S2['k'+s]; const toe=[f[0]+(f[0]-k[0])*.16+fx*.0,f[1]+(f[1]-k[1])*.1]; const fw=P(c,[J['f'+s][0]+fx*.14,J['f'+s][1]+fy*.14,J['f'+s][2]]);
     cap(f,fw||toe,.045,.04,'#15171b',dim); };
-  const arm=(s,dim)=>{ cap(S2['s'+s],S2['e'+s],.07,.058,kit.shirt,dim); cap(S2['e'+s],S2['w'+s],.05,.04,skin,dim); };
+  const mixP=(a,b,t)=>[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t,a[2]+(b[2]-a[2])*t];
+  const arm=(s,dim)=>{ const sh=S2['s'+s], el=S2['e'+s], wr=S2['w'+s], hn=S2['n'+s];
+    cap(mixP(sh,el,.4),el,.058,.049,skin,dim);             // bicep below the sleeve
+    cap(el,wr,.049,.036,skin,dim);                           // forearm
+    cap(wr,hn,.042,.039,shadeHex(skin,.95),dim);            // hand
+    cap(sh,mixP(sh,el,.48),.066,.062,kit.shirt,dim); };      // deltoid + short sleeve, drawn last so it overlaps the arm
+  const cf=V3.norm([c.f[0],c.f[1],0]); const back=fx*cf[0]+fy*cf[1];
   const farL=S2.sL[2]>S2.sR[2], F=farL?'L':'R', N=farL?'R':'L';
   leg(F,true); leg(N,false); arm(F,true);
-  solid([...ring(hipH-.24,.16,.1,lw,10),...ring(hipH+.04,.175,.11,lw,10)],kit.shorts);
-  solid([...ring(hipH+.02,.165,.105,lw,12),...ring(hipH+.3,.19,.12,lc,12),...ring(hipH+.5,.215,.11,ls,12)],kit.shirt);
+  solid([...ring(hipH-.22,.178,.11,lw,10),...ring(hipH+.04,.168,.108,lw,10)],kit.shorts);
+  solid([...ring(hipH+.02,.155,.1,lw,12),...ring(hipH+.3,.182,.118,lc,12),...ring(hipH+.43,.19,.108,ls,12),...ring(hipH+.53,.14,.08,ls,10),...ring(hipH+.575,.075,.06,lean*.97,10),...delt('L'),...delt('R')],kit.shirt);
+  { const nk=P(c,at(hipH+.555,0,lean*.97+.05)); if(nk&&back<.2){ ctx.fillStyle=shadeHex(kit.shirt,.7); ctx.beginPath(); ctx.ellipse(nk[0],nk[1],.06*sc,.03*sc,0,0,Math.PI*2); ctx.fill(); } } // collar
   // shirt number: printed on the fabric, perspective-correct, big on the back / small on the chest
-  const cf=V3.norm([c.f[0],c.f[1],0]); const back=fx*cf[0]+fy*cf[1]; const vis=clamp((Math.abs(back)-.18)/.4,0,1);
+  const vis=clamp((Math.abs(back)-.18)/.4,0,1);
   if(a.num!=null && sc>9 && fall<.45 && vis>0){ const isBack=back>0, hN=isBack?.25:.1, yN=isBack?hipH+.29:hipH+.36;
     const O=P(c,at(yN,0,lean*.6+(isBack?-.115:.12))), Ex=P(c,at(yN,isBack?-.1:.1,lean*.6+(isBack?-.112:.117))), Ey=P(c,at(yN-.1,0,lean*.55+(isBack?-.115:.12)));
     if(O&&Ex&&Ey){ const k=hN/100/.1; ctx.save(); ctx.globalAlpha=vis; ctx.setTransform((Ex[0]-O[0])*k,(Ex[1]-O[1])*k,(Ey[0]-O[0])*k,(Ey[1]-O[1])*k,O[0],O[1]);
       const nc=numInk(kit); ctx.font='800 100px "Saira Condensed","Arial Narrow",sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.lineJoin='round';
       ctx.lineWidth=10; ctx.strokeStyle=nc.edge; ctx.strokeText(a.num,0,4); ctx.fillStyle=nc.fill; ctx.fillText(a.num,0,4); ctx.restore(); } }
   arm(N,false);
-  cap(S2.nk,S2.hd,.055,.05,skin,true);
+  cap(S2.nk,S2.hd,.06,.056,skin,true);
   // head: shaded sphere, hair cap that wraps to the back
   { const hr=Math.max(1.2*c.dpr,.118*sc), h0=S2.hd; const gr=ctx.createRadialGradient(h0[0]+LS[0]*hr*.45,h0[1]+LS[1]*hr*.45,hr*.1,h0[0],h0[1],hr*1.05);
     gr.addColorStop(0,shadeHex(skin,1.12)); gr.addColorStop(.7,skin); gr.addColorStop(1,shadeHex(skin,.68)); ctx.fillStyle=gr; ctx.beginPath(); ctx.arc(h0[0],h0[1],hr,0,Math.PI*2); ctx.fill();
     const hc=a.hair||'#1d1611'; ctx.fillStyle=hc;
     // hair line drops from the forehead (front) to the nape (back): chord height follows the view angle
-    const dropY=clamp(-.12+back*.7,-.2,.5), half=Math.acos(clamp(dropY/1.04,-.99,.99)); ctx.beginPath(); ctx.arc(h0[0],h0[1]-hr*.05,hr*1.04,Math.PI/2+half,Math.PI/2-half+Math.PI*2*0,false); ctx.closePath(); ctx.fill();
+    const side=Math.abs(back); if(side>.35){ ctx.fillStyle=shadeHex(skin,.88); [-1,1].forEach(sg=>{ ctx.beginPath(); ctx.ellipse(h0[0]+sg*hr*.97,h0[1]+hr*.1,hr*.16,hr*.24,0,0,Math.PI*2); ctx.fill(); }); }
+    ctx.fillStyle=hc; ctx.save(); ctx.beginPath(); ctx.arc(h0[0],h0[1]-hr*.02,hr*1.05,0,Math.PI*2); ctx.clip();
+    const tb=(back+1)/2, fs=P(c,at(hipH+.75,0,lean*1.12+headF+.2)); let shx=0; if(fs){ const dx=fs[0]-h0[0]; shx=-clamp(dx/hr,-1,1)*hr*.32*(1-Math.abs(back)); }
+    const cy=h0[1]-hr*(1.0-.6*tb); ctx.beginPath(); ctx.ellipse(h0[0]+shx,cy,hr*1.1,hr*(.72+.3*tb),0,0,Math.PI*2); ctx.fill(); ctx.restore();
     if(back<-.2 && sc>34){ // simple face: eyes and brow shade toward the facing direction
-      const e1=P(c,at(hipH+.77,.036,lean*1.12+headF+.105)), e2=P(c,at(hipH+.77,-.036,lean*1.12+headF+.105)), ns=P(c,at(hipH+.73,0,lean*1.12+headF+.12));
+      const e1=P(c,at(hipH+.745,.036,lean*1.12+headF+.105)), e2=P(c,at(hipH+.745,-.036,lean*1.12+headF+.105)), ns=P(c,at(hipH+.715,0,lean*1.12+headF+.12));
       ctx.fillStyle='rgba(20,14,10,.85)'; [e1,e2].forEach(e=>{ if(e){ ctx.beginPath(); ctx.arc(e[0],e[1],Math.max(.8*c.dpr,.011*sc),0,Math.PI*2); ctx.fill(); } });
       if(ns){ ctx.fillStyle=shadeHex(skin,.8); ctx.beginPath(); ctx.arc(ns[0],ns[1]+.008*sc,Math.max(.6*c.dpr,.012*sc),0,Math.PI*2); ctx.fill(); } } }
   if(a.card){ const hw=S2.wR; const w=Math.max(6*c.dpr,.11*sc), h=Math.max(8*c.dpr,.15*sc); ctx.save(); ctx.translate(hw[0],hw[1]-h*.55); ctx.rotate(-.15); ctx.shadowColor=a.card==='r'?'rgba(255,80,90,.9)':'rgba(255,215,80,.9)'; ctx.shadowBlur=10*c.dpr; ctx.fillStyle=a.card==='r'?'#e3434b':'#f6c62b'; ctx.fillRect(-w/2,-h/2,w,h); ctx.restore(); }
