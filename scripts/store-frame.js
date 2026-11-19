@@ -32,7 +32,7 @@ const fonts = 'file://' + path.join(ROOT, 'www', 'fonts', 'fonts.css');
         p{font-size:${D.sub}px;color:#b9c5d4;line-height:1.3;max-width:${D.w * .82}px}
         .ph{position:absolute;left:50%;top:${D.top + 20}px;width:${iw}px;transform:translateX(-50%);border-radius:${dev === 'iphone' ? 64 : 40}px;overflow:hidden;box-shadow:0 0 0 ${dev === 'iphone' ? 14 : 12}px #141b27,0 0 0 ${dev === 'iphone' ? 16 : 14}px rgba(255,255,255,.12),0 60px 120px rgba(0,0,0,.7)}
         .ph img{display:block;width:100%}
-      </style></head><body><div class="cap"><span class="k">Son Düdük</span><h1>${title}</h1><p>${sub}</p></div><div class="ph"><img src="file://${img}"></div></body></html>`); await p.goto('file://' + html, { waitUntil: 'load' });
+      </style></head><body><div class="cap"><span class="k">Refmania</span><h1>${title}</h1><p>${sub}</p></div><div class="ph"><img src="file://${img}"></div></body></html>`); await p.goto('file://' + html, { waitUntil: 'load' });
       await p.evaluate(() => document.fonts.ready); await p.waitForTimeout(150);
       const out = path.join(OUT, `${dev}_${i + 1}.png`); await p.screenshot({ path: out }); console.log(out);
     }

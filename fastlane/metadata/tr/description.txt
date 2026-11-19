@@ -1,6 +1,6 @@
 Futbolu hiç bu açıdan oynamadın: düdük sende.
 
-Son Düdük, futbol hakemliğini tüm ayrıntısıyla yaşatan bir kariyer simülatörü. Bölgesel amatör ligde ilk maçına çıkarsın; doğru kararlarla klasman atlar, ülkenin en üst ligine yükselir, uluslararası kokartı alır ve dünyanın en büyük maçlarına atanırsın.
+Refmania, futbol hakemliğini tüm ayrıntısıyla yaşatan bir kariyer simülatörü. Bölgesel amatör ligde ilk maçına çıkarsın; doğru kararlarla klasman atlar, ülkenin en üst ligine yükselir, uluslararası kokartı alır ve dünyanın en büyük maçlarına atanırsın.
 
 SAHADAN YÖNET
 • Canlı 3D maç: oyuncular koşar, pas verir, şut çeker; sen pozisyon alırsın.

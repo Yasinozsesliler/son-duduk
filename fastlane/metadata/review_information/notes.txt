@@ -1,1 +1,1 @@
-Son Düdük is an offline single-player football referee career simulator. No account or login is required. Tap "Yeni kariyer", finish the 3-step setup, then "Maça çık" to referee a live match. All teams, players and referees are fictional. The app collects no data.
+Refmania is an offline single-player football referee career simulator. No account or login is required. Tap "Yeni kariyer", finish the 3-step setup, then "Maça çık" to referee a live match. All teams, players and referees are fictional. The app collects no data.

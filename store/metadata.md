@@ -1,4 +1,4 @@
-# App Store Connect metinleri — Son Düdük
+# App Store Connect metinleri — Refmania
 
 App Store Connect → Uygulamam → **App Store** sekmesindeki alanlara aşağıdakileri kopyala.
 Parantez içindeki sayılar Apple'ın karakter sınırıdır.
@@ -7,7 +7,7 @@ Parantez içindeki sayılar Apple'ın karakter sınırıdır.
 
 | Alan | Değer |
 |---|---|
-| Ad (30) | `Son Düdük: Hakem Kariyeri` |
+| Ad (30) | `Refmania: Hakem Simülatörü` |
 | Alt başlık (30) | `Futbol hakemi simülatörü` |
 | Paket kimliği (Bundle ID) | `com.sonduduk.hakem` |
 | SKU | `sonduduk-ios-1` |
@@ -16,7 +16,7 @@ Parantez içindeki sayılar Apple'ın karakter sınırıdır.
 | İkincil kategori | Oyunlar → Simülasyon |
 | Telif hakkı | `2026 [Adın Soyadın]` |
 
-> "Son Düdük" adı başka bir uygulamada kullanılıyorsa App Store Connect izin vermez; o durumda ör. `Son Düdük – Hakem Simülatörü` dene.
+> "Refmania" adı başka bir uygulamada kullanılıyorsa App Store Connect izin vermez; o durumda ör. `Refmania – Hakem Oyunu` dene.
 
 ## Tanıtım metni (170)
 
@@ -35,7 +35,7 @@ hakem,futbol,simülasyon,kariyer,VAR,ofsayt,penaltı,kırmızı kart,lig,maç,ka
 ```
 Futbolu hiç bu açıdan oynamadın: düdük sende.
 
-Son Düdük, futbol hakemliğini tüm ayrıntısıyla yaşatan bir kariyer simülatörü. Bölgesel amatör ligde ilk maçına çıkarsın; doğru kararlarla klasman atlar, ülkenin en üst ligine yükselir, uluslararası kokartı alır ve dünyanın en büyük maçlarına atanırsın.
+Refmania, futbol hakemliğini tüm ayrıntısıyla yaşatan bir kariyer simülatörü. Bölgesel amatör ligde ilk maçına çıkarsın; doğru kararlarla klasman atlar, ülkenin en üst ligine yükselir, uluslararası kokartı alır ve dünyanın en büyük maçlarına atanırsın.
 
 SAHADAN YÖNET
 • Canlı 3D maç: oyuncular koşar, pas verir, şut çeker; sen pozisyon alırsın.
@@ -85,7 +85,7 @@ Anketteki tüm sorulara **Yok / Hayır** (şiddet, kumar, kullanıcı içeriği,
 ## İnceleme notu (App Review Information → Notes)
 
 ```
-Son Düdük is an offline single-player football referee career simulator. No account or login is required. Tap "Yeni kariyer", finish the 3-step setup, then "Maça çık" to referee a live match. All teams, players and referees are fictional. The app collects no data.
+Refmania is an offline single-player football referee career simulator. No account or login is required. Tap "Yeni kariyer", finish the 3-step setup, then "Maça çık" to referee a live match. All teams, players and referees are fictional. The app collects no data.
 ```
 
 ## Ekran görüntüleri

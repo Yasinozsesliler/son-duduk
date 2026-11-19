@@ -1,4 +1,4 @@
-# Son Düdük'ü App Store'a çıkarma rehberi
+# Refmania'yı App Store'a çıkarma rehberi
 
 Proje teknik olarak hazır: iOS ayarları, gizlilik bildirimi, ekran görüntüleri, mağaza metinleri ve
 uygulamayı **Mac'e ihtiyaç duymadan** imzalayıp App Store Connect'e yükleyen GitHub Actions iş akışı mevcut.
@@ -19,7 +19,7 @@ Toplam süre: hesap onayı hariç yaklaşık 1–2 saat.
 ## 2. App Store Connect'te uygulamayı oluştur
 
 1. https://appstoreconnect.apple.com → **Uygulamalar** → **+** → **Yeni Uygulama**.
-2. Platform: iOS · Ad: `Son Düdük: Hakem Kariyeri` · Birincil dil: Türkçe ·
+2. Platform: iOS · Ad: `Refmania: Hakem Simülatörü` · Birincil dil: Türkçe ·
    Paket kimliği: `com.sonduduk.hakem` (listede yoksa önce developer.apple.com → Identifiers → **+** → App IDs ile bu kimliği oluştur) ·
    SKU: `sonduduk-ios-1` · Kullanıcı erişimi: Tam erişim.
 3. **Anlaşmalar, Vergi ve Bankacılık**: ücretsiz uygulama için yalnızca ücretsiz anlaşmayı kabul etmen yeterli.

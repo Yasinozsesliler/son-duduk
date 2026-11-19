@@ -1,4 +1,4 @@
-<title>Son Düdük</title>
+<title>Refmania: Hakem Simülatörü</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1257,7 +1257,7 @@ nav.side button.on{background:var(--panel2);box-shadow:inset 3px 0 0 var(--gold1
 <script>
 'use strict';
 /* =========================================================
-   SON DÜDÜK — hakem kariyer simülatörü
+   REFMANIA — hakem simülatörü
    ========================================================= */
 
 // ---------- utilities ----------
@@ -1430,7 +1430,7 @@ function startHTML(){
   if(CR) return wizardHTML();
   const slots=[1,2,3].map(n=>({n,d:readSlot(n)}));
   return `<div class="start"><canvas id="startCv" class="start-bg" aria-hidden="true"></canvas><div class="start-in">
-    <div class="start-hero"><div class="eyebrow gold">Hakem kariyer simülatörü</div><div class="logo">Son<br><span>Düdük</span></div>
+    <div class="start-hero"><div class="eyebrow gold">Hakem simülatörü</div><div class="logo" lang="en">Ref<span>mania</span></div>
       <p class="lede">Amatör ligden Dünya Şampiyonası finaline. Her pozisyonu sahada sen okursun: temas, kol pozisyonu, ofsayt çizgisi, DOGSO ölçütleri. VAR monitöre çağırır, gözlemci not verir, kurul hesap sorar.</p>
       <div class="feat">${['Canlı 3D maç','13 pozisyon türü','VAR ve OFR','8 ülke · 5 klasman','Avrupa ve dünya sahnesi','Haberler · Sosyal · Kurul'].map(t=>`<span>${t}</span>`).join('')}</div></div>
     <div class="slots"><div class="row" style="justify-content:space-between"><span class="eyebrow gold">Kariyer slotları</span><span class="muted" style="font-size:12px">${slots.filter(s=>s.d).length}/3 dolu</span></div>
@@ -3420,6 +3420,9 @@ function ik(A,B,l1,l2,bend){ const d=V3.sub(B,A); const L=Math.hypot(d[0],d[1],d
   if(L>=l1+l2-1e-4) return V3.lerp(A,B,l1/(l1+l2));
   const a=(l1*l1-l2*l2+L*L)/(2*L), h=Math.sqrt(Math.max(0,l1*l1-a*a)); const bd=V3.dot(bend,dir); let p=[bend[0]-dir[0]*bd,bend[1]-dir[1]*bd,bend[2]-dir[2]*bd]; const pl=Math.hypot(p[0],p[1],p[2])||1;
   return [A[0]+dir[0]*a+p[0]/pl*h, A[1]+dir[1]*a+p[1]/pl*h, A[2]+dir[2]*a+p[2]/pl*h]; }
+function shadeHex(hex,k){ const n=parseInt(hex.slice(1),16); let r=n>>16&255,g=n>>8&255,b=n&255; if(k>1){ const t=k-1; r+= (255-r)*t*.6; g+=(255-g)*t*.6; b+=(255-b)*t*.6; } else { r*=k; g*=k; b*=k; } return '#'+[r,g,b].map(v=>Math.round(clamp(v,0,255)).toString(16).padStart(2,'0')).join(''); }
+// kit number colours with guaranteed contrast against the shirt
+function numInk(kit){ const sh=kit.shirt; let f=kit.numCol||'#fff'; if(!/^#[0-9a-f]{6}$/i.test(f)||Math.abs(lum(f)-lum(sh))<.35) f=lum(sh)>.55?'#111418':'#ffffff'; const e=lum(f)>.5?shadeHex(sh,.55):shadeHex(sh,1.25); return {fill:f,edge:e}; }
 function drawFig(ctx,c,a){
   const fall=a.fall||0, fd=a.fallDir||a.face||[1,0];
   const up=fall>0?V3.norm([fd[0]*fall*1.6,fd[1]*fall*1.6,Math.max(.06,1-fall)]):[0,0,1];
@@ -3438,27 +3441,54 @@ function drawFig(ctx,c,a){
   J.kL=ik(J.hL,J.fL,.45*sz,.45*sz,kb); J.kR=ik(J.hR,J.fR,.45*sz,.45*sz,kb); J.eL=ik(J.sL,J.wL,.29*sz,.29*sz,eb); J.eR=ik(J.sR,J.wR,.29*sz,.29*sz,eb);
   const S2={}; for(const k in J){ const p=P(c,J[k]); if(!p) return; S2[k]=p; }
   const sc=c.F/S2.hip[2]; if(sc<1) return;
-  const g=P(c,[a.x+up[0]*.5,a.y+up[1]*.5,0]); if(!g) return;
-  ctx.fillStyle='rgba(0,0,0,.34)'; ctx.beginPath(); ctx.ellipse(g[0],g[1],(.42+fall*.5)*sc,.16*sc,0,0,Math.PI*2); ctx.fill();
+  // ---- volumetric render: lit capsules, elliptic-section torso, sphere head ----
+  const LS=[-.48,-.88]; // screen-space key light (floodlights, upper left)
+  const skin=a.skin||'#e0b08a', kit=a.kit;
+  // contact shadow projected on the turf
+  { const r0=.38+fall*.55, cx=a.x+up[0]*.45, cy=a.y+up[1]*.45; ctx.fillStyle='rgba(0,0,0,.3)'; ctx.beginPath(); for(let i=0;i<=16;i++){ const t=i/16*Math.PI*2; const q=P(c,[cx+Math.cos(t)*r0+fx*Math.cos(t)*fall*.4,cy+Math.sin(t)*r0*.85+fy*Math.cos(t)*fall*.4,0]); if(!q) break; i?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1]); } ctx.fill(); }
   if(a.hl){ ctx.save(); ctx.globalAlpha=.75; groundRing(ctx,c,a.x,a.y,.62,'rgba(255,255,255,.8)',null,false); ctx.restore(); }
-  const L=(p,q,w,col)=>{ ctx.strokeStyle=col; ctx.lineWidth=Math.max(c.dpr,w*sc); ctx.beginPath(); ctx.moveTo(p[0],p[1]); ctx.lineTo(q[0],q[1]); ctx.stroke(); };
-  const dot=(p,r,col)=>{ ctx.fillStyle=col; ctx.beginPath(); ctx.arc(p[0],p[1],Math.max(c.dpr*.8,r*sc),0,Math.PI*2); ctx.fill(); };
-  const poly=(pts,fill)=>{ ctx.fillStyle=fill; ctx.strokeStyle=fill; ctx.lineWidth=Math.max(c.dpr,.05*sc); ctx.beginPath(); pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1])); ctx.closePath(); ctx.fill(); ctx.stroke(); };
-  const skin=a.skin||'#e0b08a';
-  ctx.lineCap='round'; ctx.lineJoin='round';
-  const leg=s=>{ L(S2['h'+s],S2['k'+s],.16,skin); L(S2['k'+s],S2['f'+s],.13,a.kit.socks); const f=S2['f'+s], k=S2['k'+s]; dot(f,.075,'#121417'); ctx.strokeStyle='#121417'; ctx.lineWidth=Math.max(c.dpr,.07*sc); ctx.beginPath(); ctx.moveTo(f[0],f[1]); ctx.lineTo(f[0]+(f[0]-k[0])*.12,f[1]+(f[1]-k[1])*.12); ctx.stroke(); };
-  const arm=s=>{ L(S2['s'+s],S2['e'+s],.13,a.kit.shirt); L(S2['e'+s],S2['w'+s],.085,skin); dot(S2['w'+s],.05,skin); };
+  const cap=(p,q,r1,r2,col,dim)=>{ const dx=q[0]-p[0], dy=q[1]-p[1], l=Math.hypot(dx,dy)||1e-3; let nx=-dy/l, ny=dx/l; if(nx*LS[0]+ny*LS[1]<0){ nx=-nx; ny=-ny; }
+    const R1=Math.max(c.dpr*.7,r1*sc), R2=Math.max(c.dpr*.6,r2*sc); const base=dim?shadeHex(col,.78):col;
+    const gr=ctx.createLinearGradient((p[0]+q[0])/2+nx*R1,(p[1]+q[1])/2+ny*R1,(p[0]+q[0])/2-nx*R1,(p[1]+q[1])/2-ny*R1);
+    gr.addColorStop(0,shadeHex(base,1.16)); gr.addColorStop(.45,base); gr.addColorStop(1,shadeHex(base,.62)); ctx.fillStyle=gr;
+    const a1=Math.atan2(ny,nx); ctx.beginPath(); ctx.arc(p[0],p[1],R1,a1,a1+Math.PI,dy*nx-dx*ny>0); ctx.arc(q[0],q[1],R2,a1+Math.PI,a1,dy*nx-dx*ny>0); ctx.closePath(); ctx.fill(); };
+  // body-frame ellipse ring -> screen points
+  const ring=(h,rw,rd,fwd,n)=>{ const out=[]; for(let i=0;i<n;i++){ const t=i/n*Math.PI*2; const q=P(c,at(h,Math.cos(t)*rw,fwd+Math.sin(t)*rd)); if(q) out.push(q); } return out; };
+  const hull=pts=>{ pts=pts.slice().sort((u,v)=>u[0]-v[0]||u[1]-v[1]); const cr=(o,u,v)=>(u[0]-o[0])*(v[1]-o[1])-(u[1]-o[1])*(v[0]-o[0]); const lo=[],hi=[];
+    for(const q of pts){ while(lo.length>1&&cr(lo[lo.length-2],lo[lo.length-1],q)<=0) lo.pop(); lo.push(q); } for(let i=pts.length-1;i>=0;i--){ const q=pts[i]; while(hi.length>1&&cr(hi[hi.length-2],hi[hi.length-1],q)<=0) hi.pop(); hi.push(q); } return lo.slice(0,-1).concat(hi.slice(0,-1)); };
+  const solid=(pts,col)=>{ const H=hull(pts); if(H.length<3) return; let mx=0,my=0,R=0; H.forEach(q=>{mx+=q[0];my+=q[1];}); mx/=H.length; my/=H.length; H.forEach(q=>{ R=Math.max(R,Math.hypot(q[0]-mx,q[1]-my)); });
+    const gr=ctx.createLinearGradient(mx+LS[0]*R,my+LS[1]*R,mx-LS[0]*R,my-LS[1]*R); gr.addColorStop(0,shadeHex(col,1.14)); gr.addColorStop(.5,col); gr.addColorStop(1,shadeHex(col,.6));
+    ctx.fillStyle=gr; ctx.beginPath(); H.forEach((q,i)=>i?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1])); ctx.closePath(); ctx.fill(); };
+  const lw=lean*.12, lc=lean*.55, ls=lean*.92;
+  const leg=(s,dim)=>{ cap(S2['h'+s],S2['k'+s],.085,.06,skin,dim); cap(S2['k'+s],S2['f'+s],.062,.045,kit.socks,dim);
+    const f=S2['f'+s], k=S2['k'+s]; const toe=[f[0]+(f[0]-k[0])*.16+fx*.0,f[1]+(f[1]-k[1])*.1]; const fw=P(c,[J['f'+s][0]+fx*.14,J['f'+s][1]+fy*.14,J['f'+s][2]]);
+    cap(f,fw||toe,.045,.04,'#15171b',dim); };
+  const arm=(s,dim)=>{ cap(S2['s'+s],S2['e'+s],.07,.058,kit.shirt,dim); cap(S2['e'+s],S2['w'+s],.05,.04,skin,dim); };
   const farL=S2.sL[2]>S2.sR[2], F=farL?'L':'R', N=farL?'R':'L';
-  leg(F); leg(N); arm(F);
-  poly([S2.hL,S2.hR,S2.oR,S2.oL],a.kit.shorts);
-  poly([S2.sL,S2.sR,S2.hR,S2.hL],a.kit.shirt);
-  arm(N);
-  L(S2.nk,S2.hd,.11,skin);
-  const hr=Math.max(1.2*c.dpr,.125*sc); dot(S2.hd,.125,skin);
-  ctx.fillStyle=a.hair||'#1d1611'; ctx.beginPath(); ctx.arc(S2.hd[0],S2.hd[1]-hr*.08,hr*1.02,Math.PI*1.05,Math.PI*1.95); ctx.closePath(); ctx.fill();
+  leg(F,true); leg(N,false); arm(F,true);
+  solid([...ring(hipH-.24,.16,.1,lw,10),...ring(hipH+.04,.175,.11,lw,10)],kit.shorts);
+  solid([...ring(hipH+.02,.165,.105,lw,12),...ring(hipH+.3,.19,.12,lc,12),...ring(hipH+.5,.215,.11,ls,12)],kit.shirt);
+  // shirt number: printed on the fabric, perspective-correct, big on the back / small on the chest
+  const cf=V3.norm([c.f[0],c.f[1],0]); const back=fx*cf[0]+fy*cf[1]; const vis=clamp((Math.abs(back)-.18)/.4,0,1);
+  if(a.num!=null && sc>9 && fall<.45 && vis>0){ const isBack=back>0, hN=isBack?.25:.1, yN=isBack?hipH+.29:hipH+.36;
+    const O=P(c,at(yN,0,lean*.6+(isBack?-.115:.12))), Ex=P(c,at(yN,isBack?-.1:.1,lean*.6+(isBack?-.112:.117))), Ey=P(c,at(yN-.1,0,lean*.55+(isBack?-.115:.12)));
+    if(O&&Ex&&Ey){ const k=hN/100/.1; ctx.save(); ctx.globalAlpha=vis; ctx.setTransform((Ex[0]-O[0])*k,(Ex[1]-O[1])*k,(Ey[0]-O[0])*k,(Ey[1]-O[1])*k,O[0],O[1]);
+      const nc=numInk(kit); ctx.font='800 100px "Saira Condensed","Arial Narrow",sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.lineJoin='round';
+      ctx.lineWidth=10; ctx.strokeStyle=nc.edge; ctx.strokeText(a.num,0,4); ctx.fillStyle=nc.fill; ctx.fillText(a.num,0,4); ctx.restore(); } }
+  arm(N,false);
+  cap(S2.nk,S2.hd,.055,.05,skin,true);
+  // head: shaded sphere, hair cap that wraps to the back
+  { const hr=Math.max(1.2*c.dpr,.118*sc), h0=S2.hd; const gr=ctx.createRadialGradient(h0[0]+LS[0]*hr*.45,h0[1]+LS[1]*hr*.45,hr*.1,h0[0],h0[1],hr*1.05);
+    gr.addColorStop(0,shadeHex(skin,1.12)); gr.addColorStop(.7,skin); gr.addColorStop(1,shadeHex(skin,.68)); ctx.fillStyle=gr; ctx.beginPath(); ctx.arc(h0[0],h0[1],hr,0,Math.PI*2); ctx.fill();
+    const hc=a.hair||'#1d1611'; ctx.fillStyle=hc;
+    // hair line drops from the forehead (front) to the nape (back): chord height follows the view angle
+    const dropY=clamp(-.12+back*.7,-.2,.5), half=Math.acos(clamp(dropY/1.04,-.99,.99)); ctx.beginPath(); ctx.arc(h0[0],h0[1]-hr*.05,hr*1.04,Math.PI/2+half,Math.PI/2-half+Math.PI*2*0,false); ctx.closePath(); ctx.fill();
+    if(back<-.2 && sc>34){ // simple face: eyes and brow shade toward the facing direction
+      const e1=P(c,at(hipH+.77,.036,lean*1.12+headF+.105)), e2=P(c,at(hipH+.77,-.036,lean*1.12+headF+.105)), ns=P(c,at(hipH+.73,0,lean*1.12+headF+.12));
+      ctx.fillStyle='rgba(20,14,10,.85)'; [e1,e2].forEach(e=>{ if(e){ ctx.beginPath(); ctx.arc(e[0],e[1],Math.max(.8*c.dpr,.011*sc),0,Math.PI*2); ctx.fill(); } });
+      if(ns){ ctx.fillStyle=shadeHex(skin,.8); ctx.beginPath(); ctx.arc(ns[0],ns[1]+.008*sc,Math.max(.6*c.dpr,.012*sc),0,Math.PI*2); ctx.fill(); } } }
   if(a.card){ const hw=S2.wR; const w=Math.max(6*c.dpr,.11*sc), h=Math.max(8*c.dpr,.15*sc); ctx.save(); ctx.translate(hw[0],hw[1]-h*.55); ctx.rotate(-.15); ctx.shadowColor=a.card==='r'?'rgba(255,80,90,.9)':'rgba(255,215,80,.9)'; ctx.shadowBlur=10*c.dpr; ctx.fillStyle=a.card==='r'?'#e3434b':'#f6c62b'; ctx.fillRect(-w/2,-h/2,w,h); ctx.restore(); }
   if(a.flag){ const f0=P(c,at(1.95,.34,0)); if(f0){ ctx.fillStyle=a.flagUp?'#ffd84a':'#f2b81f'; ctx.fillRect(f0[0],f0[1]-(a.flagUp?.25*sc:0),.32*sc,.24*sc); } }
-  if(a.num!=null && sc>15 && fall<.5){ ctx.fillStyle=a.kit.numCol; ctx.font=`700 ${Math.round(.19*sc)}px "IBM Plex Mono",monospace`; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(a.num,S2.ch[0],S2.ch[1]); }
   if(a.label && sc>3){ const fs=11*c.dpr; ctx.font=`600 ${fs}px Barlow,sans-serif`; const w=ctx.measureText(a.label).width+fs*.9; const x=S2.hd[0]-w/2, y=S2.hd[1]-.25*sc-fs*1.9; ctx.fillStyle='rgba(8,13,20,.86)'; rrect(ctx,x,y,w,fs*1.55,fs*.4); ctx.fill(); ctx.fillStyle='#fff'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(a.label,S2.hd[0],y+fs*.8); }
 }
 function drawGoal(ctx,c,end,bulge){
@@ -4037,7 +4067,7 @@ function render(){
   const stateLine = S.phase==='tournament'?'Turnuva':S.phase==='seasonEnd'?'Sezon sonu':S.week+'. hafta';
   const moreBadge=TABS.filter(([k])=>!MOBILE_TABS.includes(k)).some(([k])=>badgeFor(k));
   app.innerHTML=`<header class="top"><div class="top-in">
-      <button class="brand" data-tab="merkez" aria-label="Son Düdük, ana sayfa">${WHISTLE_SVG}<span>Son Düdük</span></button>
+      <button class="brand" data-tab="merkez" aria-label="Refmania, ana sayfa">${WHISTLE_SVG}<span lang="en">Refmania</span></button>
       <div class="hdr-season"><span class="eyebrow">${seasonLabel(S.season)}</span><b>${stateLine}</b></div>
       <div class="hdr-right">
         <div class="hstat" title="İtibar"><svg class="ring" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15" class="ring-bg"/><circle cx="18" cy="18" r="15" class="ring-fg" stroke-dasharray="${(repPct/100*C).toFixed(1)} ${C.toFixed(1)}"/></svg><span><b class="num">${Math.round(S.rep)}</b><small>İtibar</small></span></div>

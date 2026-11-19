@@ -2,7 +2,7 @@
   "name": "son-duduk",
   "version": "1.0.0",
   "private": true,
-  "description": "Son Düdük — hakem kariyer simülatörü (iOS & Android)",
+  "description": "Refmania — hakem simülatörü (iOS & Android)",
   "scripts": {
     "build": "node scripts/build-web.mjs",
     "sync": "npm run build && npx cap sync",

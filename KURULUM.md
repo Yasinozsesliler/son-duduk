@@ -1,10 +1,10 @@
-# Son Düdük — iOS ve Android kurulumu
+# Refmania — iOS ve Android kurulumu
 
 Oyun, [Capacitor](https://capacitorjs.com) ile paketlenmiş yerel (native) bir mobil uygulamadır. Tek bir oyun kodu (`index.html`) hem Android hem iOS uygulamasını besler.
 
 | Bilgi | Değer |
 |---|---|
-| Uygulama adı | Son Düdük |
+| Uygulama adı | Refmania |
 | Paket kimliği (bundle ID) | `com.sonduduk.hakem` |
 | Yönlendirme | Telefonda dikey (portrait) |
 | İnternet | Gerekmez, tamamen çevrimdışı çalışır |
