@@ -3470,10 +3470,28 @@ function drawFig(ctx,c,a){
     ctx.fillStyle=gr; ctx.beginPath(); H.forEach((q,i)=>i?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1])); ctx.closePath(); ctx.fill(); };
   const lw=lean*.12, lc=lean*.55, ls=lean*.92;
   const delt=k=>{ const o=J['s'+k], out=[]; for(let i=0;i<8;i++){ const t=i/8*Math.PI*2; for(const z of [-.03,.03]){ const q=P(c,[o[0]+Math.cos(t)*.064,o[1]+Math.sin(t)*.064,o[2]+z+.01]); if(q) out.push(q); } } return out; };
-  const leg=(s,dim)=>{ cap(S2['h'+s],S2['k'+s],.085,.06,skin,dim); cap(S2['k'+s],S2['f'+s],.062,.045,kit.socks,dim);
-    const f=S2['f'+s], k=S2['k'+s]; const toe=[f[0]+(f[0]-k[0])*.16+fx*.0,f[1]+(f[1]-k[1])*.1]; const fw=P(c,[J['f'+s][0]+fx*.14,J['f'+s][1]+fy*.14,J['f'+s][2]]);
-    cap(f,fw||toe,.045,.04,'#15171b',dim); };
   const mixP=(a,b,t)=>[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t,a[2]+(b[2]-a[2])*t];
+  const BOOTS=['#16181c','#f4f5f7','#ff6a2b','#22d1e6','#ff3d8b','#e8f53a','#3a6bff'];
+  const bootCol=a.bootCol||(a.num==null?'#16181c':BOOTS[((a.num||0)*7+Math.round((a.sz||1)*100))%BOOTS.length]); // officials wear black
+  const boot=(s,dim)=>{ const A=J['f'+s], K=J['k'+s]; const sd=V3.norm(V3.sub(A,K)); // shin direction (knee -> ankle)
+    const flat=clamp(1-Math.abs(sd[2])*1.15,0,1); // 0 when the shin is vertical, 1 when the leg is stretched out
+    let fd=V3.norm([fx*(1-flat)+sd[0]*flat, fy*(1-flat)+sd[1]*flat, sd[2]*flat*.6+flat*.25]);
+    let sv=V3.norm(V3.cross(fd,[0,0,1])); if(!isFinite(sv[0])||Math.hypot(sv[0],sv[1])<1e-3) sv=[px,py,0]; const uv=V3.cross(sv,fd);
+    const pt=(u,v,w)=>[A[0]+fd[0]*u+uv[0]*v+sv[0]*w, A[1]+fd[1]*u+uv[1]*v+sv[1]*w, Math.max(.005,A[2]+fd[2]*u+uv[2]*v+sv[2]*w)];
+    const shape=[[-.075,-.07,.038],[-.08,-.02,.036],[-.035,.03,.038],[.06,-.005,.041],[.17,-.04,.035],[.2,-.065,.028],[.16,-.078,.033],[.02,-.08,.041]];
+    const up3=[], sole=[]; shape.forEach(([u,v,w])=>{ for(const sg of [1,-1]){ const q=P(c,pt(u,v,w*sg)); if(q) up3.push(q); if(v<=-.06){ const q2=P(c,pt(u,v-.014,w*sg*.95)); if(q2) sole.push(q2); } } });
+    const sc0=dim?shadeHex(bootCol,.8):bootCol; const soleCol=lum(bootCol)>.55?'#2a2d33':'#e9ecef';
+    solid(sole,soleCol); solid(up3,sc0);
+    // brand-free accent stripe along the side facing the camera
+    const toCam=V3.sub(c.pos,A); const sideSg=V3.dot(sv,toCam)>0?1:-1; const s1=P(c,pt(-.04,-.035,.043*sideSg)), s2=P(c,pt(.11,-.045,.04*sideSg));
+    if(s1&&s2&&sc>18){ ctx.strokeStyle=lum(bootCol)>.55?shadeHex(kit.shirt,.9):'rgba(255,255,255,.85)'; ctx.lineWidth=Math.max(c.dpr,.012*sc); ctx.beginPath(); ctx.moveTo(s1[0],s1[1]); ctx.lineTo(s2[0],s2[1]); ctx.stroke(); }
+    // studs: visible when the sole faces the camera (studs-up challenges read clearly)
+    if(V3.dot([-uv[0],-uv[1],-uv[2]],toCam)>0 && sc>14){ ctx.fillStyle=soleCol==='#e9ecef'?'#c8ccd2':'#55595f'; [[-.05,.02],[-.05,-.02],[.04,.025],[.04,-.025],[.12,.02],[.12,-.02]].forEach(([u,w])=>{ const q=P(c,pt(u,-.092,w)); if(q){ ctx.beginPath(); ctx.arc(q[0],q[1],Math.max(.8*c.dpr,.011*sc),0,Math.PI*2); ctx.fill(); } }); } };
+  const leg=(s,dim)=>{ const h=S2['h'+s], k=S2['k'+s], f=S2['f'+s];
+    cap(h,k,.088,.062,skin,dim);                                   // thigh
+    const ks=mixP(k,f,.1); cap(ks,f,.06,.042,kit.socks,dim);          // sock over shin guard, knee left bare
+    cap(ks,mixP(k,f,.17),.061,.058,shadeHex(kit.socks,.86),dim);     // thin sock band
+    boot(s,dim); };
   const arm=(s,dim)=>{ const sh=S2['s'+s], el=S2['e'+s], wr=S2['w'+s], hn=S2['n'+s];
     cap(mixP(sh,el,.4),el,.058,.049,skin,dim);             // bicep below the sleeve
     cap(el,wr,.049,.036,skin,dim);                           // forearm
