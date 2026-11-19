@@ -23,6 +23,15 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
     await shot('6_start');
     await p.click('[data-new="1"]'); for (let i = 0; i < 3; i++) await p.click('#wNext'); await wait(600);
     await shot('4_hub');
+    // Günün pozisyonu (#18, ceza sahasında temas): örnek bir seri, pozisyon ekranı ve doğru kararla sonuç ekranı
+    await p.evaluate(() => { const o = dayKey; window.dayKey = d => d ? o(d) : '2026-12-06'; const k = dayKey(); const y = dayShift(k, -1); dailySave({ last: y, streak: 6, best: 6, played: 8, won: 7, hist: { [y]: { v: 'dogru', t: 14 } }, bonus: {}, freezeUsed: null, doubled: {} }); render(); window.scrollTo(0, 0); });
+    await wait(300); await p.click('#tDaily'); await wait(2600);
+    await shot('8_daily');
+    await p.evaluate(() => { const c = curInc.correct; const q = s => document.querySelector('#modal ' + s);
+      const d = q(`[data-step="d"][data-id="${c.d}"]`); if (d) d.click(); if (c.c) { const cc = q(`[data-step="c"][data-id="${c.c}"]`); if (cc) cc.click(); } q('#bDy').click(); });
+    await wait(2600); await p.evaluate(() => { const m = document.querySelector('#modal'); if (m) m.scrollTop = 0; });
+    await shot('9_dailyres');
+    await p.evaluate(() => { const x = document.querySelector('#dyX'); if (x) x.click(); }); await wait(400);
     await p.click('[data-play]'); await p.click('#bKick'); await p.evaluate(() => setSpeed(2));
     let gotLive = false, gotInc = false;
     for (let i = 0; i < 3000 && !(gotLive && gotInc); i++) {
