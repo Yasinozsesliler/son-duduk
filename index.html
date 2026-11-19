@@ -1649,6 +1649,15 @@ th{text-transform:none;letter-spacing:0}
 .more-facts summary{cursor:pointer;color:var(--muted);font-size:13px;padding:4px 2px}
 .more-facts .fact{margin-top:6px;opacity:.85}
 .hint{font-size:13px;color:var(--muted);padding:8px 10px;border-radius:6px;background:var(--bg2);box-shadow:inset 3px 0 0 var(--blue)}
+/* Günün pozisyonu */
+.t-daily{grid-column:1/-1;flex-direction:row;align-items:center;gap:16px;min-height:0;padding:14px 16px;background:linear-gradient(90deg,rgba(242,194,48,.13),rgba(242,194,48,.02) 60%),var(--panel);border-color:rgba(242,194,48,.45)}
+.t-daily.done{background:var(--panel);border-color:var(--line)}
+.dy-no{font:850 40px/1 var(--f-display);font-stretch:66%;color:var(--yellow);min-width:64px}
+.dy-t{display:flex;flex-direction:column;gap:4px;flex:1;min-width:0}
+.dy-fire{font-weight:700;font-size:14px;white-space:nowrap}
+.dy-go{background:var(--yellow);color:var(--yellow-ink);font:800 17px/1 var(--f-display);font-stretch:72%;text-transform:uppercase;padding:10px 16px;border-radius:6px;white-space:nowrap}
+.t-daily.done .dy-go{background:transparent;color:var(--fg);border:1px solid var(--line2)}
+@media (max-width:560px){.t-daily{flex-wrap:wrap;gap:10px}.dy-no{font-size:32px;min-width:0}.dy-t{flex-basis:calc(100% - 70px)}.dy-go{flex:1;text-align:center}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
 /* ---------- v1.1: mağaza, tatil, rüşvet, premium ---------- */
@@ -1779,7 +1788,8 @@ main>*{animation:none}
    ========================================================= */
 
 // ---------- utilities ----------
-const rand = Math.random;
+let RNG_SRC = Math.random; // Günün pozisyonu bunu geçici olarak tohumlu üreteçle değiştirir
+const rand = () => RNG_SRC();
 const ri = (a,b)=> a+Math.floor(rand()*(b-a+1));
 const rf = (a,b)=> a+rand()*(b-a);
 const pick = a => a[Math.floor(rand()*a.length)];
@@ -4651,6 +4661,8 @@ function prematchUI(){
   ov.querySelectorAll('#prep .dopt').forEach(b=>b.onclick=()=>{ prep=b.dataset.id; ov.querySelectorAll('#prep .dopt').forEach(x=>x.classList.toggle('on',x===b)); });
   $('#bBack').onclick=()=>{ M=null; SC=null; ov.hidden=true; ov.innerHTML=''; document.body.style.overflow=''; };
   $('#bKick').onclick=()=>kickOff(prep);
+  // isteğe bağlı ödüllü reklam: bu maç için +1 kural kitabı hakkı
+  const lb=easy()?'':adBtn('bAdLaw','Kural kitabı +1 hakkı'); if(lb){ $('#bKick').insertAdjacentHTML('beforebegin',lb); $('#bAdLaw').onclick=()=>rewarded('lawbook',()=>{ if(!M) return; M.lawUses++; const x=$('#bAdLaw'); if(x) x.remove(); toast('Kural kitabı hakkı +1'); }); }
 }
 function matchUI(){
   const ov=$('#overlay'); const fx=M.fx; kickoffPositions(SC,0);
@@ -5204,7 +5216,7 @@ function hub2HTML(){
   return `<div class="hub2">${careerStrip()}
     ${ph&&S.fifa?`<span class="chip b" style="justify-self:start">Hafta içi: ${PHASE_NAMES[ph]}</span>`:''}
     ${v11HubLeft()}${storyHubHTML()}${S.kurul.hearing?`<button class="alert" data-tab="kurul">${ic('kurul')}<span><b>Kurul toplantısına çağrıldın</b><small>${esc(S.kurul.hearing.match)} · ${esc(S.kurul.hearing.min)} ${esc(S.kurul.hearing.title)}</small></span></button>`:''}
-    <div class="tiles">${playTile(next,T.matches)}${sim}${nx}${newsT}${tableT}${attrT}${refsT}${stepT}${trainT}${shopT}${acadT}${socT}${kurT}</div>
+    <div class="tiles">${playTile(next,T.matches)}${sim}${nx}${newsT}${tableT}${dailyHubTile()}${attrT}${refsT}${stepT}${trainT}${shopT}${acadT}${socT}${kurT}</div>
     <div id="trainSec">${trainHTML()}</div></div>`;
 }
 function hubHTML(){
@@ -5408,6 +5420,7 @@ function bindMain(){
   q('[data-set]').forEach(b=>b.onchange=()=>{ S.settings[b.dataset.set]=b.checked; save(); });
   const bw=$('#bWeek'); if(bw) bw.onclick=finishWeek;
   document.querySelectorAll('#tNews [data-ns]').forEach(b=>b.onclick=e=>{ e.stopPropagation(); NEWS_I=+b.dataset.ns; document.querySelectorAll('#tNews .tn-s').forEach((x,i)=>x.classList.toggle('on',i===NEWS_I)); document.querySelectorAll('#tNews [data-ns]').forEach((x,i)=>x.classList.toggle('on',i===NEWS_I)); });
+  const td=$('#tDaily'); if(td) td.onclick=dailyOpen;
   const tt=$('#tTrain'); if(tt) tt.onclick=()=>{ const t=$('#trainSec'); if(t) t.scrollIntoView({behavior:'smooth',block:'start'}); };
   const hc=$('#heroCv'); if(hc) heroStart('heroCv',hc.dataset.h,hc.dataset.a,hc.dataset.k);
   const bs=$('#bSeason'); if(bs) bs.onclick=continueAfterSeason;
@@ -5445,6 +5458,125 @@ function isPremium(){ return OWNED.has(SKU.prem); }
 function hasAll(){ return OWNED.has(SKU.tam); }
 function grantSku(id){ if(!ALL_SKUS.includes(id)||OWNED.has(id)) return false; OWNED=expandOwned(new Set([...OWNED,id])); lsSet(OWN_KEY,JSON.stringify([...OWNED])); if(isPremium()) lsSet(PREM_KEY,'1'); return true; }
 function setPremium(on){ if(on) grantSku(SKU.prem); }
+// =========================================================
+//   GÜNÜN POZİSYONU — herkese aynı, günde bir pozisyon; seri ve paylaşım
+// =========================================================
+// Aynı gün herkes aynı pozisyonu görür: tür, olgular ve doğru karar tarih tohumundan üretilir.
+const DAILY_KEY='refmania_daily', DAILY_EPOCH=Date.UTC(2026,10,19); // #1 = 19 Kasım 2026
+const DAILY_TYPES=['penalti_temas','elle_oynama','hucum_elle_gol','ofsayt_gol','orta_saha_faul','dogso','dirsek','top_disinda','kaleci_engelleme','gol_oncesi_faul','geri_pas','penalti_atisi','gol_cizgisi','yuksek_ayak','korner_cekme'];
+const DAILY_TIME=40, DAILY_BONUS_MAX=3;
+let DAILY=null; // açık oturum
+function dayKey(d){ d=d||new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function dayNo(k){ const [y,m,d]=k.split('-').map(Number); return Math.round((Date.UTC(y,m-1,d)-DAILY_EPOCH)/864e5)+1; }
+function dayShift(k,n){ const [y,m,d]=k.split('-').map(Number); return dayKey(new Date(y,m-1,d+n)); }
+function dailyState(){ return lsJ(DAILY_KEY,{last:null,streak:0,best:0,played:0,won:0,hist:{},bonus:{},freezeUsed:null,doubled:{}}); }
+function dailySave(st){ lsSet(DAILY_KEY,JSON.stringify(st)); }
+// dün kaçırıldıysa seri hâlâ kurtarılabilir mi?
+function dailyStreakAlive(st,today){ if(!st.last||!st.streak) return 'none'; if(st.last===today||st.last===dayShift(today,-1)) return 'ok'; if(st.last===dayShift(today,-2)) return 'save'; return 'lost'; }
+function dailyTypes(){ return DAILY_TYPES.filter(t=>GEN[t]); }
+// tarih tohumuyla pozisyon üret; maç bağlamı sabit iki milli takımdan kurulur
+function dailyMake(k,practice){
+  const seed=hash('refmania-daily-'+k+(practice?'-'+practice+'-'+Date.now():''));
+  const r0=seeded(seed); const types=dailyTypes(); const type=types[Math.floor(r0()*types.length)];
+  const nts=NATIONS.slice(0,32); const a=Math.floor(r0()*nts.length); let b=Math.floor(r0()*nts.length); if(b===a) b=(a+7)%nts.length;
+  const H=mkTeam(nts[a][0],nts[a][1],'',nts[a][2],true), A=mkTeam(nts[b][0],nts[b][1],'',nts[b][2],true);
+  const fx=makeFx({kind:'acad',comp:'LIG',compName:'Günün pozisyonu',home:H.id,away:A.id,imp:3,derby:false,vr:false,glt:false,lvl:3,fee:0,stage:'Günün pozisyonu'});
+  const keep=M; M=buildMatch(fx); const ctxM=M;
+  const prev=RNG_SRC; RNG_SRC=seeded(seed^0x5bd1e995); let inc;
+  try{ M.min=10+Math.floor(r0()*78); const c=ctxFor(M,r0()<.5?0:1); inc=genIncident(type,c); inc.minute=M.min+"'"; }
+  finally{ RNG_SRC=prev; M=keep; }
+  inc.vis=1; inc.posQ='best'; inc.refPos=SPOTS[inc.pos]?SPOTS[inc.pos].best:[28,15];
+  return {inc,ctxM,k,no:dayNo(k),practice:!!practice};
+}
+function dailyHubTile(){
+  const st=dailyState(), k=dayKey(), done=st.hist[k], alive=dailyStreakAlive(st,k);
+  const fire=st.streak&&alive!=='lost'&&alive!=='none'?`<span class="dy-fire">🔥 ${st.streak} gün</span>`:'';
+  const sub=done?`Bugün çözdün: ${VLAB[done.v]} · ${done.t} sn. Yeni pozisyon gece yarısı.`:alive==='save'?'Dün kaçırdın. Serini kurtarmak için bugün çöz.':'Herkes aynı pozisyonu görüyor. 40 saniyen var.';
+  return `<button class="tile t-daily ${done?'done':''}" id="tDaily"><span class="dy-no num">#${dayNo(k)}</span><span class="dy-t"><span class="t-h">Günün pozisyonu</span><small>${sub}</small></span>${fire}<span class="dy-go">${done?'Sonucu gör':'Oyna'}</span></button>`;
+}
+function dailyOpen(){
+  const st=dailyState(), k=dayKey(); const done=st.hist[k];
+  if(done){ dailySummary(); return; }
+  if(dailyStreakAlive(st,k)==='save' && st.freezeUsed!==k){ dailyStreakOffer(); return; }
+  dailyStart(false);
+}
+// seri kurtarma: dün kaçırıldıysa isteğe bağlı ödüllü reklamla
+function dailyStreakOffer(){
+  const st=dailyState();
+  openModal(head('Günün pozisyonu','Serin tehlikede','')+`<div class="sh-body"><p>Dün günün pozisyonunu kaçırdın. ${st.streak} günlük serin bugün çözersen sıfırlanır.</p>
+    <p class="muted">İstersen kısa bir reklam izleyerek dünü "kurtarılmış gün" sayabilirsin. Tamamen isteğe bağlı.</p>
+    <div class="row">${adBtn('bDyFreeze','Seriyi koru')}<button class="btn" id="bDyNoFreeze">Seri sıfırlansın, oyna</button></div></div>`,true);
+  const f=$('#bDyFreeze'); if(f) f.onclick=()=>rewarded('streak',()=>{ const s2=dailyState(); s2.freezeUsed=dayKey(); s2.last=dayShift(dayKey(),-1); s2.hist[s2.last]=s2.hist[s2.last]||{v:'freeze',t:0}; dailySave(s2); toast('Serin korundu'); dailyStart(false); });
+  $('#bDyNoFreeze').onclick=()=>dailyStart(false);
+}
+function dailyStart(practice){
+  const k=dayKey(); DAILY=dailyMake(k,practice); const {inc,ctxM}=DAILY; inc.sel={d:null,c:inc.steps[1]?null:undefined};
+  const keep=M; M=ctxM; curInc=inc; const cams=['yakin','tv','hakem','ust'];
+  const kicker=practice?'Bonus pozisyon · seriye sayılmaz':`Günün pozisyonu #${DAILY.no}`;
+  openModal(head(kicker,esc(inc.title),`<span class="num tm-l" id="tmrLab"></span><button class="btn sm" id="dyX">Kapat</button>`)+`<div class="timer" id="tmr"><i></i></div><div class="sh-body"><div class="inc"><div class="stack">${replayHTML(inc,cams)}<p class="story">${inc.story}</p></div>
+    <div class="stack"><div class="eyebrow">Olgular</div><div class="facts">${factsHTML(inc,true)}</div><div class="decide" id="decide">${stepsHTML(inc)}</div><button class="btn primary" id="bDy" disabled>Kararı ver</button></div></div></div>`);
+  bindReplay(inc,cams); bindSteps(inc,'bDy'); M=keep;
+  DAILY.t0=Date.now();
+  const finish=late=>{ stopTimer(); if(!DAILY||DAILY.over) return; DAILY.over=true; whistle(); const ans={d:inc.sel.d||'__yok'}; if(inc.steps[1]) ans.c=inc.sel.c||'yok'; dailyResult(ans,late); };
+  $('#bDy').onclick=()=>finish(false);
+  $('#dyX').onclick=()=>{ stopTimer(); replayStop(); DAILY=null; const m=$('#modal'); m.hidden=true; m.innerHTML=''; render(); };
+  startTimer(DAILY_TIME,()=>{ toast('Süre doldu'); finish(true); });
+}
+function dailyResult(ans,late){
+  const D=DAILY, inc=D.inc; const v=late&&!inc.sel.d?'hata':evaluate(inc,ans); const ok=['dogru','kabul'].includes(v);
+  const secs=Math.min(DAILY_TIME,Math.round((Date.now()-D.t0)/1000));
+  const st=dailyState(); let gain='';
+  if(!D.practice){
+    const prevLast=st.last; st.hist[D.k]={v,t:secs};
+    st.streak = (prevLast===dayShift(D.k,-1)) ? st.streak+1 : (prevLast===D.k ? st.streak : 1);
+    st.last=D.k; st.best=Math.max(st.best,st.streak); st.played++; if(ok) st.won++;
+    dailySave(st);
+    if(S){ const pay=ok?2500*(1+(S.tier||0)):800; S.money+=pay; if(typeof tx==='function') tx('Günün pozisyonu',pay,'odul'); if(ok) S.attrs.kural=clamp(S.attrs.kural+.2*(S.growth||1),0,99); save(); gain=ok?`+${moneyShort(pay)} · Kural bilgisi +0.2`:`+${moneyShort(pay)} katılım`; D.pay=pay; }
+  } else if(S && ok){ S.attrs.kural=clamp(S.attrs.kural+.05*(S.growth||1),0,99); save(); gain='Kural bilgisi +0.05'; }
+  D.res={v,secs,ok,ans};
+  dailyResultUI(gain);
+}
+function dailyResultUI(gain){
+  const D=DAILY, inc=D.inc, {v,secs,ans}=D.res; const st=dailyState(); const ok=D.res.ok;
+  const keep=M; M=D.ctxM; inc.showOff=true; const cams=['yakin','tv','ters','ust'];
+  const bonusLeft=DAILY_BONUS_MAX-(st.bonus[D.k]||0);
+  const doubleBtn=(!D.practice&&S&&D.pay&&!(st.doubled||{})[D.k])?adBtn('bDyDouble','Ödülü ikiye katla'):'';
+  const bonusBtn=bonusLeft>0?adBtn('bDyBonus',`Bonus pozisyon (${bonusLeft} hak)`):'';
+  openModal(head(D.practice?'Bonus pozisyon':`Günün pozisyonu #${D.no}`,VLAB[v],`<button class="btn sm" id="dyX">Kapat</button>`)+`<div class="sh-body"><div class="inc"><div class="stack">${replayHTML(inc,cams)}</div><div class="stack">
+    <div class="verdict v-${v}"><span class="vi">${VLAB[v]}</span><span class="muted">Senin kararın: ${inc.sel.d?esc(ansText(inc,ans)):'karar verilmedi'} · ${secs} sn</span></div>
+    ${!ok?`<p><b>Doğrusu:</b> ${esc(ansText(inc,inc.correct))}</p>`:''}<p>${esc(inc.explain)}</p>
+    <details class="law"><summary>Kural metni</summary><p>${esc(inc.law)}</p></details>
+    <div class="row">${gain?`<span class="chip g">${gain}</span>`:''}${D.practice?'':`<span class="chip">🔥 Seri ${st.streak}</span><span class="chip">En iyi ${st.best}</span><span class="chip">Doğru ${st.won}/${st.played}</span>`}</div>
+    ${D.practice?'':'<button class="btn primary" id="bDyShare">Sonucu paylaş</button>'}
+    <div class="row">${doubleBtn}${bonusBtn}</div>
+    ${D.practice?'':`<p class="muted" style="font-size:13px">Yeni pozisyon gece yarısı açılır.</p>`}</div></div></div>`);
+  bindReplay(inc,cams); M=keep;
+  $('#dyX').onclick=()=>{ replayStop(); DAILY=null; const m=$('#modal'); m.hidden=true; m.innerHTML=''; render(); };
+  const sh=$('#bDyShare'); if(sh) sh.onclick=()=>dailyShare(D.no,inc,v,secs);
+  const db=$('#bDyDouble'); if(db) db.onclick=()=>rewarded('daily2x',()=>{ const s2=dailyState(); s2.doubled=s2.doubled||{}; if(s2.doubled[D.k]) return; s2.doubled[D.k]=1; dailySave(s2); S.money+=D.pay; if(typeof tx==='function') tx('Günün pozisyonu bonusu',D.pay,'odul'); save(); haptic('success'); toast('Ödül ikiye katlandı'); db.remove(); });
+  const bb=$('#bDyBonus'); if(bb) bb.onclick=()=>rewarded('dailybonus',()=>{ const s2=dailyState(); s2.bonus[D.k]=(s2.bonus[D.k]||0)+1; dailySave(s2); replayStop(); dailyStart(true); });
+}
+// tekrar açınca bugünün özeti
+function dailySummary(){
+  const st=dailyState(), k=dayKey(), h=st.hist[k];
+  const bonusLeft=DAILY_BONUS_MAX-(st.bonus[k]||0);
+  openModal(head(`Günün pozisyonu #${dayNo(k)}`,VLAB[h.v]||'Tamamlandı',`<button class="btn sm" id="dyX">Kapat</button>`)+`<div class="sh-body">
+    <div class="row"><span class="chip">🔥 Seri ${st.streak}</span><span class="chip">En iyi ${st.best}</span><span class="chip">Doğru ${st.won}/${st.played}</span></div>
+    <p class="muted">Bugünkü pozisyonu ${h.t} saniyede çözdün. Yeni pozisyon gece yarısı açılır.</p>
+    <div class="row"><button class="btn primary" id="bDyShare">Sonucu paylaş</button>${bonusLeft>0?adBtn('bDyBonus',`Bonus pozisyon (${bonusLeft} hak)`):''}</div></div>`,true);
+  $('#dyX').onclick=()=>{ const m=$('#modal'); m.hidden=true; m.innerHTML=''; };
+  $('#bDyShare').onclick=()=>{ const D=dailyMake(k,false); dailyShare(dayNo(k),D.inc,h.v,h.t); };
+  const bb=$('#bDyBonus'); if(bb) bb.onclick=()=>rewarded('dailybonus',()=>{ const s2=dailyState(); s2.bonus[k]=(s2.bonus[k]||0)+1; dailySave(s2); dailyStart(true); });
+}
+// paylaşım: doğru kararı ele vermeden sonuç kartı
+function dailyShare(no,inc,v,secs){
+  const st=dailyState(); const mark={dogru:'🟩',kabul:'🟨',kismen:'🟧',hata:'🟥'}[v]||'⬜';
+  const text=`Refmania · Günün pozisyonu #${no}\n${inc.title}\n${mark} ${VLAB[v]} · ${secs} sn\n🔥 ${st.streak} günlük seri\nSen olsan ne verirdin? #Refmania`;
+  const done=()=>toast('Sonuç panoya kopyalandı');
+  try{ if(navigator.share){ navigator.share({text}).catch(()=>{}); return; } }catch(e){}
+  try{ navigator.clipboard.writeText(text).then(done,()=>prompt('Kopyala:',text)); }catch(e){ prompt('Kopyala:',text); }
+}
+
 // MONET: reklam ve Premium (AdMob gerçek kimlikleri ve App Store ürünü hazır olunca true)
 const MONET = true;    // Premium satın alma (açık)
 const ADS_LIVE = true; // Ödüllü + geçiş reklamları (AdMob + Unity + Liftoff arabuluculuğu)
@@ -6140,7 +6272,8 @@ function handleBack(){
 }
 async function nativeInit(){
   if(!CAP) return;
-  try{ const P=PLUG('Preferences'); if(P){ for(const k of [OLD_KEY,slotKey(1),slotKey(2),slotKey(3)]){ const r=await P.get({key:k}); if(r && r.value) NSAVE[k]=r.value; } } }catch(e){}
+  try{ const P=PLUG('Preferences'); if(P){ for(const k of [OLD_KEY,slotKey(1),slotKey(2),slotKey(3)]){ const r=await P.get({key:k}); if(r && r.value) NSAVE[k]=r.value; }
+    try{ if(!lsGet(DAILY_KEY)){ const r=await P.get({key:DAILY_KEY}); if(r && r.value) localStorage.setItem(DAILY_KEY,r.value); } }catch(e){} } }catch(e){}
   try{ const A=PLUG('App'); if(A){ A.addListener('backButton',handleBack); A.addListener('pause',pauseForBackground); A.addListener('resume',resumeFromBackground); } }catch(e){}
   try{ const SB=PLUG('StatusBar'); if(SB){ SB.setStyle({style:'DARK'}); SB.setBackgroundColor && SB.setBackgroundColor({color:'#101824'}); } }catch(e){}
   try{ const SP=PLUG('SplashScreen'); if(SP) setTimeout(()=>SP.hide(),250); }catch(e){}
