@@ -55,4 +55,4 @@ Not: Maç sonlarında geçiş reklamı da çıkıyor (her 2 maçta bir, ilk 3 ma
 - İlk 1–2 hafta: RevenueCat (Premium satışları, iadeler) ve AdMob (reklam geliri) rakamlarına bak.
 - Türkiye için daha düşük Premium fiyatı denemeyi değerlendir (App Store Connect → ülke bazında fiyat).
 - Mağaza ekran görüntüleri 1.3 için yenilendi (9 görsel, Günün pozisyonu dahil); 1.3.1 ile yüklendi.
-- `main` dalı 15 Kasım'da kaldı; güncel kod `v1.3` dalında. Birleştirilmeli.
+- `main` 21 Kasım'da `v1.4` ile birleştirildi; artık güncel kod `main`'de.
