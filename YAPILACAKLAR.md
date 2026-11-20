@@ -8,7 +8,7 @@
 - **Efsane Maçlar (Kural Akademisi):** 10 hazır senaryo, sabit tohumla üretiliyor, pozisyon başına 45 sn, 3 yıldız. "Derbinin son dakikaları" ücretsiz, diğerleri Tam Paket'e dahil. İlk tamamlamada Kural bilgisi +0.2.
 - **Hakem kimliği (Premium):** 4. kariyer slotu, 2 yeni düdük tonu (Ayarlar), paylaşım metninde Premium rozeti, üst çubukta isim yanında taç.
 - Paket ekranındaki avantaj listeleri yeni içeriklerle güncellendi. Çeviriler (en/de/es) `i18n/*.json` dosyalarına eklendi. 1.4 sürüm notları 4 dilde yazıldı.
-- **App Store Connect:** Tam Paket ve Premium ürün açıklamalarını yeni avantajlara göre güncelle (Efsane Maçlar, Hakem Raporu, arşiv).
+- **App Store Connect ürün metinleri:** `scripts/asc_iap.py` içinde güncellendi. Göndermek için: `python3 scripts/asc_iap.py metin` (ASC_KEY_ID, ASC_ISSUER_ID, ASC_KEY_PATH ortam değişkenleriyle). `metin` modu sadece ürün adı, açıklama ve inceleme notunu değiştirir; fiyatlara ve ülkelere dokunmaz.
 
 ## 1.4: Puan isteme penceresi
 iOS'ta StoreKit, Android'de Play In-App Review ile sistemin kendi puan penceresi açılıyor.

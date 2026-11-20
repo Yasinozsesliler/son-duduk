@@ -17,29 +17,30 @@ def all_pages(path,params=None):
 
 REVIEW_SHOT=os.path.join(os.path.dirname(__file__),'..','store','iap_review.png')
 NOTE=('Packs are one-time non-consumable purchases. Open Shop (Mağaza) > Packs (Paketler) or tap the crown row on Home. '
-      'Premium removes interstitial ads and makes rewarded bonuses instant. The Complete Pack includes Premium plus cosmetic items. '
+      'Premium removes interstitial ads, makes rewarded bonuses instant and unlocks the detailed Referee Report (Development tab), the Call of the Day archive, '
+      'a 4th career slot and extra whistle tones (Settings). The Complete Pack includes Premium plus Legendary Matches (Laws Academy; the first match is free for everyone) and cosmetic items. '
       'The Complete Pack Offer is the same content at a discount, shown only during limited-time windows. The Upgrade is offered only to Premium owners.')
 PRODUCTS=[
  {'pid':'com.sonduduk.hakem.premium','ref':'Premium','usd':'3.99','loc':{
-   'en-US':('Premium','Ad-free play, instant rewards, ₺250k'),
-   'tr':('Premium','Reklamsız oyun, anında ödüller, 250 bin ₺'),
-   'de-DE':('Premium','Werbefrei, Belohnungen sofort, 250k'),
-   'es-ES':('Premium','Sin anuncios, premios al instante, 250k')}},
+   'en-US':('Premium','Ad-free, Referee Report, archive, ₺250k'),
+   'tr':('Premium','Reklamsız, Hakem Raporu, arşiv, 250 bin ₺'),
+   'de-DE':('Premium','Werbefrei, Schiri-Bericht, Archiv, 250k'),
+   'es-ES':('Premium','Sin anuncios, informe, archivo, 250k')}},
  {'pid':'com.sonduduk.hakem.tampaket','ref':'Complete Pack','usd':'5.99','loc':{
-   'en-US':('Complete Pack','Premium + luxury items, gold kits, ₺750k'),
-   'tr':('Tam Paket','Premium + lüks koleksiyon, altın formalar'),
-   'de-DE':('Komplettpaket','Premium + Luxus, goldene Trikots, 750k'),
-   'es-ES':('Pack Completo','Premium + lujo, uniformes dorados, 750k')}},
+   'en-US':('Complete Pack','Premium + Legendary Matches, luxury, ₺750k'),
+   'tr':('Tam Paket','Premium + Efsane Maçlar, lüks, 750 bin ₺'),
+   'de-DE':('Komplettpaket','Premium + Legendäre Spiele, Luxus, 750k'),
+   'es-ES':('Pack Completo','Premium + Partidos Legendarios, lujo, 750k')}},
  {'pid':'com.sonduduk.hakem.firsat','ref':'Complete Pack Offer','usd':'2.99','loc':{
    'en-US':('Complete Pack Offer','Limited-time Complete Pack at half price'),
    'tr':('Tam Paket Fırsatı','Süreli fırsat: Tam Paket yarı fiyatına'),
    'de-DE':('Komplettpaket-Angebot','Komplettpaket zeitlich begrenzt, halber Preis'[:45]),
    'es-ES':('Oferta Pack Completo','Pack Completo a mitad de precio, por tiempo')}},
  {'pid':'com.sonduduk.hakem.yukseltme','ref':'Complete Pack Upgrade','usd':'2.99','loc':{
-   'en-US':('Complete Pack Upgrade','Upgrade from Premium to the Complete Pack'),
-   'tr':('Tam Paket Yükseltmesi','Premium’dan Tam Paket’e yükseltme'),
-   'de-DE':('Upgrade Komplettpaket','Von Premium auf das Komplettpaket'),
-   'es-ES':('Mejora a Pack Completo','De Premium al Pack Completo')}},
+   'en-US':('Complete Pack Upgrade','Legendary Matches, luxury items, gold kits'),
+   'tr':('Tam Paket Yükseltmesi','Efsane Maçlar, lüks koleksiyon, altın forma'),
+   'de-DE':('Upgrade Komplettpaket','Legendäre Spiele, Luxus, goldene Trikots'),
+   'es-ES':('Mejora a Pack Completo','Partidos Legendarios, lujo, uniformes oro')}},
 ]
 
 app=call('GET','/v1/apps',params={'filter[bundleId]':'com.sonduduk.hakem'})['data'][0]; aid=app['id']
@@ -96,7 +97,24 @@ def ensure(p):
     st=call('GET',f'/v2/inAppPurchases/{iid}').get('data',{}).get('attributes',{}).get('state')
     print('STATE',p['pid'],st)
 
-if len(sys.argv)>1 and sys.argv[1]=='submit':
+def texts(p):
+    # yalnızca metinler: ürün adı, açıklama ve inceleme notu (fiyat ve ülkelere dokunmaz)
+    iap=existing.get(p['pid'])
+    if not iap: print('missing',p['pid']); return
+    iid=iap['id']
+    call('PATCH',f"/v2/inAppPurchases/{iid}",{'data':{'type':'inAppPurchases','id':iid,'attributes':{'reviewNote':NOTE}}})
+    have={l['attributes']['locale']:l for l in call('GET',f'/v2/inAppPurchases/{iid}/inAppPurchaseLocalizations').get('data',[])}
+    for loc,(nm,ds) in p['loc'].items():
+        assert len(nm)<=30 and len(ds)<=45,(p['pid'],loc,len(nm),len(ds))
+        if loc in have:
+            call('PATCH',f"/v1/inAppPurchaseLocalizations/{have[loc]['id']}",{'data':{'type':'inAppPurchaseLocalizations','id':have[loc]['id'],'attributes':{'name':nm,'description':ds}}})
+        else:
+            call('POST','/v1/inAppPurchaseLocalizations',{'data':{'type':'inAppPurchaseLocalizations','attributes':{'locale':loc,'name':nm,'description':ds},'relationships':{'inAppPurchaseV2':{'data':{'type':'inAppPurchases','id':iid}}}}})
+    print('texts ok',p['pid'])
+
+if len(sys.argv)>1 and sys.argv[1]=='metin':
+    for p in PRODUCTS: texts(p)
+elif len(sys.argv)>1 and sys.argv[1]=='submit':
     # İlk ürünler sürümle birlikte incelenir: önce sürümü içeren taslak inceleme gönderimi hazırlanır.
     ver=sys.argv[2] if len(sys.argv)>2 else '1.2.0'; bnum=sys.argv[3] if len(sys.argv)>3 else ''
     v=[x for x in call('GET',f'/v1/apps/{aid}/appStoreVersions',params={'limit':10})['data'] if x['attributes']['versionString']==ver][0]; vid=v['id']
