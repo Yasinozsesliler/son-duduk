@@ -14,7 +14,7 @@ const DEV = { iphone: { w: 1290, h: 2796, scale: .86, top: 470, title: 104, sub:
 const FONT = 'file://' + path.join(ROOT, 'www', 'fonts');
 (async () => {
   const b = await chromium.launch(process.env.CHROME ? { executablePath: process.env.CHROME, args: ['--no-sandbox'] } : {});
-  for (const lang of Object.keys(CAPS)) for (const [dev, D] of Object.entries(DEV)) {
+  for (const lang of (process.env.LANGS ? process.env.LANGS.split(',') : Object.keys(CAPS))) for (const [dev, D] of Object.entries(DEV)) {
     const RAW = path.join(ROOT, 'store', 'raw', lang); const OUT = path.join(ROOT, 'store', 'screenshots', lang); fs.mkdirSync(OUT, { recursive: true });
     if (!fs.existsSync(RAW)) continue;
     const p = await b.newPage({ viewport: { width: D.w, height: D.h }, deviceScaleFactor: 1 });
