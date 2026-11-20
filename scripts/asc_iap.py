@@ -19,7 +19,8 @@ REVIEW_SHOT=os.path.join(os.path.dirname(__file__),'..','store','iap_review.png'
 NOTE=('Packs are one-time non-consumable purchases. Open Shop (Mağaza) > Packs (Paketler) or tap the crown row on Home. '
       'Premium removes interstitial ads, makes rewarded bonuses instant and unlocks the detailed Referee Report (Development tab), the Call of the Day archive, '
       'a 4th career slot and extra whistle tones (Settings). The Complete Pack includes Premium plus Legendary Matches (Laws Academy; the first match is free for everyone) and cosmetic items. '
-      'The Complete Pack Offer is the same content at a discount, shown only during limited-time windows. The Upgrade is offered only to Premium owners.')
+      'The Complete Pack Offer is the same content at a discount, shown only during limited-time windows. The Upgrade is offered only to Premium owners. '
+      'Time Travel is a separate pack (not part of Premium or the Complete Pack): Laws Academy > Time Travel, five historical eras refereed with the laws of their time.')
 PRODUCTS=[
  {'pid':'com.sonduduk.hakem.premium','ref':'Premium','usd':'3.99','loc':{
    'en-US':('Premium','Ad-free, Referee Report, archive, ₺250k'),
@@ -41,6 +42,11 @@ PRODUCTS=[
    'tr':('Tam Paket Yükseltmesi','Efsane Maçlar, lüks koleksiyon, altın forma'),
    'de-DE':('Upgrade Komplettpaket','Legendäre Spiele, Luxus, goldene Trikots'),
    'es-ES':('Mejora a Pack Completo','Partidos Legendarios, lujo, uniformes oro')}},
+ {'pid':'com.sonduduk.hakem.zaman','ref':'Time Travel','usd':'1.99','try':'99.99','loc':{
+   'en-US':('Time Travel','5 eras of football, refereed by old laws'),
+   'tr':('Zaman Yolculuğu','5 dönem, o yılların kurallarıyla düdük'),
+   'de-DE':('Zeitreise','5 Epochen, gepfiffen nach alten Regeln'),
+   'es-ES':('Viaje en el Tiempo','5 épocas, arbitradas con reglas antiguas')}},
 ]
 
 app=call('GET','/v1/apps',params={'filter[bundleId]':'com.sonduduk.hakem'})['data'][0]; aid=app['id']
@@ -70,11 +76,19 @@ def ensure(p):
     pts=all_pages(f'/v2/inAppPurchases/{iid}/pricePoints',{'filter[territory]':'USA','limit':200})
     pt=[x for x in pts if x['attributes']['customerPrice']==p['usd']]
     if pt:
+        manual=[{'type':'inAppPurchasePrices','id':'${p0}'}]
+        inc=[{'type':'inAppPurchasePrices','id':'${p0}','attributes':{'startDate':None},'relationships':{'inAppPurchasePricePoint':{'data':{'type':'inAppPurchasePricePoints','id':pt[0]['id']}}}}]
+        if p.get('try'):  # Türkiye için elle fiyat (ör. 99,99 ₺)
+            tp=[x for x in all_pages(f'/v2/inAppPurchases/{iid}/pricePoints',{'filter[territory]':'TUR','limit':200}) if x['attributes']['customerPrice']==p['try']]
+            if tp:
+                manual.append({'type':'inAppPurchasePrices','id':'${p1}'})
+                inc.append({'type':'inAppPurchasePrices','id':'${p1}','attributes':{'startDate':None},'relationships':{'inAppPurchasePricePoint':{'data':{'type':'inAppPurchasePricePoints','id':tp[0]['id']}}}})
+            else: print('TR price point not found',p['try'])
         r=call('POST','/v1/inAppPurchasePriceSchedules',{'data':{'type':'inAppPurchasePriceSchedules','relationships':{
             'inAppPurchase':{'data':{'type':'inAppPurchases','id':iid}},
             'baseTerritory':{'data':{'type':'territories','id':'USA'}},
-            'manualPrices':{'data':[{'type':'inAppPurchasePrices','id':'${p0}'}]}}},
-            'included':[{'type':'inAppPurchasePrices','id':'${p0}','attributes':{'startDate':None},'relationships':{'inAppPurchasePricePoint':{'data':{'type':'inAppPurchasePricePoints','id':pt[0]['id']}}}}]})
+            'manualPrices':{'data':manual}}},
+            'included':inc})
         print('price',p['usd'],'ok' if r.get('data') else 'err')
     else: print('price point not found',p['usd'])
     # bütün ülkelerde satışta
@@ -114,6 +128,10 @@ def texts(p):
 
 if len(sys.argv)>1 and sys.argv[1]=='metin':
     for p in PRODUCTS: texts(p)
+elif len(sys.argv)>2 and sys.argv[1]=='yeni':
+    # yalnızca adı verilen ürünleri oluşturur/ayarlar: python3 scripts/asc_iap.py yeni com.sonduduk.hakem.zaman
+    for p in PRODUCTS:
+        if p['pid'] in sys.argv[2:]: ensure(p)
 elif len(sys.argv)>1 and sys.argv[1]=='submit':
     # İlk ürünler sürümle birlikte incelenir: önce sürümü içeren taslak inceleme gönderimi hazırlanır.
     ver=sys.argv[2] if len(sys.argv)>2 else '1.2.0'; bnum=sys.argv[3] if len(sys.argv)>3 else ''

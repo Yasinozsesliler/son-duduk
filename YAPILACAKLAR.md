@@ -1,6 +1,20 @@
 # Yapılacaklar
 
-## 1.4 (v1.4 dalı): Premium'u cazip yapma
+## 1.4 (v1.4 dalı): Hakemin hayatı, sürprizler, Zaman Yolculuğu
+- **Zaman Yolculuğu (yeni ürün `com.sonduduk.hakem.zaman`, 99,99 ₺ / 1,99 $):** Kural Akademisi'nde 5 dönem (1930, 1966, 1986, 1998, 2018), o yılların kurallarıyla (kartsız ihraç, serbest geri pas, aynı hiza ofsayt, 1998 arkadan müdahale kırmızı, altın gol, ilk VAR). Premium ve Tam Paket'e dahil değil. Pozisyonlar dönem kuralına uyan sabit tohumlarla üretiliyor (`ZAMAN`, `ERA_OV`).
+  - **App Store Connect'te ürünü oluştur:** `python3 scripts/asc_iap.py yeni com.sonduduk.hakem.zaman` (ABD 1,99 $ taban, Türkiye elle 99,99 ₺). Sonra 1.4 sürümüyle birlikte incelemeye gönder.
+  - Android'de satın alma henüz kapalı (`N.iapOn = isIOS`).
+- **Yeni hikâyeler (STORIES):** gece telefonu (+2 devam), pazar yemeği, eşinle kriz, taksici, TV stüdyosu (+uyarı), sahte hesap, podcast, küçük taraftardan mektup (hatalı ve takımın kaybettiği maçtan sonra), genç hakemin ilk büyük maçı (mevcut "genc" hikâyesinin devamı, Necdet Hoca'ya selam).
+- **Aile göstergesi (`S.aile`):** hikâye seçimleri etkiliyor, haftalık enerji toparlanmasını değiştiriyor, 35 altına düşünce kriz hikâyesi geliyor. Kariyer > Hayatın panelinde.
+- **Maç içi sürprizler (`OLAYLAR`, `runOlay`):** elektrik kesintisi, kaptanlarla konuşma, TD'nin yazı tahtası (TD'ye kırmızı), sağanak (sadece yağmurlu maçta), maskot, tribünden çakmak. Maçların ~%40'ında bir tane.
+- **Nefes mini oyunu (`sleepGame`):** derbi ya da büyük maç öncesi %35 ihtimalle; sonucu karar süresini +2 / -3 sn değiştiriyor.
+- **Viral an:** büyük maçta kırmızı kart sonrası %30 ihtimalle "Refmania pozu" paylaşımı ve takipçi.
+- **Kimlik:** Düdük koleksiyonu (her efsane maç ve dönem bir düdük), Kırmızı kart müzesi (Kariyer), kart gösterme stili ve düdük çalışı (Ayarlar), DFF kokartı alınca formada rozet.
+- **Tuttuğun takım (Ayarlar):** o takımın maçlarında gerginlik artar, hataların yönü izlenir (Tarafsızlık), taraflı görünürsen kurul güveni düşer.
+- **Son maç:** emeklilikte veda töreni ve kariyer özeti.
+- Topluluk/rekabet fikirleri (Hakem Mahkemesi, eşleşmeli düello, hakem ligi) sunucu gerektirdiği için yapılmadı.
+
+## 1.4: Premium'u cazip yapma
 - **Premium Molası** (eski adı Premium Saati): 10 ödüllü reklamla artık 1 saat değil **20 dakika** reklamsız oyun. 5. maçtan sonra bir kez hediye ediliyor (sadece reklamlar açıkken).
 - **Kişisel ödeme ekranı:** Son 7 günde 3 veya daha fazla reklam izleyen oyuncuya "Son 7 günde X reklam izledin, yaklaşık Y dakika" satırı gösteriliyor (`adLog`, `pwStatHTML`).
 - **Hakem Raporu (Gelişim sekmesi):** Pozisyon türüne göre doğruluk, zayıf noktalar ve kural maddesi, son hatalar. Bedava oyuncu sadece özeti görüyor, ayrıntılar Premium'da. Veriler 1.4'ten sonra oynanan maçlardan toplanmaya başlıyor (`S.dstat`, `S.derr`).

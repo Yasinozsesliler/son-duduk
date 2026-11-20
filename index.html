@@ -1821,6 +1821,29 @@ main>*{animation:none}
 .st2-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
 @media (min-width:1180px){.st2-cards{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media (max-width:860px){.st2-cards{grid-template-columns:minmax(0,1fr)}}
+
+/* 1.4b: hayat, müze, koleksiyon, zaman yolculuğu, nefes oyunu, veda */
+.wh-row{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:10px;align-items:center;min-height:52px;padding:10px 12px;border-radius:12px;border:1px solid rgba(242,194,48,.3);background:rgba(242,194,48,.07);color:inherit;font:inherit;text-align:left;cursor:pointer}
+.wh-row small{display:block;color:var(--muted);font-size:12px}
+.wh-list{display:grid;gap:8px}
+.wh-it{display:grid;grid-template-columns:30px minmax(0,1fr);gap:10px;align-items:start;padding:10px 12px;border-radius:10px;border:1px solid var(--line);opacity:.6}
+.wh-it.on{opacity:1;border-color:rgba(242,194,48,.35);background:rgba(242,194,48,.06)}
+.wh-it small{display:block;color:var(--muted);font-size:12.5px}
+.zc .zy{font-size:22px;font-weight:800;color:#ffe08a;line-height:1}
+.zmn .leg-c{background:linear-gradient(160deg,rgba(121,167,230,.12),rgba(255,255,255,.02))}
+.era-r{padding:10px 12px;border-radius:10px;background:rgba(242,194,48,.07);border:1px solid rgba(242,194,48,.25)}
+.era-r ul{margin:6px 0 0;padding-left:18px;font-size:14px;display:grid;gap:4px}
+.life-r{display:grid;grid-template-columns:90px minmax(0,1fr) 34px;gap:10px;align-items:center;font-size:14px}
+.mus-list{display:grid;gap:6px}
+.mus-it{display:grid;grid-template-columns:14px minmax(0,1fr);gap:10px;align-items:start;font-size:13.5px}
+.mus-it .mini-card{margin-top:3px}
+.mus-it small{display:block;color:var(--muted);font-size:12px}
+.sl-wrap{position:relative;height:200px;display:grid;place-items:center;margin:8px 0}
+.sl-ring{width:180px;height:180px;border-radius:50%;border:3px solid rgba(121,167,230,.8);background:radial-gradient(circle,rgba(121,167,230,.25),rgba(121,167,230,0) 70%);will-change:transform}
+.sl-c{position:absolute;font-size:22px;font-weight:700}
+.farewell{display:grid;gap:10px;padding:16px;border-radius:12px;border:1px solid rgba(242,194,48,.35);background:linear-gradient(160deg,rgba(242,194,48,.10),rgba(255,255,255,.02))}
+.farewell h3{margin:2px 0}
+.fw-l{margin:0;padding-left:20px;display:grid;gap:6px;font-size:14.5px}
 </style>
 
 <div id="app"></div>
@@ -2209,8 +2232,8 @@ function whistle(kind){
   if(!S||!S.settings.sound) return;
   try{
     AC=AC||new (window.AudioContext||window.webkitAudioContext)();
-    const blasts = kind==='end'?[0,0.45,0.9]:kind==='long'?[0]:[0];
-    const dur = kind==='long'||kind==='end'?0.55:0.28;
+    const blasts = kind==='end'?[0,0.45,0.9]:kind==='long'?[0]:(S.settings.dstil==='cift'?[0,0.2]:[0]);
+    const dur = kind==='long'||kind==='end'?0.55:(S.settings.dstil==='cift'?0.14:0.28);
     blasts.forEach(st=>{
       const t0=AC.currentTime+st; const o=AC.createOscillator(), g=AC.createGain(), lfo=AC.createOscillator(), lg=AC.createGain();
       const W=WTONES[(isPremium()&&S.settings.wsnd)||'klasik']||WTONES.klasik;
@@ -2786,6 +2809,7 @@ function akademiHTML(){
     <div class="ah-kpis"><div><b class="num">${A.solved}</b><small>Çözülen vaka</small></div><div><b class="num">%${pct}</b><small>İsabet</small></div><div><b class="num">${A.streak}</b><small>Seri</small></div><div><b class="num">${A.best}</b><small>En uzun seri</small></div></div></section>
   <div class="hub"><div class="stack" style="gap:16px;min-width:0">
     ${legendsHTML()}
+    ${zamanHTML()}
     <section class="panel stack"><h3>Vaka çalışması</h3><p class="muted" style="font-size:14px">Gerçek maç pozisyonları 3D tekrarla gelir. Süre yok; tüm açılardan izle, kuralı uygula. Her hafta ilk 5 doğru vaka Kural bilgisi niteliğini geliştirir.</p>
       <div class="chips-row wrap">${ACAD_TOPICS.map(([k,n])=>`<button class="fchip ${ACAD_TOPIC===k?'on':''}" data-at="${k}">${n}</button>`).join('')}</div>
       <button class="btn primary lg" id="bCase">Yeni vaka · ${esc(ACAD_TOPICS.find(x=>x[0]===ACAD_TOPIC)[1])}</button></section>
@@ -2802,21 +2826,21 @@ function akademiHTML(){
 // Her senaryo sabit tohumla üretilir: herkes aynı pozisyonları görür. Takımlar ve olaylar kurgusaldır.
 const LEG_KEY='refmania_efsane', LEG_TIME=45;
 const LEGENDS=[
- {id:'derbi',free:true,name:'Derbinin son dakikaları',sub:'Şehrin iki yakası, şampiyonluk bu maçta. Tribünler alev alev.',club:[0,1],inc:[['orta_saha_faul',71],['dirsek',80],['penalti_temas',88],['gol_oncesi_faul',93]]},
- {id:'final',name:'Dünya finali, uzatmalar',sub:'Skor eşit, 120 dakikanın her saniyesi tarihe yazılıyor.',nat:['Arjantin','Fransa'],inc:[['dogso',97],['hucum_elle_gol',104],['penalti_temas',118],['penalti_atisi',120]]},
- {id:'elgol',name:'Elle gol mü?',sub:'Çeyrek finalde tek bir temas bütün dünyayı ikiye bölecek.',nat:['Arjantin','İngiltere'],inc:[['hucum_elle_gol',51],['orta_saha_faul',60],['elle_oynama',77]]},
- {id:'hayalet',name:'Hayalet gol',sub:'Top çizgiyi geçti mi? Gol çizgisi teknolojisi yok, karar senin gözünde.',nat:['İngiltere','Almanya'],inc:[['gol_cizgisi',101],['ofsayt_gol',110],['top_disinda',115]]},
- {id:'kirmizi',name:'Finalde kırmızı',sub:'Efsane kaptanın son maçı. Gerginlik her dakika artıyor.',nat:['Fransa','İtalya'],inc:[['yuksek_ayak',88],['dirsek',95],['top_disinda',110]]},
- {id:'ofsayt',name:'Ofsayt çizgisi',sub:'İki hızlı forvet, savunma çizgisinde santimlerin savaşı.',nat:['İspanya','Hollanda'],inc:[['ofsayt_gol',23],['ofsayt_gol',58],['gol_oncesi_faul',79]]},
- {id:'kaleci',name:'Kaleci gecesi',sub:'Penaltılara gidecek gibi duran bir çeyrek final.',nat:['Hırvatistan','Brezilya'],inc:[['kaleci_engelleme',34],['geri_pas',62],['penalti_atisi',120]]},
- {id:'duran',name:'Duran top savaşı',sub:'Her kornerde ceza sahası güreş minderine dönüyor.',nat:['Uruguay','Kolombiya'],inc:[['korner_cekme',12],['korner_cekme',55],['dirsek',66],['yuksek_ayak',84]]},
- {id:'sonadam',name:'Son adam',sub:'Kontra ataklarla dolu bir maç, savunmalar hep tek kişi kalıyor.',nat:['Portekiz','Fas'],inc:[['dogso',19],['dogso',73],['elle_oynama',90]]},
- {id:'sinir',name:'Sinirler gerildi',sub:'Ezeli rakipler. Top oyundan çıktığında bile kavga bitmiyor.',nat:['Meksika','ABD'],inc:[['top_disinda',40],['orta_saha_faul',58],['yuksek_ayak',75],['dirsek',89]]},
+ {id:'derbi',w:['Derbi düdüğü','Şampiyonluğun son dakikalarında çalan düdük. Hâlâ biraz tribün kokuyor.'],free:true,name:'Derbinin son dakikaları',sub:'Şehrin iki yakası, şampiyonluk bu maçta. Tribünler alev alev.',club:[0,1],inc:[['orta_saha_faul',71],['dirsek',80],['penalti_temas',88],['gol_oncesi_faul',93]]},
+ {id:'final',w:['Final düdüğü','Uzatmaların 120. dakikasında çalan, dünyanın en çok dinlenen düdüğü.'],name:'Dünya finali, uzatmalar',sub:'Skor eşit, 120 dakikanın her saniyesi tarihe yazılıyor.',nat:['Arjantin','Fransa'],inc:[['dogso',97],['hucum_elle_gol',104],['penalti_temas',118],['penalti_atisi',120]]},
+ {id:'elgol',w:['Çeyrek final düdüğü','Bir el temasının bütün dünyayı ikiye böldüğü gece.'],name:'Elle gol mü?',sub:'Çeyrek finalde tek bir temas bütün dünyayı ikiye bölecek.',nat:['Arjantin','İngiltere'],inc:[['hucum_elle_gol',51],['orta_saha_faul',60],['elle_oynama',77]]},
+ {id:'hayalet',w:['Çizgi düdüğü','Topun çizgiyi geçip geçmediğine sadece gözlerinle karar verdiğin maç.'],name:'Hayalet gol',sub:'Top çizgiyi geçti mi? Gol çizgisi teknolojisi yok, karar senin gözünde.',nat:['İngiltere','Almanya'],inc:[['gol_cizgisi',101],['ofsayt_gol',110],['top_disinda',115]]},
+ {id:'kirmizi',w:['Kaptanın düdüğü','Efsane bir kaptanın son maçında çalınan, ağır bir düdük.'],name:'Finalde kırmızı',sub:'Efsane kaptanın son maçı. Gerginlik her dakika artıyor.',nat:['Fransa','İtalya'],inc:[['yuksek_ayak',88],['dirsek',95],['top_disinda',110]]},
+ {id:'ofsayt',w:['Santim düdüğü','Savunma çizgisindeki santimlerin savaşından kalan hatıra.'],name:'Ofsayt çizgisi',sub:'İki hızlı forvet, savunma çizgisinde santimlerin savaşı.',nat:['İspanya','Hollanda'],inc:[['ofsayt_gol',23],['ofsayt_gol',58],['gol_oncesi_faul',79]]},
+ {id:'kaleci',w:['Kaleci düdüğü','Penaltılara giden bir gecede, kalecilerin arasında kalan düdük.'],name:'Kaleci gecesi',sub:'Penaltılara gidecek gibi duran bir çeyrek final.',nat:['Hırvatistan','Brezilya'],inc:[['kaleci_engelleme',34],['geri_pas',62],['penalti_atisi',120]]},
+ {id:'duran',w:['Korner düdüğü','Her kornerde güreş minderine dönen ceza sahasından kalma.'],name:'Duran top savaşı',sub:'Her kornerde ceza sahası güreş minderine dönüyor.',nat:['Uruguay','Kolombiya'],inc:[['korner_cekme',12],['korner_cekme',55],['dirsek',66],['yuksek_ayak',84]]},
+ {id:'sonadam',w:['Son adam düdüğü','Kontra atakların gecesinde iki kez kırmızıya giden düdük.'],name:'Son adam',sub:'Kontra ataklarla dolu bir maç, savunmalar hep tek kişi kalıyor.',nat:['Portekiz','Fas'],inc:[['dogso',19],['dogso',73],['elle_oynama',90]]},
+ {id:'sinir',w:['Soğukkanlılık düdüğü','Ezeli rakiplerin kavgası arasında sakin kalan hakemin düdüğü.'],name:'Sinirler gerildi',sub:'Ezeli rakipler. Top oyundan çıktığında bile kavga bitmiyor.',nat:['Meksika','ABD'],inc:[['top_disinda',40],['orta_saha_faul',58],['yuksek_ayak',75],['dirsek',89]]},
 ];
 let LEG=null;
 function legState(){ return lsJ(LEG_KEY,{}); }
 function legMin(m){ return (m>90&&m<=93?'90+'+(m-90):m)+"'"; }
-function legOpen(sc){ return sc.free||hasAll(); }
+function legOpen(sc){ return sc.pack==='zaman'?hasZaman():(sc.free||hasAll()); }
 function legStars(c,n){ return c>=n?3:c>=n-1?2:c>=Math.ceil(n/2)?1:0; }
 function legTeams(sc){
   if(sc.club){ const a=TR4_RAW[sc.club[0]], b=TR4_RAW[sc.club[1]]; return [mkTeam(a[0],a[1],a[2],'TR'),mkTeam(b[0],b[1],b[2],'TR')]; }
@@ -2824,31 +2848,96 @@ function legTeams(sc){
   return [mkTeam(a[0],a[1],'',a[2],true),mkTeam(b[0],b[1],'',b[2],true)];
 }
 function legMake(sc,i){
-  const [type,min]=sc.inc[i]; const seed=hash('refmania-efsane-'+sc.id+'-'+i); const r0=seeded(seed);
+  const [type,min,ovk]=sc.inc[i]; const OV=ovk&&ERA_OV[ovk];
   const [H,A]=legTeams(sc);
-  const fx=makeFx({kind:'acad',comp:'LIG',compName:sc.name,home:H.id,away:A.id,imp:5,derby:!!sc.club,vr:false,glt:false,lvl:4,fee:0,stage:sc.name});
+  const fx=makeFx({kind:'acad',comp:'LIG',compName:sc.name,home:H.id,away:A.id,imp:5,derby:!!sc.club,vr:ovk==='var',glt:false,lvl:4,fee:0,stage:sc.name});
   const keep=M; M=buildMatch(fx); const ctxM=M;
-  const prev=RNG_SRC; RNG_SRC=seeded(seed^0x5bd1e995); let inc;
-  try{ M.min=min; const c=ctxFor(M,r0()<.5?0:1); inc=genIncident(type,c); inc.minute=legMin(min); }
+  const prev=RNG_SRC; let inc;
+  try{
+    let found=!OV||!OV.pred;
+    for(let salt=0;salt<120;salt++){
+      const seed=hash('refmania-efsane-'+sc.id+'-'+i+(salt?'-'+salt:'')); const r0=seeded(seed); RNG_SRC=seeded(seed^0x5bd1e995);
+      M.min=min; const c=ctxFor(M,r0()<.5?0:1); inc=genIncident(type,c); inc.minute=legMin(min);
+      if(found) break; if(OV.pred(inc)){ found=true; break; }
+    }
+    if(OV&&found) OV.apply(inc); inc.eraOk=found;
+  }
   finally{ RNG_SRC=prev; M=keep; }
   inc.vis=1; inc.posQ='best'; inc.refPos=SPOTS[inc.pos]?SPOTS[inc.pos].best:[28,15];
   return {inc,ctxM};
+}
+// =========================================================
+//   ZAMAN YOLCULUĞU — eski dönemlerin kurallarıyla maç yönet (ayrı paket)
+// =========================================================
+const ZAMAN=[
+ {id:'z1930',pack:'zaman',year:1930,name:'İlk Dünya Kupası, 1930',sub:'Montevideo. Futbolun ilk büyük turnuvası; kart da yok, oyuncu değişikliği de.',nat:['Uruguay','Arjantin'],
+  rules:['Kart yok: ihtar ve oyundan ihraç sözlü yapılır','Oyuncu değişikliği yok','Geri pas serbest: kaleci eliyle alabilir'],
+  w:['1930 düdüğü','Kartların icadından 40 yıl önce, Montevideo’da çalınan düdük.'],
+  inc:[['orta_saha_faul',23,'kartsiz'],['geri_pas',57,'geripas'],['penalti_temas',81,'kartsiz']]},
+ {id:'z1966',pack:'zaman',year:1966,name:'Wembley, 1966',sub:'Final uzatmalarda. Ne gol çizgisi teknolojisi var ne de VAR; sadece sen ve yan hakemin.',nat:['İngiltere','Almanya'],
+  rules:['Kart yok: ihtar ve oyundan ihraç sözlü yapılır','Gol çizgisi teknolojisi ve VAR yok','Geri pas serbest: kaleci eliyle alabilir'],
+  w:['Wembley düdüğü','Topun çizgiyi geçip geçmediğini yalnızca gözlerinin söylediği maçtan.'],
+  inc:[['geri_pas',63,'geripas'],['dirsek',78,'kartsiz'],['gol_cizgisi',101,'kartsiz']]},
+ {id:'z1986',pack:'zaman',year:1986,name:'Meksika, 1986',sub:'Azteca’da 114 bin kişi. Kartlar var, ama ofsayt ve geri pas kuralları bugünkü gibi değil.',nat:['Arjantin','İngiltere'],
+  rules:['Aynı hizada olan oyuncu ofsayttır (1990’a kadar)','Geri pas serbest: kaleci eliyle alabilir','VAR yok'],
+  w:['Azteca düdüğü','Aynı hizanın hâlâ ofsayt sayıldığı yılların hatırası.'],
+  inc:[['hucum_elle_gol',51,null],['ofsayt_gol',66,'hiza'],['geri_pas',80,'geripas']]},
+ {id:'z1998',pack:'zaman',year:1998,name:'Fransa, 1998',sub:'Turnuva öncesi hakemlere yeni talimat: arkadan yapılan tehlikeli müdahaleye doğrudan kırmızı.',nat:['Fransa','Brezilya'],
+  rules:['Arkadan tehlikeli müdahale doğrudan kırmızı kart','Altın gol: uzatmada ilk gol maçı bitirir','Geri pas artık yasak (1992’den beri)'],
+  w:['Altın gol düdüğü','Uzatmada atılan ilk golün her şeyi bitirdiği dönemden.'],
+  inc:[['orta_saha_faul',34,'arkadan'],['orta_saha_faul',71,'arkadan'],['gol_oncesi_faul',97,'altin']]},
+ {id:'z2018',pack:'zaman',year:2018,name:'İlk VAR turnuvası, 2018',sub:'VAR, Dünya Kupası’nda ilk kez kullanılıyor. Herkes yeni teknolojinin ne zaman devreye gireceğini merak ediyor.',nat:['Fransa','Hırvatistan'],
+  rules:['VAR yalnızca açık ve net hatada müdahale eder','İncelenenler: gol, penaltı, doğrudan kırmızı, kimlik hatası','Son kararı her zaman hakem verir'],
+  w:['VAR düdüğü','Ekrana ilk kez koştuğun turnuvadan.'],
+  inc:[['penalti_temas',34,'var'],['hucum_elle_gol',58,'var'],['dogso',88,'var']]},
+];
+const ERA_OV={
+ kartsiz:{apply:inc=>{ const st=inc.steps[1]; if(st) st.opts.forEach(o=>{ const who=o.label.split(' · ').slice(1).join(' · '); if(o.id==='yok') o.label='İhtar yok'; else if(o.id.includes('kirmizi')) o.label='Oyundan ihraç · '+who; else o.label='Sözlü ihtar · '+who; }); inc.explain+=' O dönemde kart yoktu: ihtar ve oyundan ihraç sözlü yapılırdı, kartlar 1970’te geldi.'; }},
+ geripas:{pred:inc=>inc.correct.d==='endirekt'&&inc.correct.c==='yok',apply:inc=>{ inc.correct={d:'devam',c:'yok'}; inc.accept=[]; inc.partial=[]; inc.explain='1992’ye kadar kaleci, takım arkadaşının bilerek ayakla verdiği topu eliyle alabiliyordu: ihlal yok, oyun devam.'; }},
+ hiza:{pred:inc=>inc.facts.some(f=>f.val==='Pas anında son ikinci savunmacıyla aynı hizada')&&inc.facts.some(f=>f.label==='Savunmacının dokunuşu'&&f.val==='Yok')&&inc.correct.d==='gol_gecerli',apply:inc=>{ inc.correct={d:'gol_iptal'}; inc.accept=[]; inc.partial=[]; inc.explain='1990’a kadar son ikinci savunmacıyla aynı hizada olmak da ofsayttı: gol iptal.'; }},
+ arkadan:{pred:inc=>inc.facts[0]&&inc.facts[0].val==='Arka taraftan'&&inc.correct.d!=='devam'&&inc.correct.c!=='kirmizi',apply:inc=>{ inc.correct={d:inc.correct.d==='avantaj'?'faul':inc.correct.d,c:'kirmizi'}; inc.accept=[]; inc.partial=[]; inc.explain='1998 talimatı: arkadan yapılan ve rakibin güvenliğini tehlikeye atan müdahale doğrudan kırmızı kart.'; }},
+ altin:{apply:inc=>{ inc.explain+=' Altın gol kuralı: uzatmada geçerli sayılan ilk gol maçı bitirir; kararın kupayı belirliyor.'; }},
+ var:{apply:inc=>{ inc.explain+=' 2018’de VAR yalnızca açık ve net hatalarda devreye giriyordu; son karar yine sahadaki hakemindi.'; }},
+};
+function zamanHTML(){
+  const st=legState(); const own=hasZaman();
+  return `<section class="panel stack leg zmn"><div class="row" style="justify-content:space-between"><h3>Zaman Yolculuğu</h3>${own?`<span class="chip">${ZAMAN.filter(x=>(st[x.id]||{}).best).length}/${ZAMAN.length}</span>`:`<span class="chip y">Ayrı paket</span>`}</div>
+    <p class="muted" style="font-size:14px">Futbolun farklı dönemlerine git, o yılların kurallarıyla düdük çal. Kart yokken nasıl ihraç edersin? Geri pas serbestken ne verirsin?</p>
+    <div class="leg-grid">${ZAMAN.map(sc=>{ const r=st[sc.id]||{}; return `<button class="leg-c zc ${own?'':'locked'}" data-leg="${sc.id}"><span class="zy num">${sc.year}</span><b>${esc(sc.name)}</b><small>${sc.inc.length} pozisyon</small><span class="leg-st">${own?[1,2,3].map(i=>`<i class="${i<=(r.best||0)?'on':''}">★</i>`).join(''):v11g('lock','#f6c62b',16)}</span></button>`; }).join('')}</div>
+    ${own?'':`<button class="btn primary" id="bZaman">Zaman Yolculuğu’nu aç · <span class="num" data-price="${SKU.zaman}">${priceOf(SKU.zaman)}</span></button>`}</section>`;
+}
+function zamanOpen(){
+  loadPrices(); const m=$('#modal');
+  m.innerHTML=`<div class="sheet pw" role="dialog" aria-modal="true" aria-label="Zaman Yolculuğu">
+    <div class="pw-hero"><button class="pw-x" id="bPwClose" aria-label="Kapat">×</button>${v11g('cal','#f6c62b',54)}<span class="pw-brand">Refmania<i></i></span><h2>Zaman Yolculuğu</h2><p>1930’dan 2018’e beş dönem, o yılların kurallarıyla. Tek seferlik satın alma.</p></div>
+    <div class="sh-body pw-body"><ul class="pw-perks">${ZAMAN.map(sc=>`<li>${v11g('cal','#f6c62b',26)}<span><b>${esc(sc.name)}</b><small>${esc(sc.rules[0])}</small></span></li>`).join('')}</ul>
+    <button class="btn primary lg pw-buy" data-sku="${SKU.zaman}"><span class="num" data-price="${SKU.zaman}">${priceOf(SKU.zaman)}</span><em>Zaman Yolculuğu’nu al</em></button>
+    <p class="pw-foot">Ayrı bir paket: Premium ve Tam Paket’e dahil değildir. Abonelik yok. <button class="linkbtn" id="bRestore">Satın alımları geri yükle</button></p></div></div>`;
+  m.hidden=false; $('#bPwClose').onclick=closePaywall; m.onclick=e=>{ if(e.target===m) closePaywall(); }; bindPacks(m);
 }
 function legendsHTML(){
   const st=legState();
   const star=n=>[1,2,3].map(i=>`<i class="${i<=n?'on':''}">★</i>`).join('');
   return `<section class="panel stack leg"><div class="row" style="justify-content:space-between"><h3>Efsane Maçlar</h3><span class="chip">${LEGENDS.filter(x=>(st[x.id]||{}).best).length}/${LEGENDS.length}</span></div>
     <p class="muted" style="font-size:14px">Tarihe geçecek maçlarda kritik anlar. Kariyerini etkilemez; her pozisyon için ${LEG_TIME} saniyen var.</p>
-    <div class="leg-grid">${LEGENDS.map(sc=>{ const r=st[sc.id]||{}; const open=legOpen(sc);
+    ${whistleRowHTML()}<div class="leg-grid">${LEGENDS.map(sc=>{ const r=st[sc.id]||{}; const open=legOpen(sc);
       return `<button class="leg-c ${open?'':'locked'}" data-leg="${sc.id}"><b>${esc(sc.name)}</b><small>${sc.inc.length} pozisyon${sc.free&&!hasAll()?' · ücretsiz':''}</small><span class="leg-st">${open?star(r.best||0):v11g('crown','#f6c62b',18)+' Tam Paket'}</span></button>`; }).join('')}</div></section>`;
 }
+function allScenarios(){ return LEGENDS.concat(typeof ZAMAN!=='undefined'?ZAMAN:[]); }
+function whistleRowHTML(){ const st=legState(); const all=allScenarios(); const got=all.filter(x=>(st[x.id]||{}).best).length;
+  return `<button class="wh-row" id="bWhistles">${v11g('whistle','#f6c62b',22)}<span><b>Düdük koleksiyonu</b><small>Her efsane maçı ve dönemi tamamlayınca o maçın düdüğü senin olur.</small></span><b class="num">${got}/${all.length}</b></button>`; }
+function whistlesOpen(){
+  const st=legState();
+  openModal(head('Efsane Maçlar','Düdük koleksiyonu',`<button class="btn sm" id="whX">Kapat</button>`)+`<div class="sh-body"><div class="wh-list">${allScenarios().map(sc=>{ const own=(st[sc.id]||{}).best; return `<div class="wh-it ${own?'on':''}">${v11g(own?'whistle':'lock',own?'#f6c62b':'#5b6676',26)}<span><b>${own?esc(sc.w[0]):'???'}</b><small>${own?esc(sc.w[1]):esc(sc.name)+' maçını tamamla.'}</small></span></div>`; }).join('')}</div></div>`,true);
+  $('#whX').onclick=()=>{ const m=$('#modal'); m.hidden=true; m.innerHTML=''; };
+}
 function legStart(id){
-  const sc=LEGENDS.find(x=>x.id===id); if(!sc) return;
-  if(!legOpen(sc)){ openPaywall('efsane'); return; }
+  const sc=allScenarios().find(x=>x.id===id); if(!sc) return;
+  if(!legOpen(sc)){ if(sc.pack==='zaman') zamanOpen(); else openPaywall('efsane'); return; }
   LEG={sc,i:0,c:0};
   const [H,A]=legTeams(sc);
-  openModal(head('Efsane Maçlar',esc(sc.name),`<button class="btn sm" id="lgX">Kapat</button>`)+`<div class="sh-body"><p class="story">${esc(sc.sub)}</p>
-    <p><b>${esc(H.name)}</b> – <b>${esc(A.name)}</b></p><div class="row">${sc.inc.map(([t,m])=>`<span class="chip num">${legMin(m)}</span>`).join('')}</div>
+  openModal(head(sc.pack==='zaman'?'Zaman Yolculuğu':'Efsane Maçlar',esc(sc.name),`<button class="btn sm" id="lgX">Kapat</button>`)+`<div class="sh-body"><p class="story">${esc(sc.sub)}</p>
+    <p><b>${esc(H.name)}</b> – <b>${esc(A.name)}</b></p>${sc.rules?`<div class="era-r"><span class="eyebrow gold">${sc.year} kuralları</span><ul>${sc.rules.map(r=>`<li>${esc(r)}</li>`).join('')}</ul></div>`:''}<div class="row">${sc.inc.map(([t,m])=>`<span class="chip num">${legMin(m)}</span>`).join('')}</div>
     <p class="muted" style="font-size:13.5px">${sc.inc.length} kritik pozisyon. Hepsini bil: 3 yıldız.</p><button class="btn primary lg" id="lgGo">Düdüğü çal</button></div>`,true);
   $('#lgX').onclick=legClose; $('#lgGo').onclick=legCase;
 }
@@ -2877,10 +2966,11 @@ function legResult(ans,late){
 function legEnd(){
   const sc=LEG.sc, n=sc.inc.length, c=LEG.c, stars=legStars(c,n); const st=legState(); const r=st[sc.id]||{}; const first=!r.best;
   st[sc.id]={best:Math.max(r.best||0,stars),plays:(r.plays||0)+1}; lsSet(LEG_KEY,JSON.stringify(st));
+  if(first&&stars>0&&sc.w) setTimeout(()=>toast('Koleksiyona eklendi: '+sc.w[0]),700);
   let gain=''; if(S&&first&&stars>0){ S.attrs.kural=clamp(S.attrs.kural+.2*(S.growth||1),0,99); save(); gain='Kural bilgisi +0.2'; }
-  const next=LEGENDS.find(x=>x.id!==sc.id&&legOpen(x)&&!(st[x.id]||{}).best);
-  openModal(head('Efsane Maçlar',esc(sc.name),'')+`<div class="sh-body"><div class="leg-end"><span class="leg-st big">${[1,2,3].map(i=>`<i class="${i<=stars?'on':''}">★</i>`).join('')}</span><b class="num">${c}/${n}</b><small>doğru karar</small></div>
-    ${gain?`<div class="row" style="justify-content:center"><span class="chip g">${gain}</span></div>`:''}<div class="row">${next?`<button class="btn primary" id="lgNext">Sıradaki: ${esc(next.name)}</button>`:''}${!hasAll()?`<button class="btn ${next?'':'primary'}" data-paywall="efsane" id="lgPw">${v11g('crown','#f6c62b',16)} Bütün efsane maçlar</button>`:''}<button class="btn" id="lgX">Kapat</button></div></div>`,true);
+  const next=(sc.pack==='zaman'?ZAMAN:LEGENDS).find(x=>x.id!==sc.id&&legOpen(x)&&!(st[x.id]||{}).best);
+  openModal(head(sc.pack==='zaman'?'Zaman Yolculuğu':'Efsane Maçlar',esc(sc.name),'')+`<div class="sh-body"><div class="leg-end"><span class="leg-st big">${[1,2,3].map(i=>`<i class="${i<=stars?'on':''}">★</i>`).join('')}</span><b class="num">${c}/${n}</b><small>doğru karar</small></div>
+    ${gain?`<div class="row" style="justify-content:center"><span class="chip g">${gain}</span></div>`:''}<div class="row">${next?`<button class="btn primary" id="lgNext">Sıradaki: ${esc(next.name)}</button>`:''}${!hasAll()&&sc.pack!=='zaman'?`<button class="btn ${next?'':'primary'}" data-paywall="efsane" id="lgPw">${v11g('crown','#f6c62b',16)} Bütün efsane maçlar</button>`:''}<button class="btn" id="lgX">Kapat</button></div></div>`,true);
   $('#lgX').onclick=legClose; const nx=$('#lgNext'); if(nx) nx.onclick=()=>legStart(next.id);
   const pw=$('#lgPw'); if(pw) pw.onclick=()=>{ legClose(); openPaywall('efsane'); };
 }
@@ -3428,6 +3518,7 @@ function buildMatch(fx){
   for(let i=0;i<nMaj;i++){ let t; let g=0; do{ t=wpick(weights); }while((used[t]||0)>=2&&g++<20); used[t]=(used[t]||0)+1; m.schedule.push({min:minPick(),kind:'inc',type:t,side:chance(H.str/(H.str+A.str))?0:1}); }
   const qs=fx.role==='var'?[]:fx.role==='ar'?shuffle(QUICK.filter(q=>q.need==='ar')).slice(0,ri(2,3)):shuffle(QUICK.filter(q=>!q.need&&(!q.needBooked||ri(0,1)))).slice(0,nQ);
   qs.forEach(q=>m.schedule.push({min:minPick(),kind:'quick',q:q.id,side:chance(.5)?0:1}));
+  if(!fx.role&&fx.kind!=='acad'&&chance(.4)) m.schedule.push({min:minPick(),kind:'olay',o:pick(OLAY_IDS),side:ri(0,1)});
   m.schedule.sort((a,b)=>a.min-b.min);
   return m;
 }
@@ -3499,6 +3590,7 @@ function openEvent(ev){
   if(ev.kind==='pen'){ const c=ctxFor(M,ev.side); const inc=GEN.penalti_atisi(c); inc.minute=M.minLabel(); return runIncident(inc); }
   if(ev.kind==='quick') return runQuick(ev);
   if(ev.kind==='mgmt') return runMgmt(ev);
+  if(ev.kind==='olay') return runOlay(ev);
   if(ev.kind==='uz') return runStoppage(ev.half);
   if(ev.kind==='ht') return runHalftime();
   if(ev.kind==='etb') return runEtBreak();
@@ -3562,7 +3654,7 @@ function computeVis(posQ){
 function obscureFacts(inc,vis){
   let nObs=0; inc.facts.forEach(f=>{ f.obs=false; f.hint=null; if(f.key && rand()>vis && !(easy()&&nObs>=1)){ nObs++; f.obs=true; const right=rand()<.6+vis*.25; f.hint= right? f.val : (f.alt||f.val); } });
 }
-function decisionTime(){ let t=DIFFS[S.diff].timer + (S.attrs.sogukkanlilik-50)/9 - (M.fx.imp>=4?2:0) - (M.fx.lvl>=5?1:0) + (S.upgrades.mentalkoc?3:0) + v11Mod('dt'); return clamp(Math.round(t),7,40); }
+function decisionTime(){ let t=DIFFS[S.diff].timer + (S.attrs.sogukkanlilik-50)/9 - (M.fx.imp>=4?2:0) - (M.fx.lvl>=5?1:0) + (S.upgrades.mentalkoc?3:0) + v11Mod('dt') + ((M&&M.dtMod)||0); return clamp(Math.round(t),7,40); }
 
 // ---------- auto resolve ----------
 function skillP(){ return clamp(.37+(S.attrs.kural+S.attrs.pozisyon+S.attrs.sogukkanlilik)/640,.45,.88); }
@@ -3686,6 +3778,63 @@ function runMgmt(ev){
   if(M.auto){ resolve(chance(.3+S.attrs.iletisim/140)?opts.find(x=>x[2])[0]:pick(opts.filter(x=>!x[2]))[0]); return; }
   M.modal=true; mgmtUI(text,opts,resolve,ex);
 }
+// =========================================================
+//   1.4: MAÇ İÇİ SÜRPRİZLER — kuralın değil sağduyunun sınandığı anlar
+// =========================================================
+const OLAYLAR={
+ elektrik:{text:c=>`Projektörler bir anda söndü! Stadyum karanlıkta, tribünlerden ıslıklar yükseliyor. Stadyum yetkilisi sorunun ne kadar süreceğini bilmiyor.`,
+  opts:[['soyunma','Takımları soyunma odasına al, yetkiliden net süre iste',1],['bekle','Oyuncuları sahada beklet',0],['tatil','Maçı hemen tatil et',0]],
+  ex:'Dış bir etken oyunu durdurduğunda önce güvenlik gelir: takımlar soyunma odasına alınır, yetkililerden süre istenir. Tatil kararı ancak makul bekleme ve ilgili talimatlar sonrasında verilir.',sec:240},
+ kaptan:{text:c=>`Maç çok gergin başladı, her ikili mücadelede itiş kakış var. Bir sonraki duran topta iki kaptanı yanına çağırma fırsatın var.`,
+  opts:[['ikisi','İki kaptanı birlikte çağır, sınırları netleştir',1],['tek','Sadece ev sahibi kaptanla konuş',0],['yok','Kimseyle konuşma, kartlar konuşsun',0]],
+  ex:'Kaptanları birlikte çağırmak tarafsızlık mesajı verir ve maçı yönetmenin en güçlü yoludur. Tek tarafla konuşmak taraf tutuyormuş gibi görünür.',sec:30},
+ tahta:{text:c=>`${c.D.name} teknik direktörü, kulübedeki taktik tahtasına adını ve "SATILDI" yazıp tribün kameralarına gösteriyor. Dördüncü hakem sana bakıyor.`,
+  opts:[['kirmizi','Teknik direktöre kırmızı kart',1],['sari','Teknik direktöre sarı kart',0],['rapor','Dördüncü hakeme rapora yazmasını söyle, oyunu sürdür',0]],
+  ex:'Hakemi aşağılayan ya da onuruna saldıran yazılı ya da hareketli ifade, takım yetkilileri için de kırmızı kart gerektirir. Rapora yazmak tek başına yetmez.',sec:60,coach:true},
+ zemin:{rain:true,text:c=>`Sağanak dinmedi. Ceza sahalarında su birikti, top birikintilerde duruyor ve oyuncular kayıyor.`,
+  opts:[['kontrol','Oyunu durdur, kaptanlarla birlikte zemini test et (top sektirme)',1],['devam','Devam et, iki takım için de koşullar aynı',0],['tatil','Maçı hemen tatil et',0]],
+  ex:'Zeminin oynanabilirliğine hakem karar verir. Önce durdurup test etmek gerekir; top zıplamıyorsa ve güvenlik riski varsa ara verilir, düzelmezse tatil düşünülür.',sec:180},
+ maskot:{text:c=>`Ev sahibi maskotu ${c.D.name} kalecisinin arkasında dans edip laf atıyor. Kaleci oyunu durdurmuş, sana el sallıyor.`,
+  opts:[['uzaklastir','Oyunu durdur, maskotu stadyum görevlileriyle uzaklaştırt',1],['kaleci','Kaleciye oyunu geciktirdiği için sarı göster',0],['devam','Görmezden gel, devam et',0]],
+  ex:'Oyunu etkileyen dış etkenleri uzaklaştırmak hakemin görevidir. Kalecinin itirazı haklı: oyun durdurulur, görevliler uyarılır ve oyun hakem atışıyla yeniden başlar.',sec:60},
+ cakmak:{text:c=>`Tribünden atılan bir çakmak, köşe vuruşunu kullanacak ${c.A.name} oyuncusunun hemen yanına düştü. Oyuncu yerde kafasını tutuyor.`,
+  opts:[['durdur','Oyunu durdur, sağlık ekibini çağır, anons yaptır',1],['devam','Oyuncu kalkınca devam et',0],['tatil','Maçı hemen tatil et',0]],
+  ex:'Yabancı cisim atıldığında oyun durdurulur, oyuncunun sağlığı kontrol edilir ve stadyum anonsuyla seyirci uyarılır. Tekrarı halinde maçın tatili gündeme gelir.',sec:120}
+};
+const OLAY_IDS=Object.keys(OLAYLAR);
+function runOlay(ev){
+  if(M.fx.role) return;
+  let id=ev.o; if(OLAYLAR[id].rain&&!M.rain) id=pick(OLAY_IDS.filter(k=>!OLAYLAR[k].rain));
+  const O=OLAYLAR[id]; const c=ctxFor(M,ev.side); const text=O.text(c); const opts=O.opts;
+  const resolve=(cid)=>{
+    const o=opts.find(x=>x[0]===cid)||opts[opts.length-1]; const ok=!!o[2];
+    if(O.coach&&(cid==='kirmizi'||cid==='sari')) giveCard(c.di,null,cid==='kirmizi',true);
+    stopAdd('Olay: '+o[1].split(',')[0],O.sec);
+    M.temp=clamp(M.temp+(ok?-14:+10),0,100);
+    const v=ok?'dogru':'hata';
+    M.log.push({cat:'mgmt',title:'Maç içi olay',min:M.minLabel(),text,your:o[1],correct:opts.find(x=>x[2])[1],v,explain:O.ex});
+    S.totals.decisions++; if(ok) S.totals.correct++;
+    feed(ok?'Hakem durumu soğukkanlılıkla yönetti.':'Hakemin kararı tribünlerde tepkiyle karşılandı.','sys');
+    return v;
+  };
+  if(M.auto){ resolve(chance(.4+S.attrs.sogukkanlilik/160)?opts.find(x=>x[2])[0]:pick(opts.filter(x=>!x[2]))[0]); return; }
+  M.modal=true; mgmtUI(text,opts,resolve,O.ex);
+}
+// ---------- 1.4: maçtan önceki gece — nefes mini oyunu ----------
+function sleepGame(next){
+  const ov=$('#overlay'); let hits=0, round=0, t0=performance.now(), raf=0, done=false;
+  openModal(head('Maçtan önceki gece','Uyku tutmuyor','')+`<div class="sh-body"><p class="story">Yarın büyük maç var ve gözüne uyku girmiyor. Nefesini düzenle: halka en büyük olduğunda dokun.</p>
+    <div class="sl-wrap"><div class="sl-ring" id="slR"></div><span class="sl-c num" id="slC">0/3</span></div>
+    <button class="btn primary lg" id="slT" style="width:100%">Nefes al</button><p class="muted" id="slM" style="min-height:20px;text-align:center"></p></div>`,true);
+  const R=$('#slR'), size=()=>{ const ph=((performance.now()-t0)/2600)%1; return (1-Math.cos(ph*2*Math.PI))/2; };
+  const loop=()=>{ if(done||!R.isConnected) return; const k=size(); R.style.transform=`scale(${.35+.65*k})`; R.style.opacity=.45+.55*k; raf=requestAnimationFrame(loop); };
+  loop();
+  $('#slT').onclick=()=>{ if(done) return; const k=size(); round++; const ok=k>.82; if(ok) hits++; haptic(ok?'light':'medium');
+    $('#slM').textContent=ok?'Derin bir nefes… iyi.':'Acele ettin.'; $('#slC').textContent=hits+'/3';
+    if(round>=3){ done=true; cancelAnimationFrame(raf); const good=hits>=2; M.dtMod=good?2:-3;
+      $('#slM').textContent=good?'Uykuya daldın. Yarın kararların için +2 sn düşünme süren var.':'Sabaha kadar döndün durdun. Yarın kararların için 3 sn daha az süren var.';
+      $('#slT').textContent='Sabah oldu'; $('#slT').onclick=()=>{ const m=$('#modal'); m.hidden=true; m.innerHTML=''; next(); }; done=true; setTimeout(()=>{},0); } };
+}
 function stoppageRec(half){ const s=M.stop[half].reduce((a,x)=>a+x.sec,0); return Math.max(half===1?1:2, Math.round(s/60)); }
 function runStoppage(half){
   const rec=stoppageRec(half);
@@ -3784,12 +3933,13 @@ function computeRating(){
 function startMatch(fxId,auto){
   const fx = fxById(fxId); if(!fx) return;
   M=buildMatch(fx); M.auto=!!auto; if(auto) SC=null;
+  if(S.fav&&!fx.role){ if(fx.home===S.fav) M.favSide=0; else if(fx.away===S.fav) M.favSide=1; if(M.favSide!=null) M.temp=clamp(M.temp+6,0,100); }
   if(auto){
     M.temp=clamp(M.temp-5,0,100);
     let g=0; while(!M.done && g++<5000) tick();
     return;
   }
-  prematchUI();
+  if(!M.fx.role&&(M.fx.derby||M.fx.imp>=4)&&chance(.35)) sleepGame(prematchUI); else prematchUI();
 }
 function fxById(id){ if(S.tournament&&S.tournament.fx&&S.tournament.fx.id===id) return S.tournament.fx; return S.tasks&&S.tasks.matches.find(m=>m.id===id); }
 function kickOff(prep){
@@ -3827,7 +3977,7 @@ function finishMatch(){
     if(lost && fx.imp>=2){ mail(t.name+' Kulübü','Resmi açıklama: "Hakem hatası sonucu etkiledi"','Kulübümüz '+errs[0].min+' dakikadaki "'+errs[0].title.toLowerCase()+'" kararını Tahkim\'e ve Hakem Kurulu\'na taşıyacaktır. Hakemin performansı kabul edilemez.','club'); S.rep=clamp(S.rep-1.5,0,100); report.clubComplaint=t.name; } }
   if(rating<7.3 && fx.kind==='dom'){ S.suspended=1; mail('Hakem Kurulu','Performans değerlendirmesi','Gözlemci notun '+f1(rating)+'. Gelecek hafta görev verilmeyecek; video analize odaklanmanı öneriyoruz.','fed'); }
   if(rating>=8.8) mail('Gözlemci','Maç sonu not: '+f1(rating),'Pozisyon alma, kart yönetimi ve iletişim üst düzeydi. '+(fx.imp>=4?'Bu ölçekte bir maçta bu sakinlik kurul tarafından not edildi.':''),'obs');
-  dstatAdd(M.log);
+  dstatAdd(M.log); afterMatchExtras(report,fx);
   S.history.unshift({season:S.season,week:S.week,comp:fx.compName,stage:fx.stage,home:fx.home,away:fx.away,score:M.score.slice(),pens:M.pens||null,et:!!M.et,rating,kind:fx.kind});
   if(S.history.length>200) S.history.length=200;
   v11AfterMatch(report,fx);
@@ -3966,6 +4116,7 @@ function kitsFor(H,A){
   const dark=[hk.shirt,ak.shirt].some(c=>lum(c)<.16);
   let rk={shirt:dark?'#c9f03d':'#121519',shorts:'#111',socks:'#111',numCol:'#000'};
   { const K=hasAll()&&S&&S.refKit&&REF_KITS.find(k=>k.id===S.refKit); if(K&&K.shirt&&[hk.shirt,ak.shirt,hk.shorts,ak.shorts].every(c=>c&&kitDist(c,K.shirt)>95)) rk={shirt:K.shirt,shorts:K.shorts,socks:K.socks,numCol:'#000'}; }
+  if(S&&S.fifa) rk.badge=true;
   return [hk,ak,rk];
 }
 function kitDist(a,b){ const h=x=>{ x=String(x).replace('#',''); if(x.length===3) x=x.split('').map(c=>c+c).join(''); return [0,2,4].map(i=>parseInt(x.substr(i,2),16)||0); }; const p=h(a),q=h(b); return Math.hypot(p[0]-q[0],p[1]-q[1],p[2]-q[2]); }
@@ -4535,6 +4686,7 @@ function drawFig(ctx,c,a){
     if(O&&Ex&&Ey){ const k=hN/100/.1; ctx.save(); ctx.globalAlpha=vis; ctx.setTransform((Ex[0]-O[0])*k,(Ex[1]-O[1])*k,(Ey[0]-O[0])*k,(Ey[1]-O[1])*k,O[0],O[1]);
       const nc=numInk(kit); ctx.font='800 100px Archivo,"Arial Narrow",sans-serif'; try{ ctx.fontStretch='condensed'; }catch(e){} ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.lineJoin='round';
       ctx.lineWidth=10; ctx.strokeStyle=nc.edge; ctx.strokeText(a.num,0,4); ctx.fillStyle=nc.fill; ctx.fillText(a.num,0,4); ctx.restore(); } }
+  if(kit.badge && back<-.1 && sc>9 && fall<.45){ const bp=P(c,at(hipH+.42,.075,lean*.6+.125)); if(bp){ const r=Math.max(1.2*c.dpr,.028*sc); ctx.fillStyle='#f6c62b'; ctx.beginPath(); ctx.arc(bp[0],bp[1],r,0,Math.PI*2); ctx.fill(); ctx.fillStyle='#1d3f8f'; ctx.beginPath(); ctx.arc(bp[0],bp[1],r*.55,0,Math.PI*2); ctx.fill(); } }
   arm(N,false);
   cap(S2.nk,S2.hd,.06,.056,skin,true);
   // head: shaded sphere, hair cap that wraps to the back
@@ -4550,7 +4702,7 @@ function drawFig(ctx,c,a){
       const e1=P(c,at(hipH+.745,.036,lean*1.12+headF+.105)), e2=P(c,at(hipH+.745,-.036,lean*1.12+headF+.105)), ns=P(c,at(hipH+.715,0,lean*1.12+headF+.12));
       ctx.fillStyle='rgba(20,14,10,.85)'; [e1,e2].forEach(e=>{ if(e){ ctx.beginPath(); ctx.arc(e[0],e[1],Math.max(.8*c.dpr,.011*sc),0,Math.PI*2); ctx.fill(); } });
       if(ns){ ctx.fillStyle=shadeHex(skin,.8); ctx.beginPath(); ctx.arc(ns[0],ns[1]+.008*sc,Math.max(.6*c.dpr,.012*sc),0,Math.PI*2); ctx.fill(); } } }
-  if(a.card){ const hw=S2.wR; const w=Math.max(6*c.dpr,.11*sc), h=Math.max(8*c.dpr,.15*sc); ctx.save(); ctx.translate(hw[0],hw[1]-h*.55); ctx.rotate(-.15); ctx.shadowColor=a.card==='r'?'rgba(255,80,90,.9)':'rgba(255,215,80,.9)'; ctx.shadowBlur=10*c.dpr; ctx.fillStyle=a.card==='r'?'#e3434b':'#f6c62b'; ctx.fillRect(-w/2,-h/2,w,h); ctx.restore(); }
+  if(a.card){ const hw=S2.wR; const w=Math.max(6*c.dpr,.11*sc), h=Math.max(8*c.dpr,.15*sc); const ks=(S&&S.settings&&S.settings.kstil)||'klasik'; ctx.save(); ctx.translate(hw[0],hw[1]-h*(ks==='dik'?1.05:.55)); ctx.rotate(ks==='dik'?0:ks==='yan'?-.55:-.15); ctx.shadowColor=a.card==='r'?'rgba(255,80,90,.9)':'rgba(255,215,80,.9)'; ctx.shadowBlur=10*c.dpr; ctx.fillStyle=a.card==='r'?'#e3434b':'#f6c62b'; ctx.fillRect(-w/2,-h/2,w,h); ctx.restore(); }
   if(a.flag){ const f0=P(c,at(1.95,.34,0)); if(f0){ ctx.fillStyle=a.flagUp?'#ffd84a':'#f2b81f'; ctx.fillRect(f0[0],f0[1]-(a.flagUp?.25*sc:0),.32*sc,.24*sc); } }
   if(a.label && sc>3){ const fs=11*c.dpr; ctx.font=`600 ${fs}px Archivo,sans-serif`; const w=ctx.measureText(a.label).width+fs*.9; const x=S2.hd[0]-w/2, y=S2.hd[1]-.25*sc-fs*1.9; ctx.fillStyle='rgba(8,13,20,.86)'; rrect(ctx,x,y,w,fs*1.55,fs*.4); ctx.fill(); ctx.fillStyle='#fff'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(a.label,S2.hd[0],y+fs*.8); }
 }
@@ -4785,7 +4937,7 @@ function prematchUI(){
   const fx=M.fx; const ov=$('#overlay'); ov.hidden=false; document.body.style.overflow='hidden';
   SC=newScene(M.H,M.A); SC.mode='stopped';
   const weather=pick(['Açık, 17°C','Yağmurlu, zemin kaygan','Rüzgârlı, 11°C','Serin ve sisli','Sıcak ve nemli, 29°C']);
-  if(/sisli/.test(weather)) M.visMod-=.04; if(/Yağmur/.test(weather)) M.temp+=3;
+  if(/sisli/.test(weather)) M.visMod-=.04; if(/Yağmur/.test(weather)) M.temp+=3; M.rain=/Yağmur/.test(weather);
   const crowd = Math.round((fx.lvl*9000+fx.imp*6000+ri(800,4000))/100)*100;
   ov.innerHTML=`<div class="ov-in match">
     <div class="mtop"><div style="min-width:0"><div class="eyebrow">${esc(fx.compName)} · ${esc(stageTxt(fx.stage))}</div><h2>Maç öncesi</h2></div><button class="btn sm" id="bBack">Vazgeç</button></div>
@@ -4794,7 +4946,7 @@ function prematchUI(){
       <div class="panel stack"><h3>Maç dosyası</h3>
         ${stakesText(fx).map(p=>`<div class="row"><span class="dot-y"></span><span>${esc(p)}</span></div>`).join('')}
         <div class="row muted" style="font-size:14px"><span>${esc(weather)}</span><span>·</span><span>~${crowd.toLocaleString('tr-TR')} seyirci</span></div>
-        <div class="row">${fx.vr?'<span class="chip b">VAR</span>':'<span class="chip a">VAR yok</span>'}${fx.glt?'<span class="chip b">Gol çizgisi teknolojisi</span>':''}<span class="chip">Önem ${'★'.repeat(Math.round(fx.imp))}</span><span class="chip g">${moneyShort(fx.fee)}</span></div>
+        <div class="row">${M.favSide!=null?'<span class="chip a">Tuttuğun takımın maçı · baskı yüksek</span>':''}${fx.vr?'<span class="chip b">VAR</span>':'<span class="chip a">VAR yok</span>'}${fx.glt?'<span class="chip b">Gol çizgisi teknolojisi</span>':''}<span class="chip">Önem ${'★'.repeat(Math.round(fx.imp))}</span><span class="chip g">${moneyShort(fx.fee)}</span></div>
         <div class="muted" style="font-size:13px">Yardımcılar ${esc(S.crew.ar1)}, ${esc(S.crew.ar2)} · 4. hakem ${esc(S.crew.fourth)}${fx.vr?' · VAR '+esc(S.crew.var):''}</div>
       </div>
       <div class="panel stack"><h3>Hazırlık</h3>
@@ -5000,6 +5152,20 @@ function leagueHTML(){
       <footer class="lt-leg">${[...zs.entries()].map(([k,v])=>`<span><i class="lz z-${k}"></i>${esc(v)}</span>`).join('')}${LG_VIEW===S.leagueKey?`<span><em>${WHISTLE_MINI}</em>Bu sezon maçını yönettiğin takım</span>`:''}</footer></section>`;
 }
 const WHISTLE_MINI='<svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M2 8.5a4 4 0 0 0 7.6 1.7L14 9V6H7.3A4 4 0 0 0 2 8.5z" fill="currentColor"/><circle cx="6" cy="8.6" r="1.3" fill="#0b111b"/></svg>';
+function lifeHTML(){
+  const a=S.aile??70; const N=S.neutral; const fav=S.fav&&TEAM[S.fav];
+  const neu=N&&N.n?Math.round(100-clamp((N.pro-N.con)/N.n*35,0,100)):null;
+  return `<div class="panel stack life"><h3>Hayatın</h3>
+    <div class="life-r"><span>Aile</span><i class="pro-bar"><i style="width:${a}%;background:${a>=60?'var(--green)':a>=35?'var(--yellow)':'var(--red)'}"></i></i><b class="num">${Math.round(a)}</b></div>
+    <small class="muted">${a>=60?'Evde her şey yolunda; haftalık toparlanman artıyor.':a>=35?'Aile biraz ihmal edildi.':'Ailen seni özlüyor; toparlanman düşüyor.'}</small>
+    ${fav?`<div class="life-r"><span>Tarafsızlık</span><i class="pro-bar"><i style="width:${neu??100}%;background:var(--blue)"></i></i><b class="num">${neu==null?'—':neu}</b></div><small class="muted">Tuttuğun takım: ${esc(fav.name)}${N&&N.n?` · ${N.n} maçını yönettin`:''}</small>`:''}
+  </div>`;
+}
+function museumHTML(){
+  const L=S.museum||[]; if(!L.length) return '';
+  return `<div class="panel stack"><div class="row" style="justify-content:space-between"><h3>Kırmızı kart müzesi</h3><span class="chip">${L.length}</span></div>
+    <div class="mus-list">${L.slice(0,12).map(x=>`<div class="mus-it"><i class="mini-card r"></i><span><b>${esc(x.l)}</b><small>${esc(x.t)} – ${esc(x.o)} · ${esc(x.min)} · ${esc(x.comp)} · ${esc(seasonLabel(x.s))}</small></span></div>`).join('')}</div></div>`;
+}
 function careerStatsHTML(t){
   const acc=t.decisions?Math.round(t.correct/t.decisions*100):0;
   const c=[['Maç',t.matches],['Sarı kart',t.yellows],['Kırmızı kart',t.reds],['Penaltı',t.pens],['VAR',t.var],['İsabet','%'+acc]];
@@ -5437,7 +5603,25 @@ function endedHTML(){
   return `<div class="panel stack"><div class="eyebrow">${S.banned?'Lisans iptal edildi':'Kariyer sona erdi'}</div><h2 style="font-size:40px">${esc(S.name)}</h2>${S.banned?'<p class="muted">Şike soruşturması sonucu futboldan ömür boyu men edildin. Düdüğün artık susuyor.</p>':`<p class="muted">${esc(rankText())} olarak emekli oldun.</p>`}
     <div class="grid3"><div><div class="eyebrow">Maç</div><div class="num" style="font-size:30px">${t.matches}</div></div><div><div class="eyebrow">Doğru karar oranı</div><div class="num" style="font-size:30px">%${t.decisions?Math.round(t.correct/t.decisions*100):0}</div></div><div><div class="eyebrow">Kariyer anı</div><div class="num" style="font-size:30px">${ms.length}/${MILESTONES.length}</div></div></div>
     <div class="trophies">${ms.map(m=>`<div class="trophy on"><b>${esc(m.name)}</b>${esc(S.milestones[m.id])}</div>`).join('')}</div>
+    ${S.banned?'':farewellHTML()}
     <div><button class="btn primary" id="bNewCareer">Yeni kariyer</button></div></div>`;
+}
+// ---------- 1.4: son maç — emeklilik töreni ----------
+function farewellHTML(){
+  const H=S.history||[]; if(!H.length) return '';
+  const first=H[H.length-1], best=H.reduce((a,b)=>b.rating>a.rating?b:a,H[0]);
+  const tn=id=>TEAM[id]?TEAM[id].name:'';
+  const reds=(S.museum||[]).length, seasons=(S.seasons||[]).length, legs=Object.values(legState()).filter(x=>x.best).length;
+  const lines=[
+    `İlk maçın: ${tn(first.home)} – ${tn(first.away)}, ${seasonLabel(first.season)}.`,
+    `En iyi gecen: ${tn(best.home)} – ${tn(best.away)}, gözlemci notu ${f1(best.rating)}.`,
+    `${seasons} sezon, ${S.totals.matches} maç, ${S.totals.reds} kırmızı kart${reds?`; müzende ${reds} kart duruyor`:''}.`,
+    legs?`Koleksiyonunda ${legs} efsane düdük var.`:'',
+    S.story&&S.story.done&&S.story.done.genc2?'Yetiştirdiğin genç hakem bugün tribünde, gözleri dolu.':'',
+    (S.aile??70)>=60?'Ailen en önde; ellerinde "İyi ki düdüğü sen çaldın" yazan bir pankart var.':'Ailen tribünde; bundan sonra hafta sonları onların.'
+  ].filter(Boolean);
+  return `<section class="farewell"><div class="fw-h"><span class="eyebrow gold">Son maç</span><h3>Oyuncular sana koridor açtı</h3><p class="muted">Son düdüğünü çaldığında iki takım da sahada kaldı. Tribünler adını söylüyor.</p></div>
+    <ol class="fw-l">${lines.map(l=>`<li>${esc(l)}</li>`).join('')}</ol></section>`;
 }
 let MAIL_SEL=null, MAIL_F='all';
 const MAIL_CATS={all:'Tümü',fed:'Kurul ve federasyon',offer:'Teklifler',media:'Medya',warn:'Uyarılar'};
@@ -5475,7 +5659,9 @@ function careerHTML(){
   const t=S.totals;
   return `<div class="grid2"><div class="panel stack"><h2>Kariyer basamakları</h2><div class="ladder">${st.map((x,i)=>`<div class="rung ${x[2]?'done':i===cur?'cur':''}"><span class="dot"></span><div><b>${esc(x[0])}</b><div class="req">${esc(x[1])}</div></div><span class="chip ${x[2]?'g':i===cur?'y':''}">${x[2]?'Tamam':i===cur?'Hedef':'Kilitli'}</span></div>`).join('')}</div></div>
     <div class="stack" style="gap:16px">${careerStatsHTML(t)}
+    ${lifeHTML()}
     ${trophiesHTML()}
+    ${museumHTML()}
     <div class="panel stack"><h3>Sezonlar</h3>${S.seasons.length?`<div class="tbl-wrap"><table><thead><tr><th>Sezon</th><th>Lig</th><th class="n">Maç</th><th class="n">Lig</th><th class="n">Ulusl.</th><th>Not</th></tr></thead><tbody>${S.seasons.slice().reverse().map(s=>`<tr><td>${seasonLabel(s.season)}</td><td>${esc(s.league)}</td><td class="n">${s.matches}</td><td class="n">${s.dAvg?f1(s.dAvg):'—'}</td><td class="n">${s.iAvg?f1(s.iAvg):'—'}</td><td>${s.award?'<span class="chip y">Yılın hakemi</span>':''}${s.tour?`<span class="chip b">${esc(s.tour)}</span>`:''}</td></tr>`).join('')}</tbody></table></div>`:'<p class="muted">İlk sezonun devam ediyor.</p>'}</div>
     ${recentHTML()}</div></div>`;
 }
@@ -5494,6 +5680,27 @@ function radarSVG(vals){ const keys=Object.keys(ATTR_NAMES), n=keys.length, R=96
     <polygon points="${poly}" fill="rgba(242,194,48,.22)" stroke="#f2c230" stroke-width="2.2" stroke-linejoin="round"/>
     ${keys.map((k,i)=>{ const p=pt(i,R*clamp(vals[k],0,99)/99); return `<circle cx="${p[0]}" cy="${p[1]}" r="3.6" fill="#f2c230"/>`; }).join('')}
     ${keys.map((k,i)=>{ const p=pt(i,R+16); return `<text x="${p[0]}" y="${p[1]-2}" text-anchor="middle" class="rd-l">${Math.round(vals[k])}</text><text x="${p[0]}" y="${p[1]+11}" text-anchor="middle" class="rd-n">${esc(ATTR_NAMES[k])}</text>`; }).join('')}</svg>`; }
+// ---------- 1.4: maç sonrası — kart müzesi, viral an, mektup, tarafsızlık ----------
+function afterMatchExtras(report,fx){
+  try{
+    S.museum=S.museum||[];
+    M.cardsLog.filter(c=>c.red).forEach(c=>{ const t=c.side===0?M.H:M.A, o=c.side===0?M.A:M.H; S.museum.unshift({l:c.label,t:t.name,o:o.name,min:c.min,s:S.season,comp:fx.compName}); });
+    if(S.museum.length>60) S.museum.length=60;
+    if(!M.auto&&M.cardsLog.some(c=>c.red)&&fx.imp>=3&&chance(.3)){
+      const f=engage(1500); S.social.followers+=f;
+      addPost({a:{n:'Tribün Kamerası',h:'@tribunkamerasi',role:'Futbol videoları',v:0},text:`${S.name} kırmızı kartı öyle bir gösterdi ki sosyal medya yıkıldı. Herkes "Refmania pozu"nu deniyor. #RefmaniaPozu`,likes:engage(5000),rts:engage(2200),aboutMe:true});
+      setTimeout(()=>toast('Viral oldun! Kart gösterişin dolaşıyor · Takipçi +'+f),1200);
+    }
+    if(report.clubComplaint){ const st=storyEnsure(); if(!st.done.mektup&&!st.q.some(x=>x.id==='mektup')&&chance(.6)) st.q.push({id:'mektup',at:S.season*100+S.week+1}); }
+    if(M.favSide!=null){
+      const fs=M.favSide; const errs=M.log.filter(d=>d.cat==='major'&&(d.v==='hata'||d.v==='israr')&&d.harmed!=null);
+      const pro=errs.filter(d=>d.harmed===1-fs).length, con=errs.filter(d=>d.harmed===fs).length;
+      const N=S.neutral=S.neutral||{n:0,pro:0,con:0}; N.n++; N.pro+=pro; N.con+=con;
+      if(pro>con){ S.kurul.trust=clamp(S.kurul.trust-3,0,100); addPost({a:PRESS[1],text:`${S.name} tuttuğu takımın maçında hatalarını hep aynı tarafa yaptı. Tesadüf mü? #hakem`,likes:engage(900),rts:engage(300),aboutMe:true}); }
+      else if(!errs.length) S.rep=clamp(S.rep+1,0,100);
+    }
+  }catch(e){}
+}
 // ---------- Hakem Raporu: pozisyon türüne göre karar istatistiği (ayrıntısı Premium) ----------
 const OKV=['dogru','kabul','durdu'], BADV=['hata','israr','var'];
 function dstatAdd(log){
@@ -5564,6 +5771,9 @@ function settingsHTML(){
   return `<div class="grid2"><div class="panel stack"><h2>Ayarlar</h2>
     ${tg('feedback','Anında geri bildirim','Her karardan sonra doğrusunu ve gerekçesini gösterir.')}${tg('pos','Konum alma aşaması','Pozisyon öncesi nerede duracağını sen seçersin.')}${tg('sound','Düdük sesi','Kararlarda düdük çalar.')}
     <div><label class="lbl" for="set_wsnd">Düdük tonu</label><select id="set_wsnd"><option value="klasik">Klasik</option><option value="keskin" ${isPremium()&&st.wsnd==='keskin'?'selected':''}>Keskin${isPremium()?'':' · Premium'}</option><option value="derin" ${isPremium()&&st.wsnd==='derin'?'selected':''}>Derin${isPremium()?'':' · Premium'}</option></select></div>
+    <div><label class="lbl" for="set_kstil">Kart gösterme stilin</label><select id="set_kstil"><option value="klasik">Klasik</option><option value="dik" ${st.kstil==='dik'?'selected':''}>Dimdik, kol tam yukarıda</option><option value="yan" ${st.kstil==='yan'?'selected':''}>Yana yatık, rahat</option></select></div>
+    <div><label class="lbl" for="set_dstil">Düdük çalışın</label><select id="set_dstil"><option value="tek">Tek, kısa</option><option value="cift" ${st.dstil==='cift'?'selected':''}>Çift, kesik kesik</option></select></div>
+    <div><label class="lbl" for="set_fav">Tuttuğun takım</label><select id="set_fav"><option value="">Söylemek istemiyorum</option>${Object.keys(S.table||{}).map(id=>TEAM[id]).filter(Boolean).sort((a,b)=>a.name.localeCompare(b.name)).map(t=>`<option value="${esc(t.id)}" ${S.fav===t.id?'selected':''}>${esc(t.name)}</option>`).join('')}</select><small class="muted">Bu takımın maçlarında baskı artar; hataların hangi tarafa olduğu izlenir.</small></div>
     <div><label class="lbl" for="set_diff">Zorluk</label><select id="set_diff">${Object.entries(DIFFS).map(([k,d])=>`<option value="${k}" ${S.diff===k?'selected':''}>${d.name} — ${d.desc}</option>`).join('')}</select></div></div>
     <div class="panel stack"><h3>Kayıt</h3><p class="muted" style="font-size:13px">Oyun bu tarayıcıda otomatik kaydedilir. Başka cihaza taşımak için kayıt kodunu kopyala.</p>
       <textarea id="saveCode" rows="4" readonly>${exportCode()}</textarea><div class="row"><button class="btn sm" id="bCopy">Kodu kopyala</button></div>
@@ -5576,7 +5786,7 @@ function bindMain(){
   q('[data-post]').forEach(b=>b.onclick=()=>myPost(b.dataset.post));
   q('[data-lg]').forEach(b=>b.onclick=()=>{ LG_VIEW=b.dataset.lg; render(); });
   q('[data-at]').forEach(b=>b.onclick=()=>{ ACAD_TOPIC=b.dataset.at; render(); });
-  { const bc=$('#bCase'); if(bc) bc.onclick=()=>acadStart(false); const be=$('#bExam'); if(be) be.onclick=()=>acadStart(true); document.querySelectorAll('[data-leg]').forEach(b=>b.onclick=()=>legStart(b.dataset.leg)); }
+  { const bc=$('#bCase'); if(bc) bc.onclick=()=>acadStart(false); const be=$('#bExam'); if(be) be.onclick=()=>acadStart(true); document.querySelectorAll('[data-leg]').forEach(b=>b.onclick=()=>legStart(b.dataset.leg)); const bw=$('#bWhistles'); if(bw) bw.onclick=whistlesOpen; const bz=$('#bZaman'); if(bz) bz.onclick=zamanOpen; }
   q('[data-igt]').forEach(b=>b.onclick=()=>{ IG_TAB=b.dataset.igt; render(); });
   q('[data-igg]').forEach(b=>b.onclick=()=>{ IG_GRID=b.dataset.igg; render(); });
   q('[data-like]').forEach(b=>b.onclick=()=>{ const p=S.social.posts.find(x=>x.id===b.dataset.like); if(!p) return; p.liked=!p.liked; haptic('light'); save(); const art=b.closest('.igp'); if(art){ art.outerHTML=igPost(p); bindMain(); } });
@@ -5599,6 +5809,9 @@ function bindMain(){
   q('[data-up]').forEach(b=>b.onclick=()=>{ const u=UPGRADES.find(x=>x.id===b.dataset.up); if(S.money>=u.cost){ S.money-=u.cost; tx(u.name,-u.cost,'ekip'); S.upgrades[u.id]=true; toast(u.name+' ekibine katıldı'); save(); render(); } });
   q('[data-eng]').forEach(b=>b.onclick=()=>{ const c=[0,60000,90000,140000][S.english+1]; if(S.money>=c){ S.money-=c; tx('İngilizce kursu · '+ENGLISH[S.english+1],-c,'egitim'); S.english++; toast('İngilizce seviyen: '+ENGLISH[S.english]); save(); render(); } });
   q('[data-set]').forEach(b=>b.onchange=()=>{ S.settings[b.dataset.set]=b.checked; save(); });
+  const ks=$('#set_kstil'); if(ks) ks.onchange=()=>{ S.settings.kstil=ks.value; save(); };
+  const ds=$('#set_dstil'); if(ds) ds.onchange=()=>{ S.settings.dstil=ds.value; save(); whistle(); };
+  const fv=$('#set_fav'); if(fv) fv.onchange=()=>{ S.fav=fv.value||null; save(); toast(S.fav?'Tuttuğun takım kaydedildi':'Tuttuğun takım kaldırıldı'); };
   const ws=$('#set_wsnd'); if(ws) ws.onchange=()=>{ const v=ws.value; if(v!=='klasik'&&!isPremium()){ ws.value='klasik'; openPaywall('ses'); return; } S.settings.wsnd=v; save(); whistle(); };
   const bw=$('#bWeek'); if(bw) bw.onclick=finishWeek;
   document.querySelectorAll('#tNews [data-ns]').forEach(b=>b.onclick=e=>{ e.stopPropagation(); NEWS_I=+b.dataset.ns; document.querySelectorAll('#tNews .tn-s').forEach((x,i)=>x.classList.toggle('on',i===NEWS_I)); document.querySelectorAll('#tNews [data-ns]').forEach((x,i)=>x.classList.toggle('on',i===NEWS_I)); });
@@ -5626,8 +5839,10 @@ const SKU={
   prem:'com.sonduduk.hakem.premium',   // Premium · 3,99 $ : reklamsız, ödüller anında, 250.000 ₺, 2 özel ekipman
   tam:'com.sonduduk.hakem.tampaket',   // Tam Paket · 5,99 $ : Premium + Lüks Yaşam Koleksiyonu + Altın Hakem Formaları + 500.000 ₺ daha
   deal:'com.sonduduk.hakem.firsat',    // Tam Paket Fırsatı · 2,99 $ : yalnızca süreli pencerelerde (Hoş geldin 72 sa, ilk terfi 24 sa)
-  up:'com.sonduduk.hakem.yukseltme'    // Tam Paket'e yükseltme · 2,99 $ : yalnızca Premium sahibine
+  up:'com.sonduduk.hakem.yukseltme',   // Tam Paket'e yükseltme · 2,99 $ : yalnızca Premium sahibine
+  zaman:'com.sonduduk.hakem.zaman'     // Zaman Yolculuğu · 1,99 $ / 99,99 ₺ : ayrı paket, Tam Paket'e dahil değil
 };
+function hasZaman(){ return OWNED.has(SKU.zaman); }
 const ALL_SKUS=Object.values(SKU);
 const PREMIUM_ID=SKU.prem;
 const PREM_KEY='sonduduk_premium', OWN_KEY='refmania_owned';
@@ -6083,7 +6298,7 @@ function v11ReportExtras(r){
 }
 // ---------- satın alma (StoreKit 2) ----------
 const PRICES={};
-const PRICE_FB={[SKU.prem]:'3,99 $',[SKU.tam]:'5,99 $',[SKU.deal]:'2,99 $',[SKU.up]:'2,99 $'};
+const PRICE_FB={[SKU.prem]:'3,99 $',[SKU.tam]:'5,99 $',[SKU.deal]:'2,99 $',[SKU.up]:'2,99 $',[SKU.zaman]:'1,99 $'};
 const priceOf=id=>PRICES[id]||PRICE_FB[id];
 const iapDemo=()=>!!window.SD_IAP_DEMO;
 let PRICES_LOADING=null;
@@ -6095,12 +6310,13 @@ function loadPrices(){
 }
 const dealReady=()=>iapDemo()||!!PRICES[SKU.deal];
 function afterGrant(){ if(S){ v11Ensure(); save(); } closePaywall(); render(); }
+function skuThanks(id){ return id===SKU.zaman?'Zaman Yolculuğu açıldı. İyi yolculuklar!':id===SKU.prem?'Premium etkin. Teşekkürler!':'Tam Paket etkin. Teşekkürler!'; }
 async function buySku(id){
   const N=NV();
-  if(iapDemo()){ grantSku(id); haptic('success'); toast(id===SKU.prem?'Premium etkin. Teşekkürler!':'Tam Paket etkin. Teşekkürler!'); afterGrant(); return; }
+  if(iapDemo()){ grantSku(id); haptic('success'); toast(skuThanks(id)); afterGrant(); return; }
   if(!N||!N.iapOn){ toast('Paketler yalnızca App Store sürümünde satın alınabilir.'); return; }
   const res=await N.iap.buy(id);
-  if(res==='ok'){ grantSku(id); haptic('success'); toast(id===SKU.prem?'Premium etkin. Teşekkürler!':'Tam Paket etkin. Teşekkürler!'); afterGrant(); }
+  if(res==='ok'){ grantSku(id); haptic('success'); toast(skuThanks(id)); afterGrant(); }
   else if(res==='pending') toast('Satın alma onay bekliyor.');
   else if(res==='error') toast('Satın alma tamamlanamadı. Daha sonra tekrar dene.');
 }
@@ -6389,7 +6605,7 @@ const STORIES={
       {id:'git',l:'Davete git, sadece yemek',e:{susp:10},risk:[.35,{trust:-12,rep:-4},'Restorandan çıkarken fotoğrafın çekildi; manşetlerdesin.','Yemek sessizce geçti. Ama başkanın numarası artık telefonunda.']}]},
  genc:{when:()=>S.tier>=2,w:2,from:'Genç bir hakem',title:'"Bana yol gösterir misin?"',
   text:()=>`Bölgesel ligde ilk sezonunu geçiren 19 yaşında bir hakem, maç videolarını birlikte izlemek için senden zaman istiyor. "Senin gibi olmak istiyorum" diyor.`,
-  ch:[{id:'evet',l:'Haftada bir akşam ona zaman ayır',e:{energy:-5,attr:{iletisim:1.2},rep:1},t:'Öğretmek, kendi kararlarını da netleştirdi.'},
+  ch:[{id:'evet',l:'Haftada bir akşam ona zaman ayır',e:{energy:-5,attr:{iletisim:1.2},rep:1},next:['genc2',6],t:'Öğretmek, kendi kararlarını da netleştirdi.'},
       {id:'hayir',l:'Şimdilik vaktin olmadığını söyle',e:{},t:'Kendi programına odaklandın.'}]},
  test:{when:()=>S.week>=10,w:2,from:'Hakem Kurulu',title:'Ara dönem kondisyon testi',
   text:()=>`Kurul, haftaya tüm klasman hakemleri için mekik koşusu ve sprint testi yapacak. Kalanlar iki hafta görev alamayacak.`,
@@ -6405,17 +6621,75 @@ const STORIES={
       {id:'ret',l:'Odağını dağıtmak istemiyorsun',e:{attr:{sogukkanlilik:.5}},t:'Teklifi geri çevirdin.'}]},
  aile:{when:()=>true,w:2,from:'Ailen',title:'Hafta sonu düğün var',
   text:()=>`Kardeşinin düğünü bu cumartesi. Maçın pazar öğlen, ama düğün şehir dışında ve gece geç bitecek.`,
-  ch:[{id:'git',l:'Düğüne git, sabah ilk uçakla dön',e:{energy:-14},t:'Ailenle güzel bir gece geçirdin; maça biraz yorgun gideceksin.'},
-      {id:'erken',l:'Nikâhta ol, gece dönmeden ayrıl',e:{energy:-5},t:'Hem aileni hem işini idare ettin.'},
-      {id:'gitme',l:'Maça odaklan, gitme',e:{energy:6,rep:0},t:'Ailen anlayış gösterdi ama biraz kırgınlar.'}]}
+  ch:[{id:'git',l:'Düğüne git, sabah ilk uçakla dön',e:{energy:-14,aile:10},t:'Ailenle güzel bir gece geçirdin; maça biraz yorgun gideceksin.'},
+      {id:'erken',l:'Nikâhta ol, gece dönmeden ayrıl',e:{energy:-5,aile:3},t:'Hem aileni hem işini idare ettin.'},
+      {id:'gitme',l:'Maça odaklan, gitme',e:{energy:6,rep:0,aile:-10},t:'Ailen anlayış gösterdi ama biraz kırgınlar.'}]},
+ // ---------- 1.4: hakemin hayatı ----------
+ telefon:{when:()=>S.totals.matches>=3&&S.tier>=1,w:3,from:'Bilinmeyen numara',title:'Maçtan önceki gece telefon çaldı',
+  text:()=>`Gece yarısı gizli bir numara arıyor. Sakin bir ses: "Hocam, yarınki maç için küçük bir iyilik istiyoruz. Karşılığını fazlasıyla alırsın." Telefonun konuşmayı kaydediyor.`,
+  ch:[{id:'kayit',l:'Kaydı sakla, sabah federasyona götür',e:{trust:8},next:['telefon_kayit',3],t:'Kaydı Etik Kurulu’na teslim ettin.'},
+      {id:'kapat',l:'Tek kelime etmeden kapat',e:{attr:{sogukkanlilik:.5}},t:'Telefonu kapattın ve uyumaya çalıştın.'},
+      {id:'dusun',l:'"Düşünürüm" de',e:{susp:12},next:['telefon_israr',3],t:'Ses memnun görünüyordu. Bu iyiye işaret değil.'}]},
+ telefon_kayit:{chain:1,from:'Etik Kurulu',title:'Kayıt soruşturma başlattı',
+  text:()=>`Teslim ettiğin ses kaydı sayesinde bir şike çetesine soruşturma açıldı. Kurul, ifaden için seni davet ediyor; istersen adın gizli tutulabilir.`,
+  ch:[{id:'tanik',l:'Açık tanık ol, ifade ver',e:{trust:6,rep:3,fol:600},t:'Basın seni "temiz düdük" diye yazdı.'},
+      {id:'gizli',l:'Adının gizli kalmasını iste',e:{trust:4},t:'Soruşturma adın geçmeden ilerliyor.'}]},
+ telefon_israr:{chain:1,from:'Bilinmeyen numara',title:'"Düşündün mü?"',
+  text:()=>`Aynı numara yine arıyor. "Geçen sefer düşüneceğini söylemiştin. Artık cevap vermen lazım."`,
+  ch:[{id:'ihbar',l:'Şimdi federasyona bildir',e:{trust:2,susp:-10},t:'Geç de olsa doğru olanı yaptın.'},
+      {id:'sessiz',l:'Cevap verme, numarayı engelle',e:{susp:4},risk:[.35,{trust:-6},'Konuşma kaydı bir gazeteciye sızdı. Kurul açıklama istiyor.','Numara bir daha aramadı.'],t:''}]},
+ aile_masa:{when:()=>S.history.length>0&&S.history[0].rating<8.1,w:3,from:'Ailen',title:'Pazar yemeğinde "o penaltı" sorusu',
+  text:()=>`Pazar yemeğinde eniştenin sabrı taşıyor: "Dün o neydi öyle? Bütün mahalle seni konuşuyor." Çocuklar sessizce sana bakıyor.`,
+  ch:[{id:'anlat',l:'Kuralı sakin sakin anlat',e:{aile:6,attr:{iletisim:.4}},t:'Enişten bile ikna oldu, sofrada gülüşmeler.'},
+      {id:'tartis',l:'Sesini yükselt, "Sen ne anlarsın" de',e:{aile:-12,energy:-4},t:'Tatlıya kimse dokunmadı.'},
+      {id:'gul',l:'Gülüp konuyu değiştir',e:{aile:3},t:'Konu futboldan çıktı, yemek güzel geçti.'}]},
+ aile_kriz:{chain:1,from:'Eşin',title:'"Seni hiç göremiyoruz"',
+  text:()=>`Maçlar, kamplar, seyahatler… Eşin akşam seninle konuşmak istiyor: "Çocuklar babalarını televizyondan görüyor."`,
+  ch:[{id:'izin',l:'Bir hafta görev istemeyip ailenle tatile çık',e:{aile:22,suspend:1,energy:12},t:'Kurula izin dilekçesi verdin. Ailen çok mutlu.'},
+      {id:'soz',l:'Sezon sonunu söz ver',e:{aile:6},t:'Sözünü tutmak zorundasın.'},
+      {id:'is',l:'"Bu benim işim" de',e:{aile:-10},t:'Ev bir süre sessiz kaldı.'}]},
+ taksici:{when:()=>S.history.length>0,w:2,from:'Havalimanı dönüşü',title:'Taksici seni tanıdı',
+  text:()=>{ const r=S.history[0].rating; return r>=8.4?`Taksici dikiz aynasından bakıp gülümsüyor: "Dünkü maçı siz yönettiniz değil mi? Helal olsun, ilk kez hakemi konuşmadık." Telefonunu uzatıyor, bir fotoğraf istiyor.`:`Taksici dikiz aynasından bakıyor ve yüzü değişiyor: "Dünkü maçın hakemi siz misiniz? O karar yüzünden kahvede kavga çıktı!" Taksimetre hâlâ açık.`; },
+  ch:[{id:'selfie',l:'Fotoğraf çektir, sohbet et',e:{fol:250,aile:2},t:'Fotoğraf gece sosyal medyada dolaştı.'},
+      {id:'anlat',l:'Kararını kibarca açıkla',e:{attr:{iletisim:.4}},t:'İnmeden önce taksici "Haklıymışsın abi" dedi.'},
+      {id:'sessiz',l:'Sessiz kal, kulaklığı tak',e:{energy:3},t:'Yolculuk sessiz geçti.'}]},
+ // ---------- 1.4: medya ve sosyal ----------
+ tv:{when:()=>S.tier>=2||(S.social&&S.social.followers>3000),w:2,from:'Spor kanalı',title:'Canlı yayın stüdyosuna davet',
+  text:()=>`Bir spor kanalı, pazar akşamki tartışma programına seni konuk etmek istiyor. Bölüm başı iyi bir ücret teklif ediyorlar. Hakem talimatları aktif hakemlerin yorumculuk yapmasını hoş karşılamıyor.`,
+  ch:[{id:'kabul',l:'Kabul et, bir bölüm katıl',e:{money:30000,fol:2500,trust:-8},next:['tv_uyari',2],t:'Program rekor izlendi.'},
+      {id:'ret',l:'Kibarca reddet',e:{trust:5},t:'Kurul, tavrını not etti.'}]},
+ tv_uyari:{chain:1,from:'Hakem Kurulu',title:'Yorumculuk uyarısı',
+  text:()=>`Kurul, programdaki sözlerin için resmi bir uyarı yazısı gönderdi. "Devam etmen halinde görev verilmeyecek."`,
+  ch:[{id:'birak',l:'Programı bırak, özür yazısı gönder',e:{trust:6},t:'Konu kapandı.'},
+      {id:'devam',l:'Programa devam et',e:{money:60000,fol:4000,trust:-15,suspend:2},t:'İki hafta görev verilmeyecek ama ekranda yıldızsın.'}]},
+ sahte:{when:()=>S.social&&S.social.followers>1500,w:2,from:'Sosyal medya',title:'Adına sahte hesap açılmış',
+  text:()=>`Adın ve fotoğrafınla açılmış bir hesap "Bu hafta derbide ev sahibini yakacağım" diye paylaşım yaptı. Binlerce kişi paylaşmış bile.`,
+  ch:[{id:'sikayet',l:'Platforma şikâyet et, kurulu bilgilendir',e:{trust:3},t:'Hesap bir gün içinde kapatıldı.'},
+      {id:'cevap',l:'Gerçek hesabından esprili bir cevap yaz',e:{fol:1500},risk:[.3,{trust:-4},'Kurul, sosyal medyada bu kadar görünür olmanı beğenmedi.','Cevabın sahte hesaptan daha çok paylaşıldı.'],t:''},
+      {id:'sus',l:'Hiçbir şey yapma',e:{},risk:[.5,{rep:-3},'Söylenti büyüdü; bazı taraftarlar inandı.','Kimse ciddiye almadı.'],t:''}]},
+ podcast:{when:()=>S.tier>=1,w:2,from:'Emekli hakem',title:'Podcast daveti',
+  text:()=>`Sevilen bir hakem podcast’i seni bölüme çağırıyor. Bölümün sonunda dinleyicilerin gönderdiği zor kural sorularını canlı cevaplayacaksın.`,
+  ch:[{id:'katil',l:'Katıl, sorulara canlı cevap ver',e:{fol:900},riskF:()=>clamp(1-S.attrs.kural/90,.08,.6),risk:[.3,{rep:-3},'Bir ofsayt sorusunda takıldın, klip yayıldı.','Bütün kural sorularını bildin; bölüm çok dinlendi.'],t:''},
+      {id:'ret',l:'Teşekkür et, bu sezon değil',e:{},t:'Belki gelecek sezon.'}]},
+ // ---------- 1.4: duygu anları ----------
+ mektup:{chain:1,from:'Bir mektup',title:'Küçük bir taraftardan',
+  text:()=>`Kurul adresine el yazısıyla bir zarf gelmiş: "Sayın hakem, ben 11 yaşındayım. Takımım geçen hafta sizin kararınızla kaybetti. Ağladım. Ama babam hakemlerin de insan olduğunu söyledi. Siz hiç hata yapınca üzülür müsünüz?"`,
+  ch:[{id:'yaz',l:'El yazısıyla cevap yaz, onu bir maçına davet et',e:{rep:2,fol:300,attr:{sogukkanlilik:.6}},t:'Mektubun bir hafta sonra gazetede çıktı.'},
+      {id:'kisa',l:'Kısa bir teşekkür kartı gönder',e:{rep:1},t:'Kart yola çıktı.'},
+      {id:'gec',l:'Cevap verme',e:{},t:'Zarf çekmecede kaldı.'}]},
+ genc2:{chain:1,from:'Deniz',title:'Öğrencinin ilk büyük maçı',
+  text:()=>`Yol gösterdiğin genç hakem bu hafta ilk üst lig maçını yönetiyor. Maçtan önce sana kısa bir mesaj attı: "Hocam, ne yapayım?"`,
+  ch:[{id:'necdet',l:'"Sahada herkes bir şey ister. Sen sadece kuralı iste." yaz',e:{rep:2,trust:3},t:'Maçtan sonra cevap geldi: "Sadece kuralı istedim hocam." Necdet Hoca gurur duyardı.'},
+      {id:'izle',l:'Tribüne gidip izle',e:{energy:-4,rep:1},t:'Tribünden onu izledin; çok iyi yönetti.'}]}
 };
 function storyEnsure(){ if(!S.story) S.story={cur:null,done:{},q:[],n:0}; return S.story; }
 function storyWeek(){
   const st=storyEnsure(); if(S.ended) return;
+  if(S.aile!=null){ S.energy=clamp(S.energy+Math.round((S.aile-60)/20),0,100); if(S.aile<35&&!st.done.aile_kriz&&!st.q.some(x=>x.id==='aile_kriz')) st.q.push({id:'aile_kriz',at:S.season*100+S.week}); }
   const wk=S.season*100+S.week;
   const due=st.q.findIndex(x=>x.at<=wk);
   if(st.cur) return;
-  if(due>=0){ st.cur={id:st.q[due].id}; st.q.splice(due,1); return; }
+  if(due>=0){ const id=st.q[due].id; st.q.splice(due,1); if(!st.done[id]&&STORIES[id]){ st.cur={id}; return; } }
   if(S.bribe&&S.bribe.offer) return;
   if(!chance(.32)) return;
   const pool=Object.entries(STORIES).filter(([k,v])=>!v.chain&&!st.done[k]&&v.when());
@@ -6430,6 +6704,7 @@ function storyEff(e){ const out=[];
   if(e.attr) for(const k in e.attr){ S.attrs[k]=clamp(S.attrs[k]+e.attr[k],0,99); out.push(ATTR_NAMES[k]+' +'+e.attr[k]); }
   if(e.susp&&S.bribe) S.bribe.susp=clamp(S.bribe.susp+e.susp,0,100);
   if(e.suspend) S.suspended=Math.max(S.suspended||0,e.suspend);
+  if(e.aile){ S.aile=clamp((S.aile??70)+e.aile,0,100); out.push('Aile '+(e.aile>0?'+':'')+e.aile); }
   return out; }
 function storyChoice(cid){
   const st=storyEnsure(); if(!st.cur) return; const E=STORIES[st.cur.id]; const c=E.ch.find(x=>x.id===cid); if(!c) return;
