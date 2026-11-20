@@ -1,0 +1,1 @@
+football,soccer,ref,VAR,offside,penalty,red card,yellow card,career,sim,match,whistle,league,umpire
