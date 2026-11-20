@@ -18,7 +18,7 @@ window.NATIVE = N;
 /* ---------- Dil: ilk açılışta cihaz diline göre (tr/en/de/es), sonra oyuncunun seçimi ---------- */
 const LANGS = ["tr", "en", "de", "es"];
 const LANG_KEY = "sonduduk_lang";
-const SAVE_KEYS = ["sonduduk_save_v1", "sonduduk_slot_1", "sonduduk_slot_2", "sonduduk_slot_3"];
+const SAVE_KEYS = ["sonduduk_save_v1", "sonduduk_slot_1", "sonduduk_slot_2", "sonduduk_slot_3", "sonduduk_slot_4"];
 N.lang = LANGS.includes(document.documentElement.lang) ? document.documentElement.lang : "tr";
 const fileOf = (l) => (l === "tr" ? "index.html" : l + ".html");
 async function wantLang() {

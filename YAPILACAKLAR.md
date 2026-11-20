@@ -1,6 +1,16 @@
 # Yapılacaklar
 
-## 1.4 (v1.4 dalı): Puan isteme penceresi
+## 1.4 (v1.4 dalı): Premium'u cazip yapma
+- **Premium Molası** (eski adı Premium Saati): 10 ödüllü reklamla artık 1 saat değil **20 dakika** reklamsız oyun. 5. maçtan sonra bir kez hediye ediliyor (sadece reklamlar açıkken).
+- **Kişisel ödeme ekranı:** Son 7 günde 3 veya daha fazla reklam izleyen oyuncuya "Son 7 günde X reklam izledin, yaklaşık Y dakika" satırı gösteriliyor (`adLog`, `pwStatHTML`).
+- **Hakem Raporu (Gelişim sekmesi):** Pozisyon türüne göre doğruluk, zayıf noktalar ve kural maddesi, son hatalar. Bedava oyuncu sadece özeti görüyor, ayrıntılar Premium'da. Veriler 1.4'ten sonra oynanan maçlardan toplanmaya başlıyor (`S.dstat`, `S.derr`).
+- **Günün pozisyonu arşivi (Premium):** Geçmiş günler (en fazla 60), seriyi ve günlük ödülü etkilemiyor.
+- **Efsane Maçlar (Kural Akademisi):** 10 hazır senaryo, sabit tohumla üretiliyor, pozisyon başına 45 sn, 3 yıldız. "Derbinin son dakikaları" ücretsiz, diğerleri Tam Paket'e dahil. İlk tamamlamada Kural bilgisi +0.2.
+- **Hakem kimliği (Premium):** 4. kariyer slotu, 2 yeni düdük tonu (Ayarlar), paylaşım metninde Premium rozeti, üst çubukta isim yanında taç.
+- Paket ekranındaki avantaj listeleri yeni içeriklerle güncellendi. Çeviriler (en/de/es) `i18n/*.json` dosyalarına eklendi. 1.4 sürüm notları 4 dilde yazıldı.
+- **App Store Connect:** Tam Paket ve Premium ürün açıklamalarını yeni avantajlara göre güncelle (Efsane Maçlar, Hakem Raporu, arşiv).
+
+## 1.4: Puan isteme penceresi
 iOS'ta StoreKit, Android'de Play In-App Review ile sistemin kendi puan penceresi açılıyor.
 - **Ne zaman:** 8.5+ notlu maç ya da 7/14/30 günlük seri sonrası, merkeze dönünce. O an Premium teklifi çıkacaksa pencere açılmıyor (ikisi üst üste gelmesin diye).
 - **Sınırlar:** En az 5 maç oynanmış olmalı, 60 günde en fazla bir, yılda en fazla 3 kez.

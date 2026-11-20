@@ -1,7 +1,16 @@
-Premium, always within reach
-• A Premium button in the top bar and a Premium tile on the home screen.
-• Packs are now the first tab in the shop.
+Legendary Matches
+• Hold the whistle at the critical moments of 10 historic matches. The first one is free for everyone.
+
+Referee Report
+• In the Development tab, see which incidents you handle well and where you are weak.
+
+Call of the Day archive
+• Play the days you missed and replay old ones.
+
+New Premium perks
+• Full Referee Report, archive, a 4th career slot, new whistle tones and a Premium badge when you share.
+• Premium Break: 20 minutes ad-free after 10 rewarded ads. One is a gift after your 5th match.
 
 Improvements
-• Shop screen and translations fixed.
+• You can rate the game after a great match.
 • Minor bug fixes.

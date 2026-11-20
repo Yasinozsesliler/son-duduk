@@ -1781,6 +1781,46 @@ main>*{animation:none}
 .slot.empty{background:transparent;border-style:dashed}
 .slot .plus{border-radius:8px;background:transparent;border:1px solid var(--line2);color:var(--fg)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* 1.4: Premium değeri — rapor, arşiv, efsane maçlar, 4. slot */
+.pw-stat{display:block;margin-top:8px;padding:8px 12px;border-radius:10px;background:rgba(255,255,255,.06);font-size:13px;line-height:1.4}
+.pw-stat b{color:#ffe08a}
+.pro .pro-chip{color:#ffe08a;border-color:rgba(242,194,48,.45);background:rgba(242,194,48,.12)}
+.pro-sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px}
+.pro-sum>div{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid var(--line)}
+.pro-sum b{font-size:18px}.pro-sum small{color:var(--muted);font-size:12px}
+.pro-rows{display:grid;gap:8px}
+.pro-row{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(60px,1fr) 44px 24px;gap:10px;align-items:center;font-size:13.5px}
+.pro-row>span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pro-row small{color:var(--muted);text-align:right}
+.pro-bar{display:block;height:8px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden}
+.pro-bar>i{display:block;height:100%;border-radius:99px}
+.pro-h{margin:4px 0 0;font-size:14px}
+.pro-weak{display:grid;gap:6px}
+.pro-errs{display:grid;gap:8px}
+.pro-err{display:grid;gap:2px;padding:10px 12px;border-radius:10px;background:rgba(227,67,75,.07);border:1px solid rgba(227,67,75,.22);font-size:13px}
+.pro-err small{color:var(--muted)}
+.pro-lockw{position:relative;min-height:190px}
+.pro-blur{filter:blur(5px);opacity:.55;pointer-events:none;user-select:none}
+.pro-lock{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding:12px}
+.pro-lock small{color:var(--muted);max-width:300px}
+.arch-list{display:grid;gap:6px;max-height:60vh;overflow:auto}
+.arch-row{display:grid;grid-template-columns:52px minmax(0,1fr) 24px auto;gap:10px;align-items:center;min-height:48px;padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.03);color:inherit;font:inherit;text-align:left;cursor:pointer}
+.arch-row:hover{background:rgba(255,255,255,.07)}
+.leg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.leg-c{display:flex;flex-direction:column;gap:4px;min-height:96px;padding:12px;border-radius:12px;border:1px solid var(--line2);background:linear-gradient(160deg,rgba(242,194,48,.10),rgba(255,255,255,.02));color:inherit;font:inherit;text-align:left;cursor:pointer}
+.leg-c b{font-size:14px;line-height:1.25}.leg-c small{color:var(--muted);font-size:12px}
+.leg-c.locked{background:rgba(255,255,255,.03)}
+.leg-c.locked b{opacity:.75}
+.leg-st{margin-top:auto;display:flex;align-items:center;gap:4px;font-size:12px;color:#ffe08a}
+.leg-st i{font-style:normal;color:rgba(255,255,255,.2);font-size:16px}.leg-st i.on{color:#f6c62b}
+.leg-st.big i{font-size:40px}
+.leg-end{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 0 16px}
+.leg-end b{font-size:28px}.leg-end small{color:var(--muted)}
+.sc-lock{border-style:dashed}
+.st2-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (min-width:1180px){.st2-cards{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (max-width:860px){.st2-cards{grid-template-columns:minmax(0,1fr)}}
 </style>
 
 <div id="app"></div>
@@ -1963,11 +2003,11 @@ function rankOf(d){ const H=HOMES[d.nationality||'TR']||HOMES.TR; return d.fifa?
 let CR=null, SLOT_DEL=null;
 function startHTML(){
   if(CR) return wizardHTML();
-  const slots=[1,2,3].map(n=>({n,d:readSlot(n)}));
+  const slots=[1,2,3,4].map(n=>({n,d:readSlot(n)}));
   return `<div class="st2"><div class="st2-bg" aria-hidden="true">${lockerSVG()}</div><div class="st2-in">
     <header class="st2-top"><h1 class="logo">Refmania<i class="logo-card" aria-hidden="true"></i></h1><p class="st2-tag">Hakem kariyer simülatörü</p></header>
     <div class="st2-cards">${slots.map(slotCard).join('')}</div>
-    <details class="imp st2-imp"><summary>Kayıt kodu ile yükle</summary><div class="stack" style="margin-top:10px"><textarea id="stImp" rows="3" placeholder="Kayıt kodunu yapıştır"></textarea><div class="row"><label class="lbl" for="impSlot" style="margin:0">Hedef slot</label><select id="impSlot" style="width:auto">${[1,2,3].map(n=>`<option value="${n}">Slot ${n}</option>`).join('')}</select><button class="btn sm" id="bStImp">Yükle</button></div></div></details>
+    <details class="imp st2-imp"><summary>Kayıt kodu ile yükle</summary><div class="stack" style="margin-top:10px"><textarea id="stImp" rows="3" placeholder="Kayıt kodunu yapıştır"></textarea><div class="row"><label class="lbl" for="impSlot" style="margin:0">Hedef slot</label><select id="impSlot" style="width:auto">${(isPremium()?[1,2,3,4]:[1,2,3]).map(n=>`<option value="${n}">Slot ${n}</option>`).join('')}</select><button class="btn sm" id="bStImp">Yükle</button></div></div></details>
   </div></div>`;
 }
 function lastPlayedText(d){
@@ -1976,6 +2016,10 @@ function lastPlayedText(d){
   return dt.toLocaleDateString(loc,{day:'numeric',month:'short',year:'numeric'})+' · '+seasonLabel(d.season)+' · '+WEEK_FMT.replace('{n}',d.week||1);
 }
 function slotCard({n,d}){
+  if(n===4&&!d&&!isPremium()) return `<article class="sc empty sc-lock"><div class="sc-h"><span class="sc-ic">${v11g('crown','#f6c62b',30)}</span><div><b>Kariyer slotu 4</b><small>Premium</small></div></div>
+    <p class="sc-d">Dördüncü bir hakem kariyeri: başka bir ülke, başka bir hakem tipi.</p>
+    <div class="sc-box"><small>Premium’a dahil</small><b>Reklamsız oyun ve ayrıntılı rapor da cabası</b></div>
+    <button class="sc-bar primary" data-slotpw="1">Premium ile aç</button></article>`;
   if(!d) return `<article class="sc empty"><div class="sc-h"><span class="sc-ic">${WHISTLE_SVG}</span><div><b>Kariyer slotu ${n}</b><small>Boş</small></div></div>
     <p class="sc-d">Ülkeni ve hakem tipini seç; amatör ligden Dünya Şampiyonası finaline kendi kariyerini kur.</p>
     <div class="sc-box"><small>Son oynanan</small><b>Henüz oynanmadı</b></div>
@@ -2053,6 +2097,7 @@ function bindStart(){
   if($('#startCv')){ const h=mkTeam(TR4_RAW[0][0],TR4_RAW[0][1],TR4_RAW[0][2],'TR'), a=mkTeam(TR4_RAW[1][0],TR4_RAW[1][1],TR4_RAW[1][2],'TR'); heroStart('startCv',h.id,a.id,'start'); }
   const q=s=>document.querySelectorAll(s);
   if(!CR){
+    q('[data-slotpw]').forEach(b=>b.onclick=()=>openPaywall('slot'));
     q('[data-new]').forEach(b=>b.onclick=()=>{ CR={slot:+b.dataset.new,step:0,country:'TR',spec:'atlet',look:defLook(),name:rndName('TR'),nameTouched:false,age:24,diff:'rahat'}; rerenderStart(); window.scrollTo(0,0); });
     q('[data-cont]').forEach(b=>b.onclick=()=>{ SLOT=+b.dataset.cont; S=readSlot(SLOT); ensureRegistry(); TAB='merkez'; render(); window.scrollTo(0,0); });
     q('[data-del]').forEach(b=>b.onclick=()=>{ SLOT_DEL=+b.dataset.del; rerenderStart(); });
@@ -2158,6 +2203,7 @@ function milestone(id){ if(!S.milestones[id]){ S.milestones[id]=seasonLabel(S.se
 
 // ---------- sound ----------
 let AC=null;
+const WTONES={klasik:[2750,34,120],keskin:[3350,0,0],derin:[2250,46,160]};
 function whistle(kind){
   haptic(kind==='end'?'success':kind==='long'?'medium':'light');
   if(!S||!S.settings.sound) return;
@@ -2167,7 +2213,8 @@ function whistle(kind){
     const dur = kind==='long'||kind==='end'?0.55:0.28;
     blasts.forEach(st=>{
       const t0=AC.currentTime+st; const o=AC.createOscillator(), g=AC.createGain(), lfo=AC.createOscillator(), lg=AC.createGain();
-      o.type='sine'; o.frequency.value=2750; lfo.frequency.value=34; lg.gain.value=120; lfo.connect(lg); lg.connect(o.frequency);
+      const W=WTONES[(isPremium()&&S.settings.wsnd)||'klasik']||WTONES.klasik;
+      o.type='sine'; o.frequency.value=W[0]; lfo.frequency.value=W[1]||1; lg.gain.value=W[2]; lfo.connect(lg); lg.connect(o.frequency);
       g.gain.setValueAtTime(0,t0); g.gain.linearRampToValueAtTime(.12,t0+.02); g.gain.setValueAtTime(.12,t0+dur-.05); g.gain.linearRampToValueAtTime(0,t0+dur);
       o.connect(g); g.connect(AC.destination); o.start(t0); lfo.start(t0); o.stop(t0+dur+.02); lfo.stop(t0+dur+.02);
     });
@@ -2738,6 +2785,7 @@ function akademiHTML(){
   <section class="acad-hero panel"><div class="ah-badge"><span class="ah-ic">${ic('book')}</span><div><span class="eyebrow">Rütbe</span><b>${rk.name}</b><small>${rk.next?`${rk.next[0]-A.correct} doğru vaka sonra: ${rk.next[1]}`:'En üst seviye'}</small></div></div>
     <div class="ah-kpis"><div><b class="num">${A.solved}</b><small>Çözülen vaka</small></div><div><b class="num">%${pct}</b><small>İsabet</small></div><div><b class="num">${A.streak}</b><small>Seri</small></div><div><b class="num">${A.best}</b><small>En uzun seri</small></div></div></section>
   <div class="hub"><div class="stack" style="gap:16px;min-width:0">
+    ${legendsHTML()}
     <section class="panel stack"><h3>Vaka çalışması</h3><p class="muted" style="font-size:14px">Gerçek maç pozisyonları 3D tekrarla gelir. Süre yok; tüm açılardan izle, kuralı uygula. Her hafta ilk 5 doğru vaka Kural bilgisi niteliğini geliştirir.</p>
       <div class="chips-row wrap">${ACAD_TOPICS.map(([k,n])=>`<button class="fchip ${ACAD_TOPIC===k?'on':''}" data-at="${k}">${n}</button>`).join('')}</div>
       <button class="btn primary lg" id="bCase">Yeni vaka · ${esc(ACAD_TOPICS.find(x=>x[0]===ACAD_TOPIC)[1])}</button></section>
@@ -2748,6 +2796,95 @@ function akademiHTML(){
   <div class="stack" style="gap:16px;min-width:0"><section class="panel stack"><h3>Konu karnesi</h3>${tstats.map(t=>`<div class="tstat"><span>${esc(t.n)}</span><div class="bar"><i style="width:${t.p||0}%;background:${t.p==null?'transparent':t.p>=75?'var(--green)':t.p>=50?'var(--gold1)':'var(--red)'}"></i></div><span class="num muted">${t.p==null?'—':t.c+'/'+t.s}</span></div>`).join('')}</section>
     <section class="panel stack"><h3>Kural kitabı</h3>${Object.entries(LAWS).map(([k,v])=>`<details class="law"><summary>${esc(TYPE_TITLES[k]||k)}</summary><p>${esc(v)}</p></details>`).join('')}</section></div></div>`;
 }
+// =========================================================
+//   EFSANE MAÇLAR — kariyerden bağımsız hazır senaryolar (ilki ücretsiz, gerisi Tam Paket)
+// =========================================================
+// Her senaryo sabit tohumla üretilir: herkes aynı pozisyonları görür. Takımlar ve olaylar kurgusaldır.
+const LEG_KEY='refmania_efsane', LEG_TIME=45;
+const LEGENDS=[
+ {id:'derbi',free:true,name:'Derbinin son dakikaları',sub:'Şehrin iki yakası, şampiyonluk bu maçta. Tribünler alev alev.',club:[0,1],inc:[['orta_saha_faul',71],['dirsek',80],['penalti_temas',88],['gol_oncesi_faul',93]]},
+ {id:'final',name:'Dünya finali, uzatmalar',sub:'Skor eşit, 120 dakikanın her saniyesi tarihe yazılıyor.',nat:['Arjantin','Fransa'],inc:[['dogso',97],['hucum_elle_gol',104],['penalti_temas',118],['penalti_atisi',120]]},
+ {id:'elgol',name:'Elle gol mü?',sub:'Çeyrek finalde tek bir temas bütün dünyayı ikiye bölecek.',nat:['Arjantin','İngiltere'],inc:[['hucum_elle_gol',51],['orta_saha_faul',60],['elle_oynama',77]]},
+ {id:'hayalet',name:'Hayalet gol',sub:'Top çizgiyi geçti mi? Gol çizgisi teknolojisi yok, karar senin gözünde.',nat:['İngiltere','Almanya'],inc:[['gol_cizgisi',101],['ofsayt_gol',110],['top_disinda',115]]},
+ {id:'kirmizi',name:'Finalde kırmızı',sub:'Efsane kaptanın son maçı. Gerginlik her dakika artıyor.',nat:['Fransa','İtalya'],inc:[['yuksek_ayak',88],['dirsek',95],['top_disinda',110]]},
+ {id:'ofsayt',name:'Ofsayt çizgisi',sub:'İki hızlı forvet, savunma çizgisinde santimlerin savaşı.',nat:['İspanya','Hollanda'],inc:[['ofsayt_gol',23],['ofsayt_gol',58],['gol_oncesi_faul',79]]},
+ {id:'kaleci',name:'Kaleci gecesi',sub:'Penaltılara gidecek gibi duran bir çeyrek final.',nat:['Hırvatistan','Brezilya'],inc:[['kaleci_engelleme',34],['geri_pas',62],['penalti_atisi',120]]},
+ {id:'duran',name:'Duran top savaşı',sub:'Her kornerde ceza sahası güreş minderine dönüyor.',nat:['Uruguay','Kolombiya'],inc:[['korner_cekme',12],['korner_cekme',55],['dirsek',66],['yuksek_ayak',84]]},
+ {id:'sonadam',name:'Son adam',sub:'Kontra ataklarla dolu bir maç, savunmalar hep tek kişi kalıyor.',nat:['Portekiz','Fas'],inc:[['dogso',19],['dogso',73],['elle_oynama',90]]},
+ {id:'sinir',name:'Sinirler gerildi',sub:'Ezeli rakipler. Top oyundan çıktığında bile kavga bitmiyor.',nat:['Meksika','ABD'],inc:[['top_disinda',40],['orta_saha_faul',58],['yuksek_ayak',75],['dirsek',89]]},
+];
+let LEG=null;
+function legState(){ return lsJ(LEG_KEY,{}); }
+function legMin(m){ return (m>90&&m<=93?'90+'+(m-90):m)+"'"; }
+function legOpen(sc){ return sc.free||hasAll(); }
+function legStars(c,n){ return c>=n?3:c>=n-1?2:c>=Math.ceil(n/2)?1:0; }
+function legTeams(sc){
+  if(sc.club){ const a=TR4_RAW[sc.club[0]], b=TR4_RAW[sc.club[1]]; return [mkTeam(a[0],a[1],a[2],'TR'),mkTeam(b[0],b[1],b[2],'TR')]; }
+  const f=n=>NATIONS.find(x=>x[0]===n)||NATIONS[0]; const a=f(sc.nat[0]), b=f(sc.nat[1]);
+  return [mkTeam(a[0],a[1],'',a[2],true),mkTeam(b[0],b[1],'',b[2],true)];
+}
+function legMake(sc,i){
+  const [type,min]=sc.inc[i]; const seed=hash('refmania-efsane-'+sc.id+'-'+i); const r0=seeded(seed);
+  const [H,A]=legTeams(sc);
+  const fx=makeFx({kind:'acad',comp:'LIG',compName:sc.name,home:H.id,away:A.id,imp:5,derby:!!sc.club,vr:false,glt:false,lvl:4,fee:0,stage:sc.name});
+  const keep=M; M=buildMatch(fx); const ctxM=M;
+  const prev=RNG_SRC; RNG_SRC=seeded(seed^0x5bd1e995); let inc;
+  try{ M.min=min; const c=ctxFor(M,r0()<.5?0:1); inc=genIncident(type,c); inc.minute=legMin(min); }
+  finally{ RNG_SRC=prev; M=keep; }
+  inc.vis=1; inc.posQ='best'; inc.refPos=SPOTS[inc.pos]?SPOTS[inc.pos].best:[28,15];
+  return {inc,ctxM};
+}
+function legendsHTML(){
+  const st=legState();
+  const star=n=>[1,2,3].map(i=>`<i class="${i<=n?'on':''}">★</i>`).join('');
+  return `<section class="panel stack leg"><div class="row" style="justify-content:space-between"><h3>Efsane Maçlar</h3><span class="chip">${LEGENDS.filter(x=>(st[x.id]||{}).best).length}/${LEGENDS.length}</span></div>
+    <p class="muted" style="font-size:14px">Tarihe geçecek maçlarda kritik anlar. Kariyerini etkilemez; her pozisyon için ${LEG_TIME} saniyen var.</p>
+    <div class="leg-grid">${LEGENDS.map(sc=>{ const r=st[sc.id]||{}; const open=legOpen(sc);
+      return `<button class="leg-c ${open?'':'locked'}" data-leg="${sc.id}"><b>${esc(sc.name)}</b><small>${sc.inc.length} pozisyon${sc.free&&!hasAll()?' · ücretsiz':''}</small><span class="leg-st">${open?star(r.best||0):v11g('crown','#f6c62b',18)+' Tam Paket'}</span></button>`; }).join('')}</div></section>`;
+}
+function legStart(id){
+  const sc=LEGENDS.find(x=>x.id===id); if(!sc) return;
+  if(!legOpen(sc)){ openPaywall('efsane'); return; }
+  LEG={sc,i:0,c:0};
+  const [H,A]=legTeams(sc);
+  openModal(head('Efsane Maçlar',esc(sc.name),`<button class="btn sm" id="lgX">Kapat</button>`)+`<div class="sh-body"><p class="story">${esc(sc.sub)}</p>
+    <p><b>${esc(H.name)}</b> – <b>${esc(A.name)}</b></p><div class="row">${sc.inc.map(([t,m])=>`<span class="chip num">${legMin(m)}</span>`).join('')}</div>
+    <p class="muted" style="font-size:13.5px">${sc.inc.length} kritik pozisyon. Hepsini bil: 3 yıldız.</p><button class="btn primary lg" id="lgGo">Düdüğü çal</button></div>`,true);
+  $('#lgX').onclick=legClose; $('#lgGo').onclick=legCase;
+}
+function legCase(){
+  const sc=LEG.sc; const {inc,ctxM}=legMake(sc,LEG.i); LEG.inc=inc; LEG.ctxM=ctxM; LEG.over=false; inc.sel={d:null,c:inc.steps[1]?null:undefined};
+  const keep=M; M=ctxM; curInc=inc; const cams=['yakin','tv','hakem','ust'];
+  openModal(head(`${esc(sc.name)} · ${LEG.i+1}/${sc.inc.length}`,esc(inc.title),`<span class="num tm-l" id="tmrLab"></span><button class="btn sm" id="lgX">Kapat</button>`)+`<div class="timer" id="tmr"><i></i></div><div class="sh-body"><div class="inc"><div class="stack">${replayHTML(inc,cams)}<p class="story">${inc.story}</p></div>
+    <div class="stack"><div class="eyebrow">Olgular</div><div class="facts">${factsHTML(inc,true)}</div><div class="decide" id="decide">${stepsHTML(inc)}</div><button class="btn primary" id="bLg" disabled>Kararı ver</button></div></div></div>`);
+  bindReplay(inc,cams); bindSteps(inc,'bLg'); M=keep;
+  const finish=late=>{ stopTimer(); if(!LEG||LEG.over) return; LEG.over=true; whistle(); const ans={d:inc.sel.d||'__yok'}; if(inc.steps[1]) ans.c=inc.sel.c||'yok'; legResult(ans,late); };
+  $('#bLg').onclick=()=>finish(false);
+  $('#lgX').onclick=()=>{ stopTimer(); legClose(); };
+  startTimer(LEG_TIME,()=>{ toast('Süre doldu'); finish(true); });
+}
+function legResult(ans,late){
+  const sc=LEG.sc, inc=LEG.inc; const v=late&&!inc.sel.d?'hata':evaluate(inc,ans); const ok=['dogru','kabul'].includes(v);
+  LEG.i++; if(ok) LEG.c++; const last=LEG.i>=sc.inc.length;
+  const keep=M; M=LEG.ctxM; inc.showOff=true; const cams=['yakin','tv','ters','ust'];
+  openModal(head(`${esc(sc.name)} · ${LEG.i}/${sc.inc.length}`,VLAB[v],`<button class="btn sm" id="lgX">Kapat</button>`)+`<div class="sh-body"><div class="inc"><div class="stack">${replayHTML(inc,cams)}</div><div class="stack">
+    <div class="verdict v-${v}"><span class="vi">${VLAB[v]}</span><span class="muted">Senin kararın: ${inc.sel.d?esc(ansText(inc,ans)):'karar verilmedi'}</span></div>
+    ${!ok?`<p><b>Doğrusu:</b> ${esc(ansText(inc,inc.correct))}</p>`:''}<p>${esc(inc.explain)}</p><details class="law"><summary>Kural metni</summary><p>${esc(inc.law)}</p></details>
+    <button class="btn primary" id="lgN">${last?'Maçı bitir':'Sonraki pozisyon'}</button></div></div></div>`);
+  bindReplay(inc,cams); M=keep;
+  $('#lgX').onclick=legClose; $('#lgN').onclick=()=>{ replayStop(); if(last) legEnd(); else legCase(); };
+}
+function legEnd(){
+  const sc=LEG.sc, n=sc.inc.length, c=LEG.c, stars=legStars(c,n); const st=legState(); const r=st[sc.id]||{}; const first=!r.best;
+  st[sc.id]={best:Math.max(r.best||0,stars),plays:(r.plays||0)+1}; lsSet(LEG_KEY,JSON.stringify(st));
+  let gain=''; if(S&&first&&stars>0){ S.attrs.kural=clamp(S.attrs.kural+.2*(S.growth||1),0,99); save(); gain='Kural bilgisi +0.2'; }
+  const next=LEGENDS.find(x=>x.id!==sc.id&&legOpen(x)&&!(st[x.id]||{}).best);
+  openModal(head('Efsane Maçlar',esc(sc.name),'')+`<div class="sh-body"><div class="leg-end"><span class="leg-st big">${[1,2,3].map(i=>`<i class="${i<=stars?'on':''}">★</i>`).join('')}</span><b class="num">${c}/${n}</b><small>doğru karar</small></div>
+    ${gain?`<div class="row" style="justify-content:center"><span class="chip g">${gain}</span></div>`:''}<div class="row">${next?`<button class="btn primary" id="lgNext">Sıradaki: ${esc(next.name)}</button>`:''}${!hasAll()?`<button class="btn ${next?'':'primary'}" data-paywall="efsane" id="lgPw">${v11g('crown','#f6c62b',16)} Bütün efsane maçlar</button>`:''}<button class="btn" id="lgX">Kapat</button></div></div>`,true);
+  $('#lgX').onclick=legClose; const nx=$('#lgNext'); if(nx) nx.onclick=()=>legStart(next.id);
+  const pw=$('#lgPw'); if(pw) pw.onclick=()=>{ legClose(); openPaywall('efsane'); };
+}
+function legClose(){ replayStop(); LEG=null; const m=$('#modal'); m.hidden=true; m.innerHTML=''; render(); }
 function acadPickType(){ if(ACAD_TOPIC!=='karisik') return ACAD_TOPIC; return pick(ACAD_TOPICS.slice(1).map(x=>x[0])); }
 function acadMakeCase(type){
   const ids=Object.keys(S.table); const h=pick(ids); let a=pick(ids); while(a===h) a=pick(ids);
@@ -3670,7 +3807,7 @@ function finishMatch(){
   const intl = ['mid','tour'].includes(fx.kind) || fx.kind==='guest';
   if(fx.kind==='dom'||fx.kind==='cup') S.stats.dom.push(rating); else S.stats.intl.push(rating);
   S.stats.all.push(rating);
-  S.totals.matches++;
+  S.totals.matches++; hourGift();
   // rep
   const lvlF=1+fx.lvl*.15; let repD=(rating-8.2)*3*lvlF; if(rating>=9) repD+=1; repD=Math.round(repD*10)/10; S.rep=clamp(S.rep+repD,0,100); if(rating>=9) goodOffer('harika'); if(rating>=8.5) reviewMoment();
   S.money+=fx.fee; tx((fx.role==='var'?'VAR odası · ':fx.role==='ar'?'Yardımcı hakem · ':'')+team(fx.home).short+' – '+team(fx.away).short,fx.fee,'mac'); S.energy=clamp(S.energy-(fx.lvl>=4?20:16)+(S.upgrades.fizyo?6:0)+v11Mod('en'),0,100);
@@ -3690,6 +3827,7 @@ function finishMatch(){
     if(lost && fx.imp>=2){ mail(t.name+' Kulübü','Resmi açıklama: "Hakem hatası sonucu etkiledi"','Kulübümüz '+errs[0].min+' dakikadaki "'+errs[0].title.toLowerCase()+'" kararını Tahkim\'e ve Hakem Kurulu\'na taşıyacaktır. Hakemin performansı kabul edilemez.','club'); S.rep=clamp(S.rep-1.5,0,100); report.clubComplaint=t.name; } }
   if(rating<7.3 && fx.kind==='dom'){ S.suspended=1; mail('Hakem Kurulu','Performans değerlendirmesi','Gözlemci notun '+f1(rating)+'. Gelecek hafta görev verilmeyecek; video analize odaklanmanı öneriyoruz.','fed'); }
   if(rating>=8.8) mail('Gözlemci','Maç sonu not: '+f1(rating),'Pozisyon alma, kart yönetimi ve iletişim üst düzeydi. '+(fx.imp>=4?'Bu ölçekte bir maçta bu sakinlik kurul tarafından not edildi.':''),'obs');
+  dstatAdd(M.log);
   S.history.unshift({season:S.season,week:S.week,comp:fx.compName,stage:fx.stage,home:fx.home,away:fx.away,score:M.score.slice(),pens:M.pens||null,et:!!M.et,rating,kind:fx.kind});
   if(S.history.length>200) S.history.length=200;
   v11AfterMatch(report,fx);
@@ -5031,7 +5169,7 @@ function render(){
         <div class="hstat" title="İtibar"><svg class="ring" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15" class="ring-bg"/><circle cx="18" cy="18" r="15" class="ring-fg" stroke-dasharray="${(repPct/100*C).toFixed(1)} ${C.toFixed(1)}"/></svg><span><b class="num">${Math.round(S.rep)}</b><small>İtibar</small></span></div>
         <div class="hstat hide-xs" title="Enerji">${ic('bolt','hs-ic')}<span><b class="num">%${Math.round(S.energy)}</b><small>Enerji</small></span></div>
         <button class="hstat hs-money" id="bWallet" title="${money(S.money)}" aria-label="Cüzdan">${ic('coin','hs-ic gold')}<span><b class="num">${moneyShort(S.money)}</b><small>Kasa</small></span></button>
-        <button class="me" data-tab="kariyer" aria-label="Kariyer profili"><span class="av pic">${avatarSVG(S.look)}</span><span class="me-t"><b>${esc(S.name)}</b><small>${esc(rankText())}</small></span></button>
+        <button class="me" data-tab="kariyer" aria-label="Kariyer profili"><span class="av pic">${avatarSVG(S.look)}</span><span class="me-t"><b>${esc(S.name)}${isPremium()?' '+v11g('crown','#f6c62b',14):''}</b><small>${esc(rankText())}</small></span></button>
       </div></div></header>
     <nav class="tstrip" aria-label="Bölümler">${TABS.map(([k,n])=>{ const b=badgeFor(k); return `<button class="${TAB===k?'on':''}" data-tab="${k}"><span>${n}</span>${b?`<i class="tb">${b}</i>`:''}</button>`; }).join('')}</nav>
     <div class="shell"><nav class="side" aria-label="Bölümler">${TABS.map(([k,n])=>{ const b=badgeFor(k); return `<button class="${TAB===k?'on':''}" data-tab="${k}">${ic(k)}<span>${n}</span>${b?`<span class="badge">${b}</span>`:''}</button>`; }).join('')}</nav>
@@ -5356,6 +5494,40 @@ function radarSVG(vals){ const keys=Object.keys(ATTR_NAMES), n=keys.length, R=96
     <polygon points="${poly}" fill="rgba(242,194,48,.22)" stroke="#f2c230" stroke-width="2.2" stroke-linejoin="round"/>
     ${keys.map((k,i)=>{ const p=pt(i,R*clamp(vals[k],0,99)/99); return `<circle cx="${p[0]}" cy="${p[1]}" r="3.6" fill="#f2c230"/>`; }).join('')}
     ${keys.map((k,i)=>{ const p=pt(i,R+16); return `<text x="${p[0]}" y="${p[1]-2}" text-anchor="middle" class="rd-l">${Math.round(vals[k])}</text><text x="${p[0]}" y="${p[1]+11}" text-anchor="middle" class="rd-n">${esc(ATTR_NAMES[k])}</text>`; }).join('')}</svg>`; }
+// ---------- Hakem Raporu: pozisyon türüne göre karar istatistiği (ayrıntısı Premium) ----------
+const OKV=['dogru','kabul','durdu'], BADV=['hata','israr','var'];
+function dstatAdd(log){
+  try{ S.dstat=S.dstat||{}; S.derr=S.derr||[];
+    (log||[]).filter(d=>d.cat==='major'&&d.type&&d.v).forEach(d=>{
+      const o=S.dstat[d.type]=S.dstat[d.type]||{n:0,ok:0,half:0}; o.n++;
+      if(OKV.includes(d.v)) o.ok++; else if(d.v==='kismen') o.half++;
+      if(BADV.includes(d.v)) S.derr.unshift({type:d.type,min:d.min,season:S.season,week:S.week,your:d.your,correct:d.correct,law:String(d.law||'').slice(0,240)});
+    });
+    if(S.derr.length>8) S.derr.length=8;
+  }catch(e){}
+}
+function dAcc(o){ return o.n?(o.ok+o.half*.5)/o.n:0; }
+function proReportHTML(){
+  const st=S.dstat||{}; const rows=Object.keys(st).map(k=>({k,t:TYPE_TITLES[k]||k,n:st[k].n,a:dAcc(st[k])})).sort((a,b)=>b.n-a.n);
+  const tot=rows.reduce((x,r)=>x+r.n,0);
+  const head=`<div class="dv-ph"><h3>Hakem Raporu</h3>${isPremium()?'<span class="chip pro-chip">PRO</span>':'<span class="chip">Özet</span>'}</div>`;
+  if(tot<3) return `<section class="dv-panel pro">${head}<p class="muted">Birkaç maç yönettikten sonra hangi pozisyonlarda iyi, hangilerinde zayıf olduğunu burada göreceksin.</p></section>`;
+  const all=rows.reduce((x,r)=>x+r.a*r.n,0)/tot; const pct=v=>Math.round(v*100)+'%';
+  const ranked=rows.filter(r=>r.n>=2).sort((a,b)=>a.a-b.a); const weak=ranked.slice(0,3), best=ranked[ranked.length-1];
+  const summary=`<div class="pro-sum"><div><b class="num">${pct(all)}</b><small>Genel doğruluk</small></div><div><b class="num">${tot}</b><small>Önemli karar</small></div>${best?`<div><b>${esc(best.t)}</b><small>En güçlü olduğun pozisyon</small></div>`:''}</div>`;
+  const bar=r=>`<div class="pro-row"><span>${esc(r.t)}</span><i class="pro-bar"><i style="width:${Math.round(r.a*100)}%;background:${r.a>=.8?'var(--green)':r.a>=.6?'var(--yellow)':'var(--red)'}"></i></i><b class="num">${pct(r.a)}</b><small class="num">${r.n}</small></div>`;
+  if(!isPremium()){
+    const teaser=rows.slice(0,4).map(bar).join('');
+    return `<section class="dv-panel pro">${head}${summary}<div class="pro-lockw"><div class="pro-rows pro-blur" aria-hidden="true">${teaser}</div>
+      <div class="pro-lock">${v11g('crown','#f6c62b',30)}<b>Ayrıntılı rapor Premium’da</b><small>Pozisyon türüne göre doğruluk, zayıf noktaların ve kural maddeleri.</small><button class="btn primary" data-paywall="rapor">Raporu aç</button></div></div></section>`;
+  }
+  const errs=(S.derr||[]).slice(0,5);
+  return `<section class="dv-panel pro">${head}${summary}
+    <div class="pro-rows">${rows.map(bar).join('')}</div>
+    ${weak.length&&weak[0].a<.8?`<h4 class="pro-h">Üzerinde çalışman gerekenler</h4><div class="pro-weak">${weak.filter(r=>r.a<.8).map(r=>`<details class="law"><summary><b>${esc(r.t)}</b> · ${pct(r.a)}</summary><p>${esc(LAWS[r.k]||'')}</p></details>`).join('')}</div>`:''}
+    ${errs.length?`<h4 class="pro-h">Son hataların</h4><div class="pro-errs">${errs.map(e=>`<div class="pro-err"><b>${esc(TYPE_TITLES[e.type]||e.type)}</b><small>${esc(e.min||'')} · ${esc(seasonLabel(e.season))}</small><span>Senin kararın: ${esc(e.your||'—')}</span><span>Doğrusu: ${esc(e.correct||'—')}</span></div>`).join('')}</div>`:''}
+  </section>`;
+}
 function devHTML(){
   if(!S.attrStart||S.attrStart.season!==S.season) S.attrStart={season:S.season,...S.attrs};
   const engCost=[0,60000,90000,140000][S.english+1];
@@ -5372,6 +5544,7 @@ function devHTML(){
         <p class="dv-note">${S.age>36?'36 yaş sonrası gelişim yavaşlar; deneyim ve kondisyon yönetimi önem kazanır.':'Her hafta bir antrenman odağı seçebilirsin. 80 üstünde gelişim yavaşlar.'}</p>
         <button class="btn primary" data-tab="merkez" id="bGoTrain">Haftalık antrenmana git</button></div></section>
     <div class="dv-grid">${Object.keys(ATTR_NAMES).map(attrCard).join('')}</div>
+    ${proReportHTML()}
     <div class="dv-two">
       <section class="dv-panel"><div class="dv-ph"><h3>Dil kursu</h3><span class="chip">${ENGLISH[S.english]}</span></div>
         <div class="dv-cefr">${lv.map((l,i)=>`<div class="dv-step ${i<=S.english?'done':''} ${i===S.english?'cur':''}"><b>${l}</b>${req[l]?`<small>${req[l]}</small>`:'<small>&nbsp;</small>'}</div>`).join('')}</div>
@@ -5390,6 +5563,7 @@ function settingsHTML(){
   const tg=(k,l,d)=>`<label class="row" style="justify-content:space-between;border-bottom:1px solid var(--line);padding:10px 0"><span><b>${l}</b><br><span class="muted" style="font-size:13px">${d}</span></span><input type="checkbox" id="set_${k}" data-set="${k}" ${st[k]?'checked':''} style="width:22px;height:22px"></label>`;
   return `<div class="grid2"><div class="panel stack"><h2>Ayarlar</h2>
     ${tg('feedback','Anında geri bildirim','Her karardan sonra doğrusunu ve gerekçesini gösterir.')}${tg('pos','Konum alma aşaması','Pozisyon öncesi nerede duracağını sen seçersin.')}${tg('sound','Düdük sesi','Kararlarda düdük çalar.')}
+    <div><label class="lbl" for="set_wsnd">Düdük tonu</label><select id="set_wsnd"><option value="klasik">Klasik</option><option value="keskin" ${isPremium()&&st.wsnd==='keskin'?'selected':''}>Keskin${isPremium()?'':' · Premium'}</option><option value="derin" ${isPremium()&&st.wsnd==='derin'?'selected':''}>Derin${isPremium()?'':' · Premium'}</option></select></div>
     <div><label class="lbl" for="set_diff">Zorluk</label><select id="set_diff">${Object.entries(DIFFS).map(([k,d])=>`<option value="${k}" ${S.diff===k?'selected':''}>${d.name} — ${d.desc}</option>`).join('')}</select></div></div>
     <div class="panel stack"><h3>Kayıt</h3><p class="muted" style="font-size:13px">Oyun bu tarayıcıda otomatik kaydedilir. Başka cihaza taşımak için kayıt kodunu kopyala.</p>
       <textarea id="saveCode" rows="4" readonly>${exportCode()}</textarea><div class="row"><button class="btn sm" id="bCopy">Kodu kopyala</button></div>
@@ -5402,7 +5576,7 @@ function bindMain(){
   q('[data-post]').forEach(b=>b.onclick=()=>myPost(b.dataset.post));
   q('[data-lg]').forEach(b=>b.onclick=()=>{ LG_VIEW=b.dataset.lg; render(); });
   q('[data-at]').forEach(b=>b.onclick=()=>{ ACAD_TOPIC=b.dataset.at; render(); });
-  { const bc=$('#bCase'); if(bc) bc.onclick=()=>acadStart(false); const be=$('#bExam'); if(be) be.onclick=()=>acadStart(true); }
+  { const bc=$('#bCase'); if(bc) bc.onclick=()=>acadStart(false); const be=$('#bExam'); if(be) be.onclick=()=>acadStart(true); document.querySelectorAll('[data-leg]').forEach(b=>b.onclick=()=>legStart(b.dataset.leg)); }
   q('[data-igt]').forEach(b=>b.onclick=()=>{ IG_TAB=b.dataset.igt; render(); });
   q('[data-igg]').forEach(b=>b.onclick=()=>{ IG_GRID=b.dataset.igg; render(); });
   q('[data-like]').forEach(b=>b.onclick=()=>{ const p=S.social.posts.find(x=>x.id===b.dataset.like); if(!p) return; p.liked=!p.liked; haptic('light'); save(); const art=b.closest('.igp'); if(art){ art.outerHTML=igPost(p); bindMain(); } });
@@ -5425,6 +5599,7 @@ function bindMain(){
   q('[data-up]').forEach(b=>b.onclick=()=>{ const u=UPGRADES.find(x=>x.id===b.dataset.up); if(S.money>=u.cost){ S.money-=u.cost; tx(u.name,-u.cost,'ekip'); S.upgrades[u.id]=true; toast(u.name+' ekibine katıldı'); save(); render(); } });
   q('[data-eng]').forEach(b=>b.onclick=()=>{ const c=[0,60000,90000,140000][S.english+1]; if(S.money>=c){ S.money-=c; tx('İngilizce kursu · '+ENGLISH[S.english+1],-c,'egitim'); S.english++; toast('İngilizce seviyen: '+ENGLISH[S.english]); save(); render(); } });
   q('[data-set]').forEach(b=>b.onchange=()=>{ S.settings[b.dataset.set]=b.checked; save(); });
+  const ws=$('#set_wsnd'); if(ws) ws.onchange=()=>{ const v=ws.value; if(v!=='klasik'&&!isPremium()){ ws.value='klasik'; openPaywall('ses'); return; } S.settings.wsnd=v; save(); whistle(); };
   const bw=$('#bWeek'); if(bw) bw.onclick=finishWeek;
   document.querySelectorAll('#tNews [data-ns]').forEach(b=>b.onclick=e=>{ e.stopPropagation(); NEWS_I=+b.dataset.ns; document.querySelectorAll('#tNews .tn-s').forEach((x,i)=>x.classList.toggle('on',i===NEWS_I)); document.querySelectorAll('#tNews [data-ns]').forEach((x,i)=>x.classList.toggle('on',i===NEWS_I)); });
   const td=$('#tDaily'); if(td) td.onclick=dailyOpen;
@@ -5516,10 +5691,10 @@ function dailyStreakOffer(){
   const f=$('#bDyFreeze'); if(f) f.onclick=()=>rewarded('streak',()=>{ const s2=dailyState(); s2.freezeUsed=dayKey(); s2.last=dayShift(dayKey(),-1); s2.hist[s2.last]=s2.hist[s2.last]||{v:'freeze',t:0}; dailySave(s2); toast('Serin korundu'); dailyStart(false); });
   $('#bDyNoFreeze').onclick=()=>dailyStart(false);
 }
-function dailyStart(practice){
-  const k=dayKey(); DAILY=dailyMake(k,practice); const {inc,ctxM}=DAILY; inc.sel={d:null,c:inc.steps[1]?null:undefined};
+function dailyStart(practice,archK){
+  const k=archK||dayKey(); DAILY=dailyMake(k,archK?false:practice); DAILY.arch=!!archK; const {inc,ctxM}=DAILY; inc.sel={d:null,c:inc.steps[1]?null:undefined};
   const keep=M; M=ctxM; curInc=inc; const cams=['yakin','tv','hakem','ust'];
-  const kicker=practice?'Bonus pozisyon · seriye sayılmaz':`Günün pozisyonu #${DAILY.no}`;
+  const kicker=archK?`Arşiv · Günün pozisyonu #${DAILY.no}`:practice?'Bonus pozisyon · seriye sayılmaz':`Günün pozisyonu #${DAILY.no}`;
   openModal(head(kicker,esc(inc.title),`<span class="num tm-l" id="tmrLab"></span><button class="btn sm" id="dyX">Kapat</button>`)+`<div class="timer" id="tmr"><i></i></div><div class="sh-body"><div class="inc"><div class="stack">${replayHTML(inc,cams)}<p class="story">${inc.story}</p></div>
     <div class="stack"><div class="eyebrow">Olgular</div><div class="facts">${factsHTML(inc,true)}</div><div class="decide" id="decide">${stepsHTML(inc)}</div><button class="btn primary" id="bDy" disabled>Kararı ver</button></div></div></div>`);
   bindReplay(inc,cams); bindSteps(inc,'bDy'); M=keep;
@@ -5533,7 +5708,8 @@ function dailyResult(ans,late){
   const D=DAILY, inc=D.inc; const v=late&&!inc.sel.d?'hata':evaluate(inc,ans); const ok=['dogru','kabul'].includes(v);
   const secs=Math.min(DAILY_TIME,Math.round((Date.now()-D.t0)/1000));
   const st=dailyState(); let gain='';
-  if(!D.practice){
+  if(D.arch){ st.arch=st.arch||{}; st.arch[D.k]={v,t:secs}; dailySave(st); if(S&&ok){ S.attrs.kural=clamp(S.attrs.kural+.05*(S.growth||1),0,99); save(); gain='Kural bilgisi +0.05'; } }
+  else if(!D.practice){
     const prevLast=st.last; st.hist[D.k]={v,t:secs};
     st.streak = (prevLast===dayShift(D.k,-1)) ? st.streak+1 : (prevLast===D.k ? st.streak : 1);
     st.last=D.k; st.best=Math.max(st.best,st.streak); st.played++; if(ok) st.won++;
@@ -5548,19 +5724,21 @@ function dailyResultUI(gain){
   const D=DAILY, inc=D.inc, {v,secs,ans}=D.res; const st=dailyState(); const ok=D.res.ok;
   const keep=M; M=D.ctxM; inc.showOff=true; const cams=['yakin','tv','ters','ust'];
   const bonusLeft=DAILY_BONUS_MAX-(st.bonus[D.k]||0);
-  const doubleBtn=(!D.practice&&S&&D.pay&&!(st.doubled||{})[D.k])?adBtn('bDyDouble','Ödülü ikiye katla'):'';
-  const bonusBtn=bonusLeft>0?adBtn('bDyBonus',`Bonus pozisyon (${bonusLeft} hak)`):'';
-  openModal(head(D.practice?'Bonus pozisyon':`Günün pozisyonu #${D.no}`,VLAB[v],`<button class="btn sm" id="dyX">Kapat</button>`)+`<div class="sh-body"><div class="inc"><div class="stack">${replayHTML(inc,cams)}</div><div class="stack">
+  const doubleBtn=(!D.practice&&!D.arch&&S&&D.pay&&!(st.doubled||{})[D.k])?adBtn('bDyDouble','Ödülü ikiye katla'):'';
+  const bonusBtn=(!D.arch&&bonusLeft>0)?adBtn('bDyBonus',`Bonus pozisyon (${bonusLeft} hak)`):'';
+  const solo=D.practice||D.arch;
+  openModal(head(D.arch?`Arşiv · #${D.no}`:D.practice?'Bonus pozisyon':`Günün pozisyonu #${D.no}`,VLAB[v],`<button class="btn sm" id="dyX">Kapat</button>`)+`<div class="sh-body"><div class="inc"><div class="stack">${replayHTML(inc,cams)}</div><div class="stack">
     <div class="verdict v-${v}"><span class="vi">${VLAB[v]}</span><span class="muted">Senin kararın: ${inc.sel.d?esc(ansText(inc,ans)):'karar verilmedi'} · ${secs} sn</span></div>
     ${!ok?`<p><b>Doğrusu:</b> ${esc(ansText(inc,inc.correct))}</p>`:''}<p>${esc(inc.explain)}</p>
     <details class="law"><summary>Kural metni</summary><p>${esc(inc.law)}</p></details>
-    <div class="row">${gain?`<span class="chip g">${gain}</span>`:''}${D.practice?'':`<span class="chip">🔥 Seri ${st.streak}</span><span class="chip">En iyi ${st.best}</span><span class="chip">Doğru ${st.won}/${st.played}</span>`}</div>
-    ${D.practice?'':'<button class="btn primary" id="bDyShare">Sonucu paylaş</button>'}
-    <div class="row">${doubleBtn}${bonusBtn}</div>
-    ${D.practice?'':`<p class="muted" style="font-size:13px">Yeni pozisyon gece yarısı açılır.</p>`}</div></div></div>`);
+    <div class="row">${gain?`<span class="chip g">${gain}</span>`:''}${solo?'':`<span class="chip">🔥 Seri ${st.streak}</span><span class="chip">En iyi ${st.best}</span><span class="chip">Doğru ${st.won}/${st.played}</span>`}</div>
+    ${solo?'':'<button class="btn primary" id="bDyShare">Sonucu paylaş</button>'}
+    <div class="row">${doubleBtn}${bonusBtn}${archBtn()}</div>
+    ${solo?'':`<p class="muted" style="font-size:13px">Yeni pozisyon gece yarısı açılır.</p>`}</div></div></div>`);
   bindReplay(inc,cams); M=keep;
   $('#dyX').onclick=()=>{ replayStop(); DAILY=null; const m=$('#modal'); m.hidden=true; m.innerHTML=''; render(); };
   const sh=$('#bDyShare'); if(sh) sh.onclick=()=>dailyShare(D.no,inc,v,secs);
+  bindArchBtn();
   const db=$('#bDyDouble'); if(db) db.onclick=()=>rewarded('daily2x',()=>{ const s2=dailyState(); s2.doubled=s2.doubled||{}; if(s2.doubled[D.k]) return; s2.doubled[D.k]=1; dailySave(s2); S.money+=D.pay; if(typeof tx==='function') tx('Günün pozisyonu bonusu',D.pay,'odul'); save(); haptic('success'); toast('Ödül ikiye katlandı'); db.remove(); });
   const bb=$('#bDyBonus'); if(bb) bb.onclick=()=>rewarded('dailybonus',()=>{ const s2=dailyState(); s2.bonus[D.k]=(s2.bonus[D.k]||0)+1; dailySave(s2); replayStop(); dailyStart(true); });
 }
@@ -5571,15 +5749,29 @@ function dailySummary(){
   openModal(head(`Günün pozisyonu #${dayNo(k)}`,VLAB[h.v]||'Tamamlandı',`<button class="btn sm" id="dyX">Kapat</button>`)+`<div class="sh-body">
     <div class="row"><span class="chip">🔥 Seri ${st.streak}</span><span class="chip">En iyi ${st.best}</span><span class="chip">Doğru ${st.won}/${st.played}</span></div>
     <p class="muted">Bugünkü pozisyonu ${h.t} saniyede çözdün. Yeni pozisyon gece yarısı açılır.</p>
-    <div class="row"><button class="btn primary" id="bDyShare">Sonucu paylaş</button>${bonusLeft>0?adBtn('bDyBonus',`Bonus pozisyon (${bonusLeft} hak)`):''}</div></div>`,true);
+    <div class="row"><button class="btn primary" id="bDyShare">Sonucu paylaş</button>${bonusLeft>0?adBtn('bDyBonus',`Bonus pozisyon (${bonusLeft} hak)`):''}${archBtn()}</div></div>`,true);
+  bindArchBtn();
   $('#dyX').onclick=()=>{ const m=$('#modal'); m.hidden=true; m.innerHTML=''; };
   $('#bDyShare').onclick=()=>{ const D=dailyMake(k,false); dailyShare(dayNo(k),D.inc,h.v,h.t); };
   const bb=$('#bDyBonus'); if(bb) bb.onclick=()=>rewarded('dailybonus',()=>{ const s2=dailyState(); s2.bonus[k]=(s2.bonus[k]||0)+1; dailySave(s2); dailyStart(true); });
 }
+// ---------- Arşiv: geçmiş günlerin pozisyonları (Premium) ----------
+function archBtn(){ if(dayNo(dayKey())<2) return ''; return `<button class="btn" id="bDyArch">${isPremium()?'':v11g('crown','#f6c62b',16)+' '}Geçmiş pozisyonlar</button>`; }
+function bindArchBtn(){ const a=$('#bDyArch'); if(a) a.onclick=()=>{ replayStop(); DAILY=null; if(!isPremium()){ const m=$('#modal'); m.hidden=true; m.innerHTML=''; openPaywall('arsiv'); return; } dailyArchive(); }; }
+function dailyArchive(){
+  const st=dailyState(), today=dayKey(); const days=[]; for(let i=1;i<=60;i++){ const k=dayShift(today,-i); if(dayNo(k)<1) break; days.push(k); }
+  const loc={tr:'tr-TR',en:'en-GB',de:'de-DE',es:'es-ES'}[curLang()]||'tr-TR';
+  const row=k=>{ const r=(st.arch||{})[k]||st.hist[k]; const d=new Date(k+'T12:00:00'); const mark=r&&r.v?({dogru:'🟩',kabul:'🟨',kismen:'🟧',hata:'🟥',freeze:'⬜'}[r.v]||'⬜'):'';
+    return `<button class="arch-row" data-arch="${k}"><span class="num">#${dayNo(k)}</span><span>${d.toLocaleDateString(loc,{day:'numeric',month:'long',weekday:'short'})}</span><span>${mark}</span><span class="dy-go">${r&&r.v&&r.v!=='freeze'?'Tekrar oyna':'Oyna'}</span></button>`; };
+  openModal(head('Günün pozisyonu','Arşiv',`<button class="btn sm" id="dyX">Kapat</button>`)+`<div class="sh-body"><p class="muted">Kaçırdığın ya da tekrar denemek istediğin günler. Seriyi ve günlük ödülü etkilemez.</p><div class="arch-list">${days.map(row).join('')}</div></div>`,true);
+  $('#dyX').onclick=()=>{ const m=$('#modal'); m.hidden=true; m.innerHTML=''; };
+  document.querySelectorAll('[data-arch]').forEach(b=>b.onclick=()=>dailyStart(false,b.dataset.arch));
+}
 // paylaşım: doğru kararı ele vermeden sonuç kartı
 function dailyShare(no,inc,v,secs){
   const st=dailyState(); const mark={dogru:'🟩',kabul:'🟨',kismen:'🟧',hata:'🟥'}[v]||'⬜';
-  const text=`Refmania · Günün pozisyonu #${no}\n${inc.title}\n${mark} ${VLAB[v]} · ${secs} sn\n🔥 ${st.streak} günlük seri\nSen olsan ne verirdin? #Refmania`;
+  const badge=hasAll()?'👑 Refmania Tam Paket hakemi\n':isPremium()?'👑 Premium hakem\n':'';
+  const text=`Refmania · Günün pozisyonu #${no}\n${inc.title}\n${mark} ${VLAB[v]} · ${secs} sn\n🔥 ${st.streak} günlük seri\n${badge}Sen olsan ne verirdin? #Refmania`;
   const done=()=>toast('Sonuç panoya kopyalandı');
   try{ if(navigator.share){ navigator.share({text}).catch(()=>{}); return; } }catch(e){}
   try{ navigator.clipboard.writeText(text).then(done,()=>prompt('Kopyala:',text)); }catch(e){ prompt('Kopyala:',text); }
@@ -5622,6 +5814,9 @@ const V11G={
  lock:'<rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2"/>',
  envelope:'<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 7l10 7 10-7" fill="none" stroke="var(--bg)" stroke-width="1.8"/>',
  book:'<path d="M4 4h7a2 2 0 0 1 2 2v14a2 2 0 0 0-2-2H4zM20 4h-5a2 2 0 0 0-2 2v14a2 2 0 0 1 2-2h5z"/>',
+ chart:'<path d="M4 20V11h3.4v9zM10.3 20V4h3.4v16zM16.6 20v-6.5H20V20z"/>',
+ cal:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10.5h18" stroke="var(--bg)" stroke-width="1.6"/><path d="M8 3v4M16 3v4" stroke="currentColor" stroke-width="2"/>',
+ trophy:'<path d="M7 3h10v5a5 5 0 0 1-10 0z"/><path d="M7 5H4v2a4 4 0 0 0 3.5 4M17 5h3v2a4 4 0 0 1-3.5 4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10.5 13h3v4H17v3H7v-3h3.5z"/>',
 };
 const v11g=(k,col,size)=>`<span class="v11-gl" style="--gc:${col||'var(--yellow)'};${size?`width:${size}px;height:${size}px`:''}"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">${V11G[k]||V11G.gift}</svg></span>`;
 ICONS.magaza='<path d="M4 8h16l-1.5 12h-13z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8.5 8V6.5a3.5 3.5 0 0 1 7 0V8" fill="none" stroke="currentColor" stroke-width="2"/>';
@@ -5859,7 +6054,7 @@ async function rewarded(label,cb){
 function adBtn(id,label,extra){
   const free=isPremium()||hourActive();
   if(!free && !adsOn()) return '';
-  return `<button class="btn sm v11-ad" id="${id}" ${extra||''}>${free?ic('star'):`<svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">${V11G.ad}</svg>`}<span>${label}</span>${isPremium()?'<small>Premium</small>':hourActive()?'<small>Premium Saati</small>':''}</button>`;
+  return `<button class="btn sm v11-ad" id="${id}" ${extra||''}>${free?ic('star'):`<svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">${V11G.ad}</svg>`}<span>${label}</span>${isPremium()?'<small>Premium</small>':hourActive()?'<small>Premium Molası</small>':''}</button>`;
 }
 function v11AfterReport(){
   MATCH_N++;
@@ -5980,15 +6175,20 @@ function flushPendingOffer(){
   const deal=['hosgeldin','terfi'].includes(r);
   setTimeout(()=>{ if(!openOffer(r,deal?'force':'milestone') && deal) {} },700);
 }
+// son 7 günün reklam kaydı: ödeme ekranında oyuncunun kendi rakamı gösterilir
+const ADLOG_KEY='refmania_reklamlog';
+function adLog(kind){ try{ const now=Date.now(); const L=lsJ(ADLOG_KEY,{r:[],i:[]}); L[kind]=(L[kind]||[]).filter(t=>now-t<7*DAY1).concat(now); lsSet(ADLOG_KEY,JSON.stringify(L)); }catch(e){} }
+function adWeek(){ const now=Date.now(); const L=lsJ(ADLOG_KEY,{r:[],i:[]}); const r=(L.r||[]).filter(t=>now-t<7*DAY1).length, i=(L.i||[]).filter(t=>now-t<7*DAY1).length; return {n:r+i,min:Math.max(1,Math.round((r*30+i*15)/60))}; }
+function pwStatHTML(){ if(isPremium()) return ''; const w=adWeek(); if(w.n<3) return ''; return `<span class="pw-stat">Son 7 günde <b class="num">${w.n}</b> reklam izledin, yaklaşık <b class="num">${w.min}</b> dakika. Premium ile hepsi biter.</span>`; }
 function noteRewardedWatched(){
-  SESSION_RW++;
+  SESSION_RW++; adLog('r');
   if(noteHourAd()) return;
   OFF.rw++; offSave();
   if(OFF.rw>=10 && Date.now()-OFF.rw10>7*DAY1 && !SESSION_OFFER){ OFF.rw10=Date.now(); OFF.rw=0; offSave(); setTimeout(()=>openOffer('reklam10','milestone'),1500); }
   else if(SESSION_RW===3) setTimeout(()=>openOffer('reklam'),1500);
 }
 function noteInterstitialShown(){
-  OFF.ints++; offSave();
+  OFF.ints++; offSave(); adLog('i');
   if(isPremium()||SESSION_OFFER||Date.now()-OFF.nudge<DAY1) return;
   OFF.nudge=Date.now(); offSave();
   setTimeout(()=>{ const t=$('#toast'); if(!t) return; const d=document.createElement('div'); d.className='pw-nudge'; d.innerHTML=`<span>${v11g('crown','#f6c62b',22)}</span><b>Reklamsız oyna</b><button class="btn sm primary" type="button">Paketler</button>`; d.querySelector('button').onclick=()=>{ d.remove(); openPaywall('nudge'); }; t.appendChild(d); setTimeout(()=>d.remove(),7000); },900);
@@ -5996,17 +6196,19 @@ function noteInterstitialShown(){
 function upsellDue(){ return !isPremium() && adsOn() && OFF.ints>=OFF.next; }
 function dismissUpsell(){ OFF.next=OFF.ints+8; offSave(); }
 
-// ---------- Premium Saati: 10 ödüllü reklam = istediğin an başlatacağın 1 saat reklamsız oyun ----------
-const HOUR_KEY='refmania_saat', HOUR_GOAL=10;
+// ---------- Premium Molası: 10 ödüllü reklam = istediğin an başlatacağın 20 dakika reklamsız oyun ----------
+const HOUR_KEY='refmania_saat', HOUR_GOAL=10, HOUR_LEN=20*60000;
 let HOUR=lsJ(HOUR_KEY,{n:0,hak:false,bitis:0,teklif:false});
 function hourSave(){ lsSet(HOUR_KEY,JSON.stringify(HOUR)); }
 function hourActive(now=Date.now()){ return !!HOUR.bitis && now<HOUR.bitis; }
 function noteHourAd(){
   if(isPremium()||HOUR.hak||hourActive()) return false;
   HOUR.n++; if(HOUR.n<HOUR_GOAL){ hourSave(); return false; }
-  HOUR.n=0; HOUR.hak=true; hourSave(); setTimeout(()=>{ toast('Premium Saati kazandın! Merkezden istediğin an başlat.'); render(); },600); return true;
+  HOUR.n=0; HOUR.hak=true; hourSave(); setTimeout(()=>{ toast('Premium Molası kazandın! Merkezden istediğin an başlat.'); render(); },600); return true;
 }
-function startHour(){ if(!HOUR.hak||hourActive()) return; HOUR.hak=false; HOUR.bitis=Date.now()+H1; HOUR.teklif=false; hourSave(); haptic('success'); toast('Premium Saati başladı: 1 saat reklamsız'); render(); }
+function startHour(){ if(!HOUR.hak||hourActive()) return; HOUR.hak=false; HOUR.bitis=Date.now()+HOUR_LEN; HOUR.teklif=false; hourSave(); haptic('success'); toast('Premium Molası başladı: 20 dakika reklamsız'); render(); }
+// 5. maçtan sonra bir kez: Premium'u tattırmak için hediye mola (reklamlar açıksa)
+function hourGift(){ try{ if(HOUR.gift||!MONET||!adsOn()||isPremium()||HOUR.hak||hourActive()||!S||S.totals.matches<5) return; HOUR.gift=true; HOUR.hak=true; hourSave(); setTimeout(()=>{ toast('Hediye: 20 dakikalık Premium Molası! Merkezden istediğin an başlat.'); },900); }catch(e){} }
 function hourEndOffer(){ if(!HOUR.bitis||hourActive()||HOUR.teklif) return; HOUR.teklif=true; hourSave(); PENDING_OFFER=PENDING_OFFER||'saat'; }
 
 // ---------- paket penceresi ----------
@@ -6015,7 +6217,7 @@ const PW_HEAD={
   reklam:['Reklamlara ara ver','Bugün üç reklam izledin. Premium ile ödüller anında, reklamsız.'],
   reklam10:['Bir daha reklam izleme','Şimdiye kadar onlarca reklam izledin. Ödülleri tek dokunuşla al.'],
   nudge:['Reklamsız oyna','Maç aralarındaki reklamlar tamamen kalksın.'],
-  saat:['Premium Saati bitti','Beğendiysen hep böyle oyna: reklamsız, anında ödüllü.'],
+  saat:['Premium Molası bitti','Beğendiysen hep böyle oyna: reklamsız, anında ödüllü.'],
   harika:['Harika bir maçtı!','Bu formu reklamsız sürdür: Premium ile ödüller anında, kasana 250.000 ₺.'],
   seri:['Serin devam ediyor!','Her gün buradasın. Premium ile reklamsız ve anında ödüllü oyna.'],
   para:['Kasanı büyüt','Premium ile kasana hemen 250.000 ₺ eklenir, ödüller anında gelir.'],
@@ -6025,9 +6227,14 @@ const PW_HEAD={
   mac10:['10 maç geride kaldı','Artık bir hakemsin. Kariyerini bir üst seviyeye taşı.'],
   sezon:['Yeni sezon, yeni sen','Sezona Tam Paket’in lüksüyle başla.'],
   esya:['Özel koleksiyon','Bu eşya paket sahiplerine özel.'],
+  arsiv:['Günün pozisyonu arşivi','Kaçırdığın bütün günleri oyna, eskileri tekrar dene. Premium’a dahil.'],
+  efsane:['Efsane Maçlar','Tarihe geçecek 10 maçın kritik anlarında düdük sende. Tam Paket’e dahil.'],
+  slot:['4. kariyer slotu','Dördüncü bir hakem kariyeri başlat. Premium’a dahil.'],
+  ses:['Düdük tonları','Keskin ve derin düdük tonları Premium’a dahil.'],
+  rapor:['Hakem Raporu PRO','Hangi pozisyonlarda hata yaptığını kural maddesiyle gör. Premium’a dahil.'],
 };
-const PERKS_PREM=[['ad','Reklamsız oyun','Maç aralarındaki geçiş reklamları tamamen kalkar.'],['star','Ödüller anında','Ücreti ikiye katla ve enerji takviyesi, reklam izlemeden.'],['gift','250.000 ₺','Her kariyerin kasasına bir kez.'],['whistle','2 özel ekipman','Elmas kakmalı düdük ve altın hakem saati.']];
-const PERKS_TAM=[['crown','Premium’un her şeyi','Reklamsız oyun, anında ödüller, 250.000 ₺, özel ekipman.'],['home','Lüks Yaşam Koleksiyonu','Boğaz’da yalı, klasik spor otomobil, tourbillon saat.'],['shirt','Altın Hakem Formaları','Altın, gece mavisi ve buz renkli formalarla sahaya çık.'],['gift','+500.000 ₺','Toplam 750.000 ₺ hoş geldin parası.']];
+const PERKS_PREM=[['ad','Reklamsız oyun','Maç aralarındaki geçiş reklamları tamamen kalkar.'],['star','Ödüller anında','Ücreti ikiye katla ve enerji takviyesi, reklam izlemeden.'],['chart','Hakem Raporu PRO','Pozisyon türüne göre doğruluğun, zayıf noktaların ve kural maddeleri.'],['cal','Günün pozisyonu arşivi','Kaçırdığın bütün günleri oyna, eskileri tekrar dene.'],['whistle','Hakem kimliği','4. kariyer slotu, 2 yeni düdük tonu, paylaşımlarda Premium rozeti.'],['gift','250.000 ₺ ve 2 özel ekipman','Her kariyerin kasasına bir kez; elmas kakmalı düdük ve altın hakem saati.']];
+const PERKS_TAM=[['crown','Premium’un her şeyi','Reklamsız oyun, anında ödüller, Hakem Raporu PRO, arşiv, 250.000 ₺.'],['trophy','Efsane Maçlar','10 tarihi maçın kritik anlarında düdük sende.'],['home','Lüks Yaşam Koleksiyonu','Boğaz’da yalı, klasik spor otomobil, tourbillon saat.'],['shirt','Altın Hakem Formaları','Altın, gece mavisi ve buz renkli formalarla sahaya çık.'],['gift','+500.000 ₺','Toplam 750.000 ₺ hoş geldin parası.']];
 function pwPerks(list){ return `<ul class="pw-perks">${list.map(([g,t,d])=>`<li>${v11g(g,'#f6c62b',26)}<span><b>${t}</b><small>${d}</small></span></li>`).join('')}</ul>`; }
 function packsBody(reason){
   loadPrices();
@@ -6042,7 +6249,7 @@ function packsBody(reason){
       <button class="btn primary lg pw-buy" data-sku="${tamSku}">${deal&&!up?`<s class="num" data-price="${SKU.tam}">${priceOf(SKU.tam)}</s> `:''}<span class="num" data-price="${tamSku}">${priceOf(tamSku)}</span><em>${up?'Yükselt':'Tam Paket’i al'}</em></button>
     </article>`;
   const prem=up?'':`<article class="pw-card pw-prem">
-      <header><b>Premium</b><small>Reklamsız ve anında ödüllü oyun</small></header>
+      <header><b>Premium</b><small>Reklamsız oyun, ayrıntılı rapor ve arşiv</small></header>
       ${pwPerks(PERKS_PREM)}
       <button class="btn lg pw-buy" data-sku="${SKU.prem}"><span class="num" data-price="${SKU.prem}">${priceOf(SKU.prem)}</span><em>Premium’u al</em></button>
     </article>`;
@@ -6064,7 +6271,7 @@ function openPaywall(reason){
   const deal=currentDeal();
   const m=$('#modal');
   m.innerHTML=`<div class="sheet pw" role="dialog" aria-modal="true" aria-label="Refmania Paketleri">
-    <div class="pw-hero"><button class="pw-x" id="bPwClose" aria-label="Kapat">×</button>${v11g('crown','#f6c62b',54)}<span class="pw-brand">Refmania<i></i></span><h2>${esc(h)}</h2><p>${esc(sub)}</p>${deal&&!isPremium()&&!['hosgeldin','terfi'].includes(reason)?`<span class="pw-dealchip">Tam Paket fırsatı · <b class="num" data-left="${deal.ends}">${fmtLeft(deal.ends-Date.now())}</b></span>`:''}</div>
+    <div class="pw-hero"><button class="pw-x" id="bPwClose" aria-label="Kapat">×</button>${v11g('crown','#f6c62b',54)}<span class="pw-brand">Refmania<i></i></span><h2>${esc(h)}</h2><p>${esc(sub)}</p>${pwStatHTML()}${deal&&!isPremium()&&!['hosgeldin','terfi'].includes(reason)?`<span class="pw-dealchip">Tam Paket fırsatı · <b class="num" data-left="${deal.ends}">${fmtLeft(deal.ends-Date.now())}</b></span>`:''}</div>
     <div class="sh-body pw-body">${packsBody(reason)}</div></div>`;
   m.hidden=false;
   if(deal) { DEAL.seen=[...new Set([...(DEAL.seen||[]),deal.key])]; dealSave(); }
@@ -6089,10 +6296,10 @@ function premHubTile(){
 }
 function hourCardHTML(){
   if(isPremium()) return '';
-  if(hourActive()) return `<div class="pw-hour on">${v11g('star','#f6c62b',26)}<span><b>Premium Saati</b><small>Reklamsız oynuyorsun · <span class="num" data-left="${HOUR.bitis}">${fmtLeft(HOUR.bitis-Date.now())}</span></small></span></div>`;
-  if(HOUR.hak) return `<div class="pw-hour ready">${v11g('star','#f6c62b',26)}<span><b>Premium Saati hazır</b><small>1 saat reklamsız oyun, ödüller anında</small></span><button class="btn sm primary" id="bHour">Başlat</button></div>`;
+  if(hourActive()) return `<div class="pw-hour on">${v11g('star','#f6c62b',26)}<span><b>Premium Molası</b><small>Reklamsız oynuyorsun · <span class="num" data-left="${HOUR.bitis}">${fmtLeft(HOUR.bitis-Date.now())}</span></small></span></div>`;
+  if(HOUR.hak) return `<div class="pw-hour ready">${v11g('star','#f6c62b',26)}<span><b>Premium Molası hazır</b><small>20 dakika reklamsız oyun, ödüller anında</small></span><button class="btn sm primary" id="bHour">Başlat</button></div>`;
   if(!adsOn()||!HOUR.n) return '';
-  return `<div class="pw-hour">${v11g('star','#8b98ab',26)}<span><b>Premium Saati</b><small>${HOUR.n}/${HOUR_GOAL} ödüllü reklam · 10’da 1 saat reklamsız</small></span><i class="pw-hbar"><i style="width:${HOUR.n/HOUR_GOAL*100}%"></i></i></div>`;
+  return `<div class="pw-hour">${v11g('star','#8b98ab',26)}<span><b>Premium Molası</b><small>${HOUR.n}/${HOUR_GOAL} ödüllü reklam · 10’da 20 dakika reklamsız</small></span><i class="pw-hbar"><i style="width:${HOUR.n/HOUR_GOAL*100}%"></i></i></div>`;
 }
 
 // ---------- ekranlar ----------
@@ -6323,7 +6530,7 @@ function handleBack(){
 }
 async function nativeInit(){
   if(!CAP) return;
-  try{ const P=PLUG('Preferences'); if(P){ for(const k of [OLD_KEY,slotKey(1),slotKey(2),slotKey(3)]){ const r=await P.get({key:k}); if(r && r.value) NSAVE[k]=r.value; }
+  try{ const P=PLUG('Preferences'); if(P){ for(const k of [OLD_KEY,slotKey(1),slotKey(2),slotKey(3),slotKey(4)]){ const r=await P.get({key:k}); if(r && r.value) NSAVE[k]=r.value; }
     try{ if(!lsGet(DAILY_KEY)){ const r=await P.get({key:DAILY_KEY}); if(r && r.value) localStorage.setItem(DAILY_KEY,r.value); } }catch(e){} } }catch(e){}
   try{ const A=PLUG('App'); if(A){ A.addListener('backButton',handleBack); A.addListener('pause',pauseForBackground); A.addListener('resume',resumeFromBackground); } }catch(e){}
   try{ const SB=PLUG('StatusBar'); if(SB){ SB.setStyle({style:'DARK'}); SB.setBackgroundColor && SB.setBackgroundColor({color:'#101824'}); } }catch(e){}
