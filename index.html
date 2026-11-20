@@ -3672,7 +3672,7 @@ function finishMatch(){
   S.stats.all.push(rating);
   S.totals.matches++;
   // rep
-  const lvlF=1+fx.lvl*.15; let repD=(rating-8.2)*3*lvlF; if(rating>=9) repD+=1; repD=Math.round(repD*10)/10; S.rep=clamp(S.rep+repD,0,100);
+  const lvlF=1+fx.lvl*.15; let repD=(rating-8.2)*3*lvlF; if(rating>=9) repD+=1; repD=Math.round(repD*10)/10; S.rep=clamp(S.rep+repD,0,100); if(rating>=9) goodOffer('harika');
   S.money+=fx.fee; tx((fx.role==='var'?'VAR odası · ':fx.role==='ar'?'Yardımcı hakem · ':'')+team(fx.home).short+' – '+team(fx.away).short,fx.fee,'mac'); S.energy=clamp(S.energy-(fx.lvl>=4?20:16)+(S.upgrades.fizyo?6:0)+v11Mod('en'),0,100);
   // attr growth
   const gains={}; const add=(k,v)=>{ const ageMod=S.age>36?.7:1; const g=v*ageMod*(S.growth||1)*(S.attrs[k]>80?.5:1); S.attrs[k]=clamp(S.attrs[k]+g,0,99); gains[k]=(gains[k]||0)+g; };
@@ -5537,6 +5537,7 @@ function dailyResult(ans,late){
     const prevLast=st.last; st.hist[D.k]={v,t:secs};
     st.streak = (prevLast===dayShift(D.k,-1)) ? st.streak+1 : (prevLast===D.k ? st.streak : 1);
     st.last=D.k; st.best=Math.max(st.best,st.streak); st.played++; if(ok) st.won++;
+    if([7,14,30].includes(st.streak)) goodOffer('seri');
     dailySave(st);
     if(S){ const pay=ok?2500*(1+(S.tier||0)):800; S.money+=pay; if(typeof tx==='function') tx('Günün pozisyonu',pay,'odul'); if(ok) S.attrs.kural=clamp(S.attrs.kural+.2*(S.growth||1),0,99); save(); gain=ok?`+${moneyShort(pay)} · Kural bilgisi +0.2`:`+${moneyShort(pay)} katılım`; D.pay=pay; }
   } else if(S && ok){ S.attrs.kural=clamp(S.attrs.kural+.05*(S.growth||1),0,99); save(); gain='Kural bilgisi +0.05'; }
@@ -5720,7 +5721,7 @@ function effChips(it){
 function buy11(id){
   const it=itemById11(id); if(!it||owns11(id)||outclassed11(it)) return;
   if((it.tam && !hasAll()) || (it.prem && !isPremium())){ openPaywall('esya'); return; }
-  if(S.money<it.price){ toast('Kasanda yeterli para yok'); return; }
+  if(S.money<it.price){ toast('Kasanda yeterli para yok'); goodOffer('para'); return; }
   S.money-=it.price; tx(it.name,-it.price,'magaza'); S.inv.push(id);
   if(it.rep) S.rep=clamp(S.rep+it.rep,0,100);
   if(it.trust) S.kurul.trust=clamp(S.kurul.trust+it.trust,0,100);
@@ -5755,7 +5756,7 @@ function vacAvail(v){
 }
 function takeVac(id){
   const v=VAC11.find(x=>x.id===id); if(!v||!vacAvail(v)) return;
-  if(S.money<v.price){ toast('Bu tatil için kasan yetmiyor'); return; }
+  if(S.money<v.price){ toast('Bu tatil için kasan yetmiyor'); goodOffer('para'); return; }
   S.money-=v.price; tx(v.name,-v.price,'tatil'); S.vac.count++;
   if(v.kind==='kisa') S.tasks.activity='tatil';
   else { const b=breakNow(); if(b==='winter') S.vac.winter=S.season; else S.vac.summer=S.season; }
@@ -5954,6 +5955,12 @@ function openOffer(reason,mode){
   if(mode!=='milestone' && Date.now()-OFF.last<20*H1) return false;
   SESSION_OFFER=true; OFF.last=Date.now(); offSave(); openPaywall(reason); return true;
 }
+// iyi anlarda nazik teklif: en fazla 3 günde bir, Premium/Tam Paket sahibine hiç
+function goodOffer(reason){
+  try{ if(!MONET||isPremium()||hasAll()||!S||S.totals.matches<3) return; if(Date.now()-(OFF.good||0)<3*DAY1) return;
+    if(reason==='para'){ if(SESSION_OFFER) return; OFF.good=Date.now(); offSave(); setTimeout(()=>openOffer('para','milestone'),900); return; }
+    OFF.good=Date.now(); offSave(); PENDING_OFFER=PENDING_OFFER||reason; }catch(e){}
+}
 function milestoneOffer(reason){ if(hasAll()||OFF.ms.includes(reason)) return; OFF.ms.push(reason); offSave(); PENDING_OFFER=reason; }
 function flushPendingOffer(){
   if(!PENDING_OFFER||!S||TAB!=='merkez') return;
@@ -5997,6 +6004,9 @@ const PW_HEAD={
   reklam10:['Bir daha reklam izleme','Şimdiye kadar onlarca reklam izledin. Ödülleri tek dokunuşla al.'],
   nudge:['Reklamsız oyna','Maç aralarındaki reklamlar tamamen kalksın.'],
   saat:['Premium Saati bitti','Beğendiysen hep böyle oyna: reklamsız, anında ödüllü.'],
+  harika:['Harika bir maçtı!','Bu formu reklamsız sürdür: Premium ile ödüller anında, kasana 250.000 ₺.'],
+  seri:['Serin devam ediyor!','Her gün buradasın. Premium ile reklamsız ve anında ödüllü oyna.'],
+  para:['Kasanı büyüt','Premium ile kasana hemen 250.000 ₺ eklenir, ödüller anında gelir.'],
   hosgeldin:['Hoş geldin fırsatı','Tam Paket yalnızca bu pencerede yarı fiyatına.'],
   terfi:['Terfi ettin!','Yeni klasmanı kutla: Tam Paket 24 saat yarı fiyatına.'],
   terfiK:['Terfi ettin!','Yeni klasmana lüksle çık: yalı, klasik otomobil ve altın formalar.'],
