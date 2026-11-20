@@ -1,11 +1,7 @@
-NEW: Call of the Day
-• One controversial call a day, the same for everyone. Decide in 40 seconds, build your streak and share your result without spoiling the answer.
+Premium, always within reach
+• A Premium button in the top bar and a Premium tile on the home screen.
+• Packs are now the first tab in the shop.
 
-NEW: Relaxed mode
-• For newcomers: more time to decide, only the deciding facts, hints and an unlimited rule book.
-
-Clearer incidents
-• Redesigned players: fuller bodies, realistic shoulders and arms, natural arm swing when running.
-• Shirt numbers are printed on the kit; boots and studs are now visible.
-• Replays show challenges up close and clearly; dives look realistic.
-• The referee now always walks up to the player before showing a card.
+Improvements
+• Shop screen and translations fixed.
+• Minor bug fixes.

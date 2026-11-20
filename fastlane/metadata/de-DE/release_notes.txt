@@ -1,11 +1,7 @@
-NEU: Szene des Tages
-• Jeden Tag eine strittige Szene, für alle gleich. Entscheide in 40 Sekunden, baue deine Serie aus und teile dein Ergebnis, ohne die Lösung zu verraten.
+Premium jetzt immer griffbereit
+• Premium-Button in der oberen Leiste und Premium-Kachel auf der Startseite.
+• Pakete sind jetzt der erste Tab im Shop.
 
-NEU: Entspannter Modus
-• Für Einsteiger: mehr Zeit, nur die entscheidenden Fakten, Tipps und ein unbegrenztes Regelbuch.
-
-Klarere Szenen
-• Neu gestaltete Spieler: kräftigere Körper, realistische Schultern und Arme, natürliche Armbewegung beim Laufen.
-• Rückennummern sind auf das Trikot gedruckt; Schuhe und Stollen sind jetzt sichtbar.
-• Wiederholungen zeigen Zweikämpfe nah und deutlich; Schwalben wirken realistisch.
-• Der Schiedsrichter geht jetzt immer zum Spieler, bevor er eine Karte zeigt.
+Verbesserungen
+• Shop-Ansicht und Übersetzungen korrigiert.
+• Kleinere Fehlerbehebungen.

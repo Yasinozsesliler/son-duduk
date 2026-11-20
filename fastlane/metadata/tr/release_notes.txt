@@ -1,11 +1,7 @@
-YENİ: Günün pozisyonu
-• Her gün herkese aynı tartışmalı pozisyon. 40 saniyede kararını ver, serini büyüt, sonucunu cevabı ele vermeden arkadaşlarınla paylaş.
+Premium artık hep elinin altında
+• Üst çubukta Premium butonu, ana sayfada Premium kutucuğu.
+• Mağazada Paketler ilk sekmede.
 
-YENİ: Rahat mod
-• Yeni başlayanlar için daha uzun karar süresi, yalnızca belirleyici olgular, ipucu ve sınırsız kural kitabı.
-
-Daha net pozisyonlar
-• Oyuncular yeniden tasarlandı: hacimli gövde, gerçekçi omuz ve kollar, koşarken doğal kol hareketi.
-• Forma numaraları formanın üzerine basılı; kramponlar ve krampon tabanı artık görünüyor.
-• Tekrarlarda müdahaleler yakından ve net; yalandan penaltı pozisyonları gerçekçi.
-• Hakem kart göstermek için artık her zaman oyuncunun yanına gidiyor.
+İyileştirmeler
+• Mağaza ekranı ve çeviriler düzeltildi.
+• Küçük hata düzeltmeleri.
