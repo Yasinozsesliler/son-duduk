@@ -3672,7 +3672,7 @@ function finishMatch(){
   S.stats.all.push(rating);
   S.totals.matches++;
   // rep
-  const lvlF=1+fx.lvl*.15; let repD=(rating-8.2)*3*lvlF; if(rating>=9) repD+=1; repD=Math.round(repD*10)/10; S.rep=clamp(S.rep+repD,0,100); if(rating>=9) goodOffer('harika');
+  const lvlF=1+fx.lvl*.15; let repD=(rating-8.2)*3*lvlF; if(rating>=9) repD+=1; repD=Math.round(repD*10)/10; S.rep=clamp(S.rep+repD,0,100); if(rating>=9) goodOffer('harika'); if(rating>=8.5) reviewMoment();
   S.money+=fx.fee; tx((fx.role==='var'?'VAR odası · ':fx.role==='ar'?'Yardımcı hakem · ':'')+team(fx.home).short+' – '+team(fx.away).short,fx.fee,'mac'); S.energy=clamp(S.energy-(fx.lvl>=4?20:16)+(S.upgrades.fizyo?6:0)+v11Mod('en'),0,100);
   // attr growth
   const gains={}; const add=(k,v)=>{ const ageMod=S.age>36?.7:1; const g=v*ageMod*(S.growth||1)*(S.attrs[k]>80?.5:1); S.attrs[k]=clamp(S.attrs[k]+g,0,99); gains[k]=(gains[k]||0)+g; };
@@ -5537,7 +5537,7 @@ function dailyResult(ans,late){
     const prevLast=st.last; st.hist[D.k]={v,t:secs};
     st.streak = (prevLast===dayShift(D.k,-1)) ? st.streak+1 : (prevLast===D.k ? st.streak : 1);
     st.last=D.k; st.best=Math.max(st.best,st.streak); st.played++; if(ok) st.won++;
-    if([7,14,30].includes(st.streak)) goodOffer('seri');
+    if([7,14,30].includes(st.streak)) goodOffer('seri'); if([7,14,30].includes(st.streak)) reviewMoment();
     dailySave(st);
     if(S){ const pay=ok?2500*(1+(S.tier||0)):800; S.money+=pay; if(typeof tx==='function') tx('Günün pozisyonu',pay,'odul'); if(ok) S.attrs.kural=clamp(S.attrs.kural+.2*(S.growth||1),0,99); save(); gain=ok?`+${moneyShort(pay)} · Kural bilgisi +0.2`:`+${moneyShort(pay)} katılım`; D.pay=pay; }
   } else if(S && ok){ S.attrs.kural=clamp(S.attrs.kural+.05*(S.growth||1),0,99); save(); gain='Kural bilgisi +0.05'; }
@@ -5961,6 +5961,18 @@ function goodOffer(reason){
     if(reason==='para'){ if(SESSION_OFFER) return; OFF.good=Date.now(); offSave(); setTimeout(()=>openOffer('para','milestone'),900); return; }
     OFF.good=Date.now(); offSave(); PENDING_OFFER=PENDING_OFFER||reason; }catch(e){}
 }
+// Puan isteme: iyi bir maç ya da günlük seri sonrası, merkeze dönünce ve o an teklif çıkmayacaksa.
+// En az 5 maç, 60 günde bir, yılda en fazla 3 (Apple da yılda 3 ile sınırlar).
+const REVIEW_KEY='refmania_puan';
+let RV=lsJ(REVIEW_KEY,{last:0,n:[]}), PENDING_REVIEW=false;
+function reviewMoment(){ try{ if(!S||S.totals.matches<5) return; const now=Date.now(); if(now-(RV.last||0)<60*DAY1) return; if((RV.n||[]).filter(t=>now-t<365*DAY1).length>=3) return; PENDING_REVIEW=true; }catch(e){} }
+function flushReview(){
+  if(!PENDING_REVIEW||!S||TAB!=='merkez') return;
+  PENDING_REVIEW=false; if(PENDING_OFFER) return;
+  const N=NV(); if(!N||!N.review) return;
+  const now=Date.now(); RV.last=now; RV.n=(RV.n||[]).filter(t=>now-t<365*DAY1).concat(now); lsSet(REVIEW_KEY,JSON.stringify(RV));
+  setTimeout(()=>{ try{ N.review().catch(()=>{}); }catch(e){} },1200);
+}
 function milestoneOffer(reason){ if(hasAll()||OFF.ms.includes(reason)) return; OFF.ms.push(reason); offSave(); PENDING_OFFER=reason; }
 function flushPendingOffer(){
   if(!PENDING_OFFER||!S||TAB!=='merkez') return;
@@ -6281,7 +6293,7 @@ function v11Bind(){
   q('[data-paywall]').forEach(b=>b.onclick=e=>{ e.stopPropagation(); openPaywall(b.dataset.paywall); });
   const bh=$('#bHour'); if(bh) bh.onclick=startHour;
   const pin=document.querySelector('.pw-inline'); if(pin) bindPacks(pin);
-  maybeStartWelcome(); hourEndOffer(); flushPendingOffer();
+  maybeStartWelcome(); hourEndOffer(); flushReview(); flushPendingOffer();
   q('#bRestore,#bRestore2').forEach(b=>b.onclick=restorePremium);
   const pv=$('#bPrivacy'); if(pv) pv.onclick=()=>{ try{ NV().privacyOptions(); }catch(e){} };
   const ae=$('#bAdEnergy'); if(ae) ae.onclick=()=>rewarded('energy',()=>{ S.ads.energyWk=S.season*100+S.week; S.energy=clamp(S.energy+25,0,100); save(); haptic('success'); toast('Enerji +25'); render(); });

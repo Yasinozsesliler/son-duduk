@@ -1,6 +1,6 @@
 /* Son Düdük — yerel köprü (Capacitor): dil seçimi, AdMob reklamları, uygulama içi satın alma.
    Tarayıcıda her şey sessizce devre dışı kalır. www/native.js olarak paketlenir (scripts/build-web.mjs). */
-import { Capacitor } from "@capacitor/core";
+import { Capacitor, registerPlugin } from "@capacitor/core";
 import { Preferences } from "@capacitor/preferences";
 import { Device } from "@capacitor/device";
 import { AdMob, AdmobConsentStatus } from "@capacitor-community/admob";
@@ -163,3 +163,9 @@ if (N.iapOn) {
   }).catch(() => {});
 }
 if (isNative && AD.enabled) setTimeout(() => { adsReady = adsReady || initAds(); }, 5000);
+
+/* ---------- Puan isteme (iOS: StoreKit, Android: Play In-App Review) ----------
+   Yerel eklenti: ios/App/App/InAppReviewPlugin.swift, android/.../InAppReviewPlugin.java.
+   Pencerenin gerçekten çıkıp çıkmayacağına Apple/Google karar verir; sonuç bildirilmez. */
+const InAppReview = registerPlugin("InAppReview");
+N.review = isNative ? () => InAppReview.requestReview() : null;

@@ -1,5 +1,14 @@
 # Yapılacaklar
 
+## 1.4 (v1.4 dalı): Puan isteme penceresi
+iOS'ta StoreKit, Android'de Play In-App Review ile sistemin kendi puan penceresi açılıyor.
+- **Ne zaman:** 8.5+ notlu maç ya da 7/14/30 günlük seri sonrası, merkeze dönünce. O an Premium teklifi çıkacaksa pencere açılmıyor (ikisi üst üste gelmesin diye).
+- **Sınırlar:** En az 5 maç oynanmış olmalı, 60 günde en fazla bir, yılda en fazla 3 kez.
+- **Dosyalar:** `index.html` (`reviewMoment`, `flushReview`), `native/native.js` (`N.review`), `ios/App/App/InAppReviewPlugin.swift` + `MainViewController.swift` (Main.storyboard bu sınıfa bağlandı), `android/.../InAppReviewPlugin.java` + `MainActivity.java`, `android/app/build.gradle` (`com.google.android.play:review:2.0.2`).
+- **Derleme:** `npm run sync`, sonra Xcode ve Android Studio'da derle. Bu değişiklikler henüz derlenip test edilmedi.
+- **Test:** iOS'ta Xcode'dan çalıştırınca pencere her seferinde çıkar. TestFlight'ta hiç çıkmaz, App Store'da Apple'ın kendi sıklık sınırı uygulanır. Android'de sadece Play'den (dahili test dahil) yüklenen sürümde çıkar.
+- **Hızlı deneme:** Safari Web Inspector konsolunda `RV={last:0,n:[]}; PENDING_REVIEW=true; render()`.
+
 ## Tamamlandı (1.3.1)
 
 ### 1. Mağaza açıklamasındaki "reklam yok" cümlesi düzeltildi
