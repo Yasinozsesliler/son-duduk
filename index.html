@@ -2020,6 +2020,11 @@ body.ph-on{overflow:hidden}
 .qtp-mo{flex:none;display:flex;flex-direction:column;align-items:center}.qtp-mo small{font-size:10px;text-transform:uppercase;opacity:.7}.qtp-mo b{font-size:22px}
 .qx-shop{display:flex;align-items:center;gap:12px;width:100%;padding:12px 14px;border-radius:14px;border:1px solid rgba(255,181,71,.5);background:linear-gradient(110deg,rgba(255,181,71,.16),rgba(255,181,71,.03)),var(--panel);color:var(--fg);text-align:left;cursor:pointer}
 .qx-shop>span:not(.qi){flex:1;display:flex;flex-direction:column;gap:2px}.qx-shop small{opacity:.8;font-size:13px}.qx-shop i{font-style:normal;font-size:22px;opacity:.6}
+.qs-lux.pex{background:linear-gradient(90deg,#f6c62b,#e0a20d);color:#111}.qe-own.pex{left:auto;right:10px;background:#111;color:#f6c62b}
+.qs-pr s,.qu-pr s,.qe-dp s,.qr-dp s,.qe-b s,.qr-b s{font-size:.7em;opacity:.55;font-weight:600;margin-right:4px}
+.qu-pnote{display:block;margin:0 16px 6px;padding:6px 10px;border-radius:8px;border:1px dashed #c9a227;background:#fffbea;color:#7a5a10;font-weight:700;font-size:13px;cursor:pointer}
+.qa-btn.pexb{background:linear-gradient(90deg,#f6c62b,#e0a20d);color:#111}
+.qppr-hero{display:flex;flex-direction:column;gap:6px;margin:0 6px 14px;padding:14px;border-radius:16px;background:linear-gradient(135deg,#2a2416,#0b0a06);border:1px solid #c9a22766;color:#fff}.qppr-hero b{color:#f6c62b;font-size:16px}.qppr-hero span{font-size:14px}
 
 </style>
 
@@ -6629,7 +6634,7 @@ const PW_HEAD={
   ses:['Düdük tonları','Keskin ve derin düdük tonları Premium’a dahil.'],
   rapor:['Hakem Raporu PRO','Hangi pozisyonlarda hata yaptığını kural maddesiyle gör. Premium’a dahil.'],
 };
-const PERKS_PREM=[['ad','Reklamsız oyun','Maç aralarındaki geçiş reklamları tamamen kalkar.'],['star','Ödüller anında','Ücreti ikiye katla ve enerji takviyesi, reklam izlemeden.'],['chart','Hakem Raporu PRO','Pozisyon türüne göre doğruluğun, zayıf noktaların ve kural maddeleri.'],['cal','Günün pozisyonu arşivi','Kaçırdığın bütün günleri oyna, eskileri tekrar dene.'],['whistle','Hakem kimliği','4. kariyer slotu, 2 yeni düdük tonu, paylaşımlarda Premium rozeti.'],['gift','250.000 ₺ ve 2 özel ekipman','Her kariyerin kasasına bir kez; elmas kakmalı düdük ve altın hakem saati.']];
+const PERKS_PREM=[['ad','Reklamsız oyun','Maç aralarındaki geçiş reklamları tamamen kalkar.'],['star','Ödüller anında','Ücreti ikiye katla ve enerji takviyesi, reklam izlemeden.'],['chart','Hakem Raporu PRO','Pozisyon türüne göre doğruluğun, zayıf noktaların ve kural maddeleri.'],['cal','Günün pozisyonu arşivi','Kaçırdığın bütün günleri oyna, eskileri tekrar dene.'],['whistle','Hakem kimliği','4. kariyer slotu, 2 yeni düdük tonu, paylaşımlarda Premium rozeti.'],['gift','250.000 ₺ ve 2 özel ekipman','Her kariyerin kasasına bir kez; elmas kakmalı düdük ve altın hakem saati.'],['home','Telefonda %10 indirim ve 👑 özel ürünler','Sepet, Emlak ve Arabalar’da her şey ucuz; Premium’a özel saatler, evler ve arabalar.']];
 const PERKS_TAM=[['crown','Premium’un her şeyi','Reklamsız oyun, anında ödüller, Hakem Raporu PRO, arşiv, 250.000 ₺.'],['trophy','Efsane Maçlar','10 tarihi maçın kritik anlarında düdük sende.'],['home','Lüks Yaşam Koleksiyonu','Boğaz’da yalı, klasik spor otomobil, tourbillon saat.'],['shirt','Altın Hakem Formaları','Altın, gece mavisi ve buz renkli formalarla sahaya çık.'],['gift','+500.000 ₺','Toplam 750.000 ₺ hoş geldin parası.']];
 function pwPerks(list){ return `<ul class="pw-perks">${list.map(([g,t,d])=>`<li>${v11g(g,'#f6c62b',26)}<span><b>${t}</b><small>${d}</small></span></li>`).join('')}</ul>`; }
 function packsBody(reason){
@@ -7386,7 +7391,7 @@ function phCatalog(){
   }
   PH_MODELS.forEach(m=>{ if(!m.price) return; out.push({id:m.id,cat:'katalog',kc:'c_telefon',dept:'elek',lvl:m.lvl,seg:m.seg,brand:m.brand,model:m.model,name:m.brand+' '+m.model,art:'phone',
     p:{c1:m.frame,c2:m.wall[0],cam:m.cam,notch:m.cut==='ada'||m.cut==='tepe',rad:Math.round(m.rad/3)},price:m.price,sub:'Oyundaki telefonun olur',kind:'Akıllı telefon',stars:4.3+(m.lvl%3)*.2,rev:900+m.lvl*700,moral:m.seg==='luks'?5:3,rep:m.seg==='luks'?.3:0,fol:m.fol,phone:m.id}); });
-  out.forEach(it=>{ it.img=()=>pxImg(it.art,it.p,it.id); });
+  out.forEach(it=>{ it.img=()=>pxImg(it.art,it.p,it.id); if(it.seg==='luks'&&it.lvl>=1&&hash(it.id+'pex')%5===0) it.pex=1; if(it.id==='m_aurum') it.pex=1; });
   PH_CAT=out; PH_CATMAP=new Map(out.map(x=>[x.id,x]));
   return out;
 }
@@ -7434,7 +7439,7 @@ function phEstates(){
   [['b1',3,'boat',{c1:'#ffffff',c2:'#1f3c6b'},'Gezi teknesi',180000],['b2',5,'boat',{big:1,c1:'#f4f6f8',c2:'#1b2a4a'},'Motoryat',1900000],['b3',6,'plane',{c1:'#f3f4f6',c2:'#1b2a4a'},'Hafif jet',8800000]].forEach(([id,L,art,p,n,pr])=>{
     out.push({id:'a_'+id,cat:'katalog',app:'araba',body:art,seg:'luks',brand:art==='plane'?'Aerion':'Marea',model:n,name:(art==='plane'?'Aerion ':'Marea ')+n,lvl:L,price:pr,art,p,grp:art==='plane'?'ucak':'tekne',lv:L,mod:{rest:art==='plane'?4:2},upkeep:Math.round(pr*.002),moral:8,rep:.6,fol:art==='plane'?3000:900,lux:2,km:0,hp:0,yakit:''});
   });
-  out.forEach(it=>{ it.img=()=>it.app==='emlak'?pxImg('house',it.p,it.id):pxImg(it.art||'car',it.p,it.id); });
+  out.forEach(it=>{ it.img=()=>it.app==='emlak'?pxImg('house',it.p,it.id):pxImg(it.art||'car',it.p,it.id); if(it.lux&&it.lvl>=2&&hash(it.id+'pex')%4===0) it.pex=1; });
   PH_EST=out; PH_ESTM=new Map(out.map(x=>[x.id,x]));
   return out;
 }
@@ -7549,14 +7554,21 @@ function phAfterMatch(fx,rating,errs){
 function phMod(k){ if(!S||!S.ph) return 0; const m=S.ph.moral; if(k==='rest') return Math.round((m-55)/12); if(k==='temp') return Math.max(0,(m-60))/700; return 0; }
 
 // ---------- alışveriş ----------
+// Premium: Sepet, Emlak, Arabalar ve deneyimlerde %10 indirim; 👑 ürünler yalnız Premium'a
+const PH_DISC=.9;
+function phPrice(it){ return MONET&&isPremium()?Math.round(it.price*PH_DISC/10)*10:it.price; }
+function phPex(it){ return MONET&&it.pex&&!isPremium(); }
+function phPriceHTML(it){ const p=phPrice(it); return p<it.price?`<s>${phMoney(it.price)}</s> ${phMoney(p)}`:phMoney(p); }
 function phOwns(id){ return S.inv.includes(id); }
 function phCanSee(it){ return it.lvl<=phLevel()+1; }
 function phBuy(id,gift){
   const it=catById(id); if(!it) return;
   if(it.lvl>phLevel()){ toast(`${PH_LVL_NAMES[it.lvl]} kademesinde açılır`); return; }
   if(!gift&&phOwns(id)){ toast('Bu ürün zaten sende'); return; }
-  if(S.money<it.price){ toast('Kasanda yeterli para yok'); goodOffer('para'); return; }
-  S.money-=it.price; tx(it.name,-it.price,it.app==='emlak'?'ev':it.app==='araba'?'araba':'magaza');
+  if(phPex(it)){ openPaywall('esya'); return; }
+  const price=phPrice(it);
+  if(S.money<price){ toast('Kasanda yeterli para yok'); goodOffer('para'); return; }
+  S.money-=price; tx(it.name,-price,it.app==='emlak'?'ev':it.app==='araba'?'araba':'magaza');
   const P=S.ph; const recent=P.bought.filter(b=>b.k===(it.kc||it.app)&&phWk()-b.w<4).length;
   const mor=it.moral*(recent?.5:1)*(gift?.6:1); phMoralAdd(mor); P.bought.push({k:it.kc||it.app,w:phWk()}); if(P.bought.length>40) P.bought.shift();
   if(gift){ const who=gift; P.rel[who]=clamp((P.rel[who]??60)+Math.min(14,4+Math.log10(it.price+10)*2),0,100); if(who==='es'||who==='anne') S.aile=clamp((S.aile??70)+Math.min(8,2+Math.log10(it.price+10)),0,100);
@@ -7575,8 +7587,8 @@ function phExp(id,withEs){
   const x=PH_EXP.find(e=>e.id===id); if(!x) return; const P=S.ph;
   if(x.lvl>phLevel()){ toast(`${PH_LVL_NAMES[x.lvl]} kademesinde açılır`); return; }
   if(P.exp[id]===phWk()){ toast('Bunu bu hafta zaten yaptın'); return; }
-  if(S.money<x.price){ toast('Kasanda yeterli para yok'); goodOffer('para'); return; }
-  S.money-=x.price; tx(x.name,-x.price,'yasam'); P.exp[id]=phWk();
+  const xp=phPrice(x); if(S.money<xp){ toast('Kasanda yeterli para yok'); goodOffer('para'); return; }
+  S.money-=xp; tx(x.name,-xp,'yasam'); P.exp[id]=phWk();
   phMoralAdd(x.moral); if(x.en) S.energy=clamp(S.energy+x.en,0,100); if(x.fol) S.social.followers+=x.fol; if(x.rep) S.rep=clamp(S.rep+x.rep,0,100);
   if(x.english) S.english=Math.min(4,(S.english||0)+.25);
   if(x.rel){ P.rel.es=clamp(P.rel.es+x.rel,0,100); S.aile=clamp((S.aile??70)+Math.round(x.rel/2),0,100); }
@@ -7718,9 +7730,9 @@ PH_VIEWS.posta=arg=>{
 // ----- Sepet (alışveriş) -----
 let PH_SHOP={dept:'moda',seg:'',sort:'',q:'',page:1};
 function phCard(it){ const L=phLevel(); const lock=it.lvl>L; const own=phOwns(it.id);
-  return `<button class="qs-card ${lock?'lock':''}" data-pa="urun" data-arg="${it.id}"><span class="qs-img"><img src="${it.img()}" alt="" loading="lazy">${it.seg==='luks'?'<em class="qs-lux">LÜKS</em>':''}</span>
+  return `<button class="qs-card ${lock?'lock':''}" data-pa="urun" data-arg="${it.id}"><span class="qs-img"><img src="${it.img()}" alt="" loading="lazy">${it.pex?'<em class="qs-lux pex">👑 PREMIUM</em>':it.seg==='luks'?'<em class="qs-lux">LÜKS</em>':''}</span>
     <span class="qs-b"><small>${esc(it.brand)}</small><b>${esc(it.model)}</b><span class="qs-st">${'★'.repeat(Math.round(it.stars))}<i>${'★'.repeat(5-Math.round(it.stars))}</i><small>${it.rev.toLocaleString('tr-TR')}</small></span>
-    <span class="qs-pr num">${phMoney(it.price)}</span>${lock?`<span class="qs-lk">🔒 ${PH_LVL_NAMES[it.lvl]}</span>`:own?'<span class="qs-own">Sende var</span>':'<span class="qs-dl">Yarın kapında</span>'}</span></button>`; }
+    <span class="qs-pr num">${phPriceHTML(it)}</span>${lock?`<span class="qs-lk">🔒 ${PH_LVL_NAMES[it.lvl]}</span>`:own?'<span class="qs-own">Sende var</span>':'<span class="qs-dl">Yarın kapında</span>'}</span></button>`; }
 PH_VIEWS.sepet=arg=>{
   let gift=null; if(arg&&arg.startsWith('hediye:')){ gift=arg.slice(7); PH_SHOP.gift=gift; } else if(arg&&arg.startsWith('dept:')){ PH_SHOP.dept=arg.slice(5); PH_SHOP.gift=null; } else if(!arg) PH_SHOP.gift=null;
   gift=PH_SHOP.gift;
@@ -7728,7 +7740,7 @@ PH_VIEWS.sepet=arg=>{
   const depts=PH_DEPTS.filter(([k])=>k!=='hakem'||!gift);
   let body='';
   if(PH_SHOP.dept==='deneyim'){
-    body=`<div class="qs-exp">${PH_EXP.filter(x=>x.lvl<=L+1).map(x=>{ const lock=x.lvl>L, done=S.ph.exp[x.id]===phWk(); return `<div class="qs-x ${lock?'lock':''}"><img src="${pxImg('scene',{kind:x.kind,c1:x.c[0],c2:x.c[1]},x.id)}" alt=""><div><b>${esc(x.name)}</b><small>Moral +${x.moral}${x.en?` · Enerji ${x.en>0?'+':''}${x.en}`:''}${x.rel?' · Eşin mutlu':''}${x.fam?' · Ailen mutlu':''}</small><span class="qs-pr num">${phMoney(x.price)}</span></div><button class="qa-btn sm" data-exp="${x.id}" ${lock||done?'disabled':''}>${lock?'🔒 '+PH_LVL_NAMES[x.lvl]:done?'Bu hafta yapıldı':'Rezervasyon'}</button></div>`; }).join('')}</div>`;
+    body=`<div class="qs-exp">${PH_EXP.filter(x=>x.lvl<=L+1).map(x=>{ const lock=x.lvl>L, done=S.ph.exp[x.id]===phWk(); return `<div class="qs-x ${lock?'lock':''}"><img src="${pxImg('scene',{kind:x.kind,c1:x.c[0],c2:x.c[1]},x.id)}" alt=""><div><b>${esc(x.name)}</b><small>Moral +${x.moral}${x.en?` · Enerji ${x.en>0?'+':''}${x.en}`:''}${x.rel?' · Eşin mutlu':''}${x.fam?' · Ailen mutlu':''}</small><span class="qs-pr num">${phPriceHTML(x)}</span></div><button class="qa-btn sm" data-exp="${x.id}" ${lock||done?'disabled':''}>${lock?'🔒 '+PH_LVL_NAMES[x.lvl]:done?'Bu hafta yapıldı':'Rezervasyon'}</button></div>`; }).join('')}</div>`;
   } else if(PH_SHOP.dept==='hakem'){
     body=`<p class="qs-note">Hakem ekipmanı oyundaki mağazadan alınır; etkileri maç içinde çalışır.</p><button class="qa-btn" data-ptab="magaza">Ekipman mağazasını aç</button>`;
   } else {
@@ -7759,11 +7771,11 @@ PH_VIEWS.urun=id=>{
   const fx=[`Moral +${Math.round(it.moral)}`]; if(it.rep) fx.push('Ün +'+(it.rep*.5).toFixed(1)); if(it.fol) fx.push('Takipçi +'+compactNum(it.fol)); if(it.phone) fx.push('Oyundaki telefonun olur');
   return {theme:'sepet',html:`${phHead(esc(it.brand),{cls:'sepet'})}<div class="qpu"><div class="qu-img"><img src="${it.img()}" alt=""></div>
     <small class="qu-br">${esc(it.brand)} · ${esc(PH_SEG_NAMES[it.seg])}</small><h2>${esc(it.name)}</h2><span class="qs-st">${'★'.repeat(Math.round(it.stars))}<i>${'★'.repeat(5-Math.round(it.stars))}</i> <small>${it.stars.toFixed(1).replace('.',',')} · ${it.rev.toLocaleString('tr-TR')} değerlendirme</small></span>
-    <div class="qu-pr num">${phMoney(it.price)}</div><p class="qu-sub">${esc(it.kind)}${it.sub?' · '+esc(it.sub):''}</p>
+    <div class="qu-pr num">${phPriceHTML(it)}</div>${MONET&&!isPremium()?`<button class="qu-pnote" data-pa="premium">👑 Premium üyelere ${phMoney(Math.round(it.price*PH_DISC/10)*10)}</button>`:''}<p class="qu-sub">${esc(it.kind)}${it.sub?' · '+esc(it.sub):''}</p>
     <ul class="qu-fx">${fx.map(f=>`<li>${esc(f)}</li>`).join('')}</ul>
     <div class="qu-dl">🚚 <b>Yarın kapında</b> · Ücretsiz kargo</div>
-    ${lock?`<button class="qa-btn" disabled>🔒 ${PH_LVL_NAMES[it.lvl]} kademesinde açılır</button>`:gift?`<button class="qa-btn buy" id="puGift">🎁 Hediye olarak gönder</button>`:own?`<button class="qa-btn" disabled>Bu ürün sende</button><button class="qa-btn ghost" id="puGiftEs">🎁 Eşine hediye et</button>`:`<button class="qa-btn buy" id="puBuy">Hemen al</button><button class="qa-btn ghost" id="puGiftEs">🎁 Eşine hediye et</button>`}
-    ${S.money<it.price&&!lock?`<p class="qu-warn">Kasanda ${phMoney(S.money)} var.${MONET&&!isPremium()?' <button class="qu-prem" data-pa="premium">Premium ile +250.000 ₺</button>':''}</p>`:''}</div>`,
+    ${lock?`<button class="qa-btn" disabled>🔒 ${PH_LVL_NAMES[it.lvl]} kademesinde açılır</button>`:phPex(it)?`<button class="qa-btn pexb" data-pa="premium">👑 Premium’a özel ürün · Aç</button>`:gift?`<button class="qa-btn buy" id="puGift">🎁 Hediye olarak gönder</button>`:own?`<button class="qa-btn" disabled>Bu ürün sende</button><button class="qa-btn ghost" id="puGiftEs">🎁 Eşine hediye et</button>`:`<button class="qa-btn buy" id="puBuy">Hemen al</button><button class="qa-btn ghost" id="puGiftEs">🎁 Eşine hediye et</button>`}
+    ${S.money<phPrice(it)&&!lock&&!phPex(it)?`<p class="qu-warn">Kasanda ${phMoney(S.money)} var.${MONET&&!isPremium()?' <button class="qu-prem" data-pa="premium">Premium ile +250.000 ₺</button>':''}</p>`:''}</div>`,
     bind:v=>{ const b=v.querySelector('#puBuy'); if(b) b.onclick=()=>phBuy(id); const g=v.querySelector('#puGift'); if(g) g.onclick=()=>{ phBuy(id,gift); PH_SHOP.gift=null; };
       const ge=v.querySelector('#puGiftEs'); if(ge) ge.onclick=()=>phBuy(id,'es'); }};
 };
@@ -7772,25 +7784,25 @@ let PH_EM={lvl:null}, PH_AR={lvl:null};
 PH_VIEWS.emlak=arg=>{
   const L=phLevel(); const xs=phEstates().filter(x=>x.app==='emlak'&&x.lvl<=L+1).sort((a,b)=>((a.lvl>L)-(b.lvl>L))||(b.lvl-a.lvl)||(a.price-b.price));
   if(arg){ const e=catById(arg); if(!e) return PH_VIEWS.emlak(); const lock=e.lvl>L, own=phOwns(e.id);
-    return {theme:'emlak',html:`${phHead('İlan detayı',{cls:'emlak'})}<div class="qe-d"><img src="${e.img()}" alt=""><div class="qe-dp num">${phMoney(e.price)}</div><h2>${esc(PH_HOUSE[e.kind])}</h2><p class="qe-loc">📍 ${esc(e.place)}</p>
+    return {theme:'emlak',html:`${phHead('İlan detayı',{cls:'emlak'})}<div class="qe-d"><img src="${e.img()}" alt=""><div class="qe-dp num">${phPriceHTML(e)}</div><h2>${esc(PH_HOUSE[e.kind])}</h2><p class="qe-loc">📍 ${esc(e.place)}</p>
       <div class="qe-spec"><span><b class="num">${e.m2}</b><small>m²</small></span><span><b class="num">${e.rooms}+1</b><small>oda</small></span><span><b class="num">+${e.mod.rest}</b><small>haftalık enerji</small></span></div>
       <p class="qe-up">Aidat ve bakım: <b class="num">${phMoney(e.upkeep)}</b> / hafta</p>
-      ${lock?`<button class="qa-btn" disabled>🔒 ${PH_LVL_NAMES[e.lvl]} kademesinde açılır</button>`:own?`<button class="qa-btn" disabled>Tapusu sende</button>`:`<button class="qa-btn buy" id="peBuy">Satın al</button>`}</div>`,
+      ${lock?`<button class="qa-btn" disabled>🔒 ${PH_LVL_NAMES[e.lvl]} kademesinde açılır</button>`:phPex(e)?`<button class="qa-btn pexb" data-pa="premium">👑 Premium’a özel ilan · Aç</button>`:own?`<button class="qa-btn" disabled>Tapusu sende</button>`:`<button class="qa-btn buy" id="peBuy">Satın al</button>`}</div>`,
       bind:v=>{ const b=v.querySelector('#peBuy'); if(b) b.onclick=()=>phBuy(e.id); }};
   }
   return {theme:'emlak',html:`${phHead('<span class="qe-logo">emlak</span>',{cls:'emlak'})}<p class="qe-hint">Ev değiştikçe haftalık enerjin artar. Aidat her hafta kasadan düşer.</p>
-    <div class="qe-list">${xs.map(e=>{ const lock=e.lvl>L; return `<button class="qe-card ${lock?'lock':''}" data-pa="emlak" data-arg="${e.id}"><img src="${e.img()}" alt="" loading="lazy">${phOwns(e.id)?'<em class="qe-own">Senin</em>':''}<span class="qe-b"><b class="num">${phMoney(e.price)}</b><span>${esc(PH_HOUSE[e.kind])} · ${e.m2} m² · ${e.rooms}+1</span><small>📍 ${esc(e.place)}${lock?' · 🔒 '+PH_LVL_NAMES[e.lvl]:''}</small></span></button>`; }).join('')}</div>`};
+    <div class="qe-list">${xs.map(e=>{ const lock=e.lvl>L; return `<button class="qe-card ${lock?'lock':''}" data-pa="emlak" data-arg="${e.id}"><img src="${e.img()}" alt="" loading="lazy">${phOwns(e.id)?'<em class="qe-own">Senin</em>':''}${e.pex?'<em class="qe-own pex">👑 Premium</em>':''}<span class="qe-b"><b class="num">${phPriceHTML(e)}</b><span>${esc(PH_HOUSE[e.kind])} · ${e.m2} m² · ${e.rooms}+1</span><small>📍 ${esc(e.place)}${lock?' · 🔒 '+PH_LVL_NAMES[e.lvl]:''}</small></span></button>`; }).join('')}</div>`};
 };
 PH_VIEWS.araba=arg=>{
   const L=phLevel(); const xs=phEstates().filter(x=>x.app==='araba'&&x.lvl<=L+1).sort((a,b)=>((a.lvl>L)-(b.lvl>L))||(b.lvl-a.lvl)||(a.price-b.price));
   if(arg){ const e=catById(arg); if(!e) return PH_VIEWS.araba(); const lock=e.lvl>L, own=phOwns(e.id);
-    return {theme:'araba',html:`${phHead(esc(e.brand),{cls:'araba'})}<div class="qr-d"><div class="qr-img"><img src="${e.img()}" alt=""></div><h2>${esc(e.name)}</h2><div class="qr-dp num">${phMoney(e.price)}</div>
+    return {theme:'araba',html:`${phHead(esc(e.brand),{cls:'araba'})}<div class="qr-d"><div class="qr-img"><img src="${e.img()}" alt=""></div><h2>${esc(e.name)}</h2><div class="qr-dp num">${phPriceHTML(e)}</div>
       <div class="qr-spec">${e.hp?`<span><small>Güç</small><b class="num">${e.hp} hp</b></span>`:''}${e.yakit?`<span><small>Yakıt</small><b>${esc(e.yakit)}</b></span>`:''}<span><small>Durum</small><b>${e.km?compactNum(e.km)+' km':'Sıfır'}</b></span><span><small>Enerji</small><b class="num">+${e.mod.rest}</b></span></div>
       <p class="qe-up">Sigorta ve bakım: <b class="num">${phMoney(e.upkeep)}</b> / hafta</p>
-      ${lock?`<button class="qa-btn" disabled>🔒 ${PH_LVL_NAMES[e.lvl]} kademesinde açılır</button>`:own?`<button class="qa-btn" disabled>Garajında</button>`:`<button class="qa-btn buy" id="prBuy">Satın al</button>`}</div>`,
+      ${lock?`<button class="qa-btn" disabled>🔒 ${PH_LVL_NAMES[e.lvl]} kademesinde açılır</button>`:phPex(e)?`<button class="qa-btn pexb" data-pa="premium">👑 Premium’a özel araç · Aç</button>`:own?`<button class="qa-btn" disabled>Garajında</button>`:`<button class="qa-btn buy" id="prBuy">Satın al</button>`}</div>`,
       bind:v=>{ const b=v.querySelector('#prBuy'); if(b) b.onclick=()=>phBuy(e.id); }};
   }
-  return {theme:'araba',html:`${phHead('<span class="qr-logo">ARABALAR</span>',{cls:'araba'})}<div class="qr-list">${xs.map(e=>{ const lock=e.lvl>L; return `<button class="qr-card ${lock?'lock':''}" data-pa="araba" data-arg="${e.id}"><span class="qr-img"><img src="${e.img()}" alt="" loading="lazy"></span><span class="qr-b"><small>${esc(e.brand)}</small><b>${esc(e.model)}</b><span>${e.km?compactNum(e.km)+' km':'Sıfır km'}${e.hp?' · '+e.hp+' hp':''}</span><em class="num">${phMoney(e.price)}</em>${lock?`<small class="qr-lk">🔒 ${PH_LVL_NAMES[e.lvl]}</small>`:phOwns(e.id)?'<small class="qr-own">Garajında</small>':''}</span></button>`; }).join('')}</div>`};
+  return {theme:'araba',html:`${phHead('<span class="qr-logo">ARABALAR</span>',{cls:'araba'})}<div class="qr-list">${xs.map(e=>{ const lock=e.lvl>L; return `<button class="qr-card ${lock?'lock':''}" data-pa="araba" data-arg="${e.id}"><span class="qr-img"><img src="${e.img()}" alt="" loading="lazy"></span><span class="qr-b"><small>${esc(e.brand)}</small><b>${esc(e.model)}</b><span>${e.km?compactNum(e.km)+' km':'Sıfır km'}${e.hp?' · '+e.hp+' hp':''}</span><em class="num">${phPriceHTML(e)}</em>${e.pex?'<small class="qr-lk">👑 Premium’a özel</small>':''}${lock?`<small class="qr-lk">🔒 ${PH_LVL_NAMES[e.lvl]}</small>`:phOwns(e.id)?'<small class="qr-own">Garajında</small>':''}</span></button>`; }).join('')}</div>`};
 };
 // ----- Rota (tatil) -----
 PH_VIEWS.rota=()=>({theme:'rota',html:`${phHead('<span class="qt-logo">rota</span>',{cls:'rota'})}<p class="qe-hint">${breakNow()?'Tatil zamanı! Uzun tatiller şimdi açık.':'Kısa kaçamaklar hafta içi yapılır; uzun tatiller devre arası ve sezon sonunda açılır.'}</p>
@@ -7806,7 +7818,7 @@ PH_VIEWS.galeri=()=>{ const mine=S.social.posts.filter(p=>p.a&&p.a.me); const it
   return {theme:'light',html:`${phHead('Galeri')}<h4 class="qg-h">Paylaşımların</h4><div class="qk-grid">${mine.slice(0,24).map(p=>`<div class="qk-cell">${postImg(p,true)}</div>`).join('')||'<p class="qm-empty">Henüz fotoğraf yok.</p>'}</div>
     <h4 class="qg-h">Eşyaların</h4><div class="qg-items">${items.slice(-36).reverse().map(it=>`<div class="qg-it"><img src="${it.img()}" alt=""><small>${esc(it.name)}</small></div>`).join('')||'<p class="qm-empty">Sepet’ten aldıkların burada görünür.</p>'}</div>`}; };
 // ----- Premium -----
-PH_VIEWS.premium=()=>({theme:'dark',html:`${phHead('Premium',{cls:'dark'})}<div class="qppr">${isPremium()?`<p class="qppr-ok">👑 Premium sende. Teşekkürler!</p>`:''}<div class="pw-inline ph-pw">${typeof packsBody==='function'?packsBody():''}</div><button class="qa-btn ghost" id="phRestore">Satın alımları geri yükle</button></div>`,
+PH_VIEWS.premium=()=>({theme:'dark',html:`${phHead('Premium',{cls:'dark'})}<div class="qppr">${isPremium()?`<p class="qppr-ok">👑 Premium sende. Teşekkürler!</p>`:`<div class="qppr-hero"><b>Telefonunda Premium ayrıcalıkları</b><span>🛍️ Sepet, Emlak ve Arabalar’da her şey %10 ucuz</span><span>👑 ${phCatalog().filter(x=>x.pex).length+phEstates().filter(x=>x.pex).length} Premium’a özel ürün ve ilan</span><span>🚫 Reklamsız oyun, ödüller anında</span></div>`}<div class="pw-inline ph-pw">${typeof packsBody==='function'?packsBody():''}</div><button class="qa-btn ghost" id="phRestore">Satın alımları geri yükle</button></div>`,
   bind:v=>{ const pin=v.querySelector('.pw-inline'); if(pin&&typeof bindPacks==='function') bindPacks(pin); const r=v.querySelector('#phRestore'); if(r) r.onclick=restorePremium; }});
 // ----- Hakem (yönetim kısayolları) -----
 PH_VIEWS.hakem=()=>{ const L=[['kariyer','Kariyerim','Rütbe, istatistik, hayatın'],['teklifler','Teklifler',S.offers.length?S.offers.length+' bekleyen teklif':'Bekleyen teklif yok'],['kurul','Hakem Kurulu','Güven: '+Math.round(S.kurul?S.kurul.trust:0)],['akademi','Kural Akademisi','Sınavlar ve efsane maçlar'],['gelisim','Gelişim','Nitelikler ve hakem raporu'],['lig','Puan durumu',leagueName()]];

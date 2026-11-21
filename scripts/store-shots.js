@@ -32,6 +32,11 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
     await wait(2600); await p.evaluate(() => { const m = document.querySelector('#modal'); if (m) m.scrollTop = 0; });
     await shot('9_dailyres');
     await p.evaluate(() => { const x = document.querySelector('#dyX'); if (x) x.click(); }); await wait(400);
+    // Hakemin telefonu: güzel bir model, birkaç okunmamış mesaj, ana ekran
+    await p.evaluate(() => { phEnsure(); S.ph.model = 'm_pulse14'; S.ph.moral = 78; phMsg('es', 'them', PH_TALKS.find(t => t.id === 'es_aksam').t(), true); phMsg('hoca', 'them', PH_TALKS.find(t => t.id === 'hoca_tavsiye').t(), true); phMsg('grup', 'them', PH_TALKS.find(t => t.id === 'grup_halisaha').t(), true); const m = document.querySelector('#modal'); if (m) { m.hidden = true; m.innerHTML = ''; } phOpen(); });
+    await wait(600);
+    await shot('10_phone');
+    await p.evaluate(() => phClose()); await wait(300);
     await p.click('[data-play]'); await p.click('#bKick'); await p.evaluate(() => setSpeed(2));
     let gotLive = false, gotInc = false;
     for (let i = 0; i < 3000 && !(gotLive && gotInc); i++) {

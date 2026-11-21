@@ -1,0 +1,1 @@
+soccer,referee,goalkeeper,stadium,coach,simulation,tarjeta,roja,amarilla,silbato,liga,arbitraje

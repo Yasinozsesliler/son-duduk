@@ -1,0 +1,1 @@
+soccer,umpire,offside,penalty,card,whistle,career,futbolcu,oyun,hakemlik,menajerlik,kupa,stadyum
