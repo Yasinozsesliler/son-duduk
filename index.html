@@ -1854,7 +1854,7 @@ main>*{animation:none}
 <script>
 'use strict';
 /* =========================================================
-   REFMANIA — hakem kariyer simülatörü
+   REFMANIA: hakem kariyer simülatörü
    ========================================================= */
 
 // ---------- utilities ----------
@@ -2454,7 +2454,7 @@ function genOffers(){
     if(k===S.nationality){ S.offers.push({id:uid('of'),type:'move',season:S.season,exp:S.week+4,country:k,years:0,title:NAT().fed+': '+tierName(4)+'\'e geri dönüş daveti',body:NAT().kurul+' seni yeniden '+tierName(4)+' listesine almak istiyor. Kabul edersen gelecek sezon '+NAT().name+'\'de görev yaparsın.'}); }
     else { const L=LEAGUES[k]; const yrs=ri(2,3);
       S.offers.push({id:uid('of'),type:'move',season:S.season,exp:S.week+4,country:k,years:yrs,
-        title:L.country+' — '+L.league+' hakem sözleşmesi ('+yrs+' sezon)',
+        title:L.country+': '+L.league+' hakem sözleşmesi ('+yrs+' sezon)',
         body:L.league+' hakem departmanı seni profesyonel kadrosuna istiyor. Maç başı ücret '+money(L.fee)+'. '+(L.pool==='uefa'?'AFK görevlerin bu ülkeden devam eder.':'Dikkat: bu ligdeyken AFK ataması alamazsın; DFF kokartın korunur.')+' Gelecek sezondan itibaren geçerli.'});
     }
     mail('Menajerin','Yeni sözleşme teklifi','Teklifler ekranında bekleyen bir transfer teklifi var.','offer');
@@ -2826,16 +2826,16 @@ function akademiHTML(){
 // Her senaryo sabit tohumla üretilir: herkes aynı pozisyonları görür. Takımlar ve olaylar kurgusaldır.
 const LEG_KEY='refmania_efsane', LEG_TIME=45;
 const LEGENDS=[
- {id:'derbi',w:['Derbi düdüğü','Şampiyonluğun son dakikalarında çalan düdük. Hâlâ biraz tribün kokuyor.'],free:true,name:'Derbinin son dakikaları',sub:'Şehrin iki yakası, şampiyonluk bu maçta. Tribünler alev alev.',club:[0,1],inc:[['orta_saha_faul',71],['dirsek',80],['penalti_temas',88],['gol_oncesi_faul',93]]},
- {id:'final',w:['Final düdüğü','Uzatmaların 120. dakikasında çalan, dünyanın en çok dinlenen düdüğü.'],name:'Dünya finali, uzatmalar',sub:'Skor eşit, 120 dakikanın her saniyesi tarihe yazılıyor.',nat:['Arjantin','Fransa'],inc:[['dogso',97],['hucum_elle_gol',104],['penalti_temas',118],['penalti_atisi',120]]},
- {id:'elgol',w:['Çeyrek final düdüğü','Bir el temasının bütün dünyayı ikiye böldüğü gece.'],name:'Elle gol mü?',sub:'Çeyrek finalde tek bir temas bütün dünyayı ikiye bölecek.',nat:['Arjantin','İngiltere'],inc:[['hucum_elle_gol',51],['orta_saha_faul',60],['elle_oynama',77]]},
- {id:'hayalet',w:['Çizgi düdüğü','Topun çizgiyi geçip geçmediğine sadece gözlerinle karar verdiğin maç.'],name:'Hayalet gol',sub:'Top çizgiyi geçti mi? Gol çizgisi teknolojisi yok, karar senin gözünde.',nat:['İngiltere','Almanya'],inc:[['gol_cizgisi',101],['ofsayt_gol',110],['top_disinda',115]]},
- {id:'kirmizi',w:['Kaptanın düdüğü','Efsane bir kaptanın son maçında çalınan, ağır bir düdük.'],name:'Finalde kırmızı',sub:'Efsane kaptanın son maçı. Gerginlik her dakika artıyor.',nat:['Fransa','İtalya'],inc:[['yuksek_ayak',88],['dirsek',95],['top_disinda',110]]},
- {id:'ofsayt',w:['Santim düdüğü','Savunma çizgisindeki santimlerin savaşından kalan hatıra.'],name:'Ofsayt çizgisi',sub:'İki hızlı forvet, savunma çizgisinde santimlerin savaşı.',nat:['İspanya','Hollanda'],inc:[['ofsayt_gol',23],['ofsayt_gol',58],['gol_oncesi_faul',79]]},
- {id:'kaleci',w:['Kaleci düdüğü','Penaltılara giden bir gecede, kalecilerin arasında kalan düdük.'],name:'Kaleci gecesi',sub:'Penaltılara gidecek gibi duran bir çeyrek final.',nat:['Hırvatistan','Brezilya'],inc:[['kaleci_engelleme',34],['geri_pas',62],['penalti_atisi',120]]},
- {id:'duran',w:['Korner düdüğü','Her kornerde güreş minderine dönen ceza sahasından kalma.'],name:'Duran top savaşı',sub:'Her kornerde ceza sahası güreş minderine dönüyor.',nat:['Uruguay','Kolombiya'],inc:[['korner_cekme',12],['korner_cekme',55],['dirsek',66],['yuksek_ayak',84]]},
- {id:'sonadam',w:['Son adam düdüğü','Kontra atakların gecesinde iki kez kırmızıya giden düdük.'],name:'Son adam',sub:'Kontra ataklarla dolu bir maç, savunmalar hep tek kişi kalıyor.',nat:['Portekiz','Fas'],inc:[['dogso',19],['dogso',73],['elle_oynama',90]]},
- {id:'sinir',w:['Soğukkanlılık düdüğü','Ezeli rakiplerin kavgası arasında sakin kalan hakemin düdüğü.'],name:'Sinirler gerildi',sub:'Ezeli rakipler. Top oyundan çıktığında bile kavga bitmiyor.',nat:['Meksika','ABD'],inc:[['top_disinda',40],['orta_saha_faul',58],['yuksek_ayak',75],['dirsek',89]]},
+ {id:'derbi',w:['Derbi düdüğü','Derbinin son düdüğü. Şampiyonluk bununla bitti.'],free:true,name:'Derbinin son dakikaları',sub:'Şampiyonluk bu maçta belli olacak. Stat tıklım tıklım.',club:[0,1],inc:[['orta_saha_faul',71],['dirsek',80],['penalti_temas',88],['gol_oncesi_faul',93]]},
+ {id:'final',w:['Final düdüğü','Uzatmanın 120. dakikasında çaldın. Bütün dünya seni dinliyordu.'],name:'Dünya finali, uzatmalar',sub:'Skor eşit, uzatmadayız. Kimse yerinde oturamıyor.',nat:['Arjantin','Fransa'],inc:[['dogso',97],['hucum_elle_gol',104],['penalti_temas',118],['penalti_atisi',120]]},
+ {id:'elgol',w:['Çeyrek final düdüğü','O eli sen gördün, başkası değil.'],name:'Elle gol mü?',sub:'Çeyrek final. Bu gece bir el teması konuşulacak.',nat:['Arjantin','İngiltere'],inc:[['hucum_elle_gol',51],['orta_saha_faul',60],['elle_oynama',77]]},
+ {id:'hayalet',w:['Çizgi düdüğü','Teknoloji yoktu, sadece gözlerin vardı.'],name:'Hayalet gol',sub:'Top çizgiyi geçti mi? Teknoloji yok, karar senin.',nat:['İngiltere','Almanya'],inc:[['gol_cizgisi',101],['ofsayt_gol',110],['top_disinda',115]]},
+ {id:'kirmizi',w:['Kaptanın düdüğü','Efsane kaptanın son maçı. Kolay değildi.'],name:'Finalde kırmızı',sub:'Efsane kaptanın son maçı. Ortam gergin.',nat:['Fransa','İtalya'],inc:[['yuksek_ayak',88],['dirsek',95],['top_disinda',110]]},
+ {id:'ofsayt',w:['Santim düdüğü','Ofsayt mı değil mi? Santim santim.'],name:'Ofsayt çizgisi',sub:'İki hızlı forvet var. Ofsayt çizgisinden gözünü ayırma.',nat:['İspanya','Hollanda'],inc:[['ofsayt_gol',23],['ofsayt_gol',58],['gol_oncesi_faul',79]]},
+ {id:'kaleci',w:['Kaleci düdüğü','İki kaleci, bir düdük, penaltılar.'],name:'Kaleci gecesi',sub:'Bu çeyrek final penaltılara gidecek gibi.',nat:['Hırvatistan','Brezilya'],inc:[['kaleci_engelleme',34],['geri_pas',62],['penalti_atisi',120]]},
+ {id:'duran',w:['Korner düdüğü','Her kornerde formalar çekildi, sen hepsini gördün.'],name:'Duran top savaşı',sub:'Her kornerde ceza sahasında itiş kakış var.',nat:['Uruguay','Kolombiya'],inc:[['korner_cekme',12],['korner_cekme',55],['dirsek',66],['yuksek_ayak',84]]},
+ {id:'sonadam',w:['Son adam düdüğü','Son adam iki kez düştü, iki kez karar verdin.'],name:'Son adam',sub:'İki takım da kontraya oynuyor. Savunmada hep tek adam kalıyor.',nat:['Portekiz','Fas'],inc:[['dogso',19],['dogso',73],['elle_oynama',90]]},
+ {id:'sinir',w:['Soğukkanlılık düdüğü','Herkes kavga ederken sakin kalan sendin.'],name:'Sinirler gerildi',sub:'Ezeli rakipler. Top dışarıdayken bile kavga var.',nat:['Meksika','ABD'],inc:[['top_disinda',40],['orta_saha_faul',58],['yuksek_ayak',75],['dirsek',89]]},
 ];
 let LEG=null;
 function legState(){ return lsJ(LEG_KEY,{}); }
@@ -2870,25 +2870,25 @@ function legMake(sc,i){
 //   ZAMAN YOLCULUĞU — eski dönemlerin kurallarıyla maç yönet (ayrı paket)
 // =========================================================
 const ZAMAN=[
- {id:'z1930',pack:'zaman',year:1930,name:'İlk Dünya Kupası, 1930',sub:'Montevideo. Futbolun ilk büyük turnuvası; kart da yok, oyuncu değişikliği de.',nat:['Uruguay','Arjantin'],
+ {id:'z1930',pack:'zaman',year:1930,name:'İlk Dünya Kupası, 1930',sub:'Montevideo. Kart yok, oyuncu değişikliği yok.',nat:['Uruguay','Arjantin'],
   rules:['Kart yok: ihtar ve oyundan ihraç sözlü yapılır','Oyuncu değişikliği yok','Geri pas serbest: kaleci eliyle alabilir'],
-  w:['1930 düdüğü','Kartların icadından 40 yıl önce, Montevideo’da çalınan düdük.'],
+  w:['1930 düdüğü','Kart yoktu. Sadece sesin vardı.'],
   inc:[['orta_saha_faul',23,'kartsiz'],['geri_pas',57,'geripas'],['penalti_temas',81,'kartsiz']]},
- {id:'z1966',pack:'zaman',year:1966,name:'Wembley, 1966',sub:'Final uzatmalarda. Ne gol çizgisi teknolojisi var ne de VAR; sadece sen ve yan hakemin.',nat:['İngiltere','Almanya'],
+ {id:'z1966',pack:'zaman',year:1966,name:'Wembley, 1966',sub:'Final uzatmada. VAR yok, gol çizgisi teknolojisi yok. Sen ve yan hakemin.',nat:['İngiltere','Almanya'],
   rules:['Kart yok: ihtar ve oyundan ihraç sözlü yapılır','Gol çizgisi teknolojisi ve VAR yok','Geri pas serbest: kaleci eliyle alabilir'],
-  w:['Wembley düdüğü','Topun çizgiyi geçip geçmediğini yalnızca gözlerinin söylediği maçtan.'],
+  w:['Wembley düdüğü','Top girdi mi girmedi mi? Hâlâ tartışılıyor.'],
   inc:[['geri_pas',63,'geripas'],['dirsek',78,'kartsiz'],['gol_cizgisi',101,'kartsiz']]},
- {id:'z1986',pack:'zaman',year:1986,name:'Meksika, 1986',sub:'Azteca’da 114 bin kişi. Kartlar var, ama ofsayt ve geri pas kuralları bugünkü gibi değil.',nat:['Arjantin','İngiltere'],
+ {id:'z1986',pack:'zaman',year:1986,name:'Meksika, 1986',sub:'Azteca dolu. Kartlar var ama ofsayt ve geri pas kuralı bugünkü gibi değil.',nat:['Arjantin','İngiltere'],
   rules:['Aynı hizada olan oyuncu ofsayttır (1990’a kadar)','Geri pas serbest: kaleci eliyle alabilir','VAR yok'],
-  w:['Azteca düdüğü','Aynı hizanın hâlâ ofsayt sayıldığı yılların hatırası.'],
+  w:['Azteca düdüğü','O zamanlar aynı hiza ofsayttı.'],
   inc:[['hucum_elle_gol',51,null],['ofsayt_gol',66,'hiza'],['geri_pas',80,'geripas']]},
- {id:'z1998',pack:'zaman',year:1998,name:'Fransa, 1998',sub:'Turnuva öncesi hakemlere yeni talimat: arkadan yapılan tehlikeli müdahaleye doğrudan kırmızı.',nat:['Fransa','Brezilya'],
+ {id:'z1998',pack:'zaman',year:1998,name:'Fransa, 1998',sub:'Turnuvadan önce talimat geldi: arkadan sert girene direkt kırmızı.',nat:['Fransa','Brezilya'],
   rules:['Arkadan tehlikeli müdahale doğrudan kırmızı kart','Altın gol: uzatmada ilk gol maçı bitirir','Geri pas artık yasak (1992’den beri)'],
-  w:['Altın gol düdüğü','Uzatmada atılan ilk golün her şeyi bitirdiği dönemden.'],
+  w:['Altın gol düdüğü','İlk gol gelince her şey biterdi.'],
   inc:[['orta_saha_faul',34,'arkadan'],['orta_saha_faul',71,'arkadan'],['gol_oncesi_faul',97,'altin']]},
- {id:'z2018',pack:'zaman',year:2018,name:'İlk VAR turnuvası, 2018',sub:'VAR, Dünya Kupası’nda ilk kez kullanılıyor. Herkes yeni teknolojinin ne zaman devreye gireceğini merak ediyor.',nat:['Fransa','Hırvatistan'],
+ {id:'z2018',pack:'zaman',year:2018,name:'İlk VAR turnuvası, 2018',sub:'VAR ilk kez Dünya Kupası’nda. Herkes ne zaman devreye gireceğini merak ediyor.',nat:['Fransa','Hırvatistan'],
   rules:['VAR yalnızca açık ve net hatada müdahale eder','İncelenenler: gol, penaltı, doğrudan kırmızı, kimlik hatası','Son kararı her zaman hakem verir'],
-  w:['VAR düdüğü','Ekrana ilk kez koştuğun turnuvadan.'],
+  w:['VAR düdüğü','Monitöre ilk kez koştuğun turnuva.'],
   inc:[['penalti_temas',34,'var'],['hucum_elle_gol',58,'var'],['dogso',88,'var']]},
 ];
 const ERA_OV={
@@ -3032,7 +3032,7 @@ const LAWS = {
  elle_oynama:'Kural 12: Oyuncu eli/koluyla topa bilerek dokunursa ya da eli/kolu vücudunu doğal olmayan şekilde büyütüyorsa ihlal vardır. Kolun pozisyonu o anki vücut hareketiyle açıklanamıyorsa doğal değildir; omuz hizasının üstündeki kol nadiren açıklanabilir. Kolun üst sınırı koltuk altının alt hizasıdır. Düşerken vücut ile zemin arasında destek veren kol (yana/yukarı açılmamışsa) ihlal değildir. Topun oyuncunun kendi vücudundan sekmesi değerlendirmede hafifletici bir unsurdur. Bariz golü eliyle engelleyen oyuncu (kendi ceza alanındaki kaleci hariç) kırmızı kart görür.',
  hucum_elle_gol:'Kural 12: Hücum oyuncusu topa kazara eli/koluyla dokunduktan hemen sonra gol atarsa gol geçersizdir. Kazara temastan sonra top bir takım arkadaşına geçip gol olursa bu temas tek başına golü iptal ettirmez. Bilerek elle oynayarak gol atmaya çalışmak sarı karttır. Omuz kol sayılmaz; kolun üst sınırı koltuk altının alt hizasıdır.',
  ofsayt_gol:'Kural 11: Takım arkadaşı topu oynadığı anda rakip yarı alanda olup başı, gövdesi ya da ayaklarından biri toptan ve sondan ikinci rakipten kale çizgisine daha yakın olan oyuncu ofsayt pozisyonundadır. Kollar ve eller dikkate alınmaz; aynı hizada olmak ofsayt değildir. Ofsayt pozisyonu tek başına ihlal değildir: oyuncu topu oynarsa, rakibin görüş hattını açıkça kapatırsa ya da rakibin topu oynamasını açıkça etkilerse ihlal olur. Taç atışı, kale vuruşu ve köşe vuruşundan doğrudan ofsayt olmaz. Rakibin topu bilerek oynaması ofsaytı sıfırlar; refleks kurtarış ya da sekme sıfırlamaz.',
- orta_saha_faul:'Kural 12: Dikkatsiz müdahale sadece faul. Pervasız müdahale (rakibin tehlikeye girmesini umursamamak) sarı kart. Aşırı güç (rakibin sağlığını tehlikeye atan, gerekenin çok ötesinde güç) kırmızı kart — ciddi faul hareketi. Krampon tabanının açık olması, temasın yüksekliği, hız ve yoğunluk temel göstergelerdir. Umut vaat eden atağı faulle kesmek sarı karttır; hakem avantaj uygularsa bu sarı kart gerekmez. İkinci sarı kart kırmızıya dönüşür.',
+ orta_saha_faul:'Kural 12: Dikkatsiz müdahale sadece faul. Pervasız müdahale (rakibin tehlikeye girmesini umursamamak) sarı kart. Aşırı güç (rakibin sağlığını tehlikeye atan, gerekenin çok ötesinde güç) kırmızı kart: ciddi faul hareketi. Krampon tabanının açık olması, temasın yüksekliği, hız ve yoğunluk temel göstergelerdir. Umut vaat eden atağı faulle kesmek sarı karttır; hakem avantaj uygularsa bu sarı kart gerekmez. İkinci sarı kart kırmızıya dönüşür.',
  dogso:'Kural 12: DOGSO için dört ölçüt birlikte değerlendirilir: faul yeri ile kale arası mesafe, oyunun genel yönü, topu kontrol etme olasılığı, savunmacıların konumu ve sayısı. Ceza alanı dışında DOGSO her durumda kırmızı karttır. Çizgiler bulundukları alana dahildir: ceza alanı çizgisinin üzerindeki faul penaltıdır ve ceza alanı içi DOGSO kuralları uygulanır.',
  dirsek:'Kural 12: Hava topu mücadelesinde kolun denge ya da sıçrama için doğal kullanımı faul değildir. Kolu kaldıraç ya da itme aracı olarak kullanmak pervasızdır (sarı kart). Dirseği rakibin yüzüne/başına savurmak şiddetli harekettir (kırmızı kart).',
  top_disinda:'Kural 12: Topla oynama mücadelesi dışında rakibe aşırı güç ya da vahşilik içeren hareket şiddetli harekettir: kırmızı kart. Top oyundayken rakibe yapılan temaslı ihlalde direkt serbest vuruş, ihlal oyuncunun kendi ceza alanındaysa penaltı verilir. Hakaret içeren söz/hareket kırmızı karttır; temas yoksa oyun endirekt serbest vuruşla başlar. Top oyun dışındayken yapılan ihlalde disiplin cezası verilir; oyun, durdurulma nedenine göre başlar.',
@@ -3087,8 +3087,8 @@ const GEN = {
   const g = wpick([['DOGSO',22],['SPA',45],['none',33]]);
   let sev='normal'; if(kind==='faul'){ if(/kayarak|geç/.test(tackle)&&chance(.35)) sev='reckless'; if(chance(.06)) sev='excessive'; }
   const dist=ri(8,11);
-  const gText={DOGSO:'Kaleye ~'+dist+' m, merkezde, top kontrolünde; arada kaleci dışında savunmacı yok',SPA:'Açılı pozisyon, bir savunmacı geri dönüyor — umut vaat eden atak',none:'Topla çizgiye doğru gidiyor, kaleden uzaklaşıyor'}[g];
-  const contact = kind==='dalis'?'Yok — iki oyuncu arasında temas oluşmadı':kind==='temiz'?'Var; savunmacı topa dokunduktan sonra doğal devam':kind==='hafif'?'Hafif; dengeyi bozacak düzeyde değil':sev==='normal'?'Belirgin; hücumcunun bacağına':'Sert; bileğe / kaval kemiğine';
+  const gText={DOGSO:'Kaleye ~'+dist+' m, merkezde, top kontrolünde; arada kaleci dışında savunmacı yok',SPA:'Açılı pozisyon, bir savunmacı geri dönüyor: umut vaat eden atak',none:'Topla çizgiye doğru gidiyor, kaleden uzaklaşıyor'}[g];
+  const contact = kind==='dalis'?'Yok: iki oyuncu arasında temas oluşmadı':kind==='temiz'?'Var; savunmacı topa dokunduktan sonra doğal devam':kind==='hafif'?'Hafif; dengeyi bozacak düzeyde değil':sev==='normal'?'Belirgin; hücumcunun bacağına':'Sert; bileğe / kaval kemiğine';
   const sevText = sev==='normal'?'Normal mücadele yoğunluğu':sev==='reckless'?'Pervasız: hızlı ve kontrolsüz giriş':'Aşırı güç: krampon açık, yüksek hız';
   inc.story = pick([
     `<b>${esc(pl(ap))}</b> ceza sahasına sol çaprazdan girdi, <b>${esc(pl(dp))}</b> ile karşı karşıya geldi ve yerde! ${esc(c.A.name)} oyuncuları kollarını kaldırıyor, tribünler penaltı diye ayakta.`,
@@ -3096,14 +3096,14 @@ const GEN = {
     `Hızlı bir duvar pası sonrası <b>${esc(pl(ap))}</b> kaleciyle karşı karşıya kalmak üzereyken <b>${esc(pl(dp))}</b> geri döndü. İkisi birlikte yere düştü!`]);
   inc.facts=[
     F('Temas',contact,true,kind==='dalis'?'Hafif bir temas var gibi':kind==='faul'?'Temas yok gibi, belki kendini attı':'Belirgin temas olabilir'),
-    F('Topa ilk dokunan',kind==='temiz'?'Savunmacı — topa net dokundu':'Hücumcu; savunmacı topa değmedi',kind==='temiz'||kind==='faul',kind==='temiz'?'Hücumcu dokundu gibi':'Savunmacı topu sıyırmış olabilir'),
+    F('Topa ilk dokunan',kind==='temiz'?'Savunmacı: topa net dokundu':'Hücumcu; savunmacı topa değmedi',kind==='temiz'||kind==='faul',kind==='temiz'?'Hücumcu dokundu gibi':'Savunmacı topu sıyırmış olabilir'),
     F('Müdahale tipi',tackle,false),
-    F('Topu oynama girişimi',attempt?'Var':'Yok — doğrudan rakibe yönelik',kind==='faul'&&g!=='none',attempt?'Yok gibi':'Topa uzanmış olabilir'),
+    F('Topu oynama girişimi',attempt?'Var':'Yok: doğrudan rakibe yönelik',kind==='faul'&&g!=='none',attempt?'Yok gibi':'Topa uzanmış olabilir'),
     F('Hücumcunun durumu',gText,false),
     F('Temas noktası',outside?'Ceza sahası çizgisinin ~1 m dışında':'Ceza sahası içinde',kind==='faul',outside?'Çizginin üzerinde olabilir':'Çizgiye çok yakın, dışarıda olabilir'),
     F('Şiddet',kind==='faul'?sevText:'—',kind==='faul'&&sev!=='normal','Normal mücadele gibi')
   ];
-  inc.steps=[{id:'d',q:'Karar',opts:[{id:'penalti',label:'Penaltı'},{id:'devam',label:'Penaltı yok, oyun devam'},{id:'simulasyon',label:'Simülasyon — savunmaya endirekt'},{id:'serbest',label:'Ceza sahası dışı serbest vuruş'}]},
+  inc.steps=[{id:'d',q:'Karar',opts:[{id:'penalti',label:'Penaltı'},{id:'devam',label:'Penaltı yok, oyun devam'},{id:'simulasyon',label:'Simülasyon: savunmaya endirekt'},{id:'serbest',label:'Ceza sahası dışı serbest vuruş'}]},
               {id:'c',q:'Disiplin',opts:cardOpts({sari:tag('D',dp),kirmizi:tag('D',dp),h_sari:tag('A',ap)})}];
   inc.cards={sari:{side:'D',p:dp},kirmizi:{side:'D',p:dp,red:true},h_sari:{side:'A',p:ap}};
   inc.onD={penalti:'penA',serbest:'fkA'};
@@ -3143,12 +3143,12 @@ const GEN = {
   const offence = deliberate || arm==='omuz' || (arm==='siluet'&&!deflect);
   const border = arm==='siluet' && deflect;
   const goalBound = offence && chance(.08);
-  const armText={bitisik:'Vücuda bitişik',dogal:'Koşu hareketine uygun, vücuda yakın',siluet:'Yana açık — vücudu doğal olmayan şekilde büyütüyor',omuz:'Omuz hizasının üstünde',destek:'Kayarken yere destek veren kol (vücut ile zemin arasında)'}[arm];
+  const armText={bitisik:'Vücuda bitişik',dogal:'Koşu hareketine uygun, vücuda yakın',siluet:'Yana açık: vücudu doğal olmayan şekilde büyütüyor',omuz:'Omuz hizasının üstünde',destek:'Kayarken yere destek veren kol (vücut ile zemin arasında)'}[arm];
   inc.story=pick([`<b>${esc(pl(ap))}</b> ceza sahası kenarından sert vurdu, top <b>${esc(pl(dp))}</b>'ın koluna çarptı! ${esc(c.A.name)} oyuncuları elle oynama diye sana koşuyor.`,
     `Ortaya kesilen top savunmada <b>${esc(pl(dp))}</b>'a çarparak döndü. ${esc(c.A.name)} kulübesi ayakta: "El var!"`,
     `<b>${esc(pl(ap))}</b>'nın yaptığı vole vuruşu, bloke etmeye çalışan <b>${esc(pl(dp))}</b>'dan sekti. Top kola mı geldi?`]);
   inc.facts=[F('Kol pozisyonu',armText,true,arm==='siluet'||arm==='omuz'?'Vücuda yakın gibi':'Kol açık olabilir'),
-    F('Kola doğru hareket',deliberate?'Evet — kolunu topa doğru uzattı':'Hayır',deliberate,deliberate?'Refleks gibi':'Topa uzanmış olabilir'),
+    F('Kola doğru hareket',deliberate?'Evet: kolunu topa doğru uzattı':'Hayır',deliberate,deliberate?'Refleks gibi':'Topa uzanmış olabilir'),
     F('Top nereden geldi',deflect?'Önce oyuncunun kendi dizinden sekti, sonra kola':'Doğrudan şut/orta',arm==='siluet',deflect?'Doğrudan gelmiş gibi':'Dizden sekmiş olabilir'),
     F('Mesafe',dist,false),
     F('Topun yönü',goalBound?'Kaleye gidiyordu; kaleci yerinden çıkmıştı, kesin gol':'Kaleyi bulmayacaktı / kaleci karşılardı',goalBound,'Kaleye gidiyor olabilir')];
@@ -3170,7 +3170,7 @@ const GEN = {
   inc.story=`Karambolde top <b>${esc(pl(ap))}</b>'ya geldi ve fileler havalandı! Ancak ${esc(c.D.name)} oyuncuları ellerini kollarına vurarak sana koşuyor: "Elle kontrol etti!"`;
   const txt={imm:'Golü atan oyuncunun koluna kazara çarptı, ardından kendisi hemen vurdu',mate:`Üç pas önce takım arkadaşı ${mate.name}'ın koluna kazara çarptı; sonrasında top ${ap.name}'ya geçti`,delib:'Golü atan oyuncu topa bilerek koluyla vurdu',omuz:'Top golü atan oyuncunun omzuna çarptı (koltuk altı hizasının üstü)'}[v];
   inc.facts=[F('Temas',txt,true,v==='omuz'?'Kola çarpmış olabilir':v==='mate'?'Golü atanın kendisine çarpmış olabilir':'Omuza çarpmış olabilir'),F('Kol pozisyonu',v==='omuz'?'—':v==='delib'?'Bilerek topa yönlendirildi':'Vücuda yakın, kazara',v!=='omuz'),F('Golden önceki süre',v==='mate'?'~6 saniye, üç pas':'Anında',false)];
-  inc.steps=[{id:'d',q:'Karar',opts:[{id:'gol_gecerli',label:'Gol geçerli'},{id:'gol_iptal',label:'Gol iptal — elle oynama'}]},{id:'c',q:'Disiplin',opts:cardOpts({sari:tag('A',ap)})}];
+  inc.steps=[{id:'d',q:'Karar',opts:[{id:'gol_gecerli',label:'Gol geçerli'},{id:'gol_iptal',label:'Gol iptal: elle oynama'}]},{id:'c',q:'Disiplin',opts:cardOpts({sari:tag('A',ap)})}];
   inc.cards={sari:{side:'A',p:ap}}; inc.onD={gol_gecerli:'goalA'};
   if(v==='imm'){ inc.correct={d:'gol_iptal',c:'yok'}; inc.explain='Golü atan oyuncu kazara elle temastan hemen sonra gol attı: gol geçersiz. Kazara olduğu için kart yok.'; }
   if(v==='mate'){ inc.correct={d:'gol_gecerli',c:'yok'}; inc.explain='Kazara elle temas takım arkadaşında oldu ve gol hemen ardından gelmedi; bu temas golü iptal ettirmez. Gol geçerli.'; }
@@ -3207,7 +3207,7 @@ const GEN = {
     F('Yardımcı hakem',arFlag?'Bayrak kaldırdı':'Bayrak kalkmadı, gol işareti',false)];
   if(who==='other') inc.facts.push(F('Ofsayttaki oyuncunun etkisi',{engel:'Kalecinin tam görüş hattında duruyordu',hareket:'Topa doğru hamle yaptı, kaleci tepki vermekte gecikti',uzak:'Görüş hattının dışında, topa hareket etmedi'}[involve],true,involve==='uzak'?'Görüş hattına yakın olabilir':'Etkisi yok gibi'));
   if(who==='scorer'&&restart==='pas') inc.facts.push(F('Savunmacının dokunuşu',{yok:'Yok',bilerek:'Savunmacı topu kontrollü şekilde uzaklaştırmaya çalıştı, hatalı vurdu',kurtaris:'Savunmacının refleks blok denemesinden sekti'}[defT],defT!=='yok',defT==='bilerek'?'Sekme olabilir':'Bilerek oynamış olabilir'));
-  inc.steps=[{id:'d',q:'Karar',opts:[{id:'gol_gecerli',label:'Gol geçerli'},{id:'gol_iptal',label:'Gol iptal — ofsayt'}]}];
+  inc.steps=[{id:'d',q:'Karar',opts:[{id:'gol_gecerli',label:'Gol geçerli'},{id:'gol_iptal',label:'Gol iptal: ofsayt'}]}];
   inc.onD={gol_gecerli:'goalA'}; inc.factual = who==='scorer'&&defT==='yok';
   inc.correct={d:offence?'gol_iptal':'gol_gecerli'};
   const ex=[];
@@ -3246,7 +3246,7 @@ const GEN = {
     F('Oyun durumu',counter?'3\'e 2 kontra atak başlıyordu (umut vaat eden atak)':'Orta sahada kontrollü oyun',false),
     F('Avantaj imkânı',adv?'Top hücum eden takımda kaldı; 2 oyuncu rakip yarı alana boş alanla koşuyor':'Top rakipte kaldı, avantaj yok',false)];
   if(booked) inc.facts.push(F('Kart durumu',off.name+' sarı kartlı',false));
-  inc.steps=[{id:'d',q:'Karar',opts:[{id:'devam',label:'Faul yok, devam'},{id:'faul',label:'Faul — serbest vuruş'},{id:'avantaj',label:'Avantaj uygula'}]},{id:'c',q:'Disiplin',opts:cardOpts({sari:tag('D',off),kirmizi:tag('D',off)})}];
+  inc.steps=[{id:'d',q:'Karar',opts:[{id:'devam',label:'Faul yok, devam'},{id:'faul',label:'Faul: serbest vuruş'},{id:'avantaj',label:'Avantaj uygula'}]},{id:'c',q:'Disiplin',opts:cardOpts({sari:tag('D',off),kirmizi:tag('D',off)})}];
   inc.cards={sari:{side:'D',p:off},kirmizi:{side:'D',p:off,red:true}}; inc.reviewable=false; inc.redReview=true;
   if(ballPlayed && score<=1){ inc.correct={d:'devam',c:'yok'}; inc.explain='Savunmacı önce topa oynadı, müdahale kontrollü ve tehlikesiz: faul yok.'; }
   else {
@@ -3305,7 +3305,7 @@ const GEN = {
   inc.story=`Uzun topta <b>${esc(pl(off))}</b> ile <b>${esc(pl(vic))}</b> hava topuna yükseldi. ${esc(vic.name.split(' ')[0])} elleri yüzünde yerde kaldı; ${esc(c.A.name)} sağlık ekibini çağırıyor.`;
   inc.facts=[F('Kol kullanımı',{dogal:'Sıçrama ve denge için doğal kol hareketi',kaldirac:'Kol rakibe yaslanıp kaldıraç olarak kullanıldı',savurma:'Dirsek rakibe doğru savruldu'}[use],true,use==='dogal'?'Kol rakibe yöneltilmiş olabilir':'Doğal kol hareketi gibi'),
     F('Temas bölgesi',AREA_L[area],false),F('Şiddet',hard?'Sert':'Hafif',use!=='dogal','Hafif gibi'),F('Gözü topta mı',use==='savurma'?'Hayır, rakibe bakıyordu':'Evet',use==='savurma','Topa bakıyor gibi')];
-  inc.steps=[{id:'d',q:'Karar',opts:[{id:'devam',label:'Faul yok, devam'},{id:'faul',label:'Faul — serbest vuruş'}]},{id:'c',q:'Disiplin',opts:cardOpts({sari:tag('D',off),kirmizi:tag('D',off)})}];
+  inc.steps=[{id:'d',q:'Karar',opts:[{id:'devam',label:'Faul yok, devam'},{id:'faul',label:'Faul: serbest vuruş'}]},{id:'c',q:'Disiplin',opts:cardOpts({sari:tag('D',off),kirmizi:tag('D',off)})}];
   inc.cards={sari:{side:'D',p:off},kirmizi:{side:'D',p:off,red:true}}; inc.reviewable=false; inc.redReview=true;
   if(use==='dogal'){ inc.correct={d:'devam',c:'yok'}; if(area==='yüz') inc.accept=[{d:'faul',c:'yok'}]; inc.explain='Kol sıçrama ve denge için doğal kullanıldı; temas mücadelenin parçası. Faul yok'+(area==='yüz'?' (yüze temas nedeniyle faul çalmak da kabul edilebilir).':'.'); }
   else if(use==='kaldirac'){ inc.correct={d:'faul',c:'sari'}; inc.explain='Kol kaldıraç olarak kullanıldı: pervasız, sarı kart.'; }
@@ -3340,7 +3340,7 @@ const GEN = {
   inc.story=`Köşe vuruşu… kale alanına inen topa kaleci <b>${esc(pl(gk))}</b> çıktı ama topu tutamadı; <b>${esc(pl(ap))}</b> boş kaleye gönderdi! ${esc(c.D.name)} oyuncuları kaleciye faul diye sana koşuyor.`;
   const txt={tuttu:'Hücumcu, kalecinin sol kolunu tuttu',itti:'Hücumcu, sıçrayan kaleciyi iki eliyle itti',omuz:'İkisi de topa giderken normal omuz teması',engel:'Hücumcu topa bakmadan kalecinin yoluna girip gövdesiyle çarptı',arkadas:'Kaleci kendi takım arkadaşıyla çarpıştı; hücumcuyla temas yok'}[v];
   inc.facts=[F('Kaleciye temas',txt,true,v==='omuz'||v==='arkadas'?'Hücumcu kolunu tutmuş olabilir':'Normal omuz teması gibi'),F('Hücumcunun hamlesi',v==='engel'?'Topa oynamaya çalışmadı':'Topa oynamaya çalıştı',v==='engel'),F('Kalecinin pozisyonu','Kale alanı içinde, topa uzanıyordu',false)];
-  inc.steps=[{id:'d',q:'Karar',opts:[{id:'gol_gecerli',label:'Gol geçerli'},{id:'gol_iptal',label:'Gol iptal — kaleciye faul'}]},{id:'c',q:'Disiplin',opts:cardOpts({sari:tag('A',ap)})}];
+  inc.steps=[{id:'d',q:'Karar',opts:[{id:'gol_gecerli',label:'Gol geçerli'},{id:'gol_iptal',label:'Gol iptal: kaleciye faul'}]},{id:'c',q:'Disiplin',opts:cardOpts({sari:tag('A',ap)})}];
   inc.cards={sari:{side:'A',p:ap}}; inc.onD={gol_gecerli:'goalA'};
   const bad=['tuttu','itti','engel'].includes(v);
   inc.correct={d:bad?'gol_iptal':'gol_gecerli',c:'yok'}; if(v==='itti') inc.accept=[{d:'gol_iptal',c:'sari'}];
@@ -3356,7 +3356,7 @@ const GEN = {
   const ar = chance(arNear?.9:.62)? (v==='tam') : !(v==='tam');
   inc.story=`<b>${esc(pl(ap))}</b>'nın kafa vuruşunu kaleci <b>${esc(pl(gk))}</b> çizgi üzerinde çeldi! Top içeride miydi? ${esc(c.A.name)} oyuncuları gol diye bağırıyor. Bu ligde gol çizgisi teknolojisi yok.`;
   inc.facts=[F('Top',{tam:'Topun tamamı çizgiyi ~5 cm geçmişti',buyuk:'Topun büyük kısmı geçti ama tamamı değil',ustunde:'Top çizginin üzerinde'}[v],true,v==='tam'?'Tamamı geçmemiş olabilir':'Tamamen içeride gibiydi'),
-    F('Yardımcı hakem',(arNear?'Kale çizgisi hizasında':'Son savunmacı hizasında, 12 m geride')+' — '+(ar?'gol işareti verdi':'oyun devam işareti verdi'),false)];
+    F('Yardımcı hakem',(arNear?'Kale çizgisi hizasında':'Son savunmacı hizasında, 12 m geride')+': '+(ar?'gol işareti verdi':'oyun devam işareti verdi'),false)];
   inc.steps=[{id:'d',q:'Karar',opts:[{id:'gol_gecerli',label:'Gol'},{id:'devam',label:'Gol değil, devam'}]}];
   inc.onD={gol_gecerli:'goalA'}; inc.factual=true; inc.reviewable=true;
   inc.correct={d:v==='tam'?'gol_gecerli':'devam'};
@@ -3388,7 +3388,7 @@ const GEN = {
   inc.story=`<b>${esc(pl(ap))}</b> ceza sahasında <b>${esc(pl(dp))}</b> ile mücadeleden sıyrıldı ve sert vuruşla golü attı! ${esc(c.D.name)} oyuncuları "Önce faul var!" diye itiraz ediyor.`;
   const txt={itme:'Hücumcu savunmacıyı iki eliyle belirgin şekilde itti',omuz:'Omuz omuza, ikisi de topa oynuyor',basma:'Hücumcu savunmacının ayağına bastı, savunmacı dengesini kaybetti',hafif:'Kolla hafif denge teması',cekme:'Hücumcu savunmacıyı formasından çekip öne geçti'}[v];
   inc.facts=[F('Mücadele',txt,true,['itme','basma','cekme'].includes(v)?'Normal mücadele gibi':'Hücumcu itmiş olabilir'),F('Mücadele ile gol arası','Aynı atak fazı, 2 saniye',false)];
-  inc.steps=[{id:'d',q:'Karar',opts:[{id:'gol_gecerli',label:'Gol geçerli'},{id:'gol_iptal',label:'Gol iptal — hücum faulü'}]},{id:'c',q:'Disiplin',opts:cardOpts({sari:tag('A',ap)})}];
+  inc.steps=[{id:'d',q:'Karar',opts:[{id:'gol_gecerli',label:'Gol geçerli'},{id:'gol_iptal',label:'Gol iptal: hücum faulü'}]},{id:'c',q:'Disiplin',opts:cardOpts({sari:tag('A',ap)})}];
   inc.cards={sari:{side:'A',p:ap}}; inc.onD={gol_gecerli:'goalA'};
   const bad=['itme','basma','cekme'].includes(v); inc.correct={d:bad?'gol_iptal':'gol_gecerli',c:'yok'};
   if(v==='cekme') inc.accept=[{d:'gol_iptal',c:'sari'}];
@@ -3404,9 +3404,9 @@ const GEN = {
   inc.story=`Havada kalan topa <b>${esc(pl(ap))}</b> kafayla, <b>${esc(pl(dp))}</b> ise ayağıyla gitti. Krampon ${esc(ap.name.split(' ')[0])}'ın yüzüne çok yakın geçti; ${esc(c.A.name)} oyuncuları tehlikeli oyun diye bağırıyor.`;
   const txt={temassiz:'Ayak baş hizasında; temas yok ama hücumcu kafasını geri çekmek zorunda kaldı',temas:'Ayak yüksekte; krampon hücumcunun omzuna/yüzüne değdi',asiri:'Krampon açık, yüksek hızla yüze isabet etti',guvenli:'Ayak yüksekte ama hücumcu 2 m uzakta, tehlike yok',egilme:'Hücumcu topa kafayla gitmek için bel hizasına kadar eğildi; ayak normal yükseklikteydi'}[v];
   inc.facts=[F('Ayağın konumu',txt,true,v==='temassiz'||v==='guvenli'?'Krampon değmiş olabilir':'Temas yok gibiydi'),
-    F('Topu oynama girişimi','Var — savunmacı topa ayağıyla uzandı',false),
+    F('Topu oynama girişimi','Var: savunmacı topa ayağıyla uzandı',false),
     F('Hücumcunun hareketi',v==='egilme'?'Kafasını ayak hizasına indirdi':'Normal yükseklikte kafa vuruşuna çıktı',v==='egilme')];
-  inc.steps=[{id:'d',q:'Karar',opts:[{id:'devam',label:'İhlal yok, devam'},{id:'endirekt',label:'Tehlikeli oyun — endirekt serbest vuruş'},{id:'serbest',label:'Faul — direkt serbest vuruş'}]},{id:'c',q:'Disiplin',opts:cardOpts({sari:tag('D',dp),kirmizi:tag('D',dp)})}];
+  inc.steps=[{id:'d',q:'Karar',opts:[{id:'devam',label:'İhlal yok, devam'},{id:'endirekt',label:'Tehlikeli oyun: endirekt serbest vuruş'},{id:'serbest',label:'Faul: direkt serbest vuruş'}]},{id:'c',q:'Disiplin',opts:cardOpts({sari:tag('D',dp),kirmizi:tag('D',dp)})}];
   inc.cards={sari:{side:'D',p:dp},kirmizi:{side:'D',p:dp,red:true}}; inc.onD={serbest:'fkA',endirekt:'ifkA'};
   const map={temassiz:['endirekt','yok'],temas:['serbest','sari'],asiri:['serbest','kirmizi'],guvenli:['devam','yok'],egilme:['devam','yok']};
   inc.correct={d:map[v][0],c:map[v][1]};
@@ -3427,7 +3427,7 @@ const GEN = {
   inc.facts=[F('Tutma',txt,true,['belirgin','gures'].includes(v)?'Karşılıklı tutma gibi':'Savunmacı çekmiş gibi'),
     F('Etki',['belirgin','gures'].includes(v)?'Hücumcunun topa oynama şansı ortadan kalktı':v==='hucumcu'?'Savunmacı dengesini kaybetti':'Topa oynama şansı değişmedi',true),
     F('Top','Penaltı noktası hizasına iniyordu, oynanabilir mesafede',false)];
-  inc.steps=[{id:'d',q:'Karar',opts:[{id:'penalti',label:'Penaltı'},{id:'devam',label:'Faul yok, devam'},{id:'hucum_faulu',label:'Hücum faulü — savunmaya serbest vuruş'}]},{id:'c',q:'Disiplin',opts:cardOpts({sari:tag('D',dp),h_sari:tag('A',ap)})}];
+  inc.steps=[{id:'d',q:'Karar',opts:[{id:'penalti',label:'Penaltı'},{id:'devam',label:'Faul yok, devam'},{id:'hucum_faulu',label:'Hücum faulü: savunmaya serbest vuruş'}]},{id:'c',q:'Disiplin',opts:cardOpts({sari:tag('D',dp),h_sari:tag('A',ap)})}];
   inc.cards={sari:{side:'D',p:dp},h_sari:{side:'A',p:ap}}; inc.onD={penalti:'penA'};
   const map={belirgin:['penalti','yok'],gures:['penalti','sari'],karsilikli:['devam','yok'],hafif:['devam','yok'],hucumcu:['hucum_faulu','yok']};
   inc.correct={d:map[v][0],c:map[v][1]};
@@ -3447,7 +3447,7 @@ const GEN = {
   const txt={disari_dogso:'Kaleci topu ceza sahası çizgisinin ~1 m dışında eliyle tuttu',disari_spa:'Kaleci topu çizginin ~50 cm dışında eliyle çeldi',cizgi:'Top, kalecinin eline değdiği anda çizginin üzerindeydi',ici:'Kaleci topu çizginin ~40 cm içinde tuttu, sonra kayarak dışarı çıktı',disari_kafa:'Kaleci ceza sahası dışında topa kafayla vurdu'}[v];
   const sit={disari_dogso:'Hücumcu topla boş kaleye gidecekti; arkada savunmacı yok',disari_spa:'Hücumcu topa yetişebilirdi; bir savunmacı geri dönüyordu',cizgi:'Hücumcu topa yetişebilirdi',ici:'Hücumcu topa yetişebilirdi',disari_kafa:'Kaleci topu taça gönderdi'}[v];
   inc.facts=[F('Temas yeri',txt,true,v==='cizgi'||v==='ici'?'Dışarıda tutmuş gibi':'Çizginin üzerinde olabilir'),F('Hücumcunun durumu',sit,v.startsWith('disari')),F('Yardımcı hakem','Son savunmacı hizasında, çizgiye 25 m uzakta',false)];
-  inc.steps=[{id:'d',q:'Karar',opts:[{id:'devam',label:'İhlal yok, devam'},{id:'serbest',label:'Elle oynama — direkt serbest vuruş'}]},{id:'c',q:'Disiplin',opts:cardOpts({sari:tag('D',gk),kirmizi:tag('D',gk)})}];
+  inc.steps=[{id:'d',q:'Karar',opts:[{id:'devam',label:'İhlal yok, devam'},{id:'serbest',label:'Elle oynama: direkt serbest vuruş'}]},{id:'c',q:'Disiplin',opts:cardOpts({sari:tag('D',gk),kirmizi:tag('D',gk)})}];
   inc.cards={sari:{side:'D',p:gk},kirmizi:{side:'D',p:gk,red:true}}; inc.onD={serbest:'fkA'}; inc.factual=true;
   const map={disari_dogso:['serbest','kirmizi'],disari_spa:['serbest','sari'],cizgi:['devam','yok'],ici:['devam','yok'],disari_kafa:['devam','yok']};
   inc.correct={d:map[v][0],c:map[v][1]};
@@ -3493,7 +3493,7 @@ const QUICK = [
  {id:'tac',text:c=>`${pl(c.ap)} taç atışını tek eliyle, başının yanından fırlattı.`,opts:[['rakip','Taç rakibe',1],['tekrar','Tekrar ettir',0],['devam','Devam',0]],ex:'Kural 15: Taç atışı iki elle, başın arkasından ve üstünden yapılır. Hatalı atışta taç rakibe geçer.'},
  {id:'duvar',text:c=>`Serbest vuruşta ${c.A.name} oyuncusu, 4 kişilik duvarın 50 cm yanına girdi.`,opts:[['endirekt','Rakibe endirekt serbest vuruş',1],['uyari','Uyar, uzaklaştır',0],['devam','Devam',0]],ex:'Kural 13: Savunma 3 veya daha fazla kişilik duvar kurduğunda hücum oyuncuları duvardan en az 1 m uzakta olmalıdır; aksi hâlde rakibe endirekt serbest vuruş.'},
  {id:'kaptan',text:c=>`${c.D.name}'dan kaptan olmayan ${pl(c.dp)}, bağırarak yüzüne kadar geldi ve itiraz ediyor.`,opts:[['sari','Sarı kart (itiraz)',1],['gormezden','Görmezden gel',0],['kirmizi','Kırmızı kart',0]],ex:'Sözle ya da hareketle itiraz sarı karttır. Kaptan dışındaki oyuncuların hakemi çevrelemesine izin verilmez.',card:c=>({side:'D',p:c.dp})},
- {id:'kartli',text:c=>`Sarı kartlı ${pl(c.dp)}, ${c.A.name}'ın kontra atağını bilerek eliyle kesti.`,opts:[['ikinci','İkinci sarı — kırmızı',1],['faul','Sadece faul',0],['uyari','Faul ve son uyarı',0]],ex:'Umut vaat eden atağı eliyle kesmek sarı karttır. Oyuncu zaten sarı kartlı olduğu için ikinci sarıdan kırmızı. VAR ikinci sarıya müdahale edemez.',needBooked:true,card:c=>({side:'D',p:c.dp})}
+ {id:'kartli',text:c=>`Sarı kartlı ${pl(c.dp)}, ${c.A.name}'ın kontra atağını bilerek eliyle kesti.`,opts:[['ikinci','İkinci sarı: kırmızı',1],['faul','Sadece faul',0],['uyari','Faul ve son uyarı',0]],ex:'Umut vaat eden atağı eliyle kesmek sarı karttır. Oyuncu zaten sarı kartlı olduğu için ikinci sarıdan kırmızı. VAR ikinci sarıya müdahale edemez.',needBooked:true,card:c=>({side:'D',p:c.dp})}
 ];
 
 // =========================================================
@@ -3527,7 +3527,7 @@ function stopAdd(label,sec){ const h=(M.phase==='h1'||M.phase==='h1add')?1:2; M.
 function sideTeam(i){ return i?M.A:M.H; }
 function goal(side,p,note){
   M.score[side]++; const t=sideTeam(side);
-  feed(`<b>GOL! ${esc(t.name)}</b> — ${esc(pl(p))}${note?' · '+note:''}. Skor ${M.score[0]}-${M.score[1]}`,'goal');
+  feed(`<b>GOL! ${esc(t.name)}</b>: ${esc(pl(p))}${note?' · '+note:''}. Skor ${M.score[0]}-${M.score[1]}`,'goal');
   M.goalsLog.push({side,min:M.minLabel(),p});
   if(!M.auto&&SC) sceneGoal(SC,side,p);
   stopAdd('Gol: '+t.short,ri(40,60));
@@ -3782,16 +3782,16 @@ function runMgmt(ev){
 //   1.4: MAÇ İÇİ SÜRPRİZLER — kuralın değil sağduyunun sınandığı anlar
 // =========================================================
 const OLAYLAR={
- elektrik:{text:c=>`Projektörler bir anda söndü! Stadyum karanlıkta, tribünlerden ıslıklar yükseliyor. Stadyum yetkilisi sorunun ne kadar süreceğini bilmiyor.`,
+ elektrik:{text:c=>`Işıklar gitti! Stat karanlık, tribünler ıslıklıyor. Görevli ışıkların ne zaman geleceğini bilmiyor.`,
   opts:[['soyunma','Takımları soyunma odasına al, yetkiliden net süre iste',1],['bekle','Oyuncuları sahada beklet',0],['tatil','Maçı hemen tatil et',0]],
   ex:'Dış bir etken oyunu durdurduğunda önce güvenlik gelir: takımlar soyunma odasına alınır, yetkililerden süre istenir. Tatil kararı ancak makul bekleme ve ilgili talimatlar sonrasında verilir.',sec:240},
- kaptan:{text:c=>`Maç çok gergin başladı, her ikili mücadelede itiş kakış var. Bir sonraki duran topta iki kaptanı yanına çağırma fırsatın var.`,
+ kaptan:{text:c=>`Maç çok sert başladı, her ikili mücadelede itiş kakış var. Sıradaki duran topta kaptanları çağırabilirsin.`,
   opts:[['ikisi','İki kaptanı birlikte çağır, sınırları netleştir',1],['tek','Sadece ev sahibi kaptanla konuş',0],['yok','Kimseyle konuşma, kartlar konuşsun',0]],
   ex:'Kaptanları birlikte çağırmak tarafsızlık mesajı verir ve maçı yönetmenin en güçlü yoludur. Tek tarafla konuşmak taraf tutuyormuş gibi görünür.',sec:30},
  tahta:{text:c=>`${c.D.name} teknik direktörü, kulübedeki taktik tahtasına adını ve "SATILDI" yazıp tribün kameralarına gösteriyor. Dördüncü hakem sana bakıyor.`,
   opts:[['kirmizi','Teknik direktöre kırmızı kart',1],['sari','Teknik direktöre sarı kart',0],['rapor','Dördüncü hakeme rapora yazmasını söyle, oyunu sürdür',0]],
   ex:'Hakemi aşağılayan ya da onuruna saldıran yazılı ya da hareketli ifade, takım yetkilileri için de kırmızı kart gerektirir. Rapora yazmak tek başına yetmez.',sec:60,coach:true},
- zemin:{rain:true,text:c=>`Sağanak dinmedi. Ceza sahalarında su birikti, top birikintilerde duruyor ve oyuncular kayıyor.`,
+ zemin:{rain:true,text:c=>`Yağmur durmuyor. Ceza sahaları göl gibi, top suda duruyor, oyuncular kayıyor.`,
   opts:[['kontrol','Oyunu durdur, kaptanlarla birlikte zemini test et (top sektirme)',1],['devam','Devam et, iki takım için de koşullar aynı',0],['tatil','Maçı hemen tatil et',0]],
   ex:'Zeminin oynanabilirliğine hakem karar verir. Önce durdurup test etmek gerekir; top zıplamıyorsa ve güvenlik riski varsa ara verilir, düzelmezse tatil düşünülür.',sec:180},
  maskot:{text:c=>`Ev sahibi maskotu ${c.D.name} kalecisinin arkasında dans edip laf atıyor. Kaleci oyunu durdurmuş, sana el sallıyor.`,
@@ -3814,7 +3814,7 @@ function runOlay(ev){
     const v=ok?'dogru':'hata';
     M.log.push({cat:'mgmt',title:'Maç içi olay',min:M.minLabel(),text,your:o[1],correct:opts.find(x=>x[2])[1],v,explain:O.ex});
     S.totals.decisions++; if(ok) S.totals.correct++;
-    feed(ok?'Hakem durumu soğukkanlılıkla yönetti.':'Hakemin kararı tribünlerde tepkiyle karşılandı.','sys');
+    feed(ok?'Hakem paniğe kapılmadı.':'Tribünler hakemin kararına çok kızdı.','sys');
     return v;
   };
   if(M.auto){ resolve(chance(.4+S.attrs.sogukkanlilik/160)?opts.find(x=>x[2])[0]:pick(opts.filter(x=>!x[2]))[0]); return; }
@@ -4923,12 +4923,12 @@ function halftimeUI(resolve){
 function crestHTML(t,s){ return crest(t,s||22); }
 function stakesText(fx){
   const parts=[];
-  if(fx.final) parts.push('Final — milyonlar izliyor');
+  if(fx.final) parts.push('Final: milyonlar izliyor');
   if(fx.derby) parts.push('Derbi: stat tamamen dolu, gerilim yüksek');
   if(fx.kind==='dom'&&S.week>6){ const t=sortedTable(); const ph=t.findIndex(x=>x.id===fx.home)+1, pa=t.findIndex(x=>x.id===fx.away)+1; if(ph<=3&&pa<=3) parts.push('Zirve yarışı: '+ph+'. ve '+pa+'. karşı karşıya'); if(ph>t.length-4&&pa>t.length-4) parts.push('Küme düşme hattında hayati maç'); }
-  if(fx.kind==='mid') parts.push('Avrupa gecesi — AFK gözlemcisi tribünde');
+  if(fx.kind==='mid') parts.push('Avrupa gecesi: AFK gözlemcisi tribünde');
   if(fx.kind==='guest') parts.push('Yabancı hakem olarak tüm baskı üzerinde');
-  if(fx.kind==='tour') parts.push(fx.stage+' — DFF hakem komitesi izliyor');
+  if(fx.kind==='tour') parts.push(fx.stage+': DFF hakem komitesi izliyor');
   if(!parts.length) parts.push('Normal lig maçı');
   return parts;
 }
@@ -5774,7 +5774,7 @@ function settingsHTML(){
     <div><label class="lbl" for="set_kstil">Kart gösterme stilin</label><select id="set_kstil"><option value="klasik">Klasik</option><option value="dik" ${st.kstil==='dik'?'selected':''}>Dimdik, kol tam yukarıda</option><option value="yan" ${st.kstil==='yan'?'selected':''}>Yana yatık, rahat</option></select></div>
     <div><label class="lbl" for="set_dstil">Düdük çalışın</label><select id="set_dstil"><option value="tek">Tek, kısa</option><option value="cift" ${st.dstil==='cift'?'selected':''}>Çift, kesik kesik</option></select></div>
     <div><label class="lbl" for="set_fav">Tuttuğun takım</label><select id="set_fav"><option value="">Söylemek istemiyorum</option>${Object.keys(S.table||{}).map(id=>TEAM[id]).filter(Boolean).sort((a,b)=>a.name.localeCompare(b.name)).map(t=>`<option value="${esc(t.id)}" ${S.fav===t.id?'selected':''}>${esc(t.name)}</option>`).join('')}</select><small class="muted">Bu takımın maçlarında baskı artar; hataların hangi tarafa olduğu izlenir.</small></div>
-    <div><label class="lbl" for="set_diff">Zorluk</label><select id="set_diff">${Object.entries(DIFFS).map(([k,d])=>`<option value="${k}" ${S.diff===k?'selected':''}>${d.name} — ${d.desc}</option>`).join('')}</select></div></div>
+    <div><label class="lbl" for="set_diff">Zorluk</label><select id="set_diff">${Object.entries(DIFFS).map(([k,d])=>`<option value="${k}" ${S.diff===k?'selected':''}>${d.name}: ${d.desc}</option>`).join('')}</select></div></div>
     <div class="panel stack"><h3>Kayıt</h3><p class="muted" style="font-size:13px">Oyun bu tarayıcıda otomatik kaydedilir. Başka cihaza taşımak için kayıt kodunu kopyala.</p>
       <textarea id="saveCode" rows="4" readonly>${exportCode()}</textarea><div class="row"><button class="btn sm" id="bCopy">Kodu kopyala</button></div>
       <label class="lbl" for="impCode">Kayıt kodu yükle</label><textarea id="impCode" rows="3" placeholder="Kayıt kodunu buraya yapıştır"></textarea><div class="row"><button class="btn sm" id="bImp">Yükle</button></div>
@@ -6629,9 +6629,9 @@ const STORIES={
   text:()=>`Gece yarısı gizli bir numara arıyor. Sakin bir ses: "Hocam, yarınki maç için küçük bir iyilik istiyoruz. Karşılığını fazlasıyla alırsın." Telefonun konuşmayı kaydediyor.`,
   ch:[{id:'kayit',l:'Kaydı sakla, sabah federasyona götür',e:{trust:8},next:['telefon_kayit',3],t:'Kaydı Etik Kurulu’na teslim ettin.'},
       {id:'kapat',l:'Tek kelime etmeden kapat',e:{attr:{sogukkanlilik:.5}},t:'Telefonu kapattın ve uyumaya çalıştın.'},
-      {id:'dusun',l:'"Düşünürüm" de',e:{susp:12},next:['telefon_israr',3],t:'Ses memnun görünüyordu. Bu iyiye işaret değil.'}]},
+      {id:'dusun',l:'"Düşünürüm" de',e:{susp:12},next:['telefon_israr',3],t:'Karşıdaki ses memnun kaldı. Bu hiç iyi değil.'}]},
  telefon_kayit:{chain:1,from:'Etik Kurulu',title:'Kayıt soruşturma başlattı',
-  text:()=>`Teslim ettiğin ses kaydı sayesinde bir şike çetesine soruşturma açıldı. Kurul, ifaden için seni davet ediyor; istersen adın gizli tutulabilir.`,
+  text:()=>`Verdiğin kayıt sayesinde bir şike çetesine soruşturma açıldı. Kurul ifadeni almak istiyor. İstersen adın gizli kalabilir.`,
   ch:[{id:'tanik',l:'Açık tanık ol, ifade ver',e:{trust:6,rep:3,fol:600},t:'Basın seni "temiz düdük" diye yazdı.'},
       {id:'gizli',l:'Adının gizli kalmasını iste',e:{trust:4},t:'Soruşturma adın geçmeden ilerliyor.'}]},
  telefon_israr:{chain:1,from:'Bilinmeyen numara',title:'"Düşündün mü?"',
@@ -6644,7 +6644,7 @@ const STORIES={
       {id:'tartis',l:'Sesini yükselt, "Sen ne anlarsın" de',e:{aile:-12,energy:-4},t:'Tatlıya kimse dokunmadı.'},
       {id:'gul',l:'Gülüp konuyu değiştir',e:{aile:3},t:'Konu futboldan çıktı, yemek güzel geçti.'}]},
  aile_kriz:{chain:1,from:'Eşin',title:'"Seni hiç göremiyoruz"',
-  text:()=>`Maçlar, kamplar, seyahatler… Eşin akşam seninle konuşmak istiyor: "Çocuklar babalarını televizyondan görüyor."`,
+  text:()=>`Maç, kamp, yol… Eşin akşam konuşmak istiyor: "Çocuklar seni sadece televizyonda görüyor."`,
   ch:[{id:'izin',l:'Bir hafta görev istemeyip ailenle tatile çık',e:{aile:22,suspend:1,energy:12},t:'Kurula izin dilekçesi verdin. Ailen çok mutlu.'},
       {id:'soz',l:'Sezon sonunu söz ver',e:{aile:6},t:'Sözünü tutmak zorundasın.'},
       {id:'is',l:'"Bu benim işim" de',e:{aile:-10},t:'Ev bir süre sessiz kaldı.'}]},
@@ -6655,20 +6655,20 @@ const STORIES={
       {id:'sessiz',l:'Sessiz kal, kulaklığı tak',e:{energy:3},t:'Yolculuk sessiz geçti.'}]},
  // ---------- 1.4: medya ve sosyal ----------
  tv:{when:()=>S.tier>=2||(S.social&&S.social.followers>3000),w:2,from:'Spor kanalı',title:'Canlı yayın stüdyosuna davet',
-  text:()=>`Bir spor kanalı, pazar akşamki tartışma programına seni konuk etmek istiyor. Bölüm başı iyi bir ücret teklif ediyorlar. Hakem talimatları aktif hakemlerin yorumculuk yapmasını hoş karşılamıyor.`,
+  text:()=>`Bir spor kanalı seni pazar akşamki tartışma programına çağırıyor. Bölüm başı iyi para veriyorlar. Ama kurul, aktif hakemlerin televizyona çıkmasını sevmez.`,
   ch:[{id:'kabul',l:'Kabul et, bir bölüm katıl',e:{money:30000,fol:2500,trust:-8},next:['tv_uyari',2],t:'Program rekor izlendi.'},
       {id:'ret',l:'Kibarca reddet',e:{trust:5},t:'Kurul, tavrını not etti.'}]},
  tv_uyari:{chain:1,from:'Hakem Kurulu',title:'Yorumculuk uyarısı',
-  text:()=>`Kurul, programdaki sözlerin için resmi bir uyarı yazısı gönderdi. "Devam etmen halinde görev verilmeyecek."`,
+  text:()=>`Kuruldan resmi uyarı geldi: "Programa devam edersen maç verilmeyecek."`,
   ch:[{id:'birak',l:'Programı bırak, özür yazısı gönder',e:{trust:6},t:'Konu kapandı.'},
       {id:'devam',l:'Programa devam et',e:{money:60000,fol:4000,trust:-15,suspend:2},t:'İki hafta görev verilmeyecek ama ekranda yıldızsın.'}]},
  sahte:{when:()=>S.social&&S.social.followers>1500,w:2,from:'Sosyal medya',title:'Adına sahte hesap açılmış',
-  text:()=>`Adın ve fotoğrafınla açılmış bir hesap "Bu hafta derbide ev sahibini yakacağım" diye paylaşım yaptı. Binlerce kişi paylaşmış bile.`,
+  text:()=>`Senin adın ve fotoğrafınla açılmış bir hesap "Bu hafta derbide ev sahibini yakacağım" yazmış. Binlerce kişi paylaşmış bile.`,
   ch:[{id:'sikayet',l:'Platforma şikâyet et, kurulu bilgilendir',e:{trust:3},t:'Hesap bir gün içinde kapatıldı.'},
       {id:'cevap',l:'Gerçek hesabından esprili bir cevap yaz',e:{fol:1500},risk:[.3,{trust:-4},'Kurul, sosyal medyada bu kadar görünür olmanı beğenmedi.','Cevabın sahte hesaptan daha çok paylaşıldı.'],t:''},
       {id:'sus',l:'Hiçbir şey yapma',e:{},risk:[.5,{rep:-3},'Söylenti büyüdü; bazı taraftarlar inandı.','Kimse ciddiye almadı.'],t:''}]},
  podcast:{when:()=>S.tier>=1,w:2,from:'Emekli hakem',title:'Podcast daveti',
-  text:()=>`Sevilen bir hakem podcast’i seni bölüme çağırıyor. Bölümün sonunda dinleyicilerin gönderdiği zor kural sorularını canlı cevaplayacaksın.`,
+  text:()=>`Çok dinlenen bir hakem podcast’i seni konuk etmek istiyor. Sonunda dinleyicilerin zor kural sorularını canlı cevaplayacaksın.`,
   ch:[{id:'katil',l:'Katıl, sorulara canlı cevap ver',e:{fol:900},riskF:()=>clamp(1-S.attrs.kural/90,.08,.6),risk:[.3,{rep:-3},'Bir ofsayt sorusunda takıldın, klip yayıldı.','Bütün kural sorularını bildin; bölüm çok dinlendi.'],t:''},
       {id:'ret',l:'Teşekkür et, bu sezon değil',e:{},t:'Belki gelecek sezon.'}]},
  // ---------- 1.4: duygu anları ----------
@@ -6678,7 +6678,7 @@ const STORIES={
       {id:'kisa',l:'Kısa bir teşekkür kartı gönder',e:{rep:1},t:'Kart yola çıktı.'},
       {id:'gec',l:'Cevap verme',e:{},t:'Zarf çekmecede kaldı.'}]},
  genc2:{chain:1,from:'Deniz',title:'Öğrencinin ilk büyük maçı',
-  text:()=>`Yol gösterdiğin genç hakem bu hafta ilk üst lig maçını yönetiyor. Maçtan önce sana kısa bir mesaj attı: "Hocam, ne yapayım?"`,
+  text:()=>`Yetiştirdiğin genç hakem bu hafta ilk üst lig maçına çıkıyor. Maçtan önce mesaj attı: "Hocam, ne yapayım?"`,
   ch:[{id:'necdet',l:'"Sahada herkes bir şey ister. Sen sadece kuralı iste." yaz',e:{rep:2,trust:3},t:'Maçtan sonra cevap geldi: "Sadece kuralı istedim hocam." Necdet Hoca gurur duyardı.'},
       {id:'izle',l:'Tribüne gidip izle',e:{energy:-4,rep:1},t:'Tribünden onu izledin; çok iyi yönetti.'}]}
 };

@@ -1,39 +1,17 @@
-Futbolu hiç bu açıdan oynamadın: düdük sende.
+Hakemlere kızmayı bırak, düdüğü eline al.
 
-Refmania, futbol hakemliğini tüm ayrıntısıyla yaşatan bir kariyer simülatörü. Bölgesel amatör ligde ilk maçına çıkarsın; doğru kararlarla klasman atlar, ülkenin en üst ligine yükselir, uluslararası kokartı alır ve dünyanın en büyük maçlarına atanırsın.
+Refmania'da maçı sen yönetiyorsun. Penaltı mı, değil mi? Kırmızı mı, sarı mı? Tribün bağırıyor, oyuncular üstüne geliyor, karar senin.
 
-SAHADAN YÖNET
-• Canlı 3D maç: oyuncular koşar, pas verir, şut çeker; sen pozisyon alırsın.
-• Temasları yakın plan, hakem gözü ve taktik kameradan izle, ağır çekimde tekrar et.
-• Görüş açın kararını etkiler: doğru yerde durmak da işin parçası.
+Amatör ligde başlıyorsun. İyi maç çıkarırsan büyük maçlara atanırsın, kokartı alırsın, bir gün Dünya Kupası finalini yönetirsin. Kötü maç çıkarırsan kurul seni çağırır, maç sonu programlarında adın konuşulur.
 
-HER POZİSYONU SEN YORUMLA
-• 16 farklı pozisyon türü: ceza sahası teması, elle oynama, ofsayt, dirsek, gol şansını engelleme, kaleci müdahalesi ve daha fazlası.
-• Kural kitabına bak, yardımcı hakeme sor, video incelemesine git ya da kararının arkasında dur.
-• Kart gösterme animasyonu, itirazlar, maç yönetimi ve uzatma kararları.
+Neler var:
+• 3D canlı maç ve tekrar kameraları
+• Ofsayt, elle oynama, penaltı, dirsek, kaleci müdahalesi ve daha fazlası
+• VAR odası, yardımcı hakemlik, uzatmalar ve penaltı atışları
+• Gece gelen şüpheli telefonlar, rüşvet teklifleri, sosyal medya linçi
+• Her gün herkese aynı pozisyon: Günün Pozisyonu
+• Kural Akademisi ve tarihi maçların kritik anları
 
-KARİYERİNİ İNŞA ET
-• 8 ülke, her ülkede 5 klasman; yurt dışından gelen teklifler.
-• Her maçtan sonra gözlemci notu, karar dökümü ve basının yorumu.
-• Hakem Kurulu seni izliyor: başarılı ol, büyük maçlara atan; hata yap, kurula çağrıl.
-• Haftalık antrenman programı: kondisyon, video analiz, kural semineri, zihinsel hazırlık.
+İnternet gerekmez. Ücretsiz; isteğe bağlı reklam ve paketler var.
 
-ZARF SENİN ÖNÜNDE
-• Şike teklifleri gelir: geri çevir, federasyona bildir ya da zarfı al.
-• Aldığın her zarf şüpheyi büyütür; soruşturma, men cezası ve ömür boyu men seni bekleyebilir.
-
-MAĞAZA VE TATİL
-• Düdük, hakem saati, krampon, iletişim seti: sahadaki performansını artıran ekipmanlar.
-• Ev, araba, saat ve daha fazlası; gösterişli harcamalar takipçi getirir ama soru da çeker.
-• Devre arasında ve sezon sonunda tatile çık, kartpostal koleksiyonunu tamamla.
-
-DÜNYA SENİ KONUŞUYOR
-• Kadraj sosyal medyasında taraftarlar, eski hakemler ve gazeteciler kararlarını tartışır.
-• Haber akışı, puan durumları ve takvim.
-• Kural Akademisi'nde zor pozisyonlarla kendini sına.
-
-3 kariyer slotu, hakem tipi ve ülke seçimi. Türkçe, İngilizce, Almanca ve İspanyolca. İnternet bağlantısı gerekmez.
-
-Oyun ücretsizdir. İsteğe bağlı ödüllü reklamlar ve Premium içerir.
-
-Not: Oyundaki tüm takımlar, oyuncular ve hakemler kurgusaldır.
+Oyundaki bütün takımlar, oyuncular ve hakemler hayal ürünüdür.
