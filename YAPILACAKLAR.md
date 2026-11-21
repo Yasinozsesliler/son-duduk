@@ -1,5 +1,18 @@
 # Yapılacaklar
 
+## Telefon (1.4'e eklendi, henüz yayınlanmadı)
+Hakemin cebindeki akıllı telefon. Alt menünün en sağında (telefonda), üst çubukta kasanın yanında (iPad) ve ana sayfadaki "Telefonun" kutucuğunda açılır. Eski sekmelerin hiçbiri silinmedi; telefon onlara ikinci bir kapı.
+- **Uygulamalar:** Mesajlar, Takvim, Kadraj (sosyal), Manşet (haberler), Posta, Sepet (alışveriş), Emlak, Arabalar, Rota (tatil), Cüzdan, Galeri, Premium (paketler), Hakem (kariyer, teklifler, kurul, akademi kısayolları), Ayarlar.
+- **Mesajlar:** Annem, Babam, Eşim, Kardeşim, Menajerim, Mahalle ekibi, Hoca ve maç sonrası teknik direktörler. Seçenekli cevaplar aileyi (`S.aile`), morali, parayı, enerjiyi, kural bilgisini etkiliyor. 1.4 hikâyeleriyle uyumlu olsun diye "kız arkadaş" yerine "eş" kullanıldı. Cevapsız mesaj 3 haftada soğuyor.
+- **Moral (`S.ph.moral`, 0–100):** Maç notu, alışveriş, deneyim ve aile ilişkileriyle değişiyor, her hafta biraz sönüyor. Haftalık enerji toparlanmasını ve maç gerginliğini az da olsa etkiliyor (`phMod`).
+- **Sepet:** Kurgusal markalarla 1.277 ürün (kademe başına 100–230), ekonomik/orta/lüks segment, prosedürel ürün görselleri, hediye etme (eş, anne), tekrar alınabilir deneyimler (haftada bir). Bir üst kademenin ürünleri kilitli görünüyor. Lüks ürünler daha çok moral ve biraz ün veriyor.
+- **Emlak / Arabalar:** 49 ev, 63 araç, 3 tekne/uçak. Haftalık enerji veriyor (mevcut ev/araba gruplarıyla), haftalık aidat ve bakım kasadan düşüyor.
+- **Telefon modelleri:** 8 model (Cepra Nova A1 çatlak ekranla başlıyor). Sepet > Elektronik'ten alınca telefonun çerçevesi, çentiği ve duvar kâğıdı değişiyor.
+- **Ün daha yavaş:** Maçtan gelen pozitif itibar artışı %40 azaltıldı.
+- **Ana sayfa sadeleşti:** Sosyal ve mağaza kutucukları kaldırıldı (telefonda); alt menüde Sosyal yerine Telefon var (Sosyal, Menü'de duruyor).
+- **Telif temizliği:** "Emekli FIFA hakemi" ve "IFAB" metinleri kurgusal hale getirildi; tüm markalar uydurma.
+- **Kod:** `index.html` içinde `TELEFON` bölümleri (görseller `PX`, katalog `phCatalog/phEstates`, arayüz `phRender`, uygulamalar `PH_VIEWS`). Çeviriler `i18n/*.json`.
+
 ## 1.4 (v1.4 dalı): Hakemin hayatı, sürprizler, Zaman Yolculuğu
 - **Zaman Yolculuğu (yeni ürün `com.sonduduk.hakem.zaman`, 99,99 ₺ / 1,99 $):** Kural Akademisi'nde 5 dönem (1930, 1966, 1986, 1998, 2018), o yılların kurallarıyla (kartsız ihraç, serbest geri pas, aynı hiza ofsayt, 1998 arkadan müdahale kırmızı, altın gol, ilk VAR). Premium ve Tam Paket'e dahil değil. Pozisyonlar dönem kuralına uyan sabit tohumlarla üretiliyor (`ZAMAN`, `ERA_OV`).
   - **App Store Connect'te ürünü oluştur:** `python3 scripts/asc_iap.py yeni com.sonduduk.hakem.zaman` (ABD 1,99 $ taban, Türkiye elle 99,99 ₺). Sonra 1.4 sürümüyle birlikte incelemeye gönder.
