@@ -2091,6 +2091,44 @@ body.ph-on{overflow:hidden}
 .lk-pop{display:inline-block;animation:lkPop .7s cubic-bezier(.2,1.6,.4,1) var(--pd,0s) both}
 @keyframes lkPop{0%{transform:scale(.6);opacity:.3}60%{transform:scale(1.25);color:#ff5a7a}100%{transform:scale(1)}}
 @media (prefers-reduced-motion:reduce){.cflash,.cburst,.atmo,.tunnel .tn-light{animation:none!important}.sheet.shake{animation:none}.sheet.tense::after{animation:none;opacity:.6}}
+
+/* 1.5b: jest, telsiz, tribün */
+.g-hidden{display:none!important}
+.gpad{--gp:0;--gx:0px;--gy:0px;position:relative;display:grid;grid-template-columns:76px minmax(0,1fr);align-items:center;gap:14px;min-height:96px;padding:12px 16px;border-radius:16px;border:2px dashed rgba(246,198,43,.55);background:linear-gradient(135deg,rgba(246,198,43,.14),rgba(255,255,255,.03));cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;overflow:visible}
+.gpad.off{border-color:var(--line2);background:rgba(255,255,255,.03);cursor:default}
+.gpad.off .gp-ic{opacity:.35}
+.gpad.nudge{animation:shake .4s ease}
+.gp-t{display:flex;flex-direction:column;gap:3px}.gp-t b{font-size:17px}.gp-t small{color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.06em}
+.gp-fill{position:absolute;left:0;bottom:0;height:4px;border-radius:0 0 0 14px;width:calc(var(--gp)*100%);background:var(--yellow);transition:width .05s}
+.gp-ic{position:relative;width:76px;height:76px;display:grid;place-items:center}
+.gp-ic>i{position:absolute;display:none}
+.gpad[data-k=red] .gp-card,.gpad[data-k=yellow] .gp-card{display:block;width:40px;height:56px;border-radius:6px;box-shadow:0 8px 18px rgba(0,0,0,.5),inset 0 0 0 2px rgba(255,255,255,.3);transform:translate(var(--gx),calc(14px + min(0px,var(--gy)))) rotate(-6deg);transition:transform .05s}
+.gpad[data-k=yellow] .gp-card{background:linear-gradient(160deg,#ffe27a,#f2b51e)}.gpad[data-k=red] .gp-card{background:linear-gradient(160deg,#ff6b72,#c9252f)}
+.gpad[data-k=red] .gp-ic::after,.gpad[data-k=yellow] .gp-ic::after{content:'';position:absolute;left:12px;right:12px;bottom:2px;height:34px;border-radius:0 0 10px 10px;background:#1c2a24;border:2px solid #2e4238;border-top:none}
+.gpad[data-k=red]:not(.off) .gp-card,.gpad[data-k=yellow]:not(.off) .gp-card{animation:gpBob 1.4s ease-in-out infinite}
+@keyframes gpBob{50%{margin-top:-10px}}
+.gpad[data-k=pen] .gp-spot{display:block;width:16px;height:16px;border-radius:50%;background:#fff;top:50px;box-shadow:0 0 0 6px rgba(255,255,255,.15)}
+.gpad[data-k=pen] .gp-ic::before{content:'↓';position:absolute;top:2px;font-size:34px;font-weight:800;color:var(--yellow);transform:translateY(min(40px,max(0px,var(--gy))));animation:gpDown 1.2s ease-in-out infinite}
+@keyframes gpDown{50%{margin-top:10px}}
+.gpad[data-k=play] .gp-arms{display:block;font-style:normal}
+.gpad[data-k=play] .gp-ic::before{content:'→';font-size:44px;font-weight:800;color:var(--yellow);transform:translateX(min(40px,max(0px,var(--gx))));animation:gpRight 1.2s ease-in-out infinite}
+@keyframes gpRight{50%{margin-left:14px}}
+.gpad[data-k=hold] .gp-wh{display:grid;place-items:center;width:64px;height:64px;border-radius:50%;background:rgba(246,198,43,.15);box-shadow:inset 0 0 0 3px rgba(246,198,43,.4)}
+.gpad[data-k=hold] .gp-wh svg{width:34px;height:34px}
+.gpad.holding .gp-wh{background:conic-gradient(var(--yellow) 0 0,transparent 0);animation:gpHold .55s linear forwards}
+@keyframes gpHold{from{box-shadow:inset 0 0 0 3px rgba(246,198,43,.4),0 0 0 0 rgba(246,198,43,.5)}to{box-shadow:inset 0 0 0 32px rgba(246,198,43,.9),0 0 0 14px rgba(246,198,43,0)}}
+.gpad.fired.f-red .gp-card,.gpad.fired.f-yellow .gp-card{animation:gpUp .4s cubic-bezier(.2,1.4,.4,1) forwards}
+@keyframes gpUp{to{transform:translateY(-80px) rotate(-12deg) scale(1.4)}}
+.gpad.fired{border-color:var(--yellow);background:rgba(246,198,43,.25)}
+.gp-alt{display:block;margin:6px auto 0;font-size:13px;color:var(--muted);background:none;border:0;text-decoration:underline;cursor:pointer;padding:8px}
+.radio{position:absolute;left:12px;right:12px;top:52px;z-index:6;display:flex;gap:10px;align-items:center;padding:9px 12px;border-radius:12px;background:rgba(6,10,8,.86);border:1px solid rgba(121,167,230,.45);backdrop-filter:blur(6px);box-shadow:0 10px 24px rgba(0,0,0,.45);opacity:0;transform:translateY(-8px);transition:opacity .25s,transform .25s;pointer-events:none;max-width:520px;margin:0 auto}
+.radio.on{opacity:1;transform:none}
+.radio .rd-t{display:flex;flex-direction:column;gap:2px;min-width:0}.radio small{font-size:11px;color:#8fb8ff;text-transform:uppercase;letter-spacing:.06em}.radio b{font-size:14px;line-height:1.3}
+.rd-ic{display:flex;gap:2px;align-items:flex-end;height:18px}.rd-ic i{width:4px;border-radius:2px;background:#8fb8ff;animation:rdBar .5s ease-in-out infinite alternate}
+.rd-ic i:nth-child(1){height:6px}.rd-ic i:nth-child(2){height:14px;animation-delay:.15s}.rd-ic i:nth-child(3){height:10px;animation-delay:.3s}
+@keyframes rdBar{to{transform:scaleY(.4)}}
+.banner.boo{background:linear-gradient(135deg,rgba(120,20,30,.95),rgba(50,8,12,.95));border-color:transparent}.banner.boo b,.banner.boo span{color:#fff}
+@media (prefers-reduced-motion:reduce){.gpad *{animation:none!important}}
 </style>
 
 <div id="app"></div>
@@ -3196,7 +3234,7 @@ function legCase(){
     <div class="stack"><div class="eyebrow">Olgular</div><div class="facts">${factsHTML(inc,true)}</div><div class="decide" id="decide">${stepsHTML(inc)}</div><button class="btn primary" id="bLg" disabled>Kararı ver</button></div></div></div>`);
   bindReplay(inc,cams); bindSteps(inc,'bLg'); M=keep;
   const finish=late=>{ stopTimer(); if(!LEG||LEG.over) return; LEG.over=true; whistle(); const ans={d:inc.sel.d||'__yok'}; if(inc.steps[1]) ans.c=inc.sel.c||'yok'; legResult(ans,late); };
-  $('#bLg').onclick=()=>finish(false);
+  $('#bLg').onclick=()=>finish(false); attachGesture('bLg',inc);
   $('#lgX').onclick=()=>{ stopTimer(); legClose(); };
   startTimer(LEG_TIME,()=>{ toast('Süre doldu'); finish(true); });
 }
@@ -3971,7 +4009,7 @@ function finalizeIncident(inc,ans,opt){
     const harmed = (vv==='hata'||vv==='israr') ? (favorScore(inc,inc.correct)>favorScore(inc,fin)?inc.ai:inc.di) : null;
     pushLog(inc,{cat:'major',type:inc.type,title:inc.title,min:inc.minute,your:ansText(inc,inc.ans),final:ansText(inc,fin),correct:ansText(inc,inc.correct),v:vv,explain:inc.explain,law:inc.law,note,harmed,reviewable:inc.reviewable||inc.redReview,late:inc.late,posQ:inc.posQ});
     S.totals.decisions++; if(vv==='dogru'||vv==='kabul'||vv==='durdu') S.totals.correct++;
-    if(!M.auto) { if(S.settings.feedback) feedbackUI(inc,fin,vv,note); else closeModal(); }
+    if(!M.auto) { crowdReact(vv,harmed); if(S.settings.feedback) feedbackUI(inc,fin,vv,note); else closeModal(); }
   };
   if(varRes==='direkt'){ M.varCount++; S.totals.var++; stopAdd('VAR kontrolü',ri(60,110)); final={d:inc.correct.d,c:ans.c}; if(inc.steps[1]===undefined) delete final.c; v= evaluate(inc,final)==='dogru'||evaluate(inc,final)==='kabul' ? 'var' : 'hata';
     if(!M.auto) return varAnim(()=>{ after(final,v,'VAR, olgusal hata nedeniyle kararını düzeltti.'); }, 'direkt');
@@ -4191,6 +4229,7 @@ function startMatch(fxId,auto){
 }
 function fxById(id){ if(S.tournament&&S.tournament.fx&&S.tournament.fx.id===id) return S.tournament.fx; return S.tasks&&S.tasks.matches.find(m=>m.id===id); }
 function kickOff(prep){
+  setTimeout(()=>{ if(M&&!M.auto) radio('ar1',M.fx.vr?'Telsiz kontrol. Yardımcılar hazır, VAR hazır. İyi maçlar hocam.':'Telsiz kontrol. Yardımcılar hazır. İyi maçlar hocam.'); },900);
   if(M&&M.fx.role) setTimeout(()=>{ if(M&&!M.done) feed(M.fx.role==='var'?'Bu maçta VAR odasındasın. Sahadaki kararları izleyip yalnızca açık ve net hatalarda müdahale edeceksin.':'Bu maçta yardımcı hakemsin. Ofsayt, çizgi ve yön kararları senin bayrağında.','sys'); },400);
   if(prep==='analiz') M.visMod+=.06; if(prep==='kaptan') M.temp=clamp(M.temp-10*(.6+S.attrs.iletisim/120),0,100); if(prep==='isinma') M.stamina=clamp(M.stamina+8,0,100);
   matchUI(); feed('Başlama düdüğünü çaldın. '+esc(M.H.name)+' – '+esc(M.A.name)+' başladı.','sys'); whistle();
@@ -5062,7 +5101,7 @@ function incidentMain(inc){
     else msg=`${S.crew.fourth}: "Ben de senin gördüğünü gördüm, karar senin."`;
     $('#lawSlot').insertAdjacentHTML('beforeend',`<div class="lawbox" style="margin-top:8px">${esc(msg)}</div>`);
   };
-  $('#bConfirm').onclick=()=>confirmIncident(inc);
+  $('#bConfirm').onclick=()=>confirmIncident(inc); attachGesture('bConfirm',inc); radioIncident(inc);
   startTimer(decisionTime(),()=>{ inc.late=true; if(!inc.sel.d) inc.sel.d=inc.steps[0].opts.find(o=>/devam|gol_gecerli|gol$/.test(o.id))?.id||inc.steps[0].opts[0].id; if(inc.steps[1]&&!inc.sel.c) inc.sel.c='yok'; toast('Süre doldu: kararsız kaldın'); confirmIncident(inc); });
 }
 // Rahat mod: ipucu satırı, "kart yok" ön seçimi, sayaçsız kural kitabı (çeviri anahtarları bozulmasın diye ayrı metinler)
@@ -5104,6 +5143,7 @@ function bindSteps(inc,btnId){
 }
 function confirmIncident(inc){ stopTimer(); whistle(); const ans={d:inc.sel.d}; if(inc.steps[1]) ans.c=inc.sel.c||'yok'; finalizeIncident(inc,ans,{}); }
 function varAnim(cb,kind){
+  radio('var',kind==='direkt'?'Hocam bekle, olgusal hata var. Kararı düzeltiyoruz.':'Hocam, monitöre gelmeni öneriyoruz. Bir daha bak.');
   replayStop(); matchBanner('var','VAR',kind==='direkt'?'Olgusal hata':'Saha kenarı incelemesi');
   openModal(head('VAR · '+esc(S.crew.var),kind==='direkt'?'VAR müdahale ediyor':'VAR seni monitöre çağırıyor','')+`<div class="sh-body"><div class="varpulse"><i></i>${kind==='direkt'?'Görüntüler kontrol ediliyor':'Saha kenarı incelemesi'}</div></div>`,true);
   setTimeout(cb,1300);
@@ -5178,6 +5218,76 @@ function animateLikes(){
   if(TAB!=='sosyal') return; document.querySelectorAll('.post .post-m span:first-child').forEach((sp,i)=>{ if(i>4||sp.dataset.pop) return; sp.dataset.pop=1; sp.style.setProperty('--pd',(i*.12)+'s'); sp.classList.add('lk-pop'); });
 }
 try{ new MutationObserver(ms=>{ for(const m of ms) m.addedNodes.forEach(n=>{ if(n.nodeType===1) decorate(n.parentElement||n); }); animateLikes(); }).observe(document.body,{childList:true,subtree:true}); }catch(e){}
+// =========================================================
+//   1.5b: HAKEM HİSSİ — jestle karar, kulaklık telsizi, tribünün sesi
+// =========================================================
+function setOn(k){ return !S||!S.settings||S.settings[k]!==false; }
+// ---------- jestle karar ----------
+function gestureKind(inc){ const s=inc.sel||{}; const c=s.c;
+  if(c&&c!=='yok'&&!/^kart_?yok$/.test(c)) return /kirmizi/.test(c)?'red':'yellow';
+  if(s.d==='penalti') return 'pen'; if(s.d==='devam'||s.d==='avantaj') return 'play'; return 'hold'; }
+const GHINT={red:['Kırmızıyı cebinden çıkar','Kartı yukarı kaydır'],yellow:['Sarıyı cebinden çıkar','Kartı yukarı kaydır'],pen:['Penaltı noktasını göster','Aşağı doğru kaydır'],play:['Oyun devam: kollarını aç','Sağa kaydır'],hold:['Düdüğü çal','Basılı tut']};
+function attachGesture(btnId,inc){
+  if(!setOn('gesture')) return; const b=$('#'+btnId); if(!b||b.dataset.g) return; b.dataset.g=1;
+  const pad=document.createElement('div'); pad.className='gpad'; pad.setAttribute('role','button'); pad.tabIndex=0;
+  pad.innerHTML=`<span class="gp-ic"><i class="gp-card"></i><i class="gp-spot"></i><i class="gp-arms"></i><i class="gp-wh">${WHISTLE_SVG}</i></span><span class="gp-t"><b></b><small></small></span><span class="gp-fill"></span>`;
+  b.after(pad); b.classList.add('g-hidden');
+  const alt=document.createElement('button'); alt.type='button'; alt.className='linkbtn gp-alt'; alt.textContent='Dokunarak onayla'; pad.after(alt);
+  alt.onclick=()=>{ if(!b.disabled) b.click(); };
+  pad.onkeydown=e=>{ if((e.key==='Enter'||e.key===' ')&&!b.disabled){ e.preventDefault(); b.click(); } };
+  const upd=()=>{ const k=gestureKind(inc); pad.dataset.k=k; pad.classList.toggle('off',b.disabled);
+    pad.querySelector('b').textContent=b.disabled?'Önce kararını seç':GHINT[k][0]; pad.querySelector('small').textContent=b.disabled?'Sonra jestle onayla':GHINT[k][1]; pad.setAttribute('aria-label',pad.querySelector('b').textContent); };
+  upd(); const dec=$('#decide'); if(dec) dec.addEventListener('click',()=>setTimeout(upd,0));
+  try{ new MutationObserver(upd).observe(b,{attributes:true,attributeFilter:['disabled']}); }catch(e){}
+  let st=null, hold=null, fired=false;
+  const reset=()=>{ clearTimeout(hold); pad.classList.remove('holding'); pad.style.setProperty('--gp',0); pad.style.setProperty('--gx','0px'); pad.style.setProperty('--gy','0px'); st=null; };
+  const fire=()=>{ if(!st||fired) return; const k=st.k; fired=true; reset(); pad.classList.add('fired','f-'+k); haptic(k==='red'?'heavy':'medium'); setTimeout(()=>b.click(),k==='hold'?60:340); };
+  pad.addEventListener('pointerdown',e=>{ if(fired) return; if(b.disabled){ pad.classList.remove('nudge'); void pad.offsetWidth; pad.classList.add('nudge'); haptic('light'); return; }
+    st={x:e.clientX,y:e.clientY,k:gestureKind(inc)}; try{ pad.setPointerCapture(e.pointerId); }catch(_){}
+    if(st.k==='hold'){ pad.classList.add('holding'); hold=setTimeout(fire,550); } });
+  pad.addEventListener('pointermove',e=>{ if(!st) return; const dx=e.clientX-st.x, dy=e.clientY-st.y; pad.style.setProperty('--gx',dx+'px'); pad.style.setProperty('--gy',dy+'px');
+    const need={red:[0,-1],yellow:[0,-1],pen:[0,1],play:[1,0]}[st.k]; if(!need) return;
+    const prog=Math.max(0,dx*need[0]+dy*need[1])/70; pad.style.setProperty('--gp',Math.min(1,prog)); if(prog>=1) fire(); });
+  pad.addEventListener('pointerup',reset); pad.addEventListener('pointercancel',reset);
+}
+// ---------- kulaklık telsizi ----------
+const RADIO_WHO={ar1:'Yardımcı hakem',ar2:'2. yardımcı',fourth:'Dördüncü hakem',var:'VAR'};
+function radioStatic(dur){ if(!S||!S.settings.sound) return;
+  try{ AC=AC||new (window.AudioContext||window.webkitAudioContext)(); const n=Math.floor(AC.sampleRate*dur), buf=AC.createBuffer(1,n,AC.sampleRate), d=buf.getChannelData(0);
+    for(let i=0;i<n;i++) d[i]=(Math.random()*2-1)*(1-i/n);
+    const src=AC.createBufferSource(); src.buffer=buf; const f=AC.createBiquadFilter(); f.type='bandpass'; f.frequency.value=1900; f.Q.value=1.2; const g=AC.createGain(); g.gain.value=.09;
+    src.connect(f).connect(g).connect(AC.destination); src.start(); }catch(e){} }
+function radio(who,text){
+  if(!M||M.auto) return; const name=(S.crew&&S.crew[who])||''; const st=document.querySelector('.stage');
+  if(st){ let el=st.querySelector('.radio'); if(!el){ el=document.createElement('div'); el.className='radio'; el.setAttribute('role','status'); st.appendChild(el); }
+    el.innerHTML=`<span class="rd-ic" aria-hidden="true"><i></i><i></i><i></i></span><span class="rd-t"><small>${esc(RADIO_WHO[who]||'')}${name?' · '+esc(name):''}</small><b>${esc(text)}</b></span>`;
+    el.classList.remove('on'); void el.offsetWidth; el.classList.add('on'); clearTimeout(radio.t); radio.t=setTimeout(()=>el.classList.remove('on'),Math.max(3200,text.length*70)); }
+  if(!setOn('radio')||!S.settings.sound) return;
+  radioStatic(.14);
+  try{ const sy=window.speechSynthesis; if(!sy) return; sy.cancel();
+    const u=new SpeechSynthesisUtterance(text); const L={tr:'tr-TR',en:'en-GB',de:'de-DE',es:'es-ES'}[typeof curLang==='function'?curLang():'tr']||'tr-TR';
+    u.lang=L; u.rate=1.08; u.pitch=who==='var'?.85:.95; u.volume=.9; const v=(sy.getVoices()||[]).find(x=>x.lang&&x.lang.replace('_','-').startsWith(L.slice(0,2))); if(v) u.voice=v;
+    u.onend=()=>radioStatic(.08); setTimeout(()=>sy.speak(u),150); }catch(e){}
+}
+function radioIncident(inc){
+  const ar=(inc.facts||[]).find(f=>f.label==='Yardımcı hakem');
+  if(ar) setTimeout(()=>radio('ar1',ar.val),500);
+  else if(/ofsayt/.test(inc.type||'')) setTimeout(()=>radio('ar1','Hocam, bayrağı tuttum. Karar senin.'),500);
+}
+// ---------- tribünün sesi ----------
+function crowdNoise(kind,gain){ if(!S||!S.settings.sound) return;
+  try{ AC=AC||new (window.AudioContext||window.webkitAudioContext)(); const sr=AC.sampleRate, dur=kind==='boo'?2.4:1.9, n=Math.floor(sr*dur), buf=AC.createBuffer(1,n,sr), d=buf.getChannelData(0);
+    if(kind==='clap'){ for(let c=0;c<240;c++){ const at=Math.floor(Math.random()*n*.85), len=Math.floor(sr*.012), a=.5+Math.random()*.5; for(let i=0;i<len&&at+i<n;i++) d[at+i]+=(Math.random()*2-1)*a*Math.exp(-i/(sr*.003)); }
+      for(let i=0;i<n;i++) d[i]*=Math.min(1,i/(sr*.15))*Math.min(1,(n-i)/(sr*.6)); }
+    else { let ph=0; for(let i=0;i<n;i++){ const t=i/sr; ph+=2*Math.PI*(110+8*Math.sin(2*Math.PI*.7*t))/sr; d[i]=(Math.sin(ph)*.35+Math.sin(ph*2)*.18+(Math.random()*2-1)*.5)*Math.min(1,t/.35)*Math.min(1,(dur-t)/.8); } }
+    const src=AC.createBufferSource(); src.buffer=buf; const f=AC.createBiquadFilter(); f.type=kind==='boo'?'lowpass':'highpass'; f.frequency.value=kind==='boo'?520:900;
+    const g=AC.createGain(); g.gain.value=gain||.3; src.connect(f).connect(g).connect(AC.destination); src.start(); }catch(e){} }
+function crowdReact(v,harmed){
+  const big=M&&M.fx&&(M.fx.derby||M.fx.imp>=4)?1.3:1;
+  if(v==='hata'||v==='israr'){ crowdNoise('boo',.34*big); if(M) matchBanner('boo','Tribünler yuhalıyor',harmed===0?'Ev sahibi taraftarı çıldırdı':'Islıklar yükseliyor'); }
+  else if(v==='dogru'||v==='durdu') crowdNoise('clap',.22*big);
+  else if(v==='var') crowdNoise('clap',.15);
+}
 function feedbackUI(inc,fin,v,note){
   inc.showOff=true; const cams=['yakin','tv','hakem','ters','ust'];
   openModal(head(inc.minute+' · '+esc(inc.title),'Karar değerlendirmesi','')+`<div class="sh-body">
@@ -6078,6 +6188,8 @@ function settingsHTML(){
   const tg=(k,l,d)=>`<label class="row" style="justify-content:space-between;border-bottom:1px solid var(--line);padding:10px 0"><span><b>${l}</b><br><span class="muted" style="font-size:13px">${d}</span></span><input type="checkbox" id="set_${k}" data-set="${k}" ${st[k]?'checked':''} style="width:22px;height:22px"></label>`;
   return `<div class="grid2"><div class="panel stack"><h2>Ayarlar</h2>
     ${tg('feedback','Anında geri bildirim','Her karardan sonra doğrusunu ve gerekçesini gösterir.')}${tg('pos','Konum alma aşaması','Pozisyon öncesi nerede duracağını sen seçersin.')}${tg('sound','Düdük sesi','Kararlarda düdük çalar.')}
+    ${tg('gesture','Jestle karar','Kartı yukarı kaydırarak göster, penaltı noktasını işaret et, düdüğü basılı tutarak çal.')}
+    ${tg('radio','Telsiz sesi','Yardımcı hakem ve VAR kulaklığından sesli konuşur.')}
     <div><label class="lbl" for="set_wsnd">Düdük tonu</label><select id="set_wsnd"><option value="klasik">Klasik</option><option value="keskin" ${isPremium()&&st.wsnd==='keskin'?'selected':''}>Keskin${isPremium()?'':' · Premium'}</option><option value="derin" ${isPremium()&&st.wsnd==='derin'?'selected':''}>Derin${isPremium()?'':' · Premium'}</option></select></div>
     <div><label class="lbl" for="set_kstil">Kart gösterme stilin</label><select id="set_kstil"><option value="klasik">Klasik</option><option value="dik" ${st.kstil==='dik'?'selected':''}>Dimdik, kol tam yukarıda</option><option value="yan" ${st.kstil==='yan'?'selected':''}>Yana yatık, rahat</option></select></div>
     <div><label class="lbl" for="set_dstil">Düdük çalışın</label><select id="set_dstil"><option value="tek">Tek, kısa</option><option value="cift" ${st.dstil==='cift'?'selected':''}>Çift, kesik kesik</option></select></div>
@@ -6223,7 +6335,7 @@ function dailyStart(practice,archK){
   bindReplay(inc,cams); bindSteps(inc,'bDy'); M=keep;
   DAILY.t0=Date.now();
   const finish=late=>{ stopTimer(); if(!DAILY||DAILY.over) return; DAILY.over=true; whistle(); const ans={d:inc.sel.d||'__yok'}; if(inc.steps[1]) ans.c=inc.sel.c||'yok'; dailyResult(ans,late); };
-  $('#bDy').onclick=()=>finish(false);
+  $('#bDy').onclick=()=>finish(false); attachGesture('bDy',inc);
   $('#dyX').onclick=()=>{ stopTimer(); replayStop(); DAILY=null; const m=$('#modal'); m.hidden=true; m.innerHTML=''; render(); };
   startTimer(DAILY_TIME,()=>{ toast('Süre doldu'); finish(true); });
 }

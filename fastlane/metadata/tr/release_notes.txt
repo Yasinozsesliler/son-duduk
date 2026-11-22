@@ -1,4 +1,6 @@
 Daha canlı maçlar
+• Jestle karar: kartı cebinden yukarı kaydır, penaltı noktasını işaret et, düdüğü basılı tutarak çal.
+• Kulaklıktan yardımcı hakem ve VAR konuşuyor; tribün kararına göre alkışlıyor ya da yuhalıyor.
 • Kart gösterdiğinde ekran sarıya ya da kırmızıya bürünüyor, tribün kükrüyor.
 • Süre azalınca kalp atışı ve kızaran ekran; kararına göre DOĞRU ya da HATALI mührü.
 • Yağmur, kar, sis ve derbide meşaleler. Sıradaki maçın artık bir bilet.

@@ -1,4 +1,6 @@
 Partidos más vivos
+• Decide con gestos: saca la tarjeta deslizando hacia arriba, señala el punto, mantén pulsado para pitar.
+• El asistente y el VAR te hablan por el auricular; la grada aplaude o abuchea tus decisiones.
 • Al sacar una tarjeta la pantalla se tiñe de amarillo o rojo y la grada ruge.
 • Latidos y pantalla enrojecida cuando se acaba el tiempo; un sello de CORRECTO o ERROR en cada decisión.
 • Lluvia, nieve, niebla y bengalas en los derbis. Tu próximo partido es ahora una entrada.
