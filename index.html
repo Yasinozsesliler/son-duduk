@@ -2130,6 +2130,10 @@ body.ph-on{overflow:hidden}
 @keyframes rdBar{to{transform:scaleY(.4)}}
 .banner.boo{background:linear-gradient(135deg,rgba(120,20,30,.95),rgba(50,8,12,.95));border-color:transparent}.banner.boo b,.banner.boo span{color:#fff}
 @media (prefers-reduced-motion:reduce){.gpad *{animation:none!important}}
+#skipVeil{position:absolute;inset:0;z-index:6;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:rgba(6,9,16,.86);color:#fff;text-align:center;pointer-events:none}
+#skipVeil b{font-size:44px;color:var(--yellow);animation:skipP .6s ease-in-out infinite alternate}#skipVeil span{font-weight:800;font-style:italic;text-transform:uppercase;letter-spacing:.04em}#skipVeil small{font-size:28px;font-weight:900;font-style:italic;color:var(--yellow)}
+@keyframes skipP{from{transform:translateX(-6px)}to{transform:translateX(6px)}}
+.seg .skipb{font-weight:900;color:var(--yellow)}.seg .skipb.on{background:var(--yellow);color:#141000}
 /*SG-BEGIN*/
 /* ===== SPOR OYUNU MENÜSÜ TEMASI (body.sg) ===== */
 body.sg{--bg:#080c16;--bg2:#0c1220;--panel:#121a2c;--panel2:#18223a;--line:#222e48;--line2:#2e3c5c;--fg:#f3f5fa;--muted:#8d9ab3;--dim:#5d6a85;
@@ -3166,7 +3170,7 @@ function sceneQueue(sc,ev){ (sc.evQ=sc.evQ||[]).push(ev); if(M) M.holdQ=true; }
 function sceneNext(sc){ if(!sc) return false; const ev=(sc.evQ||[]).shift(); if(!sc.evQ||!sc.evQ.length) { if(M) M.holdQ=false; } if(!ev) return false; if(ev.k==='goal') sceneGoal(sc,ev.side,ev.p,true,ev.note); else sceneCard(sc,ev,true); return true; }
 function cardShow(side,p,red,second,coach){
   const t=sideTeam(side); const label=coach?squad(t).coach+' (TD)':pl(p);
-  if(coach||!SC){ showCardFx(red,second,label,t.name); return; }
+  if(coach||!SC||(M&&M.skip)){ if(!(M&&M.skip)) showCardFx(red,second,label,t.name); return; }
   const ev={k:'card',side,p,red,second,label,team:t.name};
   if(sceneBusy(SC)) sceneQueue(SC,ev); else sceneCard(SC,ev);
 }
@@ -3933,7 +3937,7 @@ function goal(side,p,note){
   M.score[side]++; const t=sideTeam(side);
   feed(`<b>GOL! ${esc(t.name)}</b>: ${esc(pl(p))}${note?' · '+note:''}. Skor ${M.score[0]}-${M.score[1]}`,'goal');
   M.goalsLog.push({side,min:M.minLabel(),p});
-  if(!M.auto&&SC) sceneGoal(SC,side,p,false,note);
+  if(!M.auto&&!M.skip&&SC) sceneGoal(SC,side,p,false,note);
   stopAdd('Gol: '+t.short,ri(40,60));
   M.temp=clamp(M.temp+3,0,100);
   if(!M.auto) haptic('medium');
@@ -3974,7 +3978,7 @@ function simulateMinute(){
   if(M.temp>78 && M.min-M.mgmtAt>15 && chance(.12)){ M.mgmtAt=M.min; M.queue.push({kind:'mgmt',side:ri(0,1)}); }
 }
 function tick(){
-  if(!M||M.modal||M.paused||M.done||((M.goalHold||M.cardHold||M.holdQ)&&!M.auto)) return;
+  if(!M||M.modal||M.paused||M.done||((M.goalHold||M.cardHold||M.holdQ)&&!M.auto&&!M.skip)) return;
   if(M.queue.length && !M.inline){ openEvent(M.queue.shift()); return; }
   switch(M.phase){
     case 'h1': M.min++; simulateMinute(); M.schedule.filter(e=>e.min===M.min).forEach(e=>M.queue.push(e)); if(M.min>=45){ M.phase='uz1'; M.queue.push({kind:'uz',half:1}); } break;
@@ -4351,9 +4355,15 @@ function kickOff(prep){
   if(M&&M.fx.role) setTimeout(()=>{ if(M&&!M.done) feed(M.fx.role==='var'?'Bu maçta VAR odasındasın. Sahadaki kararları izleyip yalnızca açık ve net hatalarda müdahale edeceksin.':'Bu maçta yardımcı hakemsin. Ofsayt, çizgi ve yön kararları senin bayrağında.','sys'); },400);
   if(prep==='analiz') M.visMod+=.06; if(prep==='kaptan') M.temp=clamp(M.temp-10*(.6+S.attrs.iletisim/120),0,100); if(prep==='isinma') M.stamina=clamp(M.stamina+8,0,100);
   matchUI(); feed('Başlama düdüğünü çaldın. '+esc(M.H.name)+' – '+esc(M.A.name)+' başladı.','sys'); whistle();
-  setSpeed(S.settings.speed||1);
+  setSpeed(S.settings.skipOn?SKIP_SPD:(S.settings.speed||1));
 }
-function setSpeed(x){ S.settings.speed=x; clearInterval(LOOP); LOOP=setInterval(tick, x===0?99999:Math.round(620/x)); document.querySelectorAll('[data-speed]').forEach(b=>b.classList.toggle('on',+b.dataset.speed===x)); }
+// "Pozisyona atla": karar anına kadar maç hızla akar, sahne çizilmez; pozisyon gelince her şey normale döner
+const SKIP_SPD=30;
+function skipVeil(on){ let v=document.querySelector('#skipVeil'); const cv=document.querySelector('#cv'); const host=cv&&cv.parentElement;
+  if(!on){ if(v) v.remove(); return; } if(!host) return;
+  if(!v){ v=document.createElement('div'); v.id='skipVeil'; v.innerHTML=`<b>⏭</b><span>${'Pozisyona kadar hızlı geçiliyor'}</span><small class="num" id="skipMin"></small>`; host.appendChild(v); }
+}
+function setSpeed(x){ const sk=x===SKIP_SPD; if(M){ M.skip=sk; if(sk){ M.goalHold=M.cardHold=M.holdQ=false; if(SC){ SC.goal=null; SC.evQ=[]; } } } skipVeil(sk); S.settings.skipOn=sk; if(!sk) S.settings.speed=x; clearInterval(LOOP); LOOP=setInterval(tick, x===0?99999:sk?22:Math.round(620/x)); document.querySelectorAll('[data-speed]').forEach(b=>b.classList.toggle('on',+b.dataset.speed===x)); }
 function finishMatch(){
   M.done=true; clearInterval(LOOP); if(!M.auto){ feed('Maç sona erdi. Son skor '+M.score[0]+'-'+M.score[1]+'.','sys'); whistle('end'); }
   const fx=M.fx; const rating=computeRating();
@@ -5254,8 +5264,8 @@ function liveIncident(inc){
     startTimer(Math.max(6,Math.round(decisionTime()*.5)),()=>choose('bad'),'ptmr','ptLab');
   } else { inc.posQ=null; inc.refPos=sp?(easy()?sp.best:sp.ok):[28,15]; SC.refTarget=SC.map(inc.refPos[0],inc.refPos[1]); setTimeout(go,500); }
 }
-function showPrompt(html){ const p=$('#prompt'); if(!p) return; p.innerHTML=html; p.hidden=false; const ov=$('#overlay'); if(ov && window.innerWidth<=700 && ov.scrollTop>40) ov.scrollTo({top:0,behavior:'smooth'}); }
-function hidePrompt(){ const p=$('#prompt'); if(p){ p.hidden=true; p.innerHTML=''; } }
+function showPrompt(html){ const p=$('#prompt'); if(!p) return; p.innerHTML=html; p.hidden=false; { const v=$('#skipVeil'); if(v) v.hidden=true; } const ov=$('#overlay'); if(ov && window.innerWidth<=700 && ov.scrollTop>40) ov.scrollTo({top:0,behavior:'smooth'}); }
+function hidePrompt(){ const p=$('#prompt'); if(p){ p.hidden=true; p.innerHTML=''; } { const v=$('#skipVeil'); if(v) v.hidden=false; } }
 
 function incidentMain(inc){
   const vis=computeVis(inc.posQ); inc.vis=vis; obscureFacts(inc,vis);
@@ -5567,13 +5577,14 @@ function matchUI(){
       <button class="btn sm" id="bPause">Duraklat</button>
     </div>
     <div class="mgrid"><div class="panel feedp"><div class="eyebrow" style="padding:12px 14px 0">Maç akışı</div><div class="feed" id="feed"></div></div><aside class="panel stack" id="side"></aside></div></div>`;
+  { const g=document.querySelector('.seg[aria-label] [data-speed="4"]'); if(g&&!document.querySelector('[data-speed="'+SKIP_SPD+'"]')) g.insertAdjacentHTML('afterend',`<button data-speed="${SKIP_SPD}" class="skipb" aria-label="${'Pozisyona atla'}">${'Atla'} ⏭</button>`); }
   document.querySelectorAll('[data-speed]').forEach(b=>b.onclick=()=>setSpeed(+b.dataset.speed));
   document.querySelectorAll('[data-lcam]').forEach(b=>b.onclick=()=>{ if(!SC) return; SC.cam=b.dataset.lcam; document.querySelectorAll('[data-lcam]').forEach(x=>x.classList.toggle('on',x===b)); });
   $('#bPause').onclick=()=>{ M.paused=!M.paused; $('#bPause').textContent=M.paused?'Devam':'Duraklat'; };
   M.feed.forEach(renderFeedLine); renderSide(); updateBoard(); startRender();
 }
 function renderFeedLine(l){ const f=$('#feed'); if(!f) return; f.insertAdjacentHTML('afterbegin',`<div class="ln ${l.cls}"><span class="m">${l.m}</span><span>${l.text}</span></div>`); }
-function updateBoard(){ if(!M) return; const sc=$('#sc'); if(sc) sc.textContent=M.score[0]+' – '+M.score[1]; const c=$('#clk'); if(c) c.textContent= M.phase==='ht'?'D.A.':M.minLabel(); const t=$('#mTemp'); if(t) t.style.width=M.temp+'%'; const s=$('#mSta'); if(s) s.style.width=M.stamina+'%'; renderSide(); }
+function updateBoard(){ if(!M) return; if(M.skip){ const k=$('#skipMin'); if(k) k.textContent=M.minLabel(); } const sc=$('#sc'); if(sc) sc.textContent=M.score[0]+' – '+M.score[1]; const c=$('#clk'); if(c) c.textContent= M.phase==='ht'?'D.A.':M.minLabel(); const t=$('#mTemp'); if(t) t.style.width=M.temp+'%'; const s=$('#mSta'); if(s) s.style.width=M.stamina+'%'; renderSide(); }
 function renderSide(){
   const el=$('#side'); if(!el||!M) return;
   const cards=M.cardsLog.slice(-6).reverse();
