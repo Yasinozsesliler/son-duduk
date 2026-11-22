@@ -2213,6 +2213,39 @@ body.sg .story-from{text-transform:uppercase;letter-spacing:.1em;font-weight:800
 body.sg .dopt{border-radius:0!important;border:0!important;background:#0a0f1c!important;box-shadow:inset 3px 0 0 var(--line2);clip-path:polygon(0 0,100% 0,calc(100% - 10px) 100%,0 100%);padding-right:22px!important;transition:box-shadow .12s,background .12s}
 body.sg .dopt:active,body.sg .dopt:hover{box-shadow:inset 3px 0 0 var(--yellow);background:#141c30!important}
 body.sg .cs-kpis>div{padding:4px 8px}
+/* ===== tüm ekranlar: bileşenler ===== */
+body.sg :is(input,select,textarea,.btn,.fx,.act-b,.trophy,.opt,.board,.fact,.cbtn,.lawbox,.verdict,.posopt,.dec,.post,.fxc,.empty,.kpis>div,.news-lead,.news-ph,.rpost,.appt,.bug,.banner,.prompt,.mbar,.tcard,.aic,.next-step,.slot,.imp,.wiz-prev,.wiz-foot,.ccard,.rkpis>div,.rw,.rw-ic,.dec2,.rfoot,.cal-kpis>div,.cal-bar,.wk,.wk-r,.pt-ic,.cmp-o,.st-ic,.rh-plate,.cf,.cf-c,.ah-kpis div,.acad-tease,.mf-rc,.dl-cmp,.var-onfield,.sc,.st2-imp,.mav,.dv-a,.dv-panel,.dv-st,.wl-card,.wl-sum div,.wl-chart,.wl-ti,.v11-gl,.v11-break,.v11-postcard,.v11-dilemma,.v11-bribe,.v11-premrow,.v11-perks>div,.pw-stat,.pro-sum>div,.pro-err,.arch-row,.leg-c,.wh-row,.wh-it,.era-r,.farewell,.stamp,.gpad,.menu-grid button,nav.side button,.pitchbox,.stage){border-radius:2px!important}
+/* büyük kaplar: kesik köşe ve renk şeridi */
+body.sg :is(.panel,.sheet,.ccard,.wiz-main,.rhero,.mhero,.refcard,.v11-card,.mail,.dv-hero,.board,.empty,.news-lead){border-radius:0!important;border-color:transparent!important;background-color:var(--panel);clip-path:polygon(0 0,calc(100% - var(--cut)) 0,100% var(--cut),100% 100%,0 100%)}
+body.sg :is(.panel,.ccard,.v11-card,.mail,.board){background-image:linear-gradient(160deg,#18223a 0%,#121a2c 60%,#0f1626 100%)!important;box-shadow:inset 3px 0 0 var(--line2)}
+body.sg :is(.ccard.on,.ccard.sel,.ccard[aria-pressed="true"]){box-shadow:inset 0 0 0 3px var(--yellow)!important}
+body.sg .sheet{box-shadow:inset 0 4px 0 var(--yellow),0 -20px 60px rgba(0,0,0,.6)!important;clip-path:polygon(0 0,calc(100% - 22px) 0,100% 22px,100% 100%,0 100%)}
+/* sekme ve etiketler: eğik bloklar */
+body.sg :is(.seg button,.rtabs button,.lgchip,.rate-pill,.chips button,.filters button,.f-chip,.tabs button){border-radius:0!important;transform:skewX(-10deg)}
+body.sg :is(.seg button,.rtabs button,.lgchip,.rate-pill,.chips button,.filters button,.f-chip,.tabs button)>*{transform:skewX(10deg)}
+body.sg :is(.seg button.on,.rtabs button.on,.chips button.on,.filters button.on,.tabs button.on){background:var(--yellow)!important;color:#141000!important;border-color:var(--yellow)!important}
+body.sg nav.side button.on,body.sg .tstrip button.on{background:var(--yellow)!important;color:#141000!important}
+body.sg .tstrip button{border-radius:0!important;transform:skewX(-12deg);font-style:italic;font-weight:900;text-transform:uppercase}
+/* veri satırları */
+body.sg table tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+body.sg :is(.kpis>div,.rkpis>div,.cal-kpis>div,.ah-kpis div,.pro-sum>div){background:rgba(0,0,0,.28)!important;border:0!important;box-shadow:inset 3px 0 0 var(--blue)}
+body.sg :is(.kpis,.rkpis,.cal-kpis,.ah-kpis,.pro-sum)>div:nth-child(3n+2){box-shadow:inset 3px 0 0 var(--yellow)}
+body.sg :is(.kpis,.rkpis,.cal-kpis,.ah-kpis,.pro-sum)>div:nth-child(3n){box-shadow:inset 3px 0 0 var(--red)}
+body.sg :is(.kpis,.rkpis,.cal-kpis,.ah-kpis,.pro-sum) b{font-family:var(--f-display);font-stretch:62%;font-style:italic;font-weight:900}
+/* karar seçenekleri (maç içi) */
+body.sg :is(.opt,.posopt,.dec,.dec2,.cbtn){clip-path:polygon(0 0,100% 0,calc(100% - 10px) 100%,0 100%);border-width:0!important;background:#0a0f1c!important;box-shadow:inset 3px 0 0 var(--line2)}
+body.sg :is(.opt,.posopt,.dec,.dec2,.cbtn):is(.on,.sel,[aria-pressed="true"]){box-shadow:inset 3px 0 0 var(--yellow),inset 0 0 0 2px var(--yellow)!important;background:#1a1606!important}
+body.sg .fact{border:0!important;background:rgba(0,0,0,.25)!important;box-shadow:inset 3px 0 0 var(--line2)}
+body.sg .fact.key{box-shadow:inset 3px 0 0 var(--yellow)}
+/* başlangıç ekranı */
+body.sg .logo{font-style:italic;font-stretch:62%;font-weight:900;text-transform:uppercase}
+/* toast */
+body.sg #toast div{border-radius:0!important;box-shadow:inset 4px 0 0 var(--yellow),0 10px 30px rgba(0,0,0,.5)}
+body.sg .v11-tabs button,body.sg .stepper>*{border-radius:0!important;transform:skewX(-10deg);font-style:italic;text-transform:uppercase;font-weight:800}
+body.sg .v11-tabs button>*,body.sg .stepper>*>*{transform:skewX(10deg)}
+body.sg .v11-tabs button.on,body.sg .stepper>.on{background:var(--yellow)!important;color:#141000!important;border-color:var(--yellow)!important}
+body.sg .stepper>.done{background:#1a2440!important;color:var(--fg)!important}
+body.sg .chip{transform:skewX(-8deg);border-radius:0!important}
 /*SG-END*/
 </style>
 
