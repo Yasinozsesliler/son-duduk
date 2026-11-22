@@ -3163,7 +3163,7 @@ function zoneOf(k,pos,n){ const top=k==='H4'||!/^H/.test(k);
 // =========================================================
 function sceneBusy(sc){ return (M&&M.modal)||['goal','card','buildup'].includes(sc.mode); }
 function sceneQueue(sc,ev){ (sc.evQ=sc.evQ||[]).push(ev); if(M) M.holdQ=true; }
-function sceneNext(sc){ if(!sc) return false; const ev=(sc.evQ||[]).shift(); if(!sc.evQ||!sc.evQ.length) { if(M) M.holdQ=false; } if(!ev) return false; if(ev.k==='goal') sceneGoal(sc,ev.side,ev.p,true); else sceneCard(sc,ev,true); return true; }
+function sceneNext(sc){ if(!sc) return false; const ev=(sc.evQ||[]).shift(); if(!sc.evQ||!sc.evQ.length) { if(M) M.holdQ=false; } if(!ev) return false; if(ev.k==='goal') sceneGoal(sc,ev.side,ev.p,true,ev.note); else sceneCard(sc,ev,true); return true; }
 function cardShow(side,p,red,second,coach){
   const t=sideTeam(side); const label=coach?squad(t).coach+' (TD)':pl(p);
   if(coach||!SC){ showCardFx(red,second,label,t.name); return; }
@@ -3933,7 +3933,7 @@ function goal(side,p,note){
   M.score[side]++; const t=sideTeam(side);
   feed(`<b>GOL! ${esc(t.name)}</b>: ${esc(pl(p))}${note?' · '+note:''}. Skor ${M.score[0]}-${M.score[1]}`,'goal');
   M.goalsLog.push({side,min:M.minLabel(),p});
-  if(!M.auto&&SC) sceneGoal(SC,side,p);
+  if(!M.auto&&SC) sceneGoal(SC,side,p,false,note);
   stopAdd('Gol: '+t.short,ri(40,60));
   M.temp=clamp(M.temp+3,0,100);
   if(!M.auto) haptic('medium');
@@ -5133,31 +5133,89 @@ function crowdRoar(){
 // live goal sequence: carry, shot, keeper beaten, net bulge, celebration
 function sceneGoal(sc,side,p){
   if(!sc) return;
-  if(!arguments[3] && sceneBusy(sc)){ sceneQueue(sc,{k:'goal',side,p}); return; }
+  if(!arguments[3] && sceneBusy(sc)){ sceneQueue(sc,{k:'goal',side,p,note:arguments[4]}); return; }
   const d=sdir(sc,side), gx=d>0?105:0;
   sc.forced=null; sc.spots=null; sc.mark=null; sc.refTarget=null; sc.gather=null; sc.flash=null;
   sc.pl.forEach(q=>{ q.keepDown=false; q.fall=0; q.pose=null; q.t=null; q.hl=false; });
   const mates=sc.pl.filter(q=>q.side===side&&q.role!=='GK'&&!q.gone&&!q.leaving);
   let sp=p?mates.find(q=>q.num===p.no):null; if(!sp) sp=nearestTo(mates.filter(q=>q.role==='F'),gx,34)||mates[0]; if(p) sp.num=p.no;
-  const shotPos=[gx-d*rf(11,16),34+rf(-8,8)], target=[gx+d*1.15,34+(chance(.5)?1:-1)*rf(1.8,3.1)];
-  sc.goal={side,sp,shotPos,target,d,gx,t:0,gk:sc.pl.find(q=>q.side!==side&&q.role==='GK'),label:esc(sideTeam(side).name)+(p?' · '+esc(p.name):'')};
+  // gol türü: yakın bitiriş, kafa, dönen top, kontra, nadiren uzaktan; penaltı notuyla gelirse penaltı vuruşu
+  const note=arguments[4]||'';
+  let kind=window.GOAL_KIND||(/penalt/i.test(note)?'pen':null)||wpick([['yakin',3],['kafa',2],['karambol',1.2],['kontra',1.5],['uzak',.35]]);
+  const side2=chance(.5)?1:-1, others=mates.filter(q=>q!==sp);
+  const helper=kind==='kafa'?(nearestTo(others.filter(q=>q.role!=='F'),gx-d*14,34+side2*26)||others[0]):kind==='karambol'?(nearestTo(others.filter(q=>q.role==='F'||q.role==='M'),gx-d*16,34)||others[0]):null;
+  if((kind==='kafa'||kind==='karambol')&&!helper) kind='yakin';
+  let shotPos,target,T;
+  if(kind==='pen'){ shotPos=[gx-d*11,34]; target=[gx+d*1.15,34+side2*rf(2.2,3.2)]; T=[1.6,1.8,2.15]; }
+  else if(kind==='kafa'){ shotPos=[gx-d*rf(6,9),34-side2*rf(0,4)]; target=[gx+d*1.15,34+(chance(.5)?1:-1)*rf(1.2,3)]; T=[1.25,2.05,2.35]; }
+  else if(kind==='karambol'){ shotPos=[gx-d*rf(4.5,6.5),34+rf(-3,3)]; target=[gx+d*1.15,34+(chance(.5)?1:-1)*rf(.8,2.6)]; T=[1.5,2.15,2.4]; }
+  else if(kind==='kontra'){ shotPos=[gx-d*rf(8,11),34+rf(-5,5)]; target=[gx+d*1.15,34+(chance(.5)?1:-1)*rf(.6,2.4)]; T=[2.0,2.25,2.75]; }
+  else if(kind==='uzak'){ shotPos=[gx-d*rf(18,22),34+rf(-6,6)]; target=[gx+d*1.15,34+(chance(.5)?1:-1)*rf(2.6,3.3)]; T=[1.6,1.85,2.4]; }
+  else { shotPos=[gx-d*rf(7,11),34+rf(-7,7)]; target=[gx+d*1.15,34+(chance(.5)?1:-1)*rf(1.4,3.1)]; T=[1.7,1.95,2.3]; }
+  // golcü ve yardımcısı hareketin başına alınır: top asla sahanın öbür ucundan kaleye gitmez
+  const place=(q,x,y)=>{ if(!q) return; if(Math.hypot(q.x-x,q.y-y)>4){ q.x=x; q.y=y; q.vx=q.vy=0; } q.face=[d,0]; };
+  if(kind==='kontra') place(sp,shotPos[0]-d*rf(10,12),shotPos[1]+rf(-5,5));
+  else if(kind==='pen') place(sp,gx-d*13.5,34+side2*1.2);
+  else if(kind==='kafa'){ place(sp,shotPos[0]-d*6,shotPos[1]); place(helper,gx-d*24,34+side2*25); }
+  else if(kind==='karambol'){ place(sp,shotPos[0]-d*7,shotPos[1]); place(helper,gx-d*25,34+side2*7); }
+  else if(kind==='uzak') place(sp,shotPos[0]-d*5,shotPos[1]);
+  else place(sp,shotPos[0]-d*5.5,shotPos[1]+rf(-3,3));
+  const gk0=sc.pl.find(q=>q.side!==side&&q.role==='GK'); if(gk0){ gk0.x=gx-d*2; gk0.y=34; gk0.fall=0; gk0.pose=null; }
+  sc.ball.x=sp.x+d*.55; sc.ball.y=sp.y; sc.ball.z=0;
+  sc.goal={side,sp,shotPos,target,d,gx,t:0,kind,helper,T,w:side2,gk:sc.pl.find(q=>q.side!==side&&q.role==='GK'),label:esc(sideTeam(side).name)+(p?' · '+esc(p.name):'')};
   sc.mode='goal'; sc.mt=0; sc.ball.fl=null; sc.ball.owner=null; sc.net=null;
   if(M) M.goalHold=true;
 }
+// gol öncesi: türe göre top yolu, şutçu ve kaleci hareketi
+function goalPre(sc,G,dt,b,sp,gk,d,T1,T2,T3,K,hp){
+  const gxl=G.gx, dive=(k,tg)=>{ const dv=tg[1]>34?-1:1; gk.face=[-d,0]; gk.pose={P:POSES.gkDive,k:Math.min(1,k*1.6)}; gk.fall=Math.min(.95,k*1.4); gk.fallDir=[0,dv]; steer(gk,gk.x,34+dv*1.8,dt,4); };
+  const finish=(k,from,zFrom,zPeak,zEnd,curve)=>{ b.x=from[0]+(G.target[0]-from[0])*k; b.y=from[1]+(G.target[1]-from[1])*k+(curve||0)*4*k*(1-k); b.z=zFrom+(zEnd-zFrom)*k+zPeak*4*k*(1-k); };
+  const shoot=(k)=>{ sp.speed=Math.max(.8,(sp.speed||0)*.92); sp.face=v2n(G.target[0]-sp.x,G.target[1]-sp.y); sp.x+=sp.face[0]*sp.speed*dt*.5; sp.y+=sp.face[1]*sp.speed*dt*.5; sp.pose={P:kickPose('shot',.45*k),k:Math.min(1,k*4)}; b.x=sp.x+sp.face[0]*.5; b.y=sp.y+sp.face[1]*.5; b.z=0; };
+  const follow=kk=>{ sp.pose={P:kickPose('shot',.45+.55*kk),k:Math.max(0,1-Math.max(0,kk-.8)*5)}; sp.speed=.6; };
+  if(K==='kafa'){ // kanattan orta, ceza sahasında kafa
+    const wingPos=[gxl-d*15,34+G.w*27];
+    if(G.t<T1){ steer(hp,wingPos[0],wingPos[1],dt,6.5); b.x=hp.x+hp.face[0]*.55; b.y=hp.y+hp.face[1]*.55; b.z=0; steer(sp,G.shotPos[0]-d*3,G.shotPos[1],dt,5); steer(gk,gxl-d*2,34+G.w*2,dt,3);
+      if(G.t>T1-.35){ const k=(G.t-(T1-.35))/.35; hp.pose={P:kickPose('cross',.45*k),k:Math.min(1,k*3)}; } }
+    else if(G.t<T2){ if(!G.from){ G.from=[b.x,b.y]; } const k=(G.t-T1)/(T2-T1); hp.pose={P:kickPose('cross',.45+.55*Math.min(1,k*3)),k:Math.max(0,1-k*1.5)};
+      const hd=[G.shotPos[0],G.shotPos[1]]; steer(sp,hd[0],hd[1],dt,6.2); b.x=G.from[0]+(hd[0]-G.from[0])*k; b.y=G.from[1]+(hd[1]-G.from[1])*k; b.z=.2+1.75*k+3.2*4*k*(1-k)*.5;
+      if(k>.7){ sp.face=[d,0]; sp.pose={P:POSES.header,k:Math.min(1,(k-.7)*4)}; } steer(gk,gxl-d*2.2,34+(b.y-34)*.25,dt,3); }
+    else { if(!G.from2){ G.from2=[b.x,b.y]; } const k=(G.t-T2)/(T3-T2); sp.pose={P:POSES.header,k:Math.max(0,1-k)}; finish(k,G.from2,1.95,.15,.7,0); dive(k,G.target); }
+    return; }
+  if(K==='karambol'){ // şut, kaleci çeler, dönen topu tamamlama
+    const shotFrom=[gxl-d*15,34+G.w*6], parry=[G.gx-d*1.6,34+G.w*1.5];
+    if(G.t<T1){ steer(hp,shotFrom[0],shotFrom[1],dt,6.8); b.x=hp.x+hp.face[0]*.55; b.y=hp.y+hp.face[1]*.55; b.z=0; steer(sp,G.shotPos[0]-d*2,G.shotPos[1]-G.w*2,dt,4.6); steer(gk,gxl-d*2.5,34+(b.y-34)*.3,dt,3);
+      if(G.t>T1-.3){ const k=(G.t-(T1-.3))/.3; hp.pose={P:kickPose('shot',.45*k),k:Math.min(1,k*3)}; } }
+    else if(G.t<T1+.32){ if(!G.from){ G.from=[b.x,b.y]; } const k=(G.t-T1)/.32; hp.pose={P:kickPose('shot',.45+.55*Math.min(1,k*2)),k:Math.max(0,1-k)}; b.x=G.from[0]+(parry[0]-G.from[0])*k; b.y=G.from[1]+(parry[1]-G.from[1])*k; b.z=.3+.6*4*k*(1-k);
+      gk.face=[-d,0]; gk.pose={P:POSES.gkDive,k:Math.min(1,k*1.8)}; gk.fall=Math.min(.9,k*1.3); gk.fallDir=[0,G.w]; steer(gk,gk.x,34+G.w*1.2,dt,4); steer(sp,G.shotPos[0],G.shotPos[1],dt,6.5); }
+    else if(G.t<T2){ if(!G.from1){ G.from1=[b.x,b.y]; } const k=(G.t-T1-.32)/(T2-T1-.32); b.x=G.from1[0]+(sp.x+d*.5-G.from1[0])*k; b.y=G.from1[1]+(sp.y-G.from1[1])*k; b.z=.5*(1-k)+.4*4*k*(1-k); steer(sp,G.shotPos[0],G.shotPos[1],dt,5); }
+    else { if(!G.from2){ G.from2=[b.x,b.y]; } const k=(G.t-T2)/(T3-T2); follow(Math.min(1,k*2)); finish(k,G.from2,.1,.1,.25,0); }
+    return; }
+  if(K==='pen'){ // penaltı: kısa koşu, vuruş, kaleci ters köşeye ya da doğru köşeye
+    const spot=[gxl-d*11,34];
+    if(G.t<T1){ if(G.t<.6){ b.x=spot[0]; b.y=spot[1]; b.z=0; sp.pose=null; } else steer(sp,spot[0]-d*.6,34+G.w*.4,dt,4.2); b.x=spot[0]; b.y=spot[1]; b.z=0; gk.x=G.gx-d*.3; gk.y=34; gk.face=[-d,0]; }
+    else if(G.t<T2){ const k=(G.t-T1)/(T2-T1); sp.face=v2n(G.target[0]-sp.x,G.target[1]-sp.y); sp.pose={P:kickPose('shot',.45*k),k:Math.min(1,k*4)}; b.x=spot[0]; b.y=spot[1]; b.z=0; }
+    else { if(!G.from){ G.from=[spot[0],spot[1]]; G.wrong=chance(.6); } const k=(G.t-T2)/(T3-T2); follow(Math.min(1,k*2)); finish(k,G.from,0,.25,.5+(G.w>0?.2:.05),0);
+      const dv=G.wrong?-Math.sign(G.target[1]-34):Math.sign(G.target[1]-34); gk.face=[-d,0]; gk.pose={P:POSES.gkDive,k:Math.min(1,k*1.8)}; gk.fall=Math.min(.95,k*1.5); gk.fallDir=[0,dv]; steer(gk,gk.x,34+dv*1.8,dt,4.5); }
+    return; }
+  // yakin, kontra, uzak: sür, şut
+  if(G.t<T1){ steer(sp,G.shotPos[0],G.shotPos[1],dt,K==='kontra'?8.6:7.2); b.x=sp.x+sp.face[0]*.55; b.y=sp.y+sp.face[1]*.55; b.z=0;
+    if(K==='kontra') steer(gk,gxl-d*(4+Math.max(0,(T1-G.t))*2),34+(b.y-34)*.4,dt,4.2); else steer(gk,gxl-d*2.5,34+(b.y-34)*.3,dt,3); }
+  else if(G.t<T2) shoot((G.t-T1)/(T2-T1));
+  else { if(!G.from){ G.from=[b.x,b.y]; G.chip=K==='kontra'&&chance(.45); G.curve=K==='uzak'?(G.target[1]>34?-1:1)*rf(1.5,2.6):(chance(.5)?1:-1)*rf(.3,1.2); }
+    const k=(G.t-T2)/(T3-T2); follow(Math.min(1,k*2.4));
+    if(G.chip) finish(k,G.from,.1,1.6,.9,0); else if(K==='uzak') finish(k,G.from,.2,1.1,2.05,G.curve); else finish(k,G.from,.1,.35,.45+rf(0,.15)*0,G.curve);
+    if(K==='kontra'&&G.chip){ gk.face=[-d,0]; gk.pose={P:POSES.gkDive,k:Math.min(.6,k)}; gk.fall=Math.min(.5,k*.8); gk.fallDir=[0,1]; } else dive(k,G.target); }
+}
 function goalAI(sc,dt){
   const G=sc.goal; if(!G){ kickoffPositions(sc,0); return; } G.t+=dt; const b=sc.ball, sp=G.sp, d=G.d;
-  const T1=1.7,T2=1.95,T3=2.35,END=5.6;
+  const [T1,T2,T3]=G.T||[1.7,1.95,2.35], END=T3+3.25, K=G.kind||"yakin", hp=G.helper;
   sc.pl.forEach(q=>{ if(q===sp||q===G.gk||q.gone||q.leaving) return;
-    if(G.t<T3){ if(q.side===G.side) steer(q,G.gx-d*(13+(q.i%4)*5),34+((q.i%5)-2)*8,dt,5.6); else steer(q,G.gx-d*(5+(q.i%4)*2.5),34+((q.i%5)-2)*6,dt,6); }
+    if(G.t<T3){ if(q===hp) return; if(K==="pen"){ steer(q,G.gx-d*(19+(q.i%3)*2),34+((q.i%7)-3)*5,dt,4); return; } if(K==="kontra"){ if(q.side===G.side) steer(q,G.gx-d*(26+(q.i%4)*4),34+((q.i%5)-2)*9,dt,6.4); else steer(q,G.gx-d*(14+(q.i%4)*4),34+((q.i%5)-2)*8,dt,7.4); return; } if(q.side===G.side) steer(q,G.gx-d*(13+(q.i%4)*5),34+((q.i%5)-2)*8,dt,5.6); else steer(q,G.gx-d*(5+(q.i%4)*2.5),34+((q.i%5)-2)*6,dt,6); }
     else if(q.side===G.side){ steer(q,sp.x-d*(1.2+(q.i%3)*.9),sp.y+((q.i%4)-1.5)*1.4,dt,6.8); if(G.t>T3+1.2){ const near=Math.hypot(q.x-sp.x,q.y-sp.y)<5; q.pose={P:near?POSES.celebrate:POSES.armUp,k:near?.45+.55*Math.abs(Math.sin(G.t*6.5+q.i)):.7}; } }
     else { steer(q,q.x,q.y,dt,.6); q.pose={P:POSES.slump,k:Math.min(1,(G.t-T3)*2)}; } });
   const gk=G.gk;
-  if(G.t<T1){ steer(sp,G.shotPos[0],G.shotPos[1],dt,7.2); b.x=sp.x+sp.face[0]*.55; b.y=sp.y+sp.face[1]*.55; b.z=0; steer(gk,G.gx-d*2.5,34+(b.y-34)*.3,dt,3); }
-  else if(G.t<T2){ const k=(G.t-T1)/(T2-T1); sp.speed=Math.max(.8,(sp.speed||0)*.92); sp.face=v2n(G.target[0]-sp.x,G.target[1]-sp.y); sp.x+=sp.face[0]*sp.speed*dt*.5; sp.y+=sp.face[1]*sp.speed*dt*.5; sp.pose={P:kickPose('shot',.45*k),k:Math.min(1,k*4)}; b.x=sp.x+sp.face[0]*.5; b.y=sp.y+sp.face[1]*.5; }
-  else if(G.t<T3){ if(!G.from){ G.from=[b.x,b.y]; G.curve=(chance(.5)?1:-1)*rf(.8,2.2); } const kk=Math.min(1,(G.t-T2)/.35); sp.pose={P:kickPose('shot',.45+.55*kk),k:Math.max(0,1-Math.max(0,kk-.8)*5)}; sp.speed=.6;
-    const k=(G.t-T2)/(T3-T2); b.x=G.from[0]+(G.target[0]-G.from[0])*k; b.y=G.from[1]+(G.target[1]-G.from[1])*k+G.curve*4*k*(1-k); b.z=1.1*k+.9*4*k*(1-k)*.5;
-    const dv=G.target[1]>34?-1:1; gk.face=[-d,0]; gk.pose={P:POSES.gkDive,k:Math.min(1,k*1.6)}; gk.fall=Math.min(.95,k*1.4); gk.fallDir=[0,dv]; steer(gk,gk.x,34+dv*1.8,dt,4); }
-  else { if(!G.scored){ G.scored=true; sc.net={end:d>0?1:0,t:0}; matchBanner('goal','GOL!',G.label); crowdRoar(); haptic('success'); }
+  if(G.t<T3) goalPre(sc,G,dt,b,sp,gk,d,T1,T2,T3,K,hp);
+  else { if(hp&&hp.pose&&G.t>T3+.3) hp.pose=null; if(!G.scored){ G.scored=true; sc.net={end:d>0?1:0,t:0}; matchBanner('goal','GOL!',G.label); crowdRoar(); haptic('success'); }
     b.x=G.target[0]+d*.4; b.z=Math.max(.11,(b.z||0)-dt*2.5);
     if(!G.cel) G.cel=['slide','airplane','jump'][Math.floor(Math.random()*3)];
     const corner=[G.gx-d*3,G.target[1]>34?64:4], dc=Math.hypot(corner[0]-sp.x,corner[1]-sp.y), ck=Math.min(1,Math.max(0,G.t-T3-.4)*3);
