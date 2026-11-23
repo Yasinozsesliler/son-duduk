@@ -1,7 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Son Düdük</string>
-    <string name="title_activity_main">Son Düdük</string>
+    <string name="app_name">Refmania</string>
+    <string name="title_activity_main">Refmania</string>
     <string name="package_name">com.sonduduk.hakem</string>
     <string name="custom_url_scheme">com.sonduduk.hakem</string>
+    <!-- AdMob Android uygulama kimliği. Reklamlar kapalıyken Google'ın örnek kimliği yeterli; açınca kendi kimliğinle değiştir. -->
+    <string name="admob_app_id">ca-app-pub-3940256099942544~3347511713</string>
 </resources>

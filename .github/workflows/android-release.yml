@@ -1,0 +1,143 @@
+name: Android release (Google Play)
+
+# Builds a signed Android App Bundle (.aab).
+# - Always attaches the .aab to a GitHub Release (Releases sayfasından indirilebilir).
+# - If PLAY_SERVICE_ACCOUNT_JSON is set, also uploads it (and optionally the store listing) to Google Play.
+#
+# Repository secrets (see GOOGLE_PLAY.md):
+#   ANDROID_KEYSTORE_BASE64     upload keystore (.jks) in base64
+#   ANDROID_KEYSTORE_PASSWORD   keystore password (also used as key password unless ANDROID_KEY_PASSWORD is set)
+#   ANDROID_KEY_ALIAS           optional, default "upload"
+#   ANDROID_KEY_PASSWORD        optional
+#   PLAY_SERVICE_ACCOUNT_JSON   optional, Google Play Developer API service account key (JSON)
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Sürüm adı (oyuncuların gördüğü), örn. 1.5.0"
+        required: true
+        default: "1.5.0"
+      track:
+        description: "Google Play kanalı"
+        type: choice
+        options: [internal, alpha, beta, production]
+        default: internal
+      status:
+        description: "draft: Play Console'da elle yayınlarsın (yeni uygulamada zorunlu). completed: hemen yayına girer"
+        type: choice
+        options: [draft, completed]
+        default: draft
+      listing:
+        description: "Mağaza sayfasını da yükle (metinler + görseller)"
+        type: boolean
+        default: true
+      upload_build:
+        description: "Derlemeyi Google Play'e yükle (kapalıysa yalnızca GitHub Releases'a koyar)"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      HAS_PLAY: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON != '' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Build web bundle and sync Android project
+        run: |
+          npm ci
+          npm run build
+          npx cap sync android
+
+      - name: Install upload keystore
+        env:
+          KS: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          KS_PASS: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          KEY_PASS: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          if [ -z "$KS" ] || [ -z "$KS_PASS" ]; then echo "::error::ANDROID_KEYSTORE_BASE64 / ANDROID_KEYSTORE_PASSWORD secrets missing (see GOOGLE_PLAY.md)"; exit 1; fi
+          printf '%s' "$KS" | tr -d ' \r\n\t' | base64 --decode > "$RUNNER_TEMP/upload.jks"
+          ALIAS="${KEY_ALIAS:-upload}"
+          if ! keytool -list -keystore "$RUNNER_TEMP/upload.jks" -storepass "$KS_PASS" -alias "$ALIAS" >/dev/null 2>&1; then
+            echo "::error::Keystore could not be opened with the given password/alias."; exit 1; fi
+          {
+            echo "ANDROID_KEYSTORE_PATH=$RUNNER_TEMP/upload.jks"
+            echo "ANDROID_KEY_ALIAS=$ALIAS"
+          } >> "$GITHUB_ENV"
+          echo "::add-mask::$KS_PASS"
+          echo "ANDROID_KEYSTORE_PASSWORD=$KS_PASS" >> "$GITHUB_ENV"
+          echo "ANDROID_KEY_PASSWORD=${KEY_PASS:-$KS_PASS}" >> "$GITHUB_ENV"
+
+      - name: Build signed App Bundle
+        working-directory: android
+        env:
+          VERSION_NAME: ${{ inputs.version }}
+          VERSION_CODE: ${{ github.run_number }}
+        run: |
+          chmod +x gradlew
+          ./gradlew bundleRelease --no-daemon
+          cp app/build/outputs/bundle/release/app-release.aab "$RUNNER_TEMP/refmania-${{ inputs.version }}-${{ github.run_number }}.aab"
+          echo "AAB=$RUNNER_TEMP/refmania-${{ inputs.version }}-${{ github.run_number }}.aab" >> "$GITHUB_ENV"
+
+      - name: Attach .aab to a GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="android-v${{ inputs.version }}-${{ github.run_number }}"
+          gh release create "$TAG" "$AAB" --target "${{ github.sha }}" --prerelease \
+            --title "Android ${{ inputs.version }} (build ${{ github.run_number }})" \
+            --notes "Google Play için imzalı App Bundle. Sürüm kodu: ${{ github.run_number }}"
+
+      - uses: ruby/setup-ruby@v1
+        if: env.HAS_PLAY == 'true' && (inputs.upload_build || inputs.listing)
+        with:
+          ruby-version: "3.3"
+
+      - name: Upload to Google Play
+        if: env.HAS_PLAY == 'true' && (inputs.upload_build || inputs.listing)
+        env:
+          PLAY_JSON: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
+        run: |
+          gem install fastlane --no-document >/dev/null
+          pip install --quiet pillow
+          python3 scripts/play-store.py
+          printf '%s' "$PLAY_JSON" > "$RUNNER_TEMP/play.json"
+          ARGS=(--json_key "$RUNNER_TEMP/play.json" --package_name com.sonduduk.hakem
+                --metadata_path fastlane/play --skip_upload_changelogs true)
+          if [ "${{ inputs.upload_build }}" = "true" ]; then
+            ARGS+=(--aab "$AAB" --track "${{ inputs.track }}" --release_status "${{ inputs.status }}")
+          else
+            ARGS+=(--skip_upload_aab true --skip_upload_apk true)
+          fi
+          if [ "${{ inputs.listing }}" != "true" ]; then
+            ARGS+=(--skip_upload_metadata true --skip_upload_images true --skip_upload_screenshots true)
+          fi
+          fastlane supply "${ARGS[@]}"
+          rm -f "$RUNNER_TEMP/play.json"
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "### Android ${{ inputs.version }} (sürüm kodu ${{ github.run_number }})"
+            echo "- .aab: Releases → android-v${{ inputs.version }}-${{ github.run_number }}"
+            if [ "$HAS_PLAY" = "true" ]; then echo "- Google Play: ${{ inputs.track }} kanalı, durum ${{ inputs.status }}"; else echo "- Google Play'e otomatik yükleme kapalı (PLAY_SERVICE_ACCOUNT_JSON yok). İlk yüklemeyi Play Console'dan elle yap."; fi
+          } >> "$GITHUB_STEP_SUMMARY"
+          rm -f "$RUNNER_TEMP/upload.jks"

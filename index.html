@@ -6602,7 +6602,9 @@ function dailyShare(no,inc,v,secs){
 // MONET: reklam ve Premium (AdMob gerçek kimlikleri ve App Store ürünü hazır olunca true)
 const MONET = true;    // Premium satın alma (açık)
 const ADS_LIVE = true; // Ödüllü + geçiş reklamları (AdMob + Unity + Liftoff arabuluculuğu)
-const adsOn = () => ADS_LIVE && !!(NV() && NV().isNative);
+const adsOn = () => ADS_LIVE && !!(NV() && NV().isNative && NV().adsEnabled!==false);
+// Android'de mağaza hesabı Google: metinlerdeki "Apple" (her dilde) "Google" olur
+const acctFix = s => (NV()&&NV().platform==='android') ? String(s).replace(/Apple/g,'Google') : s;
 
 // ---------- küçük ikonlar ----------
 const V11G={
@@ -6933,7 +6935,7 @@ async function restorePremium(){
   const N=NV(); if(!N||!N.iapOn){ toast('Geri yükleme yalnızca App Store sürümünde çalışır.'); return; }
   const owned=await N.iap.restore(); let got=false; (owned||[]).forEach(id=>{ if(grantSku(id)) got=true; });
   if(owned&&owned.some(id=>ALL_SKUS.includes(id))){ toast(hasAll()?'Tam Paket geri yüklendi':'Premium geri yüklendi'); afterGrant(); }
-  else toast('Bu Apple hesabında paket satın alımı bulunamadı.');
+  else toast(acctFix('Bu Apple hesabında paket satın alımı bulunamadı.'));
 }
 async function checkPremiumOwned(){ const N=NV(); if(!N||!N.iapOn) return; loadPrices(); try{ const o=await N.iap.owned(); let ch=false; (o||[]).forEach(id=>{ if(grantSku(id)) ch=true; }); if(ch&&S){ v11Ensure(); save(); render(); } }catch(e){} }
 window.SD_IAP_UPDATE=(id,ok)=>{ if(ok&&grantSku(id)){ if(S){ v11Ensure(); save(); } render(); } };
@@ -7060,7 +7062,8 @@ const PW_HEAD={
 const PERKS_PREM=[['ad','Reklamsız oyun','Maç aralarındaki geçiş reklamları tamamen kalkar.'],['star','Ödüller anında','Ücreti ikiye katla ve enerji takviyesi, reklam izlemeden.'],['chart','Hakem Raporu PRO','Pozisyon türüne göre doğruluğun, zayıf noktaların ve kural maddeleri.'],['cal','Günün pozisyonu arşivi','Kaçırdığın bütün günleri oyna, eskileri tekrar dene.'],['whistle','Hakem kimliği','4. kariyer slotu, 2 yeni düdük tonu, paylaşımlarda Premium rozeti.'],['gift','250.000 ₺ ve 2 özel ekipman','Her kariyerin kasasına bir kez; elmas kakmalı düdük ve altın hakem saati.'],['home','Telefonda %10 indirim ve 👑 özel ürünler','Sepet, Emlak ve Arabalar’da her şey ucuz; Premium’a özel saatler, evler ve arabalar.']];
 const PERKS_TAM=[['crown','Premium’un her şeyi','Reklamsız oyun, anında ödüller, Hakem Raporu PRO, arşiv, 250.000 ₺.'],['trophy','Efsane Maçlar','10 tarihi maçın kritik anlarında düdük sende.'],['home','Lüks Yaşam Koleksiyonu','Boğaz’da yalı, klasik spor otomobil, tourbillon saat.'],['shirt','Altın Hakem Formaları','Altın, gece mavisi ve buz renkli formalarla sahaya çık.'],['gift','+500.000 ₺','Toplam 750.000 ₺ hoş geldin parası.']];
 function pwPerks(list){ return `<ul class="pw-perks">${list.map(([g,t,d])=>`<li>${v11g(g,'#f6c62b',26)}<span><b>${t}</b><small>${d}</small></span></li>`).join('')}</ul>`; }
-function packsBody(reason){
+function packsBody(reason){ return acctFix(packsBody0(reason)); }
+function packsBody0(reason){
   loadPrices();
   const deal=currentDeal(), up=isPremium()&&!hasAll();
   if(hasAll()) return `<div class="pw-owned">${v11g('crown','#f6c62b',48)}<b>Tam Paket etkin</b><small>Bütün paket içerikleri sende. Teşekkürler!</small></div>${kitPickerHTML()}`;

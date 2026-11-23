@@ -12,7 +12,7 @@ const isNative = Capacitor.isNativePlatform();
 const platform = Capacitor.getPlatform();
 const isIOS = platform === "ios";
 const AD = isIOS ? ADS.ios : ADS.android;
-const N = { isNative, platform };
+const N = { isNative, platform, adsEnabled: !!AD.enabled };
 window.NATIVE = N;
 
 /* ---------- Dil: ilk açılışta cihaz diline göre (tr/en/de/es), sonra oyuncunun seçimi ---------- */
@@ -120,10 +120,10 @@ if (isIOS) {
 const rcRecord = (id) => (rcReady ? rcQuick(Purchases.recordPurchase({ productID: id })) : undefined);
 const rcSync = () => (rcReady ? rcQuick(Purchases.syncPurchases()) : undefined);
 
-/* ---------- Uygulama içi satın alma (StoreKit 2, şimdilik yalnızca iOS) ---------- */
+/* ---------- Uygulama içi satın alma (iOS: StoreKit 2, Android: Google Play Billing) ---------- */
 const INAPP = PURCHASE_TYPE.INAPP;
 const okTx = (t) => t && !t.revocationDate;
-N.iapOn = isIOS;
+N.iapOn = isIOS || platform === "android";
 N.iap = {
   async products(ids) {
     if (!N.iapOn) return [];
