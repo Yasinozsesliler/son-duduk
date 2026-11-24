@@ -32,6 +32,10 @@ on:
         description: "Mağaza sayfasını da yükle (metinler + görseller)"
         type: boolean
         default: true
+      version_code:
+        description: "Sürüm kodu (boş: otomatik). Play'de 'kullanıldı' hatası alırsan daha büyük bir sayı ver"
+        required: false
+        default: ""
       upload_build:
         description: "Derlemeyi Google Play'e yükle (kapalıysa yalnızca GitHub Releases'a koyar)"
         type: boolean
@@ -89,21 +93,21 @@ jobs:
         working-directory: android
         env:
           VERSION_NAME: ${{ inputs.version }}
-          VERSION_CODE: ${{ github.run_number }}
+          VERSION_CODE: ${{ inputs.version_code || github.run_number }}
         run: |
           chmod +x gradlew
           ./gradlew bundleRelease --no-daemon
-          cp app/build/outputs/bundle/release/app-release.aab "$RUNNER_TEMP/refmania-${{ inputs.version }}-${{ github.run_number }}.aab"
-          echo "AAB=$RUNNER_TEMP/refmania-${{ inputs.version }}-${{ github.run_number }}.aab" >> "$GITHUB_ENV"
+          cp app/build/outputs/bundle/release/app-release.aab "$RUNNER_TEMP/refmania-${{ inputs.version }}-${{ inputs.version_code || github.run_number }}.aab"
+          echo "AAB=$RUNNER_TEMP/refmania-${{ inputs.version }}-${{ inputs.version_code || github.run_number }}.aab" >> "$GITHUB_ENV"
 
       - name: Attach .aab to a GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          TAG="android-v${{ inputs.version }}-${{ github.run_number }}"
+          TAG="android-v${{ inputs.version }}-${{ inputs.version_code || github.run_number }}"
           gh release create "$TAG" "$AAB" --target "${{ github.sha }}" --prerelease \
-            --title "Android ${{ inputs.version }} (build ${{ github.run_number }})" \
-            --notes "Google Play için imzalı App Bundle. Sürüm kodu: ${{ github.run_number }}"
+            --title "Android ${{ inputs.version }} (build ${{ inputs.version_code || github.run_number }})" \
+            --notes "Google Play için imzalı App Bundle. Sürüm kodu: ${{ inputs.version_code || github.run_number }}"
 
       - uses: ruby/setup-ruby@v1
         if: env.HAS_PLAY == 'true' && (inputs.upload_build || inputs.listing)
@@ -136,8 +140,8 @@ jobs:
         if: always()
         run: |
           {
-            echo "### Android ${{ inputs.version }} (sürüm kodu ${{ github.run_number }})"
-            echo "- .aab: Releases → android-v${{ inputs.version }}-${{ github.run_number }}"
+            echo "### Android ${{ inputs.version }} (sürüm kodu ${{ inputs.version_code || github.run_number }})"
+            echo "- .aab: Releases → android-v${{ inputs.version }}-${{ inputs.version_code || github.run_number }}"
             if [ "$HAS_PLAY" = "true" ]; then echo "- Google Play: ${{ inputs.track }} kanalı, durum ${{ inputs.status }}"; else echo "- Google Play'e otomatik yükleme kapalı (PLAY_SERVICE_ACCOUNT_JSON yok). İlk yüklemeyi Play Console'dan elle yap."; fi
           } >> "$GITHUB_STEP_SUMMARY"
           rm -f "$RUNNER_TEMP/upload.jks"
