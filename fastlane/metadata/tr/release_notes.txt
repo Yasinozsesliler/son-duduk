@@ -1,5 +1,5 @@
 Yeni modlar
-• 3 Saniye: Her gün herkese aynı 3 pozisyon. Görüntü temas anında donuyor, kararını 3 saniyede ver. Sonucunu 🟩🟥 kartıyla arkadaşlarınla paylaş, serini sürdür.
+• 3 Saniye: Her gün herkese aynı 3 pozisyon. Görüntü temas anında donuyor, kararını 3 saniyede ver. Sonucunu sonuç kartıyla arkadaşlarınla paylaş, serini sürdür.
 • VAR odası: Kulübeye geç, 5 kameradan izle. Sahadaki karar doğruysa "Kontrol tamam", açık bir hata varsa müdahale et ve doğru kararı öner.
 • Hakem dolabı: 13 forma, 8 krampon ve yeni düdük tonları. Klasman atladıkça, oyun parasıyla ya da Premium ile aç; seçtiğin forma maçta ve tekrarlarda görünsün.
 • İngilizce, Almanca ve İspanyolca çeviriler güncellendi.
