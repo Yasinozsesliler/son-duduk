@@ -2251,6 +2251,95 @@ body.sg .v11-tabs button.on,body.sg .stepper>.on{background:var(--yellow)!import
 body.sg .stepper>.done{background:#1a2440!important;color:var(--fg)!important}
 body.sg .chip{transform:skewX(-8deg);border-radius:0!important}
 /*SG-END*/
+/*MODES-BEGIN*/
+.t-modes{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.md-b{position:relative;display:flex;align-items:center;gap:12px;padding:14px 14px;min-height:74px;text-align:left;background:linear-gradient(160deg,#1a2440 0%,#121a2c 60%,#0f1626 100%);border:0;color:#fff;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,0 100%);box-shadow:inset 4px 0 0 var(--mc,#ffd60a)}
+.md-bz{--mc:#ffd60a}.md-vr{--mc:#22d3ee}.md-wd{--mc:#1fdc85}
+.md-ic{flex:0 0 auto;width:46px;height:46px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.06);font-weight:900;font-style:italic;font-stretch:66%;font-size:30px;color:var(--mc);line-height:1}
+.md-ic small{font-size:13px;margin-left:1px}
+.md-t{display:flex;flex-direction:column;gap:3px;min-width:0}
+.md-t b{font-weight:900;font-style:italic;font-stretch:70%;text-transform:uppercase;font-size:17px;line-height:1.05}
+.md-t small{color:#a3aec4;font-size:12.5px;line-height:1.25;overflow:hidden;text-overflow:ellipsis}
+.md-new{position:absolute;top:8px;right:16px;background:var(--mc);color:#06101c;font-size:10px;font-weight:900;text-transform:uppercase;padding:2px 6px;letter-spacing:.04em}
+@media (max-width:760px){.t-modes{grid-template-columns:minmax(0,1fr)}.md-b{min-height:62px;padding:10px 12px}}
+/* 3 Saniye */
+.bz-intro{text-align:center}
+.bz-big{display:grid;grid-template-columns:auto auto;justify-content:center;align-items:baseline;gap:2px 12px;margin:6px 0 10px}
+.bz-big span{font-weight:900;font-style:italic;font-stretch:62%;font-size:84px;line-height:.9;color:#ffd60a}
+.bz-big span:nth-of-type(2){color:#22d3ee}
+.bz-big small{text-align:left;font-weight:900;font-style:italic;font-stretch:66%;text-transform:uppercase;font-size:30px}
+.bz-intro .row{justify-content:center}
+.bz-go{min-width:200px;font-size:18px;padding:14px 28px}
+.bz-pips{display:flex;gap:6px;align-items:center;margin-right:6px}
+.bz-pips i{width:26px;height:8px;border-radius:4px;background:rgba(255,255,255,.18)}
+.bz-pips i.cur{background:#22d3ee}.bz-pips i.g{background:#22c55e}.bz-pips i.r{background:#ef4444}
+.bz{display:flex;flex-direction:column;gap:12px;position:relative}
+.bz-rp{position:relative}
+.bz-rp canvas{width:100%;aspect-ratio:16/10;display:block}
+.bz-cd{position:absolute;right:14px;top:14px;width:84px;height:84px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(3,6,12,.82);border:5px solid #22d3ee}
+.bz-cd b{font-weight:900;font-stretch:62%;font-size:54px;line-height:1}
+.bz-cd.low{border-color:#ef4444}.bz-cd.tick{animation:bzt .35s ease-out}
+@keyframes bzt{0%{transform:scale(1.25)}100%{transform:scale(1)}}
+.bz-fb{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-3deg);text-align:center;padding:10px 32px 6px;animation:bzf .3s cubic-bezier(.2,1.6,.4,1)}
+.bz-fb b{display:block;font-weight:900;font-style:italic;font-stretch:62%;text-transform:uppercase;font-size:56px;line-height:1}
+.bz-fb small{font-weight:800;font-size:15px}
+.bz-fb.ok{background:#22c55e;color:#04140a}.bz-fb.no{background:#ef4444;color:#fff}
+@keyframes bzf{0%{transform:translate(-50%,-50%) rotate(-3deg) scale(1.6);opacity:0}100%{transform:translate(-50%,-50%) rotate(-3deg) scale(1);opacity:1}}
+.bz-bar{height:8px;background:rgba(255,255,255,.1);border-radius:4px;overflow:hidden}
+.bz-bar i{display:block;height:100%;width:100%;background:#22d3ee}
+.bz-q{font-weight:800;font-size:15px;color:#cfd8e6;text-align:center}
+.bz-opts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.bz-o{min-height:84px;padding:12px;border-radius:16px;border:3px solid rgba(255,255,255,.22);background:rgba(10,15,28,.92);color:#fff;font-weight:900;font-style:italic;font-stretch:70%;text-transform:uppercase;font-size:20px;line-height:1.05}
+.bz-o:not(:disabled):active{transform:scale(.96);border-color:#22d3ee}
+.bz-o:disabled{opacity:1;cursor:default}
+.bz-o.ok{background:#22c55e;border-color:#22c55e;color:#04140a}.bz-o.no{background:#ef4444;border-color:#ef4444}.bz-o.off{opacity:.45}
+.bz-next{align-self:center}
+.bz-score{display:flex;flex-direction:column;align-items:center;gap:6px;margin:4px 0 14px}
+.bz-score b{font-weight:900;font-stretch:62%;font-size:96px;line-height:.9;color:#22c55e}
+.bz-score b span{color:rgba(255,255,255,.35)}
+.bz-marks{font-size:30px;letter-spacing:4px}
+.bz-score small{color:#a3aec4}
+.bz-list{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+.bz-row{background:rgba(255,255,255,.04);padding:10px 12px;border-left:4px solid #22c55e}
+.bz-row.no{border-left-color:#ef4444}
+.bz-row summary{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;cursor:pointer;list-style:none}
+.bz-row summary::-webkit-details-marker{display:none}
+.bz-row summary span{grid-row:span 2;font-size:20px}
+.bz-row summary small{color:#a3aec4}
+.bz-row p{margin:8px 0 0;font-size:14px;color:#cfd8e6}
+/* VAR odası */
+.vr-hero{display:flex;gap:16px;align-items:flex-start;margin-bottom:12px}
+.vr-hero .ic,.vr-hero svg{flex:0 0 auto}
+.vr-hero p{margin:6px 0 0;color:#cfd8e6}
+.vr-rules{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:6px 0 14px}
+.vr-rules span{background:rgba(34,211,238,.08);border:1px solid rgba(34,211,238,.3);padding:10px;text-align:center;font-size:13px;color:#cfd8e6}
+.vr-rules b{display:block;font-weight:900;font-stretch:66%;font-size:28px;color:#22d3ee;line-height:1}
+.vr-field{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;padding:12px 16px;margin-bottom:12px;background:linear-gradient(90deg,rgba(34,211,238,.16),rgba(34,211,238,.02));border-left:5px solid #22d3ee}
+.vr-field .eyebrow{flex-basis:100%;margin:0}
+.vr-field b{font-weight:900;font-style:italic;font-stretch:66%;text-transform:uppercase;font-size:28px;line-height:1}
+.vr-field small{color:#a3aec4}
+.vr-act{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.vr-act .btn{min-height:54px;font-size:16px}
+#vrPick{margin-top:10px}
+#vrPick .row{margin-top:10px}
+.vr-pts{font-weight:900;font-stretch:66%;font-size:26px;color:#22d3ee}
+/* Hakem dolabı */
+.wd-prev{position:relative;margin-bottom:12px}
+.wd-prev canvas{width:100%;height:240px;display:block;background:#0b1a12}
+.wd-prev .chip{position:absolute;left:10px;bottom:10px}
+.wd-tabs{margin-bottom:12px}
+.wd-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:10px;margin-bottom:10px}
+.wd-it{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 8px 10px;background:rgba(255,255,255,.04);border:2px solid transparent;color:#fff;font-weight:800;font-size:13px}
+.wd-it.on{border-color:#1fdc85;background:rgba(31,220,133,.1)}
+.wd-it.lk{opacity:.78}.wd-it.lk .wd-sw{filter:grayscale(.55) brightness(.7)}
+.wd-sw{width:52px;height:52px;display:block;background:linear-gradient(180deg,var(--k) 0 62%,var(--s) 62% 100%);clip-path:polygon(22% 0,40% 8%,60% 8%,78% 0,100% 18%,88% 34%,80% 30%,80% 100%,20% 100%,20% 30%,12% 34%,0 18%)}
+.wd-bt{clip-path:none;border-radius:6px 22px 8px 8px;height:30px;margin:11px 0;background:var(--k)}
+.wd-whi{clip-path:none;border-radius:50%;background:#1d2840;display:flex;align-items:center;justify-content:center}
+.wd-lk{font-size:11px;color:#a3aec4;display:flex;align-items:center;gap:3px;font-weight:700}
+.wd-pr{color:#f6c62b}
+.vr-help{align-self:flex-start;border-color:rgba(34,211,238,.45)!important;color:#22d3ee!important}
+/*MODES-END*/
+
 </style>
 
 <div id="app"></div>
@@ -4531,8 +4620,9 @@ function kitsFor(H,A){
   if(cdist(H.c1,A.c1)<150){ const w=lum(H.c1)<.5; ak={shirt:w?'#f2f3f5':'#1b2433',shorts:w?'#f2f3f5':'#1b2433',socks:w?'#f2f3f5':'#1b2433',numCol:w?'#111':'#fff'}; }
   const dark=[hk.shirt,ak.shirt].some(c=>lum(c)<.16);
   let rk={shirt:dark?'#c9f03d':'#121519',shorts:'#111',socks:'#111',numCol:'#000'};
-  { const K=hasAll()&&S&&S.refKit&&REF_KITS.find(k=>k.id===S.refKit); if(K&&K.shirt&&[hk.shirt,ak.shirt,hk.shorts,ak.shorts].every(c=>c&&kitDist(c,K.shirt)>95)) rk={shirt:K.shirt,shorts:K.shorts,socks:K.socks,numCol:'#000'}; }
+  { const K=S?wdKit():null; if(K&&K.shirt&&[hk.shirt,ak.shirt,hk.shorts,ak.shorts].every(c=>c&&kitDist(c,K.shirt)>95)) rk={shirt:K.shirt,shorts:K.shorts,socks:K.socks,numCol:'#000'}; }
   if(S&&S.fifa) rk.badge=true;
+  { const bc=S?wdBoot():null; if(bc) rk.boot=bc; }
   return [hk,ak,rk];
 }
 function kitDist(a,b){ const h=x=>{ x=String(x).replace('#',''); if(x.length===3) x=x.split('').map(c=>c+c).join(''); return [0,2,4].map(i=>parseInt(x.substr(i,2),16)||0); }; const p=h(a),q=h(b); return Math.hypot(p[0]-q[0],p[1]-q[1],p[2]-q[2]); }
@@ -5064,7 +5154,7 @@ function drawFig(ctx,c,a){
   const delt=k=>{ const o=J['s'+k], out=[]; for(let i=0;i<8;i++){ const t=i/8*Math.PI*2; for(const z of [-.03,.03]){ const q=P(c,[o[0]+Math.cos(t)*.064,o[1]+Math.sin(t)*.064,o[2]+z+.01]); if(q) out.push(q); } } return out; };
   const mixP=(a,b,t)=>[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t,a[2]+(b[2]-a[2])*t];
   const BOOTS=['#16181c','#f4f5f7','#ff6a2b','#22d1e6','#ff3d8b','#e8f53a','#3a6bff'];
-  const bootCol=a.bootCol||(a.num==null?'#16181c':BOOTS[((a.num||0)*7+Math.round((a.sz||1)*100))%BOOTS.length]); // officials wear black
+  const bootCol=a.bootCol||(a.num==null?((a.kit&&a.kit.boot)||'#16181c'):BOOTS[((a.num||0)*7+Math.round((a.sz||1)*100))%BOOTS.length]); // officials wear black
   const boot=(s,dim)=>{ const A=J['f'+s], K=J['k'+s]; const sd=V3.norm(V3.sub(A,K)); // shin direction (knee -> ankle)
     const flat=clamp(1-Math.abs(sd[2])*1.15,0,1); // 0 when the shin is vertical, 1 when the leg is stretched out
     let fd=V3.norm([fx*(1-flat)+sd[0]*flat, fy*(1-flat)+sd[1]*flat, sd[2]*flat*.6+flat*.25]);
@@ -6132,7 +6222,7 @@ function hub2HTML(){
   return `<div class="hub2">${careerStrip()}
     ${ph&&S.fifa?`<span class="chip b" style="justify-self:start">Hafta içi: ${PHASE_NAMES[ph]}</span>`:''}
     ${v11HubLeft()}${storyHubHTML()}${S.kurul.hearing?`<button class="alert" data-tab="kurul">${ic('kurul')}<span><b>Kurul toplantısına çağrıldın</b><small>${esc(S.kurul.hearing.match)} · ${esc(S.kurul.hearing.min)} ${esc(S.kurul.hearing.title)}</small></span></button>`:''}
-    <div class="tiles">${playTile(next,T.matches)}${sim}${nx}${newsT}${dailyHubTile()}${phHubTile()}${MONET?premHubTile():''}${tableT}${attrT}${refsT}${stepT}${trainT}${acadT}${kurT}</div>
+    <div class="tiles">${playTile(next,T.matches)}${sim}${nx}${newsT}${dailyHubTile()}${modesHubRow()}${phHubTile()}${MONET?premHubTile():''}${tableT}${attrT}${refsT}${stepT}${trainT}${acadT}${kurT}</div>
     <div id="trainSec">${trainHTML()}</div></div>`;
 }
 function hubHTML(){
@@ -6422,7 +6512,7 @@ function bindMain(){
   const ws=$('#set_wsnd'); if(ws) ws.onchange=()=>{ const v=ws.value; if(v!=='klasik'&&!isPremium()){ ws.value='klasik'; openPaywall('ses'); return; } S.settings.wsnd=v; save(); whistle(); };
   const bw=$('#bWeek'); if(bw) bw.onclick=finishWeek;
   document.querySelectorAll('#tNews [data-ns]').forEach(b=>b.onclick=e=>{ e.stopPropagation(); NEWS_I=+b.dataset.ns; document.querySelectorAll('#tNews .tn-s').forEach((x,i)=>x.classList.toggle('on',i===NEWS_I)); document.querySelectorAll('#tNews [data-ns]').forEach((x,i)=>x.classList.toggle('on',i===NEWS_I)); });
-  const td=$('#tDaily'); if(td) td.onclick=dailyOpen;
+  const td=$('#tDaily'); if(td) td.onclick=dailyOpen; modesBind();
   const tt=$('#tTrain'); if(tt) tt.onclick=()=>{ const t=$('#trainSec'); if(t) t.scrollIntoView({behavior:'smooth',block:'start'}); };
   const hc=$('#heroCv'); if(hc) heroStart('heroCv',hc.dataset.h,hc.dataset.a,hc.dataset.k);
   const bs=$('#bSeason'); if(bs) bs.onclick=continueAfterSeason;
@@ -7085,12 +7175,12 @@ function packsBody0(reason){
 }
 function kitPickerHTML(){
   const cur=(S&&S.refKit)||'std';
-  return `<section class="pw-kits"><h3>Hakem forman</h3><div class="pw-kitrow">${REF_KITS.map(k=>`<button class="pw-kit ${cur===k.id?'on':''}" data-kit="${k.id}" style="--k:${k.shirt||'#121519'};--s:${k.shorts||'#111'}"><i></i><span>${k.name}</span></button>`).join('')}</div><small class="muted">Takım renkleriyle karışırsa maçta standart forma giyilir.</small></section>`;
+  return `<section class="pw-kits"><h3>Hakem forman</h3><div class="pw-kitrow">${REF_KITS.filter(k=>k.how==='free'||k.how==='tam').map(k=>`<button class="pw-kit ${cur===k.id?'on':''}" data-kit="${k.id}" style="--k:${k.shirt||'#121519'};--s:${k.shorts||'#111'}"><i></i><span>${k.name}</span></button>`).join('')}</div><small class="muted">Takım renkleriyle karışırsa maçta standart forma giyilir.</small></section>`;
 }
 function bindPacks(root){
   root.querySelectorAll('.pw-buy').forEach(b=>b.onclick=()=>buySku(b.dataset.sku));
   root.querySelectorAll('#bRestore').forEach(b=>b.onclick=restorePremium);
-  root.querySelectorAll('[data-kit]').forEach(b=>b.onclick=()=>{ if(!S) return; S.refKit=b.dataset.kit; save(); haptic('light'); const m=$('#modal'); if(m&&!m.hidden) openPaywall('shop'); else render(); });
+  root.querySelectorAll('[data-kit]').forEach(b=>b.onclick=()=>{ if(!S) return; S.refKit=b.dataset.kit; if(S.wd) S.wd.kit=S.refKit; save(); haptic('light'); const m=$('#modal'); if(m&&!m.hidden) openPaywall('shop'); else render(); });
 }
 function openPaywall(reason){
   reason=reason||'shop';
@@ -8272,6 +8362,309 @@ function phDecorate(){
   document.querySelectorAll('#bPhone,#bPhoneTop,#tPhone').forEach(b=>b.onclick=()=>phOpen());
   if(PH.open) phRender();
 }
+
+// =========================================================
+//   MODLAR: 3 Saniye · VAR odası · Hakem dolabı
+// =========================================================
+// ortak: tarih/tohumla pozisyon üret (Günün pozisyonu ile aynı yöntem)
+function caseMake(seed,type,compName,vr){
+  const r0=seeded(seed);
+  const nts=NATIONS.slice(0,32); const a=Math.floor(r0()*nts.length); let b=Math.floor(r0()*nts.length); if(b===a) b=(a+7)%nts.length;
+  const H=mkTeam(nts[a][0],nts[a][1],'',nts[a][2],true), A=mkTeam(nts[b][0],nts[b][1],'',nts[b][2],true);
+  const fx=makeFx({kind:'acad',comp:'LIG',compName,home:H.id,away:A.id,imp:3,derby:false,vr:!!vr,glt:false,lvl:3,fee:0,stage:compName});
+  const keep=M; M=buildMatch(fx); const ctxM=M;
+  const prev=RNG_SRC; RNG_SRC=seeded(seed^0x5bd1e995); let inc;
+  try{ M.min=10+Math.floor(r0()*78); const c=ctxFor(M,r0()<.5?0:1); inc=genIncident(type,c); inc.minute=M.min+"'"; }
+  finally{ RNG_SRC=prev; M=keep; }
+  inc.vis=1; inc.posQ='best'; inc.refPos=SPOTS[inc.pos]?SPOTS[inc.pos].best:[28,15];
+  return {inc,ctxM};
+}
+const okDec=(inc,d)=>d===inc.correct.d||inc.accept.some(a=>a.d===d);
+const modalX=()=>{ stopTimer(); replayStop(); const m=$('#modal'); m.hidden=true; m.innerHTML=''; };
+const fmtSec=s=>(+s).toLocaleString({tr:'tr-TR',en:'en-GB',de:'de-DE',es:'es-ES'}[typeof curLang==='function'?curLang():'tr']||'tr-TR',{minimumFractionDigits:1,maximumFractionDigits:1});
+
+// ---------------------------------------------------------
+//   3 SANİYE: herkese aynı 3 pozisyon, temas anında donar, 3 saniyede karar
+// ---------------------------------------------------------
+const BZ_KEY='refmania_3sn', BZ_SEC=3, BZ_EXTRA=3;
+const BZ_TYPES=['penalti_temas','elle_oynama','ofsayt_gol','dirsek','yuksek_ayak','orta_saha_faul','dogso','top_disinda','gol_oncesi_faul','kaleci_engelleme','hucum_elle_gol','penalti_atisi'];
+let BZ=null;
+function bzState(){ return lsJ(BZ_KEY,{hist:{},streak:0,best:0,last:null,extra:{},played:0,pts:0}); }
+function bzSave(s){ lsSet(BZ_KEY,JSON.stringify(s)); }
+function bzMake(k,practice){
+  const base=hash('refmania-3sn-'+k+(practice?'-p'+Date.now():'')); const r=seeded(base);
+  const types=BZ_TYPES.filter(t=>GEN[t]); const ts=[]; let g=0; while(ts.length<3&&g++<99){ const t=types[Math.floor(r()*types.length)]; if(!ts.includes(t)) ts.push(t); }
+  return ts.map((t,i)=>{ const c=caseMake((base+i*7919)>>>0,t,'3 Saniye',false); const inc=c.inc, C=inc.correct; const opts=inc.steps[0].opts;
+    const bad=o=>o.id===C.d||inc.accept.some(a=>a.d===o.id)||inc.partial.some(a=>a.d===o.id);
+    let wr=opts.filter(o=>!bad(o)); if(!wr.length) wr=opts.filter(o=>o.id!==C.d);
+    const w=wr[Math.floor(r()*wr.length)]; const ok=opts.find(o=>o.id===C.d)||{id:C.d,label:labelOf(inc,'d',C.d)};
+    c.two=r()<.5?[ok,w]:[w,ok]; return c; });
+}
+const bzMarks=res=>res.map(x=>x.ok?'🟩':x.late?'⬛':'🟥').join('');
+function bzHubBtn(){
+  const st=bzState(), h=st.hist[dayKey()];
+  const sub=h?`Bugün ${h.m} · ${h.s}/3`:'Günün 3 pozisyonu';
+  return `<button class="md-b md-bz" id="mdBz"><span class="md-ic">3<small>sn</small></span><span class="md-t"><b>3 Saniye</b><small>${sub}</small></span>${!h?'<span class="md-new">Yeni</span>':''}</button>`;
+}
+function bzOpen(){ const st=bzState(); if(st.hist[dayKey()]) return bzSummary(); bzIntro(false); }
+function bzIntro(practice){
+  const st=bzState();
+  openModal(head(practice?'3 Saniye · Ekstra tur':`3 Saniye #${dayNo(dayKey())}`,'3 pozisyon, 3 saniye',`<button class="btn sm" id="bzX">Kapat</button>`)+`<div class="sh-body bz-intro">
+    <div class="bz-big"><span>3</span><small>pozisyon</small><span>3</span><small>saniye</small></div>
+    <p>Pozisyon temas anında donar. İki seçenekten birini <b>3 saniye</b> içinde seç. Herkes bugün aynı 3 pozisyonu görüyor.</p>
+    ${practice?'<p class="muted">Ekstra tur seriye ve günlük ödüle sayılmaz.</p>':`<div class="row"><span class="chip">🔥 Seri ${st.streak}</span><span class="chip">En iyi ${st.best}</span></div>`}
+    <button class="btn primary bz-go" id="bzGo">Başla</button></div>`,true);
+  $('#bzX').onclick=modalX; $('#bzGo').onclick=()=>bzStart(practice);
+}
+function bzStart(practice){ const k=dayKey(); BZ={k,no:dayNo(k),practice:!!practice,cases:bzMake(k,practice),i:0,res:[]}; bzCase(); }
+function bzStop(){ if(!BZ) return; clearInterval(BZ.w); clearInterval(BZ.tm); clearTimeout(BZ.nx); }
+function bzCase(){
+  const c=BZ.cases[BZ.i], inc=c.inc; BZ.picked=false;
+  const pips=BZ.cases.map((_,i)=>{ const r=BZ.res[i]; return `<i class="${r?(r.ok?'g':'r'):i===BZ.i?'cur':''}"></i>`; }).join('');
+  openModal(head(`3 Saniye · ${BZ.i+1}/3`,esc(inc.title),`<span class="bz-pips">${pips}</span><button class="btn sm" id="bzX">Kapat</button>`)+`<div class="sh-body bz">
+    <div class="replay bz-rp"><canvas id="rcv" aria-label="Pozisyon"></canvas><div class="bz-cd" id="bzCd" hidden><b id="bzN">3</b></div><div class="bz-fb" id="bzFb" hidden></div></div>
+    <div class="bz-bar" id="bzBar"><i></i></div>
+    <div class="bz-q">${esc(inc.steps[0].q)}</div>
+    <div class="bz-opts">${c.two.map(o=>`<button class="bz-o" data-o="${o.id}" disabled>${esc(o.label)}</button>`).join('')}</div></div>`);
+  $('#bzX').onclick=()=>{ bzStop(); BZ=null; modalX(); };
+  const keep=M; M=c.ctxM; replayStart($('#rcv'),inc,['ofsayt_gol','hucum_elle_gol','gol_oncesi_faul','kaleci_engelleme','penalti_atisi'].includes(inc.type)?'tv':'yakin'); M=keep;
+  BZ.w=setInterval(()=>{ if(!RP){ clearInterval(BZ.w); return; } if(RP.froze||RP.t>=CT-.004){ clearInterval(BZ.w); RP.playing=false; RP.t=CT; RP.hold=0; bzAsk(); } },30);
+}
+function bzAsk(){
+  whistle(); haptic('medium');
+  document.querySelectorAll('.bz-o').forEach(b=>{ b.disabled=false; b.onclick=()=>bzPick(b.dataset.o); });
+  const cd=$('#bzCd'); if(cd) cd.hidden=false; BZ.t0=Date.now(); let lastN=4;
+  BZ.tm=setInterval(()=>{ const left=BZ_SEC*1000-(Date.now()-BZ.t0); const p=clamp(left/(BZ_SEC*1000),0,1);
+    const bi=document.querySelector('#bzBar i'); if(bi) bi.style.width=(p*100)+'%';
+    const n=Math.max(0,Math.ceil(left/1000)); if(n!==lastN){ lastN=n; const e=$('#bzN'); if(e){ e.textContent=n; e.parentNode.classList.remove('tick'); void e.parentNode.offsetWidth; e.parentNode.classList.add('tick'); e.parentNode.classList.toggle('low',n<=1); } if(n>0&&n<3) haptic('light'); }
+    if(left<=0) bzPick(null); },40);
+}
+function bzPick(id){
+  if(!BZ||BZ.picked) return; if(!document.querySelector('.bz')){ bzStop(); BZ=null; return; } BZ.picked=true; clearInterval(BZ.tm);
+  const c=BZ.cases[BZ.i], inc=c.inc; const ok=id!=null&&okDec(inc,id); const secs=Math.min(BZ_SEC,(Date.now()-BZ.t0)/1000);
+  BZ.res.push({ok,id,late:id==null,secs:id==null?BZ_SEC:secs});
+  haptic(ok?'success':'error');
+  document.querySelectorAll('.bz-o').forEach(b=>{ b.disabled=true; const good=okDec(inc,b.dataset.o); b.classList.add(good?'ok':b.dataset.o===id?'no':'off'); });
+  const cd=$('#bzCd'); if(cd) cd.hidden=true;
+  const fb=$('#bzFb'); if(fb){ fb.hidden=false; fb.className='bz-fb '+(ok?'ok':'no'); fb.innerHTML=`<b>${ok?'Doğru!':id==null?'Süre doldu':'Yanlış!'}</b>${ok?`<small>${fmtSec(secs)} sn</small>`:''}`; }
+  if(RP){ RP.playing=true; RP.slow=true; }
+  const go=()=>{ if(!BZ) return; clearTimeout(BZ.nx); if(!document.querySelector('.bz')){ bzStop(); BZ=null; return; } replayStop(); BZ.i++; if(BZ.i<BZ.cases.length) bzCase(); else bzFinish(); };
+  BZ.nx=setTimeout(go,1900);
+  const sh=document.querySelector('.bz'); if(sh) sh.insertAdjacentHTML('beforeend',`<button class="btn sm bz-next" id="bzNext">${BZ.i<2?'Sonraki ›':'Sonuç ›'}</button>`);
+  const nb=$('#bzNext'); if(nb) nb.onclick=go;
+}
+function bzFinish(){
+  const D=BZ, st=bzState(); const s=D.res.filter(r=>r.ok).length; const t=D.res.reduce((a,r)=>a+r.secs,0); const m=bzMarks(D.res);
+  let gain='';
+  if(!D.practice){
+    const prevLast=st.last; st.hist[D.k]={m,s,t:+t.toFixed(1)};
+    st.streak=(prevLast===dayShift(D.k,-1))?st.streak+1:(prevLast===D.k?st.streak:1);
+    st.last=D.k; st.best=Math.max(st.best,st.streak); st.played++; st.pts+=s; bzSave(st);
+    if(S&&s>0){ const pay=s*1200*(1+(S.tier||0)); S.money+=pay; if(typeof tx==='function') tx('3 Saniye',pay,'odul'); S.attrs.kural=clamp(S.attrs.kural+.07*s*(S.growth||1),0,99); save(); gain=`+${moneyShort(pay)} · Kural bilgisi +${(.07*s).toFixed(2)}`; }
+    if(s===3) setTimeout(()=>confettiBurst(70),250);
+    if([7,14,30].includes(st.streak)) goodOffer('seri');
+  }
+  D.gain=gain; bzResultUI();
+}
+function bzResultUI(){
+  const D=BZ, st=bzState(); const s=D.res.filter(r=>r.ok).length; const t=D.res.reduce((a,r)=>a+r.secs,0);
+  const ex=st.extra[D.k]||0; const again=ex<BZ_EXTRA?adBtn('bzAgain',`Ekstra tur (${BZ_EXTRA-ex} hak)`):'';
+  const title=s===3?'Kusursuz!':s===2?'İyi düdük':s===1?'Zor gündü':'Yarın yeniden';
+  openModal(head(D.practice?'3 Saniye · Ekstra tur':`3 Saniye #${D.no}`,title,`<button class="btn sm" id="bzX">Kapat</button>`)+`<div class="sh-body">
+    <div class="bz-score"><b class="num">${s}<span>/3</span></b><span class="bz-marks">${bzMarks(D.res)}</span><small>Toplam ${fmtSec(t)} sn</small></div>
+    <div class="bz-list">${D.cases.map((c,i)=>{ const r=D.res[i], inc=c.inc; return `<details class="bz-row ${r.ok?'ok':'no'}"><summary><span>${r.ok?'🟩':r.late?'⬛':'🟥'}</span><b>${esc(inc.title)}</b><small>${r.ok?esc(labelOf(inc,'d',r.id)):'Doğrusu: '+esc(labelOf(inc,'d',inc.correct.d))}</small></summary><p>${esc(inc.explain)}</p></details>`; }).join('')}</div>
+    <div class="row">${D.gain?`<span class="chip g">${D.gain}</span>`:''}${D.practice?'':`<span class="chip">🔥 Seri ${st.streak}</span><span class="chip">En iyi ${st.best}</span>`}</div>
+    ${D.practice?'':'<button class="btn primary" id="bzShare">Sonucu paylaş</button>'}
+    <div class="row">${again}</div>
+    ${D.practice?'':'<p class="muted" style="font-size:13px">Yarın yeni 3 pozisyon.</p>'}</div>`,true);
+  $('#bzX').onclick=()=>{ bzStop(); BZ=null; modalX(); render(); };
+  const sh=$('#bzShare'); if(sh) sh.onclick=()=>bzShare(D.no,bzMarks(D.res),s,t);
+  bzBindAgain();
+}
+function bzBindAgain(){ const a=$('#bzAgain'); if(a) a.onclick=()=>rewarded('bzextra',()=>{ const s2=bzState(), k=dayKey(); s2.extra[k]=(s2.extra[k]||0)+1; bzSave(s2); bzStop(); bzIntro(true); }); }
+function bzSummary(){
+  const st=bzState(), k=dayKey(), h=st.hist[k]; const ex=st.extra[k]||0;
+  openModal(head(`3 Saniye #${dayNo(k)}`,`Bugün ${h.s}/3`,`<button class="btn sm" id="bzX">Kapat</button>`)+`<div class="sh-body">
+    <div class="bz-score"><b class="num">${h.s}<span>/3</span></b><span class="bz-marks">${h.m}</span><small>Toplam ${fmtSec(h.t)} sn</small></div>
+    <div class="row"><span class="chip">🔥 Seri ${st.streak}</span><span class="chip">En iyi ${st.best}</span></div>
+    <button class="btn primary" id="bzShare">Sonucu paylaş</button>
+    <div class="row">${ex<BZ_EXTRA?adBtn('bzAgain',`Ekstra tur (${BZ_EXTRA-ex} hak)`):''}</div>
+    <p class="muted" style="font-size:13px">Yarın yeni 3 pozisyon.</p></div>`,true);
+  $('#bzX').onclick=modalX; $('#bzShare').onclick=()=>bzShare(dayNo(k),h.m,h.s,h.t); bzBindAgain();
+}
+function bzShare(no,marks,s,t){
+  const st=bzState(); const badge=hasAll()?'👑 Refmania Tam Paket hakemi\n':isPremium()?'👑 Premium hakem\n':'';
+  const text=`Refmania · 3 Saniye #${no}\n${marks} ${s}/3 · ${fmtSec(t)} sn\n🔥 ${st.streak} günlük seri\n${badge}Sen kaç yaparsın? #Refmania`;
+  try{ if(navigator.share){ navigator.share({text}).catch(()=>{}); return; } }catch(e){}
+  try{ navigator.clipboard.writeText(text).then(()=>toast('Sonuç panoya kopyalandı'),()=>prompt('Kopyala:',text)); }catch(e){ prompt('Kopyala:',text); }
+}
+
+// ---------------------------------------------------------
+//   VAR ODASI: sahadaki karar verilmiş; sen VAR'sın
+// ---------------------------------------------------------
+const VR_TYPES=['penalti_temas','elle_oynama','hucum_elle_gol','ofsayt_gol','dogso','dirsek','top_disinda','gol_oncesi_faul','kaleci_engelleme','penalti_atisi'];
+const VR_N=5, VR_SEC=35;
+const VR_REFS=['K. Aydın','M. Çelik','S. Yıldız','E. Korkmaz','B. Şahin','T. Demir','O. Kaya','U. Arslan'];
+let VRS=null;
+function vrState(){ S.vroom=S.vroom||{n:0,best:0,day:null,today:0,tot:0,ok:0}; const v=S.vroom, k=dayKey(); if(v.day!==k){ v.day=k; v.today=0; } return v; }
+function vrHubBtn(){ const v=S?vrState():{n:0,best:0}; return `<button class="md-b md-vr" id="mdVr"><span class="md-ic">${v11g('vr','#22d3ee',26)}</span><span class="md-t"><b>VAR odası</b><small>${v.n?`En iyi vardiya ${v.best}/10`:'Monitörün başına geç'}</small></span>${!v.n?'<span class="md-new">Yeni</span>':''}</button>`; }
+function vrOpen(){
+  if(!S) return; const v=vrState(); const free=isPremium()||v.today<1;
+  const acc=v.tot?Math.round(v.ok/v.tot*100):null;
+  const startBtn=free?`<button class="btn primary" id="bVrGo">Vardiyaya başla</button>`:adBtn('bVrAd','Yeni vardiya');
+  openModal(head('VAR odası','Monitörün başındasın',`<button class="btn sm" id="vrX">Kapat</button>`)+`<div class="sh-body vr-intro">
+    <div class="vr-hero">${v11g('vr','#22d3ee',54)}<div><b>Bu kez sahada değilsin.</b><p>Sahadaki hakem kararını verdi. Sen VAR'sın: bütün kameralardan izle. <b>Açık ve net bir hata</b> varsa müdahale et ve doğru kararı öner. Yoksa kontrolü tamamla, oyun devam etsin.</p></div></div>
+    <div class="vr-rules"><span><b>${VR_N}</b> olay</span><span><b>${VR_SEC}</b> sn / olay</span><span><b>5</b> kamera</span></div>
+    ${v.n?`<div class="row"><span class="chip">Vardiya ${v.n}</span><span class="chip">En iyi ${v.best}/10</span>${acc!=null?`<span class="chip">Doğruluk %${acc}</span>`:''}</div>`:''}
+    <div class="row">${startBtn}${!isPremium()&&!free?`<button class="btn" id="bVrPrem">${v11g('crown','#f6c62b',16)} Premium ile sınırsız</button>`:''}</div>
+    ${!isPremium()?`<p class="muted" style="font-size:13px">${free?'Her gün bir vardiya ücretsiz. Premium ile sınırsız.':'Bugünkü ücretsiz vardiyanı oynadın.'}</p>`:''}</div>`,true);
+  $('#vrX').onclick=modalX;
+  const g=$('#bVrGo'); if(g) g.onclick=vrStart;
+  const a=$('#bVrAd'); if(a) a.onclick=()=>rewarded('varroom',vrStart);
+  const p=$('#bVrPrem'); if(p) p.onclick=()=>{ modalX(); openPaywall('var'); };
+}
+function vrStart(){
+  const v=vrState(); v.today++; save();
+  const base=hash('refmania-var-'+Date.now()); const r=seeded(base); const types=VR_TYPES.filter(t=>GEN[t]); const ts=[]; let g=0;
+  while(ts.length<VR_N&&g++<99){ const t=types[Math.floor(r()*types.length)]; if(!ts.includes(t)) ts.push(t); }
+  const cases=ts.map((t,i)=>{ const c=caseMake((base+i*104729)>>>0,t,'VAR odası',true); const inc=c.inc, C=inc.correct; const opts=inc.steps[0].opts;
+    const bad=o=>okDec(inc,o.id)||inc.partial.some(a=>a.d===o.id); const wr=opts.filter(o=>!bad(o));
+    c.field=(wr.length&&inc.reviewable!==false&&r()<.55)?wr[Math.floor(r()*wr.length)].id:C.d; c.ref=VR_REFS[Math.floor(r()*VR_REFS.length)]; return c; });
+  VRS={i:0,cases,res:[]}; vrCase();
+}
+function vrCase(){
+  const c=VRS.cases[VRS.i], inc=c.inc; inc.sel={d:null}; inc.showOff=false; const cams=['tv','yakin','ters','arka','ust'];
+  openModal(head(`VAR odası · Olay ${VRS.i+1}/${VR_N}`,esc(inc.title),`<span class="num tm-l" id="tmrLab"></span><button class="btn sm" id="vrX">Kapat</button>`)+`<div class="timer" id="tmr"><i></i></div><div class="sh-body">
+    <div class="vr-field"><span class="eyebrow">Sahadaki karar</span><b>${esc(labelOf(inc,'d',c.field))}</b><small>Hakem ${esc(c.ref)} · ${inc.minute}</small></div>
+    <div class="inc"><div class="stack"><div class="monitor">${replayHTML(inc,cams)}</div><p class="story">${inc.story}</p></div>
+    <div class="stack"><button class="btn sm vr-help" id="bVrHelp">Görüntü analizi iste · bu olayda en fazla +1</button><div id="vrFacts" hidden><div class="eyebrow">Görüntülerden olgular</div><div class="facts">${factsHTML(inc,true)}</div></div>
+      <div class="vr-act" id="vrAct"><button class="btn vr-ok" id="bVrOk">Kontrol tamam</button><button class="btn primary vr-go" id="bVrInt">Müdahale et</button></div>
+      <div id="vrPick" hidden><div class="eyebrow">Hakeme önerin</div><div class="dopts">${inc.steps[0].opts.filter(o=>o.id!==c.field).map(o=>`<button class="dopt" data-vd="${o.id}">${esc(o.label)}</button>`).join('')}</div>
+      <div class="row"><button class="btn" id="bVrBack">Geri</button><button class="btn primary" id="bVrSend" disabled>Monitöre çağır</button></div></div></div></div></div>`);
+  const keep=M; M=c.ctxM; bindReplay(inc,cams); M=keep;
+  $('#vrX').onclick=()=>{ VRS=null; modalX(); };
+  c.help=false; $('#bVrHelp').onclick=()=>{ c.help=true; $('#bVrHelp').remove(); $('#vrFacts').hidden=false; haptic('light'); };
+  $('#bVrOk').onclick=()=>vrJudge(false,null);
+  $('#bVrInt').onclick=()=>{ $('#vrAct').hidden=true; $('#vrPick').hidden=false; };
+  $('#bVrBack').onclick=()=>{ $('#vrAct').hidden=false; $('#vrPick').hidden=true; };
+  document.querySelectorAll('[data-vd]').forEach(b=>b.onclick=()=>{ inc.sel.d=b.dataset.vd; haptic('light'); document.querySelectorAll('[data-vd]').forEach(x=>x.classList.toggle('on',x===b)); $('#bVrSend').disabled=false; });
+  $('#bVrSend').onclick=()=>vrJudge(true,inc.sel.d);
+  startTimer(VR_SEC,()=>{ toast('Süre doldu: kontrol tamamlandı sayıldı'); vrJudge(false,null); });
+}
+const VR_V={dogru:'Doğru karar',kontrol:'Doğru: kontrol tamam',gereksiz:'Gereksiz müdahale',kacti:'Hata kaçtı',kismen:'Müdahale doğru, öneri yanlış'};
+function vrJudge(interv,d){
+  stopTimer(); const c=VRS.cases[VRS.i], inc=c.inc; const fieldOk=okDec(inc,c.field);
+  let v,pts; if(fieldOk){ v=interv?'gereksiz':'kontrol'; pts=interv?0:2; } else if(!interv){ v='kacti'; pts=0; } else if(okDec(inc,d)){ v='dogru'; pts=2; } else { v='kismen'; pts=1; }
+  if(c.help&&pts===2) pts=1;
+  VRS.res.push({v,pts}); haptic(pts===2?'success':pts?'light':'error'); if(interv) whistle();
+  inc.showOff=true; const cams=['yakin','tv','ters','ust']; const last=VRS.i>=VR_N-1;
+  const why=fieldOk?`Sahadaki karar (${labelOf(inc,'d',c.field)}) doğruydu. VAR yalnızca açık ve net hatada müdahale eder.`:`Sahadaki karar yanlıştı. Doğrusu: ${labelOf(inc,'d',inc.correct.d)}.`;
+  openModal(head(`VAR odası · Olay ${VRS.i+1}/${VR_N}`,VR_V[v],`<span class="vr-pts num">+${pts}</span>`)+`<div class="sh-body"><div class="inc"><div class="stack">${replayHTML(inc,cams)}</div><div class="stack">
+    <div class="verdict v-${pts===2?'dogru':pts?'kismen':'hata'}"><span class="vi">${VR_V[v]}</span><span class="muted">${c.help&&pts===1&&(v==='dogru'||v==='kontrol')?'Analiz desteğiyle · ':''}${interv?'Müdahale ettin: '+esc(labelOf(inc,'d',d)):'Kontrolü tamamladın'}</span></div>
+    <p><b>${esc(why)}</b></p><p>${esc(inc.explain)}</p><details class="law"><summary>Kural metni</summary><p>${esc(inc.law)}</p></details>
+    <button class="btn primary" id="bVrNext">${last?'Vardiyayı bitir':'Sonraki olay ›'}</button></div></div></div>`);
+  const keep=M; M=c.ctxM; bindReplay(inc,cams); M=keep;
+  $('#bVrNext').onclick=()=>{ replayStop(); VRS.i++; if(VRS.i<VR_N) vrCase(); else vrFinish(); };
+}
+function vrFinish(){
+  const v=vrState(); const score=VRS.res.reduce((a,r)=>a+r.pts,0); const okN=VRS.res.filter(r=>r.pts===2).length;
+  v.n++; v.best=Math.max(v.best,score); v.tot+=VR_N; v.ok+=okN;
+  const pay=Math.round(score*500*(1+(S.tier||0))); if(pay){ S.money+=pay; if(typeof tx==='function') tx('VAR odası',pay,'odul'); }
+  S.attrs.kural=clamp(S.attrs.kural+.04*score*(S.growth||1),0,99);
+  if(S.kurul) S.kurul.trust=clamp(S.kurul.trust+(score>=8?1.5:score<=4?-1:0),0,100);
+  save(); if(score>=9) setTimeout(()=>confettiBurst(70),250);
+  const grade=score>=9?'Elit VAR':score>=7?'Güvenilir VAR':score>=5?'Gelişiyorsun':'Zor vardiya';
+  const marks=VRS.res.map(r=>r.pts===2?'🟩':r.pts?'🟨':'🟥').join('');
+  openModal(head('VAR odası · Vardiya bitti',grade,`<button class="btn sm" id="vrX">Kapat</button>`)+`<div class="sh-body">
+    <div class="bz-score"><b class="num">${score}<span>/10</span></b><span class="bz-marks">${marks}</span><small>${okN}/${VR_N} olayda doğru karar</small></div>
+    <div class="row">${pay?`<span class="chip g">+${moneyShort(pay)}</span>`:''}<span class="chip g">Kural bilgisi +${(.04*score).toFixed(2)}</span>${score>=8?'<span class="chip g">Kurul güveni +1,5</span>':score<=4?'<span class="chip r">Kurul güveni −1</span>':''}<span class="chip">En iyi ${v.best}/10</span></div>
+    <div class="row"><button class="btn primary" id="bVrAgain">Yeni vardiya</button></div></div>`,true);
+  $('#vrX').onclick=()=>{ VRS=null; modalX(); render(); };
+  $('#bVrAgain').onclick=()=>{ VRS=null; vrOpen(); };
+}
+
+// ---------------------------------------------------------
+//   HAKEM DOLABI: forma, krampon, düdük
+// ---------------------------------------------------------
+// how: free | tier:N (klasmana çıkınca) | money:N (oyun parasıyla) | prem (Premium) | tam (Tam Paket)
+REF_KITS.forEach(k=>{ k.how=k.id==='std'?'free':'tam'; });
+REF_KITS.push(
+ {id:'kirmizi',name:'Kırmızı',shirt:'#c8102e',shorts:'#111111',socks:'#111111',how:'tier:1'},
+ {id:'mor',name:'Mor',shirt:'#6b3fa0',shorts:'#1a1026',socks:'#1a1026',how:'tier:2'},
+ {id:'turuncu',name:'Turuncu',shirt:'#ff7a1a',shorts:'#1b1b1b',socks:'#1b1b1b',how:'tier:3'},
+ {id:'neon',name:'Neon sarı',shirt:'#d7f23a',shorts:'#111111',socks:'#111111',how:'money:60000'},
+ {id:'turkuaz',name:'Turkuaz',shirt:'#18a8b8',shorts:'#0e1a22',socks:'#0e1a22',how:'money:120000'},
+ {id:'bordo',name:'Bordo',shirt:'#7a1630',shorts:'#1a0a10',socks:'#1a0a10',how:'money:250000'},
+ {id:'karbon',name:'Karbon',shirt:'#2c3038',shorts:'#0b0c0e',socks:'#c9f03d',how:'prem'},
+ {id:'zumrut',name:'Zümrüt',shirt:'#0f8a5f',shorts:'#0a1712',socks:'#0a1712',how:'prem'},
+ {id:'pembe',name:'Pembe',shirt:'#e0559b',shorts:'#1b1b1b',socks:'#1b1b1b',how:'prem'});
+const WD_BOOTS=[
+ {id:'siyah',name:'Siyah',c:'#16181c',how:'free'},{id:'beyaz',name:'Beyaz',c:'#eef1f4',how:'free'},
+ {id:'kirmizi',name:'Kırmızı',c:'#d62839',how:'tier:1'},{id:'mavi',name:'Mavi',c:'#2f7bff',how:'tier:2'},
+ {id:'neon',name:'Neon',c:'#c8f53a',how:'money:40000'},{id:'turuncu',name:'Turuncu',c:'#ff7a1a',how:'money:80000'},
+ {id:'altin',name:'Altın',c:'#e5b931',how:'prem'},{id:'gumus',name:'Gümüş',c:'#c9d1d9',how:'tam'}];
+const WD_WH=[{id:'klasik',name:'Klasik',how:'free'},{id:'keskin',name:'Keskin',how:'prem'},{id:'derin',name:'Derin',how:'prem'}];
+const TIER_LBL=n=>typeof tierName==='function'?tierName(n):TIER_NAMES[n];
+function wdEnsure(){ if(!S) return null; if(!S.wd) S.wd={own:[],kit:S.refKit||'std',boot:'siyah'}; return S.wd; }
+function wdHas(it){ const h=it.how||'free'; if(h==='free') return true; if(h==='tam') return hasAll(); if(h==='prem') return isPremium();
+  if(h.startsWith('tier:')) return !!S&&((S.tier||0)>=+h.slice(5)||!!S.fifa); if(h.startsWith('money:')) return !!S&&!!S.wd&&S.wd.own.includes(it.id); return false; }
+function wdKit(){ const w=wdEnsure(); if(!w) return null; const K=REF_KITS.find(k=>k.id===w.kit); return K&&K.shirt&&wdHas(K)?K:null; }
+function wdBoot(){ const w=wdEnsure(); if(!w) return null; const B=WD_BOOTS.find(b=>b.id===w.boot); return B&&wdHas(B)&&B.id!=='siyah'?B.c:null; }
+function wdCount(){ wdEnsure(); const all=[...REF_KITS,...WD_BOOTS,...WD_WH]; return [all.filter(wdHas).length,all.length]; }
+function wdHubBtn(){ const [a,b]=S?wdCount():[0,0]; return `<button class="md-b md-wd" id="mdWd"><span class="md-ic">${v11g('shirt','#ffd60a',26)}</span><span class="md-t"><b>Hakem dolabı</b><small>${a}/${b} parça açık</small></span></button>`; }
+let WD_TAB='kit';
+function wdLock(it){ const h=it.how||'free'; if(wdHas(it)) return '';
+  if(h.startsWith('tier:')) return `<small class="wd-lk">${esc(TIER_LBL(+h.slice(5)))}</small>`;
+  if(h.startsWith('money:')) return `<small class="wd-lk num">${moneyShort(+h.slice(6))}</small>`;
+  if(h==='prem') return `<small class="wd-lk wd-pr">${v11g('crown','#f6c62b',12)} Premium</small>`;
+  return `<small class="wd-lk wd-pr">${v11g('crown','#f6c62b',12)} Tam Paket</small>`; }
+function wdOpen(){
+  if(!S) return; const w=wdEnsure(); const [a,b]=wdCount();
+  const tabs=[['kit','Formalar'],['boot','Kramponlar'],['wh','Düdükler']];
+  const list=WD_TAB==='kit'?REF_KITS:WD_TAB==='boot'?WD_BOOTS:WD_WH;
+  const cur=WD_TAB==='kit'?w.kit:WD_TAB==='boot'?w.boot:((isPremium()&&S.settings.wsnd)||'klasik');
+  const sw=it=>WD_TAB==='kit'?`<i class="wd-sw" style="--k:${it.shirt||'#121519'};--s:${it.shorts||'#111'}"></i>`:WD_TAB==='boot'?`<i class="wd-sw wd-bt" style="--k:${it.c}"></i>`:`<i class="wd-sw wd-whi">${v11g('whistle','#fff',22)}</i>`;
+  openModal(head('Hakem dolabı',`${a}/${b} parça açık`,`<button class="btn sm" id="wdX">Kapat</button>`)+`<div class="sh-body wd">
+    <div class="wd-prev"><canvas id="wdCv"></canvas><span class="chip">Maçlarda böyle görüneceksin</span></div>
+    <div class="seg wd-tabs">${tabs.map(([k,l])=>`<button data-wt="${k}" class="${WD_TAB===k?'on':''}">${l}</button>`).join('')}</div>
+    <div class="wd-grid">${list.map(it=>{ const has=wdHas(it); return `<button class="wd-it ${cur===it.id?'on':''} ${has?'':'lk'}" data-wi="${it.id}">${sw(it)}<span>${esc(it.name)}</span>${wdLock(it)}</button>`; }).join('')}</div>
+    <p class="muted" style="font-size:13px">${WD_TAB==='kit'?'Takım renkleriyle karışırsa maçta standart forma giyilir.':WD_TAB==='boot'?'Kramponlar maçta ve tekrarlarda görünür.':'Düdük tonu her kararında çalar.'}</p></div>`);
+  $('#wdX').onclick=()=>{ modalX(); render(); };
+  document.querySelectorAll('[data-wt]').forEach(x=>x.onclick=()=>{ WD_TAB=x.dataset.wt; wdOpen(); });
+  document.querySelectorAll('[data-wi]').forEach(x=>x.onclick=()=>wdTap(list.find(i=>i.id===x.dataset.wi)));
+  wdDraw();
+}
+function wdTap(it){
+  const w=wdEnsure(); const h=it.how||'free';
+  if(!wdHas(it)){
+    if(h==='prem'||h==='tam'){ modalX(); openPaywall('dolap'); return; }
+    if(h.startsWith('tier:')){ toast(`Kilitli · ${TIER_LBL(+h.slice(5))} hakemliğinde açılır`); return; }
+    if(h.startsWith('money:')){ const p=+h.slice(6); if(S.money<p){ toast('Kasanda yeterli para yok'); return; }
+      if(!confirm(`${it.name} (${moneyShort(p)}) satın alınsın mı?`)) return;
+      S.money-=p; if(typeof tx==='function') tx('Hakem dolabı: '+it.name,-p,'yasam'); w.own.push(it.id); haptic('success'); toast(`${it.name} dolabında`); }
+  }
+  if(WD_TAB==='kit'){ w.kit=it.id; S.refKit=it.id; } else if(WD_TAB==='boot') w.boot=it.id; else { S.settings.wsnd=it.id; whistle(); }
+  save(); haptic('light'); wdOpen();
+}
+// önizleme: oyunun kendi 3D hakem figürü
+function wdDraw(){
+  const cv=$('#wdCv'); if(!cv) return; const [W,H,dpr]=fitCanvas(cv); const ctx=cv.getContext('2d');
+  const K=wdKit()||{shirt:'#121519',shorts:'#111',socks:'#111'}; const kit={shirt:K.shirt,shorts:K.shorts,socks:K.socks,numCol:'#000',boot:wdBoot()||'#16181c',badge:!!(S&&S.fifa)};
+  let t0=performance.now();
+  const loop=now=>{ if(!document.body.contains(cv)) return; const t=(now-t0)/1000; const a={x:52.5,y:34,face:[Math.cos(t*.6),Math.sin(t*.6)],phase:0,speed:0,fall:0,kit,skin:SKINS[1],num:null,sz:1};
+    const cam=camera([52.5-3.1,34-3.1,1.55],[52.5,34,.95],1.05,W,H,dpr);
+    try{ drawWorld(ctx,cam,{net:null,actors:[a],ball:{x:60,y:60,z:0},offX:null,mark:null,t:t,flash:null}); }catch(e){ return; }
+    requestAnimationFrame(loop); };
+  requestAnimationFrame(loop);
+}
+
+// ---------- ana sayfa satırı ve bağlantılar ----------
+function modesHubRow(){ if(!S) return ''; return `<div class="t-modes">${bzHubBtn()}${vrHubBtn()}${wdHubBtn()}</div>`; }
+function modesBind(){ const a=$('#mdBz'); if(a) a.onclick=bzOpen; const b=$('#mdVr'); if(b) b.onclick=vrOpen; const c=$('#mdWd'); if(c) c.onclick=wdOpen; }
+Object.assign(PW_HEAD,{
+  var:['VAR odası sınırsız','Günde bir vardiya ücretsiz. Premium ile istediğin kadar vardiya.'],
+  dolap:['Özel hakem parçaları','Karbon, Zümrüt ve Pembe formalar, altın krampon ve özel düdük tonları Premium’a dahil.']});
+PERKS_PREM.splice(1,0,['vr','VAR odası sınırsız','İstediğin kadar VAR vardiyası; ücretsiz oyuncuya günde bir.'],['shirt','Özel hakem dolabı','3 Premium forma, altın krampon ve 2 düdük tonu.']);
 
 // ---------- boot ----------
 document.body.classList.add('sg');

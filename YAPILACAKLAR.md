@@ -76,3 +76,9 @@ Not: Maç sonlarında geçiş reklamı da çıkıyor (her 2 maçta bir, ilk 3 ma
 - Türkiye için daha düşük Premium fiyatı denemeyi değerlendir (App Store Connect → ülke bazında fiyat).
 - Mağaza ekran görüntüleri 1.3 için yenilendi (9 görsel, Günün pozisyonu dahil); 1.3.1 ile yüklendi.
 - `main` 21 Kasım'da `v1.4` ile birleştirildi; artık güncel kod `main`'de.
+
+## Sonraki güncelleme: 3 Saniye, VAR odası, Hakem dolabı
+- **3 Saniye (ana sayfa):** Her gün herkese aynı 3 pozisyon. Pozisyon temas anında donar, iki seçenekten birini 3 saniyede seç. Sonuç 🟩🟥⬛ kartıyla paylaşılır; ayrı seri tutulur (`refmania_3sn`). Doğru başına para ve kural bilgisi. Günde 3 ekstra tur (ödüllü reklam, Premium'da reklamsız).
+- **VAR odası:** Sahadaki karar verilmiş geliyor (%55 ihtimalle yanlış, yalnız VAR'ın bakabileceği türlerde). Oyuncu 5 kameradan izler; "Kontrol tamam" ya da "Müdahale et + doğru kararı öner". 5 olay, 35 sn/olay, 10 puan. "Görüntü analizi" olguları açar ama o olayda en fazla 1 puan. Ödül: para, kural bilgisi, kurul güveni. Günde 1 vardiya ücretsiz; fazlası ödüllü reklam ya da Premium (sınırsız).
+- **Hakem dolabı:** 13 forma, 8 krampon, 3 düdük tonu. Açılma yolları: ücretsiz, klasman (3. Lig / 2. Lig / 1. Lig), oyun parası, Premium (Karbon, Zümrüt, Pembe forma, altın krampon, keskin/derin düdük), Tam Paket (Altın, Gece mavisi, Buz forma, gümüş krampon). Forma ve krampon maçta ve tekrarlarda görünür; önizleme oyunun kendi 3D hakem figürüyle. Takım renkleriyle çakışırsa standart forma.
+- Paywall'a "VAR odası sınırsız" ve "Özel hakem dolabı" satırları eklendi. EN/DE/ES çevirileri yapıldı.
