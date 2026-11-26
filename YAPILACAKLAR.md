@@ -1,5 +1,12 @@
 # Yapılacaklar
 
+## Telefon gezinmesi ve hız (1.5'e eklendi)
+- **Gezinme çubuğu:** Telefon ekranının altında Geri ‹, Ana ekran ○, Son uygulamalar ▢ (eski ince ana ekran çizgisi kaldırıldı).
+- **Son uygulamalar:** En son açılan 8 uygulama kart olarak; dokununca o uygulamaya (ve kaldığın sayfaya) geçer, ✕ ile kapatılır, "Tümünü kapat".
+- **Hareketler:** Sol kenardan sağa kaydır = geri; alttan yukarı kaydır = ana ekran. Android geri tuşu telefonda bir adım geri gider.
+- **Hız:** Telefon açıkken ana sayfadaki 3D sahne duruyor, telefonun arkasındaki tam ekran bulanıklık kaldırıldı, her dokunuşta telefon çerçevesi yeniden çizilmiyor (sadece ekran içeriği), tek dinleyiciyle dokunuşlar anında işleniyor, basılınca anında görsel tepki.
+- **Kod:** `phMount` (dinleyiciler, hareketler), `phRender` (yalnız ekranı günceller), `phRecents`, `PH_VIEWS.__rec`, `PH.recent`. Çeviriler `i18n/*.json`.
+
 ## Telefon (1.4'e eklendi, henüz yayınlanmadı)
 Hakemin cebindeki akıllı telefon. Alt menünün en sağında (telefonda), üst çubukta kasanın yanında (iPad) ve ana sayfadaki "Telefonun" kutucuğunda açılır. Eski sekmelerin hiçbiri silinmedi; telefon onlara ikinci bir kapı.
 - **Uygulamalar:** Mesajlar, Takvim, Kadraj (sosyal), Manşet (haberler), Posta, Sepet (alışveriş), Emlak, Arabalar, Rota (tatil), Cüzdan, Galeri, Premium (paketler), Hakem (kariyer, teklifler, kurul, akademi kısayolları), Ayarlar.

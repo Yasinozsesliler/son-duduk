@@ -2340,6 +2340,32 @@ body.sg .chip{transform:skewX(-8deg);border-radius:0!important}
 .vr-help{align-self:flex-start;border-color:rgba(34,211,238,.45)!important;color:#22d3ee!important}
 /*MODES-END*/
 
+
+/* telefon: gezinme çubuğu, son uygulamalar, hızlı dokunuş */
+#phone{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(3,6,12,.86)}
+#phone button{touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:transform .08s ease-out,opacity .08s ease-out}
+#phone button:active{transform:scale(.95);opacity:.75;transition:none}
+#phone .ph-view{touch-action:pan-y;overscroll-behavior:contain}
+.ph-hb{display:none}
+.ph-nav{flex:none;position:relative;z-index:6;display:grid;grid-template-columns:repeat(3,1fr);height:50px;padding:0 18px 4px;background:rgba(0,0,0,.55);color:#fff}
+.ph-scr.t-light .ph-nav,.ph-scr.t-paper .ph-nav,.ph-scr.t-sepet .ph-nav,.ph-scr.t-emlak .ph-nav,.ph-scr.t-rota .ph-nav{background:rgba(255,255,255,.94);color:#1c1c1e;border-top:1px solid rgba(0,0,0,.08)}
+.ph-nav button{display:grid;place-items:center;background:none;border:0;color:inherit;cursor:pointer;position:relative;height:100%}
+.ph-nav svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.ph-nav button.on svg{stroke:#f6c62b}
+.ph-nav i{position:absolute;top:8px;left:calc(50% + 8px);min-width:16px;height:16px;padding:0 4px;border-radius:8px;background:#f6c62b;color:#111;font:700 10px/16px system-ui;font-style:normal}
+.ph-scr.old .ph-nav{height:44px}
+.ph-view.home .ph-dock{bottom:14px}
+.ph-view.home{padding-bottom:104px}
+.ph-view.app-__rec{padding:14px 14px 20px;background:#0b0c0f}
+.qr-h{display:flex;align-items:center;justify-content:space-between;margin:4px 2px 14px}
+.qr-h b{font-size:20px}
+.qr-clr{background:rgba(255,255,255,.12);color:#fff;border:0;border-radius:999px;padding:8px 14px;font-weight:700;font-size:13px;cursor:pointer}
+.qr-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.qr-card{position:relative;border-radius:20px;background:linear-gradient(160deg,#1f232b,#14171c);border:1px solid rgba(255,255,255,.08)}
+.qr-open{width:100%;display:flex;flex-direction:column;align-items:center;gap:10px;padding:22px 8px 18px;background:none;border:0;color:#fff;font-weight:700;font-size:14px;cursor:pointer}
+.qr-x{position:absolute;top:6px;right:6px;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.1);color:#fff;border:0;font-size:13px;cursor:pointer}
+.qr-empty{text-align:center;opacity:.6;margin-top:40px}
+.qa-bk{min-width:44px;min-height:40px;font-size:34px}
 </style>
 
 <div id="app"></div>
@@ -6129,7 +6155,7 @@ function heroStart(cvId,hId,aId,key){
   const reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(reduce){ for(let i=0;i<60;i++) sceneUpdate(MS.sc,.05); heroDraw(cv); return; }
   const loop=now=>{ if($('#'+cvId)!==cv){ MS.raf=null; return; } const dt=Math.min(.1,(now-last)/1000); last=now; acc+=dt;
-    if(!document.hidden && ($('#overlay').hidden || cv.closest('#overlay')) && $('#modal').hidden && acc>=1/30){ sceneUpdate(MS.sc,Math.min(acc,.06)); heroDraw(cv); acc=0; }
+    if(!document.hidden && !document.body.classList.contains('ph-on') && ($('#overlay').hidden || cv.closest('#overlay')) && $('#modal').hidden && acc>=1/30){ sceneUpdate(MS.sc,Math.min(acc,.06)); heroDraw(cv); acc=0; }
     MS.raf=requestAnimationFrame(loop); };
   heroDraw(cv); MS.raf=requestAnimationFrame(loop);
 }
@@ -7965,7 +7991,7 @@ function phEstates(){
 // =========================================================
 // Uygulamalar mevcut oyun sistemlerini kullanır (sosyal, haber, posta, takvim, mağaza, tatil, Premium);
 // eski sekmeler silinmedi, telefon bunlara ikinci ve daha yakın bir kapı.
-const PH={open:false,app:null,stack:[],arg:null,scroll:{}};
+const PH={open:false,app:null,stack:[],arg:null,scroll:{},recent:[]};
 const PH_FN={TR:['Elif','Zeynep','Selin','Defne','Ece','Melis','Derya','Buse','İrem','Ceren'],ENG:['Emily','Sophie','Grace','Chloe','Hannah','Lucy'],ESP:['Lucía','María','Carmen','Sofía','Paula'],ITA:['Giulia','Chiara','Francesca','Sara'],GER:['Lena','Anna','Laura','Marie','Julia'],FRA:['Camille','Léa','Manon','Chloé'],POR:['Inês','Beatriz','Mariana'],NED:['Sanne','Lotte','Emma'],BRA:['Ana','Júlia','Larissa'],SAU:['Leen','Noura','Sara'],GEN:['Sara','Nina','Mia','Ana']};
 function phEnsure(){
   if(!S) return;
@@ -8115,12 +8141,35 @@ function phExp(id,withEs){
 
 // ---------- kabuk ----------
 function phMount(){ if($('#phone')) return; const d=document.createElement('div'); d.id='phone'; d.hidden=true; document.body.appendChild(d);
-  d.addEventListener('click',e=>{ if(e.target===d) phClose(); }); }
-function phOpen(app,arg){ phEnsure(); phMount(); PH.open=true; PH.stack=[]; PH.app=app||null; PH.arg=arg||null; $('#phone').hidden=false; document.body.classList.add('ph-on'); phRender(); haptic('light'); }
+  // Tek dinleyici (her çizimde yeniden bağlamak yok): dokunuşlar hemen işlenir
+  d.addEventListener('click',e=>{
+    if(e.target===d) return phClose();
+    const t=e.target.closest('[data-pa],[data-pback],[data-ptab],[data-pnav],[data-prec],[data-prx],#phX'); if(!t||!d.contains(t)) return;
+    if(t.id==='phX') return phClose();
+    if(t.dataset.prx!=null){ e.stopPropagation(); PH.recent=t.dataset.prx==='__all'?[]:PH.recent.filter(r=>r[0]!==t.dataset.prx); return t.dataset.prx==='__all'?phHome():phRender(true); }
+    if(t.dataset.prec!=null){ const r=PH.recent.find(x=>x[0]===t.dataset.prec); PH.stack=[]; PH.app=r?r[0]:t.dataset.prec; PH.arg=r?r[1]:null; phNote(); return phRender(true); }
+    if(t.dataset.pnav){ haptic('light'); const n=t.dataset.pnav; return n==='back'?phBack():n==='home'?phHome():phRecents(); }
+    if(t.dataset.pa!=null) return phGo(t.dataset.pa,t.dataset.arg||null);
+    if(t.dataset.pback!=null) return phBack();
+    if(t.dataset.ptab){ const tb=t.dataset.ptab; phClose(); TAB=tb; render(); window.scrollTo(0,0); }
+  });
+  // Hareketler: sol kenardan sağa kaydır = geri, alttan yukarı kaydır = ana ekran
+  let g=null;
+  d.addEventListener('touchstart',e=>{ const scr=d.querySelector('.ph-scr'); if(!scr||e.touches.length!==1) return g=null; const r=scr.getBoundingClientRect(), t=e.touches[0];
+    g={x:t.clientX,y:t.clientY,edge:t.clientX-r.left<26,bottom:r.bottom-t.clientY<64,t:Date.now()}; },{passive:true});
+  d.addEventListener('touchend',e=>{ if(!g) return; const t=e.changedTouches[0], dx=t.clientX-g.x, dy=t.clientY-g.y, fast=Date.now()-g.t<700;
+    if(g.edge&&dx>70&&Math.abs(dy)<70&&fast){ haptic('light'); phBack(); }
+    else if(g.bottom&&dy<-70&&Math.abs(dx)<90&&fast){ haptic('light'); phHome(); }
+    g=null; },{passive:true});
+}
+const PH_NAV_L={back:'Geri',home:'Ana ekran',rec:'Son uygulamalar',close:'Telefonu kapat'};
+function phNote(){ const k=PH.app; if(!k||!PH_APPS.some(a=>a[0]===k)) return; PH.recent=[[k,PH.arg],...PH.recent.filter(r=>r[0]!==k)].slice(0,8); }
+function phOpen(app,arg){ phEnsure(); phMount(); PH.open=true; PH.stack=[]; PH.app=app||null; PH.arg=arg||null; phNote(); $('#phone').hidden=false; document.body.classList.add('ph-on'); phRender(true); haptic('light'); }
 function phClose(){ PH.open=false; const p=$('#phone'); if(p){ p.hidden=true; p.innerHTML=''; } document.body.classList.remove('ph-on'); save(); try{ render(); }catch(e){} }
-function phGo(app,arg){ PH.stack.push([PH.app,PH.arg]); PH.app=app; PH.arg=arg||null; phRender(true); }
-function phBack(){ if(PH.stack.length){ const [a,g]=PH.stack.pop(); PH.app=a; PH.arg=g; phRender(true); } else if(PH.app){ PH.app=null; PH.arg=null; phRender(true); } else phClose(); }
+function phGo(app,arg){ PH.stack.push([PH.app,PH.arg]); PH.app=app; PH.arg=arg||null; phNote(); phRender(true); }
+function phBack(){ if(PH.app==='__rec'){ return phHome(); } if(PH.stack.length){ const [a,g]=PH.stack.pop(); PH.app=a; PH.arg=g; phRender(true); } else if(PH.app){ PH.app=null; PH.arg=null; phRender(true); } else phClose(); }
 function phHome(){ PH.stack=[]; PH.app=null; PH.arg=null; phRender(true); }
+function phRecents(){ if(PH.app==='__rec') return phHome(); PH.stack=[]; PH.app='__rec'; PH.arg=null; phRender(true); }
 function phTime(){ const d=new Date(); return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0'); }
 const PH_IC={
  mesaj:['#36d17a','#12a454','<path d="M5 6.5h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H11l-4.5 3v-3H5a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2z" fill="#fff"/>'],
@@ -8149,21 +8198,28 @@ function phRender(reset){
   const cur=root.querySelector('.ph-view'); if(cur&&!reset) PH.scroll[PH.app||'home']=cur.scrollTop;
   const M_=phModel(S.ph.model); const a=PH.app?PH_VIEWS[PH.app]:null; const v=a?a(PH.arg):null;
   const theme=v?v.theme||'light':'dark';
-  const cut={tepe:'<i class="ph-cut tepe"></i>',damla:'<i class="ph-cut damla"></i>',delik:'<i class="ph-cut delik"></i>',ada:'<i class="ph-cut ada"></i>'}[M_.cut];
   const E=Math.round(S.energy);
-  root.innerHTML=`<div class="ph-dev ${M_.gold?'gold':''}" style="--fr:${M_.frame};--bz:${M_.bezel}px;--rd:${M_.rad}px;--w1:${M_.wall[0]};--w2:${M_.wall[1]}">
-    <button class="ph-x" id="phX" aria-label="Telefonu kapat">✕</button>
+  const sb=`<b>${phTime()}</b><span class="ph-sbr"><svg viewBox="0 0 18 12" class="sig"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5" width="3" height="7" rx="1"/><rect x="10" y="2" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1" opacity="${M_.cut==='tepe'?'.35':'1'}"/></svg><span class="qbat"><i style="width:${Math.max(6,E)}%;background:${E<25?'#ff453a':'currentColor'}"></i></span><small>${E}%</small></span>`;
+  const viewCls=`ph-view ${v?'app-'+PH.app:'home'}`, html=v?v.html:phHomeHTML();
+  const nav=`<nav class="ph-nav"><button data-pnav="back" aria-label="${PH_NAV_L.back}"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><button data-pnav="home" aria-label="${PH_NAV_L.home}"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5"/></svg></button><button data-pnav="rec" class="${PH.app==='__rec'?'on':''}" aria-label="${PH_NAV_L.rec}"><svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2.5"/></svg>${PH.recent.length>1?`<i>${PH.recent.length}</i>`:''}</button></nav>`;
+  let dev=root.querySelector('.ph-dev');
+  if(dev&&dev.dataset.m===M_.id){
+    const scr=dev.querySelector('.ph-scr'); scr.className=`ph-scr t-${theme} ${M_.cut==='tepe'?'old':''}`;
+    scr.querySelector('.ph-sb').innerHTML=sb;
+    const vw=scr.querySelector('.ph-view'); vw.className=viewCls; vw.innerHTML=html;
+    scr.querySelector('.ph-nav').outerHTML=nav;
+  } else {
+    const cut={tepe:'<i class="ph-cut tepe"></i>',damla:'<i class="ph-cut damla"></i>',delik:'<i class="ph-cut delik"></i>',ada:'<i class="ph-cut ada"></i>'}[M_.cut];
+    root.innerHTML=`<div class="ph-dev ${M_.gold?'gold':''}" data-m="${M_.id}" style="--fr:${M_.frame};--bz:${M_.bezel}px;--rd:${M_.rad}px;--w1:${M_.wall[0]};--w2:${M_.wall[1]}">
+    <button class="ph-x" id="phX" aria-label="${PH_NAV_L.close}">✕</button>
     <div class="ph-scr t-${theme} ${M_.cut==='tepe'?'old':''}">
-      ${cut}<div class="ph-sb"><b>${phTime()}</b><span class="ph-sbr"><svg viewBox="0 0 18 12" class="sig"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5" width="3" height="7" rx="1"/><rect x="10" y="2" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1" opacity="${M_.cut==='tepe'?'.35':'1'}"/></svg><span class="qbat"><i style="width:${Math.max(6,E)}%;background:${E<20?'#e3434b':''}"></i></span><small class="num">${E}%</small></span></div>
-      <div class="ph-view ${v?'app-'+PH.app:'home'}">${v?v.html:phHomeHTML()}</div>
+      ${cut}<div class="ph-sb">${sb}</div>
+      <div class="${viewCls}">${html}</div>
       ${M_.id==='m_nova1'?`<svg class="ph-crack" viewBox="0 0 100 100"><path d="M100 46 L84 54 L74 50 L62 62 L50 58 M84 54 L80 74 L88 100 M74 50 L70 38 L60 34 M80 74 L66 82" stroke="#fff" stroke-opacity=".45" stroke-width=".8" fill="none"/></svg>`:''}
-      <button class="ph-hb" id="phHB" aria-label="Ana ekran"></button>
+      ${nav}
     </div></div>`;
+  }
   const view=root.querySelector('.ph-view'); view.scrollTop=reset?0:(PH.scroll[PH.app||'home']||0);
-  $('#phX').onclick=phClose; $('#phHB').onclick=()=>PH.app?phHome():phClose();
-  root.querySelectorAll('[data-pa]').forEach(b=>b.onclick=()=>phGo(b.dataset.pa,b.dataset.arg||null));
-  root.querySelectorAll('[data-pback]').forEach(b=>b.onclick=phBack);
-  root.querySelectorAll('[data-ptab]').forEach(b=>b.onclick=()=>{ const t=b.dataset.ptab; phClose(); TAB=t; render(); window.scrollTo(0,0); });
   if(v&&v.bind) v.bind(view);
 }
 function phHomeHTML(){
@@ -8181,6 +8237,11 @@ const phHead=(t,opt)=>`<div class="qa-h ${opt&&opt.cls||''}"><button class="qa-b
 const phMoney=n=>money(n);
 
 const PH_VIEWS={};
+// ----- Son uygulamalar (uygulama değiştirici) -----
+PH_VIEWS.__rec=()=>{ const R=PH.recent;
+  return {theme:'dark',html:`<div class="qr-h"><b>${'Son uygulamalar'}</b>${R.length?`<button class="qr-clr" data-prx="__all">${'Tümünü kapat'}</button>`:''}</div>
+    ${R.length?`<div class="qr-grid">${R.map(([k])=>{ const n=(PH_APPS.find(a=>a[0]===k)||[k,k])[1]; return `<div class="qr-card"><button class="qr-open" data-prec="${k}">${phIcon(k,44)}<span>${esc(n)}</span></button><button class="qr-x" data-prx="${k}" aria-label="✕">✕</button></div>`; }).join('')}</div>`:`<p class="qr-empty">${'Açık uygulama yok'}</p>`}`};
+};
 // ----- Mesajlar -----
 PH_VIEWS.mesaj=arg=>{
   const P=S.ph; const C=phContacts();
