@@ -43,4 +43,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- Android'de reklamlar kapalıyken reklam kimliği kullanılmaz (native/ads.config.js). Reklamları açınca bu satırı sil. -->
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" tools:node="remove" />
+    <!-- Fırsat hatırlatmaları tam saatte olmak zorunda değil: tam zamanlı alarm izni istenmez (Play politikası) -->
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" tools:node="remove" />
 </manifest>

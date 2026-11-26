@@ -1,5 +1,12 @@
 # Yapılacaklar
 
+## 1.7: Premium görevi, tekrar stüdyosu, kural koçu, kurucu rozeti, fırsat bildirimleri
+- **Haftanın Premium görevi:** Her hafta tohumlu 4 pozisyonluk özel maç (`gorevSc`, `gorevHTML`, id `gorev_<hafta>`); Efsane Maçlar panelinin üstünde. 2+ yıldızda kasaya `gorevPrize()` (50.000 ₺ + klasman×15.000) ve `S.gorevN` rozet sayısı.
+- **Tekrar stüdyosu (Premium):** Maç sonu tekrarlarında süper yavaş (×3), kare kare kaydırıcı, klip paylaşma (canvas + MediaRecorder, "Refmania" filigranı). Paylaşım yerel eklentiyle: `ios/App/App/ClipSharePlugin.swift`, `android/.../ClipSharePlugin.java` (JS: `NATIVE.shareFile`).
+- **Kişisel kural koçu (Premium):** Gelişim sekmesinde; Hakem Raporu'ndaki en zayıf 3 türden haftalık 5 vaka (`coachStart`, `coachEnd`, `S.coach`). 3+ doğruda Kural bilgisi +0.5.
+- **Kurucu Hakem rozeti:** 28 Şubat 2027'ye kadar Premium/Tam Paket alanlara kalıcı (`FOUNDER_KEY=refmania_kurucu`, `founderCheck`); üst çubukta kupa simgesi, paket ekranında ilk satır.
+- **Fırsat bildirimleri:** `@capacitor/local-notifications`; süreli fırsat bitmeden 3 saat önce (`dealNotify`, `NTF_IDS`). Yeni sezon sonu fırsatı (24 saat, `maybeStartSeasonDeal`). Ayarlar > Fırsat bildirimleri. Android'de `SCHEDULE_EXACT_ALARM` izni kaldırıldı.
+
 ## Devre arası tepkileri ve Premium görünürlüğü (1.5'e eklendi)
 - **Telefonun titredi (devre arası):** İlk yarının kararlarına, kartlara ve skora göre 2–4 Kadraj bildirimi (hatalı karar kırmızı vurgulu). Paylaşımlar Kadraj akışına da düşer (`htReactions`, `htPhoneHTML`).
 - **Telefonda Premium kutucuğu:** Ana ekranda "Bu hafta Premium'a özel" (haftalık değişen 👑 ürünler + %10 indirim). Premium sahibine "Refmania Gold kasan hazır" (`phPremWidget`).

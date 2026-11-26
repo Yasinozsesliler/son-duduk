@@ -1,7 +1,9 @@
-Partidos más vivos
-• Decide con gestos: saca la tarjeta deslizando hacia arriba, señala el punto, mantén pulsado para pitar.
-• El asistente y el VAR te hablan por el auricular; la grada aplaude o abuchea tus decisiones.
-• Al sacar una tarjeta la pantalla se tiñe de amarillo o rojo y la grada ruge.
-• Latidos y pantalla enrojecida cuando se acaba el tiempo; un sello de CORRECTO o ERROR en cada decisión.
-• Lluvia, nieve, niebla y bengalas en los derbis. Tu próximo partido es ahora una entrada.
-• Una carrera nueva empieza saliendo del túnel con tu primer silbato.
+Actualización del teléfono y Premium
+• El teléfono tiene botones de atrás, inicio y apps recientes; desliza desde el borde para volver. Responde mucho más rápido.
+• En el descanso tu teléfono vibra: la afición comenta tus decisiones en Kadraj.
+• Nuevo: Misión Premium de la semana, un partido especial con premio en dinero cada semana.
+• Nuevo: Estudio de repetición. Súper cámara lenta, análisis fotograma a fotograma y comparte tu decisión como clip.
+• Nuevo: Entrenador de reglas personal, 5 casos semanales de tus puntos débiles.
+• Prueba gratis cada semana un partido legendario y el Informe del Árbitro.
+• Insignia de Árbitro Fundador: para quien se haga Premium antes del 28 de febrero.
+• Oferta de fin de temporada y recordatorios de ofertas (se pueden desactivar en Ajustes).

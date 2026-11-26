@@ -2387,6 +2387,22 @@ body.sg .chip{transform:skewX(-8deg);border-radius:0!important}
 .pro-trial .btn{margin-left:auto}
 .leg-c.trial{box-shadow:inset 0 0 0 1.5px #f6c62b}
 .pro-lock .btn.sm{margin-top:6px}
+
+/* v1.7: Premium görevi, kural koçu, tekrar stüdyosu, kurucu rozeti */
+.gv-c{display:flex;align-items:center;gap:12px;width:100%;margin:6px 0 12px;padding:12px 14px;border-radius:16px;border:1.5px solid rgba(246,198,43,.6);background:linear-gradient(120deg,rgba(246,198,43,.2),rgba(246,198,43,.04));color:inherit;text-align:left;cursor:pointer}
+.gv-c.locked{opacity:.95;border-style:dashed}
+.gv-t{display:flex;flex-direction:column;gap:2px;min-width:0}.gv-t b{font-size:16px}.gv-t small{font-size:12px;opacity:.8}.gv-t small b{font-size:12px;color:#f6c62b}
+.gv-r{margin-left:auto;font-weight:800;color:#f6c62b;white-space:nowrap}
+.dv-panel.coach .btn{margin-top:6px}.coach-done{display:flex;align-items:center;gap:8px}
+.rp-studio{margin-top:8px;padding:10px 12px;border-radius:14px;background:rgba(246,198,43,.08);border:1px solid rgba(246,198,43,.35);position:relative}
+.rps-h{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#f6c62b;margin-bottom:6px}
+.rps-row{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px}
+.rps-row button{padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:inherit;font-weight:700;font-size:13px;cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;gap:4px}
+.rps-row button.on{background:#f6c62b;color:#111;border-color:#f6c62b}
+.rps-row input[type=range]{width:100%;accent-color:#f6c62b}
+.rp-studio.locked .rps-row{opacity:.55}
+.rps-lock{position:absolute;right:10px;top:7px;padding:4px 10px;border-radius:999px;border:0;background:#f6c62b;color:#111;font-weight:800;font-size:12px;cursor:pointer}
+.fd-badge{display:inline-flex;vertical-align:middle;margin-left:4px}
 </style>
 
 <div id="app"></div>
@@ -3033,7 +3049,7 @@ function finishWeek(){
   if(!S.tasks.activity) S.energy=clamp(S.energy+6,0,100);
   genOffers();
   if(S.week%6===0){ const t=sortedTable(); mail('Lig bülteni',leagueName()+': '+team(t[0].id).name+' zirvede',team(t[0].id).name+' '+t[0].pts+' puanla lider. En yakın takipçisi '+team(t[1].id).name+' ('+t[1].pts+'). Ligin dibinde '+team(t[t.length-1].id).name+' var.','news'); }
-  if(S.week>=34){ seasonEnd(); try{ if(!currentDeal()) milestoneOffer('sezon'); }catch(e){} TAB='merkez'; save(); render(); window.scrollTo(0,0); return; }
+  if(S.week>=34){ seasonEnd(); try{ maybeStartSeasonDeal(); }catch(e){} TAB='merkez'; save(); render(); window.scrollTo(0,0); return; }
   S.week++; makeWeekTasks(); save(); render(); window.scrollTo(0,0);
 }
 
@@ -3389,7 +3405,25 @@ const TRIAL_KEY='refmania_deneme';
 const trialWk=()=>Math.floor(Date.now()/(7*864e5));
 function trialGet(){ const t=lsJ(TRIAL_KEY,{}); return t.wk===trialWk()?t:{wk:trialWk()}; }
 function trialSet(k,v){ const t=trialGet(); t[k]=v; lsSet(TRIAL_KEY,JSON.stringify(t)); }
-function legOpen(sc){ return sc.pack==='zaman'?hasZaman():(sc.free||hasAll()||trialGet().leg===sc.id); }
+function legOpen(sc){ if(sc.pack==='gorev') return isPremium(); return sc.pack==='zaman'?hasZaman():(sc.free||hasAll()||trialGet().leg===sc.id); }
+// Haftanın Premium görevi: her hafta herkese aynı (tohumlu) 4 pozisyonluk özel maç
+const GOREV_T=[['Kupa gecesi','Uzatmalara giden bir kupa maçı. Her karar konuşulacak.'],['Şampiyonluk yarışı','Zirvedeki iki takım karşı karşıya. Puan farkı yok.'],['Kümede kalma savaşı','Kaybeden küme düşecek. Tribünler gergin.'],['Yağmur altında derbi','Saha ağır, temaslar sert. Derbi ateşi yüksek.'],['Yıldızın veda maçı','Efsane oyuncunun son maçı. Duygular çok yüksek.'],['Rövanş gecesi','İlk maçtaki tartışmalı karar hâlâ konuşuluyor.']];
+function gorevSc(){
+  const wk=trialWk(); const r=seeded(hash('gorev'+wk));
+  const types=[...new Set(LEGENDS.flatMap(x=>x.inc.map(i=>i[0])))];
+  const inc=[]; let m=6; for(let i=0;i<4;i++){ m+=8+Math.floor(r()*16); inc.push([types[Math.floor(r()*types.length)],Math.min(90,m)]); }
+  const T=GOREV_T[Math.floor(r()*GOREV_T.length)];
+  const c1=Math.floor(r()*TR4_RAW.length); let c2=Math.floor(r()*TR4_RAW.length); if(c2===c1) c2=(c1+1)%TR4_RAW.length;
+  return {id:'gorev_'+wk,pack:'gorev',name:T[0],sub:T[1],club:[c1,c2],inc,w:null};
+}
+const gorevPrize=()=>50000+((S&&S.tier)||0)*15000;
+function gorevHTML(){
+  if(!MONET) return '';
+  const sc=gorevSc(); const st=legState()[sc.id]||{}; const open=isPremium();
+  const left=Math.max(1,Math.ceil(((trialWk()+1)*7*864e5-Date.now())/864e5));
+  const star=n=>[1,2,3].map(i=>`<i class="${i<=n?'on':''}">★</i>`).join('');
+  return `<button class="gv-c ${open?'':'locked'}" data-leg="${sc.id}"><span class="gv-ic">${v11g('crown','#f6c62b',26)}</span><span class="gv-t"><small>${'Haftanın Premium görevi'} · ${left} ${'gün kaldı'}</small><b>${esc(sc.name)}</b><small>${esc(sc.sub)} ${'2+ yıldız'}: <b class="num">+${moneyShort(gorevPrize())}</b></small></span><span class="gv-r">${st.best?`<span class="leg-st">${star(st.best)}</span>`:open?'Başla':'Premium'}</span></button>`;
+}
 function legTrialAvail(){ return MONET&&!hasAll()&&!trialGet().leg; }
 function legStars(c,n){ return c>=n?3:c>=n-1?2:c>=Math.ceil(n/2)?1:0; }
 function legTeams(sc){
@@ -3470,7 +3504,7 @@ function legendsHTML(){
   const star=n=>[1,2,3].map(i=>`<i class="${i<=n?'on':''}">★</i>`).join('');
   return `<section class="panel stack leg"><div class="row" style="justify-content:space-between"><h3>Efsane Maçlar</h3><span class="chip">${LEGENDS.filter(x=>(st[x.id]||{}).best).length}/${LEGENDS.length}</span></div>
     <p class="muted" style="font-size:14px">Tarihe geçecek maçlarda kritik anlar. Kariyerini etkilemez; her pozisyon için ${LEG_TIME} saniyen var.</p>
-    ${whistleRowHTML()}<div class="leg-grid">${LEGENDS.map(sc=>{ const r=st[sc.id]||{}; const open=legOpen(sc);
+    ${gorevHTML()}${whistleRowHTML()}<div class="leg-grid">${LEGENDS.map(sc=>{ const r=st[sc.id]||{}; const open=legOpen(sc);
       const tr=!sc.free&&!hasAll()&&trialGet().leg===sc.id;
       return `<button class="leg-c ${open?'':'locked'} ${tr?'trial':''}" data-leg="${sc.id}"><b>${esc(sc.name)}</b><small>${sc.inc.length} pozisyon${sc.free&&!hasAll()?' · ücretsiz':tr?' · '+'bu haftanın denemesi':''}</small><span class="leg-st">${open?star(r.best||0):v11g('crown','#f6c62b',18)+' Tam Paket'}</span></button>`; }).join('')}</div>
     ${legTrialAvail()?`<p class="leg-trial">${v11g('gift','#f6c62b',18)}<span>${'Bu hafta kilitli efsane maçlardan birini ücretsiz oynayabilirsin. Birine dokun.'}</span></p>`:''}</section>`;
@@ -3492,8 +3526,8 @@ function legTrialAsk(sc){
   $('#ltNo').onclick=x;
 }
 function legStart(id){
-  const sc=allScenarios().find(x=>x.id===id); if(!sc) return;
-  if(!legOpen(sc)){ if(sc.pack==='zaman') zamanOpen(); else if(legTrialAvail()) legTrialAsk(sc); else openPaywall('efsane'); return; }
+  const sc=allScenarios().find(x=>x.id===id)||(String(id).startsWith('gorev_')?gorevSc():null); if(!sc) return;
+  if(!legOpen(sc)){ if(sc.pack==='gorev') openPaywall('gorev'); else if(sc.pack==='zaman') zamanOpen(); else if(legTrialAvail()) legTrialAsk(sc); else openPaywall('efsane'); return; }
   LEG={sc,i:0,c:0};
   const [H,A]=legTeams(sc);
   openModal(head(sc.pack==='zaman'?'Zaman Yolculuğu':'Efsane Maçlar',esc(sc.name),`<button class="btn sm" id="lgX">Kapat</button>`)+`<div class="sh-body"><p class="story">${esc(sc.sub)}</p>
@@ -3528,6 +3562,7 @@ function legEnd(){
   st[sc.id]={best:Math.max(r.best||0,stars),plays:(r.plays||0)+1}; lsSet(LEG_KEY,JSON.stringify(st));
   if(first&&stars>0&&sc.w) setTimeout(()=>toast('Koleksiyona eklendi: '+sc.w[0]),700);
   let gain=''; if(S&&first&&stars>0){ S.attrs.kural=clamp(S.attrs.kural+.2*(S.growth||1),0,99); save(); gain='Kural bilgisi +0.2'; }
+  if(S&&sc.pack==='gorev'&&stars>=2&&(r.best||0)<2){ const pz=gorevPrize(); S.money+=pz; tx('Haftalık görev ödülü',pz,'odul'); S.gorevN=(S.gorevN||0)+1; save(); gain='+'+moneyShort(pz)+' · '+'Görev rozeti'+' '+S.gorevN; }
   const next=(sc.pack==='zaman'?ZAMAN:LEGENDS).find(x=>x.id!==sc.id&&legOpen(x)&&!(st[x.id]||{}).best);
   openModal(head(sc.pack==='zaman'?'Zaman Yolculuğu':'Efsane Maçlar',esc(sc.name),'')+`<div class="sh-body"><div class="leg-end"><span class="leg-st big">${[1,2,3].map(i=>`<i class="${i<=stars?'on':''}">★</i>`).join('')}</span><b class="num">${c}/${n}</b><small>doğru karar</small></div>
     ${gain?`<div class="row" style="justify-content:center"><span class="chip g">${gain}</span></div>`:''}<div class="row">${next?`<button class="btn primary" id="lgNext">Sıradaki: ${esc(next.name)}</button>`:''}${!hasAll()&&sc.pack!=='zaman'?`<button class="btn ${next?'':'primary'}" data-paywall="efsane" id="lgPw">${v11g('crown','#f6c62b',16)} Bütün efsane maçlar</button>`:''}<button class="btn" id="lgX">Kapat</button></div></div>`,true);
@@ -3543,10 +3578,31 @@ function acadMakeCase(type){
   const ctxM=M; M=keep; return {inc,ctxM};
 }
 function acadStart(exam){ ACAD={exam,n:0,c:0,total:exam?5:1}; acadCase(); }
+const acadTitle=n=>ACAD.coach?`Kural koçu · ${n}/5`:ACAD.exam?`Haftalık sınav · ${n}/5`:'Vaka çalışması';
+// Kişisel kural koçu (Premium): Hakem Raporu'ndaki en zayıf pozisyon türlerinden haftalık 5 vaka
+function coachTypes(){ const st=(S&&S.dstat)||{}; const known=ACAD_TOPICS.slice(1).map(x=>x[0]);
+  const t=Object.keys(st).filter(k=>known.includes(k)&&st[k].n>0).sort((a,b)=>dAcc(st[a])-dAcc(st[b])).slice(0,3);
+  for(const k of known){ if(t.length>=3) break; if(!t.includes(k)) t.push(k); } return t; }
+function coachDone(){ return !!(S&&S.coach&&S.coach.wk===trialWk()); }
+function coachStart(){ if(!isPremium()){ openPaywall('koc'); return; } ACAD={exam:false,coach:true,types:coachTypes(),n:0,c:0,total:5}; acadCase(); }
+function coachHTML(){
+  if(!MONET&&!isPremium()) return '';
+  const names=coachTypes().map(k=>(ACAD_TOPICS.find(x=>x[0]===k)||[k,k])[1]);
+  return `<section class="dv-panel coach"><div class="dv-ph"><h3>${'Kural koçu'}</h3>${isPremium()?'<span class="chip pro-chip">PRO</span>':`<span class="chip">${v11g('crown','#f6c62b',14)} Premium</span>`}</div>
+    <p class="muted" style="font-size:14px">${'Bu hafta en zayıf olduğun pozisyonlardan 5 vaka'}: <b>${esc(names.join(', '))}</b></p>
+    ${coachDone()?`<p class="coach-done">${v11g('star','#f6c62b',18)} ${'Bu haftanın çalışması tamam'}: <b class="num">${S.coach.c}/5</b></p>`:`<button class="btn ${isPremium()?'primary':''}" data-coach="1">${isPremium()?'Çalışmaya başla':'Premium ile aç'}</button>`}</section>`;
+}
+function coachEnd(){
+  const c=ACAD.c; S.coach={wk:trialWk(),c}; let msg=`${c}/5.`;
+  if(c>=3){ S.attrs.kural=clamp(S.attrs.kural+.5*(S.growth||1),0,99); msg+=' '+'Kural bilgisi +0.5'; } else msg+=' '+'Gelecek hafta yeni vakalarla tekrar dene.';
+  replayStop(); save();
+  openModal(head('Kural koçu','Sonuç','')+`<div class="sh-body"><div class="verdict v-${c>=3?'dogru':'kismen'}"><span class="vi">${c>=3?'Güzel çalışma':'Devam et'}</span><span class="num" style="font-size:22px">${c}/5</span></div><p>${esc(msg)}</p><button class="btn primary" id="acX">Kapat</button></div>`,true);
+  $('#acX').onclick=acadClose;
+}
 function acadCase(){
-  const {inc,ctxM}=acadMakeCase(ACAD.exam?pick(ACAD_TOPICS.slice(1).map(x=>x[0])):acadPickType()); ACAD.inc=inc; ACAD.ctxM=ctxM; inc.sel={d:null,c:inc.steps[1]?null:undefined};
+  const {inc,ctxM}=acadMakeCase(ACAD.coach?ACAD.types[ACAD.n%ACAD.types.length]:ACAD.exam?pick(ACAD_TOPICS.slice(1).map(x=>x[0])):acadPickType()); ACAD.inc=inc; ACAD.ctxM=ctxM; inc.sel={d:null,c:inc.steps[1]?null:undefined};
   const keep=M; M=ctxM; curInc=inc; const cams=['yakin','tv','hakem','ust'];
-  openModal(head(ACAD.exam?`Haftalık sınav · ${ACAD.n+1}/5`:'Vaka çalışması',esc(inc.title),`<button class="btn sm" id="acX">Kapat</button>`)+`<div class="sh-body"><div class="inc"><div class="stack">${replayHTML(inc,cams)}<p class="story">${inc.story}</p></div>
+  openModal(head(acadTitle(ACAD.n+1),esc(inc.title),`<button class="btn sm" id="acX">Kapat</button>`)+`<div class="sh-body"><div class="inc"><div class="stack">${replayHTML(inc,cams)}<p class="story">${inc.story}</p></div>
     <div class="stack"><div class="eyebrow">Olgular</div><div class="facts">${factsHTML(inc,true)}</div><div class="decide" id="decide">${stepsHTML(inc)}</div><button class="btn primary" id="bAc" disabled>Kararı ver</button></div></div></div>`);
   bindReplay(inc,cams); bindSteps(inc,'bAc'); M=keep;
   $('#acX').onclick=acadClose;
@@ -3560,14 +3616,14 @@ function acadResult(inc,ans){
   if(ok && !ACAD.exam && A.gains<5){ A.gains++; S.attrs.kural=clamp(S.attrs.kural+.3*(S.growth||1),0,99); gain='Kural bilgisi +0.3'; }
   ACAD.n++; if(ok) ACAD.c++;
   const keep=M; M=ACAD.ctxM; const cams=['yakin','tv','hakem','ust']; inc.showOff=true;
-  const last=ACAD.exam&&ACAD.n>=5;
-  openModal(head(ACAD.exam?`Haftalık sınav · ${ACAD.n}/5`:'Vaka çalışması',VLAB[v],`<button class="btn sm" id="acX">Kapat</button>`)+`<div class="sh-body"><div class="inc"><div class="stack">${replayHTML(inc,cams)}</div><div class="stack">
+  const last=(ACAD.exam||ACAD.coach)&&ACAD.n>=5;
+  openModal(head(acadTitle(ACAD.n),VLAB[v],`<button class="btn sm" id="acX">Kapat</button>`)+`<div class="sh-body"><div class="inc"><div class="stack">${replayHTML(inc,cams)}</div><div class="stack">
     <div class="verdict v-${v}"><span class="vi">${VLAB[v]}</span><span class="muted">Senin kararın: ${esc(ansText(inc,ans))}</span></div>${!ok?`<p><b>Doğrusu:</b> ${esc(ansText(inc,inc.correct))}</p>`:''}<p>${esc(inc.explain)}</p><details class="law" open><summary>İlgili kural</summary><p>${esc(inc.law)}</p></details>
     <div class="row">${gain?`<span class="chip g">${gain}</span>`:''}<span class="chip">Seri ${A.streak}</span></div>
-    <button class="btn primary" id="acN">${last?'Sınavı bitir':ACAD.exam?'Sonraki soru':'Sonraki vaka'}</button></div></div></div>`);
+    <button class="btn primary" id="acN">${last?(ACAD.coach?'Çalışmayı bitir':'Sınavı bitir'):(ACAD.exam||ACAD.coach)?'Sonraki soru':'Sonraki vaka'}</button></div></div></div>`);
   bindReplay(inc,cams); M=keep; save();
   $('#acX').onclick=acadClose;
-  $('#acN').onclick=()=>{ if(last) acadExamEnd(); else acadCase(); };
+  $('#acN').onclick=()=>{ if(last){ if(ACAD.coach) coachEnd(); else acadExamEnd(); } else acadCase(); };
 }
 function acadExamEnd(){
   const A=acadState(); const c=ACAD.c; A.examWeek=S.season*100+S.week; A.lastExam={c,season:S.season,week:S.week}; const pass=c>=4; let msg;
@@ -5095,11 +5151,13 @@ function replayStart(cv,inc,mode,opt){
   const offX = inc.showOff && inc.dia.off!=null ? map(34,inc.dia.off)[0] : null;
   RP={cv,inc,cam:mode,slow:false,playing:true,t:0,actors,refA,mk,bkf,offX,last:performance.now(),map,obscure:!!opt.obscure};
   const loop=now=>{ if(!RP||RP.cv!==cv||!document.body.contains(cv)) return; const dt=Math.min(.05,(now-RP.last)/1000); RP.last=now;
-    if(RP.playing){ if(RP.hold>0){ RP.hold-=dt; } else { const dc=Math.abs(RP.t-CT); const z=RP.t>.5&&RP.t<.95?.17+.83*Math.min(1,dc/.16):1; const pt=RP.t; RP.t+=dt/(RP.slow?7.5:3.2)*z; if(!RP.froze&&pt<CT&&RP.t>=CT&&RP.inc.anim&&RP.inc.anim.contact!==false){ RP.t=CT; RP.froze=true; RP.hold=.9; } } } if(RP.t>1.3){ RP.t=0; RP.froze=false; RP.trail=[]; } replayDraw(); RP.raf=requestAnimationFrame(loop); };
+    if(RP.playing){ if(RP.hold>0){ RP.hold-=dt; } else { const dc=Math.abs(RP.t-CT); const z=RP.t>.5&&RP.t<.95?.17+.83*Math.min(1,dc/.16):1; const pt=RP.t; RP.t+=dt/(RP.slow?(RP.ultra?22:7.5):3.2)*z; if(!RP.froze&&pt<CT&&RP.t>=CT&&RP.inc.anim&&RP.inc.anim.contact!==false){ RP.t=CT; RP.froze=true; RP.hold=.9; } } } if(RP.t>1.3){ RP.t=0; RP.froze=false; RP.trail=[]; } replayDraw(); if(RP.scrubEl&&!RP.scrubbing) RP.scrubEl.value=RP.t; RP.raf=requestAnimationFrame(loop); };
   RP.raf=requestAnimationFrame(loop);
 }
 function replayStop(){ if(RP){ cancelAnimationFrame(RP.raf); RP=null; } }
-function replayDraw(){
+function replayDraw(){ replayDraw0(); const R=RP; if(R&&R.rec){ const c=R.cv.getContext('2d'), W=R.cv.width, H=R.cv.height, f=Math.max(14,Math.round(H*.05));
+  c.save(); c.font=`900 ${f}px Archivo,system-ui,sans-serif`; c.textAlign='right'; c.textBaseline='bottom'; c.fillStyle='rgba(0,0,0,.45)'; c.fillText('Refmania',W-f*.55+2,H-f*.45+2); c.fillStyle='#ffd60a'; c.fillText('Refmania',W-f*.55,H-f*.45); c.restore(); } }
+function replayDraw0(){
   const R=RP, cv=R.cv; const [W,H,dpr]=fitCanvas(cv); const ctx=cv.getContext('2d'); const t=Math.min(1,R.t);
   physStep(R,t);
   const fl=applyAnim(R.actors,R.inc,t,R.map);
@@ -5146,18 +5204,56 @@ function replayFocus(ctx,cam,R,t,W,H,dpr){
   ctx.strokeStyle=`rgba(255,255,255,${.6*w})`; ctx.lineWidth=1.2*dpr; ctx.beginPath(); ctx.arc(sp[0],sp[1],r*.55*pulse,0,Math.PI*2); ctx.stroke();
   for(const a of [0,Math.PI/2,Math.PI,Math.PI*1.5]){ const c1=r*.3, c2=r*.38; ctx.strokeStyle=`rgba(242,194,48,${w})`; ctx.lineWidth=2*dpr; ctx.beginPath(); ctx.moveTo(sp[0]+Math.cos(a)*c1,sp[1]+Math.sin(a)*c1); ctx.lineTo(sp[0]+Math.cos(a)*c2,sp[1]+Math.sin(a)*c2); ctx.stroke(); }
 }
-function replayHTML(inc,cams){
+function replayHTML(inc,cams,studio){
   const names={yakin:'Yakın plan',hakem:'Hakem gözü',ust:'Taktik',tv:'Yayın',ters:'Ters açı',arka:'Kale arkası'};
   return `<div class="replay"><canvas id="rcv" aria-label="Pozisyonun tekrar görüntüsü"></canvas><div class="rp-top"><span class="rp-live">TEKRAR</span><span id="rpT" class="rp-ph">Atak</span>${inc.vis!=null&&inc.vis<.55&&!inc.showOff?'<span class="rp-warn">Görüş kısıtlı</span>':''}</div>
-    <div class="rp-ctl"><div class="seg">${cams.map((c,i)=>`<button data-cam="${c}" class="${i===0?'on':''}">${names[c]}</button>`).join('')}</div><div class="seg"><button id="rpSlow">Yavaş</button><button id="rpPlay">Durdur</button></div></div></div>`;
+    <div class="rp-ctl"><div class="seg">${cams.map((c,i)=>`<button data-cam="${c}" class="${i===0?'on':''}">${names[c]}</button>`).join('')}</div><div class="seg"><button id="rpSlow">Yavaş</button><button id="rpPlay">Durdur</button></div></div></div>${studio?studioHTML():''}`;
 }
 function bindReplay(inc,cams,opt){
-  const cv=$('#rcv'); if(!cv) return; replayStart(cv,inc,cams[0],opt);
+  const cv=$('#rcv'); if(!cv) return; replayStart(cv,inc,cams[0],opt); bindStudio();
   document.querySelectorAll('[data-cam]').forEach(b=>b.onclick=()=>{ if(!RP) return; RP.cam=b.dataset.cam; document.querySelectorAll('[data-cam]').forEach(x=>x.classList.toggle('on',x===b)); RP.actors.forEach(a=>a.hl=!!a.t.hl&&RP.cam!=='hakem'); });
   $('#rpSlow').onclick=()=>{ RP.slow=!RP.slow; $('#rpSlow').classList.toggle('on',RP.slow); };
   $('#rpPlay').onclick=()=>{ RP.playing=!RP.playing; $('#rpPlay').textContent=RP.playing?'Durdur':'Oynat'; };
 }
 
+// ---------- Premium tekrar stüdyosu: süper ağır çekim, kare kare inceleme, klip paylaşma ----------
+function studioHTML(){ const pro=isPremium(); const lk=pro?'':v11g('crown','#f6c62b',14)+' ';
+  if(!pro&&!MONET) return '';
+  return `<div class="rp-studio ${pro?'':'locked'}"><span class="rps-h">${v11g('camera','#f6c62b',16)} ${'Tekrar stüdyosu'}</span>
+    <div class="rps-row"><button id="rpUltra">${lk}${'Süper yavaş'}</button><input type="range" id="rpScrub" min="0" max="1.3" step="0.002" value="0" aria-label="${'Kare kare'}" ${pro?'':'disabled'}><button id="rpClip">${lk}${'Klip paylaş'}</button></div>
+    ${pro?'':`<button class="rps-lock" id="rpLock">${'Premium ile aç'}</button>`}</div>`; }
+function bindStudio(){
+  const u=$('#rpUltra'); if(!u) return; const pro=isPremium(); const pw=()=>{ replayStop(); const m=$('#modal'); m.hidden=true; m.innerHTML=''; openPaywall('studyo'); };
+  if(!pro){ u.onclick=pw; $('#rpClip').onclick=pw; const l=$('#rpLock'); if(l) l.onclick=pw; return; }
+  u.onclick=()=>{ if(!RP) return; RP.ultra=!RP.ultra; RP.slow=RP.ultra||RP.slow; u.classList.toggle('on',RP.ultra); const s=$('#rpSlow'); if(s) s.classList.toggle('on',RP.slow); };
+  const sc=$('#rpScrub'); if(RP){ RP.scrubEl=sc; }
+  sc.oninput=()=>{ if(!RP) return; RP.scrubbing=true; RP.playing=false; RP.t=+sc.value; RP.froze=true; RP.hold=0; RP.trail=[]; const pb=$('#rpPlay'); if(pb) pb.textContent='Oynat'; };
+  sc.onchange=()=>{ if(RP) RP.scrubbing=false; };
+  $('#rpClip').onclick=clipShare;
+}
+function blobB64(b){ return new Promise(r=>{ const fr=new FileReader(); fr.onload=()=>r(String(fr.result).split(',')[1]||''); fr.readAsDataURL(b); }); }
+async function clipShare(){
+  const R=RP; const btn=$('#rpClip');
+  if(!R||!R.cv.captureStream||typeof MediaRecorder==='undefined'){ toast('Bu cihazda klip kaydı desteklenmiyor'); return; }
+  const mime=['video/mp4','video/webm;codecs=vp9','video/webm'].find(m=>MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported(m))||'';
+  if(btn){ btn.disabled=true; btn.textContent='Kaydediliyor…'; }
+  let stream, rec; const chunks=[];
+  try{ stream=R.cv.captureStream(30); rec=new MediaRecorder(stream,mime?{mimeType:mime,videoBitsPerSecond:2500000}:undefined); }catch(e){ toast('Bu cihazda klip kaydı desteklenmiyor'); if(btn){ btn.disabled=false; btn.textContent='Klip paylaş'; } return; }
+  rec.ondataavailable=e=>{ if(e.data&&e.data.size) chunks.push(e.data); };
+  const stopped=new Promise(r=>{ rec.onstop=r; });
+  const keepS=[R.slow,R.ultra]; R.slow=false; R.ultra=false;
+  R.t=0; R.froze=false; R.hold=0; R.trail=[]; R.playing=true; R.scrubbing=false; R.rec=true; rec.start(250);
+  await new Promise(r=>{ const t0=Date.now(); const iv=setInterval(()=>{ if(RP!==R||R.t>=1.22||Date.now()-t0>9000){ clearInterval(iv); r(); } },60); });
+  try{ rec.stop(); }catch(e){} await stopped; R.rec=false; [R.slow,R.ultra]=keepS; try{ stream.getTracks().forEach(t=>t.stop()); }catch(e){}
+  const type=(chunks[0]&&chunks[0].type)||mime||'video/webm'; const blob=new Blob(chunks,{type}); const ext=type.includes('mp4')?'mp4':'webm';
+  const name='refmania-tekrar.'+ext, text=(R.inc.title||'')+' · Refmania';
+  try{
+    const N=NV();
+    if(N&&N.shareFile) await N.shareFile({data:await blobB64(blob),name,mime:type,text});
+    else { const f=new File([blob],name,{type}); if(navigator.canShare&&navigator.canShare({files:[f]})) await navigator.share({files:[f],text}); else { const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=name; document.body.appendChild(a); a.click(); a.remove(); } }
+  }catch(e){}
+  if(btn){ btn.disabled=false; btn.textContent='Klip paylaş'; }
+}
 function ik(A,B,l1,l2,bend){ const d=V3.sub(B,A); const L=Math.hypot(d[0],d[1],d[2]); if(L<1e-5) return A.slice(); const dir=[d[0]/L,d[1]/L,d[2]/L];
   if(L>=l1+l2-1e-4) return V3.lerp(A,B,l1/(l1+l2));
   const a=(l1*l1-l2*l2+L*L)/(2*L), h=Math.sqrt(Math.max(0,l1*l1-a*a)); const bd=V3.dot(bend,dir); let p=[bend[0]-dir[0]*bd,bend[1]-dir[1]*bd,bend[2]-dir[2]*bd]; const pl=Math.hypot(p[0],p[1],p[2])||1;
@@ -5783,7 +5879,7 @@ function minNum(s){ const m=String(s).match(/(\d+)(?:\+(\d+))?/); return m? +m[1
 const VCOL={dogru:'var(--green)',durdu:'var(--green)',kabul:'var(--blue)',kismen:'var(--amber)',var:'var(--amber)',hata:'var(--red)',israr:'var(--red)'};
 function replayModal(d){
   const inc=d.inc; inc.showOff=true; const cams=['yakin','tv','ters','arka','hakem','ust'];
-  openModal(head(esc(d.min)+' · Tekrar',esc(d.title),`<button class="btn sm" id="bRpClose">Kapat</button>`)+`<div class="sh-body"><div class="inc"><div class="stack">${replayHTML(inc,cams)}</div><div class="stack">
+  openModal(head(esc(d.min)+' · Tekrar',esc(d.title),`<button class="btn sm" id="bRpClose">Kapat</button>`)+`<div class="sh-body"><div class="inc"><div class="stack">${replayHTML(inc,cams,true)}</div><div class="stack">
     <div class="verdict v-${d.v}"><span class="vi">${VLAB[d.v]}</span></div><p><b>Senin kararın:</b> ${esc(d.final||d.your)}</p>${d.v!=='dogru'&&d.v!=='durdu'?`<p><b>Doğrusu:</b> ${esc(d.correct)}</p>`:''}<p>${esc(d.explain)}</p><p class="muted" style="font-size:13px">${esc(d.law||'')}</p></div></div></div>`);
   bindReplay(inc,cams); $('#bRpClose').onclick=()=>{ replayStop(); const m=$('#modal'); m.hidden=true; m.innerHTML=''; };
 }
@@ -6117,7 +6213,7 @@ function render(){
         <div class="hstat" title="İtibar"><svg class="ring" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15" class="ring-bg"/><circle cx="18" cy="18" r="15" class="ring-fg" stroke-dasharray="${(repPct/100*C).toFixed(1)} ${C.toFixed(1)}"/></svg><span><b class="num">${Math.round(S.rep)}</b><small>İtibar</small></span></div>
         <div class="hstat hide-xs" title="Enerji">${ic('bolt','hs-ic')}<span><b class="num">%${Math.round(S.energy)}</b><small>Enerji</small></span></div>
         <button class="hstat hs-money" id="bWallet" title="${money(S.money)}" aria-label="Cüzdan">${ic('coin','hs-ic gold')}<span><b class="num">${moneyShort(S.money)}</b><small>Kasa</small></span></button>
-        <button class="me" data-tab="kariyer" aria-label="Kariyer profili"><span class="av pic">${avatarSVG(S.look)}</span><span class="me-t"><b>${esc(S.name)}${isPremium()?' '+v11g('crown','#f6c62b',14):''}</b><small>${esc(rankText())}</small></span></button>
+        <button class="me" data-tab="kariyer" aria-label="Kariyer profili"><span class="av pic">${avatarSVG(S.look)}</span><span class="me-t"><b>${esc(S.name)}${isPremium()?' '+v11g('crown','#f6c62b',14):''}${founderBadge(14)}</b><small>${esc(rankText())}</small></span></button>
       </div></div></header>
     <nav class="tstrip" aria-label="Bölümler">${TABS.map(([k,n])=>{ const b=badgeFor(k); return `<button class="${TAB===k?'on':''}" data-tab="${k}"><span>${n}</span>${b?`<i class="tb">${b}</i>`:''}</button>`; }).join('')}</nav>
     <div class="shell"><nav class="side" aria-label="Bölümler">${TABS.map(([k,n])=>{ const b=badgeFor(k); return `<button class="${TAB===k?'on':''}" data-tab="${k}">${ic(k)}<span>${n}</span>${b?`<span class="badge">${b}</span>`:''}</button>`; }).join('')}</nav>
@@ -6534,7 +6630,7 @@ function devHTML(){
         <p class="dv-note">${S.age>36?'36 yaş sonrası gelişim yavaşlar; deneyim ve kondisyon yönetimi önem kazanır.':'Her hafta bir antrenman odağı seçebilirsin. 80 üstünde gelişim yavaşlar.'}</p>
         <button class="btn primary" data-tab="merkez" id="bGoTrain">Haftalık antrenmana git</button></div></section>
     <div class="dv-grid">${Object.keys(ATTR_NAMES).map(attrCard).join('')}</div>
-    ${proReportHTML()}
+    ${proReportHTML()}${coachHTML()}
     <div class="dv-two">
       <section class="dv-panel"><div class="dv-ph"><h3>Dil kursu</h3><span class="chip">${ENGLISH[S.english]}</span></div>
         <div class="dv-cefr">${lv.map((l,i)=>`<div class="dv-step ${i<=S.english?'done':''} ${i===S.english?'cur':''}"><b>${l}</b>${req[l]?`<small>${req[l]}</small>`:'<small>&nbsp;</small>'}</div>`).join('')}</div>
@@ -6549,10 +6645,10 @@ function offersHTML(){
     ${S.pendingMove?`<p class="chip a">Gelecek sezon: ${S.pendingMove.country===S.nationality?NAT().name:esc(LEAGUES[S.pendingMove.country].country)}</p>`:''}</div>`;
 }
 function settingsHTML(){
-  const st=S.settings;
+  const st=S.settings; if(st.ntf===undefined) st.ntf=true;
   const tg=(k,l,d)=>`<label class="row" style="justify-content:space-between;border-bottom:1px solid var(--line);padding:10px 0"><span><b>${l}</b><br><span class="muted" style="font-size:13px">${d}</span></span><input type="checkbox" id="set_${k}" data-set="${k}" ${st[k]?'checked':''} style="width:22px;height:22px"></label>`;
   return `<div class="grid2"><div class="panel stack"><h2>Ayarlar</h2>
-    ${tg('feedback','Anında geri bildirim','Her karardan sonra doğrusunu ve gerekçesini gösterir.')}${tg('pos','Konum alma aşaması','Pozisyon öncesi nerede duracağını sen seçersin.')}${tg('sound','Düdük sesi','Kararlarda düdük çalar.')}
+    ${tg('feedback','Anında geri bildirim','Her karardan sonra doğrusunu ve gerekçesini gösterir.')}${NV()&&NV().isNative?tg('ntf','Fırsat bildirimleri','Süreli fırsatlar bitmeden önce telefonuna hatırlatma gelir.'):''}${tg('pos','Konum alma aşaması','Pozisyon öncesi nerede duracağını sen seçersin.')}${tg('sound','Düdük sesi','Kararlarda düdük çalar.')}
     ${tg('gesture','Jestle karar','Kartı yukarı kaydırarak göster, penaltı noktasını işaret et, düdüğü basılı tutarak çal.')}
     ${tg('radio','Telsiz sesi','Yardımcı hakem ve VAR kulaklığından sesli konuşur.')}
     <div><label class="lbl" for="set_wsnd">Düdük tonu</label><select id="set_wsnd"><option value="klasik">Klasik</option><option value="keskin" ${isPremium()&&st.wsnd==='keskin'?'selected':''}>Keskin${isPremium()?'':' · Premium'}</option><option value="derin" ${isPremium()&&st.wsnd==='derin'?'selected':''}>Derin${isPremium()?'':' · Premium'}</option></select></div>
@@ -6637,6 +6733,12 @@ function lsJ(k,d){ try{ return Object.assign({},d,JSON.parse(lsGet(k)||'{}')); }
 function expandOwned(o){ if(o.has(SKU.deal)||o.has(SKU.up)) o.add(SKU.tam); if(o.has(SKU.tam)) o.add(SKU.prem); return o; }
 let OWNED=(()=>{ const o=new Set(); try{ JSON.parse(lsGet(OWN_KEY)||'[]').forEach(x=>o.add(x)); }catch(e){} if(lsGet(PREM_KEY)==='1') o.add(SKU.prem); return expandOwned(o); })();
 function isPremium(){ return OWNED.has(SKU.prem); }
+// Kurucu Hakem: 28 Şubat 2027'ye kadar Premium ya da Tam Paket alanlara kalıcı rozet (bir daha verilmez)
+const FOUNDER_END=Date.UTC(2027,1,28,21,0), FOUNDER_KEY='refmania_kurucu';
+const founderOpen=()=>Date.now()<FOUNDER_END;
+function isFounder(){ return lsGet(FOUNDER_KEY)==='1'; }
+function founderCheck(){ try{ if(!isFounder()&&(OWNED.has(SKU.prem)||OWNED.has(SKU.tam))&&founderOpen()){ lsSet(FOUNDER_KEY,'1'); setTimeout(()=>toast('Kurucu Hakem rozeti artık senin!'),1200); } }catch(e){} }
+const founderBadge=sz=>isFounder()?`<span class="fd-badge" title="${'Kurucu Hakem'}">${v11g('trophy','#ffd60a',sz||14)}</span>`:'';
 function hasAll(){ return OWNED.has(SKU.tam); }
 function grantSku(id){ if(!ALL_SKUS.includes(id)||OWNED.has(id)) return false; OWNED=expandOwned(new Set([...OWNED,id])); lsSet(OWN_KEY,JSON.stringify([...OWNED])); if(isPremium()) lsSet(PREM_KEY,'1'); return true; }
 function setPremium(on){ if(on) grantSku(SKU.prem); }
@@ -7101,7 +7203,7 @@ function loadPrices(){
   return PRICES_LOADING;
 }
 const dealReady=()=>iapDemo()||!!PRICES[SKU.deal];
-function afterGrant(){ if(S){ v11Ensure(); save(); } closePaywall(); render(); }
+function afterGrant(){ founderCheck(); if(S){ v11Ensure(); save(); } closePaywall(); render(); }
 function skuThanks(id){ return id===SKU.zaman?'Zaman Yolculuğu açıldı. İyi yolculuklar!':id===SKU.prem?'Premium etkin. Teşekkürler!':'Tam Paket etkin. Teşekkürler!'; }
 async function buySku(id){
   const N=NV();
@@ -7119,7 +7221,7 @@ async function restorePremium(){
   if(owned&&owned.some(id=>ALL_SKUS.includes(id))){ toast(hasAll()?'Tam Paket geri yüklendi':'Premium geri yüklendi'); afterGrant(); }
   else toast(acctFix('Bu Apple hesabında paket satın alımı bulunamadı.'));
 }
-async function checkPremiumOwned(){ const N=NV(); if(!N||!N.iapOn) return; loadPrices(); try{ const o=await N.iap.owned(); let ch=false; (o||[]).forEach(id=>{ if(grantSku(id)) ch=true; }); if(ch&&S){ v11Ensure(); save(); render(); } }catch(e){} }
+async function checkPremiumOwned(){ founderCheck(); const N=NV(); if(!N||!N.iapOn) return; loadPrices(); try{ const o=await N.iap.owned(); let ch=false; (o||[]).forEach(id=>{ if(grantSku(id)) ch=true; }); founderCheck(); if(ch&&S){ v11Ensure(); save(); render(); } }catch(e){} }
 window.SD_IAP_UPDATE=(id,ok)=>{ if(ok&&grantSku(id)){ if(S){ v11Ensure(); save(); } render(); } };
 
 // ---------- süreli Tam Paket fırsatı (gerçek sayaç, pencere bitince kapanır) ----------
@@ -7131,15 +7233,33 @@ function currentDeal(now=Date.now()){
   if(hasAll()) return null;
   if(DEAL.hos && now<DEAL.hos+72*H1) return {kind:'hosgeldin',ends:DEAL.hos+72*H1,key:'hos'};
   if(DEAL.terfi && now<DEAL.terfi+24*H1) return {kind:'terfi',ends:DEAL.terfi+24*H1,key:'terfi'};
+  if(DEAL.sezon && now<DEAL.sezon+24*H1) return {kind:'sezonsonu',ends:DEAL.sezon+24*H1,key:'sezon'};
   return null;
 }
 function maybeStartWelcome(){
   if(!S||DEAL.hos||hasAll()||S.totals.matches<3||!dealReady()) return;
-  DEAL.hos=Date.now(); dealSave(); PENDING_OFFER=PENDING_OFFER||'hosgeldin';
+  DEAL.hos=Date.now(); dealSave(); PENDING_OFFER=PENDING_OFFER||'hosgeldin'; dealNotify();
+}
+function maybeStartSeasonDeal(){
+  if(hasAll()||currentDeal()||!dealReady()||!S||DEAL.sezonS===S.season){ milestoneOffer('sezon'); return; }
+  DEAL.sezon=Date.now(); DEAL.sezonS=S.season; dealSave(); PENDING_OFFER='sezonsonu'; dealNotify();
+}
+// Fırsat bitmeden 3 saat önce yerel bildirim (Ayarlar > Fırsat bildirimleri)
+const NTF_IDS={hos:7001,terfi:7002,sezon:7003};
+function dealNotify(){
+  try{
+    const N=NV(); if(!N||!N.notify||!S) return;
+    if(S.settings.ntf===undefined) S.settings.ntf=true;
+    if(hasAll()||!S.settings.ntf){ if(DEAL.ntf){ N.notify.cancel(Object.values(NTF_IDS)); DEAL.ntf=null; dealSave(); } return; }
+    const d=currentDeal(); if(!d) return; const tag=d.key+':'+d.ends; if(DEAL.ntf===tag) return;
+    const at=d.ends-3*H1; if(at<Date.now()+10*60*1000) return;
+    DEAL.ntf=tag; dealSave();
+    N.notify.perm(true).then(ok=>{ if(ok) N.notify.schedule([{id:NTF_IDS[d.key]||7009,title:'Fırsat bitmek üzere',body:'Tam Paket yarı fiyat fırsatın 3 saat sonra bitiyor.',at}]); });
+  }catch(e){}
 }
 function maybeStartPromoDeal(){
   if(DEAL.terfi||hasAll()||currentDeal()||!dealReady()) return;
-  DEAL.terfi=Date.now(); dealSave(); PENDING_OFFER='terfi';
+  DEAL.terfi=Date.now(); dealSave(); PENDING_OFFER='terfi'; dealNotify();
 }
 function fmtLeft(ms){ const t=Math.max(0,Math.floor(ms/1000)), d=Math.floor(t/86400), h=String(Math.floor(t%86400/3600)).padStart(2,'0'), m=String(Math.floor(t%3600/60)).padStart(2,'0'), x=String(t%60).padStart(2,'0'); return (d>0?d+' gün ':'')+h+':'+m+':'+x; }
 setInterval(()=>{ document.querySelectorAll('[data-left]').forEach(el=>{ const l=+el.dataset.left-Date.now(); el.textContent=fmtLeft(l); if(l<=0&&!el.dataset.done){ el.dataset.done=1; setTimeout(render,50); } }); },1000);
@@ -7180,7 +7300,7 @@ function milestoneOffer(reason){ if(hasAll()||OFF.ms.includes(reason)) return; O
 function flushPendingOffer(){
   if(!PENDING_OFFER||!S||TAB!=='merkez') return;
   const r=PENDING_OFFER; PENDING_OFFER=null;
-  const deal=['hosgeldin','terfi'].includes(r);
+  const deal=['hosgeldin','terfi','sezonsonu'].includes(r);
   setTimeout(()=>{ if(!openOffer(r,deal?'force':'milestone') && deal) {} },700);
 }
 // son 7 günün reklam kaydı: ödeme ekranında oyuncunun kendi rakamı gösterilir
@@ -7232,6 +7352,10 @@ const PW_HEAD={
   para:['Kasanı büyüt','Premium ile kasana hemen 250.000 ₺ eklenir, ödüller anında gelir.'],
   hosgeldin:['Hoş geldin fırsatı','Tam Paket yalnızca bu pencerede yarı fiyatına.'],
   terfi:['Terfi ettin!','Yeni klasmanı kutla: Tam Paket 24 saat yarı fiyatına.'],
+  sezonsonu:['Sezon bitti!','Sezon sonu fırsatı: Tam Paket 24 saat yarı fiyatına.'],
+  gorev:['Haftanın Premium görevi','Her hafta yeni bir özel maç ve kasana para ödülü. Premium’a dahil.'],
+  koc:['Kişisel kural koçu','Zayıf olduğun pozisyonlardan her hafta 5 vaka. Premium’a dahil.'],
+  studyo:['Tekrar stüdyosu','Süper ağır çekim, kare kare inceleme ve klip paylaşma. Premium’a dahil.'],
   terfiK:['Terfi ettin!','Yeni klasmana lüksle çık: yalı, klasik otomobil ve altın formalar.'],
   mac10:['10 maç geride kaldı','Artık bir hakemsin. Kariyerini bir üst seviyeye taşı.'],
   sezon:['Yeni sezon, yeni sen','Sezona Tam Paket’in lüksüyle başla.'],
@@ -7242,9 +7366,9 @@ const PW_HEAD={
   ses:['Düdük tonları','Keskin ve derin düdük tonları Premium’a dahil.'],
   rapor:['Hakem Raporu PRO','Hangi pozisyonlarda hata yaptığını kural maddesiyle gör. Premium’a dahil.'],
 };
-const PERKS_PREM=[['ad','Reklamsız oyun','Maç aralarındaki geçiş reklamları tamamen kalkar.'],['star','Ödüller anında','Ücreti ikiye katla ve enerji takviyesi, reklam izlemeden.'],['chart','Hakem Raporu PRO','Pozisyon türüne göre doğruluğun, zayıf noktaların ve kural maddeleri.'],['cal','Günün pozisyonu arşivi','Kaçırdığın bütün günleri oyna, eskileri tekrar dene.'],['whistle','Hakem kimliği','4. kariyer slotu, 2 yeni düdük tonu, paylaşımlarda Premium rozeti.'],['gift','250.000 ₺ ve 2 özel ekipman','Her kariyerin kasasına bir kez; elmas kakmalı düdük ve altın hakem saati.'],['home','Telefonda %10 indirim ve 👑 özel ürünler','Sepet, Emlak ve Arabalar’da her şey ucuz; Premium’a özel saatler, evler ve arabalar.']];
+const PERKS_PREM=[['ad','Reklamsız oyun','Maç aralarındaki geçiş reklamları tamamen kalkar.'],['trophy','Haftanın Premium görevi','Her hafta yeni bir özel maç ve kasana para ödülü.'],['camera','Tekrar stüdyosu','Süper ağır çekim, kare kare inceleme ve klip paylaşma.'],['book','Kişisel kural koçu','Zayıf olduğun pozisyonlardan her hafta 5 vaka.'],['star','Ödüller anında','Ücreti ikiye katla ve enerji takviyesi, reklam izlemeden.'],['chart','Hakem Raporu PRO','Pozisyon türüne göre doğruluğun, zayıf noktaların ve kural maddeleri.'],['cal','Günün pozisyonu arşivi','Kaçırdığın bütün günleri oyna, eskileri tekrar dene.'],['whistle','Hakem kimliği','4. kariyer slotu, 2 yeni düdük tonu, paylaşımlarda Premium rozeti.'],['gift','250.000 ₺ ve 2 özel ekipman','Her kariyerin kasasına bir kez; elmas kakmalı düdük ve altın hakem saati.'],['home','Telefonda %10 indirim ve 👑 özel ürünler','Sepet, Emlak ve Arabalar’da her şey ucuz; Premium’a özel saatler, evler ve arabalar.']];
 const PERKS_TAM=[['crown','Premium’un her şeyi','Reklamsız oyun, anında ödüller, Hakem Raporu PRO, arşiv, 250.000 ₺.'],['trophy','Efsane Maçlar','10 tarihi maçın kritik anlarında düdük sende.'],['home','Lüks Yaşam Koleksiyonu','Boğaz’da yalı, klasik spor otomobil, tourbillon saat.'],['shirt','Altın Hakem Formaları','Altın, gece mavisi ve buz renkli formalarla sahaya çık.'],['gift','+500.000 ₺','Toplam 750.000 ₺ hoş geldin parası.']];
-function pwPerks(list){ return `<ul class="pw-perks">${list.map(([g,t,d])=>`<li>${v11g(g,'#f6c62b',26)}<span><b>${t}</b><small>${d}</small></span></li>`).join('')}</ul>`; }
+function pwPerks(list){ if(founderOpen()&&!isFounder()) list=[['trophy','Kurucu Hakem rozeti','28 Şubat 2027’ye kadar alanlara özel, kalıcı rozet. Bir daha verilmeyecek.'],...list]; return `<ul class="pw-perks">${list.map(([g,t,d])=>`<li>${v11g(g,'#f6c62b',26)}<span><b>${t}</b><small>${d}</small></span></li>`).join('')}</ul>`; }
 function packsBody(reason){ return acctFix(packsBody0(reason)); }
 function packsBody0(reason){
   loadPrices();
@@ -7568,6 +7692,8 @@ function v11Bind(){
   q('[data-lang]').forEach(b=>b.onclick=()=>{ if(b.dataset.lang!==curLang()) setLang(b.dataset.lang); });
   q('[data-paywall]').forEach(b=>b.onclick=e=>{ e.stopPropagation(); openPaywall(b.dataset.paywall); });
   q('[data-trial]').forEach(b=>b.onclick=()=>{ trialSet(b.dataset.trial,1); haptic('success'); render(); });
+  q('[data-coach]').forEach(b=>b.onclick=coachStart);
+  dealNotify();
   const bh=$('#bHour'); if(bh) bh.onclick=startHour;
   const pin=document.querySelector('.pw-inline'); if(pin) bindPacks(pin);
   maybeStartWelcome(); hourEndOffer(); flushReview(); flushPendingOffer();

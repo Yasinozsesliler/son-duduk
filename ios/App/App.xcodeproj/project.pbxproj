@@ -21,6 +21,7 @@
 		9582B6832FE993A70072D4E8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9582B6822FE993A50072D4E8 /* SceneDelegate.swift */; };
 		A1B2C3D40000000000000003 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D40000000000000004 /* MainViewController.swift */; };
 		A1B2C3D40000000000000001 /* InAppReviewPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D40000000000000002 /* InAppReviewPlugin.swift */; };
+		A1B2C3D40000000000000005 /* ClipSharePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D40000000000000006 /* ClipSharePlugin.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		9582B6822FE993A50072D4E8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A1B2C3D40000000000000004 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		A1B2C3D40000000000000002 /* InAppReviewPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppReviewPlugin.swift; sourceTree = "<group>"; };
+		A1B2C3D40000000000000006 /* ClipSharePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipSharePlugin.swift; sourceTree = "<group>"; };
 		958DCC722DB07C7200EA8C5F /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = debug.xcconfig; path = ../debug.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -79,6 +81,7 @@
 				504EC3071FED79650016851F /* AppDelegate.swift */,
 				A1B2C3D40000000000000004 /* MainViewController.swift */,
 				A1B2C3D40000000000000002 /* InAppReviewPlugin.swift */,
+				A1B2C3D40000000000000006 /* ClipSharePlugin.swift */,
 				504EC30B1FED79650016851F /* Main.storyboard */,
 				504EC30E1FED79650016851F /* Assets.xcassets */,
 				504EC3101FED79650016851F /* LaunchScreen.storyboard */,
@@ -180,6 +183,7 @@
 				9582B6832FE993A70072D4E8 /* SceneDelegate.swift in Sources */,
 				A1B2C3D40000000000000003 /* MainViewController.swift in Sources */,
 				A1B2C3D40000000000000001 /* InAppReviewPlugin.swift in Sources */,
+				A1B2C3D40000000000000005 /* ClipSharePlugin.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

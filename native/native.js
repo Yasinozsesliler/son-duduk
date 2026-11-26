@@ -6,6 +6,7 @@ import { Device } from "@capacitor/device";
 import { AdMob, AdmobConsentStatus } from "@capacitor-community/admob";
 import { NativePurchases, PURCHASE_TYPE } from "@capgo/native-purchases";
 import { Purchases, PURCHASES_ARE_COMPLETED_BY_TYPE, STOREKIT_VERSION } from "@revenuecat/purchases-capacitor";
+import { LocalNotifications } from "@capacitor/local-notifications";
 import { ADS } from "./ads.config.js";
 
 const isNative = Capacitor.isNativePlatform();
@@ -169,3 +170,30 @@ if (isNative && AD.enabled) setTimeout(() => { adsReady = adsReady || initAds();
    Pencerenin gerçekten çıkıp çıkmayacağına Apple/Google karar verir; sonuç bildirilmez. */
 const InAppReview = registerPlugin("InAppReview");
 N.review = isNative ? () => InAppReview.requestReview() : null;
+
+/* ---------- Klip paylaşma (Premium tekrar stüdyosu): yerel paylaşım sayfası ----------
+   Yerel eklenti: ios/App/App/ClipSharePlugin.swift, android/.../ClipSharePlugin.java */
+const ClipShare = registerPlugin("ClipShare");
+N.shareFile = isNative ? (o) => ClipShare.share(o) : null;
+
+/* ---------- Yerel bildirimler (fırsat hatırlatmaları) ---------- */
+N.notify = {
+  async perm(ask) {
+    if (!isNative) return false;
+    try {
+      let p = await LocalNotifications.checkPermissions();
+      if (p.display !== "granted" && ask) p = await LocalNotifications.requestPermissions();
+      return p.display === "granted";
+    } catch (e) { return false; }
+  },
+  async schedule(list) {
+    if (!isNative || !list.length) return;
+    try {
+      await LocalNotifications.schedule({ notifications: list.map((n) => ({ id: n.id, title: n.title, body: n.body, schedule: { at: new Date(n.at) } })) });
+    } catch (e) {}
+  },
+  async cancel(ids) {
+    if (!isNative || !ids.length) return;
+    try { await LocalNotifications.cancel({ notifications: ids.map((id) => ({ id })) }); } catch (e) {}
+  },
+};
