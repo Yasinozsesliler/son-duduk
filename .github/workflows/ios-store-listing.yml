@@ -26,7 +26,7 @@ on:
       task:
         description: "listing = metin+görsel yükle; release_pending = onaylı sürümü yayınla; status = durum"
         type: choice
-        options: [listing, release_pending, status, submit, iap, iap_new, iap_submit, agerating]
+        options: [listing, release_pending, status, submit, merge, iap, iap_new, iap_submit, agerating]
         default: listing
 
 jobs:
@@ -78,6 +78,7 @@ jobs:
           if [ "${{ inputs.task }}" = "iap" ]; then ASC_KEY_PATH="$RUNNER_TEMP/keys/key.p8" python3 scripts/asc_iap.py;
           elif [ "${{ inputs.task }}" = "iap_new" ]; then ASC_KEY_PATH="$RUNNER_TEMP/keys/key.p8" python3 scripts/asc_iap.py yeni com.sonduduk.hakem.zaman;
           elif [ "${{ inputs.task }}" = "agerating" ]; then ASC_KEY_PATH="$RUNNER_TEMP/keys/key.p8" python3 scripts/asc_agerating.py;
+          elif [ "${{ inputs.task }}" = "merge" ]; then ASC_KEY_PATH="$RUNNER_TEMP/keys/key.p8" python3 scripts/asc_merge.py "${{ inputs.version }}" "${{ inputs.build }}";
           elif [ "${{ inputs.task }}" = "iap_submit" ]; then ASC_KEY_PATH="$RUNNER_TEMP/keys/key.p8" python3 scripts/asc_iap.py submit "${{ inputs.version }}" "${{ inputs.build }}"; else
           ASC_KEY_PATH="$RUNNER_TEMP/keys/key.p8" python3 scripts/asc.py "${{ inputs.task }}" "${{ inputs.version }}" "${{ inputs.build }}"; fi
 
