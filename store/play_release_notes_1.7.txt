@@ -1,0 +1,36 @@
+<tr-TR>
+Telefon ve Premium güncellemesi
+• Telefonda geri, ana ekran ve son uygulamalar düğmeleri; dokunuşlar çok daha hızlı.
+• Devre arasında taraftarlar kararlarını Kadraj'da yorumluyor.
+• Yeni: Haftanın Premium görevi, tekrar stüdyosu (süper yavaş, klip paylaş) ve kişisel kural koçu.
+• Haftada bir ücretsiz efsane maç ve Hakem Raporu.
+• Kurucu Hakem rozeti: 28 Şubat'a kadar Premium alanlara.
+• Sezon sonu fırsatı ve fırsat hatırlatmaları.
+</tr-TR>
+<en-US>
+Phone and Premium update
+• Back, home and recent-apps buttons on the phone; taps respond much faster.
+• At half-time fans react to your calls on Kadraj.
+• New: Weekly Premium mission, replay studio (super slow motion, share clips) and a personal rules coach.
+• A free weekly legendary match and Referee Report.
+• Founding Referee badge for everyone who goes Premium before 28 February.
+• End-of-season deal and deal reminders.
+</en-US>
+<de-DE>
+Handy- und Premium-Update
+• Zurück-, Home- und Letzte-Apps-Tasten am Handy; Eingaben reagieren viel schneller.
+• In der Halbzeit kommentieren Fans deine Entscheidungen auf Kadraj.
+• Neu: Premium-Mission der Woche, Wiederholungsstudio (Superzeitlupe, Clips teilen) und persönlicher Regel-Coach.
+• Jede Woche ein Legendenspiel und der Schiri-Bericht gratis.
+• Gründer-Schiri-Abzeichen für alle, die bis 28. Februar Premium holen.
+• Saisonende-Angebot und Angebotserinnerungen.
+</de-DE>
+<es-ES>
+Actualización del teléfono y Premium
+• Botones de atrás, inicio y apps recientes en el teléfono; responde mucho más rápido.
+• En el descanso la afición comenta tus decisiones en Kadraj.
+• Nuevo: Misión Premium semanal, estudio de repetición (súper lento, compartir clips) y entrenador de reglas personal.
+• Gratis cada semana: un partido legendario y el Informe del Árbitro.
+• Insignia de Árbitro Fundador para quien se haga Premium antes del 28 de febrero.
+• Oferta de fin de temporada y avisos.
+</es-ES>
