@@ -1,14 +1,8 @@
-Phone and Premium update
-• The phone now has back, home and recent-apps buttons; swipe from the edge to go back. Taps respond much faster.
-• At half-time your phone buzzes: fans react to your first-half calls on Kadraj.
-• New: Weekly Premium mission, a special match with a cash reward every week.
-• New: Replay studio. Super slow motion, frame-by-frame review and share your call as a clip.
-• New: Personal rules coach, 5 weekly cases from your weakest incident types.
-• A free weekly try of one legendary match and the Referee Report.
-• Founding Referee badge: for everyone who goes Premium before 28 February.
-• End-of-season deal and deal reminders (can be turned off in Settings).
-
-New modes
-• 3 Seconds: The same 3 incidents for everyone, every day. The replay freezes at the moment of contact and you have 3 seconds to decide. Share your result card and keep your streak going.
-• VAR room: Step into the booth and watch from 5 cameras. Confirm the on-field call with "Check complete", or intervene on a clear error and recommend the right decision.
-• Referee locker: 13 shirts, 8 pairs of boots and new whistle tones. Unlock them by moving up divisions, with in-game cash or with Premium, and wear your pick in matches and replays.
+An update shaped by player feedback
+• More time to decide: 30 s on Normal and 38 s on Easy, or turn on "Untimed decisions" in Settings.
+• Live match rating: your rating stays on screen and moves up or down with every call.
+• Clearer added time: lost time is counted during the match, and the board shows the total.
+• Clearer pitch: the broadcast camera is closer and players have team-coloured rings.
+• Your assistant has your back: in matches without VAR, they flag a key mistake over the radio and you can check the replay again.
+• Crowd pressure: whistles rise in tense moments and after wrong calls. Turn the crowd down or off in Settings.
+• Road to Europe: a progress bar on the home screen shows how close you are to the European stage and what comes next.

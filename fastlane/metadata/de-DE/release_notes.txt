@@ -1,14 +1,8 @@
-Handy- und Premium-Update
-• Das Handy hat jetzt Zurück-, Home- und Letzte-Apps-Tasten; vom Rand wischen geht zurück. Eingaben reagieren viel schneller.
-• In der Halbzeit vibriert dein Handy: Fans kommentieren deine Entscheidungen auf Kadraj.
-• Neu: Premium-Mission der Woche, jede Woche ein Spezialspiel mit Geldprämie.
-• Neu: Wiederholungsstudio. Superzeitlupe, Bild-für-Bild-Analyse und deine Entscheidung als Clip teilen.
-• Neu: Persönlicher Regel-Coach, jede Woche 5 Fälle zu deinen Schwächen.
-• Jede Woche ein Legendenspiel und der Schiri-Bericht gratis zum Testen.
-• Gründer-Schiri-Abzeichen: für alle, die bis 28. Februar Premium holen.
-• Saisonende-Angebot und Erinnerungen an Angebote (in den Einstellungen abschaltbar).
-
-Neue Modi
-• 3 Sekunden: Jeden Tag dieselben 3 Szenen für alle. Das Bild friert im Moment des Kontakts ein, du hast 3 Sekunden für deine Entscheidung. Teile deine Ergebniskarte und halte deine Serie am Leben.
-• VAR-Raum: Setz dich in den Videoraum und schau aus 5 Kameras. Bestätige die Entscheidung auf dem Platz mit „Check abgeschlossen“ oder greif bei einem klaren Fehler ein und empfiehl die richtige Entscheidung.
-• Schiri-Spind: 13 Trikots, 8 Paar Schuhe und neue Pfeifentöne. Schalte sie durch Aufstiege, mit Spielgeld oder mit Premium frei; dein Outfit ist im Spiel und in den Wiederholungen zu sehen.
+Ein Update nach eurem Feedback
+• Mehr Zeit zum Entscheiden: 30 Sek. auf Normal und 38 Sek. auf Leicht, oder schalte in den Einstellungen „Ohne Zeitlimit entscheiden“ ein.
+• Live-Note: Deine Note bleibt das ganze Spiel über sichtbar und steigt oder fällt mit jeder Entscheidung.
+• Klarere Nachspielzeit: Die verlorene Zeit wird während des Spiels gezählt, die Tafel zeigt die Summe.
+• Klareres Spielfeld: Die TV-Kamera ist näher dran, die Spieler haben Ringe in Teamfarbe.
+• Dein Assistent warnt dich: In Spielen ohne VAR meldet er sich bei einem schweren Fehler über Funk, und du kannst dir die Wiederholung nochmal ansehen.
+• Druck von den Rängen: In hitzigen Momenten und nach Fehlentscheidungen wird gepfiffen. Publikum in den Einstellungen leiser stellen oder ausschalten.
+• Weg nach Europa: Ein Fortschrittsbalken auf dem Startbildschirm zeigt, wie nah du der europäischen Bühne bist und was als Nächstes kommt.

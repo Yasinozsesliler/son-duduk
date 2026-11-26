@@ -1,14 +1,8 @@
-Telefon ve Premium güncellemesi
-• Telefonda geri, ana ekran ve son uygulamalar düğmeleri; kenardan kaydırarak geri dön. Dokunuşlar artık çok daha hızlı.
-• Devre arasında telefonun titriyor: taraftarlar ilk yarıdaki kararlarını Kadraj'da yorumluyor.
-• Yeni: Haftanın Premium görevi, her hafta özel bir maç ve para ödülü.
-• Yeni: Tekrar stüdyosu. Süper ağır çekim, kare kare inceleme ve kararını klip olarak paylaşma.
-• Yeni: Kişisel kural koçu, zayıf olduğun pozisyonlardan haftalık 5 vaka.
-• Haftada bir efsane maç ve Hakem Raporu ücretsiz deneme.
-• Kurucu Hakem rozeti: 28 Şubat'a kadar Premium alanlara özel.
-• Sezon sonu fırsatı ve fırsat hatırlatmaları (Ayarlar'dan kapatılabilir).
-
-Yeni modlar
-• 3 Saniye: Her gün herkese aynı 3 pozisyon. Görüntü temas anında donuyor, kararını 3 saniyede ver. Sonuç kartını arkadaşlarınla paylaş, serini sürdür.
-• VAR odası: Kulübeye geç, 5 kameradan izle. Sahadaki karar doğruysa "Kontrol tamam", açık bir hata varsa müdahale et ve doğru kararı öner.
-• Hakem dolabı: 13 forma, 8 krampon ve yeni düdük tonları. Klasman atladıkça, oyun parasıyla ya da Premium ile aç; seçtiğin forma maçta ve tekrarlarda görünsün.
+Oyuncu yorumlarıyla gelen güncelleme
+• Karar süresi uzadı: Normal 30 sn, Kolay 38 sn. İstersen Ayarlar'dan "Süresiz karar" seçeneğini aç.
+• Canlı maç puanı: Puanın maç boyunca ekranda; her kararda yükselip düştüğünü anında görürsün.
+• Uzatma artık net: Kaybedilen süre maç boyunca sayılıyor, tabelada toplamı görüyorsun.
+• Daha net saha: Yayın kamerası yakınlaştı, oyuncuların altında takım renginde halkalar var.
+• Yardımcı hakem seni uyarıyor: VAR'ın olmadığı maçlarda kritik bir hatada telsizden "Hocam, emin misin?" diyor, tekrara bir daha bakabiliyorsun.
+• Tribün baskısı: Gergin anlarda ve hatalı kararlarda ıslıklar yükseliyor. Seyirci sesini Ayarlar'dan kısabilir ya da kapatabilirsin.
+• Avrupa yolu: Ana ekranda Avrupa sahnelerine ne kadar yaklaştığını ve sıradaki hedefini gösteren bir ilerleme çubuğu var.
