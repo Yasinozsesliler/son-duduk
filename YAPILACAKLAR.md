@@ -1,5 +1,12 @@
 # Yapılacaklar
 
+## Devre arası tepkileri ve Premium görünürlüğü (1.5'e eklendi)
+- **Telefonun titredi (devre arası):** İlk yarının kararlarına, kartlara ve skora göre 2–4 Kadraj bildirimi (hatalı karar kırmızı vurgulu). Paylaşımlar Kadraj akışına da düşer (`htReactions`, `htPhoneHTML`).
+- **Telefonda Premium kutucuğu:** Ana ekranda "Bu hafta Premium'a özel" (haftalık değişen 👑 ürünler + %10 indirim). Premium sahibine "Refmania Gold kasan hazır" (`phPremWidget`).
+- **Maç sonu:** "Premium olsaydın: +X ₺ daha, reklamsız ve anında" satırı (yalnızca reklamsız teklif kutusu çıkmadıysa).
+- **Haftalık ücretsiz deneme:** Haftada bir kilitli Efsane Maç ve bir kez ayrıntılı Hakem Raporu (`TRIAL_KEY=refmania_deneme`, `trialGet/trialSet`, `legTrialAsk`).
+- **Refmania Gold telefon:** Premium'a özel altın kasa (`PH_MODELS` > `m_refgold`, `prem:1`); Premium değilse Ayarlar'da kilitli satır, dokununca paket ekranı (`PW_HEAD.altin`).
+
 ## Telefon gezinmesi ve hız (1.5'e eklendi)
 - **Gezinme çubuğu:** Telefon ekranının altında Geri ‹, Ana ekran ○, Son uygulamalar ▢ (eski ince ana ekran çizgisi kaldırıldı).
 - **Son uygulamalar:** En son açılan 8 uygulama kart olarak; dokununca o uygulamaya (ve kaldığın sayfaya) geçer, ✕ ile kapatılır, "Tümünü kapat".
